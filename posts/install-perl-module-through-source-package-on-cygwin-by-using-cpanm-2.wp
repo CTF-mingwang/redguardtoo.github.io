@@ -1,4 +1,0 @@
-<html><body><p>I failed to install package "Template" by running `cpanm Template'. </p> <p> It's because the binary package requires gcc4 while on my cygwin only gcc3 available. </p> <p> So I install it from source package (with some hack, of course), </p>   <pre class="src src-sh">cpanm --look Template <span style="color: #af0000;"># </span><span style="color: #af0000;">Download and unpack the distribution and then open the directory with your shellI</span>
-cpanm . <span style="color: #af0000;">#</span><span style="color: #af0000;">install from local directory</span>
-
-</pre>   <p> Updated: I found the simpler solution was to install gcc4 at cygwin. </p></body></html>

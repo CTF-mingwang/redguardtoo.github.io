@@ -1,8 +1,0 @@
-<html><body><p>Install <a href="http://www.tug.org/texlive/">TexLive</a> in your OS. </p> <p> Install latex2pdf which is dependent on TexLive. </p>   <pre class="src src-sh">cpan App::cpanminus <span style="color: #af0000;"># </span><span style="color: #af0000;">handy tool to install cpan module</span>
-cpanm Template <span style="color: #af0000;"># </span><span style="color: #af0000;">Template is missing on cygwin</span>
-
-cpanm latex2pdf <span style="color: #af0000;"># </span><span style="color: #af0000;">finally</span>
-
-</pre>   <p> Convert now! </p>   <pre class="src src-sh">pdf2latex cv.tex
-
-</pre>  </body></html>

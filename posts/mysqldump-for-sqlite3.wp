@@ -1,4 +1,0 @@
-<html><body><p>Be careful that import data into Sqlite3 could be very slow in this way. </p>   <pre class="src src-sh">mysqldump -u root -p111111 -c --compact -t --skip-opt dbname tbl1 tbl2|sed -e <span style="color:#00cd00;">"s/\'/''/g"</span>|gzip -9 &gt; data.dump.gz
-zcat data.dump.gz | sqlite3 db.sqlite3
-
-</pre>    </body></html>

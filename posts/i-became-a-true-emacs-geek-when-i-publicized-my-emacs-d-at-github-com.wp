@@ -1,8 +1,0 @@
-<html><body><p>Me, for example. </p> <p> The first day I changed my .emacs.d: </p>   <pre class="example">master $ git log --pretty=format:'%C(yellow)%h%Creset %ad %s %Cred(%an)%Creset' --date=short|grep "`git config user.name`"|tail -n1
-11fd85f 2011-08-31 eim (Chinese input method) (chen bin)
-
-</pre>   <p> How many times I modified my emacs.d since then: </p>   <pre class="example">master $ git log --pretty=format:'%C(yellow)%h%Creset %ad %s %Cred(%an)%Creset' --date=short|grep "`git config user.name`"|wc -l
-
-672
-
-</pre>   <p> My emacs.d at github: <a href="https://github.com/redguardtoo/emacs.d">https://github.com/redguardtoo/emacs.d</a> </p></body></html>

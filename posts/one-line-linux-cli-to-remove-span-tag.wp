@@ -1,2 +1,0 @@
-<html><body><p>Some CMS are too smart to handle &lt;span&gt; tag properly. </p> <p> I have to copy the content into clipboard, remove the span tag, and paste it back into CMS. </p> <p> Actually all the trouble could be saved by one line linux command, </p>   <pre class="src src-sh">xclip -o|sed <span style="color:#802a55;">'s%&lt;/*span[^&gt;]*&gt;%%g'</span>|xclip -selection c
-</pre></body></html>
