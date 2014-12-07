@@ -1,0 +1,84 @@
+
+<p><a href="http://ctags.sourceforge.net/">Ctags</a> is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from <a href="http://company-mode.github.io/">company-mode</a>.
+</p>
+<p>
+The first tip is to use global variable `tags-table-list` instead of `tags-file-name`.  The Emacs documentation says you should NOT set both. `tags-table-list` is better because it's a list, where you can store multiple tag files.
+</p>
+<p>
+Here is the value of `tags-table-list` for one project:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
+</pre>
+
+
+
+<p>
+The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan <b>less</b> code files.
+</p>
+<p>
+The second tip is we can avoid feeding big js files to ctags. Currently one of my client's project is not managed well. They place the concatenated js files, third party js libraries, and normal code file into one folder. The naming of files is a mess. So I can not tell which is which from file name or file path. The tag file created from those big concatenated js files will <a href="https://github.com/company-mode/company-mode/issues/243">crash my Emacs</a>.
+</p>
+<p>
+Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
+</p>
+
+
+
+<pre class="prettyprint lang-bash">
+find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+</pre>
+
+
+
+<p>
+The point is the option `-not -size +16k`. It means only handle files less thank 16k.
+</p>
+<p>
+Here is the Emacs lisp function to wrap above shell command:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;optional FORCE)
+  "return the full path of tags file"
+  ;; TODO save the CTAGS-OPTS into hash
+  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
+       file
+       cmd)
+    (setq file (concat dir "TAGS"))
+    (when (or FORCE (not (file-exists-p file)))
+      (setq cmd (format "find %s -type f -not -iwholename '*TAGS' -not -size +24k | ctags -f %s -e  %s -L -" dir file CTAGS-OPTS))
+      (shell-command cmd))
+    file))
+</pre>
+
+
+
+<p>
+BTW, here is my <a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags">~/.ctags</a>.
+</p>
+<p>
+In summary, <b>there are ONLY two points</b>:
+</p><ul>
+<li>What's the `tags-table-list`
+</li>
+<li>How the tags file are created by ctags
+</li>
+</ul>
+
+
+<p>
+UPDATE:
+</p><ol>
+<li>My tags file management strategy is described at <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a>. It's effective to me. But it may be not generic enough to apply to others' use cases.
+
+</li>
+<li>I do use <a href="http://www.gnu.org/software/global/">Gnu Global</a> for <b>C/C++/Java</b> code. I use it exactly in the <b>same way</b> as ctags. Please `man global` for the details. Hint, all you need care is the environment variable <b>GTAGSLIBPATH</b>.
+</li>
+</ol>
+

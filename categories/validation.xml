@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (validation)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/validation.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:04 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is the &lt;a href="http://www.emacswiki.org/emacs/FlymakeHtml"&gt;solution from EmacsWiki&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I found it not effective because tidy is too strict to HTML5 and produces too much noise.
+&lt;/p&gt;
+
+&lt;p&gt;
+I only need validation of missing open/closed html tag(s). Nothing more!
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my complete solution:
+&lt;/p&gt;
+
+&lt;pre class="prettyprint lang-lisp"&gt;
+(defun flymake-html-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "tidy" (list local-file))))
+
+(defun flymake-html-load ()
+  (interactive)
+  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+    (set (make-local-variable 'flymake-allowed-file-name-masks)
+         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+         )
+    (set (make-local-variable 'flymake-err-line-patterns)
+         ;; pick up errors and warnings for HTML5
+         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing.*\\|discarding.*\\)" nil 1 2 4))
+         )
+    (flymake-mode t)))
+
+(add-hook 'web-mode-hook 'flymake-html-load)
+(add-hook 'html-mode-hook 'flymake-html-load)
+(add-hook 'nxml-mode-hook 'flymake-html-load)
+(add-hook 'php-mode-hook 'flymake-html-load)
+&lt;/pre&gt;
+
+&lt;p&gt;
+Here is the difference from EmacsWiki:
+&lt;/p&gt;
+
+&lt;pre class="prettyprint lang-diff"&gt;
+diff --git a/lisp/init-web-mode.el b/lisp/init-web-mode.el
+index 63006c1..d1c19a6 100644
+--- a/lisp/init-web-mode.el
++++ b/lisp/init-web-mode.el
+@@ -31,7 +31,8 @@
+          '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+          )
+     (set (make-local-variable 'flymake-err-line-patterns)
+-         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)" nil 1 2 4))
++         ;; pick up errors and warnings for HTML5
++         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing\\|discarding.*\\)" nil 1 2 4))
+          )
+     (flymake-mode t)))
+&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>end</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item></channel></rss>

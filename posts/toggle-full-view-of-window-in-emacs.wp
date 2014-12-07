@@ -1,0 +1,17 @@
+<html><body><p>Add below code into your ~/.emacs: </p>   
+
+
+<pre class="prettyprint ">
+
+(defun toggle-full-window()
+  "Toggle the full view of selected window"
+  (interactive)
+  ;; @see http://www.gnu.org/software/emacs/manual/html_node/elisp/Splitting-Windows.html
+  (if (window-parent)
+      (delete-other-windows)
+    (winner-undo)
+    ))
+</pre>
+
+
+   <p> I use <a href="http://www.emacswiki.org/emacs/Evil">evil</a>, so I assign hot key ",ff" to `toggle-full-window`. </p></body></html>

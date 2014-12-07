@@ -1,0 +1,58 @@
+<html><body><p>I love the Wordpress theme <a href="http://sixhours-demo.calobeedoodles.com/">Sixhours</a> 1.5 designed the by <a href="http://www.carolinemoore.net">Caroline Moore</a>. </p> <p> It is purely simple text theme with dark background and elegant fonts. </p> <p> But for geeks there are two shortcomings: </p><ol> <li>The font color of the hyperlinks is almost same to the plain text. </li> <li>The code block in &lt;pre&gt; element is not highlighted with solid border. </li> </ol>   <p> So here is my patch of style.css to fix these problems: </p>   <pre class="src src-diff"><span style="color: #70c0b1;">--- </span><span style="color: #7aa6da; font-weight: bold;">style.css   2012-03-08 23:56:31.000000000 +0800</span>
+<span style="color: #70c0b1;">+++ </span><span style="color: #7aa6da; font-weight: bold;">style.css   2012-03-08 23:55:53.000000000 +0800</span>
+
+<span style="color: #c397d8;">@@ -25,7 +25,7 @@</span>
+
+<span style="color: #969896;"> a:visited {</span>
+
+<span style="color: #969896;">        text-decoration: none;</span>
+
+<span style="color: #969896;">        font-weight: bold;</span>
+
+<span style="color: #e78c45;">-</span><span style="color: #e78c45;">       color: #f3f3f3;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">       color: #888;</span>
+
+<span style="color: #969896;"> }</span>
+
+<span style="color: #969896;"> a:hover,</span>
+
+<span style="color: #969896;"> a:active {</span>
+
+<span style="color: #c397d8;">@@ -440,4 +440,17 @@</span>
+
+<span style="color: #969896;">        font-style: italic;</span>
+
+<span style="color: #969896;"> }</span>
+
+
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">/* source code block*/</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">pre.src {</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    border:solid 1px;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    -moz-box-shadow: 5px 5px 5px #000; /* Firefox */</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    -webkit-box-shadow: 5px 5px 5px #000; /* Safari, Chrome */</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    box-shadow: 5px 5px 5px #000; /* CSS3 */</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    clear: none;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    float: none;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    font-family: "Courier New",monospace,Monaco,Lucida Console !important;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    margin:5px;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    overflow:auto;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">    white-space: pre;</span>
+
+<span style="color: #b9ca4a;">+</span><span style="color: #b9ca4a;">}</span>
+
+<span style="color: #969896;"> /* End Comments */</span>
+
+</pre>  </body></html>

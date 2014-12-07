@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>How a programmer publish static HTML blog in Emacs | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="How a programmer publish static HTML blog in Emacs">
+    <meta property="og:url" content="http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html">
+    <meta property="og:description" content="I can publish my blog in five seconds, by running only one Emacs command!
+
+
+
+I will give you a minimum solution, then explain why and provide technical details.
+
+
+
+Basic Emacs lisp knowledges are requ">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2014-11-15T04:16:31+00:00">
+           <meta property="article:tag" content="emacs">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="ftp">
+
+    
+
+    
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">How a programmer publish static HTML blog in Emacs</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2014-11-15T04:16:31+00:00">2014-11-15 04:16</time>
+            
+
+            
+          |  
+        <a href="how-to-publish-static-html-blog-in-emacs-as-a-programmer.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/ftp.html" rel="tag">ftp</a></li>
+        </ul>
+        </div>
+
+        </div>
+        <div class="body">
+            <div>
+<p>I can publish my blog <b>in five seconds</b>, by running only <b>one Emacs command</b>!
+</p>
+
+<p>
+I will give you a minimum solution, then explain why and provide technical details.
+</p>
+
+<p>
+Basic Emacs lisp knowledges are required.
+</p>
+
+<p>
+Please note I'm <b>NOT</b> targeted at specific static site generator like <a href="http://getnikola.com/blog/">Nikola</a> or <a href="http://jekyllrb.com/">Jekyll</a>.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Solution</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Tested on <b>Linux and OSX</b>.
+</p>
+<p>
+Requirements:
+</p>
+<ul>
+<li>Org-mode bundled with Emacs 24.x
+</li>
+<li>Nikola as the blog generator 
+</li>
+<li>FTP client <a href="http://www.ncftp.com/ncftp/">ncftp</a>
+</li>
+<li>Latest <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> (v0.0.9+)
+</li>
+<li>Insert below code into ~/.emacs
+</li>
+</ul>
+
+
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun org2nikola-after-hook-setup (title slug)
+  (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
+        (nikola-dir (file-truename "~/projs/nikola-root"))
+        (password "yourpassowrd")
+        (username "yourusername")
+        dir
+        file
+        lines
+        rlt
+        res
+        cmd)
+    (kill-new title)
+    (kill-new url)
+    (message "%s =&gt; kill-ring" url)
+    (setq rlt (shell-command-to-string (format "cd %s; nikola build" nikola-dir)))
+    (setq lines (split-string rlt "\n"))
+    (dolist (l lines)
+      (when (string-match "output\\(.*/\\)*\\([^/]*\\)$" l)
+        (setq dir (match-string 1 l))
+        (setq file (match-string 2 l))
+        (setq cmd (format "ncftpput -b -u %s -p %s ftp.yourdomain.net /blog%s %s/output%s%s"
+                          username password dir nikola-dir dir file))
+        (message "cmd=%s" cmd)
+        (shell-command cmd)
+        ))
+    ))
+
+(add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
+</pre>
+
+
+
+<p>
+You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Why</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>I used <a href="https://wordpress.org">Wordpress</a> and <a href="https://github.com/punchagan/org2blog">Org2blog</a> for a very long time. Then I turned to static blog generator because:
+</p>
+<ul>
+<li>Wordpress is slow to load web page
+</li>
+<li>I waste too much time to "manage" Wordpress (applying security patch, fighting with spam comment …)
+</li>
+<li>As a programmer, I need publish code snippets. Wordpress is <b>BAD</b> at rendering code.
+</li>
+</ul>
+
+
+<p>
+Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by <a href="https://github.com/punchagan">Puneeth Chaganti</a>'s excellent work on org2blog.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Technical Details</h4>
+<div class="outline-text-3" id="text-3">
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h5 id="sec-3-1">Generating HTML</h5>
+<div class="outline-text-4" id="text-3-1">
+
+<p>As I said, Nikola is my blog generator which converts my org file into HTML.
+</p>
+<p>
+But I prefer using <a href="http://orgmode.org/">Org-mode</a> to do the HTML rendering. Nikola only need handle remaining minor book keeping stuff (creating RSS feed, for example).
+</p>
+<p>
+It's because I want to minimize the dependency. I may switch to other blog generator in the future. But my web site always has the <b>same look and feel</b> because the HTML is generated by Org-mode.
+</p>
+<p>
+I learned this trick from Org2blog.
+</p>
+<p>
+If we only use org-mode to create HTML, then extracting code snippet is really easy. All we need is to use regular expression to extract the content between HTML tag "&lt;pre&gt;".
+</p>
+<p>
+Actually I don't even bother doing the extraction. I just replace all the "&lt;pre&gt;" tag with my own tag because I <b>assume</b> the HTML produced by org-mode is stable.
+</p>
+<p>
+Here is the Emacs lisp code I borrowed from Org2blog:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun org2nikola-replace-pre (html)
+  "Replace pre blocks with sourcecode shortcode blocks.
+shamelessly copied from org2blog/wp-replace-pre()"
+  (save-excursion
+    (let (pos code lang info params header code-start code-end html-attrs pre-class)
+      (with-temp-buffer
+        (insert html)
+        (goto-char (point-min))
+        (save-match-data
+          (while (re-search-forward "&lt;pre\\(.*?\\)&gt;" nil t 1)
+
+            ;; When the codeblock is a src_block
+            (unless
+                (save-match-data
+                  (setq pre-class (match-string-no-properties 1))
+                  (string-match "example" pre-class))
+              ;; Replace the &lt;pre...&gt; text
+              (setq lang (replace-regexp-in-string ".*src-\\([a-zA-Z0-9]+\\).*" "\\1" pre-class)  )
+
+              (replace-match "")
+              (setq code-start (point))
+
+              ;; Go to end of code and remove &lt;/pre&gt;
+              (re-search-forward "&lt;/pre.*?&gt;" nil t 1)
+              (replace-match "")
+              (setq code-end (point))
+              (setq code (buffer-substring-no-properties code-start code-end))
+
+              ;; Delete the code
+              (delete-region code-start code-end)
+              ;; Stripping out all the code highlighting done by htmlize
+              (setq code (replace-regexp-in-string "&lt;.*?&gt;" "" code))
+              ;; class linenums will add stripes which will destory the 3rd party skins
+              (insert (concat "\n&lt;pre class=\"prettyprint lang-"
+                              (org2nikola-fix-unsupported-language lang)
+                              "\"&gt;\n"
+                              code
+                              "&lt;/pre&gt;\n"))
+              )))
+
+        ;; Get the new html!
+        (setq html (buffer-substring-no-properties (point-min) (point-max))))
+      ))
+  html)
+</pre>
+
+
+
+<p>
+The code snippet inside "&lt;pre&gt;" tag could be rendered by 3rd party javascript library <a href="https://code.google.com/p/google-code-prettify/">google-code-prettify</a> or <a href="http://alexgorbatchev.com/SyntaxHighlighter/">SyntaxHighlighter</a>.
+</p>
+<p>
+BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h5 id="sec-3-2">Create blog posts</h5>
+<div class="outline-text-4" id="text-3-2">
+
+<p>Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
+</p>
+<p>
+Nikola's duty is simple. Basically it only copy my stuff from its input folder to its output folder when I trigger "nikola build" command.
+</p>
+<p>
+The "nikola build" command will also dump the list of files to be uploaded into stdout.
+</p>
+<p>
+The build message dumped:
+</p>
+
+
+<pre class="example">Scanning posts....done!
+.  render_archive:output/2014/index.html
+.  render_sources:output/posts/jump-to-the-positions-before-and-after-m-x-imenu.wp
+.  render_posts:cache/posts/jump-to-the-positions-before-and-after-m-x-imenu.html
+.  render_indexes:output/index.html
+.  render_indexes:output/index-17.html
+.  render_tags:output/categories/en.html
+.  render_tags:output/categories/emacs.html
+.  render_tags:output/assets/js/tag_cloud_data.json
+.  render_tags:output/categories/emacs.xml
+.  generate_rss:output/rss.xml
+.  render_pages:output/posts/jump-to-the-positions-before-and-after-m-x-imenu.html
+.  render_pages:output/posts/why-emacs-is-better-editor-part-two.html
+.  render_tags:output/categories/en.xml
+</pre>
+
+
+<p>
+Only the files in sub-folder "output" need be uploaded.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-4">
+<h5 id="sec-3-3">Preprocess nikola output</h5>
+<div class="outline-text-4" id="text-3-3">
+
+<p>It's all done by Emacs Lisp.
+</p>
+<p>
+The final output contain lines like:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
+</pre>
+
+
+
+<p>
+As you can see, each line is a ftp upload command we need execute in shell.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-4">
+<h5 id="sec-3-4">FTP upload</h5>
+<div class="outline-text-4" id="text-3-4">
+
+<p>Ncftp is my choice of FTP client. It's solid and efficient.
+</p>
+<p>
+Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is <b>extremely fast</b>.
+</p>
+<p>
+I use Emacs Lisp API `file-truename` to convert all relative path to absolute path to avoid any platform (OSX) issue.
+</p>
+<p>
+BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Summary</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>The workflow is simple.
+</p>
+<p>
+Emacs and third party JS libraries are responsible for the look and feel of my website.
+</p>
+<p>
+Blog generator like Nikola is just a thin layer to relay the HTML files created by Emacs.
+</p>
+<p>
+Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.
+</p>
+</div>
+
+</div>
+</div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="jump-to-the-positions-before-and-after-m-x-imenu.html" rel="prev" title="Jump to the positions before and after `M-x imenu`">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="export-org-file-embedded-with-code-snippets.html" rel="next" title="Export org file embedded with code snippets">Next post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html",
+        disqus_title="How a programmer publish static HTML blog in Emacs",
+        disqus_identifier="cache/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

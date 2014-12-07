@@ -1,0 +1,19 @@
+<html><body><p>I often need update my README files at the root directory of my project which is always managed by git. </p> <p> As a lazy guy, I' rather use some hotkey to open that README. </p> <p> So if you add below elisp code into your ~/ .emacs, you can use hot key `C-c C-f` to open the README: </p>    <pre class="src src-elisp">(<span style="color: #b5bd68;">defun</span> <span style="color: #81a2be;">open-readme-in-git-root-directory</span> ()
+  (interactive)
+  (<span style="color: #b5bd68;">let</span> (filename
+        (root-dir (locate-dominating-file (file-name-as-directory (file-name-directory buffer-file-name)) <span style="color: #8abeb7;">".git"</span>))
+        )
+    <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(message "root-dir=%s" root-dir)</span>
+    (and root-dir (file-name-as-directory root-dir))
+    (setq filename (concat root-dir <span style="color: #8abeb7;">"README.org"</span>))
+    (<span style="color: #b5bd68;">if</span> (not (file-exists-p filename))
+        (setq filename (concat root-dir <span style="color: #8abeb7;">"README.md"</span>))
+      )
+    <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(message "filename=%s" filename)</span>
+    (<span style="color: #b5bd68;">if</span> (file-exists-p filename)
+        (switch-to-buffer (find-file-noselect filename nil nil))
+      (message <span style="color: #8abeb7;">"NO README.org or README.md found!"</span>))
+    ))
+(global-set-key (kbd <span style="color: #8abeb7;">"C-c C-f"</span>) 'open-readme-in-git-root-directory)
+
+</pre>  <p> ,,,, </p></body></html>

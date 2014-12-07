@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (install)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/install.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:04 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Notes to install Gentoo Linux</title><link>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;intel integrated video card&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&amp;gt; Intel) is critical: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+sudo genkernel --menuconfig all
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;grub2&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;let grub2 create the cfg for me automatically, &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;network&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;for ethernet: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+cd /etc/init.d
+
+ln -s net.lo net.eth0
+
+echo 'config_eth0="dhcp"' &amp;gt;&amp;gt; /etc/conf.d/net
+
+/etc/init.d/net.eth0 start
+
+rc-update add net.eth0 default
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; for wireless: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+# I need setup /etc/wpa_supplicant/wpa_supplicant.conf at first
+
+cd /etc/init.d
+
+ln -s net.lo net.ra0
+
+echo 'config_ra0="dhcp"' &amp;gt;&amp;gt; /etc/conf.d/net
+
+/etc/init.d/net.ra0 start
+
+rc-update add net.ra0 default
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Content of /etc/wpa_supplicant/wpa_supplicant.conf: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+#let wpa_supplicant take care of scanning and AP selection
+
+ap_scan=1
+
+
+
+#simple case: WPA-PSK, PPSK as an simple passphrase
+
+http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdatehttp://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdatenetwork={
+  ssid="myssid"
+  psk="mypassword"
+  # the higher priority the sooner we matched
+  priority=5
+}
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;clock synchronization&lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;&lt;a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate"&gt;htpdate&lt;/a&gt; is great because it only use HTTP protocol, don't forget add server in its config file. &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-5" class="outline-3"&gt; &lt;h4 id="sec-5"&gt;sound&lt;/h4&gt; &lt;div class="outline-text-3" id="text-5"&gt;  &lt;p&gt;Nothing to tell. There may be some issue, but I forgot. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>en</category><category>gentoo</category><category>install</category><category>linux</category><guid>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</guid><pubDate>Sun, 24 Feb 2013 23:22:00 GMT</pubDate></item><item><title>Install perl module through source package on cygwin by using cpanm</title><link>http://blog.binchen.org/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I failed to install package "Template" by running `cpanm Template'. &lt;/p&gt; &lt;p&gt; It's because the binary package requires gcc4 while on my cygwin only gcc3 available. &lt;/p&gt; &lt;p&gt; So I install it from source package (with some hack, of course), &lt;/p&gt;   &lt;pre class="src src-sh"&gt;cpanm --look Template &lt;span style="color: #af0000;"&gt;# &lt;/span&gt;&lt;span style="color: #af0000;"&gt;Download and unpack the distribution and then open the directory with your shellI&lt;/span&gt;
+cpanm . &lt;span style="color: #af0000;"&gt;#&lt;/span&gt;&lt;span style="color: #af0000;"&gt;install from local directory&lt;/span&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; Updated: I found the simpler solution was to install gcc4 at cygwin. &lt;/p&gt;&lt;/div&gt;</description><category>cpan</category><category>cpanm</category><category>emacs</category><category>en</category><category>install</category><category>module</category><category>perl</category><guid>http://blog.binchen.org/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html</guid><pubDate>Tue, 17 Jul 2012 23:22:23 GMT</pubDate></item><item><title>Install perl module through source package on cygwin by using cpanm</title><link>http://blog.binchen.org/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Install source package with some hack, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;cpanm --look Template &lt;span style="color: #af0000;"&gt;# &lt;/span&gt;&lt;span style="color: #af0000;"&gt;Download and unpack the distribution and then open the directory with your shellI&lt;/span&gt;
+&lt;span style="color: #af0000;"&gt;#&lt;/span&gt;&lt;span style="color: #af0000;"&gt;hacking ...&lt;/span&gt;
+&lt;p&gt;cpanm . &lt;span style="color: #af0000;"&gt;#&lt;/span&gt;&lt;span style="color: #af0000;"&gt;install from local directory&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>cpan</category><category>cpanm</category><category>emacs</category><category>en</category><category>install</category><category>module</category><category>perl</category><guid>http://blog.binchen.org/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html</guid><pubDate>Sun, 08 Jul 2012 15:26:35 GMT</pubDate></item></channel></rss>

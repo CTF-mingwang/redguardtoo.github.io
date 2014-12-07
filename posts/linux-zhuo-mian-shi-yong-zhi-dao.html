@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Linux桌面使用之道 | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Linux桌面使用之道">
+    <meta property="og:url" content="http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html">
+    <meta property="og:description" content="作者: 陈斌(redguardtoo)   注意: 我会长期维护本文,请参考下面的更新时间   更新时间:  2014-04-14 Mon   原创时间:  2011-05-08 日   这是为有志于成为顶尖Linux Geek的中级Linux用户而写的入门指导.   本文的重点是如何高效地使用Linux桌面软件.    为什么你的Linux水准原地踏步       消费主义   Linux下的免">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2011-05-08T16:08:00+00:00">
+           <meta property="article:tag" content="desktop">
+           <meta property="article:tag" content="linux">
+           <meta property="article:tag" content="software">
+           <meta property="article:tag" content="zh">
+
+    
+
+    
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Linux桌面使用之道</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2011-05-08T16:08:00+00:00">2011-05-08 16:08</time>
+            
+
+            
+          |  
+        <a href="linux-zhuo-mian-shi-yong-zhi-dao.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/desktop.html" rel="tag">desktop</a></li>
+           <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="../categories/software.html" rel="tag">software</a></li>
+           <li><a class="tag p-category" href="../categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+        </div>
+        <div class="body">
+            <div>
+<p></p>
+<p>作者: 陈斌(redguardtoo) </p> <p> 注意: 我会长期维护本文,请参考下面的更新时间 </p> <p> 更新时间: <span class="timestamp-wrapper"> <span class="timestamp">2014-04-14 Mon</span></span> </p> <p> 原创时间: <span class="timestamp-wrapper"> <span class="timestamp">2011-05-08 日</span></span> </p> <p> 这是为有志于成为顶尖Linux Geek的中级Linux用户而写的入门指导. </p> <p> 本文的重点是如何高效地使用Linux桌面软件. </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">为什么你的Linux水准原地踏步</h4> <div class="outline-text-3" id="text-1">   </div>  <div id="outline-container-1-1" class="outline-4"> <h5 id="sec-1-1">消费主义</h5> <div class="outline-text-4" id="text-1-1">  <p>Linux下的免费软件很多,许多人就要把所有有趣的软件都玩遍.这就和高富帅收集跑车,白富美收集包包一个概念.但是问题的关键是时间都被浪费了,学习Linux的初衷被丢之脑后. </p>
+</div>  </div>  <div id="outline-container-1-2" class="outline-4"> <h5 id="sec-1-2">自我主义</h5> <div class="outline-text-4" id="text-1-2">  <p>例如,拒绝使用更好的软件,因为"我习惯了老的软件"或者"我写了脚本可以实现类似功能"或者"我的人生哲学等等" </p>
+</div>  </div>  <div id="outline-container-1-3" class="outline-4"> <h5 id="sec-1-3">缺乏经验,轻信他人</h5> <div class="outline-text-4" id="text-1-3">  <p>典型的就是如果有个新的最酷的文本编辑器出来了.你立即丢弃了你正在用的Emacs,因为你轻信了新软件的广告.一旦那个软件停止升级,发觉你在其上时间精力投资也就白费了.也许在转投阵营前调查软件后面的人(用户和开发者)可能更好一点. </p> <p> 又比如有个开源界的知名人士宣称Unix的原则就是很多小的独立的程序通过纯文本协议相互作用.在你把这当成黄金法则到处乱应用之前,也许你应该了解一下该大牛讲话的风格就是比较偏激的. </p>
+</div>  </div>  <div id="outline-container-1-4" class="outline-4"> <h5 id="sec-1-4">自我管理差</h5> <div class="outline-text-4" id="text-1-4">  <p>年青的我就是最好的反面典型.当时我自认为自己智商高,记忆力好,所以学到有用的知识后没有记下来,后来全忘了. </p> <p> 现在我醒悟了,我会写下心得,公开发表,同时增量备份到全世界至少三个服务器上.在若干年内不断的维护改进. </p> <p> 比如我写的<a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org">一年成为Emacs高手</a>就是一个活生生的例子. </p>
+</div> </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">哲学</h4> <div class="outline-text-3" id="text-2">   </div>  <div id="outline-container-2-1" class="outline-4"> <h5 id="sec-2-1">长期投资</h5> <div class="outline-text-4" id="text-2-1">  <p>软件对我而言是长期投资.所以我会花很多时间学习软件的快捷键(快捷键长期来说操作比鼠标高效),那种只能用鼠标操作的软件对我来说就是"坏"软件. </p>
+</div>  </div>  <div id="outline-container-2-2" class="outline-4"> <h5 id="sec-2-2">理性思维</h5> <div class="outline-text-4" id="text-2-2">  <p>以文件管理器来说,在Windows平台下我长期使用并热爱Total Commander,在Linux下平台下也有几款文件管理器在界面和功能上和Total Commander上非常接近,自然从感情上讲我会爱屋及乌.但是我最后还是选择了以Emacs作为主要的文件管理器,以丑陋的Midnight Commander为辅助,因我已确定选择软件的总的原则是尽可能用少的的软件做尽可能多的事.具体说来就是以Emacs做任何事,如果一定要用其他软件辅助Emacs,快捷键也应是Emacs的.Midnight Commander符合该条件 </p>
+</div>  </div>  <div id="outline-container-2-3" class="outline-4"> <h5 id="sec-2-3">科学方法</h5> <div class="outline-text-4" id="text-2-3">  <p>细节见后文,我要强调的是我的工具和方法都是有高手验证过,有官方文档支持.对我而言,科学的含义,就是前人反复验证过的,过去100%成功也许能保证现在将来可能成功(因工具环境不断在变化,所以只是有可能).除此以外都不叫科学. </p>
+</div>  </div>  <div id="outline-container-2-4" class="outline-4"> <h5 id="sec-2-4">以人为本</h5> <div class="outline-text-4" id="text-2-4">  <p>在后文我会列出一些筛选软件的方法.也会推荐一些软件.但你决不要认为只要用了这些软件或者记住了我的方法就能成为高手了.这只是敲门砖而已. </p> <p> 实际上我推荐的不是软件,而是人.这些软件和用户和开发者是一个精英荟萃的圈子.重要的是你要理解这个圈子的风格. </p>
+</div> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">少而精</h4> <div class="outline-text-3" id="text-3">  <p>软件数量少,品质高,功能强,依赖小,界面通用. </p> </div>  <div id="outline-container-3-1" class="outline-4"> <h5 id="sec-3-1">数量少</h5> <div class="outline-text-4" id="text-3-1">  <p>这点很重要,只有需要使用的软件少(但是完成的工作一分都不能少),才可能精通. </p> <p> 软件少的另外一个好处是维护省心,例如你发觉某个软件的快捷键和另一未知软件有冲突,找出另一个未知软件的工作量和你在系统上安装的软件数量有重大关系. </p>
+</div>  </div>  <div id="outline-container-3-2" class="outline-4"> <h5 id="sec-3-2">品质高</h5> <div class="outline-text-4" id="text-3-2">  <p>我对于品质的要求很简单: </p>
+<ul> <li>久经考验(例如Emacs的开发历史有35年以上) </li> <li>聪明人认同 </li> </ul>   <p> 何为久经考验,何为聪明人,我相信是可以找出很多客观的指标的.指标越严格,筛选结果就越少. </p>
+</div>  </div>  <div id="outline-container-3-3" class="outline-4"> <h5 id="sec-3-3">功能强</h5> <div class="outline-text-4" id="text-3-3">  <p>原谅我又用Emacs举例,用Emacs可以看网页,收邮件,写程序,做笔记,写博客,读rss. </p> <p> 附带说明一下,在我罗列的这些功能中,Emacs都是极为优秀,很少有同类软件可以媲美. </p> <p> 事实上,功能强的终极境界就是提供了一个无所不能的可编程平台. </p>
+</div>  </div>  <div id="outline-container-3-4" class="outline-4"> <h5 id="sec-3-4">依赖小</h5> <div class="outline-text-4" id="text-3-4">  <p>例如,命令行软件不依赖于QT,GTK之类图形界面库,安装包小很多,运行时消耗内存也小,启动快. </p>
+</div>  </div>  <div id="outline-container-3-5" class="outline-4"> <h5 id="sec-3-5">界面通用</h5> <div class="outline-text-4" id="text-3-5">  <p>例如,我写程序用emacs,一般操作用bash shell,文件管理用Midnight Commander(mc),上网用Firefox,但是通过适当的设置(Firefox需要安装插件keysnail,其他软件只要用最新版即可),他们的快捷键都是Emacs的. </p>
+</div> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">软件推荐</h4> <div class="outline-text-3" id="text-4">   </div>  <div id="outline-container-4-1" class="outline-4"> <h5 id="sec-4-1">编辑器</h5> <div class="outline-text-4" id="text-4-1">  <p>我用Emacs,考虑到它可以做任何事,可以认为它是轻量级的. </p> <p> Vim也用,万不得已用nano,结束了. </p>
+</div>  </div>  <div id="outline-container-4-2" class="outline-4"> <h5 id="sec-4-2">浏览器</h5> <div class="outline-text-4" id="text-4-2">  <p>Firefox.它是自由软件,所以有很多顶尖Geek为其写插件.例如<a href="https://github.com/mooz/keysnail/wiki">keysnail</a>可以把Firefox的快捷键设置为Emacs的快捷键.所以我可以不用鼠标浏览网页. </p>
+</div>  </div>  <div id="outline-container-4-3" class="outline-4"> <h5 id="sec-4-3">Shell</h5> <div class="outline-text-4" id="text-4-3">  <p>我用bash,在我的.bashrc中有如下一行, </p>   
+<pre class="prettyprint ">
+
+export HISTSIZE=200000
+</pre>
+
+<p></p>
+<p> 确保我输入的所有命令都不会丢失,我偏爱命令行软件,但是记命令会消耗我很多脑细胞,所以我让shell替我记住.我只要记住按Ctrl+R可搜索历史就好了. </p> <p> 其他有用的选项还很多.这只是个例子,说明Bash是可编程的. </p>
+</div>  </div>  <div id="outline-container-4-4" class="outline-4"> <h5 id="sec-4-4">桌面</h5> <div class="outline-text-4" id="text-4-4">  <p>Gnome,KDE是绝对不会考虑的.我使用更轻量级的<a href="http://i3wm.org/">i3</a>. </p> <p> i3的优点是平铺桌面(例如左边开一个窗口写代码,右边开个窗口看PDF文档)极为方便,学习曲线很低(同类软件我大概试用过10多个了,包括主流的Gnome,KDE,XFCE4). </p>
+</div>  </div>  <div id="outline-container-4-5" class="outline-4"> <h5 id="sec-4-5">其他</h5> <div class="outline-text-4" id="text-4-5">  <ul> <li>联网我自己写脚本,因为GUI工具如wicd之类的依赖多而且曾经折腾过我. </li> <li>听音乐我用命令行工具mpd和mpc </li> <li>播放视频我用<a href="http://www.mplayerhq.hu">mplayer</a>(命令行),等等. </li> <li>硬盘清理我用bleachbit(清理常用软件产生的临时文件),localepurge(删除无用的多国语言),ncdu(检查硬盘如何被占用) </li> <li>文件管理器我用Midnight Commander.其键盘快捷键可设置为Emacs的快捷键,对于我这种记不住快捷键的人很有用. </li> </ul>  </div> </div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">软件的使用也需维护</h4> <div class="outline-text-3" id="text-5">  <p>安装软件在包管理系统的帮助下很简单.麻烦的是最新软件有时候不稳定,这通常是因为软件的配置文件更新引起的. </p> </div>  <div id="outline-container-5-1" class="outline-4"> <h5 id="sec-5-1">将/etc目录下的默认配置文件备份</h5> <div class="outline-text-4" id="text-5-1">  <p>Linux的软件默认配置文件在/etc/目录下. 我使用分布式版本控制软件<a href="http://git-scm.com/">git</a>管理/etc目录,分布式版本控制系统好处很多,最大好处就是数据到处有完整备份,非常安全.具体细节请参考<a href="http://en.wikipedia.org/wiki/Distributed_revision_control_system">wikipedia</a>. </p> <p> 在Linux上更新完系统或者安装最新软件包后,可以考虑手动将/etc目录下的文件用git备份. </p>   
+<pre class="prettyprint ">
+
+sudo git add /etc/
+
+sudo git commit -am "backup"
+</pre>
+
+<p></p>
+<p> 一旦某软件工作不正常了,可以检查其/etc下默认配置文件的修改纪录,将配置文件恢复到上一个正常工作的版本. </p>   
+<pre class="prettyprint ">
+
+sudo git log /etc/mysql/my.cnf #check history
+
+sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-5-2" class="outline-4"> <h5 id="sec-5-2">将用户目录下的用户定制配置文件备份</h5> <div class="outline-text-4" id="text-5-2">  <p>我也用git将个人用户的配置文件(在/home/username/下的配置文件)备份到<a href="http://www.github.com">github</a>的服务器上.这里必须用第三方服务器同步配置,因为我使用多台电脑. </p> <p> 具体操作可写成长篇大论,这里不展开了. </p>
+</div>  </div>  <div id="outline-container-5-3" class="outline-4"> <h5 id="sec-5-3">将软件版本降级</h5> <div class="outline-text-4" id="text-5-3">  <p>最新版本的软件可能不稳定,这时降级是必要的. </p> <p> 对于Arch Linux来说很简单,请参考<a href="https://wiki.archlinux.org/index.php/Downgrading_Packages">Archwiki</a>,实际上很简单,安装名为downgrade的软件,然后让它干所有的体力活就行了. </p>   
+<pre class="prettyprint ">
+
+packer downgrade
+</pre>
+
+<p></p>
+<p> 对于其他主流的Linux发行版如Centos或者Ubuntu来说,由于包的测试周期比较长,所以不会有不稳定的问题. </p> <p> 对于小众版本来说(例如我现在实用Gentoo Linux),更好的策略是不要随意使用最新版本的软件. </p>
+</div>  </div>  <div id="outline-container-5-4" class="outline-4"> <h5 id="sec-5-4">云备份</h5> <div class="outline-text-4" id="text-5-4">  <p>电子图书,多媒体文件用专业的云备份服务更好,我推荐<a href="https://www.getdropbox.com/referrals/NTg1ODg2Mjk">Dropbox</a>. </p> <p> Dropbox实在是妙用无穷(例如,国外有人把Dropbox和git结合使用),我只是用了其最简单的功能. </p> <p> 顺便说一下,国内的服务不要用,安全原因,不言自明. </p>
+</div>  </div>  <div id="outline-container-5-5" class="outline-4"> <h5 id="sec-5-5">备份操作系统</h5> <div class="outline-text-4" id="text-5-5">  <p>不用经常作,又有云备份,又有分布式版本控制系统,怕什么. </p> <p> 备份整个硬盘是用<a href="http://clonezilla.org/">Clonezilla</a>,只是备份操作系统的话用以下命令, </p>   
+<pre class="prettyprint ">
+
+tar zcvpf mylinux.tgz --exclude=/proc/* --exclude=/lost+found --exclude='mylinux.tgz' --exclude=/mnt/* --exclude=/home/username/* --exclude=/sys/* /
+</pre>
+
+<p></p>
+<p> 我建议用前者,因为省事. </p> <p> 假设你采用clonezilla备份操作系统,我建议将/目录(操作系统目录)和/home目录放在两个分区内. </p> <p> 如果能够按照我前面的少而精的原则选择软件的话,操作系统目录的分区并不需要很大(8G足够了),目前我的常用软件和操作系统的所占空间控制在3G左右(我的例子比较极端,因为我的netbook只有4G硬盘),这样clonezilla的操作就很快. </p>
+</div>  </div>  <div id="outline-container-5-6" class="outline-4"> <h5 id="sec-5-6">阅读官方文档</h5> <div class="outline-text-4" id="text-5-6">  <p>阅读官方和社区文档. </p> <p> Ubuntu社区的特点用户多,少见的bug一般都会在该社区报告.缺点是其文档深度不够. </p> <p> Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术含量很高. </p>
+</div>  </div>  <div id="outline-container-5-7" class="outline-4"> <h5 id="sec-5-7">虚拟机的用处</h5> <div class="outline-text-4" id="text-5-7">  <p>我虚拟机软件使用VirtualBox,虚拟机为Windows XP,该操作系统我会定期更新安全补丁.软件只安装了IE和firefox.该操作系统我只用来操作网络银行.每次操作完毕,我会重置虚拟机状态到操作前的snapshot. </p>
+</div> </div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">常用软件的诊断修复</h4> <div class="outline-text-3" id="text-6">  <p>即使采用了上述做法,一年中也会有一次倒霉.就是我要用的某个版本的某个软件出问题了.没人能帮忙,不能降级,改软件配置也没用,也没有可用的错误信息. </p> <p> 问题看起来很难,事实上5分钟就能搞定.这往往是因为某软件需要的第三方库的版本出问题了. </p> <p> 比如说firefox不能启动,运行如下命令调试, </p>   
+<pre class="prettyprint ">
+
+strace -o err.txt firefox
+</pre>
+
+<p></p>
+<p> 读一下err.txt就可以知道是哪个库出问题了.相信我,这是不需要任何编程知识的,猜加google就可以了. </p> <p> 你知道哪个库文件出问题了(保险起见,ldd firefox确认一下).比如/usr/lib/libpng.so.14找不到,简单的解决办法是用另一个版本的库文件代替. </p> <p> 如果/usr/lib/libpng.so.15是存在的,我们可以用该库顶替libpng.so.14, </p>   
+<pre class="prettyprint ">
+
+sudo ln -s /usr/lib/libpng.so.15 /usr/lib/libpng.so.14
+</pre>
+
+<p></p>
+<p> 通常这样就行了. </p> <p> 万一冒名顶替不行,我们就必须根据丢失的库文件查找需要安装的软件包. </p> <p> 以Arch Linux为例(其他发行版也有类似功能): </p>   
+<pre class="prettyprint ">
+
+pkgfile libpng
+</pre>
+
+<p></p>
+<p> pkgfile属于软件包pkgtools,所以你必须安装pkgtools, </p>   
+<pre class="prettyprint ">
+
+packer -S pkgtools-git
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-7" class="outline-3"> <h4 id="sec-7">系统启动失败的修复</h4> <div class="outline-text-3" id="text-7">  <p>解决方法很简单,用常见的Linux启动光盘启动,然后chroot,其作用是以指定目录作为操作系统根目录(root directory),然后以此根目录为基准建立一个新的环境. </p> <p> 细节请参考<a href="https://wiki.archlinux.org/index.php/Change_Root">https://wiki.archlinux.org/index.php/Change_Root</a>. </p> <p> 比如说我升级kernel后系统启动失败,而老的kernel没有备份,我可以光盘启动电脑,然后chroot,再使用上文所提的工具升级或者降级kernel. </p>
+</div>  </div>  <div id="outline-container-8" class="outline-3"> <h4 id="sec-8">书籍推荐</h4> <div class="outline-text-3" id="text-8">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
+<col class="left">
+<col class="left"> </colgroup> <thead> <tr>
+<th scope="col" class="left">书籍</th>
+<th scope="col" class="left">评论</th>
+</tr> </thead> <tbody> <tr>
+<td class="left">
+<a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting Guide</a> by Mendel Cooper</td>
+<td class="left">经典,不断更新中.其提供的.bashrc模板很有价值,手册完全读完没必要</td>
+</tr> <tr>
+<td class="left"><a href="http://www.catb.org/esr/writings/taoup/">The Art of Unix Programming by Eric Steven Raymond</a></td>
+<td class="left">开拓思路,当八卦看,和编程实际上关系不大</td>
+</tr> <tr>
+<td class="left"><a href="http://debian-handbook.info/browse/stable/">The Debian Administrator's Handbook</a></td>
+<td class="left">很好.捡对你有用的章节看.</td>
+</tr> </tbody> </table>  </div>  </div>  <div id="outline-container-9" class="outline-3"> <h4 id="sec-9">常见问题</h4> <div class="outline-text-3" id="text-9">  <p>等你的问题了. </p>
+</div>  </div>  <div id="outline-container-10" class="outline-3"> <h4 id="sec-10">联系我</h4> <div class="outline-text-3" id="text-10">  <p>这是我的<a href="https://twitter.com/#!/chen_bin">twitter</a>和<a href="https://plus.google.com/110954683162859211810">google plus</a>,也可以通过我的email&lt;chenbin DOT sh AT GMAIL DOT COM&gt;联系我. </p> <p> 我的主力博客为<a href="http://blog.binchen.org">http://blog.binchen.org</a>. </p>
+</div> </div> </div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="yong-mintty-zuo-wei-cyginw-de-console.html" rel="prev" title="用mintty作为cygwin的console">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="one-line-linux-cli-to-remove-span-tag.html" rel="next" title="One-line Linux CLI to remove span tag">Next post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html",
+        disqus_title="Linux\u684c\u9762\u4f7f\u7528\u4e4b\u9053",
+        disqus_identifier="cache/posts/linux-zhuo-mian-shi-yong-zhi-dao.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

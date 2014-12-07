@@ -1,0 +1,76 @@
+
+<p>Use <a href="https://github.com/capitaomorte/yasnippet">yasnippets</a> is the easiest way for email templates.
+</p>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Place email templates in the directory $HOME/my-yasnippets/message-mode</a></li>
+<li><a href="#sec-2">2 Add following code into .emacs to make yasnippet load the emacs templates</a></li>
+<li><a href="#sec-3">3 Email yasnippet template</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">Place email templates in the directory $HOME/my-yasnippets/message-mode</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">github</a>. But email templates are my private stuff. So I put them in different location instead under ~/.emacs.d.
+</p></div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Add following code into .emacs to make yasnippet load the emacs templates</h3>
+<div class="outline-text-3" id="text-2">
+
+
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
+(if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
+    (add-to-list 'yas-snippet-dirs my-yasnippets))
+;; yasnippet set up code, blah blah ...
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Email yasnippet template</h3>
+<div class="outline-text-3" id="text-3">
+
+<p>Here is a sample email to reply my job agents:
+</p>
+
+
+<pre class="example"># -*- mode: snippet -*-
+# name: email for OK job
+# key: jobok
+# --
+Hi ${1:AGENT_NAME},
+
+Thank you very much for providing me this great opportunity.
+
+Unfortunately I'm occupied now and will not consider new job for the time being.
+
+Currently I'm working for ${2:COMPANY_NAME} as a contract developer. However, the
+contract will be over ${3:END_OF_CONTRACT} and I will be available then.
+
+So keep int touch.
+
+Attached is my latest CV.
+$0
+
+&lt;#part type="application/msword" filename="~/org/cv/resume.doc" disposition=attachment description=resume&gt;
+&lt;#/part&gt;
+</pre>
+
+
+</div>
+</div>

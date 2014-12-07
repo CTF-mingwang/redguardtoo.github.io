@@ -1,0 +1,22 @@
+<html><body><p>Add following code into your .emacs, then use "/" to execute `git command` on your marked files in dired-mode: </p>   <pre class="src src-elisp">(<span style="color: #b9ca4a;">defun</span> <span style="color: #7aa6da;">diredext-exec-git-command-in-shell</span> (command <span style="color: #e78c45;">&amp;optional</span> arg file-list)
+  <span style="color: #c397d8;">"Run a shell command `git COMMAND`' on the marked files.</span>
+<span style="color: #c397d8;">if no files marked, always operate on current line in dired-mode</span>
+
+<span style="color: #c397d8;">"</span>
+  (interactive
+   (<span style="color: #b9ca4a;">let</span> ((files (dired-get-marked-files t current-prefix-arg)))
+     (list
+      <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">Want to give feedback whether this file or marked files are used:</span>
+      (dired-read-shell-command <span style="color: #70c0b1;">"git command on %s: "</span> current-prefix-arg files)
+      current-prefix-arg
+      files)))
+  (<span style="color: #b9ca4a;">unless</span> (string-match <span style="color: #70c0b1;">"[*?][ \t]*\\'"</span> command)
+    (setq command (concat command <span style="color: #70c0b1;">" *"</span>)))
+  (setq command (concat <span style="color: #70c0b1;">"git "</span> command))
+  (dired-do-shell-command command arg file-list)
+  (message command))
+
+
+(<span style="color: #b9ca4a;">eval-after-load</span> 'dired '(define-key dired-mode-map <span style="color: #70c0b1;">"/"</span> 'diredext-exec-git-command-in-shell))
+
+</pre>   <p> For example, say you set the alias "a" for git command "add" in your $HOME/.gitconfig. </p> <p> In order to `git add` files, you marked files in dired-mode and press "/", then press "a". The command `git a(dd)` will be executed. </p> <p> The reason to use git in dired-mode is simple. I'm working for some big enterprise application. You know the enterprise guys have the tendency to create lots of small modules/files for one feature. So I need do lots of `cp files somewhere` and `git add files` things these days. </p> <p> Thanks all the <a href="https://plus.google.com/110954683162859211810/posts/4CmwuDxVCA1">Emacs geeks on the Google+</a> who enlighten me. </p></body></html>

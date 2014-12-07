@@ -1,0 +1,24 @@
+<html><body><pre class="src src-python"><span style="color: #cd0000;">#!/usr/bin/python</span>
+<span style="color: #00cdcd; font-weight: bold;">import</span> Image
+
+<span style="color: #00cdcd; font-weight: bold;">import</span> cStringIO
+
+
+
+<span style="color: #cdcd00;">data</span>=<span style="color: #0000ee; font-weight: bold;">open</span>(<span style="color: #00cd00;">"test.png"</span>,<span style="color: #00cd00;">"rb"</span>).read()
+
+<span style="color: #cd0000;"># in real application, I handle the data in memory</span>
+
+<span style="color: #cdcd00;">img</span>=Image.open(cStringIO.StringIO(data))
+
+img.thumbnail((800,480),Image.ANTIALIAS)
+
+img.save(<span style="color: #00cd00;">"test-p.jpg"</span>,<span style="color: #00cd00;">"JPEG"</span>)
+
+img.thumbnail((128,128),Image.ANTIALIAS)
+
+img.save(<span style="color: #00cd00;">"test-t.jpg"</span>,<span style="color: #00cd00;">"JPEG"</span>)
+
+<span style="color: #00cdcd; font-weight: bold;">print</span> <span style="color: #00cd00;">"DONE"</span>
+
+</pre>  </body></html>

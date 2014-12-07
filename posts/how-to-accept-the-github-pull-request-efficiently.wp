@@ -1,0 +1,77 @@
+
+<p>I use keyboard only in order to maximize my productivity.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">Preparation</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>Install Firefox addon <a href="https://github.com/mooz/keysnail/wiki">Keysnail</a> and its plugin <a href="https://github.com/mooz/keysnail/wiki/plugin">HOK</a>. From now on, all the web browsing is done ONLY in keyboard.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Step 1</h3>
+<div class="outline-text-3" id="text-2">
+
+<p>Open pull request page at github.com, click the link "command line".
+</p>
+<p>
+In a real world project, I rarely accept a pull request without some modification. So I usually avoid pressing the big green button "merge pull request" on that page.
+</p>
+<p>
+In the "command line" page, github is kind enough to list the command lines to "check out a new branch and test the changes" from the pull request. The command lines are like:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+git checkout -b her-master master
+git pull git@github.com:her/myproject.git master
+</pre>
+
+
+<p>
+I have installed a Greasemonkey user script <a href="https://github.com/redguardtoo/NinjaWebCoder">NinjaWebCoder</a> in order to <b>use keyboard</b> to copy those command lines from the browser into clipboard. Then I paste the command lines into terminal.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Step 2</h3>
+<div class="outline-text-3" id="text-3">
+
+<p>I open the code file with Emacs.
+</p>
+<p>
+There is an Emacs addon called <a href="https://github.com/syohex/emacs-git-gutter">git-gutter</a>. I use its command "git-gutter:next-hunk" to move the cursor to the next "diff hunk".
+</p>
+<p>
+Let me explain what's the diff hunk. When you edit some code under git's control, you code has some difference with the HEAD version. Every difference corresponds to the pair of a file name and a line number. That file-name-line-number pair is defined as a "diff hunk".
+</p>
+<p>
+Now comes <b>the most important part of this article</b>. Since version 0.71, git-gutter added a new command "git-gutter:set-start-version". If I "git-gutter:set-start-revision" to the "HEAD^" version. I can jump to "diff hunk" of the difference between "HEAD" and "HEAD^".
+</p>
+<p>
+In short, I can <b>review the latest commit and change the code in one step</b>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h3 id="sec-4">Done</h3>
+<div class="outline-text-3" id="text-4">
+
+<p>After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
+</p>
+<p>
+Every operation in previous steps is optimized with some shortcut. For example, in shell I use alias "g" instead of full command line "git status".
+</p>
+<p>
+Please enlighten me if the work flow could be improved.
+</p></div>
+</div>

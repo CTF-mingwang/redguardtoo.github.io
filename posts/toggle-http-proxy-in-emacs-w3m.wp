@@ -1,0 +1,24 @@
+<html><body><p><a href="http://www.emacswiki.org/emacs/emacs-w3m">emacs-w3m</a> is a browser embedded in Emacs. It can handle all my basic web surfing needs. </p> <p> For some reason, I need switch my http proxy frequently when accessing the internet in China. So I need figure out a easy way doing this. </p> <p> It turns out all I need to do is to set/unset the environment variable "http_proxy" in elisp code. Restarting the w3m session after change the environment variable is not needed at all. </p> <p> Here is my code: </p>   
+
+
+<pre class="prettyprint ">
+
+(defun toggle-env-http-proxy ()
+  "set/unset the environment variable http_proxy which w3m uses"
+  (interactive)
+  (let ((proxy "http://127.0.0.1:8000"))
+    (if (string= (getenv "http_proxy") proxy)
+        ;; clear the proxy
+        (progn
+          (setenv "http_proxy" "")
+          (message "env http_proxy is empty now")
+          )
+      ;; set the proxy
+      (setenv "http_proxy" proxy)
+      (message "env http_proxy is %s now" proxy)
+        )
+    ))
+</pre>
+
+
+  </body></html>

@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (spam)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/spam.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2012-12-28&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-09-28 Sun&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="http://getpopfile.org"&gt;POPFile&lt;/a&gt; automatically sorts my email messages.
+&lt;/p&gt;
+
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Install POPFile&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;Download and extract the zip file to ~/bin/popfile/.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Install third party packages&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;Run the command:
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+&lt;/pre&gt;
+
+
+
+&lt;p&gt;
+BTW, don't let the cpan detect the mirror site automatically because the process takes several minutes. Choose the site manually!
+&lt;/p&gt;
+&lt;p&gt;
+First question is would you like automatic setup? Yes!
+&lt;/p&gt;
+&lt;p&gt;
+Second quesiton, set up mirror site for you? No!
+&lt;/p&gt;
+&lt;p&gt;
+Third question, choose one mirror site from the list? No!
+&lt;/p&gt;
+&lt;p&gt;
+Forth question, please input the site manullay. &lt;a href="http://mirror.optusnet.com.au/CPAN/"&gt;http://mirror.optusnet.com.au/CPAN/&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;
+This is my cpan setup (Please note I use proxy),
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-perl"&gt;
+# content of /root/.cpan/CPAN/MyConfig.pm
+$CPAN::Config = {
+  'applypatch' =&amp;gt; q[],
+  'auto_commit' =&amp;gt; q[0],
+  'build_cache' =&amp;gt; q[100],
+  'build_dir' =&amp;gt; q[/root/.cpan/build],
+  'build_dir_reuse' =&amp;gt; q[0],
+  'build_requires_install_policy' =&amp;gt; q[yes],
+  'bzip2' =&amp;gt; q[/bin/bzip2],
+  'cache_metadata' =&amp;gt; q[1],
+  'check_sigs' =&amp;gt; q[0],
+  'colorize_output' =&amp;gt; q[0],
+  'commandnumber_in_prompt' =&amp;gt; q[1],
+  'connect_to_internet_ok' =&amp;gt; q[1],
+  'cpan_home' =&amp;gt; q[/root/.cpan],
+  'ftp_passive' =&amp;gt; q[1],
+  'ftp_proxy' =&amp;gt; q[],
+  'getcwd' =&amp;gt; q[cwd],
+  'gpg' =&amp;gt; q[/usr/bin/gpg],
+  'gzip' =&amp;gt; q[/bin/gzip],
+  'halt_on_failure' =&amp;gt; q[0],
+  'histfile' =&amp;gt; q[/root/.cpan/histfile],
+  'histsize' =&amp;gt; q[100],
+  'http_proxy' =&amp;gt; q[http://127.0.0.1:3128],
+  'inactivity_timeout' =&amp;gt; q[0],
+  'index_expire' =&amp;gt; q[1],
+  'inhibit_startup_message' =&amp;gt; q[0],
+  'keep_source_where' =&amp;gt; q[/root/.cpan/sources],
+  'load_module_verbosity' =&amp;gt; q[none],
+  'make' =&amp;gt; q[/usr/bin/make],
+  'make_arg' =&amp;gt; q[],
+  'make_install_arg' =&amp;gt; q[],
+  'make_install_make_command' =&amp;gt; q[/usr/bin/make],
+  'makepl_arg' =&amp;gt; q[INSTALLDIRS=site],
+  'mbuild_arg' =&amp;gt; q[],
+  'mbuild_install_arg' =&amp;gt; q[],
+  'mbuild_install_build_command' =&amp;gt; q[./Build],
+  'mbuildpl_arg' =&amp;gt; q[--installdirs site],
+  'no_proxy' =&amp;gt; q[],
+  'pager' =&amp;gt; q[/usr/bin/less],
+  'patch' =&amp;gt; q[/usr/bin/patch],
+  'perl5lib_verbosity' =&amp;gt; q[none],
+  'prefer_external_tar' =&amp;gt; q[1],
+  'prefer_installer' =&amp;gt; q[MB],
+  'prefs_dir' =&amp;gt; q[/root/.cpan/prefs],
+  'prerequisites_policy' =&amp;gt; q[follow],
+  'scan_cache' =&amp;gt; q[atstart],
+  'shell' =&amp;gt; q[/bin/bash],
+  'show_unparsable_versions' =&amp;gt; q[0],
+  'show_upload_date' =&amp;gt; q[0],
+  'show_zero_versions' =&amp;gt; q[0],
+  'tar' =&amp;gt; q[/bin/tar],
+  'tar_verbosity' =&amp;gt; q[none],
+  'term_is_latin' =&amp;gt; q[1],
+  'term_ornaments' =&amp;gt; q[1],
+  'test_report' =&amp;gt; q[0],
+  'trust_test_report_history' =&amp;gt; q[0],
+  'unzip' =&amp;gt; q[/usr/bin/unzip],
+  'urllist' =&amp;gt; [q[http://mirror.optusnet.com.au/CPAN/]],
+  'use_sqlite' =&amp;gt; q[0],
+  'version_timeout' =&amp;gt; q[15],
+  'wget' =&amp;gt; q[/usr/bin/wget],
+  'yaml_load_code' =&amp;gt; q[0],
+  'yaml_module' =&amp;gt; q[YAML],
+};
+1;
+__END__
+&lt;/pre&gt;
+
+
+
+&lt;p&gt;
+After packages installed, double check them locally:
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+perl -MDBI -e 'print $MIME::DBI::VERSION'
+&lt;/pre&gt;
+
+
+
+&lt;p&gt;
+If there is any error:
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+perl -V
+sudo rm -rf /usr/lib/perl5/site_perl/*
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+&lt;/pre&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Set up&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;I only use IMAP. The purpose of setting up POP3 port is to make the program executable without root permission.
+&lt;/p&gt;
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:mayneedroot"&gt;http://getpopfile.org/docs/howtos:mayneedroot&lt;/a&gt; for details.
+&lt;/p&gt;
+&lt;p&gt;
+Run the below command to fix the root issue.
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+&lt;/pre&gt;
+
+
+
+&lt;p&gt;
+Here is my popfile setup for davmail server (please note ssl is disabled),
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-conf"&gt;
+bayes_bad_sqlite_version 4.0.0
+bayes_corpus corpus
+bayes_database popfile.db
+bayes_dbauth 
+bayes_dbconnect dbi:SQLite:dbname=$dbname
+bayes_dbuser 
+bayes_hostname 192-168-1-3.tpgi.com.au
+bayes_localhostname 
+bayes_nihongo_parser kakasi
+bayes_sqlite_journal_mode delete
+bayes_sqlite_tweaks 4294967295
+bayes_subject_mod_left [
+bayes_subject_mod_pos 1
+bayes_subject_mod_right ]
+bayes_unclassified_weight 100
+bayes_xpl_angle 0
+config_pidcheck_interval 5
+config_piddir ./
+GLOBAL_debug 1
+GLOBAL_last_update_check 1407715200
+GLOBAL_message_cutoff 100000
+GLOBAL_msgdir messages/
+GLOBAL_ssl_verify_peer_certs 0
+GLOBAL_timeout 60
+GLOBAL_update_check 1
+history_archive 0
+history_archive_classes 0
+history_archive_dir archive
+history_history_days 2
+html_cache_templates 0
+html_column_characters 0
+html_columns +inserted,+from,+to,-cc,+subject,-date,-size,+bucket
+html_date_format 
+html_language English
+html_last_reset Sat Dec  1 11:06:48 2012
+html_local 0
+html_page_size 20
+html_password b6b3637136ad630eba43aa5ee7106780
+html_port 8888
+html_search_filter_highlight 0
+html_send_stats 1
+html_session_dividers 1
+html_show_bucket_help 1
+html_show_training_help 0
+html_skin simplyblue
+html_strict_templates 0
+html_test_language 0
+html_wordtable_format 
+imap_bucket_folder_mappings job--&amp;gt;job--&amp;gt;geek--&amp;gt;geek--&amp;gt;business--&amp;gt;business--&amp;gt;ad--&amp;gt;ad--&amp;gt;unclassified--&amp;gt;INBOX--&amp;gt;work--&amp;gt;work--&amp;gt;
+imap_enabled 1
+imap_expunge 0
+imap_hostname localhost
+imap_login binc1
+imap_password password1
+imap_port 1143
+imap_training_mode 0
+imap_uidnexts work--&amp;gt;749--&amp;gt;job--&amp;gt;5914--&amp;gt;INBOX--&amp;gt;20736--&amp;gt;geek--&amp;gt;5009--&amp;gt;ad--&amp;gt;1296--&amp;gt;business--&amp;gt;15--&amp;gt;
+imap_uidvalidities job--&amp;gt;98--&amp;gt;work--&amp;gt;107--&amp;gt;ad--&amp;gt;100--&amp;gt;business--&amp;gt;106--&amp;gt;geek--&amp;gt;99--&amp;gt;INBOX--&amp;gt;2--&amp;gt;
+imap_update_interval 1000
+imap_use_ssl 0
+imap_watched_folders INBOX--&amp;gt;INBOX--&amp;gt;
+logger_format default
+logger_level 0
+logger_logdir ./
+nntp_enabled 0
+nntp_force_fork 1
+nntp_headtoo 0
+nntp_local 1
+nntp_port 119
+nntp_separator :
+nntp_socks_port 1080
+nntp_socks_server 
+nntp_welcome_string NNTP POPFile (v1.1.3) server ready
+pop3_enabled 0
+pop3_force_fork 1
+pop3_local 1
+pop3_port 1110
+pop3_secure_port 110
+pop3_secure_server 
+pop3_separator :
+pop3_socks_port 1080
+pop3_socks_server 
+pop3_toptoo 0
+pop3_welcome_string POP3 POPFile (v1.1.3) server ready
+smtp_chain_port 25
+smtp_chain_server 
+smtp_enabled 0
+smtp_force_fork 1
+smtp_local 1
+smtp_port 25
+smtp_socks_port 1080
+smtp_socks_server 
+smtp_welcome_string SMTP POPFile (v1.1.3) welcome
+xmlrpc_enabled 0
+xmlrpc_local 1
+xmlrpc_port 8081
+
+&lt;/pre&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;Run the program&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+cd ~/bin/popfile;perl popfile.pl
+&lt;/pre&gt;
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-5" class="outline-3"&gt;
+&lt;h4 id="sec-5"&gt;Start the POPFile automatically when bash login&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5"&gt;
+
+&lt;p&gt;Insert below code in ~/.bashrc:
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-bash"&gt;
+OS_NAME=`uname -s`
+if [ $OS_NAME == Linux ]; then
+   # start popfile
+   if [ -f $HOME/bin/popfile/popfile.pl ]; then
+      # @see http://getpopfile.org/docs/howtos:runlocation
+      pop_pid=`ps -ef | grep perl | grep popfile.pl | gawk '{print $2}'`
+      if [ "${pop_pid}" = "" ] ; then
+         cd $HOME/bin/popfile
+         perl popfile.pl &amp;gt;&amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;
+      fi
+      cd $HOME
+   fi
+fi
+&lt;/pre&gt;
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-6" class="outline-3"&gt;
+&lt;h4 id="sec-6"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-6"&gt;
+
+&lt;p&gt;My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
+&lt;/p&gt;
+&lt;p&gt;
+here is content of popfile.service.
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-conf"&gt;
+[Unit]
+Description=POPFile (Automatic Email Classification) Service
+
+[Service]
+WorkingDirectory=/home/cb/bin/popfile
+ExecStart=/usr/bin/perl popfile.pl
+User=cb
+
+[Install]
+WantedBy=multi-user.target
+&lt;/pre&gt;
+
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-7" class="outline-3"&gt;
+&lt;h4 id="sec-7"&gt;Backup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-7"&gt;
+
+&lt;p&gt;Please backup popfile.cfg and popfile.db.
+&lt;/p&gt;
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:backup"&gt;http://getpopfile.org/docs/howtos:backup&lt;/a&gt; for details.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-8" class="outline-3"&gt;
+&lt;h4 id="sec-8"&gt;Summary&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-8"&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Portable
+&lt;/li&gt;
+&lt;li&gt;No root privilege needed
+&lt;/li&gt;
+&lt;li&gt;No X windows needed. I can finish all the email stuff in remote shell
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>email</category><category>en</category><category>filter</category><category>linux</category><category>popfile</category><category>spam</category><guid>http://blog.binchen.org/posts/use-popfile-at-linux.html</guid><pubDate>Fri, 28 Dec 2012 13:37:00 GMT</pubDate></item></channel></rss>

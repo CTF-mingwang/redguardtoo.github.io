@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (screenshot)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/screenshot.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:04 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to take screen shot for business people efficiently in Emacs</title><link>http://blog.binchen.org/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Required tools&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt; &lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt;&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;&lt;th scope="col" class="left"&gt;Minimum version&lt;/th&gt;&lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class="left"&gt;org-mode&lt;/td&gt;&lt;td class="left"&gt;create org-file which could be converted to odt file&lt;/td&gt;&lt;td class="left"&gt;7.8&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;scrot&lt;/td&gt;&lt;td class="left"&gt;command line tool to take screen shot&lt;/td&gt;&lt;td class="left"&gt;any version&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;libreoffice&lt;/td&gt;&lt;td class="left"&gt;convert odt to word document&lt;/td&gt;&lt;td class="left"&gt;any version&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;xsel&lt;/td&gt;&lt;td class="left"&gt;X clipboard tool&lt;/td&gt;&lt;td class="left"&gt;any version&lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;  &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Work flow&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;   &lt;/div&gt;  &lt;div id="outline-container-2-1" class="outline-4"&gt; &lt;h5 id="sec-2-1"&gt;Use scrot to take screen shot and put its full path into clipboard&lt;/h5&gt; &lt;div class="outline-text-4" id="text-2-1"&gt;     
+&lt;pre class="prettyprint "&gt;
+scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2-2" class="outline-4"&gt; &lt;h5 id="sec-2-2"&gt;Create org file in Emacs and insert the path of screen shot&lt;/h5&gt; &lt;div class="outline-text-4" id="text-2-2"&gt;  &lt;p&gt;Actually I use below elisp command to do the insertion for me. &lt;/p&gt;   
+&lt;pre class="prettyprint lang-lisp"&gt;
+(defun insert-file-link-from-clipboard ()
+  "Make sure the full path of file exist in clipboard. This command will convert
+The full path into relative path and insert it as a local file link in org-mode"
+  (interactive)
+  (let (str)
+    (with-temp-buffer
+      (shell-command
+       (cond
+        ((eq system-type 'cygwin) "getclip")
+        ((eq system-type 'darwin) "pbpaste")
+        (t "xsel -ob")
+        )
+       1)
+      (setq str (buffer-string))
+      )
+
+    ;; convert to relative path (relative to current buffer) if possible
+    (let ((m (string-match (file-name-directory (buffer-file-name)) str) ))
+      (when m
+        (if (= 0 m )
+            (setq str (substring str (length (file-name-directory (buffer-file-name)))))
+          )
+        )
+        (insert (format "[[file:%s]]" str))
+      )
+    ))
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2-3" class="outline-4"&gt; &lt;h5 id="sec-2-3"&gt;Export the org to odt file in Emacs&lt;/h5&gt; &lt;div class="outline-text-4" id="text-2-3"&gt;  &lt;p&gt;Run the command "org-export" whose hot key is "C-c C-e". &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2-4" class="outline-4"&gt; &lt;h5 id="sec-2-4"&gt;Convert the odt file into word file in Emacs&lt;/h5&gt; &lt;div class="outline-text-4" id="text-2-4"&gt;  &lt;p&gt;This is automatically done if you insert below code into your ~/.emacs: &lt;/p&gt;   
+&lt;pre class="prettyprint lang-lisp"&gt;
+(setq org-export-odt-preferred-output-format "doc")
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Basically this flag make emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2-5" class="outline-4"&gt; &lt;h5 id="sec-2-5"&gt;Tips&lt;/h5&gt; &lt;div class="outline-text-4" id="text-2-5"&gt;  &lt;p&gt;If you need insert page break in the exported document, insert below line into you org file: &lt;/p&gt;   
+&lt;pre class="example"&gt;
+#+ODT: &amp;lt;text:p text:style-name="PageBreak"/&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>screenshot</category><guid>http://blog.binchen.org/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html</guid><pubDate>Wed, 23 Oct 2013 14:31:00 GMT</pubDate></item></channel></rss>

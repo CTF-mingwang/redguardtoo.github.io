@@ -1,0 +1,24 @@
+<html><body><p>I need toggle on input method to input Chinese (or any other language) in Emacs. The default hot key is "C-\" which corresponds the command "toggle-input-method". </p> <p> My problem is since I'm using <a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a> (a Vim simulation), I need switch evil state from "normal" to "insert" before toggling on input method. </p> <p> That extra step is not necessary if you insert below code into ~/.emacs: </p>    
+
+
+<pre class="prettyprint ">
+
+(defun evil-toggle-input-method ()
+  "when toggle on input method, switch to evil-insert-state if possible.
+when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
+  (interactive)
+  (if (not current-input-method)
+      (if (not (string= evil-state "insert"))
+          (evil-insert-state))
+    (if (string= evil-state "insert")
+        (evil-normal-state)
+        ))
+  (toggle-input-method))
+
+
+(global-set-key (kbd "C-\\") 'evil-toggle-input-method)
+</pre>
+
+
+
+   <p> BTW, I strongly recommend the Chinese input method <a href="https://github.com/wenbinye/emacs-eim">eim</a> written in pure elisp. </p> <p> Emacs中切换其自带输入法的快捷键是"C-\",对应的命令是"toggle-input-method". </p> <p> 我遇到的问题是如果使用<a href="http://www.emacswiki.org/emacs/Evil">Evil</a>(一种Vim模拟)则切换输入法不方便.我需要先切换evil-state至insert,然后才能切换输入法. </p> <p> 只要将以上代码贴入~/.emacs,则切换输入法可以更加高效: </p> <p> 顺便提一下,<a href="https://github.com/wenbinye/emacs-eim">eim</a>是我强烈推荐的中文输入法.  </p></body></html>

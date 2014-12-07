@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Linux, Programming, Emacs">
+    <meta name="viewport" content="width=device-width">
+    <title>Chen's blog (old posts, page 3) | Chen's blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/index-3.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+        <div class="post">
+            <h1 class="title"><a href="posts/hotkeys-for-moving-windows-in-emacs.html">Hotkeys for moving windows in emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-31T08:26:00+00:00">2012-01-31 08:26</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/hotkeys-for-moving-windows-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/hotkeys-for-moving-windows-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>See <a href="http://www.emacswiki.org/emacs/WindMove">http://www.emacswiki.org/emacs/WindMove</a> for details. </p> <p> My hotkeys are different from emacswiki because: </p>
+<ul> <li>I was a vi guy, I prefer H,J,K,L for navigation. </li> <li>Arrow keys does not work on my terminal simulators.  <p>   Here is my hotkeys: </p>
+</li> </ul>     
+<pre class="prettyprint ">
+
+(when (fboundp 'windmove-left)
+  (global-set-key "\C-ch" 'windmove-left)
+  (global-set-key "\C-cj" 'windmove-down)
+  (global-set-key "\C-ck" 'windmove-up)
+  (global-set-key "\C-cl" 'windmove-right))
+</pre>
+
+<p></p>
+<p> Note:   <code>C-c j</code> is originall hokey of function <code>join-line</code>. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/copypaste-in-emacs.html">Copy/Paste in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-30T10:52:00+00:00">2012-01-30 10:52</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/copypaste-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/copypaste-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/clipboard.html" rel="tag">clipboard</a></li>
+           <li><a class="tag p-category" href="categories/cygwin.html" rel="tag">cygwin</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2012-01-30</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-08-23 Sat</span></span>
+</p>
+
+<p>
+See <a href="http://www.emacswiki.org/emacs/CopyAndPaste">http://www.emacswiki.org/emacs/CopyAndPaste</a> for discussion.
+</p>
+
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="posts/copypaste-in-emacs.html#sec-1">1 Prepare</a></li>
+<li><a href="posts/copypaste-in-emacs.html#sec-2">2 Solution</a></li>
+<li>
+<a href="posts/copypaste-in-emacs.html#sec-3">3 Advanced Tips</a>
+<ul>
+<li><a href="posts/copypaste-in-emacs.html#sec-3-1">3.1 Clipboard manager</a></li>
+<li><a href="posts/copypaste-in-emacs.html#sec-3-2">3.2 Remote clipboard</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Prepare</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>For Emacs console version under Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
+</p>
+<p>
+For Emacs GUI version on any OS, NO external tool is needed.
+</p>
+<p>
+For Emacs under Cygwin, you need install its package "cygutils-extra".
+</p>
+<p>
+For Emacs console version under OS X, NO external tool is needed.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Solution</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>This solution works reliably at <b>any environment</b>.
+</p>
+<p>
+Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x paste-from-xclipboard' to paste.
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq *is-a-mac* (eq system-type 'darwin))
+(setq *cygwin* (eq system-type 'cygwin) )
+(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
+(defun copy-to-x-clipboard ()
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (cond
+         ((and (display-graphic-p) x-select-enable-clipboard)
+          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
+         (t (shell-command-on-region (region-beginning) (region-end)
+                                     (cond
+                                      (*cygwin* "putclip")
+                                      (*is-a-mac* "pbcopy")
+                                      (*linux* "xsel -ib")))
+            ))
+        (message "Yanked region to clipboard!")
+        (deactivate-mark))
+        (message "No region active; can't yank to clipboard!")))
+
+(defun paste-from-x-clipboard()
+  (interactive)
+  (cond
+   ((and (display-graphic-p) x-select-enable-clipboard)
+    (insert (x-selection 'CLIPBOARD)))
+   (t (shell-command
+       (cond
+        (*cygwin* "getclip")
+        (*is-a-mac* "pbpaste")
+        (t "xsel -ob"))
+       1))
+   ))
+
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
+  )
+
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Advanced Tips</h4>
+<div class="outline-text-3" id="text-3">
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h5 id="sec-3-1">Clipboard manager</h5>
+<div class="outline-text-4" id="text-3-1">
+
+<p>Clipboard manager is handy sometimes.
+</p>
+<p>
+I suggest <a href="http://parcellite.sourceforge.net/">parcellite</a> at Linux, <a href="http://ditto-cp.sourceforge.net/">ditto</a> under windows.
+</p>
+<p>
+Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
+</p>
+
+
+
+<pre class="prettyprint lang-conf">
+[rc]
+use_copy=true
+use_primary=true
+synchronize=true
+save_history=true
+history_limit=64
+hyperlinks_only=false
+confirm_clear=false
+single_line=true
+reverse_history=false
+item_length=50
+ellipsize=2
+history_key=&lt;Super&gt;Y
+actions_key=
+menu_key=
+history_pos=false
+history_x=1
+history_y=1
+case_search=false
+type_search=false
+data_size=0
+ignore_whiteonly=false
+trim_wspace_begend=false
+trim_newline=false
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h5 id="sec-3-2">Remote clipboard</h5>
+<div class="outline-text-4" id="text-3-2">
+
+<p>Use below command to ssh the Linux server. Then you can share the clipboard between the server and your local computer seamlessly. No furthe setup needed.
+</p>
+
+
+
+
+<pre class="prettyprint lang-sh">
+ssh -X -C -c blowfish-cbc,arcfour $@
+</pre>
+
+
+
+</div>
+
+<p></p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/the-most-important-features-of-midnight-commander-mc.html">The most important features of Midnight Commander (MC)</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-23T08:29:00+00:00">2012-01-23 08:29</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/the-most-important-features-of-midnight-commander-mc.html#disqus_thread" data-disqus-identifier="cache/posts/the-most-important-features-of-midnight-commander-mc.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/mc.html" rel="tag">mc</a></li>
+           <li><a class="tag p-category" href="categories/tc.html" rel="tag">tc</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Since I was a big fan of <a href="http://www.ghisler.com">Total Commander (TC)</a>, I priorize the MC's feature according to my TC's experience. </p> <p> Here is the list (C = Ctrl, M = Alt, S = Shift): </p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
+<col class="left">
+<col class="left">
+<col class="left"> </colgroup> <thead> <tr>
+<th scope="col" class="left">Feature</th>
+<th scope="col" class="left">MC</th>
+<th scope="col" class="left">TC</th>
+</tr> </thead> <tbody> <tr>
+<td class="left">Bookmark</td>
+<td class="left">C-\, then "New Entry"</td>
+<td class="left">C-D</td>
+</tr> <tr>
+<td class="left">Quick Search</td>
+<td class="left">C-s or M-s</td>
+<td class="left">C-M-first<sub>character</sub><sub>of</sub><sub>file</sub><sub>name</sub>
+</td>
+</tr> <tr>
+<td class="left">Find File</td>
+<td class="left">M-?</td>
+<td class="left">M-F7</td>
+</tr> <tr>
+<td class="left">Select Files by Pattern</td>
+<td class="left">+ (- will unselect files)</td>
+<td class="left">C-F12</td>
+</tr> <tr>
+<td class="left">Mkdir</td>
+<td class="left">F7</td>
+<td class="left">F7</td>
+</tr> <tr>
+<td class="left">Create New File with Vim</td>
+<td class="left">Shift-F4</td>
+<td class="left">Shift-F4</td>
+</tr> <tr>
+<td class="left">Edit File with Vi</td>
+<td class="left">F4 (See <a href="http://www.cyberciti.biz/tips/midnightcommander-set-vi-as-default-editor-viewer.html">Use vi as Default Editor)</a>
+</td>
+<td class="left">F4 (need configuration)</td>
+</tr> <tr>
+<td class="left">View File</td>
+<td class="left">F3</td>
+<td class="left">F3</td>
+</tr> <tr>
+<td class="left">Copy File Name</td>
+<td class="left">M-w (See <a href="https://www.midnight-commander.org/browser/misc/mc.keymap.emacs">mc.keymail.emacs</a>
+</td>
+<td class="left">No hotkey</td>
+</tr> <tr>
+<td class="left">Copy Full Path to CLI</td>
+<td class="left">C-S-Enter</td>
+<td class="left">Don't know</td>
+</tr> <tr>
+<td class="left">Directory History</td>
+<td class="left">M-h (actually history of all the commands</td>
+<td class="left">Don't know</td>
+</tr> </tbody> </table>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/start-wxwdigets-programming-on-windows.html">Start wxWdigets programming on Windows</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-18T11:28:00+00:00">2012-01-18 11:28</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/start-wxwdigets-programming-on-windows.html#disqus_thread" data-disqus-identifier="cache/posts/start-wxwdigets-programming-on-windows.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/mathjax.html" rel="tag">mathjax</a></li>
+           <li><a class="tag p-category" href="categories/win32.html" rel="tag">win32</a></li>
+           <li><a class="tag p-category" href="categories/wxwidgets.html" rel="tag">wxwidgets</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<ul> <li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a> </li> <li>Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. </li> <li>Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" </li> <li>Install Visual Studio (Express version is fine if you installed WIN32 SDK too) </li> <li>Compile wxWidgets library by running the dos batch file: </li> </ul>     <pre class="src src-sh">@echo off
+call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span>
+<p>nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=debug</p>
+<p>nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=release</p>
+<p></p></pre>   <p> We use vcvars32.bat to set up the CLI tool chains. </p> <p> "Unicode=1" because our application will support i18n. </p>
+<ul> <li>Install <a href="http://www.cmake.org">CMake</a> </li> <li>Create a simple project with files main.cpp, main.hpp, CMakeLists.txt </li> </ul>  <p>main.cpp and main.hpp containts normal C++ code. </p> <p> CMakeLists.txt is the project file for CMake: </p>   <pre class="src src-cmake"><span style="color: #7aa6da;">PROJECT</span>(main)
+<p><span style="color: #7aa6da;">CMAKE_MINIMUM_REQUIRED</span>(VERSION 2.6)</p>
+<p><span style="color: #969896; font-style: italic;"># sets variable SOURCES to the project source files.</span></p>
+<p><span style="color: #7aa6da;">set</span>(XRCS
+  main_frame.xrc
+  )</p>
+<p><span style="color: #7aa6da;">set</span>(XRCS_DIR ${main_SOURCE_DIR}/rc)</p>
+<p><span style="color: #7aa6da;">if</span>(CMAKE_COMPILER_IS_GNUCC)
+  <span style="color: #969896; font-style: italic;"># needed for gcc 4.6+</span>
+  <span style="color: #7aa6da;">set</span>(CMAKE_CXX_FLAGS <span style="color: #70c0b1;">"${CMAKE_CXX_FLAGS} -fpermissive"</span>)
+<span style="color: #7aa6da;">endif</span>()</p>
+<p><span style="color: #7aa6da;">set</span>( CPP_SOURCES
+  main.cpp
+  )</p>
+<p><span style="color: #7aa6da;">set</span>( H_SOURCES
+    main.hpp
+    )
+  )</p>
+<p><span style="color: #7aa6da;">set</span>(SOURCES
+  ${CPP_SOURCES}
+  ${H_SOURCES}
+  )</p>
+<p><span style="color: #969896; font-style: italic;"># xrc -&gt; xml, adv, html</span></p>
+<p><span style="color: #7aa6da;">set</span>(wxWidgets_USE_LIBS xrc xml adv html core base)</p>
+<p><span style="color: #7aa6da;">find_package</span>(wxWidgets REQUIRED)</p>
+<p><span style="color: #7aa6da;">include</span>(${wxWidgets_USE_FILE})</p>
+<p><span style="color: #969896; font-style: italic;">#try to embed resource</span></p>
+<p><span style="color: #7aa6da;">foreach</span>(XRC $latex {XRCS})
+  <span style="color: #7aa6da;">string</span>(REGEX REPLACE <span style="color: #70c0b1;">"[.].*$"</span> <span style="color: #70c0b1;">".h"</span> XRC_HEADER ${XRC})
+  <span style="color: #7aa6da;">set</span>(XRC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/${XRC_HEADER})
+  <span style="color: #7aa6da;">set</span>(XRC ${XRCS_DIR}/${XRC})
+  <span style="color: #7aa6da;">add_custom_command</span>(OUTPUT ${XRC_HEADER}
+    COMMAND bin2c -c ${XRC} ${XRC_HEADER}
+    MAIN_DEPENDENCY ${XRC} )
+  <span style="color: #7aa6da;">set</span>(SOURCES ${SOURCES} ${XRC_HEADER})
+<span style="color: #7aa6da;">endforeach</span>(XRC)</p>
+<p><span style="color: #7aa6da;">set</span>(INC
+  )</p>
+<p><span style="color: #7aa6da;">if</span>(UNIX AND NOT APPLE)
+  <span style="color: #7aa6da;">include</span>(FindPkgConfig)
+  <span style="color: #7aa6da;">pkg_check_modules</span>(GTK2 REQUIRED gtk+-2.0&gt;=2.10)
+  <span style="color: #7aa6da;">set</span>(INC ${INC} ${GTK2_INCLUDE_DIRS})
+<span style="color: #7aa6da;">endif</span>()</p>
+<p><span style="color: #969896; font-style: italic;">#add other librarie</span></p>
+<p><span style="color: #7aa6da;">include_directories</span>(${INC})</p>
+<p><span style="color: #7aa6da;">if</span>(UNIX)
+  <span style="color: #7aa6da;">add_definitions</span>(-Wno-write-strings)
+<span style="color: #7aa6da;">endif</span>()</p>
+<p><span style="color: #7aa6da;">if</span>(WIN32)
+  <span style="color: #969896; font-style: italic;"># WIN32 := subsystem is windows instead of console?</span>
+  <span style="color: #7aa6da;">add_executable</span>(main WIN32 ${SOURCES})
+<span style="color: #7aa6da;">else</span>(WIN32)
+  <span style="color: #7aa6da;">add_executable</span>(main ${SOURCES})
+<span style="color: #7aa6da;">endif</span>()</p>
+<p><span style="color: #7aa6da;">set</span>(LIBS
+  ${wxWidgets_LIBRARIES}
+  )</p>
+<p><span style="color: #7aa6da;">if</span>(MINGW AND WIN32)
+  <span style="color: #7aa6da;">set</span>(LIBS ${LIBS} ole32 uuid oleaut32)
+<span style="color: #7aa6da;">endif</span>()</p>
+<p><span style="color: #7aa6da;">target_link_libraries</span>(main ${LIBS})</p>
+<p></p></pre>   <ul> <li>Running the below dos batch the create Visual Studio Project Files </li> </ul>     <pre class="src src-sh">@echo off
+<p>call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span></p>
+<p>cmake path/of/directory/which/contains/CMakeLists.txt/</p>
+<p></p></pre>  <ul> <li>Enjoy! </li> </ul>   <p> BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/always-turn-on-fpermissive-for-gcc-4-6.html">Always turn on "-fpermissive" for GCC 4.6</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-14T10:38:00+00:00">2012-01-14 10:38</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/always-turn-on-fpermissive-for-gcc-4-6.html#disqus_thread" data-disqus-identifier="cache/posts/always-turn-on-fpermissive-for-gcc-4-6.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gcc.html" rel="tag">gcc</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Below code will get error message if compiled by gcc 4.6+: </p>   <pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+</pre>    <pre class="src src-c++"><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">A</span>
+<p>{
+   <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">a</span>();
+}</p>
+<p><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">B</span></p>
+<p>{
+   <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>;
+}</p>
+<p><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">MyClass</span>:<span style="color: #00cdcd; font-weight: bold;">public</span> <span style="color: #00cd00;">B</span></p>
+<p>{
+  <span style="color: #00cd00;">A</span> <span style="color: #cdcd00;">_a</span>;
+  <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>
+  {
+    _a.a(); <span style="color: #cd0000;">//</span><span style="color: #cd0000;">gcc complains here!</span>
+  }
+}</p>
+<p></p></pre>  <p> Since I cannot modify class A and B, I need add "-fpermission" to CXX<sub>FLAG</sub>. Here is my <a href="http://www.cmake.org">cmake</a> code, </p>   <pre class="src src-cmake">if(CMAKE_COMPILER_IS_GNUCC)
+  # needed for gcc 4.6+
+  set(CMAKE_CXX_FLAGS <span style="color: #00cd00;">"${CMAKE_CXX_FLAGS} -fpermissive"</span>)
+endif()
+<p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/clean-up-emacs-mode-line-for-tiny-netbook.html">Clean up emacs mode line for tiny netbook</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-13T08:56:00+00:00">2012-01-13 08:56</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/clean-up-emacs-mode-line-for-tiny-netbook.html#disqus_thread" data-disqus-identifier="cache/posts/clean-up-emacs-mode-line-for-tiny-netbook.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>. </p> <p> It contains too much information for me because my screen is tiny (I use the netbook <a href="http://en.wikipedia.org/wiki/Asus_Eee_PC">Eee PC 701</a> whose LCD resolution is 800x480). </p> <p> For example, org-mode will append some information at the mode-line which is beyond my tiny screen. </p> <p> See <a href="http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html">customizing the mode-line</a> for the solution to clean up the mode-line. </p> <p> But there is one problem. The variable "global-mode-string" is missing in mode-line, so my favourite org-mode goodie "M-x org-timer-set-timer" won't work. </p> <p> Here is my fixed version. </p>
+<ul> <li>screenshot </li> </ul>  <p><img src="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png*" alt="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png* "> </p>
+<ul> <li>Elisp code </li> </ul>     <pre class="src src-elisp"><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">@see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html</span>
+<span style="color: #cd0000;">;; </span><span style="color: #cd0000;">But I need global-mode-string,</span>
+<p><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">@see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html</span></p>
+<p><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">use setq-default to set it for /all/ modes</span></p>
+<p>(setq-default mode-line-format
+  (list
+    <span style="color: #cd0000;">;; </span><span style="color: #cd0000;">the buffer name; the file name as a tool tip</span>
+    '(<span style="color: #0000ee; font-weight: bold;">:eval</span> (propertize <span style="color: #00cd00;">"%b "</span> 'face 'font-lock-keyword-face
+        'help-echo (buffer-file-name)))</p>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>line and column<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"("<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>'%02' to set to 2 chars at least; prevents flickering<span class="nt">&lt;/span&gt;</span>
+  (propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%02l"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>","<span class="nt">&lt;/span&gt;</span>
+  (propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%02c"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>") "<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>relative position, size of file<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt;</span>
+<span class="s2">(propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">p</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-constant-face) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;% above top&lt;/span&gt;</span>
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">/</span><span class="s2">"&lt;/span&gt;</span>
+<span class="s2">(propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">I</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-constant-face) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;size&lt;/span&gt;</span>
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>the current major mode for the buffer.<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt;</span>
+
+<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">m</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-string-face</span>
+<span class="s2">          'help-echo buffer-file-coding-system))</span>
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+
+
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;insert vs overwrite mode, input-method in a tooltip&lt;/span&gt;</span>
+<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (propertize (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;if&lt;/span&gt; overwrite-mode &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Ovr</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Ins</span><span class="s2">"&lt;/span&gt;)</span>
+<span class="s2">          'face 'font-lock-preprocessor-face</span>
+<span class="s2">          'help-echo (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="n">is</span> <span class="k">in</span> <span class="s2">"&lt;/span&gt;</span>
+<span class="s2">                       (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;if&lt;/span&gt; overwrite-mode &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">overwrite</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nb">insert</span><span class="s2">"&lt;/span&gt;) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span> <span class="nb">mode</span><span class="s2">"&lt;/span&gt;)))</span>
+
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;was this buffer modified since the last save?&lt;/span&gt;</span>
+<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;when&lt;/span&gt; (buffer-modified-p)</span>
+<span class="s2">          (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="p">,</span><span class="s2">"&lt;/span&gt;  (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Mod</span><span class="s2">"&lt;/span&gt;</span>
+<span class="s2">                         'face 'font-lock-warning-face</span>
+<span class="s2">                         'help-echo &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">modified</span><span class="s2">"&lt;/span&gt;))))</span>
+
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;is this buffer read-only?&lt;/span&gt;</span>
+<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;when&lt;/span&gt; buffer-read-only</span>
+<span class="s2">          (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="p">,</span><span class="s2">"&lt;/span&gt;  (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">RO</span><span class="s2">"&lt;/span&gt;</span>
+<span class="s2">                         'face 'font-lock-type-face</span>
+<span class="s2">                         'help-echo &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="nx">is</span> <span class="nb">read</span><span class="na">-only</span><span class="s2">"&lt;/span&gt;))))</span>
+<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>global-mode-string, org-timer-set-timer in org-mode need this<span class="nt">&lt;/span&gt;</span>
+(propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%M"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face)
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>" --"<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>i don't want to see minor-modes; but if you want, uncomment this:<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>minor-mode-alist  ;; list of minor modes<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%-"<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>fill with '-'<span class="nt">&lt;/span&gt;</span>
+))
+</pre>
+
+
+<p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html">为什么程序员创业的小时工资是1000$/小时</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-12T13:17:00+00:00">2012-01-12 13:17</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html#disqus_thread" data-disqus-identifier="cache/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/startup.html" rel="tag">startup</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>读了<a href="http://blog.asmartbear.com">A Smart Bear</a>的两篇文章后的简写. </p> <p> 第一篇,<a href="http://blog.asmartbear.com/value-time">你的时间价值1000$每小时</a>: </p>
+<ul> <li>如果你投资自己的时间做一个金钱回报在未来的项目,项目成功概率不是100%,你得假设你的小时工资是你1000$每小时 </li> <li>简单数学计算的结果,回报X概率/项目开发时间 </li> <li>否则还不如做别人的项目. </li> <li>结论是你的时间非常宝贵,必需只用来做最重要的事. </li> </ul>   <p> 第二篇,<a href="http://blog.asmartbear.com/virtual-assistant-startup.html">尽可能外包是唯一解决之道</a>: </p>
+<ul> <li>只要可能,尽量外包,唯一例外是你的核心代码 </li> <li>程序员有自动化任务的习惯,很多时候和人力外包相比不值得 </li> <li>记住你的小时工资是1000$每小时 </li> <li>例如,做市场/技术方案调查时,很多工作可以外包.节省的金钱时间是惊人的. </li> <li>设定任务和最后期限及具体的流程 </li> <li>作者偏爱菲律宾人,因为英语好,盗窃知识产权的风险不大 </li> </ul>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/ncdu-best-disk-usage-analyzer-under-linux.html">ncdu, Best disk usage analyzer under Linux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2011-12-30T02:50:00+00:00">2011-12-30 02:50</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/ncdu-best-disk-usage-analyzer-under-linux.html#disqus_thread" data-disqus-identifier="cache/posts/ncdu-best-disk-usage-analyzer-under-linux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/disk.html" rel="tag">disk</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/usage.html" rel="tag">usage</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>The size of the package is only 56K. UI is easy. </p> <p> Use j,k to navigate. </p> <p> Here is the software information: </p>   <pre class="src src-sh">Name           : ncdu
+Version        : 1.8-1
+<p>URL            : http://dev.yorhel.nl/ncdu/</p>
+<p>Licenses       : custom:MIT</p>
+<p>Depends On     : ncurses</p>
+<p>Packager       : Gaetan Bisson &lt;<a href="mailto:bisson@archlinux.org">bisson@archlinux.org</a>&gt;</p>
+<p>Description    : Disk usage analyzer with an ncurses interface</p>
+<p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html">评估了Emacs下支持intellisense的几个方案</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2011-12-29T16:26:00+00:00">2011-12-29 16:26</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html#disqus_thread" data-disqus-identifier="cache/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/intellisense.html" rel="tag">intellisense</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>  我的结论,Emacs23自带的semantic简单可用. </p> <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Cedet1.0</h4> <div class="outline-text-3" id="text-1">  <p>   (require 'semantic-ia)后一些函数可用. </p> <p>    我没有试出来,和我安装的emacs是terminal版本有关(Cedet下的semantic-ia需要一个GUI介面的popup-menu). </p> <p>    这也是游人探讨<a href="http://www.emacswiki.org/emacs/AutoComplete">Auto Complete</a>接合semantic-ia的原因,因为AutoComplete已经完美实现了popup-menu. </p> <p>    缺点,semantic做后台语法解析的时候emacs会失去响应几妙种(我的硬件配置很好,intel i3 双核,4G内存),有时候会导致emacs退出. </p> </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Emacs23自带的semantic</h4> <div class="outline-text-3" id="text-2">  <p>   没有semantic-ia. </p> <p>    semantic-analyze-possible-completion(快捷键为C-c , l)较符合要求,可惜这个函数只是打印候选字符串在另一个buffer.需用hippie-expand(快捷键为M-/)选择. </p> <p>    启动semantic-mode在emacs23中很简单,M-x semantic-mode即可. </p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Clang</h4> <div class="outline-text-3" id="text-3">  <p>   速度极快,<a href="http://www.emacswiki.org/emacs/AutoComplete">AutoComplete</a> 上有几个接合Clang和AutoComple的方案(<a href="https://llvm.org/svn/llvm-project/cfe/trunk/utils/clang-completion-mode.el">其中一个</a> 为clang官方提供演示原理,我不建议使用). </p> <p>    通过elpa安装auto-complete-clang,试用后非常完美,智能且响应速度极快,支持Mac/Cygwin/Linux. </p> <p>    如果做语法实时检查,可以用flymake,需要提供完整的CXXFLAG给clang.如果用CMake生成Makefile的话,可在flags.make中轻易得到. </p> <p>    顺便说一下,我个人非常喜爱CMake,是构建打包配置管理的最佳工具.我以后所有的C++项目都将用CMake. </p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/tui-jian-hao-shu-enterprise-rails.html">推荐好书Enterprise Rails</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2011-12-29T13:22:00+00:00">2011-12-29 13:22</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/tui-jian-hao-shu-enterprise-rails.html#disqus_thread" data-disqus-identifier="cache/posts/tui-jian-hao-shu-enterprise-rails.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/book.html" rel="tag">book</a></li>
+           <li><a class="tag p-category" href="categories/enterprise.html" rel="tag">enterprise</a></li>
+           <li><a class="tag p-category" href="categories/review.html" rel="tag">review</a></li>
+           <li><a class="tag p-category" href="categories/ror.html" rel="tag">ror</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Dan Chak写的<a href="http://shop.oreilly.com/product/9780596515201.do">Enterprise Rails</a>很不错.作者在Amazon工作过. </p> <p> 他的观点独特,但是论据充分推理严密. </p> <p> 简介可参考<a href="http://www.amazon.com/Enterprise-Rails-Dan-Chak/dp/0596515200">亚马逊的这篇书评</a>. 简略地翻译成中文的意思就是Dan Chak推荐的方法是Anti-Rails的. </p> <p> 例如他对MySQL不感冒,"如果要用数据库,就用PostgreSQL,用PostgreSQL的DDL,不用Ruby写的Migration Script,结束" </p> <p> 我对于他的某些观点还没有完全接受,但是相当值得重视. </p> <p> 例如,他强烈建议将decoractor code转移到plugin module中,充分利用ruby的管理机制.他完全反对使用git的submodule机制来代替. </p> <p> 这点我现在身有体会,<a href="http://book.git-scm.com/5_submodules.html">git-submodule</a> 给我带来的麻烦参考<a href="https://github.com/purcell/emacs.d/issues/8">这里</a>(git submodule告诉我子模块版本A可用，但是该版本不是正式的发布版本，因为没有这样的强制机制，事实是A不存在或者被某人误删了，于是我惨了） 解决办法可以类比于ruby(现在语言是elisp),使用emacs自带的包管理机制elpa<a href="https://github.com/purcell/emacs.d/commit/11d791caab798015d4ea1909f26259c035bd61">而不是git-submodule</a>. </p>
+</div>
+            </div>
+        </div>
+    
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="previous">
+                <a href="index-4.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-2.html" rel="next">Older posts</a>
+            </li>
+        </ul>
+        </nav>
+
+    
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+    
+        <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
+        <script src="assets/js/mathjax.js"></script>
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

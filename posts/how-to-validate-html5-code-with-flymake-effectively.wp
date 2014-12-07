@@ -1,0 +1,67 @@
+
+<p>Here is the <a href="http://www.emacswiki.org/emacs/FlymakeHtml">solution from EmacsWiki</a>.
+</p>
+<p>
+I found it not effective because tidy is too strict to HTML5 and produces too much noise.
+</p>
+<p>
+I only need validation of missing open/closed html tag(s). Nothing more!
+</p>
+<p>
+So here is my complete solution:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun flymake-html-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "tidy" (list local-file))))
+
+(defun flymake-html-load ()
+  (interactive)
+  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+    (set (make-local-variable 'flymake-allowed-file-name-masks)
+         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+         )
+    (set (make-local-variable 'flymake-err-line-patterns)
+         ;; pick up errors and warnings for HTML5
+         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing.*\\|discarding.*\\)" nil 1 2 4))
+         )
+    (flymake-mode t)))
+
+(add-hook 'web-mode-hook 'flymake-html-load)
+(add-hook 'html-mode-hook 'flymake-html-load)
+(add-hook 'nxml-mode-hook 'flymake-html-load)
+(add-hook 'php-mode-hook 'flymake-html-load)
+</pre>
+
+
+
+<p>
+Here is the difference from EmacsWiki:
+</p>
+
+
+
+<pre class="prettyprint lang-diff">
+diff --git a/lisp/init-web-mode.el b/lisp/init-web-mode.el
+index 63006c1..d1c19a6 100644
+--- a/lisp/init-web-mode.el
++++ b/lisp/init-web-mode.el
+@@ -31,7 +31,8 @@
+          '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+          )
+     (set (make-local-variable 'flymake-err-line-patterns)
+-         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)" nil 1 2 4))
++         ;; pick up errors and warnings for HTML5
++         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing\\|discarding.*\\)" nil 1 2 4))
+          )
+     (flymake-mode t)))
+</pre>
+
+

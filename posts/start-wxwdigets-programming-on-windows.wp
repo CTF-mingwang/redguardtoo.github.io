@@ -1,0 +1,123 @@
+<html><body><ul> <li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a> </li> <li>Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. </li> <li>Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" </li> <li>Install Visual Studio (Express version is fine if you installed WIN32 SDK too) </li> <li>Compile wxWidgets library by running the dos batch file: </li> </ul>     <pre class="src src-sh">@echo off
+call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span>
+
+nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=debug
+
+nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=release
+
+</pre>   <p> We use vcvars32.bat to set up the CLI tool chains. </p> <p> "Unicode=1" because our application will support i18n. </p><ul> <li>Install <a href="http://www.cmake.org">CMake</a> </li> <li>Create a simple project with files main.cpp, main.hpp, CMakeLists.txt </li> </ul>  <p>main.cpp and main.hpp containts normal C++ code. </p> <p> CMakeLists.txt is the project file for CMake: </p>   <pre class="src src-cmake"><span style="color: #7aa6da;">PROJECT</span>(main)
+
+<span style="color: #7aa6da;">CMAKE_MINIMUM_REQUIRED</span>(VERSION 2.6)
+
+
+
+<span style="color: #969896; font-style: italic;"># sets variable SOURCES to the project source files.</span>
+
+<span style="color: #7aa6da;">set</span>(XRCS
+  main_frame.xrc
+  )
+
+
+<span style="color: #7aa6da;">set</span>(XRCS_DIR ${main_SOURCE_DIR}/rc)
+
+
+
+<span style="color: #7aa6da;">if</span>(CMAKE_COMPILER_IS_GNUCC)
+  <span style="color: #969896; font-style: italic;"># needed for gcc 4.6+</span>
+  <span style="color: #7aa6da;">set</span>(CMAKE_CXX_FLAGS <span style="color: #70c0b1;">"${CMAKE_CXX_FLAGS} -fpermissive"</span>)
+<span style="color: #7aa6da;">endif</span>()
+
+
+
+<span style="color: #7aa6da;">set</span>( CPP_SOURCES
+  main.cpp
+  )
+
+
+<span style="color: #7aa6da;">set</span>( H_SOURCES
+    main.hpp
+    )
+  )
+
+
+<span style="color: #7aa6da;">set</span>(SOURCES
+  ${CPP_SOURCES}
+  ${H_SOURCES}
+  )
+
+
+<span style="color: #969896; font-style: italic;"># xrc -&gt; xml, adv, html</span>
+
+<span style="color: #7aa6da;">set</span>(wxWidgets_USE_LIBS xrc xml adv html core base)
+
+<span style="color: #7aa6da;">find_package</span>(wxWidgets REQUIRED)
+
+<span style="color: #7aa6da;">include</span>(${wxWidgets_USE_FILE})
+
+
+
+<span style="color: #969896; font-style: italic;">#try to embed resource</span>
+
+<span style="color: #7aa6da;">foreach</span>(XRC $latex {XRCS})
+  <span style="color: #7aa6da;">string</span>(REGEX REPLACE <span style="color: #70c0b1;">"[.].*$"</span> <span style="color: #70c0b1;">".h"</span> XRC_HEADER ${XRC})
+  <span style="color: #7aa6da;">set</span>(XRC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/${XRC_HEADER})
+  <span style="color: #7aa6da;">set</span>(XRC ${XRCS_DIR}/${XRC})
+  <span style="color: #7aa6da;">add_custom_command</span>(OUTPUT ${XRC_HEADER}
+    COMMAND bin2c -c ${XRC} ${XRC_HEADER}
+    MAIN_DEPENDENCY ${XRC} )
+  <span style="color: #7aa6da;">set</span>(SOURCES ${SOURCES} ${XRC_HEADER})
+<span style="color: #7aa6da;">endforeach</span>(XRC)
+
+
+
+<span style="color: #7aa6da;">set</span>(INC
+  )
+
+
+<span style="color: #7aa6da;">if</span>(UNIX AND NOT APPLE)
+  <span style="color: #7aa6da;">include</span>(FindPkgConfig)
+  <span style="color: #7aa6da;">pkg_check_modules</span>(GTK2 REQUIRED gtk+-2.0&gt;=2.10)
+  <span style="color: #7aa6da;">set</span>(INC ${INC} ${GTK2_INCLUDE_DIRS})
+<span style="color: #7aa6da;">endif</span>()
+
+
+
+<span style="color: #969896; font-style: italic;">#add other librarie</span>
+
+<span style="color: #7aa6da;">include_directories</span>(${INC})
+
+
+
+<span style="color: #7aa6da;">if</span>(UNIX)
+  <span style="color: #7aa6da;">add_definitions</span>(-Wno-write-strings)
+<span style="color: #7aa6da;">endif</span>()
+
+
+
+<span style="color: #7aa6da;">if</span>(WIN32)
+  <span style="color: #969896; font-style: italic;"># WIN32 := subsystem is windows instead of console?</span>
+  <span style="color: #7aa6da;">add_executable</span>(main WIN32 ${SOURCES})
+<span style="color: #7aa6da;">else</span>(WIN32)
+  <span style="color: #7aa6da;">add_executable</span>(main ${SOURCES})
+<span style="color: #7aa6da;">endif</span>()
+
+
+
+<span style="color: #7aa6da;">set</span>(LIBS
+  ${wxWidgets_LIBRARIES}
+  )
+
+
+<span style="color: #7aa6da;">if</span>(MINGW AND WIN32)
+  <span style="color: #7aa6da;">set</span>(LIBS ${LIBS} ole32 uuid oleaut32)
+<span style="color: #7aa6da;">endif</span>()
+
+<span style="color: #7aa6da;">target_link_libraries</span>(main ${LIBS})
+
+</pre>   <ul> <li>Running the below dos batch the create Visual Studio Project Files </li> </ul>     <pre class="src src-sh">@echo off
+
+call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span>
+
+cmake path/of/directory/which/contains/CMakeLists.txt/
+
+</pre>  <ul> <li>Enjoy! </li> </ul>   <p> BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>. </p></body></html>

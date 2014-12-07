@@ -1,0 +1,177 @@
+
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2012-01-30</span></span>
+</p>
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-08-23 Sat</span></span>
+</p>
+<p>
+See <a href="http://www.emacswiki.org/emacs/CopyAndPaste">http://www.emacswiki.org/emacs/CopyAndPaste</a> for discussion.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Prepare</a></li>
+<li><a href="#sec-2">2 Solution</a></li>
+<li><a href="#sec-3">3 Advanced Tips</a>
+<ul>
+<li><a href="#sec-3-1">3.1 Clipboard manager</a></li>
+<li><a href="#sec-3-2">3.2 Remote clipboard</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">Prepare</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>For Emacs console version under Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
+</p>
+<p>
+For Emacs GUI version on any OS, NO external tool is needed.
+</p>
+<p>
+For Emacs under Cygwin, you need install its package "cygutils-extra".
+</p>
+<p>
+For Emacs console version under OS X, NO external tool is needed.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Solution</h3>
+<div class="outline-text-3" id="text-2">
+
+<p>This solution works reliably at <b>any environment</b>.
+</p>
+<p>
+Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x paste-from-xclipboard' to paste.
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq *is-a-mac* (eq system-type 'darwin))
+(setq *cygwin* (eq system-type 'cygwin) )
+(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
+(defun copy-to-x-clipboard ()
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (cond
+         ((and (display-graphic-p) x-select-enable-clipboard)
+          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
+         (t (shell-command-on-region (region-beginning) (region-end)
+                                     (cond
+                                      (*cygwin* "putclip")
+                                      (*is-a-mac* "pbcopy")
+                                      (*linux* "xsel -ib")))
+            ))
+        (message "Yanked region to clipboard!")
+        (deactivate-mark))
+        (message "No region active; can't yank to clipboard!")))
+
+(defun paste-from-x-clipboard()
+  (interactive)
+  (cond
+   ((and (display-graphic-p) x-select-enable-clipboard)
+    (insert (x-selection 'CLIPBOARD)))
+   (t (shell-command
+       (cond
+        (*cygwin* "getclip")
+        (*is-a-mac* "pbpaste")
+        (t "xsel -ob"))
+       1))
+   ))
+
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
+  )
+
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Advanced Tips</h3>
+<div class="outline-text-3" id="text-3">
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-4">
+<h4 id="sec-3-1">Clipboard manager</h4>
+<div class="outline-text-4" id="text-3-1">
+
+<p>Clipboard manager is handy sometimes.
+</p>
+<p>
+I suggest <a href="http://parcellite.sourceforge.net/">parcellite</a> at Linux, <a href="http://ditto-cp.sourceforge.net/">ditto</a> under windows.
+</p>
+<p>
+Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
+</p>
+
+
+
+<pre class="prettyprint lang-conf">
+[rc]
+use_copy=true
+use_primary=true
+synchronize=true
+save_history=true
+history_limit=64
+hyperlinks_only=false
+confirm_clear=false
+single_line=true
+reverse_history=false
+item_length=50
+ellipsize=2
+history_key=&lt;Super&gt;Y
+actions_key=
+menu_key=
+history_pos=false
+history_x=1
+history_y=1
+case_search=false
+type_search=false
+data_size=0
+ignore_whiteonly=false
+trim_wspace_begend=false
+trim_newline=false
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-4">
+<h4 id="sec-3-2">Remote clipboard</h4>
+<div class="outline-text-4" id="text-3-2">
+
+<p>Use below command to ssh the Linux server. Then you can share the clipboard between the server and your local computer seamlessly. No furthe setup needed.
+</p>
+
+
+
+
+<pre class="prettyprint lang-sh">
+ssh -X -C -c blowfish-cbc,arcfour $@
+</pre>
+
+
+
+</div>
+</div>
+</div>

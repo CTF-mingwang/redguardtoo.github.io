@@ -1,0 +1,33 @@
+
+<p>First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
+</p>
+<p>
+Second, intergrating some command line clipboard tool into Emacs is better than Emacs X clipboard. Command line tool works in any environment. For example, when you log into a remote server with ssh, your local computer could share clipboard with your Emacs in remote shell. Please note in this example, you need using X11 forward over ssh, usually it's already set up on server.
+</p>
+<p>
+Here is the code:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun paste-from-x-clipboard()
+  (interactive)
+  (shell-command
+   (cond
+    (*cygwin* "getclip")
+    (*is-a-mac* "pbpaste")
+    (t "xsel -ob")
+    )
+   1)
+  )
+
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
+  )
+
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+</pre>
+
+
+

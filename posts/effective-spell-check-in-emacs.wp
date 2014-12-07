@@ -1,0 +1,153 @@
+
+<p>I will use spell check for html as an example. But the solution also works for other languages.
+</p>
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Smart spell check in HTML</a></li>
+<li><a href="#sec-2">2 Spell check the camel case strings</a></li>
+<li><a href="#sec-3">3 Summary</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">Smart spell check in HTML</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>These days I'm maintaining some legacy web application.
+</p>
+<p>
+My customer is very serious about the content displayed because it's used by many people. For example, any wording change will be reviewed by team from legal team, business team and QA team. Any typo will bring me much paper work in this flow.
+</p>
+<p>
+Certainly I can use <a href="http://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> to do the spell check thing.
+</p>
+<p>
+But a html file contains many html tags, spell-check everything is even worse than no spell check.
+</p>
+<p>
+The key point is make spell checker smarter:
+</p><ul>
+<li>only check text between html tag like `&lt;label&gt;Please input email&lt;/label&gt;`
+</li>
+<li>only check the value of html input control like `&lt;input type="text" value="Please input your name"&gt;`
+</li>
+</ul>
+
+
+<p>
+Paste below code into ~/.emacs:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun web-mode-flyspell-verify ()
+  (let ((f (get-text-property (- (point) 1) 'face))
+        thing
+        rlt)
+    (cond
+     ((not (memq f '(web-mode-html-attr-value-face
+                     web-mode-html-tag-face
+                     web-mode-html-attr-name-face
+                     web-mode-constant-face
+                     web-mode-doctype-face
+                     web-mode-keyword-face
+                     web-mode-comment-face ;; focus on get html label right
+                     web-mode-function-name-face
+                     web-mode-variable-name-face
+                     web-mode-css-property-name-face
+                     web-mode-css-selector-face
+                     web-mode-css-color-face
+                     web-mode-type-face
+                     web-mode-block-control-face)
+                 ))
+      (setq rlt t))
+     ((memq f '(web-mode-html-attr-value-face))
+      (save-excursion
+        (search-backward-regexp "=['\"]" (line-beginning-position) t)
+        (backward-char)
+        (setq thing (thing-at-point 'symbol))
+        (setq rlt (or (string-match "^ng-.*" thing)
+                     (string= "value" thing)))
+        rlt))
+     (t t))
+    rlt
+    ))
+
+(put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspell-verify)
+</pre>
+
+
+
+<p>
+I use <a href="http://web-mode.org/">web-mode</a> for html file editing. But you can figure out similar solution for other major modes.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Spell check the camel case strings</h3>
+<div class="outline-text-3" id="text-2">
+
+<p>Another issue is that we use camel case naming convention. The variable name is usually very long. For example, name like "moduleServiceControllerLoginManager" is below average length.
+</p>
+<p>
+I need Emacs to spell check the each word from the camel case string.
+</p>
+<p>
+The solution is let Emacs use <a href="http://aspell.net/">aspell</a> with some extra arguments.
+</p>
+<p>
+Please paste below code into ~/.emacs,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+;; if (aspell installed) { use aspell}
+;; else if (hunspell installed) { use hunspell }
+;; whatever spell checker I use, I always use English dictionary
+;; I prefer use aspell because:
+;; 1. aspell is older
+;; 2. looks Kevin Atkinson still get some road map for aspell:
+;; @see http://lists.gnu.org/archive/html/aspell-announce/2011-09/msg00000.html
+(setq ispell-program-name "aspell"
+      ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+      ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+</pre>
+
+
+
+<p>
+Please note the option "&ndash;run-together-min=2" means the minimum length of <b>each word</b> extracted from camel case string is two. Please `man aspell` for details.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Summary</h3>
+<div class="outline-text-3" id="text-3">
+
+<p>If you read <a href="http://www.emacswiki.org/emacs/FlySpell">Emacs wiki on fly spell</a>, you may find code like `(flyspell-prog-mode)` is suggested for most programming environment.
+</p>
+<p>
+But as I proved in above two examples, I can <b>do more</b> than simply copy code from internet, if I can spend some time to read code and manual.
+</p>
+<p>
+When I say "read code", I mean read the official elisp code bundled with emacs. For example, after "M-x describe ENTER flyspell-buffer ENTER", I realized that the strength of fly spell is its powerful APIs. Common setup around the internet only use small percentage of its power.
+</p>
+<p>
+"Read manual" means reading official manual. For example, Emacswiki has some outdated tips about aspell which misguided me. After wasting one hour on mess with aspell, it occurs to me that `man aspell` to check out official manual may help. And it does. It should be a simple task if I had read the manual at the beginning. 
+</p>
+<p>
+Finally, let's see then screen shot (the typos are underscored):
+<img src="/wp-content/spell-check-html-in-emacs.png"  alt="spell-check-html-in-emacs.png" />
+</p>
+</div>
+</div>

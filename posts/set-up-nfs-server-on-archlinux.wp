@@ -1,0 +1,22 @@
+<html><body><p>The purpose of set up nfs server is to watch video stored on server through my android devices. </p>    <pre class="src src-sh">sudo pacman -S nfs-utils
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">donnot touch /etc/idmapd.conf</span>
+
+mkdir -p /srv/nfs4/z
+
+</pre>   <p> add following lines into /etc/fstab: </p>   <pre class="src src-conf"><span style="color: #e7c547;">UUID</span>=986C96596C9631CC /mnt/z ntfs-3g defaults,nofail 0 2
+
+/mnt/z /srv/nfs4/z none bind,nofail 0 0
+
+</pre>   <p> add this line into /etc/exports: </p>   <pre class="src src-conf"><span style="color: #e7c547;">/srv/nfs4/z</span> 192.168.0.0/24(async,rw,no_subtree_check,nohide,no_root_squash)
+
+</pre>   <p> make sure change in /etc/exports to take effect: </p>   <pre class="src src-sh">sudo exportfs -ra
+
+</pre>   <p> now enable and start the services: </p>   <pre class="src src-sh">sudo systemctl enable rpc-idmapd
+
+sudo systemctl start rpc-idmapd
+
+sudo systemctl enable rpc-mountd
+
+sudo systemctl start rpc-mountd
+
+</pre>  </body></html>

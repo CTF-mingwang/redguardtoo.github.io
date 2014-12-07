@@ -1,0 +1,56 @@
+
+<p><a href="http://www.emacswiki.org/emacs/WhichFuncMode">Which Func Mode</a> will display the current function name in the mode line.
+</p>
+<p>
+But I can't use it.
+</p>
+<p>
+It's because I reduce my mode-line into minimum to make it work with my tiny netbook.
+</p>
+<p>
+<a href="http://emacsredux.com/blog/2014/04/05/which-function-mode/">Showing the function in header</a> is also not possible because it conflicts with my color theme.
+</p>
+<p>
+So I choose to display the function name in a popup.
+</p>
+<p>
+Insert below code into ~/.emacs,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(autoload 'which-function "which-func")
+(autoload 'popup-tip "popup")
+
+(defun copy-yank-str (msg)
+  (kill-new msg)
+  (with-temp-buffer
+    (insert msg)
+    (shell-command-on-region (point-min) (point-max)
+                             (cond
+                              ((eq system-type 'cygwin) "putclip")
+                              ((eq system-type 'darwin) "pbcopy")
+                              (t "xsel -ib")
+                              ))))
+
+(defun popup-which-function ()
+  (interactive)
+  (let ((msg (which-function)))
+    (popup-tip msg)
+    (copy-yank-str msg)
+    ))
+</pre>
+
+
+
+<p>
+The extra bonus is "popup-which-function" will also insert the function name into clipboard and kill ring.
+</p>
+<p>
+The above code need package <a href="https://github.com/auto-complete/popup-el">"popup.el"</a> to be installed.
+</p>
+<p>
+Screen shot:
+<img src="/wp-content/pop-which-func-nq8.png"  alt="pop-which-func-nq8.png" />
+</p>

@@ -1,0 +1,34 @@
+<html><body><p><a href="https://github.com/punchagan/org2blog">org2blog</a> will post items in org-mode into wordpress blog. </p> <p> It makes the Emacs best blog writer in the world. </p> <p> My only issue is after publishing the blog, how can I share the blog url to social network sites. </p> <p> So I write a function which will automatically put the article's permanent url into clipboard: </p>   
+
+
+<pre class="prettyprint ">
+
+(defun my-org2blog-post-subtree ()
+  (interactive)
+  ;; go to the top node which is a blog item
+  ;;(outline-up-heading)
+
+  ;; post and publish
+  (org2blog/wp-post-subtree t)
+  (let* ((postid (or (org-entry-get (point) "POSTID")
+                     (org-entry-get (point) "POST_ID")))
+         (url org2blog/wp-server-xmlrpc-url))
+    (if (not postid)
+        (message "This subtree hasn't been posted, yet.")
+      (setq url (substring url 0 -10))
+      (setq url (concat url "?p=" postid ))
+      (kill-new url)
+      (with-temp-buffer
+        (insert url)
+        (shell-command-on-region (point-min) (point-max)
+                                 (cond
+                                  ((eq system-type 'cygwin) "putclip")
+                                  ((eq system-type 'darwin) "pbcopy")
+                                  (t "xsel -ib")
+                                  )))
+      (message (concat url " =&gt; clipboard"))
+      )))
+</pre>
+
+
+   <p> BTW, use some clipboard manager to synchronize the X clipboards. </p></body></html>

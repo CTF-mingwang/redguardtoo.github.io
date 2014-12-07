@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>perl code to change ip | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/perl-code-to-change-ip.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="perl code to change ip">
+    <meta property="og:url" content="http://blog.binchen.org/posts/perl-code-to-change-ip.html">
+    <meta property="og:description" content='I write this script for a real project. It changes ip of every node in a local network. All the information related to our customer is deleted. 
+if you see the test() function and you will notice "ass'>
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2006-12-11T10:39:00+00:00">
+           <meta property="article:tag" content="linux">
+
+    
+
+    
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">perl code to change ip</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2006-12-11T10:39:00+00:00">2006-12-11 10:39</time>
+            
+
+            
+          |  
+        <a href="perl-code-to-change-ip.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+        </div>
+        <div class="body">
+            <div>
+<p></p>
+<p>I write this script for a real project. It changes ip of every node in a local network. All the information related to our customer is deleted. </p>
+<p>if you see the test() function and you will notice "assert" lines. Yes, I believe in <strong>TDD (Test Drivern Development)</strong>. </p>
+<p>
+
+</p>
+
+<pre class="src src-perl"><span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">!/usr/bin/perl</span>
+
+
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">File name: chgip</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Description : change ip of every node in the local network</span>
+
+<span style="color: #b5bd68;">require</span> <span style="color: #8abeb7;">"assert.pl"</span>;
+
+<span style="color: #b5bd68;">use</span> <span style="color: #de935f;">File</span>::Basename;
+
+
+
+<span style="color: #969896; font-style: italic;">#</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Globals</span>
+
+<span style="color: #969896; font-style: italic;">#</span>
+
+<span style="color: #b5bd68;">use</span> <span style="color: #de935f;">vars</span> qw<span style="color: #8abeb7;">/ %opt /</span>;
+
+
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">valid input:</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1 -&gt; change /etc/hosts ;$k= node1;</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1 eth0 none-&gt; NOT change /etc/hosts;$k=node1 eth0</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1 eth1 none-&gt; NOT change /etc/hosts;$k=node1 eth1</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 192.168.30.111 -&gt; NOT change /etc/hosts;$k= 192.168.30.111</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1 eth1 default -&gt; change /etc/hosts;$k=node1 eth1 default </span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1 eth1 -&gt; "eth1" will be skipped andit equals </span>
+
+<span style="color: #969896; font-style: italic;">#                          </span><span style="color: #969896; font-style: italic;">192.168.30.151 node1</span>
+
+<span style="color: #969896; font-style: italic;">#                         </span><span style="color: #969896; font-style: italic;">cat /etc/hosts/ and you will see</span>
+
+<span style="color: #969896; font-style: italic;">#                         </span><span style="color: #969896; font-style: italic;">"150.245.178.31 node1 node1.dcinema.com", </span>
+
+<span style="color: #969896; font-style: italic;">#                         </span><span style="color: #969896; font-style: italic;">we will avoid confilict with such lines in /etc/hosts</span>
+
+
+
+$<span style="color: #f0c674;">USE_SSH</span>=1;
+
+$<span style="color: #f0c674;">USE_TELNET</span>=2;
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">main</span>
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+$<span style="color: #f0c674;">NDEBUG</span>=0; <span style="color: #969896; font-style: italic;"># NDEBUG  NOT debug version</span>
+
+
+
+&amp;<span style="color: #81a2be;">init</span>();
+
+<span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{h}){
+    usage();<span style="color: #b5bd68;">exit</span> 1;
+}
+
+
+
+$<span style="color: #f0c674;">NDEBUG</span>=$<span style="color: #f0c674;">opt</span>{d}?0:1;
+
+
+
+<span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">NDEBUG</span>){
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">pipein</span>;
+
+    <span style="color: #b5bd68;">if</span>(&amp;<span style="color: #81a2be;">is_interactive</span>()){
+        <span style="color: #b5bd68;">if</span>($#<span style="color: #f0c674; text-decoration: underline;">ARGV</span>==-1){
+            usage();<span style="color: #b5bd68;">exit</span> 1;
+        }
+        @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=split(<span style="color: #8abeb7;">/[rn]+/</span>,$<span style="color: #f0c674;">ARGV</span>[$#<span style="color: #f0c674; text-decoration: underline;">ARGV</span>]);
+    }
+    <span style="color: #b5bd68;">else</span>{
+        @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=;
+    }
+
+
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">print "pipein[0]=$pipein[0]n"; #debug</span>
+
+
+    <span style="color: #b5bd68;">if</span>(!$<span style="color: #f0c674;">opt</span>{a} &amp;&amp; !$<span style="color: #f0c674;">opt</span>{p}){
+        $<span style="color: #f0c674;">opt</span>{a}=$<span style="color: #f0c674;">USE_SSH</span>;
+    }
+
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">arp</span>;
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{a}){
+        $<span style="color: #f0c674;">arp</span>=&amp;<span style="color: #81a2be;">get_hosts_from_arp</span>();
+    }
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">who_will_change</span>(@<span style="color: #f0c674; text-decoration: underline;">pipein</span>);
+
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingable</span>;
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{p}){
+        $<span style="color: #f0c674;">pingable</span>=&amp;<span style="color: #81a2be;">who_are_pingable</span>($<span style="color: #f0c674;">h</span>);
+    }
+
+    <span style="color: #de935f;">my</span> %<span style="color: #f0c674; text-decoration: underline;">whose_ip_changed</span>=();
+
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">local_restart_later</span>=0;
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">for my $it (keys %$h){ print "key=$it:val=$h-&gt;{$it}n"; } #debug </span>
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+    <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (sort keys %$<span style="color: #f0c674;">h</span>){
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[0] eq $<span style="color: #f0c674;">s</span>){
+            $<span style="color: #f0c674;">local_restart_later</span>=1;
+        }
+
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{a}){
+            <span style="color: #b5bd68;">if</span>(!exists($<span style="color: #f0c674;">arp</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]})){ <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">s</span> ne $<span style="color: #f0c674;">a</span>[0]){ <span style="color: #b5bd68;">next</span>; } }
+        }
+
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{p}){
+            <span style="color: #b5bd68;">if</span>(!exists($<span style="color: #f0c674;">pingable</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]})){ <span style="color: #b5bd68;">next</span>; }
+        }
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">netcard</span>=<span style="color: #8abeb7;">"eth0"</span>;
+        <span style="color: #b5bd68;">if</span>($#<span style="color: #f0c674; text-decoration: underline;">a</span>==2){
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[2] eq <span style="color: #8abeb7;">"default"</span> || $<span style="color: #f0c674;">a</span>[2] eq <span style="color: #8abeb7;">"none"</span>){
+                $<span style="color: #f0c674;">netcard</span>=$<span style="color: #f0c674;">a</span>[1];
+            }
+        }
+        <span style="color: #969896; font-style: italic;">#print "netcard=$netcardn"; #debug</span>
+        print <span style="color: #8abeb7;">"changing ip of $netcard on $a[0] ... "</span>;
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">try_telnet</span>=0;
+        $<span style="color: #f0c674;">ret</span>=&amp;<span style="color: #81a2be;">change_ip</span>($<span style="color: #f0c674;">a</span>[0],$<span style="color: #f0c674;">h</span>-&gt;{$<span style="color: #f0c674;">k</span>},<span style="color: #8abeb7;">"/etc/sysconfig/network-scripts"</span>,
+                        $<span style="color: #f0c674;">netcard</span>,$<span style="color: #f0c674;">try_telnet</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){
+            print <span style="color: #8abeb7;">"failed!n"</span>;
+        }
+        <span style="color: #b5bd68;">else</span>{
+            $<span style="color: #f0c674;">whose_ip_changed</span>{$<span style="color: #f0c674;">a</span>[0]}=1;
+            print <span style="color: #8abeb7;">"succeededn"</span>;
+        }
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">try_telnet</span>){
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{a}){
+                $<span style="color: #f0c674;">arp</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}=$<span style="color: #f0c674;">USE_TELNET</span>;
+            }
+
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{p}){
+                $<span style="color: #f0c674;">pingable</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}=$<span style="color: #f0c674;">USE_TELNET</span>;
+            }
+        }
+    }
+
+
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">change /etc/host, every node need it</span>
+    <span style="color: #de935f;">my</span> %<span style="color: #f0c674; text-decoration: underline;">nodes_restarted</span>=();
+    system(<span style="color: #8abeb7;">"cp -f /etc/hosts /tmp/hosts.new &gt;/dev/null 2&gt;&amp;1"</span>);
+    &amp;<span style="color: #81a2be;">change_etc_hosts</span>(<span style="color: #8abeb7;">"/tmp/hosts.new"</span>,$<span style="color: #f0c674;">h</span>);
+
+
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">distribute /etc/hosts</span>
+    <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %$<span style="color: #f0c674;">h</span>){
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+        <span style="color: #b5bd68;">if</span>( $<span style="color: #f0c674;">s</span> eq $<span style="color: #f0c674;">a</span>[0]){
+            <span style="color: #969896; font-style: italic;">#print "s=$s;k=$k****n"; #debug</span>
+            <span style="color: #969896; font-style: italic;">#you need reinstall ssh key, if you change anyone's ip and you want </span>
+            <span style="color: #969896; font-style: italic;">#ssh it again </span>
+            <span style="color: #b5bd68;">next</span>;
+        }
+
+        <span style="color: #969896; font-style: italic;">#if we cannot connect to the node, how can we send it /etc/hosts</span>
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{a}){
+            <span style="color: #b5bd68;">if</span>(!exists($<span style="color: #f0c674;">arp</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}) || $<span style="color: #f0c674;">arp</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}==$<span style="color: #f0c674;">USE_TELNET</span> )
+            {
+                <span style="color: #b5bd68;">next</span>;
+            }
+        }
+
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{p}){
+            <span style="color: #b5bd68;">if</span>(!exists($<span style="color: #f0c674;">pingable</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}) || $<span style="color: #f0c674;">pingable</span>-&gt;{$<span style="color: #f0c674;">a</span>[0]}==$<span style="color: #f0c674;">USE_TELNET</span> )
+            {
+                <span style="color: #b5bd68;">next</span>;
+            }
+        }
+
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+        <span style="color: #969896; font-style: italic;">#it's ridiculous to restart same pc again and again!</span>
+        <span style="color: #b5bd68;">if</span>(!exists($<span style="color: #f0c674;">nodes_restarted</span>{$<span style="color: #f0c674;">a</span>[0]})){
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ret</span>=0;
+            print <span style="color: #8abeb7;">"distributing new /etc/hosts to $a[0] ... "</span>;
+            $<span style="color: #f0c674;">ret</span>=system(<span style="color: #8abeb7;">"scp /tmp/hosts.new root@$a[0]:/etc/hosts &gt;/dev/null 2&gt;&amp;1"</span>);
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){
+                print <span style="color: #8abeb7;">"failed!n"</span>;
+            }
+            <span style="color: #b5bd68;">else</span>{
+                print <span style="color: #8abeb7;">"succeededn"</span>;
+            }
+
+
+
+            <span style="color: #969896; font-style: italic;">#http://groups.google.com/group/linux.gentoo.user/browse_frm/thread/</span>
+            <span style="color: #969896; font-style: italic;">#       677f23ea20dd85a/506384edeba2c270?lnk=st&amp;q=ssh+network+restart&amp;rnum=5&amp;hl</span>
+            <span style="color: #969896; font-style: italic;">#       =zh-CN#506384edeba2c270</span>
+            <span style="color: #969896; font-style: italic;">#print `cat /etc/hosts|grep node1`; #debug</span>
+            <span style="color: #969896; font-style: italic;">#nohup return too quickly, before ssh starts, we've already changed /etc/hosts</span>
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">restart_cmd</span>=<span style="color: #8abeb7;">"/etc/init.d/network restart;/etc/init.d/rmiregistry restart;"</span>;
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[0]=~<span style="color: #8abeb7;">/node[0-9]+/</span>){
+                $<span style="color: #f0c674;">restart_cmd</span>.=<span style="color: #8abeb7;">"restart_some_scripts;"</span>;
+            }
+            <span style="color: #b5bd68;">elsif</span>($<span style="color: #f0c674;">a</span>[0]=~<span style="color: #8abeb7;">/ekfp[0-9]+/</span>){
+                $<span style="color: #f0c674;">restart_cmd</span>.=<span style="color: #8abeb7;">"fp_restart;"</span>;
+            }
+            <span style="color: #969896; font-style: italic;">#print "restart_cmd=$restart_cmdn"; #debug</span>
+            $<span style="color: #f0c674;">ret</span>=system(<span style="color: #8abeb7;">"nohup ssh root@"</span>.&amp;<span style="color: #81a2be;">get_ip</span>($<span style="color: #f0c674;">a</span>[0]).<span style="color: #8abeb7;">" '$restart_cmd' &gt;/dev/null 2&gt;&amp;1 &amp;"</span>);
+            $<span style="color: #f0c674;">nodes_restarted</span>{$<span style="color: #f0c674;">a</span>[0]}=1;
+        }
+        <span style="color: #b5bd68;">else</span>{
+            $<span style="color: #f0c674;">nodes_restarted</span>{$<span style="color: #f0c674;">a</span>[0]}+=1;
+        }
+    } <span style="color: #969896; font-style: italic;">#end of for</span>
+
+
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">print("local_restart_later=$local_restart_latern");#debug</span>
+    system(<span style="color: #8abeb7;">"cp -f /tmp/hosts.new /etc/hosts &gt;/dev/null 2&gt;&amp;1"</span>);
+<span style="color: #969896; font-style: italic;">#</span><span style="color: #969896; font-style: italic;">print `cat /etc/hosts|grep node1`; #debug</span>
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">local_restart_later</span> ){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">restart_cmd</span>=<span style="color: #8abeb7;">"/etc/init.d/network restart &gt;/dev/null 2&gt;&amp;1;"</span>;
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+        print <span style="color: #8abeb7;">"restarting $s ... "</span>;
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">s</span>=~<span style="color: #8abeb7;">/manager.*/</span> ){
+            $<span style="color: #f0c674;">restart_cmd</span>.=<span style="color: #8abeb7;">"restart_some_scripts &gt;/dev/null 2&gt;&amp;1;"</span>;
+        }
+        <span style="color: #b5bd68;">else</span>{
+            $<span style="color: #f0c674;">restart_cmd</span>.=<span style="color: #8abeb7;">"restart_some_scripts &gt;/dev/null 2&gt;&amp;1;"</span>;
+        }
+        <span style="color: #969896; font-style: italic;">#assume this is a cms or tms</span>
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ret</span>=system($<span style="color: #f0c674;">restart_cmd</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){
+            print <span style="color: #8abeb7;">"failed!n"</span>;
+        }
+        <span style="color: #b5bd68;">else</span>{
+            print <span style="color: #8abeb7;">"succeededn"</span>;
+        }
+
+    }
+
+    print <span style="color: #8abeb7;">"finished to change ip!n"</span>;
+    system(<span style="color: #8abeb7;">"rm nohup.out &gt;/dev/null 2&gt;&amp;1"</span>);
+    system(<span style="color: #8abeb7;">"rm ~/.ssh/known_hosts&gt;/dev/null 2&gt;&amp;1"</span>);
+
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">opt</span>{a}){
+        print <span style="color: #8abeb7;">"updating arp cache ... "</span>;
+        <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %<span style="color: #f0c674; text-decoration: underline;">whose_ip_changed</span>){
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+            system(<span style="color: #8abeb7;">"$pingcmd $k &gt;/dev/null 2&gt;&amp;1"</span>);
+        }
+        print <span style="color: #8abeb7;">"finishedn"</span>;
+    }
+}<span style="color: #969896; font-style: italic;">#if(0)</span>
+
+
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">test</span>
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+<span style="color: #b5bd68;">if</span>(!$<span style="color: #f0c674;">NDEBUG</span>){
+    &amp;<span style="color: #81a2be;">test</span>();
+}<span style="color: #969896; font-style: italic;">#if(0)</span>
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">test</span>
+
+{
+
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">hostname</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">hostname</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pipein</span>;
+        <span style="color: #b5bd68;">if</span>(&amp;<span style="color: #81a2be;">is_interactive</span>()){
+            @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=split(<span style="color: #8abeb7;">/[rn]/</span>,<span style="color: #8abeb7;">"127.0.0.9 $hostname"</span>);
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">who_will_change</span>(@<span style="color: #f0c674; text-decoration: underline;">pipein</span>);
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingable</span>=&amp;<span style="color: #81a2be;">who_are_pingable</span>($<span style="color: #f0c674;">h</span>);
+            assert(exists($<span style="color: #f0c674;">pingable</span>-&gt;{$<span style="color: #f0c674;">hostname</span>}));
+        }
+        <span style="color: #b5bd68;">else</span>{
+            @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=;
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">who_will_change</span>(@<span style="color: #f0c674; text-decoration: underline;">pipein</span>);
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingable</span>=&amp;<span style="color: #81a2be;">who_are_pingable</span>($<span style="color: #f0c674;">h</span>);
+            print <span style="color: #8abeb7;">"*********who are pingable**********beginn"</span>;
+            <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %$<span style="color: #f0c674;">pingable</span>){
+                print <span style="color: #8abeb7;">"key=$kn"</span>;
+                print <span style="color: #8abeb7;">"val=$pingable-&gt;{$k}n"</span>;
+            }
+            print <span style="color: #8abeb7;">"*********who are pingable**********endn"</span>;
+        }
+    }
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">id</span>=&amp;<span style="color: #81a2be;">unique_id</span>();
+        print <span style="color: #8abeb7;">"id=$idn"</span>;
+        assert( $<span style="color: #f0c674;">id</span> ne <span style="color: #8abeb7;">""</span>);
+    }<span style="color: #969896; font-style: italic;">#if(0)</span>
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">id</span>=<span style="color: #8abeb7;">"test_set_one_card"</span>;
+        print <span style="color: #8abeb7;">"file written by set_onecard=$idn"</span>;
+        <span style="color: #8abeb7;">`echo "IPADDR=192.168.30.100" &gt; $id`</span>;
+        <span style="color: #8abeb7;">`echo "NETWORK=192.168.30.0" &gt;&gt; $id`</span>;
+        <span style="color: #8abeb7;">`echo "BROADCAST=192.168.30.255" &gt;&gt; $id`</span>;
+        <span style="color: #8abeb7;">`echo "GATEWAY=192.168.30.1" &gt;&gt; $id`</span>;
+        &amp;<span style="color: #81a2be;">set_one_card</span>(<span style="color: #8abeb7;">"11.168.30.100"</span>,$<span style="color: #f0c674;">id</span>);
+        open(F,$<span style="color: #f0c674;">id</span>);
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">lines</span>=;
+        close(F);
+        chomp($<span style="color: #f0c674;">lines</span>[0]);assert($<span style="color: #f0c674;">lines</span>[0] eq <span style="color: #8abeb7;">"IPADDR=11.168.30.100"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[1]);assert($<span style="color: #f0c674;">lines</span>[1] eq <span style="color: #8abeb7;">"NETWORK=11.168.30.0"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[2]);assert($<span style="color: #f0c674;">lines</span>[2] eq <span style="color: #8abeb7;">"BROADCAST=11.168.30.255"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[3]);assert($<span style="color: #f0c674;">lines</span>[3] eq <span style="color: #8abeb7;">"GATEWAY=11.168.30.1"</span>);
+        <span style="color: #8abeb7;">`rm $id`</span>;
+    }
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">hostname</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">hostname</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ip</span>=get_ip($<span style="color: #f0c674;">hostname</span>);
+        print <span style="color: #8abeb7;">"ip=$ipn"</span>;
+        assert(&amp;<span style="color: #81a2be;">is_valid_ip</span>($<span style="color: #f0c674;">ip</span>));
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">rubbish</span>=get_ip(<span style="color: #8abeb7;">"rubbish"</span>);
+        assert( $<span style="color: #f0c674;">rubbish</span> eq <span style="color: #8abeb7;">"rubbish"</span>);
+    }
+
+
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">p</span>=<span style="color: #8abeb7;">"127.0.0.9 node1n0.0.0.0 node2"</span>;
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=split(<span style="color: #8abeb7;">/[rn]+/</span>,$<span style="color: #f0c674;">p</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">who_will_change</span>(@<span style="color: #f0c674; text-decoration: underline;">pipein</span>);
+        assert($<span style="color: #f0c674;">h</span>-&gt;{<span style="color: #8abeb7;">'node1'</span>} eq <span style="color: #8abeb7;">'127.0.0.9'</span>);
+        assert($<span style="color: #f0c674;">h</span>-&gt;{<span style="color: #8abeb7;">'node2'</span>} eq <span style="color: #8abeb7;">'0.0.0.0'</span>);
+        <span style="color: #8abeb7;">`echo "1.1.1.1 node1" &gt; hosts`</span>;
+        <span style="color: #8abeb7;">`echo "1.1.1.1 node2 node2.dcinema.com" &gt;&gt; hosts`</span>;
+        <span style="color: #8abeb7;">`echo "1.1.1.1 node3" &gt;&gt; hosts`</span>;
+        &amp;<span style="color: #81a2be;">change_etc_hosts</span>(<span style="color: #8abeb7;">"hosts"</span>,$<span style="color: #f0c674;">h</span>);
+        open(F,<span style="color: #8abeb7;">"&lt;hosts"</span>);
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">lines</span>=;
+        close(F);
+        chomp($<span style="color: #f0c674;">lines</span>[0]);assert($<span style="color: #f0c674;">lines</span>[0] eq <span style="color: #8abeb7;">"127.0.0.9 node1"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[1]);assert($<span style="color: #f0c674;">lines</span>[1] eq <span style="color: #8abeb7;">"0.0.0.0 node2 node2.dcinema.com"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[2]);assert($<span style="color: #f0c674;">lines</span>[2] eq <span style="color: #8abeb7;">"1.1.1.1 node3"</span>);
+    }<span style="color: #969896; font-style: italic;">#if(0)</span>
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">hostname</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">hostname</span>);
+        print(<span style="color: #8abeb7;">"hostname=$hostnamen"</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">p</span>=<span style="color: #8abeb7;">"11.168.30.10 $hostname"</span>;
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">pipein</span>=split(<span style="color: #8abeb7;">/[rn]+/</span>,$<span style="color: #f0c674;">p</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">who_will_change</span>(@<span style="color: #f0c674; text-decoration: underline;">pipein</span>);
+        assert($<span style="color: #f0c674;">h</span>-&gt;{$<span style="color: #f0c674;">hostname</span>} eq <span style="color: #8abeb7;">'11.168.30.10'</span>);
+        <span style="color: #8abeb7;">`echo "DEVICE=eth0" &gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "IPADDR=192.168.30.10" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "NETWORK=192.168.30.0" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "NETMASK=255.255.255.0" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "ONBOOT=yes" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "TYPE=Ethernet" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "GATEWAY=192.168.30.1" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #8abeb7;">`echo "BROADCAST=192.168.30.255" &gt;&gt; ifcfg-eth0`</span>;
+        <span style="color: #b5bd68;">use</span> <span style="color: #de935f;">Cwd</span>;
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">d</span>=getcwd;
+        print <span style="color: #8abeb7;">"cwd=$dn"</span>;
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+        <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %$<span style="color: #f0c674;">h</span>){
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ret</span>=0;
+            <span style="color: #b5bd68;">if</span>(system(<span style="color: #8abeb7;">"$pingcmd $k"</span>)!=0){
+                <span style="color: #969896; font-style: italic;">#meanless to ping self</span>
+                <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">s</span> ne $<span style="color: #f0c674;">a</span>[0]) { <span style="color: #b5bd68;">next</span>; }
+            }
+
+            <span style="color: #969896; font-style: italic;"># $k: node1</span>
+            <span style="color: #969896; font-style: italic;">#     node1 eth1</span>
+            <span style="color: #969896; font-style: italic;">#     eckp1 ech1 default</span>
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">netcard</span>=<span style="color: #8abeb7;">"eth0"</span>;
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+            <span style="color: #b5bd68;">if</span>($#<span style="color: #f0c674; text-decoration: underline;">a</span>==2){
+                $<span style="color: #f0c674;">netcard</span>=$<span style="color: #f0c674;">a</span>[1];
+            }
+            <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">try_telnet</span>;
+            $<span style="color: #f0c674;">ret</span>=&amp;<span style="color: #81a2be;">change_ip</span>($<span style="color: #f0c674;">a</span>[0],$<span style="color: #f0c674;">h</span>-&gt;{$<span style="color: #f0c674;">k</span>},$<span style="color: #f0c674;">d</span>,$<span style="color: #f0c674;">netcard</span>,$<span style="color: #f0c674;">try_telnet</span>);
+        }
+        open(F,<span style="color: #8abeb7;">"&lt;ifcfg-eth0"</span>);
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">lines</span>=;
+        close(F);
+        chomp($<span style="color: #f0c674;">lines</span>[0]);assert($<span style="color: #f0c674;">lines</span>[0] eq <span style="color: #8abeb7;">"DEVICE=eth0"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[1]);assert($<span style="color: #f0c674;">lines</span>[1] eq <span style="color: #8abeb7;">"IPADDR=11.168.30.10"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[2]);assert($<span style="color: #f0c674;">lines</span>[2] eq <span style="color: #8abeb7;">"NETWORK=11.168.30.0"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[3]);assert($<span style="color: #f0c674;">lines</span>[3] eq <span style="color: #8abeb7;">"NETMASK=255.255.255.0"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[4]);assert($<span style="color: #f0c674;">lines</span>[4] eq <span style="color: #8abeb7;">"ONBOOT=yes"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[5]);assert($<span style="color: #f0c674;">lines</span>[5] eq <span style="color: #8abeb7;">"TYPE=Ethernet"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[6]);assert($<span style="color: #f0c674;">lines</span>[6] eq <span style="color: #8abeb7;">"GATEWAY=11.168.30.1"</span>);
+        chomp($<span style="color: #f0c674;">lines</span>[7]);assert($<span style="color: #f0c674;">lines</span>[7] eq <span style="color: #8abeb7;">"BROADCAST=11.168.30.255"</span>);
+    }
+
+    <span style="color: #b5bd68;">if</span>(0){
+        <span style="color: #de935f;">my</span> ($<span style="color: #f0c674;">name</span>,$<span style="color: #f0c674;">dir</span>,$<span style="color: #f0c674;">suffix</span>)=fileparse($<span style="color: #f0c674;">0</span>);
+        print <span style="color: #8abeb7;">"name=$name;dir=$dir;suffix=$suffix;n"</span>;
+        assert(-e $<span style="color: #f0c674;">dir</span>.<span style="color: #8abeb7;">"chg_jnior_ip.exp"</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">e1ip</span>=&amp;<span style="color: #81a2be;">get_ip</span>(<span style="color: #8abeb7;">"node1-auto"</span>);
+        <span style="color: #b5bd68;">if</span>(!system(<span style="color: #8abeb7;">"$pingcmd node1-auto"</span>)){
+            print <span style="color: #8abeb7;">"ip of node1-auto=$e1ipn"</span>;
+            assert($<span style="color: #f0c674;">e1ip</span> ne <span style="color: #8abeb7;">"192.168.30.52"</span>);
+            assert(system(<span style="color: #8abeb7;">"$pingcmd 192.168.30.52"</span>));
+            <span style="color: #b5bd68;">if</span>(system($<span style="color: #f0c674;">dir</span>.<span style="color: #8abeb7;">"chg_jnior_ip.exp node1-auto 192.168.30.52"</span>)){
+                assert(0);
+            }
+            sleep(8); <span style="color: #969896; font-style: italic;">#wait jnior</span>
+            assert(!system(<span style="color: #8abeb7;">"$pingcmd 192.168.30.52"</span>));
+            assert(system(<span style="color: #8abeb7;">"$pingcmd node1-auto"</span>));
+            <span style="color: #b5bd68;">if</span>(system($<span style="color: #f0c674;">dir</span>.<span style="color: #8abeb7;">"chg_jnior_ip.exp 192.168.30.52 $e1ip"</span>)){
+                assert(0);
+            }
+            sleep(8); <span style="color: #969896; font-style: italic;">#wait jnior</span>
+            assert(system(<span style="color: #8abeb7;">"$pingcmd 192.168.30.52"</span>));
+            assert(!system(<span style="color: #8abeb7;">"$pingcmd node1-auto"</span>));
+        }
+        <span style="color: #b5bd68;">else</span>{
+            print <span style="color: #8abeb7;">"cannnot connect to node1-auto!n"</span>;
+        }
+    }
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> ($<span style="color: #f0c674;">network</span>,$<span style="color: #f0c674;">broadcast</span>)=&amp;<span style="color: #81a2be;">get_netprop</span>(<span style="color: #8abeb7;">"192.168.1.1"</span>);
+        assert($<span style="color: #f0c674;">network</span> eq <span style="color: #8abeb7;">"192.168.1.0"</span>);
+        assert($<span style="color: #f0c674;">broadcast</span> eq <span style="color: #8abeb7;">"192.168.1.255"</span>);
+    }
+
+
+
+    <span style="color: #b5bd68;">if</span>(1){
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=&amp;<span style="color: #81a2be;">get_hosts_from_arp</span>();
+        <span style="color: #b5bd68;">foreach</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %$<span style="color: #f0c674;">h</span>){
+            print <span style="color: #8abeb7;">"key=$k;val=$h-&gt;{$k}n"</span>; <span style="color: #969896; font-style: italic;">#debug</span>
+        }
+    }
+
+
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">a</span>()
+
+{
+    <span style="color: #b5bd68;">if</span>(!$<span style="color: #f0c674;">NDEBUG</span>){
+        assert($<span style="color: #f0c674;">_</span>[$[]);
+    }
+}
+
+
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">subroutines</span>
+
+<span style="color: #969896; font-style: italic;">############################</span>
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">get_ip</span>{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">hostname</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ip</span>=<span style="color: #8abeb7;">`$pingcmd $hostname`</span>;
+    <span style="color: #969896; font-style: italic;">#PING node1 (192.168.30.111) 56(84) bytes of data.</span>
+    <span style="color: #969896; font-style: italic;">#64 bytes from node1 (192.168.30.111): icmp_seq=0 ttl=64 time=0.129 ms</span>
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[rn]+/</span>,<span style="color: #8abeb7;">`$pingcmd $hostname`</span>);
+    chomp($<span style="color: #f0c674;">a</span>[0]);
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">on cygwin, the first line is empty</span>
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[0] eq <span style="color: #8abeb7;">""</span>){ $<span style="color: #f0c674;">a</span>[0]=$<span style="color: #f0c674;">a</span>[1]; }
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">v</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">a</span>[0]);
+    $<span style="color: #f0c674;">v</span>[2]=~s<span style="color: #8abeb7;">/[()[] ]*//</span>g;
+    <span style="color: #b5bd68;">if</span>(!&amp;<span style="color: #81a2be;">is_valid_ip</span>($<span style="color: #f0c674;">v</span>[2])){
+        <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">hostname</span>;
+    }
+    <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">v</span>[2];
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">is_interactive</span> {
+    <span style="color: #b5bd68;">return</span> -t STDIN &amp;&amp; -t STDOUT;
+}
+
+
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">who_will_change</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ls</span>=shift;
+    <span style="color: #de935f;">my</span> %<span style="color: #f0c674; text-decoration: underline;">h</span>=();
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">rlt</span>=grep(<span style="color: #8abeb7;">/^[0-9.]+.*/</span>,@$<span style="color: #f0c674;">ls</span>);
+    <span style="color: #969896; font-style: italic;"># change ip address to 127.0.0.1 is crazy idea!</span>
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">rlt</span>=grep(!<span style="color: #8abeb7;">/^127.0.0.1.*/</span>,@<span style="color: #f0c674; text-decoration: underline;">rlt</span>);
+    <span style="color: #b5bd68;">foreach</span> (@<span style="color: #f0c674; text-decoration: underline;">rlt</span>){
+        chomp($<span style="color: #f0c674;">_</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">_</span> eq <span style="color: #8abeb7;">""</span>){<span style="color: #b5bd68;">next</span>;}
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>);
+        <span style="color: #b5bd68;">if</span>($#<span style="color: #f0c674; text-decoration: underline;">a</span> == 0){<span style="color: #b5bd68;">next</span>;}
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span>=$<span style="color: #f0c674;">a</span>[1];
+        <span style="color: #b5bd68;">for</span>(<span style="color: #de935f;">my</span> $<span style="color: #f0c674;">i</span>=2;$<span style="color: #f0c674;">i</span>&lt;=$#<span style="color: #f0c674; text-decoration: underline;">a</span>;$<span style="color: #f0c674;">i</span>++){
+            $<span style="color: #f0c674;">k</span>.=<span style="color: #8abeb7;">" "</span>.$<span style="color: #f0c674;">a</span>[$<span style="color: #f0c674;">i</span>];
+        }
+        $<span style="color: #f0c674;">h</span>{$<span style="color: #f0c674;">k</span>}=$<span style="color: #f0c674;">a</span>[0];
+    }
+    <span style="color: #b5bd68;">return</span> %<span style="color: #f0c674; text-decoration: underline;">h</span>;
+}
+
+
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">change_etc_hosts</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">f</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=shift;
+    open(F,$<span style="color: #f0c674;">f</span>);
+    @<span style="color: #f0c674; text-decoration: underline;">lines</span>=;
+    close(F);
+    <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (keys %$<span style="color: #f0c674;">h</span>){
+        <span style="color: #969896; font-style: italic;">#print "k=$kn"; #debug</span>
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">need_replace</span>=0;
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">replaced</span>=0;
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=();
+        <span style="color: #b5bd68;">for</span>(<span style="color: #de935f;">my</span> $<span style="color: #f0c674;">i</span>=0;$<span style="color: #f0c674;">i</span>&lt;=$#<span style="color: #f0c674; text-decoration: underline;">lines</span>;$<span style="color: #f0c674;">i</span>++){
+            @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+            <span style="color: #b5bd68;">if</span>( $#<span style="color: #f0c674; text-decoration: underline;">a</span> == 2 &amp;&amp; ($<span style="color: #f0c674;">a</span>[2] eq <span style="color: #8abeb7;">"none"</span>) ){
+                <span style="color: #b5bd68;">next</span>;
+            }
+
+            <span style="color: #b5bd68;">if</span>(&amp;<span style="color: #81a2be;">is_valid_ip</span>($<span style="color: #f0c674;">a</span>[0])){
+                <span style="color: #b5bd68;">next</span>;
+            }
+
+            $<span style="color: #f0c674;">need_replace</span>=1;
+            $<span style="color: #f0c674;">_</span>=$<span style="color: #f0c674;">a</span>[0];
+            <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]!~<span style="color: #8abeb7;">/^[d.]+[st]+$_[strn]+/</span>){
+                <span style="color: #b5bd68;">next</span>;
+            }
+
+            $<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=~s<span style="color: #8abeb7;">/^[d.]+/$h-&gt;{$k}/</span>g;
+            $<span style="color: #f0c674;">replaced</span>=1;
+
+            <span style="color: #969896; font-style: italic;">#print "line=".$lines[$i]; #debug</span>
+        }
+
+        <span style="color: #b5bd68;">if</span>( $<span style="color: #f0c674;">need_replace</span> &amp;&amp; !$<span style="color: #f0c674;">replaced</span> ){
+            push(@<span style="color: #f0c674; text-decoration: underline;">lines</span>,<span style="color: #8abeb7;">"$h-&gt;{$k} $a[0]n"</span>);
+        }
+    }
+    <span style="color: #969896; font-style: italic;">#foreach (@lines){print "line=$_";}; #debug</span>
+    open (F,<span style="color: #8abeb7;">"&gt;$f"</span>);
+    print F (@<span style="color: #f0c674; text-decoration: underline;">lines</span>);
+    close(F);
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">get_pingcmd</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`uname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">s</span> eq <span style="color: #8abeb7;">"Linux"</span>){
+        <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">"ping -c3"</span>;
+    }
+    <span style="color: #b5bd68;">return</span> <span style="color: #8abeb7;">"ping"</span>;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">set_one_card</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">addr</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ifcfg</span>=shift;
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">p</span>=split(<span style="color: #8abeb7;">/./</span>,$<span style="color: #f0c674;">addr</span>);
+    open(F,<span style="color: #8abeb7;">"&lt;$ifcfg"</span>);
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">lines</span>=;
+    <span style="color: #b5bd68;">for</span>(<span style="color: #de935f;">my</span> $<span style="color: #f0c674;">i</span>=0;$<span style="color: #f0c674;">i</span>&lt;=$#<span style="color: #f0c674; text-decoration: underline;">lines</span>;$<span style="color: #f0c674;">i</span>++){
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=~<span style="color: #8abeb7;">/IPADDR=.*$/</span>){
+            $<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=<span style="color: #8abeb7;">"IPADDR=$addrn"</span>;
+        }
+        <span style="color: #b5bd68;">elsif</span>($<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=~<span style="color: #8abeb7;">/NETWORK=.*$/</span>){
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">orig</span>=split(<span style="color: #8abeb7;">/=/</span>,$<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]);
+            chomp($<span style="color: #f0c674;">orig</span>[1]);
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">o</span>=split(<span style="color: #8abeb7;">/./</span>,$<span style="color: #f0c674;">orig</span>[1]);
+            $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">"$p[0].$p[1].$p[2].$o[3]"</span>;
+            $<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=<span style="color: #8abeb7;">"NETWORK=$sn"</span>;
+
+        }
+        <span style="color: #b5bd68;">elsif</span>($<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=~<span style="color: #8abeb7;">/BROADCAST=.*$/</span>){
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">orig</span>=split(<span style="color: #8abeb7;">/=/</span>,$<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]);
+            chomp($<span style="color: #f0c674;">orig</span>[1]);
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">o</span>=split(<span style="color: #8abeb7;">/./</span>,$<span style="color: #f0c674;">orig</span>[1]);
+            $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">"$p[0].$p[1].$p[2].$o[3]"</span>;
+            $<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=<span style="color: #8abeb7;">"BROADCAST=$sn"</span>;
+        }
+        <span style="color: #b5bd68;">elsif</span>($<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=~<span style="color: #8abeb7;">/GATEWAY=.*$/</span>){
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">orig</span>=split(<span style="color: #8abeb7;">/=/</span>,$<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]);
+            chomp($<span style="color: #f0c674;">orig</span>[1]);
+            <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">o</span>=split(<span style="color: #8abeb7;">/./</span>,$<span style="color: #f0c674;">orig</span>[1]);
+            $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">"$p[0].$p[1].$p[2].$o[3]"</span>;
+            $<span style="color: #f0c674;">lines</span>[$<span style="color: #f0c674;">i</span>]=<span style="color: #8abeb7;">"GATEWAY=$sn"</span>;
+        }
+    }
+    close(F);
+    open (F,<span style="color: #8abeb7;">"&gt;$ifcfg"</span>);
+    print F (@<span style="color: #f0c674; text-decoration: underline;">lines</span>);
+    close(F);
+    <span style="color: #b5bd68;">return</span> 0;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">get_netprop</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">addr</span>=shift;
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">p</span>=split(<span style="color: #8abeb7;">/./</span>,$<span style="color: #f0c674;">addr</span>);
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">network</span>=<span style="color: #8abeb7;">"$p[0].$p[1].$p[2].0"</span>;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">broadcast</span>=<span style="color: #8abeb7;">"$p[0].$p[1].$p[2].255"</span>;
+    <span style="color: #b5bd68;">return</span> ($<span style="color: #f0c674;">network</span>,$<span style="color: #f0c674;">broadcast</span>,);
+}
+
+
+
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">Return: </span>
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">change_ip</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">addr</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">dir</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">netcard</span>=shift;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">tr</span>=shift;
+
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ret</span>=0;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+    <span style="color: #de935f;">my</span> ($<span style="color: #f0c674;">network</span>,$<span style="color: #f0c674;">broadcast</span>)=&amp;<span style="color: #81a2be;">get_netprop</span>($<span style="color: #f0c674;">addr</span>);
+    <span style="color: #b5bd68;">if</span>( $<span style="color: #f0c674;">s</span> eq $<span style="color: #f0c674;">k</span>){ <span style="color: #969896; font-style: italic;">#local</span>
+        <span style="color: #969896; font-style: italic;">#print "s=$s;k=$kn"; #debug</span>
+        $<span style="color: #f0c674;">ret</span>=&amp;<span style="color: #81a2be;">set_one_card</span>($<span style="color: #f0c674;">addr</span>,<span style="color: #8abeb7;">"$dir/ifcfg-$netcard"</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){ &amp;<span style="color: #81a2be;">a</span>(0); <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;}
+        <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;
+    }
+    <span style="color: #969896; font-style: italic;">#remote</span>
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">u</span>=&amp;<span style="color: #81a2be;">unique_id</span>();
+    <span style="color: #969896; font-style: italic;">#print "k=$kn"; #debug</span>
+    $<span style="color: #f0c674;">ret</span>=system(<span style="color: #8abeb7;">"scp root@$k:$dir/ifcfg-$netcard /tmp/$u.ifcfg-$netcard </span>
+<span style="color: #8abeb7;">              &gt;/dev/null 2&gt;&amp;1"</span>);
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){ <span style="color: #969896; font-style: italic;"># maybe jnior</span>
+        $$<span style="color: #f0c674;">tr</span>=1;
+        <span style="color: #de935f;">my</span> ($<span style="color: #f0c674;">name</span>,$<span style="color: #f0c674;">dir</span>,$<span style="color: #f0c674;">suffix</span>)=fileparse($<span style="color: #f0c674;">0</span>);
+        &amp;<span style="color: #81a2be;">a</span>(-e $<span style="color: #f0c674;">dir</span>.<span style="color: #8abeb7;">"chg_jnior_ip.exp"</span>);
+        $<span style="color: #f0c674;">ret</span>=system($<span style="color: #f0c674;">dir</span>.<span style="color: #8abeb7;">"chg_jnior_ip.exp $k $addr &gt;/dev/null 2&gt;&amp;1"</span>);
+        <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;
+    }
+    <span style="color: #b5bd68;">else</span>{
+        $$<span style="color: #f0c674;">tr</span>=0;
+    }
+    $<span style="color: #f0c674;">ret</span>=&amp;<span style="color: #81a2be;">set_one_card</span>($<span style="color: #f0c674;">addr</span>,<span style="color: #8abeb7;">"/tmp/$u.ifcfg-$netcard"</span>);
+
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){ &amp;<span style="color: #81a2be;">a</span>(0); <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;}
+    $<span style="color: #f0c674;">ret</span>=system(<span style="color: #8abeb7;">"scp /tmp/$u.ifcfg-$netcard root@$k:$dir/ifcfg-$netcard </span>
+<span style="color: #8abeb7;">              &gt;/dev/null 2&gt;&amp;1"</span>);
+    system(<span style="color: #8abeb7;">"rm -f /tmp/$u.ifcfg-$netcard &gt;/dev/null 2&gt;&amp;1"</span>);
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">ret</span>){ &amp;<span style="color: #81a2be;">a</span>(0); <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;}
+    <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">ret</span>;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">unique_id</span>()
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">sessionId</span>  =<span style="color: #8abeb7;">""</span>;
+    <span style="color: #b5bd68;">for</span>($<span style="color: #f0c674;">i</span>=0 ; $<span style="color: #f0c674;">i</span>&lt; 32 ;) 
+    {
+        $<span style="color: #f0c674;">j</span> = chr(int(rand(127)));
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">j</span> =~ <span style="color: #8abeb7;">/[a-zA-Z0-9]/</span>)
+        {
+            $<span style="color: #f0c674;">sessionId</span> .=$<span style="color: #f0c674;">j</span>;
+            $<span style="color: #f0c674;">i</span>++;
+        }
+    }
+    <span style="color: #b5bd68;">return</span> $<span style="color: #f0c674;">sessionId</span>;
+g}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">is_valid_ip</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">ip</span>=shift;
+    <span style="color: #b5bd68;">if</span>( $<span style="color: #f0c674;">ip</span> !~ <span style="color: #8abeb7;">/^d{1,3}.d{1,3}.d{1,3}.d{1,3}$/</span> ){
+        <span style="color: #b5bd68;">return</span> 0;
+    }
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">'.'</span>,$<span style="color: #f0c674;">ip</span>);
+    <span style="color: #969896; font-style: italic;">#print "$a[0] $a[1] $a[2] $a[3]n";#debug</span>
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[0]&gt;255){ <span style="color: #b5bd68;">return</span> 0;}
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[1]&gt;255){ <span style="color: #b5bd68;">return</span> 0;}
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[2]&gt;255){ <span style="color: #b5bd68;">return</span> 0;}
+    <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[3]&gt;255){ <span style="color: #b5bd68;">return</span> 0;}
+    <span style="color: #b5bd68;">return</span> 1;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">who_are_pingable</span>
+
+{
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">h</span>=shift;
+    <span style="color: #de935f;">my</span> %<span style="color: #f0c674; text-decoration: underline;">p</span>=();
+    <span style="color: #b5bd68;">for</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">k</span> (sort keys %$<span style="color: #f0c674;">h</span>){
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=split(<span style="color: #8abeb7;">/[st]+/</span>,$<span style="color: #f0c674;">k</span>);
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">s</span>=<span style="color: #8abeb7;">`hostname`</span>;chomp($<span style="color: #f0c674;">s</span>);
+        <span style="color: #b5bd68;">if</span>($<span style="color: #f0c674;">a</span>[0] eq $<span style="color: #f0c674;">s</span>){
+            print <span style="color: #8abeb7;">"test $a[0] ... connectablen"</span>;
+            $<span style="color: #f0c674;">p</span>{$<span style="color: #f0c674;">a</span>[0]}=$<span style="color: #f0c674;">USE_SSH</span>;
+            <span style="color: #b5bd68;">next</span>;
+        }
+        <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">pingcmd</span>=&amp;<span style="color: #81a2be;">get_pingcmd</span>();
+        print <span style="color: #8abeb7;">"test $a[0] ... "</span>;
+        <span style="color: #b5bd68;">if</span>(system(<span style="color: #8abeb7;">"$pingcmd $a[0] &gt;/dev/null 2&gt;&amp;1"</span>)!=0){
+            print <span style="color: #8abeb7;">"NOT connectablen"</span>;
+            <span style="color: #b5bd68;">next</span>;
+        }
+        <span style="color: #b5bd68;">else</span>{
+            print <span style="color: #8abeb7;">"connectablen"</span>;
+        }
+
+        $<span style="color: #f0c674;">p</span>{$<span style="color: #f0c674;">a</span>[0]}=1;
+    }
+    <span style="color: #b5bd68;">return</span> %<span style="color: #f0c674; text-decoration: underline;">p</span>;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">get_hosts_from_arp</span>
+
+{
+    <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">a</span>=grep(!<span style="color: #8abeb7;">/incomplete/</span>,split(<span style="color: #8abeb7;">/[rn]/</span>,<span style="color: #8abeb7;">`arp -a`</span>));
+    <span style="color: #de935f;">my</span> %<span style="color: #f0c674; text-decoration: underline;">h</span>=();
+    <span style="color: #b5bd68;">foreach</span> <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">l</span> (@<span style="color: #f0c674; text-decoration: underline;">a</span>){
+        <span style="color: #de935f;">my</span> @<span style="color: #f0c674; text-decoration: underline;">s</span>=split(<span style="color: #8abeb7;">/[st()]+/</span>,$<span style="color: #f0c674;">l</span>);
+        $<span style="color: #f0c674;">h</span>{$<span style="color: #f0c674;">s</span>[0]}=$<span style="color: #f0c674;">s</span>[1];
+    }
+    <span style="color: #b5bd68;">return</span> %<span style="color: #f0c674; text-decoration: underline;">h</span>;
+}
+
+
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">usage</span>
+
+{
+    <span style="color: #de935f;">my</span> ($<span style="color: #f0c674;">name</span>,$<span style="color: #f0c674;">dir</span>,$<span style="color: #f0c674;">suffix</span>)=fileparse($<span style="color: #f0c674;">0</span>);
+    print STDERR &lt;&lt; <span style="color: #8abeb7;">"EOF"</span>;
+    USAGE
+        $<span style="color: #f0c674;">name</span> [OPTION] <span style="color: #8abeb7;">"ip hostname [netcard default/none]"</span>
+
+        DESCRIPTION
+        Change IP of remote hosts.
+        -h    : this (help) message
+        -d    : self test and print debugging messages to stderr
+        -a    : <span style="color: #b5bd68;">use</span> <span style="color: #8abeb7;">`arp -a`</span> to verify remote hosts reachable
+        <span style="color: #8abeb7;">`$name "ip host"`</span> (without either -a or -p)  
+        equals <span style="color: #8abeb7;">`$name -a "ip host"`</span>
+        -p    : <span style="color: #b5bd68;">use</span> <span style="color: #8abeb7;">`ping`</span> to verify remote hosts reachable
+
+        <span style="color: #de935f;">netcard</span>      : the name of the netcard
+        default/none : default - the changed ip will be recorded in /etc/hosts
+        none    - contrary to <span style="color: #8abeb7;">"default"</span>
+
+        EXAMPLE
+        echo 192.168.30.151 manager|$<span style="color: #f0c674;">name</span>
+        echo 192.168.30.151 manager eth1 none|$<span style="color: #f0c674;">name</span> 
+        echo 192.168.30.151 manager eth1 none|$<span style="color: #f0c674;">name</span>  -p
+        cat /etc/hosts|$<span style="color: #f0c674;">name</span> -a
+        $<span style="color: #f0c674;">name</span> <span style="color: #8abeb7;">"192.168.30.151 manager"</span>
+        $<span style="color: #f0c674;">name</span> <span style="color: #8abeb7;">"192.168.30.151 manager eth0 default"</span>
+
+        AUTHOR
+        Chen Bin 
+
+        EOF
+}
+
+<span style="color: #b5bd68;">sub</span> <span style="color: #81a2be;">init</span>()
+
+{
+    <span style="color: #b5bd68;">use</span> <span style="color: #de935f;">Getopt</span>::Std;
+    <span style="color: #de935f;">my</span> $<span style="color: #f0c674;">opt_string</span> = <span style="color: #8abeb7;">'hdap'</span>;
+    getopts( <span style="color: #8abeb7;">"$opt_string"</span>, %<span style="color: #f0c674; text-decoration: underline;">opt</span> ) or usage();
+}
+
+</pre>
+
+<p></p>
+</div>
+        </div>
+        
+        <ul class="pager">
+            <li class="next">
+                <a href="dropbox-hen-you-chuang-yi.html" rel="next" title="DropBox很有创意">Next post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/perl-code-to-change-ip.html",
+        disqus_title="perl code to change ip",
+        disqus_identifier="cache/posts/perl-code-to-change-ip.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

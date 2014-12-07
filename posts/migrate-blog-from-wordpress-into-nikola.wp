@@ -1,0 +1,197 @@
+
+<p>Here are the steps.
+</p>
+
+
+
+
+<pre class="prettyprint lang-sh">
+# install python2 and make sure sqlite is supported
+sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# install dependencies (requests is required by zen theme)
+sudo pip install markdown webassets phpserialize nikola requests
+
+mkdir ~/projs/blog.binchen.org;cd ~/projs/blog.binchen.org
+
+# import from wordpress dump
+nicola import_wordpress my_wordpress_dump.xml
+
+# back up at first
+git init;git add .;git commit -m "first import"
+
+# since I use zen theme, I need install lessc
+sudo npm install -g less
+
+# I use zen theme, before intalling new theme, clean the legacy theme at first
+rm -rf themes/zen/;nikola install_theme zen
+
+# build the web site
+nikola build
+</pre>
+
+
+<p>
+Then open the index.html in "output" directory.
+</p>
+<p>
+Import comments into disqus.
+</p>
+<p>
+Use below command to fix code embedded in the html:
+</p>
+<div class="org-src-container">
+<p>
+Import comments into disqus.
+</p>
+<p>
+Use below command to fix code embedded in the html:
+</p>
+
+
+
+<pre class="prettyprint lang-bash">
+find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
+find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
+</pre>
+
+
+
+<p>
+manually fixed those articles with Chinese title and url_map.csv
+</p>
+<p>
+use below script to fixed the xml dumped from wordpress
+</p>
+
+
+
+<pre class="prettyprint lang-python">
+#!/usr/bin/python
+import getopt, sys, csv
+def usage():
+    print '''
+NAME
+    fix url mapping when migrate wordpress blog into nikola
+Usage
+    python fix-url-map.py [options]
+'''[1:-1]
+
+if __name__ == '__main__':
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf:x:", ["help", "file=","xml="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+
+    file=""
+    xml=""
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-f", "--file"):
+            file= a
+        elif o in ("-x", "--xml"):
+            xml=a
+        else:
+            assert False, "unhandled option"
+
+    with open(xml, 'r') as content_file:
+        content = content_file.read()
+
+    with open(file, 'rb') as csvfile:
+         spamreader = csv.reader(csvfile, delimiter=',')
+         for row in spamreader:
+             content=content.replace("&gt;"+row[0]+"&lt;","&gt;"+row[1]+"&lt;")
+
+    print content
+</pre>
+
+
+<p>
+Import the xml int disqus.com.
+</p>
+<p>
+Install syntaxhighlighter and google analytics, insert below code into conf.py:
+</p>
+
+
+<pre class="prettyprint lang-python">
+BODY_END = """
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+function path()
+{
+  var args = arguments,
+      result = [];
+
+  for(var i = 0; i &lt; args.length; i++){
+    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
+  }
+
+  return result;
+};
+
+SyntaxHighlighter.autoloader.apply(null, path(
+  'applescript            @shBrushAppleScript.min.js',
+  'actionscript3 as3      @shBrushAS3.min.js',
+  'bash shell             @shBrushBash.min.js',
+  'coldfusion cf          @shBrushColdFusion.min.js',
+  'cpp c c++              @shBrushCpp.min.js',
+  'clojure                @shBrushScala.min.js',
+  'c# c-sharp csharp      @shBrushCSharp.min.js',
+  'css                    @shBrushCss.min.js',
+  'delphi pascal          @shBrushDelphi.min.js',
+  'diff patch pas         @shBrushDiff.min.js',
+  'erl erlang             @shBrushErlang.min.js',
+  'groovy                 @shBrushGroovy.min.js',
+  'java                   @shBrushJava.min.js',
+  'jfx javafx             @shBrushJavaFX.min.js',
+  'js jscript javascript  @shBrushJScript.min.js',
+  'perl pl                @shBrushPerl.min.js',
+  'php                    @shBrushPhp.min.js',
+  'text plain             @shBrushPlain.min.js',
+  'py python              @shBrushPython.min.js',
+  'ruby rails ror rb      @shBrushRuby.min.js',
+  'sass scss              @shBrushSass.min.js',
+  'scala                  @shBrushScala.min.js',
+  'sql                    @shBrushSql.min.js',
+  'vb vbnet               @shBrushVb.min.js',
+  'xml xhtml xslt html    @shBrushXml.min.js'
+));
+SyntaxHighlighter.all();
+&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+&lt;/script&gt;
+"""
+
+EXTRA_HEAD_DATA = """
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&gt;
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&gt;
+"""
+</pre>
+
+
+
+<p>
+In above code, shCoreEmacs.css is the color theme.
+</p>
+<p>
+To upload files into ftp, I suggest FileZilla, it'stable and fast. curlftpfs is too slow.
+</p>

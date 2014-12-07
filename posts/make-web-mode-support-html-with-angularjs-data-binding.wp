@@ -1,0 +1,20 @@
+
+<p>I find it very useful to use `M-x imenu` to jump to the  <a href="http://angularjs.org">AngularJS</a> binding point of one HTML file.
+</p>
+<p>
+Insert below code into ~/.emacs:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(eval-after-load 'web-mode
+  '(progn
+     ;; angular imenu
+     (add-to-list 'web-mode-imenu-regexp-list
+                  '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
+</pre>
+
+
+
+

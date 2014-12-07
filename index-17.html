@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Linux, Programming, Emacs">
+    <meta name="viewport" content="width=device-width">
+    <title>Chen's blog (old posts, page 17) | Chen's blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/index-17.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+        <div class="post">
+            <h1 class="title"><a href="posts/ccjava-code-indentation-in-emacs.html">C/C++/Java code indentation in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-05-09T09:19:18+00:00">2014-05-09 09:19</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/ccjava-code-indentation-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/ccjava-code-indentation-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/c.html" rel="tag">c</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>There are two styles when insert curly braces in C like languages.
+</p>
+<p>
+Style 1:
+</p>
+
+
+
+<pre class="prettyprint lang-c">
+if(true) {
+    printf("hello world\n");
+}
+</pre>
+
+
+
+<p>
+Style 2:
+</p>
+
+
+
+<pre class="prettyprint lang-c">
+if(true)
+{
+    printf("hello world\n");
+}
+</pre>
+
+
+
+<p>
+Whatever style I use, I expect Emacs will properly handle the indentation for me.
+</p>
+<p>
+In "Style 1", when I press ENTER key after "{" at first line, I expect the new line will indent four spaces.
+</p>
+<p>
+In "Style 2", when I press ENTER key after ")" at first line, I expect the new line will NOT indent.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Solution</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Insert below code into ~/.emacs:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun fix-c-indent-offset-according-to-syntax-context (key val)
+  ;; remove the old element
+  (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
+  ;; new value
+  (add-to-list 'c-offsets-alist '(key . val)))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              ;; indent
+              (fix-c-indent-offset-according-to-syntax-context 'substatement 0)
+              (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
+            ))
+
+</pre>
+
+
+
+<p>
+That's it.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Explanation</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>When you press the ENTER key, the function <b>c-indent-line</b> will be called.
+</p>
+<p>
+That function will do some simple syntax analysis and decide current syntactic context..
+</p>
+<p>
+It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
+</p>
+<p>
+For example, <b>substatement</b> corresponds to the code like below:
+</p>
+
+
+
+<pre class="prettyprint lang-c">
+if(true) // press ENTER here
+</pre>
+
+
+
+<p>
+And <b>func-decl-cont</b> corresponds to:
+</p>
+
+
+
+<pre class="prettyprint lang-c">
+void fn () //press ENTER here
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Technical details</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
+</p>
+<p>
+<b>indent-according-to-mode</b> will actually call function object <b>indent-line-function</b> if it's not nil.
+</p>
+<p>
+In C/C++/Java, that object is actually <b>c-indent-line</b>.
+</p>
+<p>
+<b>c-indent-line</b> is defined in /usr/share/emacs/24.3/lisp/progmodes/cc-cmds.el (I use Emacs 24.3 on Gentoo Linux).
+</p>
+<p>
+In that function, just below the code line:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq c-syntactic-context (c-guess-basic-syntax))
+</pre>
+
+
+
+<p>
+Please insert insert log code:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(message "c-syntactic-context=%s" c-syntactic-context)
+</pre>
+
+
+
+<p>
+Then you will know the current syntactic context when you press ENTER key.
+</p>
+<p>
+<a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> said you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
+</p>
+<p>
+For example, the context <b>statement-cont</b> corresponds to the use case like this:
+</p>
+
+
+
+<pre class="prettyprint lang-c">
+int a=3, // press ENTER here
+</pre>
+
+
+
+<p>
+Please note syntax analysis in c-indent-line is turned on if and <b>only if</b> the global flag <b>c-syntactic-indentation</b> is true.
+</p>
+<p>
+Thanks for <a href="https://github.com/chengyi">chengyi</a> for <a href="https://github.com/redguardtoo/emacs.d/issues/98">reporting the issue and suggesting the fix</a>.
+</p>
+<p>
+BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.
+</p>
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-30T12:46:31+00:00">2014-04-30 12:46</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/why-gnus-is-better-than-gmail.html#disqus_thread" data-disqus-identifier="cache/posts/why-gnus-is-better-than-gmail.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+</p>
+
+<p>
+My first reaction is to reply the email with "Great! Please forward me CV".
+</p>
+
+<p>
+Before I press the "Send" button, it occurs to me that other agents have possibily <b>already</b> submitted my CV to FF since it is a big organization. I need double check.
+</p>
+
+<p>
+I save current email as draft, search all the mails containing "FF" and forward them to the original email I've not sent yet. Then my agent could figure out whether other guys have already represented me for the same opportunity.
+</p>
+
+<p>
+This operation is doable in desktop application like Outlook. I need search emails in a new dialog box. Select emails. Then drag them to the original email.
+</p>
+
+<p>
+It's hard to do this kind of thing in Gmail.
+</p>
+
+<p>
+Now let me show you how Emacs get the job done:
+</p>
+
+<ul>
+<li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
+</li>
+<li>Step 2, Mark the emails I want to forward with hot key "#"
+</li>
+<li>Step 3, Press key "C-c C-f" or run command "M-x gnus-summary-mail-forward". A new buffer is created. It contains a big chuck of xml string wrapped by either "&lt;#multipart&gt;" tag or "&lt;#mml&gt;" tag.
+</li>
+<li>Step 4, Select and copy that string into you original email. Done!
+</li>
+</ul>
+
+<p>
+Well, some people may argue that step 4 could be improved a little bit.
+</p>
+
+<p>
+In Emacs, everyting could be optimized. Please copy below code into your ~/.emacs:
+</p>
+
+<pre class="prettyprint lang-lisp">
+(defun message-select-forwarded-email-tags ()
+  "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (let (start rlt)
+    (when (search-forward "&lt;#")
+      (setq start (point))
+      (push-mark (point) t t)
+      (goto-char (point-max))
+      (search-backward "&gt;")
+      (forward-char)
+      (setq rlt t))
+    rlt))
+
+(defun message-copy-select-forwarded-email-tags ()
+  "copy the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (save-excursion
+    (cond
+     ((message-select-forwarded-email-tags)
+      (copy-region-as-kill (region-beginning) (region-end))
+      (message "forwarded email tags copied!"))
+     (t (message "NO forwarded email tags found!"))
+     )
+    ))
+</pre>
+
+<p>
+All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
+</p>
+
+<p>
+UPDATE:
+This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/migrate-blog-from-wordpress-into-nikola.html">migrate blog from wordpress into nikola</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-22T09:09:21+00:00">2014-04-22 09:09</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/migrate-blog-from-wordpress-into-nikola.html#disqus_thread" data-disqus-identifier="cache/posts/migrate-blog-from-wordpress-into-nikola.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/migrate.html" rel="tag">migrate</a></li>
+           <li><a class="tag p-category" href="categories/nikola.html" rel="tag">nikola</a></li>
+           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Here are the steps.
+</p>
+
+<pre class="prettyprint lang-sh">
+# install python2 and make sure sqlite is supported
+sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# install dependencies (requests is required by zen theme)
+sudo pip install markdown webassets phpserialize nikola requests
+
+mkdir ~/projs/blog.binchen.org;cd ~/projs/blog.binchen.org
+
+# import from wordpress dump
+nicola import_wordpress my_wordpress_dump.xml
+
+# back up at first
+git init;git add .;git commit -m "first import"
+
+# since I use zen theme, I need install lessc
+sudo npm install -g less
+
+# I use zen theme, before intalling new theme, clean the legacy theme at first
+rm -rf themes/zen/;nikola install_theme zen
+
+# build the web site
+nikola build
+</pre>
+
+<p>
+Then open the index.html in "output" directory.
+</p>
+
+<p>
+Import comments into disqus.
+</p>
+
+<p>
+Use below command to fix code embedded in the html:
+</p>
+
+<div class="org-src-container">
+<p>
+Import comments into disqus.
+</p>
+<p>
+Use below command to fix code embedded in the html:
+</p>
+
+
+
+<pre class="prettyprint lang-bash">
+find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
+find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
+</pre>
+
+
+
+<p>
+manually fixed those articles with Chinese title and url_map.csv
+</p>
+<p>
+use below script to fixed the xml dumped from wordpress
+</p>
+
+
+
+<pre class="prettyprint lang-python">
+#!/usr/bin/python
+import getopt, sys, csv
+def usage():
+    print '''
+NAME
+    fix url mapping when migrate wordpress blog into nikola
+Usage
+    python fix-url-map.py [options]
+'''[1:-1]
+
+if __name__ == '__main__':
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf:x:", ["help", "file=","xml="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+
+    file=""
+    xml=""
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-f", "--file"):
+            file= a
+        elif o in ("-x", "--xml"):
+            xml=a
+        else:
+            assert False, "unhandled option"
+
+    with open(xml, 'r') as content_file:
+        content = content_file.read()
+
+    with open(file, 'rb') as csvfile:
+         spamreader = csv.reader(csvfile, delimiter=',')
+         for row in spamreader:
+             content=content.replace("&gt;"+row[0]+"&lt;","&gt;"+row[1]+"&lt;")
+
+    print content
+</pre>
+
+
+<p>
+Import the xml int disqus.com.
+</p>
+<p>
+Install syntaxhighlighter and google analytics, insert below code into conf.py:
+</p>
+
+
+<pre class="prettyprint lang-python">
+BODY_END = """
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+function path()
+{
+  var args = arguments,
+      result = [];
+
+  for(var i = 0; i &lt; args.length; i++){
+    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
+  }
+
+  return result;
+};
+
+SyntaxHighlighter.autoloader.apply(null, path(
+  'applescript            @shBrushAppleScript.min.js',
+  'actionscript3 as3      @shBrushAS3.min.js',
+  'bash shell             @shBrushBash.min.js',
+  'coldfusion cf          @shBrushColdFusion.min.js',
+  'cpp c c++              @shBrushCpp.min.js',
+  'clojure                @shBrushScala.min.js',
+  'c# c-sharp csharp      @shBrushCSharp.min.js',
+  'css                    @shBrushCss.min.js',
+  'delphi pascal          @shBrushDelphi.min.js',
+  'diff patch pas         @shBrushDiff.min.js',
+  'erl erlang             @shBrushErlang.min.js',
+  'groovy                 @shBrushGroovy.min.js',
+  'java                   @shBrushJava.min.js',
+  'jfx javafx             @shBrushJavaFX.min.js',
+  'js jscript javascript  @shBrushJScript.min.js',
+  'perl pl                @shBrushPerl.min.js',
+  'php                    @shBrushPhp.min.js',
+  'text plain             @shBrushPlain.min.js',
+  'py python              @shBrushPython.min.js',
+  'ruby rails ror rb      @shBrushRuby.min.js',
+  'sass scss              @shBrushSass.min.js',
+  'scala                  @shBrushScala.min.js',
+  'sql                    @shBrushSql.min.js',
+  'vb vbnet               @shBrushVb.min.js',
+  'xml xhtml xslt html    @shBrushXml.min.js'
+));
+SyntaxHighlighter.all();
+&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+&lt;/script&gt;
+"""
+
+EXTRA_HEAD_DATA = """
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&gt;
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&gt;
+"""
+</pre>
+
+
+
+<p>
+In above code, shCoreEmacs.css is the color theme.
+</p>
+<p>
+To upload files into ftp, I suggest FileZilla, it'stable and fast. curlftpfs is too slow.
+</p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/what-s-the-best-spell-check-set-up-in-emacs.html">What's the best spell check set up in emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-21T08:25:20+00:00">2014-04-21 08:25</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/what-s-the-best-spell-check-set-up-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/what-s-the-best-spell-check-set-up-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/aspell.html" rel="tag">aspell</a></li>
+           <li><a class="tag p-category" href="categories/check.html" rel="tag">check</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/hunspell.html" rel="tag">hunspell</a></li>
+           <li><a class="tag p-category" href="categories/ispell.html" rel="tag">ispell</a></li>
+           <li><a class="tag p-category" href="categories/spell.html" rel="tag">spell</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>To save your time, I started from conclusion.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Suggestion for non-programmers</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Emacs will find the right dictionary by querying your locale.
+</p>
+<p>
+Run command "locale" in your shell to get current locale.
+</p>
+<p>
+If you want to force Emacs use dictionary "en_US", copy below code into your ~/.emacs:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+;; find aspell and hunspell automatically
+(cond
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
+ ((executable-find "hunspell")
+  (setq ispell-program-name "hunspell")
+  (setq ispell-extra-args '("-d en_US")))
+ )
+</pre>
+
+
+
+<p>
+That's it!
+</p>
+<p>
+Please run command "man aspell" or "man hunspell" in shell if you have more questions. I've nothing more to say.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Suggestion for programmers</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>I strongly recommend aspell instead of hunspell (Though hunspell is fine).
+</p>
+<p>
+Please insert below code into your ~/.emacs:
+</p>
+
+
+
+
+<pre class="prettyprint lang-lisp">
+;; if (aspell installed) { use aspell}
+;; else if (hunspell installed) { use hunspell }
+;; whatever spell checker I use, I always use English dictionary
+;; I prefer use aspell because:
+;; 1. aspell is older
+;; 2. looks Kevin Atkinson still get some road map for aspell:
+;; @see http://lists.gnu.org/archive/html/aspell-announce/2011-09/msg00000.html
+(defun flyspell-detect-ispell-args (&amp;optional RUN-TOGETHER)
+  "if RUN-TOGETHER is true, spell check the CamelCase words"
+  (let (args)
+    (cond
+     ((string-match  "aspell$" ispell-program-name)
+      ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+      (setq args (list "--sug-mode=ultra" "--lang=en_US"))
+      (if RUN-TOGETHER
+          (setq args (append args '("--run-together" "--run-together-limit=5" "--run-together-min=2")))))
+     ((string-match "hunspell$" ispell-program-name)
+      (setq args nil)))
+    args
+    ))
+
+(cond
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell"))
+ ((executable-find "hunspell")
+  (setq ispell-program-name "hunspell")
+  ;; just reset dictionary to the safe one "en_US" for hunspell.
+  ;; if we need use different dictionary, we specify it in command line arguments
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
+ (t (setq ispell-program-name nil)))
+
+;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
+;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
+(setq ispell-extra-args (flyspell-detect-ispell-args t))
+;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
+(defadvice ispell-word (around my-ispell-word activate)
+  (let ((old-ispell-extra-args ispell-extra-args))
+    (ispell-kill-ispell t)
+    (setq ispell-extra-args (flyspell-detect-ispell-args))
+    ad-do-it
+    (setq ispell-extra-args old-ispell-extra-args)
+    (ispell-kill-ispell t)
+    ))
+</pre>
+
+
+
+<p>
+That's it.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Why</h4>
+<div class="outline-text-3" id="text-3">
+
+<ul>
+<li id="sec-3-1">Aspell<br>
+apell is recommended because its option "–run-together". That option could spell check the camel case word. Variable name often uses camel case naming convention these days. Read my <a href="http://blog.binchen.org/?p=950">Effective spell check in Emacs</a> for advanced tips on how to use flyspell to check variable names.
+
+<p>
+If Emacs start a aspell process with "–run-together" option, that process is not closed so it can be re-used by other commands.
+</p>
+<p>
+This behaviour will be a problem if you want to let Emacs/aspell correct the typo by running the command "ispell-word" because a apell process with "–run-together" will produce much noise.
+</p>
+<p>
+For example, for a typo "helle" Emacs will give you too many candidates. It's hard to find the desired word "hello":
+<img src="wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png">
+</p>
+<p>
+The better solution is before running "M-x ispell-word", we'd better restart a aspell proces without the argument "–run-together".
+</p>
+<p>
+Here is the screen shot after we applying this fix:
+<img src="wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png">
+</p>
+<p>
+As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
+</p>
+<p>
+There is another variable named "ispell-cmd-args". It is actually some <b>extra</b> arguments Emacs could send to an <b>existing</b> spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are really confusing. "ispell-extra-args" is actually command line arguments the spell checker will always use. The "ispell-cmd-args" are actually the extra arguments will be used in certain cases.
+</p>
+</li>
+</ul>
+<ul>
+<li id="sec-3-2">Hunspell<br>
+I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
+
+<p>
+Hunspell has some design flaw. It will always check the environment variable LC_ALL, LC_MESSAGES and LANG <b>at first</b> to find the default dictionary unless you specify the dictionary in the command line. If it cannot find the default dictionary, the spell checker process won't start. Aspell does not have this issue, if it cannot find the zh_CN dictionary, it will fall back into English.
+</p>
+<p>
+Specify the ispell-extra-args <b>won't stop hunspell to search for the default dictionary</b> at the beginning.
+</p>
+<p>
+For example, I am a Chinese and my locale is "zh_CN.utf-8". So hunspell will always search the dictionary zh_CN. Even I'm only interested in English spell checking.
+</p>
+<p>
+To specify the dictionary explicitly, I need hack the Emacs code which is kind of mess. Finally, I figure out. It's just several lines of elisp code:
+</p>
+
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq ispell-program-name "hunspell")
+(setq ispell-local-dictionary "en_US")
+(setq ispell-local-dictionary-alist
+      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+</pre>
+
+
+
+</li>
+</ul>
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-embed-button-in-wxdataviewlistctrl.html">How to embed button in wxDataViewListCtrl</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-13T15:39:28+00:00">2014-04-13 15:39</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-embed-button-in-wxdataviewlistctrl.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-embed-button-in-wxdataviewlistctrl.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/c.html" rel="tag">c</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/wxwidgets.html" rel="tag">wxwidgets</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Before creating wxDataViewListCtrl, it's better to detect information about text size so that we can set the column width and height intelligently.
+</p>
+
+<p>
+Here is the code:
+</p>
+
+<pre class="prettyprint lang-c">
+void GuessRowSize(int* w, int* h) {
+    //@see http://sourceforge.net/apps/trac/codelite/browser/trunk/LiteEditor/new_build_tab.cpp?rev=5804
+
+// Determine the row height
+    wxBitmap tmpBmp(1, 1);
+    wxMemoryDC memDc;
+    memDc.SelectObject(tmpBmp);
+    wxFont f = wxSystemSettings::GetFont(wxSYS_ANSI_FIXED_FONT);
+    int xx, yy;
+    memDc.GetTextExtent(wxT("Tp"), &amp;xx, &amp;yy, NULL, NULL, &amp;f);
+
+    //enough height for ICON
+    *h=yy&lt;16? 16: yy;
+
+    memDc.GetTextExtent("Wp", &amp;xx, &amp;yy, NULL, NULL, &amp;f);
+    *w=xx/2;
+
+    return;
+}
+wxDataViewListCtrl* ctrl=new wxDataViewListCtrl(parent,-1);
+ctrl-&gt;Create(parent,id,wxDefaultPosition,wxDefaultSize);
+int w,h;
+GuessRowSize(&amp;w,&amp;h);
+//hard code width may not be good, may be can use w ,h
+AppendTextColumn(_T("Column 1"),wxDATAVIEW_CELL_INERT,200 /*width*/);
+//must be called after Create()
+ctrl-&gt;SetRowHeight(h+6);
+
+
+// well I need provide button render by myself
+class wxDataViewMyButtonRenderer: public wxDataViewCustomRenderer, public wxTimer
+{
+public:
+    wxDataViewMyButtonRenderer( const wxString &amp;varianttype = wxT("wxString"),
+                              int align = wxDVR_DEFAULT_ALIGNMENT );
+
+    virtual bool SetValue( const wxVariant &amp;value );
+    virtual bool GetValue( wxVariant &amp;value ) const;
+
+    virtual bool Render( wxRect, wxDC*, int);
+    virtual wxSize GetSize() const;
+    virtual void Notify();
+    void SetParent(GalleryListView*);
+    // Implementation only, don't use nor override
+    virtual bool ActivateCell(const wxRect&amp; rect,
+        wxDataViewModel *model,
+        const wxDataViewItem&amp; item,
+        unsigned int col,
+        const wxMouseEvent *mouseEvent);
+
+private:
+    wxString m_value;
+    bool m_button_clicked;
+    wxRect m_cell_rect;
+    GalleryListView* m_parent;
+
+protected:
+    DECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewMyButtonRenderer)
+};
+</pre>
+
+<p>
+When user click one row, the ActivateCell is called, we can use some rect detect algorithm to find if the button rect is clicked.
+</p>
+
+<p>
+There is no mouse up event handler! So I have to hack, basically start a wxTimer when button clicked and draw the button up effect after about 1 second in Notify(). That's why I ask wxDataViewMyButtonRenderer to inherit from wxTimer.
+</p>
+
+<p>
+To draw the button up effect, I need ask the parent wxDataViewListCtrl to refresh itself, so that the button's Render() method has a chance to be called. That's why we need SetParent().
+</p>
+
+<p>
+Here is the part of implementation:
+</p>
+
+<pre class="prettyprint lang-c">
+bool
+wxDataViewMyButtonRenderer::ActivateCell(const wxRect&amp; rect,
+    wxDataViewModel *model,
+    const wxDataViewItem&amp; item,
+    unsigned int col,
+    const wxMouseEvent *mouseEvent)
+{
+    wxDataViewListStore* store=(wxDataViewListStore*) model;
+
+    if ( mouseEvent ) {
+        if ( !wxRect(GetSize()).Contains(mouseEvent-&gt;GetPosition()) ){
+            return false;
+        }
+        wxVariant item_value_pdf;
+        store-&gt;GetValueByRow(item_value_pdf , store-&gt;GetRow(item),0);
+        wxVariant item_value_created;
+        store-&gt;GetValueByRow(item_value_created , store-&gt;GetRow(item),1);
+
+        m_button_clicked=true;
+        m_cell_rect=rect;
+    } else {
+        wxLogDebug(_T("Sorry, I don't handle keyboard"));
+    }
+
+    return true;
+}
+
+bool
+wxDataViewMyButtonRenderer::Render( wxRect rect, wxDC *dc, int state )
+{
+    wxLogDebug(_T("Render called"));
+    // Ensure that the check boxes always have at least the minimal required
+    // size, otherwise DrawCheckBox() doesn't really work well. If this size is
+    // greater than the rect size, the checkbox will be truncated but this is a
+    // lesser evil.
+    wxSize size = rect.GetSize();
+    size.IncTo(GetSize());
+    rect.SetSize(size);
+
+    // draw button
+    if(m_button_clicked==true &amp;&amp; rect.Intersects(m_cell_rect)){
+        //draw the button when clicked
+        dc-&gt;SetBrush(wxBrush(wxColour(65, 150, 65), wxBRUSHSTYLE_SOLID));
+        dc-&gt;SetPen( *wxBLACK_PEN );
+        dc-&gt;DrawRectangle(rect);
+
+        // draw button push down effect. since we cannot detect mouse up event, we use
+        // timer to draw it
+        const int time_to_button_up=350;
+        StartOnce(time_to_button_up);
+    } else {
+        // draw normal button
+        dc-&gt;SetBrush(wxBrush(wxColour(84, 174, 84), wxBRUSHSTYLE_SOLID));
+        dc-&gt;SetPen( *wxBLACK_PEN );
+        dc-&gt;DrawRectangle(rect);
+
+        //draw inner white border
+        rect.Deflate(1);
+        dc-&gt;SetPen( *wxWHITE_PEN );
+        dc-&gt;DrawRectangle(rect);
+    }
+
+    dc-&gt;SetTextForeground(*wxWHITE);
+    dc-&gt;DrawLabel(m_value,wxRect(dc-&gt;GetTextExtent(m_value)).CentreIn(rect));
+
+    return true;
+}
+</pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/popup-function-your-cursor-is-in.html">popup function where your cursor is in</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-08T22:59:00+00:00">2014-04-08 22:59</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/popup-function-your-cursor-is-in.html#disqus_thread" data-disqus-identifier="cache/posts/popup-function-your-cursor-is-in.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p><a href="http://www.emacswiki.org/emacs/WhichFuncMode">Which Func Mode</a> will display the current function name in the mode line.
+</p>
+
+<p>
+But I can't use it.
+</p>
+
+<p>
+It's because I reduce my mode-line into minimum to make it work with my tiny netbook.
+</p>
+
+<p>
+<a href="http://emacsredux.com/blog/2014/04/05/which-function-mode/">Showing the function in header</a> is also not possible because it conflicts with my color theme.
+</p>
+
+<p>
+So I choose to display the function name in a popup.
+</p>
+
+<p>
+Insert below code into ~/.emacs,
+</p>
+
+<pre class="prettyprint lang-lisp">
+(autoload 'which-function "which-func")
+(autoload 'popup-tip "popup")
+
+(defun copy-yank-str (msg)
+  (kill-new msg)
+  (with-temp-buffer
+    (insert msg)
+    (shell-command-on-region (point-min) (point-max)
+                             (cond
+                              ((eq system-type 'cygwin) "putclip")
+                              ((eq system-type 'darwin) "pbcopy")
+                              (t "xsel -ib")
+                              ))))
+
+(defun popup-which-function ()
+  (interactive)
+  (let ((msg (which-function)))
+    (popup-tip msg)
+    (copy-yank-str msg)
+    ))
+</pre>
+
+<p>
+The extra bonus is "popup-which-function" will also insert the function name into clipboard and kill ring.
+</p>
+
+<p>
+The above code need package <a href="https://github.com/auto-complete/popup-el">"popup.el"</a> to be installed.
+</p>
+
+<p>
+Screen shot:
+<img src="wp-content/pop-which-func-nq8.png" alt="pop-which-func-nq8.png">
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html">paste string from clipboard into minibuffer in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-08T22:17:00+00:00">2014-04-08 22:17</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
+</p>
+
+<p>
+Second, intergrating some command line clipboard tool into Emacs is better than Emacs X clipboard. Command line tool works in any environment. For example, when you log into a remote server with ssh, your local computer could share clipboard with your Emacs in remote shell. Please note in this example, you need using X11 forward over ssh, usually it's already set up on server.
+</p>
+
+<p>
+Here is the code:
+</p>
+
+<pre class="prettyprint lang-lisp">
+(defun paste-from-x-clipboard()
+  (interactive)
+  (shell-command
+   (cond
+    (*cygwin* "getclip")
+    (*is-a-mac* "pbpaste")
+    (t "xsel -ob")
+    )
+   1)
+  )
+
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
+  )
+
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+</pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/upload-emacs-package-to-marmalade.html">Upload emacs package to marmalade</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-28T07:26:01+00:00">2014-03-28 07:26</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/upload-emacs-package-to-marmalade.html#disqus_thread" data-disqus-identifier="cache/posts/upload-emacs-package-to-marmalade.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/marmalade.html" rel="tag">marmalade</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Thanks to <a href="https://plus.google.com/+SebastianWiesner/posts">Sebastian Wiesner</a> for providing a python script to upload package to <a href="http://marmalade-repo.org/">http://marmalade-repo.org/</a>. </p>    
+<pre class="prettyprint ">
+
+sudo pip install requests keyring
+
+curl -L https://raw.githubusercontent.com/lunaryorn/dotfiles/master/emacs/bin/marmalade-upload &gt; ~/bin/marmalade-upload &amp;&amp; chmod +x ~/bin/marmalade-upload
+
+~/bin/marmalade-upload -h # see help
+</pre>
+
+<p></p>
+<p> Please note if the same version already exists on server, I need delete it before uploading. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/use-firefox-in-emacs-way-3.html">Use firefox in Emacs way</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-23T20:03:00+00:00">2014-03-23 20:03</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-firefox-in-emacs-way-3.html#disqus_thread" data-disqus-identifier="cache/posts/use-firefox-in-emacs-way-3.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/firefox.html" rel="tag">firefox</a></li>
+           <li><a class="tag p-category" href="categories/keysnail.html" rel="tag">keysnail</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-05-20 Tue</span></span>
+</p>
+
+<p>
+CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-03-23 Sun</span></span>
+</p>
+
+<p>
+I use <a href="https://github.com/mooz/keysnail/wiki">keysnail</a>. it's a firefox addon to convert firefox into Emacs.
+</p>
+
+<p>
+I install keysnail's own plugins "HoK" and "Tanything".
+</p>
+
+<p>
+Here are the use cases of keysnail.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Click &amp; Copy the links</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
+</p>
+<p>
+Insert below code into ~/.keysnail.js:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+hook.setHook("PluginLoaded", function () {
+    if (!plugins.hok) return;
+
+    /* HoK 1.3.9+ required */
+    plugins.hok.pOptions.selector = plugins.hok.pOptions.selector
+    /* feedly */
+    + ", *[data-uri]" + ", *[data-selector-toggle]" + ", *[data-page-action]" + ", *[data-app-action]"
+    /* google plus */
+    + ", *[guidedhelpid]"
+    /* twitter */
+    + ", *[data-item-count]";
+});
+
+key.setGlobalKey(["C-c","C-f"], function (aEvent, aArg) {
+        ext.exec("hok-start-foreground-mode", aArg);
+}, "Hok - Foreground hint mode", true);
+
+key.setGlobalKey(["C-c","C-b"], function (aEvent, aArg) {
+        ext.exec("hok-start-background-mode", aArg);
+}, "HoK - Background hint mode", true);
+
+key.setGlobalKey(["C-c","C-y"], function (aEvent, aArg) {
+        ext.exec("hok-yank-foreground-mode", aArg);
+}, "HoK - Background hint mode", true);
+
+key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
+        ext.exec("hok-start-extended-mode", aArg);
+}, "HoK - Extented hint mode", true);
+
+key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
+        ext.exec("hok-start-continuous-mode", aArg);
+}, "Start continuous HaH", true);
+
+</pre>
+
+
+
+<p>
+Now I can press "Ctrl-C Ctrl-F" to select the links to click.
+</p>
+<p>
+The links will be highlighted as below screen shot:
+<img src="wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png">
+</p>
+<p>
+I can press the highlighted hint to click the link.
+</p>
+<p>
+Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Copy the text of link</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
+</p>
+<p>
+That's error prone because:
+</p>
+<ol>
+<li>The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
+</li>
+<li>The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, <a href="https://www.atlassian.com/software/jira">JIRA</a> will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
+</li>
+</ol>
+
+
+<p>
+If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Switch tab</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
+</p>
+<p>
+Insert below code into ~/.keysnail.js:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
+  ext.exec("tanything", arg);
+}, "view all tabs", true);
+</pre>
+
+
+
+<p>
+Press "Ctrl-C Ctrl-A", you got below UI:
+<img src="wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png">
+</p>
+<p>
+Tanything will locate the tab by finding match in web page's title or URL.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">My keysnail set up</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
+</p>
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/debug-emacs-lisp-code-the-hard-way.html">Debug Emacs Lisp code the hard way</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-19T19:45:00+00:00">2014-03-19 19:45</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/debug-emacs-lisp-code-the-hard-way.html#disqus_thread" data-disqus-identifier="cache/posts/debug-emacs-lisp-code-the-hard-way.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/debug.html" rel="tag">debug</a></li>
+           <li><a class="tag p-category" href="categories/elisp.html" rel="tag">elisp</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>I <a href="https://github.com/emacs-helm/helm/issues/448">met some issue</a> when using helm several days ago. </p> <p> With the help from Michael Heerdegen, I can locate the line error message is dumped. </p> <p> But the problem is I cannot get the backtrace at all. </p> <p> So I insert some <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html">backtrace printing code</a> above that line and "M-x eval-buffer": </p>   
+<pre class="prettyprint ">
+
+(with-output-to-temp-buffer "backtrace-output"
+  (let ((var 1))
+    (save-excursion
+      (setq var (eval '(progn
+                         (1+ var)
+                         (list 'testing (backtrace))))))))
+</pre>
+
+<p></p>
+<p> It turns out that some third party package I installed changes the emacs variable "display-buffer-function". I guess that's why the backtrace is blocked. Because backtrace is usually dumped into a backtrace buffer. And backtrace buffer's is actually influenced by the variable. </p>
+</div>
+            </div>
+        </div>
+    
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="previous">
+                <a href="index-18.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-16.html" rel="next">Older posts</a>
+            </li>
+        </ul>
+        </nav>
+
+    
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+    
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

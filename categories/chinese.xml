@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (chinese)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/chinese.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:03 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;cygwin1.7在我的电脑上不能显示中文,已困扰我很久了. &lt;/p&gt; &lt;p&gt; 今天才找到解决办法,只要安装&lt;a href="http://code.google.com/p/mintty/"&gt;mintty&lt;/a&gt;即可. &lt;/p&gt; &lt;p&gt; 安装后在宽屏显示器上字可能比较小, 参考&lt;a href="http://mintty.googlecode.com/svn-history/r1065/trunk/docs/mintty.1.html"&gt;其手册&lt;/a&gt;缩放字体. &lt;/p&gt; &lt;p&gt; 以下是我的cygwin.bat, &lt;/p&gt;    &lt;pre class="example"&gt;@echo off
+chdir C:cygwinbin
+&lt;p&gt;set EDITOR=vi&lt;/p&gt;
+&lt;p&gt;set VISUAL=vi&lt;/p&gt;
+&lt;p&gt;REM shamelessly copied from git://github.com/justsoso8/dotfile.git&lt;/p&gt;
+&lt;p&gt;REM mintty installed which supports chinese&lt;/p&gt;
+&lt;p&gt;REM =======================================&lt;/p&gt;
+&lt;p&gt;@echo off&lt;/p&gt;
+&lt;p&gt;rem find cygwin roo directory one by one&lt;/p&gt;
+&lt;p&gt;rem disk c -&amp;gt; disk d -&amp;gt; disk e&lt;/p&gt;
+&lt;p&gt;:CYGWIN_C&lt;/p&gt;
+&lt;p&gt;if not exist c:cygwin goto CYGWIN_D&lt;/p&gt;
+&lt;p&gt;set _cygwinroot=c:cygwin&lt;/p&gt;
+&lt;p&gt;goto HAVECYGWIN&lt;/p&gt;
+&lt;p&gt;:CYGWIN_D&lt;/p&gt;
+&lt;p&gt;if not exist d:cygwin goto CYGWIN_E&lt;/p&gt;
+&lt;p&gt;set _cygwinroot=d:cygwin&lt;/p&gt;
+&lt;p&gt;goto HAVECYGWIN&lt;/p&gt;
+&lt;p&gt;:CYGWIN_E&lt;/p&gt;
+&lt;p&gt;if not exist e:cygwin goto NOCYGWIN&lt;/p&gt;
+&lt;p&gt;set _cygwinroot=e:cygwin&lt;/p&gt;
+&lt;p&gt;goto HAVECYGWIN&lt;/p&gt;
+&lt;p&gt;:NOCYGWIN&lt;/p&gt;
+&lt;p&gt;echo no cygwin installation found on disk C/D/E&lt;/p&gt;
+&lt;p&gt;pause&lt;/p&gt;
+&lt;p&gt;goto EOF&lt;/p&gt;
+&lt;p&gt;:HAVECYGWIN&lt;/p&gt;
+&lt;p&gt;set LANG=zh_CN.utf8&lt;/p&gt;
+&lt;p&gt;rem CONSOLE is sure to know this setting&lt;/p&gt;
+&lt;p&gt;rem and can display chinese very well&lt;/p&gt;
+&lt;p&gt;rem but look &amp;amp; feel &amp;amp; funcationality are not as good as mintty&lt;/p&gt;
+&lt;p&gt;REM select terminal one by one&lt;/p&gt;
+&lt;p&gt;REM mintty -&amp;gt; rxvt -&amp;gt; console&lt;/p&gt;
+&lt;p&gt;:MINTTY&lt;/p&gt;
+&lt;p&gt;set _termapp=%_cygwinroot%binmintty.exe&lt;/p&gt;
+&lt;p&gt;if not exist %_termapp% goto RXVT&lt;/p&gt;
+&lt;p&gt;start %_termapp% /bin/bash --login -i&lt;/p&gt;
+&lt;p&gt;rem mintty has it's option to set as zh_CN.utf8&lt;/p&gt;
+&lt;p&gt;rem ignore the ${LANG} setting&lt;/p&gt;
+&lt;p&gt;rem and it appends @cjknarrow automatically&lt;/p&gt;
+&lt;p&gt;rem current solution is to "LANG=zh_CN.utf8 gvim ..."&lt;/p&gt;
+&lt;p&gt;goto EOF&lt;/p&gt;
+&lt;p&gt;:RXVT&lt;/p&gt;
+&lt;p&gt;set _termapp=%_cygwinroot%binrxvt.exe&lt;/p&gt;
+&lt;p&gt;if not exist %_termapp% goto CONSOLE&lt;/p&gt;
+&lt;p&gt;set BGCOLOR=Black&lt;/p&gt;
+&lt;p&gt;set FGCOLOR=White&lt;/p&gt;
+&lt;p&gt;start %_termapp% -sl 2500 -fg %FGCOLOR% -bg %BGCOLOR% -sr -fn Courier-20 -geometry 80x25 -e /bin/bash --login -i&lt;/p&gt;
+&lt;p&gt;goto EOF&lt;/p&gt;
+&lt;p&gt;:CONSOLE&lt;/p&gt;
+&lt;p&gt;set _termapp=%_cygwinroot%binbash.exe&lt;/p&gt;
+&lt;p&gt;start %_termapp% --login -i&lt;/p&gt;
+&lt;p&gt;goto EOF&lt;/p&gt;
+&lt;p&gt;:EOF&lt;/p&gt;
+&lt;p&gt;exit&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>chinese</category><category>cygwin</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</guid><pubDate>Fri, 29 Apr 2011 07:00:00 GMT</pubDate></item></channel></rss>

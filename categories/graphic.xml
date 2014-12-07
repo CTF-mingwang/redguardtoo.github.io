@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (graphic)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/graphic.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Sample python code to resize image</title><link>http://blog.binchen.org/posts/sample-python-code-to-resize-image.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="src src-python"&gt;&lt;span style="color: #cd0000;"&gt;#!/usr/bin/python&lt;/span&gt;
+&lt;span style="color: #00cdcd; font-weight: bold;"&gt;import&lt;/span&gt; Image
+&lt;p&gt;&lt;span style="color: #00cdcd; font-weight: bold;"&gt;import&lt;/span&gt; cStringIO&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #cdcd00;"&gt;data&lt;/span&gt;=&lt;span style="color: #0000ee; font-weight: bold;"&gt;open&lt;/span&gt;(&lt;span style="color: #00cd00;"&gt;"test.png"&lt;/span&gt;,&lt;span style="color: #00cd00;"&gt;"rb"&lt;/span&gt;).read()&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #cd0000;"&gt;# in real application, I handle the data in memory&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #cdcd00;"&gt;img&lt;/span&gt;=Image.open(cStringIO.StringIO(data))&lt;/p&gt;
+&lt;p&gt;img.thumbnail((800,480),Image.ANTIALIAS)&lt;/p&gt;
+&lt;p&gt;img.save(&lt;span style="color: #00cd00;"&gt;"test-p.jpg"&lt;/span&gt;,&lt;span style="color: #00cd00;"&gt;"JPEG"&lt;/span&gt;)&lt;/p&gt;
+&lt;p&gt;img.thumbnail((128,128),Image.ANTIALIAS)&lt;/p&gt;
+&lt;p&gt;img.save(&lt;span style="color: #00cd00;"&gt;"test-t.jpg"&lt;/span&gt;,&lt;span style="color: #00cd00;"&gt;"JPEG"&lt;/span&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #00cdcd; font-weight: bold;"&gt;print&lt;/span&gt; &lt;span style="color: #00cd00;"&gt;"DONE"&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>en</category><category>graphic</category><category>python</category><guid>http://blog.binchen.org/posts/sample-python-code-to-resize-image.html</guid><pubDate>Wed, 28 Sep 2011 05:40:00 GMT</pubDate></item></channel></rss>

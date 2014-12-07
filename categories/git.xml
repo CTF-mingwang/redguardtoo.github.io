@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Dec 2014 23:12:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to accept the github pull request efficiently</title><link>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use keyboard only in order to maximize my productivity.
+&lt;/p&gt;
+
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Preparation&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;Install Firefox addon &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keysnail&lt;/a&gt; and its plugin &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HOK&lt;/a&gt;. From now on, all the web browsing is done ONLY in keyboard.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Step 1&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;Open pull request page at github.com, click the link "command line".
+&lt;/p&gt;
+&lt;p&gt;
+In a real world project, I rarely accept a pull request without some modification. So I usually avoid pressing the big green button "merge pull request" on that page.
+&lt;/p&gt;
+&lt;p&gt;
+In the "command line" page, github is kind enough to list the command lines to "check out a new branch and test the changes" from the pull request. The command lines are like:
+&lt;/p&gt;
+
+
+
+&lt;pre class="prettyprint lang-sh"&gt;
+git checkout -b her-master master
+git pull git@github.com:her/myproject.git master
+&lt;/pre&gt;
+
+
+&lt;p&gt;
+I have installed a Greasemonkey user script &lt;a href="https://github.com/redguardtoo/NinjaWebCoder"&gt;NinjaWebCoder&lt;/a&gt; in order to &lt;b&gt;use keyboard&lt;/b&gt; to copy those command lines from the browser into clipboard. Then I paste the command lines into terminal.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Step 2&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;I open the code file with Emacs.
+&lt;/p&gt;
+&lt;p&gt;
+There is an Emacs addon called &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter&lt;/a&gt;. I use its command "git-gutter:next-hunk" to move the cursor to the next "diff hunk".
+&lt;/p&gt;
+&lt;p&gt;
+Let me explain what's the diff hunk. When you edit some code under git's control, you code has some difference with the HEAD version. Every difference corresponds to the pair of a file name and a line number. That file-name-line-number pair is defined as a "diff hunk".
+&lt;/p&gt;
+&lt;p&gt;
+Now comes &lt;b&gt;the most important part of this article&lt;/b&gt;. Since version 0.71, git-gutter added a new command "git-gutter:set-start-version". If I "git-gutter:set-start-revision" to the "HEAD^" version. I can jump to "diff hunk" of the difference between "HEAD" and "HEAD^".
+&lt;/p&gt;
+&lt;p&gt;
+In short, I can &lt;b&gt;review the latest commit and change the code in one step&lt;/b&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;Done&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
+&lt;/p&gt;
+&lt;p&gt;
+Every operation in previous steps is optimized with some shortcut. For example, in shell I use alias "g" instead of full command line "git status".
+&lt;/p&gt;
+&lt;p&gt;
+Please enlighten me if the work flow could be improved.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</guid><pubDate>Fri, 01 Aug 2014 13:52:18 GMT</pubDate></item><item><title>Git merge in command line</title><link>http://blog.binchen.org/posts/git-merge-in-command-line.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;List and filter all the files need resolve conflict, then apply certain git operation on them: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git diff --name-only --diff-filter=U|grep "\.html\|\.min\.js"|xargs -I{} sh -c "git checkout --theirs {} &amp;amp;&amp;amp; git add {}"
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;</description><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/git-merge-in-command-line.html</guid><pubDate>Tue, 28 Jan 2014 16:53:00 GMT</pubDate></item><item><title>How to use git effectively</title><link>http://blog.binchen.org/posts/how-to-use-git-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;To take the full power of git, you need forget GUI and use CLI only. A little knowledge of script language like Bash/Perl/Python may be helpful. &lt;/p&gt; &lt;p&gt; Here is an example how I use git. &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;I'm working for a big enterprise project which uses git as version control software.  My daily routine is find what files I changed. So I often use git commands with "–stat" paramters. &lt;/p&gt;    
+&lt;pre class="prettyprint "&gt;
+
+git show --stat
+
+git diff --cached --stat
+
+git log --stat
+
+git diff --stat
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Since I use CLI git in bash shell only. I set alias for these commands in bash. For example, I need only type &lt;code&gt;gds&lt;/code&gt; in bash instead of "git diff –stat". &lt;/p&gt; &lt;p&gt; Git commands with "–stat" option usually only display relative paths, so I write some bash function which enable me select that relative path interactively (without using mouse, of course), convert that path to absolute path, and copy that absolute path into clipboard. &lt;/p&gt; &lt;p&gt; Getting full path into clipboard is useful because in big projects I need do lots of communication with managers and colleagues. For example, I need list files I changed in our bug tracking system (JIRA) and also email them by using Outlook. If you still don't understand why it's hard in big project, let me give you some hint. Big project is usually a big shit. Say you will edit file A, you will find another 10 files distributed in different location with &lt;b&gt;same file name&lt;/b&gt; and &lt;b&gt;similar code&lt;/b&gt;. Those another 10 files are not your business and if you dare touch them, you need deal with another 10 managers from ten teams. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Set up&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;Now you understand the problme. Here comes the solution. &lt;/p&gt; &lt;p&gt; Step 1, You need install percol by &lt;code&gt;sudo pip install percol&lt;/code&gt;. Percol will provide some interactive UI to help you select the line in shell. &lt;/p&gt; &lt;p&gt; Step 2, install xsel or xclip under Linux to support paste text into X clipboard. BTW, you did install some clipboard manager under Linux, didn't you? &lt;/p&gt; &lt;p&gt; Step 3, insert below code into your ~/.bash: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+# search the file and pop up dialog, then put the full path in clipboard
+
+
+
+function pclip() {
+    if [ $OS_NAME == CYGWIN ]; then
+        putclip $@;
+    elif [ $OS_NAME == Darwin ]; then
+        pbcopy $@;
+    else
+        if [ -x /usr/bin/xsel ]; then
+            xsel -ib $@;
+        else
+            if [ -x /usr/bin/xclip ]; then
+                xclip -selection c $@;
+            else
+                echo "Neither xsel or xclip is installed!"
+            fi
+        fi
+    fi
+}
+
+
+
+function glsf () {
+    local str=`git --no-pager log --oneline --decorate --stat $* |percol`
+    if [[ $str =~ ^[[:space:]]*([a-z0-9A-Z_.\/-]*).*$ ]]; then
+        echo -n ${BASH_REMATCH[1]} |pclip;
+        echo ${BASH_REMATCH[1]}
+    fi
+}
+
+
+
+function ff()
+
+{
+    # @see http://stackoverflow.com/questions/13373249/extract-substring-using-regexp-in-plain-bash
+    local fullpath=$*
+    local filename=${fullpath##*/}
+    local filter=${fullpath##*./}
+    #  only the filename without path is needed
+    # filename should be reasonable
+    local cli=`find $PWD -type f -iname '*'${filename}'*'|grep ${filter}|percol`
+    echo ${cli}
+    echo -n ${cli} |pclip;
+}
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Usage&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;     
+&lt;pre class="prettyprint "&gt;
+
+glsf
+
+ff line-from-clipboard
+
+# now I can paste the full path into firefox, outlook ...
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen cast: &lt;img src="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif" alt="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif"&gt; &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><guid>http://blog.binchen.org/posts/how-to-use-git-effectively.html</guid><pubDate>Fri, 11 Oct 2013 09:38:00 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Send the latest commit&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     
+&lt;pre class="prettyprint "&gt;
+
+# send one commit
+
+git send-email -1 --annotate
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Apply patch&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;   &lt;p&gt; Select that email, run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer. &lt;/p&gt; &lt;p&gt; Emacs will prompt you where to save that email. Say I save it in ~/News/patch/hello.patch. &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git am ~/News/patch/hello.patch
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Syntax highlight of patch email&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;See &lt;a href="https://github.com/fgeller/emacs.d/blob/master/site-lisp/gnus-article-treat-patch.el"&gt;fgeller's plugin&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Add following code to configure his plugin: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+(require 'gnus-article-treat-patch)
+
+(setq gnus-article-patch-conditions
+      '( "^@@ -[0-9]+,[0-9]+ \\+[0-9]+,[0-9]+ @@" ))
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Fri, 06 Sep 2013 22:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
+&lt;pre class="prettyprint "&gt;
+&lt;p&gt;sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL&lt;/p&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt;</description><category>email</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</guid><pubDate>Thu, 15 Aug 2013 08:24:21 GMT</pubDate></item><item><title>The power of git command line interface</title><link>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Examples about how to use git CLI. NO gui front end needed. &lt;/p&gt; &lt;p&gt; You need install beautiful &lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; developed by mooz by run &lt;code&gt;pip installl percol&lt;/code&gt;. &lt;/p&gt; &lt;p&gt; percol "adds flavor of interactive filtering to the traditional pipe concept of UNIX shell". &lt;/p&gt; &lt;p&gt; Append below code into ~/.bashrc and run "source ~/.bashrc": &lt;/p&gt; &lt;br&gt;
+&lt;pre class="prettyprint "&gt;
+&lt;p&gt;function gurl () {
+    if [ -z "$1" ]; then
+        echo "Usage: gurl commit-id"
+        echo "get the full http url of commit"
+    else
+        local msg=&lt;code&gt;git remote -v|grep "origin\s\+.*\s\+(fetch)"|sed -e "s/origin\s\+\(.*\)\s\+(fetch)/\1/"&lt;/code&gt;
+        local url=""
+      # github
+        if [ "${msg:0:14}" == "git@github.com" ]; then
+            echo https://github.com/&lt;code&gt;echo ${msg}|sed -e "s/^git\@github\.com\:\(.*\)\.git$/\1/"&lt;/code&gt;/commit/$1
+        fi
+    fi
+}&lt;/p&gt;
+&lt;h2&gt;pick commit id from &lt;code&gt;git log&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;function gcid () {
+    local commit_id=&lt;code&gt;git log --pretty=format:'%h %ad %s (%an)' --date=short|percol|sed -e"s/^\([a-z0-9]\+\)\s\+.*$/\1/"&lt;/code&gt;
+    echo ${commit_id}
+}&lt;/p&gt;
+&lt;h2&gt;pick commit from &lt;code&gt;git log&lt;/code&gt; and output its url&lt;/h2&gt;
+&lt;p&gt;function gqurl () {
+    local commit_id=&lt;code&gt;git log --pretty=format:'%h %ad %s (%an)' --date=short|percol|sed -e"s/^\([a-z0-9]\+\)\s\+.*$/\1/"&lt;/code&gt;
+    gurl ${commit_id}
+}&lt;/p&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Now you have three bash fuctions "gurl", "gcid", "gqurl". &lt;/p&gt; &lt;p&gt; Here is demo how to use "gcid": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif"&gt; &lt;/p&gt; &lt;p&gt; Here is demo of "gqurl": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif"&gt; &lt;/p&gt; &lt;p&gt; BTW, I use CLI clipboard tool like xsel. For example, "echo hello|xsel -ib" which insert string "hello" into system clipboard. &lt;/p&gt; &lt;p&gt; so I can "git show &lt;code&gt;gcid&lt;/code&gt;|xsel -ib" to copy/paste the code of specific commit between terminal and firefox. &lt;/p&gt; &lt;p&gt; In summary, the only limit of taking advantage of git's raw power is your imagination. &lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><category>percol</category><guid>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</guid><pubDate>Thu, 01 Aug 2013 13:17:00 GMT</pubDate></item><item><title>Poor man's github</title><link>http://blog.binchen.org/posts/poor-mans-github.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Key points of this article: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Build a github prototype written in Bash within 5 minutes &lt;/li&gt; &lt;li&gt;Highlight key elements in my usual git work flow &lt;/li&gt; &lt;li&gt;Git is scalabe. you can use any tool to extend it. &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; As &lt;a href="https://plus.google.com/110090899194056392647"&gt;Yuri Albuquerque&lt;/a&gt; mentioned, there are more powerful tools like &lt;a href="https://github.com/sitaramc/gitolite"&gt;gitolite&lt;/a&gt;. But the key concept behind the system is similar. &lt;/p&gt; &lt;p&gt; Add following code into ~/.bashrc and run "source ~/.bashrc", then run "gih" to see help: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;gih&lt;/span&gt;() {
+    &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_USERNAME&lt;/span&gt;=git
+    &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt;=git@domain.name
+    &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt;=8888
+    &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt; [ -z &lt;span style="color: #8abeb7;"&gt;"$1"&lt;/span&gt; ]; &lt;span style="color: #b5bd68;"&gt;then&lt;/span&gt;
+        cat &amp;lt;&amp;lt; &lt;span style="color: #8abeb7;"&gt;'EOF'&lt;/span&gt;
+&lt;span style="color: #8abeb7;"&gt;Usage: gih [command]&lt;/span&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;Commands:&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;l, ls, list - list the projects&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;n, new [project-name] - create a new project&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;r, readme [project-name] - show README&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;i, issue [project-name] - show issues list&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;st, status - check free space of git server&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;u, url [project-name] - the full url of the project&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span style="color: #8abeb7;"&gt;EOF&lt;/span&gt;
+    &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt;
+        &lt;span style="color: #b5bd68;"&gt;case&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;1&lt;/span&gt;&lt;span style="color: #b5bd68;"&gt; in&lt;/span&gt;
+            l|ls|list)
+                ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"ls -1"&lt;/span&gt;|sed &lt;span style="color: #8abeb7;"&gt;'s/.git$//g'&lt;/span&gt;
+                ;;
+            n|new)
+                &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt; [ -z &lt;span style="color: #8abeb7;"&gt;"$2"&lt;/span&gt; ]; &lt;span style="color: #b5bd68;"&gt;then&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Please input the name of new project!"&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Current projects hosted:"&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"ls -1"&lt;/span&gt;|sed &lt;span style="color: #8abeb7;"&gt;'s/.git$//g'&lt;/span&gt;
+                &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"mkdir -p ~/$2.git;cd ~/$2.git;git --bare init;"&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Push existing repository from command line:"&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; git remote add origin ssh://$&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt;:$&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt;/home/$&lt;span style="color: #f0c674;"&gt;MY_USERNAME&lt;/span&gt;/$&lt;span style="color: #f0c674;"&gt;2&lt;/span&gt;.git
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; git push -u origin master
+                &lt;span style="color: #b5bd68;"&gt;fi&lt;/span&gt;
+                ;;
+            r|readme)
+                &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt; [ -z &lt;span style="color: #8abeb7;"&gt;"$2"&lt;/span&gt; ]; &lt;span style="color: #b5bd68;"&gt;then&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Please input the name of new project!"&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Current projects hosted:"&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"ls -1"&lt;/span&gt;|sed &lt;span style="color: #8abeb7;"&gt;'s/.git$//g'&lt;/span&gt;
+                &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"cd ~/$2.git;git show HEAD:README.org || git show HEAD:README.md"&lt;/span&gt;
+                &lt;span style="color: #b5bd68;"&gt;fi&lt;/span&gt;
+                ;;
+            i|issue)
+                &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt; [ -z &lt;span style="color: #8abeb7;"&gt;"$2"&lt;/span&gt; ]; &lt;span style="color: #b5bd68;"&gt;then&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Please input the name of new project!"&lt;/span&gt;
+                    &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Current projects hosted:"&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"ls -1"&lt;/span&gt;|sed &lt;span style="color: #8abeb7;"&gt;'s/.git$//g'&lt;/span&gt;
+                &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt;
+                    ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; git@sydneypc.mooo.com &lt;span style="color: #8abeb7;"&gt;"cd ~/$2.git;git show HEAD:ISSUE.org || git show HEAD:ISSUE.md"&lt;/span&gt;
+                &lt;span style="color: #b5bd68;"&gt;fi&lt;/span&gt;
+                ;;
+            st|status)
+                ssh -p $&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt; $&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"df -h /dev/sda1"&lt;/span&gt;
+                ;;
+            u|url)
+                &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; ssh://$&lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt;:$&lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt;/home/$&lt;span style="color: #f0c674;"&gt;MY_USERNAME&lt;/span&gt;/$&lt;span style="color: #f0c674;"&gt;2&lt;/span&gt;.git
+                ;;
+            *)
+                &lt;span style="color: #b294bb;"&gt;echo&lt;/span&gt; &lt;span style="color: #8abeb7;"&gt;"Unknown command, check help please"&lt;/span&gt;
+                ;;
+        &lt;span style="color: #b5bd68;"&gt;esac&lt;/span&gt;
+    &lt;span style="color: #b5bd68;"&gt;fi&lt;/span&gt;
+}&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>en</category><category>git</category><category>linux</category><category>ssh</category><guid>http://blog.binchen.org/posts/poor-mans-github.html</guid><pubDate>Mon, 15 Jul 2013 10:09:00 GMT</pubDate></item><item><title>My git set up</title><link>http://blog.binchen.org/posts/my-git-set-up.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Content of my .gitconfig: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+[apply]
+    whitespace = nowarn
+[user]
+    name = my name
+    email =my@email.com
+[core]
+    ; @see http://comments.gmane.org/gmane.comp.version-control.git/166098
+    filemode = true
+    ;autocrlf = false
+    ignorecase = false
+    ;autocrlf=false
+    ;safecrlf=true
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = auto
+[alias]
+    ca=commit --amend
+    cl = clean -fxd
+    au = add -u
+    st = status -sb #short status output for geeks
+    stu= status --untracked-files=no
+    r = rebase
+    c = commit
+    co = checkout
+    b = branch
+    s=show
+    l = log --pretty=format:'%C(yellow)%h%Creset %ad %s %Cred(%an)%Creset' --date=short --decorate --graph
+    d =diff
+    da= diff --name-only # get the file list
+    ds = diff --stat
+    dw=diff --word-diff #highlight word changes
+    dc = diff --cached
+    dcs = diff --cached --stat
+    t=stash
+    a=add
+    f=format-patch -n --stdout
+    rh=reset --hard
+    rs=reset --soft
+    undo=reset --soft HEAD^
+    rs=reset
+    cnt=count-objects
+    ps=push
+    p=pull --rebase
+    w = whatchanged
+    sb = show-branch
+    cp = cherry-pick
+    # @see http://magazine.redhat.com/2008/05/02/shipping-quality-code-with-git/
+    cpnx = cherry-pick --no-commit -x
+    rl = reflog
+    lp = log -p
+    lt = log --topo-order
+    gl = log --graph
+    m = merge
+    mt= mergetool
+    me = merge --no-commit --no-ff
+    brm = branch --merged
+    brnm = branch --no-merged
+    rnc = revert --no-commit
+    com = checkout master
+    glt = log --pretty=format:'%h : %s' --topo-order --graph
+    phm = push heroku master
+    pom = push origin master
+    puom= pull origin master
+    untrac=rm -r --cached
+    #produce patch for hg
+    hgp = show --format="From: %an &amp;lt;%ae&amp;gt;%n%s%n%b" -U8
+    show-root-folder = rev-parse --show-toplevel
+    forward = pull --ff -r
+    u = !git stash &amp;amp;&amp;amp; git pull --rebase &amp;amp;&amp;amp; git stash pop
+[sendemail]
+    smtpencryption = tls
+    smtpserver = smtp.gmail.com
+    smtpuser = myname@gmail.com
+    smtpserverport = 587
+[github]
+    user = github user
+[push]
+    default = tracking
+
+
+[merge]
+    branchdesc = true
+    log = true
+    tool = vimdiff
+[diff]
+    tool = vimdiff
+[mergetool]
+    prompt = false
+
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; content of my .bashrc: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+# enable bash completion in interactive shells
+
+# @see http://www.simplicidade.org/notes/archives/2008/02/bash_completion.html
+
+if [ -f /etc/bash_completion ]; then
+    # ArchLinux
+    . /etc/bash_completion
+elif [ -f /etc/profile.d/bash-completion.sh ]; then
+    # Gentoo Linux
+    . /etc/profile.d/bash-completion.sh
+fi
+
+. $HOME/bash_completion.d/gibo-completion.bash
+
+. $HOME/bash_completion.d/git-completion.bash
+
+
+
+function parse_git_branch ()
+
+{
+   git branch --no-color 2&amp;gt; /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
+}
+
+
+
+function simpleprompt()
+
+{
+   if test -n "`type -t git`"; then
+      PS1="\$(parse_git_branch) \\$ "
+   else
+      PS1="\\$ "
+   fi
+}
+
+
+
+alias gcd='cd $(git rev-parse --show-cdup)'
+
+alias g="git status --short -b"
+
+alias gn="git status --untracked-files=no --short -b"
+
+alias gfl="git diff-tree --no-commit-id --name-only -r"
+
+alias ga="git add"
+
+alias gaa="git add ."
+
+alias gau="git add -u"
+
+alias gc="git commit -m"
+
+alias gca="git commit --amend"
+
+alias gb="git branch"
+
+alias gbd="git branch -d"
+
+alias gco="git checkout"
+
+alias gcob="git checkout -b"
+
+alias gt="git stash"
+
+alias gta="git stash apply"
+
+alias gm="git merge"
+
+alias gmt="git mergetool"
+
+alias gr="git rebase"
+
+alias gl="git log --oneline --decorate --graph"
+
+alias gs="git show"
+
+alias gss="git show --stat"
+
+alias gd="git diff"
+
+alias gds="git diff --stat"
+
+alias gdc="git diff --cached"
+
+alias gdcs="git diff --cached --stat"
+
+alias gbl="git blame"
+
+alias gps="git push"
+
+alias gpl="git pull"
+
+alias cdgr='cd $(git rev-parse --show-toplevel)' #goto root dir
+
+function gu(){
+    local st=`git status --porcelain --untracked=no`
+    if [ -z "$st" ]; then
+        git pull --rebase
+    else
+        git stash &amp;amp;&amp;amp; git pull --rebase &amp;amp;&amp;amp; git stash pop
+    fi
+}
+
+
+
+function gsrp(){
+  if [ -z "$1" ]; then
+      echo "Usage: gsrp old_string new_string (string could be perl regex)"
+      echo "replace the content of file in latest git commit"
+  elif [ $# -eq "2" ]; then
+      git diff-tree --no-commit-id --name-only -r HEAD|xargs perl -pi -e "s/$1/$2/g"
+  elif [ $# -eq "3" ]; then
+      git diff-tree --no-commit-id --name-only -r $1|xargs perl -pi -e "s/$2/$3/g"
+  fi
+}
+
+
+
+[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;amp;&amp;amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+
+# xclip has some problem with my emacs, so I use xsel for everything
+
+function pclip() {
+    if [ $OS_NAME == CYGWIN ]; then
+        putclip $@;
+    elif [ $OS_NAME == Darwin ]; then
+        pbcopy $@;
+    else
+        if [ -x /usr/bin/xsel ]; then
+            xsel -ib $@;
+        else
+            if [ -x /usr/bin/xclip ]; then
+                xclip -selection c $@;
+            else
+                echo "Neither xsel or xclip is installed!"
+            fi
+        fi
+    fi
+}
+
+
+
+# search the file in root directory of git repository, pop up dialog let you choose the path,
+
+# then put the full path in clipboard
+
+function gg()
+
+{
+    local cli=`find $(git rev-parse --show-toplevel) -type f -iname '*'$*'*'|percol`
+    echo -n ${cli}|pclip
+    echo ${cli}
+}
+
+
+
+alias ge='grep -rsn --exclude=TAGS --exclude=tags --exclude=GTAGS --exclude-dir=.svn --exclude-dir=.sass-cache --exclude-dir=.cache  --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude=\*.swp --exclude=\*~ --color=auto'
+
+function ggs()
+
+{
+    local cli=`ge -l $* $(git rev-parse --show-toplevel)/*|percol`
+    echo -n ${cli} |pclip;
+    echo ${cli}
+}
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; I do lots of git stuff  under shell, so I'm heavly dependent on some bash tools: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;&lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to change current directory quickly. &lt;/li&gt; &lt;li&gt;&lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; to filter the text from stdin interactively. &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>github</category><guid>http://blog.binchen.org/posts/my-git-set-up.html</guid><pubDate>Sun, 07 Jul 2013 20:17:00 GMT</pubDate></item><item><title>An example to abuse the git merge</title><link>http://blog.binchen.org/posts/an-example-to-abuse-the-git-merge.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;WARNING, this is BAD practice. I'm showing you anti-pattern you'd better avoid. &lt;/p&gt; &lt;p&gt; The work flow is simple at the beginning. There is only one master branch where several developers submit the code. &lt;/p&gt; &lt;p&gt; Then come bad rules:  &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Rule 1, any feature should be done on new branch (this rule is actually good if without next three rules)  &lt;/li&gt; &lt;li&gt;Rule 2, &lt;code&gt;git rebase&lt;/code&gt; is forbidden and any minor branch created by developers should be publicized immediately.  &lt;/li&gt; &lt;li&gt;Rule 3, keep using your same feature branch forever even it's behind master branch for a very long time.   &lt;/li&gt; &lt;li&gt;Rule 4, &lt;code&gt;git merge&lt;/code&gt; between feature and master branches frequently &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; After three months developement, this is the result of &lt;code&gt;git log –graph –oneline&lt;/code&gt;: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/06/git-merge-mess-nq82.png" alt="image/git-merge-mess-nq8.png"&gt; &lt;/p&gt; &lt;p&gt; Can you see the "M" at the top right corner. It's "M" from "Merge". &lt;/p&gt;&lt;/div&gt;</description><category>branch</category><category>en</category><category>git</category><category>merge</category><guid>http://blog.binchen.org/posts/an-example-to-abuse-the-git-merge.html</guid><pubDate>Thu, 13 Jun 2013 14:23:00 GMT</pubDate></item><item><title>Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</title><link>http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;If you are already a vim master and you are impatient, please jump to the &lt;a href="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#sec-7"&gt;Quick start&lt;/a&gt; section at the end of this article. &lt;/p&gt; &lt;p&gt; In this post, I use git as an example of version control software. But you can use any other version control softwares instead. &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;The reasons to use vimdiff to do the merge?&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;ul&gt; &lt;li&gt;vimdiff is free (vim) &lt;/li&gt; &lt;li&gt;vimdiff works on any OS  &lt;/li&gt; &lt;li&gt;vimdiff works on non-GUI environment &lt;/li&gt; &lt;li&gt;Efficient, all the operations are finished by keyboard &lt;/li&gt; &lt;li&gt;light weight &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Set up vimdiff&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code. &lt;/p&gt; &lt;p&gt; First, add following code into your ~/.vimrc, &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+set laststatus=2 "show the status line
+
+set statusline=%-10.3n  "buffer number
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; The purpose of above two lines is to display buffer number at the status line of vim. It's OPTIONAL. You don't need see the buffer number is you are familiar with the all the buffer's position. The left top is buffer number 2. The middle top is buffer number 3. The right top is buffer number 4. &lt;/p&gt; &lt;p&gt; Second, if you know the buffer number, you can use hot key like ",2" (press comma first, then press two key as quickly as possible) to pull change from buffer number 2. Add below code into your ~/.vimrc to set up hot keys: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;2 :diffget 2&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;3 :diffget 3&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;4 :diffget 4&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Set up git&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;To use vimdiff as default merge tool: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git config --global merge.tool vimdiff
+
+git config --global mergetool.prompt false
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;Create a git project which has conflicting merges&lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;I already set up a "hello world" project at &lt;a href="https://github.com/redguardtoo/test-git-mergetool"&gt;https://github.com/redguardtoo/test-git-mergetool&lt;/a&gt; for your practice. &lt;/p&gt; &lt;p&gt; It has three branches "master", "bob", and "chen". &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git clone git://github.com/redguardtoo/test-git-mergetool.git
+
+cd test-git-mergetool
+
+git checkout -b bob origin/bob # create local mirror of bob branch
+
+git checkout -b chen origin/chen # create local mirror of chen branch
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Bob and Chen has edited same files. So please merge branch "bob" into "master" at first. Then merge from "chen". The merge conflicts will be created. &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git branch # double check that we got three local branches: master, bob, chen
+
+git checkout master # set master branch as main branch
+
+git merge bob #this is ok, because bob is the first one to merge changes
+
+git merge chen # now some conflicts created because Bob has already edited and merged same files
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-5" class="outline-3"&gt; &lt;h4 id="sec-5"&gt;Resolve merge conflict&lt;/h4&gt; &lt;div class="outline-text-3" id="text-5"&gt;  &lt;p&gt;Now start merge tool: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+git mergetool
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Git will invoke vimdiff with the following window layout. There are four buffers in this layout: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png"&gt; &lt;/p&gt; &lt;p&gt; Here is the explanation of each buffer: &lt;/p&gt;&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt; &lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="right"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt;&lt;th scope="col" class="left"&gt;Buffer&lt;/th&gt;&lt;th scope="col" class="left"&gt;Explanation&lt;/th&gt;&lt;th scope="col" class="right"&gt;Buffer Number&lt;/th&gt;&lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class="left"&gt;THEIRS (LOCAL)&lt;/td&gt;&lt;td class="left"&gt;contents of the file on the current branch&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;BASE&lt;/td&gt;&lt;td class="left"&gt;common base for the merge&lt;/td&gt;&lt;td class="right"&gt;3&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;YOURS (REMOTE)&lt;/td&gt;&lt;td class="left"&gt;contents of the file to be merged.&lt;/td&gt;&lt;td class="right"&gt;4&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;MERGED&lt;/td&gt;&lt;td class="left"&gt;The file containing the conflict markers. You need edit and commit this file.&lt;/td&gt;&lt;td class="right"&gt;1&lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;   &lt;p&gt; Some people name THEIRS and YOURS buffer to LOCAL and REMOTE buffer. That's totally fine because names are just names. The point is that the top middle buffer is the BASE one which contains the original code before Bob and Chen committing any code. And the bottom buffer is the mess which contains resolved/unresolved conflicts where you actual editing work happens. &lt;/p&gt; &lt;p&gt; You could press hot key ",2" (comma + two), Then you pick the content from THEIRS buffer (the top left buffer). It means you will use the Bob's code and discard Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",3" (comma + three), Then you pick the content from BASE buffer (the top middle buffer). It means you will discard either Bob's code or Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",4" (comma + four), Then you pick the content from YOURS buffer (the top right buffer). It means you will use Chen's code and discard Bob code in MERGED buffer. &lt;/p&gt; &lt;p&gt; Or you can edit the content directly in MERGED buffer. Anyway, git only care about the file binding to MERGED buffer. Any other buffer will be ignored by git. &lt;/p&gt; &lt;p&gt; You can use hot key "[c language=" and "][/c]c" to navigate to previous/next conflict (including the conflict resolved by git automatically) in current file which is binding to MERGED buffer. &lt;/p&gt; &lt;p&gt; After finishing editing of the conflicting file in MERGED buffer, you can use hot key ":xa" to exit vimdiff. Git will open next conflicting file with vimdiff automatically. &lt;/p&gt; &lt;p&gt; When you have resolved all the conflicts, follow the hint of git to commit your changes. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-6" class="outline-3"&gt; &lt;h4 id="sec-6"&gt;Tips&lt;/h4&gt; &lt;div class="outline-text-3" id="text-6"&gt;  &lt;ul&gt; &lt;li&gt;A vim plugin called fugitive.vim (&lt;a href="https://github.com/tpope/vim-fugitive"&gt;https://github.com/tpope/vim-fugitive&lt;/a&gt;) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code. &lt;/li&gt; &lt;li&gt;You can use Emacs to do the similar job (&lt;a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool"&gt;http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool&lt;/a&gt;). For me, Emacs start up time is too much for this task. Some people use emacsclient which has other overhead which I don't like. &lt;/li&gt; &lt;li&gt;If you prefer merge tool with GUI, you can use command line &lt;code&gt;git mergetool -t gvimdiff&lt;/code&gt; instead. &lt;/li&gt; &lt;li&gt;The ":diffget" command is valid if and only if there are &lt;b&gt;MARKED&lt;/b&gt; conflicts in merged buffer. If there are &lt;b&gt;NOT&lt;/b&gt; any marked string like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;" or "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" around current change (you can jump to previous/next change by press "[c language=" or "][/c]c"), it means the git have automatically resolved potential conflict for you. Review this kind of change is still wise because git is not as smart as human. &lt;/li&gt; &lt;li&gt;If you prefer navigating between the unresolved conflicts &lt;b&gt;only&lt;/b&gt;, you can install Tim Pope's &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt; and use hot key "[n" and "]n" to do the navigation. &lt;/li&gt; &lt;li&gt;I map "[n" and "]n" to more handy hot keys: &lt;/li&gt; &lt;/ul&gt;     
+&lt;pre class="prettyprint "&gt;
+
+map ]] ]n
+
+map [[ [n
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-7" class="outline-3"&gt; &lt;h4 id="sec-7"&gt;&lt;a name="Quick-start" class="target"&gt;Quick start&lt;/a&gt;&lt;/h4&gt; &lt;div class="outline-text-3" id="text-7"&gt;  &lt;p&gt;You can use command line like "git mergetool -t vimdiff" to start vimdiff from git. &lt;/p&gt; &lt;p&gt; So the minimum set up is adding three lines of code into your ~/.vimrc: &lt;/p&gt;   
+&lt;pre class="prettyprint "&gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;2 :diffget 2&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;3 :diffget 3&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+
+map &amp;lt;silent&amp;gt; &amp;lt;leader&amp;gt;4 :diffget 4&amp;lt;CR&amp;gt; :diffupdate&amp;lt;CR&amp;gt;
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Then you can press hot key ",2" ",3" ",4" in vimdiff to pull change from top three buffer. The bottom buffer is for editing the code with markers which is actually your only work space. &lt;/p&gt; &lt;p&gt; ":help vimdiff" for other hot keys. &lt;/p&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>en</category><category>git</category><category>merge</category><category>mergetool</category><category>vim</category><guid>http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html</guid><pubDate>Mon, 10 Jun 2013 19:08:00 GMT</pubDate></item></channel></rss>

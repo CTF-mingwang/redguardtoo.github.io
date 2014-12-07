@@ -1,0 +1,167 @@
+
+<p>My way is possibily not the best in the world. But I'm sure it's close to world class level because I didn't figure out the solution by myself. People who are much better than me provided the design. I'm just the guy who did the implementation.
+</p>
+<p>
+Mendel Cooper provided the original idea in his famous <a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting Guide</a>. Masafumi Oyamada (AKA mooz) added the missing piece by creating <a href="https://github.com/mooz/percol">percol</a>.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h3 id="sec-1">Problem</h3>
+<div class="outline-text-3" id="text-1">
+
+<p>You need find full path of a file in a huge project.
+</p>
+<p>
+The information you've got about the file is in-complete:
+</p><ul>
+<li>could be a relative path like "../part/of/path/file-name.txt"
+</li>
+<li>could be a file name without file extension  like "helloword"
+</li>
+</ul>
+
+
+<p>
+When you got the full path of that file, you want to share it to other applications easily.
+</p>
+<p>
+The whole work flow should be intuitive and efficient.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h3 id="sec-2">Installation</h3>
+<div class="outline-text-3" id="text-2">
+
+<p>Step 1, Install percol
+<a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
+</p>
+<p> 
+Step 2, Insert below code into ~/.bashrc: 
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+function pclip() {
+    if [ $OS_NAME == CYGWIN ]; then
+        putclip $@;
+    elif [ $OS_NAME == Darwin ]; then
+        pbcopy $@;
+    else
+        if [ -x /usr/bin/xsel ]; then
+            xsel -ib $@;
+        else
+            if [ -x /usr/bin/xclip ]; then
+                xclip -selection c $@;
+            else
+                echo "Neither xsel or xclip is installed!"
+            fi
+        fi
+    fi
+}
+
+function ff()
+{
+    local fullpath=$*
+    local filename=${fullpath##*/} # remove "/" from the beginning
+    filename=${filename##*./} # remove  ".../" from the beginning
+    echo file=$filename
+    #  only the filename without path is needed
+    # filename should be reasonable
+    local cli=`find $PWD -not -iwholename '*/target/*' -not -iwholename '*.svn*' -not -iwholename '*.git*' -not -iwholename '*.sass-cache*' -not -iwholename '*.hg*' -type f -iwholename '*'${filename}'*' -print | ~/bin/percol.py`
+    echo ${cli}
+    echo -n ${cli} |pclip;
+}
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h3 id="sec-3">Usage</h3>
+<div class="outline-text-3" id="text-3">
+
+<p>Type "ff partials-of-file-path" in the bash shell. A filter window will popup. You can filter and scroll down/up in that window to select one file. The full path of the file will be copied into system clipboard automatically (under Linux, you need install either xsel or xclip to access clipboard).
+</p>
+<p>
+The paritls-of-file-path could contain wildcard character. For example, "&hellip;/grunt-docs/*bootstrap*css" is a fine example.
+</p>
+<p>
+Here is the screen shot when I type "ff el" in my ~/.emacs.d:
+<img src="/wp-content/use-ff-in-shell.png"  alt="use-ff-in-shell.png" />
+</p>
+<p>
+You will notice that I input the string "inflect" to filter the result.
+</p>
+<p>
+I can scroll up/down (press Ctrl-P or Ctrl-N) to select the exact file.
+</p>
+<p>
+BTW, in Emacs community, many people tried to embed a file explorer into Emacs (Sr speedbar, for example). This solution may make embedded file explorer unnecessary. A <a href="http://www.sublimetext.com/">Sublime</a> guy once asked me to share this trick to him. I guess it's because Sublime's own file explorer is not good enough for him.
+</p></div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h3 id="sec-4">Advanced usage</h3>
+<div class="outline-text-3" id="text-4">
+
+<p>What I have show you is only a prototype.  I use it to demostrate the key idea about combining the power of bash/percol/clipboard.
+</p>
+<p>
+What I actually use in real world is more advanced.
+</p>
+<p>
+For example, here is the screen shot when I search the bash history.
+<img src="/wp-content/use-h-in-shell.png"  alt="use-h-in-shell.png" />
+</p>
+<p>
+Code to insert ~/.bashrc:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+function h () {
+    # reverse history, pick up one line, remove new line characters and put it into clipboard
+    if [ -z "$1" ]; then
+        history | sed '1!G;h;$!d' | ~/bin/percol.py | sed -n 's/^ *[0-9][0-9]* *\(.*\)$/\1/p'| tr -d '\n' | pclip
+    else
+        history | grep "$1" | sed '1!G;h;$!d' | ~/bin/percol.py | sed -n 's/^ *[0-9][0-9]* *\(.*\)$/\1/p'| tr -d '\n' | pclip
+    fi
+}
+</pre>
+
+
+
+
+<p>
+Another screen shot I select a file in my git commit.
+<img src="/wp-content/use-glsf-in-shell.png"  alt="use-glsf-in-shell.png" />
+</p>
+<p>
+Code:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+function glsf () {
+    local str=`git --no-pager log --oneline --stat $* |  ~/bin/percol.py`
+    if [[ $str =~ ^[[:space:]]*([a-z0-9A-Z_.\/-]*).*$ ]]; then
+        echo -n ${BASH_REMATCH[1]} |pclip;
+        echo ${BASH_REMATCH[1]}
+    fi
+}
+</pre>
+
+
+</div>
+</div>

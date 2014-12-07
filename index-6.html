@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Linux, Programming, Emacs">
+    <meta name="viewport" content="width=device-width">
+    <title>Chen's blog (old posts, page 6) | Chen's blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/index-6.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">How to use ctags with Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-22T12:35:00+00:00">2012-11-22 12:35</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>  See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. </p> <p>   According wiki page, people usually use ctags to do two things, </p>
+<ol> <li>Code navigation </li> <li>Auto-complete/Intellisense  <p>   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like <a href="http://cscope.sourceforge.net/">cscope</a> or <a href="http://www.gnu.org/software/global">GNU Global</a>. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like <a href="http://www.gnu.org/software/global">GNU Global</a>. See the head up from <a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451">Nick Alcock</a>. His summary of the Pro/Con of GNU Global is great. </p> <p>   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. </p> <p>   I found one missing piece from Emacswiki is the tip on how to <b>manage tags file</b> easily when the TAGS is built from some code of third party libraries (<a href="http://http://en.wikipedia.org/wiki/Qt_(framework)">QT</a>, <a href="http://www.wxwidgets.org">wxWidgets</a>, <a href="http://www.gtk.org">GTK</a>, <a href="http://www.boost.org">Boost</a>, just name a few). </p> <p>   My typical work flow is: </p>
+</li> <li>Load the tags file for my own code. </li> <li>Load other tags files built from third party libraries related to my current task. </li> <li>Unload third party tags immediately if its not needed.  <p>   The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". </p> <p>   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. </p>
+</li> </ol>   <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Produce tags files for all the environments</h4> <div class="outline-text-3" id="text-1">  <p>For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" </p>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use git and github to manage the tags files</h4> <div class="outline-text-3" id="text-2">  <p>So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. </p> <p> Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. </p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Write emacs lisp code to load/unload these tags files</h4> <div class="outline-text-3" id="text-3">  <p>Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys. </p>   
+<pre class="prettyprint lang-lisp">
+; Set up tags built from third party libraries ===begin
+; define tags alias like "wx-tags" here
+(setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
+
+; @see &lt;Selecting a Tags Table&gt; in Emacs manual for details.
+; We only change the list "tags-table-list". It is documented officialy.
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+; This is a sample command, all you need is copy/paste this template
+; for other new commands
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags files
+    ; Usually you need load/unload tags files combination in one command
+    ; change below line to add them
+    (setq mytags (list wx-tags))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+; === end
+</pre>
+
+<p></p>
+<p> This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. </p> <p> See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details. </p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/my-personal-emacs-customization-custom-el.html">My personal emacs customization (custom.el)</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-16T12:10:02+00:00">2012-11-16 12:10</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-personal-emacs-customization-custom-el.html#disqus_thread" data-disqus-identifier="cache/posts/my-personal-emacs-customization-custom-el.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/personal.html" rel="tag">personal</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
+</p>
+
+<pre class="prettyprint lang-lisp">
+;; I'm in Australia now
+;; I'm in Australia now
+(setq system-time-locale "C")
+
+;; {{ stardict
+(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
+(setq sdcv-dictionary-complete-list '("WordNet"))
+;; }}
+
+;; {{ elpa-mirror
+(setq elpamr-default-output-directory "~/myelpa")
+(setq elpamr-repository-name "myelpa")
+(setq elpamr-repository-path "https://dl.dropboxusercontent.com/u/858862/myelpa/")
+(setq elpamr-email "myname@mydomain.com")
+;; }}
+
+;; lock my package
+(if (file-readable-p (expand-file-name "~/Dropbox/Public/myelpa/archive-contents"))
+     (setq package-archives '(("myelpa" . "~/Dropbox/Public/myelpa/"))))
+
+;; {{ Set up third party tags
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags
+    (setq mytags (list "~/tags/wx/osx/TAGS"))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+;; }}
+
+;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+;; (system-name) won't work because as Optus required, my /etc/hosts is changed
+(defun my/at-office ()
+  (interactive)
+  (let ((my-hostname (with-temp-buffer
+                       (shell-command "hostname" t)
+                       (goto-char (point-max))
+                       (delete-char -1)
+                       (buffer-string))
+                     ))
+    (and (string= my-hostname "my-sydney-workpc")
+         (not (or (string= my-hostname "sydneypc")
+                  (string= my-hostname "ChenBinMacAir")
+                  (string= my-hostname "eee")
+                  )))
+    ))
+
+(defun my/use-office-style ()
+  (interactive)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p "CompanyProject" dir)
+    ))
+
+(defun my/setup-develop-environment ()
+  (cond
+   ((my/use-office-style)
+    (message "Office code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 4)
+    (setq js-indent-level 4)
+    (setq js2-basic-offset 4)
+    (setq web-mode-indent-style 4))
+   (t
+    (message "My code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 2)
+    (setq js-indent-level 2)
+    (setq js2-basic-offset 2)
+    (setq web-mode-indent-style 2))
+   ))
+
+(add-hook 'js2-mode-hook 'my/setup-develop-environment)
+(add-hook 'web-mode-hook 'my/setup-develop-environment)
+
+(my/setup-develop-environment)
+
+;; {{ gnus setup
+(require 'nnir)
+
+;; ask encyption password once
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
+
+;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
+(if (my/at-office)
+    (add-to-list 'gnus-secondary-select-methods '(nnml "optus"))
+    (setq mail-sources
+      '((pop :server "localhost"
+         :port 1110
+         :user "CP111111"
+         :password "MyPassword"
+         :stream network)))
+    )
+
+
+(setq gnus-select-method
+             '(nnimap "gmail"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnimap-authinfo-file "~/.authinfo.gpg")
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)
+                      ))
+
+;;@see http://gnus.org/manual/gnus_397.html
+;; (add-to-list 'gnus-secondary-select-methods
+;;              )
+
+(setq-default
+  gnus-summary-line-format "%U%R%z %(%&amp;user-date;  %-15,15f  %B%s%)\n"
+  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+  gnus-sum-thread-tree-false-root ""
+  gnus-sum-thread-tree-indent ""
+  gnus-sum-thread-tree-leaf-with-other "-&gt; "
+  gnus-sum-thread-tree-root ""
+  gnus-sum-thread-tree-single-leaf "|_ "
+  gnus-sum-thread-tree-vertical "|")
+(setq gnus-thread-sort-functions
+      '(
+        (not gnus-thread-sort-by-date)
+        (not gnus-thread-sort-by-number)
+        ))
+
+;; we want to browse freely from gwene (RSS)
+(setq gnus-safe-html-newsgroups "\\`nntp[+:]news\\.gwene\\.org[+:]")
+
+; NO 'passive
+(setq gnus-use-cache t)
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-save-score t)
+(add-hook 'mail-citation-hook 'sc-cite-original)
+(add-hook 'message-sent-hook 'gnus-score-followup-article)
+(add-hook 'message-sent-hook 'gnus-score-followup-thread)
+; @see http://stackoverflow.com/questions/945419/how-dont-use-gnus-adaptive-scoring-in-some-newsgroups
+(setq gnus-parameters
+      '(("nnimap.*"
+         (gnus-use-scoring nil)) ;scoring is annoying when I check latest email
+        ))
+
+(defvar gnus-default-adaptive-score-alist
+  '((gnus-kill-file-mark (from -10))
+    (gnus-unread-mark)
+    (gnus-read-mark (from 10) (subject 30))
+    (gnus-catchup-mark (subject -10))
+    (gnus-killed-mark (from -1) (subject -30))
+    (gnus-del-mark (from -2) (subject -15))
+    (gnus-ticked-mark (from 10))
+    (gnus-dormant-mark (from 5))))
+
+;; Fetch only part of the article if we can.  I saw this in someone
+;; else's .gnus
+(setq gnus-read-active-file 'some)
+
+;; Tree view for groups.  I like the organisational feel this has.
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+;; Threads!  I hate reading un-threaded email -- especially mailing
+;; lists.  This helps a ton!
+(setq gnus-summary-thread-gathering-function
+      'gnus-gather-threads-by-subject)
+
+;; Also, I prefer to see only the top level message.  If a message has
+;; several replies or is part of a thread, only show the first
+;; message.  'gnus-thread-ignore-subject' will ignore the subject and
+;; look at 'In-Reply-To:' and 'References:' headers.
+(setq gnus-thread-hide-subtree t)
+(setq gnus-thread-ignore-subject t)
+
+; Personal Information
+(setq user-full-name "My Name"
+      user-mail-address (if (my/at-office) "myname@office.com" "myname@mydomain.com")
+      )
+
+;; Change email address for work folder.  This is one of the most
+;; interesting features of Gnus.  I plan on adding custom .sigs soon
+;; for different mailing lists.
+;; Usage, FROM: chen bin &lt;work&gt;
+(setq gnus-posting-styles
+      '((".*"
+         (name "My Name"
+          (address "myname@mydomain.com"
+                   (organization "")
+                   (signature-file "~/.signature")
+                   ("X-Troll" "Emacs is better than Vi")
+                   )))))
+
+
+(setq mm-text-html-renderer 'w3m)
+
+;; http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
+(setq gnus-use-correct-string-widths nil)
+;; @see http://emacs.1067599.n5.nabble.com/gnus-compile-td221680.html
+;;(gnus-compile)
+; =Gnus Tips=
+;; @see http://www.scottmcpeak.com/gnus.html
+;; }}
+</pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-ftp-in-emacs.html">How to use FTP in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-11T13:05:00+00:00">2012-11-11 13:05</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-ftp-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-ftp-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/ftp.html" rel="tag">ftp</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/mac.html" rel="tag">mac</a></li>
+           <li><a class="tag p-category" href="categories/mount.html" rel="tag">mount</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Emacs's default <a href="http://www.emacswiki.org/AngeFtp">Ftp client</a> is a little outdated compared to other modern Ftp clients. </p> <p> What I want is a two panel file explorer with ftp client integrated (An excellent example is <a href="http://www.ghisler.com">Total Commander</a> on windows). </p> <p> In Emacs, I've got <a href="http://emacswiki.org/emacs/Sunrise_Commander">Sunrise Commander</a> which is close to Total Commander, but NO Ftp integration. </p> <p> I dig around the internet for a while and find that the perfect solution is mount the ftp server into my local file system with <a href="http://curlftpfs.sourceforge.net">CurlFtpFS</a>. </p> <p> The best part of this solution is CurlFtpFS supports both OS X and Linux. </p> <p> In order to install CurlFtpFS on OS X, you need use the package manager <a href="http://mxcl.github.com/homebrew/">Homebrew</a>. The only catch I met on OS X is that I need upgrade Fuse4X driver manually for some wired reason to avoid "incompatible with the kernel version" error. Upgrading is simple. Download dmg plus mouse click stuff only. See <a href="http://fuse4x.github.com/faq.html">FAQ</a> for details. </p> <p> For the usage of CurlFtpFS, see <a href="https://wiki.archlinux.org/index.php/Mount_FTP">HERE</a> for documentation. It's for Linux. But totally fine for OS X users. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/notes-on-using-gnus.html">Practical guide to use Gnus with Gmail</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-10-12T17:14:00+00:00">2012-10-12 17:14</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/notes-on-using-gnus.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-using-gnus.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/gmail.html" rel="tag">gmail</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Author: Chen Bin (redguardtoo)
+</p>
+
+<p>
+Version: 20140809
+</p>
+
+<p>
+Updated: <span class="timestamp-wrapper"> <span class="timestamp">2014-08-09 Sat</span></span>
+</p>
+
+<p>
+Created: <span class="timestamp-wrapper"> <span class="timestamp">2012-10-12 Mon</span></span>
+</p>
+
+<p>
+Copyright: This work is licensed under the <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.
+</p>
+
+<p>
+Note: This article is maintained at <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide">https://github.com/redguardtoo/mastering-emacs-in-one-year-guide</a>. Please send me your feedback at github's issue tracker.
+</p>
+
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="posts/notes-on-using-gnus.html#sec-1">1 Introduction</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-2">2 Why Gnus</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-3">3 A quick guide</a></li>
+<li>
+<a href="posts/notes-on-using-gnus.html#sec-4">4 Essentail 5 percent of Gnus</a>
+<ul>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-1">4.1 Search emails</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-2">4.2 Subscribe group (email folder)</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-3">4.3 Reply email</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-4">4.4 Compose new email</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-5">4.5 Attach a file</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-6">4.6 Download attachment</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-7">4.7 Send email</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-8">4.8 Refresh "Summary Buffer" in Gnus (check new emails)</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-9">4.9 Make ALL emails in "Summary Buffer" visible (IMPORTANT)</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-10">4.10 Forward mail</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-11">4.11 Mark emails read</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-4-12">4.12 Auto complete email address when composing email</a></li>
+</ul>
+</li>
+<li>
+<a href="posts/notes-on-using-gnus.html#sec-5">5 Advanced tips</a>
+<ul>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-1">5.1 How to auto-complete email address</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-2">5.2 How to synchronize the Gmail contacts into BBDB's database</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-3">5.3 How to set up email "From" field for home and office</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-4">5.4 How to tag email</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-5">5.5 How to send HTML mail</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-6">5.6 How to read HTML mail</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-7">5.7 How to read email offline</a></li>
+<li><a href="posts/notes-on-using-gnus.html#sec-5-8">5.8 How to use multiple Gmail accounts</a></li>
+</ul>
+</li>
+<li><a href="posts/notes-on-using-gnus.html#sec-6">6 My Gnus configuration (for Gmail)</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Introduction</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Gnus is a good email client. Sometimes I find it's more user friendly than Gmail's own UI.
+</p>
+<p>
+Many people complain that Gnus is hard. I don't agree with them. It's easy to use if you know how to <b>locate the essential 5% features and ignore the other 95%</b>..
+</p>
+<p>
+So here is my guide. It will help you focus on that useful 5% features only.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Why Gnus</h4>
+<div class="outline-text-3" id="text-2">
+
+<ul>
+<li>less hardware resource required
+</li>
+<li>email search and filter is good
+</li>
+<li>bundled with Emacs, no extra installing overhead if you have Emacs.
+</li>
+<li>support different environments. For example, if I want to see html email in Linux shell without X windows, Gnus can do it.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">A quick guide</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>In the rest of the article,  "C" means "Ctrl"" key and "M" means "Alt"" key. For example, "M-x" means pressing "Alt" and "x" key together.
+</p>
+<p>
+See <a href="http://www.emacswiki.org/emacs/GnusGmail">http://www.emacswiki.org/emacs/GnusGmail</a> on setting up Gnus for Gmail. You can also copy my Gmail setting at the end of this article.
+</p>
+
+<p>
+In order to start Gnus, you need run command "M-x gnus".
+</p>
+<p>
+If the Gnus properly set up, you will come to the "Group Buffer" window. The "Group Buffer" lists the email folders. In Gnus, the folder is named "Group". By default, the groups (email folders) are <b>invisible</b>!
+</p>
+<p>
+You need subscribe the groups to make it visible. For example, my Gmail folder "Inbox" is a group named "nnimap+gmail:INBOX" in "Group Buffer" and <b>it's invisible by default</b>!. If I don't subscribe that group, I can't read email in my INBOX. I know this is confusing. But this is the way of Gnus.
+</p>
+<p>
+Check section "Subscribe groups" for details.
+After subscribing the group INBOX, the INBOX could still be <b>invisible</b> if INBOX does not contain unread emails. That makes no sense for an email client (It does make sense for a stone age news reader)! Anyway, the solution is simple, `C-u 5 gnus-group-list-all-groups` will get desired result. I assigned hotkey "o" to it. Here is my elisp code you could paste into your .emacs. See the <a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Listing-Groups.html">Gnus Manual on Listing Groups</a> for more details.
+</p>
+
+
+
+
+<pre class="prettyprint lang-lisp">
+(defun my-gnus-group-list-subscribed-groups ()
+  "List all subscribed groups with or without un-read messages"
+  (interactive)
+  (gnus-group-list-all-groups 5)
+  )
+ (add-hook 'gnus-group-mode-hook
+           ;; list all the subscribed groups even they contain zero un-read messages
+           (lambda () (local-set-key "o" 'my-gnus-group-list-subscribed-groups ))
+           )
+</pre>
+
+
+
+<p>
+In the "Group Buffer", you can select a group (email folder) by pressing "RET" to check emails in that folder. But I strongly suggest pressing "C-u RET" instead because your true intention is to see ALL the emails instead of the emails filtered by "smart" Gnus.
+</p>
+<p>
+After selecting a group and pressing "RET", you reach the "Summary Buffer" which is, as I said before, a list of your emails.
+</p>
+<p>
+Now everything is simple, you can press "RET" to see the email and use normail Emacs hotkeys for navigation. Hotkey "q" is for quitting "Summary Buffer".
+</p>
+<p>
+In summary, you only need remember "Group Buffer" is the list of mail folders and "Summary Buffer" is the list of mails.
+</p>
+<p>
+That's all you need to know about Gnus. If you want to start use Gnus for Gmail right now. Please check section <a href="posts/notes-on-using-gnus.html#sec-6">My Gnus configuration (for Gmail)</a> and copy my minimum set up for Gmail.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Essentail 5 percent of Gnus</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>Don't try to memorize all the key bindings here. Pick up the commands you actually use only.
+</p>
+</div>
+
+<div id="outline-container-4-1" class="outline-4">
+<h5 id="sec-4-1">Search emails</h5>
+<div class="outline-text-4" id="text-4-1">
+
+<p>"G G" to search email at <b>server side</b> in "Group Buffer". You can use "#" ("M-#" to unmark)to mark the group you want to search. If you don't mark the groups, the curent group under cursor is searched. If you put the cursor at the first line above any group, all the groups will be searched. You could use <a href="http://tools.ietf.org/html/rfc3501#section-6.4.4">more advanced syntax</a> instead of simple keyword. I suggest not doing so.
+</p>
+<p>
+"/ /" to limit the emails by subject at "Summary Buffer". "Limiting" is means searching mail <b>locally</b>.
+</p>
+<p>
+"/ a" to limit the emails by author at "Summary Buffer".
+</p>
+<p>
+"/ w" to cancel the current filter.
+</p>
+<p>
+You can apply the limits sequentially and cancel them one by one using "/ w"
+</p>
+<p>
+BTW, I love "Limiting" in Gnus. See <a href="http://www.gnu.org/software/emacs/manual/html_mono/gnus.html#Limiting">http://www.gnu.org/software/emacs/manual/html_mono/gnus.html#Limiting</a> for more limiting tricks.
+</p>
+<p>
+See <a href="http://sachachua.com/blog/2008/05/emacs-gnus-searching-mail/">http://sachachua.com/blog/2008/05/emacs-gnus-searching-mail/</a> for details.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-2" class="outline-4">
+<h5 id="sec-4-2">Subscribe group (email folder)</h5>
+<div class="outline-text-4" id="text-4-2">
+
+<p>"A A" in "Group Buffer" to list all groups on all the connected server. It may take a while. I suggest pressing "L" to avoid querying data from all the servers if possible.
+</p>
+<p>
+After getting the list of all subscribed/unsubscribed groups, press "u" to subscribe/unsubscribe specific group.
+</p>
+<p>
+I repeat, in order to see the emails in "INBOX" folder/group, you need <b>MANUALLY</b> subscribe the group "INBOX"!
+</p>
+<p>
+"l" to navigate back the default view of group buffer which you may find confusing, as I mentioned before. Press "o" is much better if you uses my elisp code to show all the subscribed groups.
+</p>
+<p>
+"g" to refresh groups list.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-3" class="outline-4">
+<h5 id="sec-4-3">Reply email</h5>
+<div class="outline-text-4" id="text-4-3">
+
+<p>"R" to reply with quoted text. "r" to reply without quoted.
+</p>
+<p>
+"S W" (press S then press W) to reply all (It's named "wide reply" in Emacs) with quoted text. "S w" to reply all without quoted.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-4" class="outline-4">
+<h5 id="sec-4-4">Compose new email</h5>
+<div class="outline-text-4" id="text-4-4">
+
+<p>The hot key is "a" or "m" in "Summary Buffer".
+</p>
+<p>
+BTW, you don't need open Gnus to compose a mail. You can type "C-x m" anywhere in Emacs.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-5" class="outline-4">
+<h5 id="sec-4-5">Attach a file</h5>
+<div class="outline-text-4" id="text-4-5">
+
+<p>The hot key is "C-c C-a"
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-6" class="outline-4">
+<h5 id="sec-4-6">Download attachment</h5>
+<div class="outline-text-4" id="text-4-6">
+
+<p>The hot key is "o". See "<a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Using-MIME.html">Using Mime</a>" in Emacs manual for details.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-7" class="outline-4">
+<h5 id="sec-4-7">Send email</h5>
+<div class="outline-text-4" id="text-4-7">
+
+<p>"C-c C-c".
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-8" class="outline-4">
+<h5 id="sec-4-8">Refresh "Summary Buffer" in Gnus (check new emails)</h5>
+<div class="outline-text-4" id="text-4-8">
+
+<p>Hot key "/ N" or command "M-x gnus-summary-insert-new-articles"
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-9" class="outline-4">
+<h5 id="sec-4-9">Make ALL emails in "Summary Buffer" visible (IMPORTANT)</h5>
+<div class="outline-text-4" id="text-4-9">
+
+<p>"C-u RET" on the selected group (email folder) in "Group Buffer", or "C-u M-g" in "Summary Buffer".
+</p>
+<p>
+That's the most important part of this article! Gnus only display unread emails. Kind of stupid for an email client. Say my client call me to discuss his proposal in his old emails. I open my Gnus but client's emails are invisible in "Summary Buffer" because they are marked expired by Gnus. Can I ask my client hang on for five minutes because I cannot find the emails he sent?
+</p>
+<p>
+Check <a href="http://stackoverflow.com/questions/4982831/i-dont-want-to-expire-mail-in-gnus">http://stackoverflow.com/questions/4982831/i-dont-want-to-expire-mail-in-gnus</a> for the details.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-10" class="outline-4">
+<h5 id="sec-4-10">Forward mail</h5>
+<div class="outline-text-4" id="text-4-10">
+
+<p>"C-c C-f" or "M-x gnus-summary-mail-forward" in "Summary Buffer".
+</p>
+<p>
+BTW, you can mark several emails you want to forward (hot key is "#") and then forward them all at once (<a href="https://plus.google.com/112423173565156165016/posts">Holger Schauer</a> provided this tip).
+</p>
+<p>
+After the forwarded email is created, you may copy the body of that email without sending it. The copied content could be inserted into any other email.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-11" class="outline-4">
+<h5 id="sec-4-11">Mark emails read</h5>
+<div class="outline-text-4" id="text-4-11">
+
+<p>Press "c" is enough. Either in summary buffer or group buffer. <b>This is the most useful Gnus command because Gmail sucks</b>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4-12" class="outline-4">
+<h5 id="sec-4-12">Auto complete email address when composing email</h5>
+<div class="outline-text-4" id="text-4-12">
+
+<p>I use <a href="http://www.emacswiki.org/emacs/CategoryBbdb">BBDB</a>. The only command from BBDB I use is bbdb-complete-name.
+</p>
+<p>
+I assign TAB key to this command,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(add-hook 'message-mode-hook
+          '(lambda ()
+             (local-set-key "&lt;TAB&gt;" 'bbdb-complete-name)))
+</pre>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-3">
+<h4 id="sec-5">Advanced tips</h4>
+<div class="outline-text-3" id="text-5">
+
+</div>
+
+<div id="outline-container-5-1" class="outline-4">
+<h5 id="sec-5-1">How to auto-complete email address</h5>
+<div class="outline-text-4" id="text-5-1">
+
+<p>You need install <a href="http://bbdb.sourceforge.net/">BBDB</a> which is a database to store email address. I recommend installing it through <a href="http://melpa.milkbox.net/#/bbdb">melpa</a>.
+</p>
+<p>
+Then insert below code into ~/.emacs,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(add-hook 'message-mode-hook
+          '(lambda ()
+             (bbdb-initialize 'message)
+             (bbdb-initialize 'gnus)
+             (local-set-key "&lt;TAB&gt;" 'bbdb-complete-name)))
+</pre>
+
+
+
+<p>
+You can also install <a href="https://github.com/company-mode/company-mode">company-mode</a> which requires no setup at all.
+</p>
+<p>
+I use both "bbdb-complete-name" and company-mode.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-2" class="outline-4">
+<h5 id="sec-5-2">How to synchronize the Gmail contacts into BBDB's database</h5>
+<div class="outline-text-4" id="text-5-2">
+
+<p>Here are the steps,
+</p>
+<ul>
+<li>Go to <a href="https://contacts.google.com">https://contacts.google.com</a>
+</li>
+<li>Click "More -&gt; Export -&gt; vCard Format -&gt; Export".
+</li>
+<li>Install <a href="https://github.com/redguardtoo/gmail2bbdb">https://github.com/redguardtoo/gmail2bbdb</a> and run its command "gmail2bbdb-import-file". The contacts will be output into ~/.bbdb.el
+</li>
+<li>Move ~/.bbdb.el into ~/.emacs.d/.bbdb, The file ".bbdb" is defined in variable bbdb-file
+</li>
+</ul>
+
+
+<p>
+There are other plugins which can do the similar thing. But they are dependent on certain version of BBDB. So if you install in-compatible version of BBDB, they won't work.
+</p>
+<p>
+gmail2bbdb has no dependency.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-3" class="outline-4">
+<h5 id="sec-5-3">How to set up email "From" field for home and office</h5>
+<div class="outline-text-4" id="text-5-3">
+
+<p>What I want to do is, if I send emails from office "From" will be my company's email address. But in the email sent from my home pc, the "From" is my personal address.
+</p>
+<p>
+My solution is use $HOSTNAME to detect which computer I am using.
+</p>
+<p>
+Here is the code to be inserted into ~/.emacs:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+;; (system-name) won't work because as Optus required, my /etc/hosts is changed
+(setq my-hostname (with-temp-buffer
+        (shell-command "hostname" t)
+        (goto-char (point-max))
+        (delete-char -1)
+        (buffer-string))
+      )
+
+(defun at-office ()
+  (interactive)
+  (and (string= my-hostname "my-sydney-workpc")
+       (not (or (string= my-hostname "homepc")
+                (string= my-hostname "eee")
+                ))
+       )
+  )
+(setq user-full-name "My Name"
+      user-mail-address (if (at-office) "me@mycompany.com" "me@gmail.com")
+      )
+</pre>
+
+
+
+<p>
+Key points:
+</p>
+<ul>
+<li>$HOSTNAME is <b>not</b> an environment variable.
+</li>
+<li>I grab the output of command line program "hostname" instead using elisp function `(system-name)` which get wrong hostname at my office pc
+</li>
+<li>At my office pc, (system-name) try to get the hostname from /etc/hosts which containing a line "127.0.0.1 webdev.local.mycompany.com.au my-sydney-workpc"
+</li>
+<li>I worked on several computers which does <b>not</b> belong to me, so I cannot change /etc/hosts
+</li>
+<li>You need <a href="http://support.google.com/a/bin/answer.py?hl=en&amp;answer=22370">verify</a> your email address in "From" field at Gmail's web interface if you are using google's SMTP server
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-4" class="outline-4">
+<h5 id="sec-5-4">How to tag email</h5>
+<div class="outline-text-4" id="text-5-4">
+
+<p>Gmail's own system annoys me. I use a third party software <a href="http://getpopfile.org/">Popfile</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-5" class="outline-4">
+<h5 id="sec-5-5">How to send HTML mail</h5>
+<div class="outline-text-4" id="text-5-5">
+
+<p>Check <a href="http://orgmode.org/worg/org-contrib/org-mime.html">org-mime</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5-6" class="outline-4">
+<h5 id="sec-5-6">How to read HTML mail</h5>
+<div class="outline-text-4" id="text-5-6">
+
+<p>You need install <a href="http://w3m.sourceforge.net/">w3m</a> and a Emacs plugin <a href="http://www.emacswiki.org/emacs/emacs-w3m">emacs-w3m</a>.
+</p>
+<p>
+Then insert below code into ~/.emacs,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq mm-text-html-renderer 'w3m)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-7" class="outline-4">
+<h5 id="sec-5-7">How to read email offline</h5>
+<div class="outline-text-4" id="text-5-7">
+
+<p>Go to the "Summary Buffer". "Summary Buffer" list the emails in one email folder.
+</p>
+<p>
+You need mark the emails you want to read offline by "M-x gnus-summary-tick-article-forward".
+</p>
+<p>
+The marked article will enter the disk cache.
+</p>
+<p>
+You can remove the article from the disk cache by "M-x gnus-summary-put-mark-as-read".
+</p>
+<p>
+The disk cache is actually the directory "~/News/cache/". I suggest backing up it with Github's private repository.
+</p>
+<p>
+You also need insert below code into ~/.emacs,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(setq gnus-use-cache t)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5-8" class="outline-4">
+<h5 id="sec-5-8">How to use multiple Gmail accounts</h5>
+<div class="outline-text-4" id="text-5-8">
+
+<p>As you can see from my Gmail configuration.
+</p>
+<p>
+You only need copy the code containing "gnus-secondary-select-methods" from my configuration and rename some line,
+</p>
+<p>
+Here is a sample,
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "gmail-second"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnimap-authinfo-file "~/.authinfo-second.gpg")
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)
+                      ))
+</pre>
+
+
+
+<p>
+"gnus-secondary-select-methods" means the list of your email accounts.
+</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-3">
+<h4 id="sec-6">My Gnus configuration (for Gmail)</h4>
+<div class="outline-text-3" id="text-6">
+
+<p>The ~/.gnus.el
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+; -*- Lisp -*-
+(require 'nnir)
+
+;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
+(setq gnus-select-method '(nntp "news.gmane.org"))
+
+;; ask encyption password once
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
+(setq smtpmail-auth-credentials "~/.authinfo.gpg")
+
+;;@see http://gnus.org/manual/gnus_397.html
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "gmail"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnimap-authinfo-file "~/.authinfo.gpg")
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)
+                      )
+             )
+
+(setq-default
+  gnus-summary-line-format "%U%R%z %(%&amp;user-date;  %-15,15f  %B%s%)\n"
+  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+  gnus-sum-thread-tree-false-root ""
+  gnus-sum-thread-tree-indent ""
+  gnus-sum-thread-tree-leaf-with-other "-&gt; "
+  gnus-sum-thread-tree-root ""
+  gnus-sum-thread-tree-single-leaf "|_ "
+  gnus-sum-thread-tree-vertical "|")
+
+(setq gnus-thread-sort-functions
+      '(
+        (not gnus-thread-sort-by-date)
+        (not gnus-thread-sort-by-number)
+        ))
+
+; NO 'passive
+(setq gnus-use-cache t)
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-save-score t)
+(add-hook 'mail-citation-hook 'sc-cite-original)
+(add-hook 'message-sent-hook 'gnus-score-followup-article)
+(add-hook 'message-sent-hook 'gnus-score-followup-thread)
+; @see http://stackoverflow.com/questions/945419/how-dont-use-gnus-adaptive-scoring-in-some-newsgroups
+(setq gnus-parameters
+      '(("nnimap.*"
+         (gnus-use-scoring nil))
+        ))
+
+(defvar gnus-default-adaptive-score-alist
+  '((gnus-kill-file-mark (from -10))
+    (gnus-unread-mark)
+    (gnus-read-mark (from 10) (subject 30))
+    (gnus-catchup-mark (subject -10))
+    (gnus-killed-mark (from -1) (subject -30))
+    (gnus-del-mark (from -2) (subject -15))
+    (gnus-ticked-mark (from 10))
+    (gnus-dormant-mark (from 5))))
+
+(setq  gnus-score-find-score-files-function
+       '(gnus-score-find-hierarchical gnus-score-find-bnews bbdb/gnus-score)
+       )
+
+;; BBDB: Address list
+(when (file-exists-p "/usr/share/emacs/site-lisp/bbdb")
+  (add-to-list 'load-path "/usr/share/emacs/site-lisp/bbdb")
+  (require 'bbdb)
+  (bbdb-initialize 'message 'gnus 'sendmail)
+  (setq bbdb-file "~/bbdb.db")
+  (add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus)
+  (setq bbdb/mail-auto-create-p t
+        bbdb/news-auto-create-p t)
+  (defvar bbdb-time-internal-format "%Y-%m-%d"
+    "The internal date format.")
+  ;;;###autoload
+  (defun bbdb-timestamp-hook (record)
+    "For use as a `bbdb-change-hook'; maintains a notes-field called `timestamp'
+    for the given record which contains the time when it was last modified.  If
+    there is such a field there already, it is changed, otherwise it is added."
+    (bbdb-record-putprop record 'timestamp (format-time-string
+                                             bbdb-time-internal-format
+                                             (current-time))))
+    )
+
+
+(add-hook 'message-mode-hook
+          '(lambda ()
+             (flyspell-mode t)
+             (local-set-key "&lt;TAB&gt;" 'bbdb-complete-name)))
+
+;; Fetch only part of the article if we can.  I saw this in someone
+;; else's .gnus
+(setq gnus-read-active-file 'some)
+
+;; Tree view for groups.  I like the organisational feel this has.
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+;; Threads!  I hate reading un-threaded email -- especially mailing
+;; lists.  This helps a ton!
+(setq gnus-summary-thread-gathering-function
+      'gnus-gather-threads-by-subject)
+
+;; Also, I prefer to see only the top level message.  If a message has
+;; several replies or is part of a thread, only show the first
+;; message.  'gnus-thread-ignore-subject' will ignore the subject and
+;; look at 'In-Reply-To:' and 'References:' headers.
+(setq gnus-thread-hide-subtree t)
+(setq gnus-thread-ignore-subject t)
+
+; Personal Information
+(setq user-full-name "My Name"
+      user-mail-address "username@gmail.com"
+      ;message-generate-headers-first t
+      )
+
+;; Change email address for work folder.  This is one of the most
+;; interesting features of Gnus.  I plan on adding custom .sigs soon
+;; for different mailing lists.
+;; Usage, FROM: My Name &lt;work&gt;
+(setq gnus-posting-styles
+      '((".*"
+     (name "My Name"
+          (address "username@gmail.com"
+                   (organization "")
+                   (signature-file "~/.signature")
+                   ("X-Troll" "Emacs is better than Vi")
+                   )))))
+
+; You need install the command line brower 'w3m' and Emacs plugin 'w3m'
+(setq mm-text-html-renderer 'w3m)
+
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials '(("smtp.gmail.com" 587 "username@gmail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-local-domain "homepc")
+;http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
+(setq gnus-use-correct-string-widths nil)
+(gnus-compile)
+</pre>
+
+
+
+<p>
+The ~/.authinfo.gpg
+</p>
+
+
+
+<pre class="prettyprint lang-conf">
+machine imap.gmail.com login username@gmail.com password my-secret-password port 993
+machine smtp.gmail.com login username@gmail.com password my-secret-password port 587
+</pre>
+
+
+
+<p>
+Please note .authinfo.gpg is a encrypted file. You must use Emacs to edit it. Emacs will do the encryption/descryption automatically. See <a href="http://emacswiki.org/emacs/EasyPG">http://emacswiki.org/emacs/EasyPG</a> for technical details.
+</p>
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html">The latest version of yasnippet is NOT compatible with auto-complete</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-09-28T20:54:00+00:00">2012-09-28 20:54</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html#disqus_thread" data-disqus-identifier="cache/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/auto.html" rel="tag">auto</a></li>
+           <li><a class="tag p-category" href="categories/complete.html" rel="tag">complete</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/yasnippet.html" rel="tag">yasnippet</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Yes. The latest yasnippet (yasnippet-20120822.52) changed too many APIs and I cannot figure out how to work around it. Upgrading to the latest auto-complete (auto-complete-20120922.1815) won't solve the problem. </p> <p> See <a href="https://github.com/capitaomorte/yasnippet/issues/311">https://github.com/capitaomorte/yasnippet/issues/311</a> for the details. </p> <p> So here is the fix. You can use older version of yasnippet (yasnippet-20120718) and wait until the issue is fixed. </p> <p> Here is the link of older version, <a href="http://dl.dropbox.com/u/858862/yasnippet-20120718.tar.gz">http://dl.dropbox.com/u/858862/yasnippet-20120718.tar.gz</a>. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/why-facebook-app-for-android-pad-sucks.html">Why Facebook app for android pad sucks?</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-09-28T19:50:00+00:00">2012-09-28 19:50</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/why-facebook-app-for-android-pad-sucks.html#disqus_thread" data-disqus-identifier="cache/posts/why-facebook-app-for-android-pad-sucks.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/android.html" rel="tag">android</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/facebook.html" rel="tag">facebook</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>I don't use facebook. I just record my roommates' complaining. </p> <p> Here are his points, </p>
+<dl> <dt>failed to take full advantage of big screen of android pad</dt>
+<dd>The right blank margin could be used to display comments instead, as some application has done. </dd> <dt>scroll down/up to view the images sucks</dt>
+<dd>Slow and hard to locate the exact item he wants. </dd> <dt>Performance may be not good enough</dt>
+<dd>Especially when viewing the images, it's not as fluent as other applications. </dd> </dl>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html">python code to migrate the MySQL database</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-08-22T12:08:00+00:00">2012-08-22 12:08</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html#disqus_thread" data-disqus-identifier="cache/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/database.html" rel="tag">database</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/mysql.html" rel="tag">mysql</a></li>
+           <li><a class="tag p-category" href="categories/python.html" rel="tag">python</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>The script can read configuration file and runs on python 2.4. </p>   <pre class="src src-python"><span style="color: #af0000;">#!/usr/bin/python</span>
+<span style="color: #af00ff;">import</span> sys
+<p><span style="color: #af00ff;">import</span> os</p>
+<p><span style="color: #af00ff;">import</span> string</p>
+<p><span style="color: #af00ff;">import</span> time</p>
+<p><span style="color: #af00ff;">import</span> datetime</p>
+<p><span style="color: #af00ff;">import</span> getopt</p>
+<p><span style="color: #af0000;">#############</span></p>
+<p><span style="color: #af0000;"># CONFIG</span></p>
+<p><span style="color: #af0000;">#############</span></p>
+<p><span style="color: #af5f00;">DB_NAME</span>=<span style="color: #87005f;">'mydb'</span></p>
+<p><span style="color: #af5f00;">DB_PASSWORD</span>=<span style="color: #87005f;">'111111'</span></p>
+<p><span style="color: #af5f00;">DB_USER</span>=<span style="color: #87005f;">'root'</span></p>
+<p><span style="color: #af5f00;">DB_HOST</span>=<span style="color: #87005f;">'mylinux0'</span></p>
+<p><span style="color: #af5f00;">SQL_DB_SCHEMA</span>=os.path.abspath(<span style="color: #87005f;">"db_schema.sql"</span>)</p>
+<p><span style="color: #af5f00;">SQL_CREATE_TABLE</span>=os.path.abspath(<span style="color: #87005f;">"000.sql"</span>)</p>
+<p><span style="color: #af5f00;">CLONE_TABLES</span>=[<span style="color: #87005f;">'MyJobs'</span>,<span style="color: #87005f;">'MyUsers'</span>]</p>
+<p><span style="color: #af0000;">#############</span></p>
+<p><span style="color: #af0000;"># GLOBALS</span></p>
+<p><span style="color: #af0000;">#############</span></p>
+<p><span style="color: #af5f00;">backup_db</span>=<span style="color: #af00ff;">False</span></p>
+<p><span style="color: #af5f00;">migration</span>=<span style="color: #af00ff;">False</span></p>
+<p><span style="color: #af5f00;">config</span>=<span style="color: #008787;">None</span></p>
+<p><span style="color: #af5f00;">verbose</span>=<span style="color: #af00ff;">False</span></p>
+<p><span style="color: #af5f00;">delete</span>=<span style="color: #af00ff;">False</span></p>
+<p><span style="color: #af5f00;">remote</span>=<span style="color: #af00ff;">False</span></p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">sql_cmd</span>(cmd):
+    <span style="color: #af00ff;">if</span> remote:
+        <span style="color: #af00ff;">return</span> <span style="color: #87005f;">'mysql -h %s -u %s -p%s -e " %s " %s'</span> % (DB_HOST,DB_USER,DB_PASSWORD,cmd,DB_NAME)
+    <span style="color: #af00ff;">return</span> <span style="color: #87005f;">'mysql -u %s -p%s -e " %s " %s'</span> % (DB_USER,DB_PASSWORD,cmd,DB_NAME)</p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">sql_script</span>(script):
+    <span style="color: #af00ff;">if</span> remote:
+        <span style="color: #af00ff;">return</span> <span style="color: #87005f;">'mysql -h %s -u %s -p%s %s &lt; %s'</span> % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,script)
+    <span style="color: #af00ff;">return</span> <span style="color: #87005f;">'mysql -u %s -p%s %s &lt; %s'</span> % (DB_USER,DB_PASSWORD,DB_NAME,script)</p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">make_sql_to_create_table</span>():
+    s=<span style="color: #5f5f87;">open</span>(SQL_DB_SCHEMA).read()
+    <span style="color: #af00ff;">for</span> t <span style="color: #af00ff;">in</span> CLONE_TABLES:
+        s=s.replace(t,t+<span style="color: #87005f;">'2'</span>)
+    <span style="color: #5f5f87;">open</span>(SQL_CREATE_TABLE,<span style="color: #87005f;">'w'</span>).write(s)</p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">backup_database</span>():
+    fname=<span style="color: #87005f;">"%s-%s.dump.gz"</span> % (DB_NAME,time.strftime(<span style="color: #87005f;">'%Y%m%d%H%M%S'</span>, time.gmtime()))
+    <span style="color: #af00ff;">if</span> remote:
+        cmd=<span style="color: #87005f;">"mysqldump -h %s -u %s -p%s --compact %s|gzip -9 &gt; %s"</span> % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,fname)
+    <span style="color: #af00ff;">else</span>:
+        cmd=<span style="color: #87005f;">"mysqldump -u %s -p%s --compact %s|gzip -9 &gt; %s"</span> % (DB_USER,DB_PASSWORD,DB_NAME,fname)</p>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+</pre>
+
+
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">delete_db_records</span>():
+    cmd=sql_cmd(<span style="color: #87005f;">"delete from sources;delete from cameras;"</span>)
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">"==WILL RUN [ %s ]"</span> % (cmd)
+    os.system(cmd)
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">"==DONE"</span></p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">package</span>():
+    cmd=<span style="color: #87005f;">"tar zcvf migrate-db.tar.gz <em>.sql migrate.py .migrate_</em>"</span>
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">"==WILL RUN [ %s ]"</span> % (cmd)
+    os.system(cmd)
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">"==DONE"</span></p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">read_config</span>(config):
+    <span style="color: #af00ff;">global</span> DB_NAME
+    <span style="color: #af00ff;">global</span> DB_PASSWORD
+    <span style="color: #af00ff;">global</span> DB_USER
+    <span style="color: #af00ff;">global</span> DB_HOST
+    f=<span style="color: #5f5f87;">open</span>(config,<span style="color: #87005f;">"r"</span>)
+    <span style="color: #af00ff;">for</span> line <span style="color: #af00ff;">in</span> f:
+        a=line.split(<span style="color: #87005f;">"="</span>)
+        <span style="color: #af00ff;">if</span> <span style="color: #5f5f87;">len</span>(a)!=2:
+            <span style="color: #af00ff;">continue</span>
+        n=a[0].strip()
+        v=a[1].strip()
+        <span style="color: #af00ff;">if</span> n==<span style="color: #87005f;">"DB_NAME"</span>:
+            DB_NAME=v
+        <span style="color: #af00ff;">elif</span> n==<span style="color: #87005f;">"DB_PASSWORD"</span>:
+            DB_PASSWORD=v
+        <span style="color: #af00ff;">elif</span> n==<span style="color: #87005f;">"DB_USER"</span>:
+            DB_USER=v
+        <span style="color: #af00ff;">elif</span> n==<span style="color: #87005f;">"DB_HOST"</span>:
+            DB_HOST=v</p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">usage</span>():
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">'''</span>
+<span style="color: #87005f;">USAGE: python migrate.py [OPTIONS]</span></p>
+<p><span style="color: #87005f;">OPTIONS:</span></p>
+<p><span style="color: #87005f;">    -h, --help</span></p>
+<p><span style="color: #87005f;">        print this help</span></p>
+<p><span style="color: #87005f;">    -b, --backup-database</span></p>
+<p><span style="color: #87005f;">        backup the old database before migration (recommended)</span></p>
+<p><span style="color: #87005f;">    -m, --migrate</span></p>
+<p><span style="color: #87005f;">        donot start migration</span></p>
+<p><span style="color: #87005f;">    -v, --verbose</span></p>
+<p><span style="color: #87005f;">        print database related information</span></p>
+<p><span style="color: #87005f;">    -p, --package</span></p>
+<p><span style="color: #87005f;">        packge all the scripts into migrate-db.tar.gz</span></p>
+<p><span style="color: #87005f;">    -d, --delete-db-records</span></p>
+<p><span style="color: #87005f;">        delete database records so we can restart migration</span></p>
+<p><span style="color: #87005f;">    -c, --config</span></p>
+<p><span style="color: #87005f;">SAMPLES:</span></p>
+<p><span style="color: #87005f;">    python migrate.py -b                        #back database and exit</span></p>
+<p><span style="color: #87005f;">    python migrate.py -m                        #start migration right now</span></p>
+<p><span style="color: #87005f;">    python migrate.py -b -m                     #backup the database and start the migration (recommended)</span></p>
+<p><span style="color: #87005f;">    python migrate.py -v                        #print database information and exit</span></p>
+<p><span style="color: #87005f;">    python migrate.py -c .migrate_staging -v    #print staging database information and exit</span></p>
+<p><span style="color: #87005f;">'''</span></p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">show_info</span>():
+    <span style="color: #af00ff;">print</span> <span style="color: #87005f;">'''</span>
+<span style="color: #87005f;">==Database Information</span></p>
+<p><span style="color: #87005f;">name:{name}</span></p>
+<p><span style="color: #87005f;">password:{password}</span></p>
+<p><span style="color: #87005f;">user:{user}</span></p>
+<p><span style="color: #87005f;">host:{host}</span></p>
+<p><span style="color: #87005f;">'''</span>.format(name=DB_NAME, password=DB_PASSWORD,user=DB_USER,host=DB_HOST)</p>
+<p><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">confirm</span>(prompt=<span style="color: #008787;">None</span>, resp=<span style="color: #af00ff;">False</span>):
+    <span style="color: #87005f;">"""prompts for yes or no response from the user. Returns True for yes and</span>
+<span style="color: #87005f;">    False for no.</span></p>
+<p><span style="color: #87005f;">    'resp' should be set to the default value assumed by the caller when</span></p>
+<p><span style="color: #87005f;">    user simply types ENTER.</span></p>
+<p><span style="color: #87005f;">    &gt;&gt;&gt; confirm(prompt='Create Directory?', resp=True)</span></p>
+<p><span style="color: #87005f;">    Create Directory? [y]|n:</span></p>
+<p><span style="color: #87005f;">    True</span></p>
+<p><span style="color: #87005f;">    &gt;&gt;&gt; confirm(prompt='Create Directory?', resp=False)</span></p>
+<p><span style="color: #87005f;">    Create Directory? [n]|y:</span></p>
+<p><span style="color: #87005f;">    False</span></p>
+<p><span style="color: #87005f;">    &gt;&gt;&gt; confirm(prompt='Create Directory?', resp=False)</span></p>
+<p><span style="color: #87005f;">    Create Directory? [n]|y: y</span></p>
+<p><span style="color: #87005f;">    True</span></p>
+<p><span style="color: #87005f;">    """</span></p>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> prompt <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>is<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #008787;"</span><span class="nt">&gt;</span>None<span class="nt">&lt;/span&gt;</span>:
+    prompt = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'WARNING: DONOT run me twice and migration CANNOT be rolled back, GO?'<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> resp:
+    prompt = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'%s <span class="cp">[</span><span class="o">%</span><span class="nb">s</span><span class="cp">]</span>|%s: '<span class="nt">&lt;/span&gt;</span> % (prompt, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'y'<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'n'<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>else<span class="nt">&lt;/span&gt;</span>:
+    prompt = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'%s <span class="cp">[</span><span class="o">%</span><span class="nb">s</span><span class="cp">]</span>|%s: '<span class="nt">&lt;/span&gt;</span> % (prompt, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'n'<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'y'<span class="nt">&lt;/span&gt;</span>)
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>while<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>:
+    ans = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>raw_input<span class="nt">&lt;/span&gt;</span>(prompt)
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>not<span class="nt">&lt;/span&gt;</span> ans:
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> resp
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> ans <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>not<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> <span class="cp">[</span><span class="o">&lt;</span><span class="nx">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #87005f;"</span><span class="o">&gt;</span><span class="s1">'y'</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #87005f;"</span><span class="o">&gt;</span><span class="s1">'Y'</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #87005f;"</span><span class="o">&gt;</span><span class="s1">'n'</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #87005f;"</span><span class="o">&gt;</span><span class="s1">'N'</span><span class="o">&lt;/</span><span class="nx">span</span><span class="o">&gt;</span><span class="cp">]</span>:
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'please enter y or n.'<span class="nt">&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>continue<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> ans == <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'y'<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>or<span class="nt">&lt;/span&gt;</span> ans == <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'Y'<span class="nt">&lt;/span&gt;</span>:
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> ans == <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'n'<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>or<span class="nt">&lt;/span&gt;</span> ans == <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'N'<span class="nt">&lt;/span&gt;</span>:
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>return<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>False<span class="nt">&lt;/span&gt;</span>
+</pre>
+
+
+<p><span style="color: #af00ff;">if</span> <span style="color: #5f5f87;"><strong>name</strong></span>==<span style="color: #87005f;">"<strong>main</strong>"</span>:
+    <span style="color: #87005f;">'''</span>
+<span style="color: #87005f;">    @see http://linux.byexamples.com/archives/366/python-how-to-run-a-command-line-within-python/</span></p>
+<p><span style="color: #87005f;">    '''</span>
+    <span style="color: #af00ff;">try</span>:
+        opts, args = getopt.getopt(sys.argv[1:], <span style="color: #87005f;">"hbmvpdc:r"</span>, [<span style="color: #87005f;">"help"</span>, <span style="color: #87005f;">"backup-database"</span>,<span style="color: #87005f;">"--migrate"</span>,<span style="color: #87005f;">"--verbose"</span>,<span style="color: #87005f;">"--package"</span>,<span style="color: #87005f;">"--delete-db-records"</span>,<span style="color: #87005f;">"--config="</span>,<span style="color: #87005f;">"--remote"</span>])
+    <span style="color: #af00ff;">except</span> getopt.GetoptError, err:
+        <span style="color: #af00ff;">print</span> str(err) <span style="color: #af0000;"># will print something like "option -a not recognized"</span>
+        usage()
+        <span style="color: #5f5f87;">exit</span>(2)</p>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>len<span class="nt">&lt;/span&gt;</span>(opts)==0:
+    usage()
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>exit<span class="nt">&lt;/span&gt;</span>(2)
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>for<span class="nt">&lt;/span&gt;</span> o, a <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> opts:
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-h"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--help"<span class="nt">&lt;/span&gt;</span>):
+        usage()
+        sys.exit()
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-v"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--verbose"<span class="nt">&lt;/span&gt;</span>):
+        verbose=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-c"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--config"<span class="nt">&lt;/span&gt;</span>):
+        config=a
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> config
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-d"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--delete-db-records"<span class="nt">&lt;/span&gt;</span>):
+        delete=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-p"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--package"<span class="nt">&lt;/span&gt;</span>):
+        package()
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>exit<span class="nt">&lt;/span&gt;</span>(0)
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-b"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--backup-database"<span class="nt">&lt;/span&gt;</span>):
+        backup_db=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-m"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--migrate"<span class="nt">&lt;/span&gt;</span>):
+        migration=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>elif<span class="nt">&lt;/span&gt;</span> o <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>in<span class="nt">&lt;/span&gt;</span> (<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"-r"<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"--remote"<span class="nt">&lt;/span&gt;</span>):
+        remote=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>else<span class="nt">&lt;/span&gt;</span>:
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>assert<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>False<span class="nt">&lt;/span&gt;</span>, <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"unhandled option"<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> config!=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #008787;"</span><span class="nt">&gt;</span>None<span class="nt">&lt;/span&gt;</span>:
+    read_config(config)
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> delete:
+    delete_db_records()
+    sys.exit()
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> verbose:
+    show_info()
+    sys.exit()
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> backup_db:
+    backup_database()
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> migration==<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>False<span class="nt">&lt;/span&gt;</span>:
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>exit<span class="nt">&lt;/span&gt;</span>(0)
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> confirm()==<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>False<span class="nt">&lt;/span&gt;</span>:
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"Aborting ..."<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>exit<span class="nt">&lt;/span&gt;</span>(0)
+
+make_sql_to_create_table()
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==START MIGRATION"<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af0000;"</span><span class="nt">&gt;</span># test data base connection<span class="nt">&lt;/span&gt;</span>
+cmd=sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'show databases;use %s;'<span class="nt">&lt;/span&gt;</span> % (DB_NAME))
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"000.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('001.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"001.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('002.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"002.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('003.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"003.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('004.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"004.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('005.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"005.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('006.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"006.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+os.system(sql_cmd(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert into migrate (Action) values ('100.sql')"<span class="nt">&lt;/span&gt;</span>))
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"100.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"insert_sample_sources.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+cmd=sql_script(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"app_config.sql"<span class="nt">&lt;/span&gt;</span>)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN <span class="cp">[</span> <span class="o">%</span><span class="nb">s</span> <span class="cp">]</span>"<span class="nt">&lt;/span&gt;</span> % (cmd)
+os.system(cmd)
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
+
+<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==END MIGRATION"<span class="nt">&lt;/span&gt;</span>
+</pre>
+
+
+<p><span style="color: #af0000;"># vim: set expandtab tabstop=4 shiftwidth=4:</span></p>
+<p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html">Emacs中的自动完成(Auto Completion)完全指南</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-08-21T12:50:00+00:00">2012-08-21 12:50</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/completion.html" rel="tag">completion</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/intellisense.html" rel="tag">intellisense</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>作者: 陈斌(redguardtoo) </p> <p> 版本号: 20131106 </p> <p> 更新时间: <span class="timestamp-wrapper"> <span class="timestamp">2013-11-06 Wed</span></span> 原创时间: <span class="timestamp-wrapper"> <span class="timestamp">2012-08-21 二</span></span> </p> <p> 所谓"自动完成",就是emacs智能猜测用户想输入的是什么词,帮助用户自动输入,如果emacs找到多个可选项,也可能弹出下拉菜单让用户来选择. </p> <p> 通常我们所说的IDE中的Intellisense,也可以认为是某种"自动完成". </p> <p> Emacs的自动完成远比篇普通IDE的Intellisense强大得多,例如Emacs可以自动输入当前打开的文件的名字(带或者不带文件名后缀都可以). </p> <p> 我不是来赞美Emacs的强大的,我是来吐槽的.Emacs中的自动完成框架实在是太多了,很多框架的功能是重叠的,让人实在困扰. </p> <p> 所以本文的目的有两个, </p>
+<ol> <li>说明哪些自动完成框架是主流的 </li> <li>如何配置使用自动完成框架 </li> </ol>    <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">概述</h4> <div class="outline-text-3" id="text-1">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+<col class="left"> </colgroup> <thead> <tr>
+<th scope="col" class="left">函数/插件名</th>
+<th scope="col" class="left">快捷键</th>
+<th scope="col" class="left">推荐度</th>
+<th scope="col" class="left">使用频率</th>
+</tr> </thead> <tbody> <tr>
+<td class="left">complete-symbol</td>
+<td class="left">C-M-i</td>
+<td class="left">中</td>
+<td class="left">低</td>
+</tr> <tr>
+<td class="left">auto-complete (结合clang)</td>
+<td class="left">TAB</td>
+<td class="left">优</td>
+<td class="left">低</td>
+</tr> <tr>
+<td class="left">company-mode (结合clang)</td>
+<td class="left">不需要</td>
+<td class="left">优</td>
+<td class="left">中</td>
+</tr> <tr>
+<td class="left">hippie-expand</td>
+<td class="left">M-/</td>
+<td class="left">良</td>
+<td class="left">高</td>
+</tr> <tr>
+<td class="left">evil-mode</td>
+<td class="left">C-n/C-p(完成词),C-x C-n/p(完成行)</td>
+<td class="left">中</td>
+<td class="left">高</td>
+</tr> </tbody> </table>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">auto-complete结合clang</h4> <div class="outline-text-3" id="text-2">  <p><a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,完美提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟). </p> <p> 而<a href="http://clang.llvm.org">clang</a>是苹果公司开发的目前最优秀的C/C++/Objective-C编译器,对C++语法的解析又快又好. </p> <p> 显然,这种方案只适用于clang支持的语言.支持Mac/Linux/Cygwin平台,我不知道是否支持Windows平台. </p> <p> 需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件auto-complete和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>. </p> <p> 如果你是重度IDE用户,喜欢和IDE一样的Intellisense功能,这就是你需要的了. </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-auto-complete.el">init-auto-complete.el</a>. </p> <p> 顺便说一下,关于elpa的配置,可能你需要参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-elpa.el">init-elpa.el</a>,因现在有多个AppStore,且直到Emacs24对elpa的支持才开始自带. </p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">company-mode</h4> <div class="outline-text-3" id="text-3">  <p><a href="https://github.com/company-mode/company-mode">company-mode</a>和auto-complete功能类似，唯一的区别是clang以及其他语言支持已内置，所以不需要安装其他elisp插件或者额外配置.目前我已用company-mode代替了auto-complete. </p>
+</div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">hippie-expand</h4> <div class="outline-text-3" id="text-4">  <p><a href="http://emacswiki.org/emacs/HippieExpand">hippie-expand</a>是Emacs自带的自动完成框架,其默认的一些自动完成特色功能可作为auto-complete的补充,例如自动完成词/文件名/行的功能. </p> <p> 既然是框架,当然可以扩充,在<a href="http://emacswiki.org/emacs/HippieExpand">Emacs Wiki</a>中提供了和<a href="http://ctags.sourceforge.net">ctags</a>结合的方案. </p> <p> ctags类似clang,对各种语言做语法解析的后端,但是智能程度远不如clang及后文提到的semantic,优点是所有语言通吃(例如javascript),支持所有操作系统,解析速度快(废话,正则表达式当然快). </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-hippie-expand.el">init-hippie-expand.el</a>. </p>
+</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">complete-symbol</h4> <div class="outline-text-3" id="text-5">  <p>Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,它默认仅仅调用了后台的ctags而已. </p> <p> hippie-expand经过调教也可调用ctags,且其默认的特色功能比complete-symbol多,所以我没兴趣配置第三个自动完成框架了. </p> <p> 之所以还值得介绍,是因为我通过阅读Emacs24的changelog,发觉complete-symbol经过配置后可以用semantic作为语法解析后端(我试用后,发觉Emacs23.4也支持,不明白为什么要把该特性放在Emacs24的changelog介绍). </p> <p> <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html">semantic</a>是lisp写的语法解析器,Emacs自带,智能程度介于ctags和clang之间,解析速度比较慢,如果机器配置比较差(例如我的eeepc701上网本),会让emacs很卡. </p> <p> 我个人不是很喜欢这个语法解析器,过去在semantic尚且是开源项目<a href="http://cedet.sourceforge.net">Cedet</a>的一个组件未被集成进Emacs中时,我折腾过Cedet,当时的感觉是速度慢,配置繁琐,不稳定. </p> <p> 也许现在集成进Emacs后的semantic要好很多吧. </p> <p> Semantic支持多种语言,如C++/Java,如果你是Java程序员,可以考虑complete-symbol加semantic的方案. </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-semantic.el">init-semantic.el</a>(注意,我不用semantic,所以相应的代码被注释了.如果你要用semantic,取消注释). </p>
+</div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">evil-mode</h4> <div class="outline-text-3" id="text-6">  <p><a href="http://emacswiki.org/emacs/Evil">Evil-mode</a>把Emacs模拟成了Vim,是我最喜欢的第三方插件,其自动完成很简单,就是根据当前文件内容自动完成词或行. </p> <p> 值得推荐是因为我曾是重度Vim用户,Vim的自动完成快捷键已经成为我的本能了. </p> <p> 没什么要配置的,启动evil-mode即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>. </p>
+</div>  </div>  <div id="outline-container-7" class="outline-3"> <h4 id="sec-7">小结</h4> <div class="outline-text-3" id="text-7">  <p>所谓的自动完成框架,包括前端用户界面和后端语法解析引擎两个部分. </p> <p> 作为前端的用户界面,我认为唯一做得好的就是auto-complete了,其他都很普通. </p> <p> 后端语法解析引擎,clang最优秀.ctags实际上谈不上语法解析,只是玩玩正则表达式罢了,但是因此才能通吃所有语言.semantic支持的语言比clang多一点,性能和稳定性上比较差. </p> <p> 作为一个C++程序员,我过去的首选是auto-complete加上clang,现在我用company-mode加上clang. </p> <p> 如用一些脚本语言(ruby/python/javascript),我会用ctags加hippie-expand. </p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/my-git-alias-in-bashrc.html">My git alias in .bashrc</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-07-20T17:22:02+00:00">2012-07-20 17:22</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-git-alias-in-bashrc.html#disqus_thread" data-disqus-identifier="cache/posts/my-git-alias-in-bashrc.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
+           <li><a class="tag p-category" href="categories/control.html" rel="tag">control</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="categories/version.html" rel="tag">version</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>My favourite alias are <code>g</code>, <code>gau</code>, <code>gc</code>,<code>gt</code>,<code>gl</code>,<code>gdc</code>. </p>    <pre class="src src-sh"><span style="color: #af0000;"># </span><span style="color: #af0000;">Git alias</span>
+<span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">g</span>=<span style="color: #87005f;">"git status"</span>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">ga</span>=<span style="color: #87005f;">"git add"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gaa</span>=<span style="color: #87005f;">"git add ."</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gau</span>=<span style="color: #87005f;">"git add -u"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gc</span>=<span style="color: #87005f;">"git commit -m"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gca</span>=<span style="color: #87005f;">"git commit -am"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gb</span>=<span style="color: #87005f;">"git branch"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gbd</span>=<span style="color: #87005f;">"git branch -d"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gco</span>=<span style="color: #87005f;">"git checkout"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gcob</span>=<span style="color: #87005f;">"git checkout -b"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gt</span>=<span style="color: #87005f;">"git stash"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gta</span>=<span style="color: #87005f;">"git stash apply"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gm</span>=<span style="color: #87005f;">"git merge"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gr</span>=<span style="color: #87005f;">"git rebase"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gl</span>=<span style="color: #87005f;">"git log --oneline --decorate --graph"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gs</span>=<span style="color: #87005f;">"git show"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gd</span>=<span style="color: #87005f;">"git diff"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gdc</span>=<span style="color: #87005f;">"git diff --cached"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gbl</span>=<span style="color: #87005f;">"git blame"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gps</span>=<span style="color: #87005f;">"git push"</span></p>
+<p><span style="color: #5f5f87;">alias</span> <span style="color: #af5f00;">gpl</span>=<span style="color: #87005f;">"git pull"</span></p>
+<p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html">Emacs中的完美多窗口操作</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-07-20T14:56:00+00:00">2012-07-20 14:56</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/multiple.html" rel="tag">multiple</a></li>
+           <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">典型的工作流</h4> <div class="outline-text-3" id="text-1">  <ol> <li>在两个子窗口中对比文件内容 </li> <li>打开更多的窗口以参考其他信息. </li> <li>对某个窗口内容比较有兴趣,跳转到该窗口,将该窗口最大化 </li> <li>看完最大化的窗口内容后,undo最大化操作,重新回到早先的多个小窗口模式以便继续纵览全局 </li> </ol>  </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">将子窗口自动编号,然后按M-0…9跳转(最爱)</h4> <div class="outline-text-3" id="text-2">  <p>安装<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">window-numbering</span>)
+(window-numbering-mode 1)
+<p></p></pre>  </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">undo/redo之前的窗口操作(最爱)</h4> <div class="outline-text-3" id="text-3">  <p>安装<a href="http://www.emacswiki.org/emacs/WinnerMode">Winner Mode</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(winner-mode 1)
+<p><span style="color: #af0000;">;; </span><span style="color: #af0000;">copied from http://puntoblogspot.blogspot.com/2011/05/undo-layouts-in-emacs.html</span></p>
+<p>(global-set-key (kbd <span style="color: #87005f;">"C-x 4 u"</span>) 'winner-undo)</p>
+<p>(global-set-key (kbd <span style="color: #87005f;">"C-x 4 r"</span>) 'winner-redo)</p>
+<p></p></pre>  </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">焦点移动到下一窗口(常用)</h4> <div class="outline-text-3" id="text-4">  <p>M-x other-window,快捷键是<code>C-x o</code>. </p>
+</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">水平/垂直切分当前窗口(常用)</h4> <div class="outline-text-3" id="text-5">  <p>快捷键C-x 2/3 </p>
+</div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">将当前子窗口最大化(常用)</h4> <div class="outline-text-3" id="text-6">  <p>M-x delete-other-windows,快捷键<code>C-x 1</code>. </p>
+</div>  </div>  <div id="outline-container-7" class="outline-3"> <h4 id="sec-7">删除当前子窗口(偶尔用)</h4> <div class="outline-text-3" id="text-7">  <p>M-x delete-window (快捷键<code>C-x 0</code>) </p> <p> 顺便说一下,M-x kill-buffer-and-window (快捷键<code>C-x 4 0</code>),我现在用得更多 些. </p>
+</div>  </div>  <div id="outline-container-8" class="outline-3"> <h4 id="sec-8">移动焦点到上下左右的窗口(基本不用)</h4> <div class="outline-text-3" id="text-8">  <p>因我较喜欢vi快捷键,所以我安装了<a href="http://emacswiki.org/emacs/Evil">Evil Mode</a>.快捷键和Vi一样. C-w h/j/k/l移动至各方向的子窗口. </p>
+</div>  </div>  <div id="outline-container-9" class="outline-3"> <h4 id="sec-9">存储/载入窗口布局到register(基本不用)</h4> <div class="outline-text-3" id="text-9">  <p><code>C-x r w &amp;lt;register&amp;gt;</code>存储,<code>C-x r j &amp;lt;register&amp;gt;</code>载入. </p>
+</div> </div> </div>
+            </div>
+        </div>
+    
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="previous">
+                <a href="index-7.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-5.html" rel="next">Older posts</a>
+            </li>
+        </ul>
+        </nav>
+
+    
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+    
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

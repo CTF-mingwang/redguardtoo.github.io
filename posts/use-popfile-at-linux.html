@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Use POPFile at Linux | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/use-popfile-at-linux.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Use POPFile at Linux">
+    <meta property="og:url" content="http://blog.binchen.org/posts/use-popfile-at-linux.html">
+    <meta property="og:description" content="CREATED:  2012-12-28
+
+
+
+UPDATED:  2014-09-28 Sun
+
+
+
+POPFile automatically sorts my email messages.
+
+
+
+Install POPFile
+
+
+Download and extract the zip file to ~/bin/popfile/.
+
+
+
+
+
+Install third party pa">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2012-12-28T13:37:00+00:00">
+           <meta property="article:tag" content="email">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="filter">
+           <meta property="article:tag" content="linux">
+           <meta property="article:tag" content="popfile">
+           <meta property="article:tag" content="spam">
+
+    
+
+    
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Use POPFile at Linux</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2012-12-28T13:37:00+00:00">2012-12-28 13:37</time>
+            
+
+            
+          |  
+        <a href="use-popfile-at-linux.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/filter.html" rel="tag">filter</a></li>
+           <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="../categories/popfile.html" rel="tag">popfile</a></li>
+           <li><a class="tag p-category" href="../categories/spam.html" rel="tag">spam</a></li>
+        </ul>
+        </div>
+
+        </div>
+        <div class="body">
+            <div>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2012-12-28</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-09-28 Sun</span></span>
+</p>
+
+<p>
+<a href="http://getpopfile.org">POPFile</a> automatically sorts my email messages.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Install POPFile</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Download and extract the zip file to ~/bin/popfile/.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Install third party packages</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Run the command:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+</pre>
+
+
+
+<p>
+BTW, don't let the cpan detect the mirror site automatically because the process takes several minutes. Choose the site manually!
+</p>
+<p>
+First question is would you like automatic setup? Yes!
+</p>
+<p>
+Second quesiton, set up mirror site for you? No!
+</p>
+<p>
+Third question, choose one mirror site from the list? No!
+</p>
+<p>
+Forth question, please input the site manullay. <a href="http://mirror.optusnet.com.au/CPAN/">http://mirror.optusnet.com.au/CPAN/</a>
+</p>
+<p>
+This is my cpan setup (Please note I use proxy),
+</p>
+
+
+
+<pre class="prettyprint lang-perl">
+# content of /root/.cpan/CPAN/MyConfig.pm
+$CPAN::Config = {
+  'applypatch' =&gt; q[],
+  'auto_commit' =&gt; q[0],
+  'build_cache' =&gt; q[100],
+  'build_dir' =&gt; q[/root/.cpan/build],
+  'build_dir_reuse' =&gt; q[0],
+  'build_requires_install_policy' =&gt; q[yes],
+  'bzip2' =&gt; q[/bin/bzip2],
+  'cache_metadata' =&gt; q[1],
+  'check_sigs' =&gt; q[0],
+  'colorize_output' =&gt; q[0],
+  'commandnumber_in_prompt' =&gt; q[1],
+  'connect_to_internet_ok' =&gt; q[1],
+  'cpan_home' =&gt; q[/root/.cpan],
+  'ftp_passive' =&gt; q[1],
+  'ftp_proxy' =&gt; q[],
+  'getcwd' =&gt; q[cwd],
+  'gpg' =&gt; q[/usr/bin/gpg],
+  'gzip' =&gt; q[/bin/gzip],
+  'halt_on_failure' =&gt; q[0],
+  'histfile' =&gt; q[/root/.cpan/histfile],
+  'histsize' =&gt; q[100],
+  'http_proxy' =&gt; q[http://127.0.0.1:3128],
+  'inactivity_timeout' =&gt; q[0],
+  'index_expire' =&gt; q[1],
+  'inhibit_startup_message' =&gt; q[0],
+  'keep_source_where' =&gt; q[/root/.cpan/sources],
+  'load_module_verbosity' =&gt; q[none],
+  'make' =&gt; q[/usr/bin/make],
+  'make_arg' =&gt; q[],
+  'make_install_arg' =&gt; q[],
+  'make_install_make_command' =&gt; q[/usr/bin/make],
+  'makepl_arg' =&gt; q[INSTALLDIRS=site],
+  'mbuild_arg' =&gt; q[],
+  'mbuild_install_arg' =&gt; q[],
+  'mbuild_install_build_command' =&gt; q[./Build],
+  'mbuildpl_arg' =&gt; q[--installdirs site],
+  'no_proxy' =&gt; q[],
+  'pager' =&gt; q[/usr/bin/less],
+  'patch' =&gt; q[/usr/bin/patch],
+  'perl5lib_verbosity' =&gt; q[none],
+  'prefer_external_tar' =&gt; q[1],
+  'prefer_installer' =&gt; q[MB],
+  'prefs_dir' =&gt; q[/root/.cpan/prefs],
+  'prerequisites_policy' =&gt; q[follow],
+  'scan_cache' =&gt; q[atstart],
+  'shell' =&gt; q[/bin/bash],
+  'show_unparsable_versions' =&gt; q[0],
+  'show_upload_date' =&gt; q[0],
+  'show_zero_versions' =&gt; q[0],
+  'tar' =&gt; q[/bin/tar],
+  'tar_verbosity' =&gt; q[none],
+  'term_is_latin' =&gt; q[1],
+  'term_ornaments' =&gt; q[1],
+  'test_report' =&gt; q[0],
+  'trust_test_report_history' =&gt; q[0],
+  'unzip' =&gt; q[/usr/bin/unzip],
+  'urllist' =&gt; [q[http://mirror.optusnet.com.au/CPAN/]],
+  'use_sqlite' =&gt; q[0],
+  'version_timeout' =&gt; q[15],
+  'wget' =&gt; q[/usr/bin/wget],
+  'yaml_load_code' =&gt; q[0],
+  'yaml_module' =&gt; q[YAML],
+};
+1;
+__END__
+</pre>
+
+
+
+<p>
+After packages installed, double check them locally:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+perl -MDBI -e 'print $MIME::DBI::VERSION'
+</pre>
+
+
+
+<p>
+If there is any error:
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+perl -V
+sudo rm -rf /usr/lib/perl5/site_perl/*
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Set up</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>I only use IMAP. The purpose of setting up POP3 port is to make the program executable without root permission.
+</p>
+<p>
+See <a href="http://getpopfile.org/docs/howtos:mayneedroot">http://getpopfile.org/docs/howtos:mayneedroot</a> for details.
+</p>
+<p>
+Run the below command to fix the root issue.
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+</pre>
+
+
+
+<p>
+Here is my popfile setup for davmail server (please note ssl is disabled),
+</p>
+
+
+
+<pre class="prettyprint lang-conf">
+bayes_bad_sqlite_version 4.0.0
+bayes_corpus corpus
+bayes_database popfile.db
+bayes_dbauth 
+bayes_dbconnect dbi:SQLite:dbname=$dbname
+bayes_dbuser 
+bayes_hostname 192-168-1-3.tpgi.com.au
+bayes_localhostname 
+bayes_nihongo_parser kakasi
+bayes_sqlite_journal_mode delete
+bayes_sqlite_tweaks 4294967295
+bayes_subject_mod_left [
+bayes_subject_mod_pos 1
+bayes_subject_mod_right ]
+bayes_unclassified_weight 100
+bayes_xpl_angle 0
+config_pidcheck_interval 5
+config_piddir ./
+GLOBAL_debug 1
+GLOBAL_last_update_check 1407715200
+GLOBAL_message_cutoff 100000
+GLOBAL_msgdir messages/
+GLOBAL_ssl_verify_peer_certs 0
+GLOBAL_timeout 60
+GLOBAL_update_check 1
+history_archive 0
+history_archive_classes 0
+history_archive_dir archive
+history_history_days 2
+html_cache_templates 0
+html_column_characters 0
+html_columns +inserted,+from,+to,-cc,+subject,-date,-size,+bucket
+html_date_format 
+html_language English
+html_last_reset Sat Dec  1 11:06:48 2012
+html_local 0
+html_page_size 20
+html_password b6b3637136ad630eba43aa5ee7106780
+html_port 8888
+html_search_filter_highlight 0
+html_send_stats 1
+html_session_dividers 1
+html_show_bucket_help 1
+html_show_training_help 0
+html_skin simplyblue
+html_strict_templates 0
+html_test_language 0
+html_wordtable_format 
+imap_bucket_folder_mappings job--&gt;job--&gt;geek--&gt;geek--&gt;business--&gt;business--&gt;ad--&gt;ad--&gt;unclassified--&gt;INBOX--&gt;work--&gt;work--&gt;
+imap_enabled 1
+imap_expunge 0
+imap_hostname localhost
+imap_login binc1
+imap_password password1
+imap_port 1143
+imap_training_mode 0
+imap_uidnexts work--&gt;749--&gt;job--&gt;5914--&gt;INBOX--&gt;20736--&gt;geek--&gt;5009--&gt;ad--&gt;1296--&gt;business--&gt;15--&gt;
+imap_uidvalidities job--&gt;98--&gt;work--&gt;107--&gt;ad--&gt;100--&gt;business--&gt;106--&gt;geek--&gt;99--&gt;INBOX--&gt;2--&gt;
+imap_update_interval 1000
+imap_use_ssl 0
+imap_watched_folders INBOX--&gt;INBOX--&gt;
+logger_format default
+logger_level 0
+logger_logdir ./
+nntp_enabled 0
+nntp_force_fork 1
+nntp_headtoo 0
+nntp_local 1
+nntp_port 119
+nntp_separator :
+nntp_socks_port 1080
+nntp_socks_server 
+nntp_welcome_string NNTP POPFile (v1.1.3) server ready
+pop3_enabled 0
+pop3_force_fork 1
+pop3_local 1
+pop3_port 1110
+pop3_secure_port 110
+pop3_secure_server 
+pop3_separator :
+pop3_socks_port 1080
+pop3_socks_server 
+pop3_toptoo 0
+pop3_welcome_string POP3 POPFile (v1.1.3) server ready
+smtp_chain_port 25
+smtp_chain_server 
+smtp_enabled 0
+smtp_force_fork 1
+smtp_local 1
+smtp_port 25
+smtp_socks_port 1080
+smtp_socks_server 
+smtp_welcome_string SMTP POPFile (v1.1.3) welcome
+xmlrpc_enabled 0
+xmlrpc_local 1
+xmlrpc_port 8081
+
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Run the program</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>See <a href="http://getpopfile.org/docs/howtos:runlocation">http://getpopfile.org/docs/howtos:runlocation</a> for details.
+</p>
+
+
+
+<pre class="prettyprint lang-sh">
+cd ~/bin/popfile;perl popfile.pl
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-3">
+<h4 id="sec-5">Start the POPFile automatically when bash login</h4>
+<div class="outline-text-3" id="text-5">
+
+<p>Insert below code in ~/.bashrc:
+</p>
+
+
+
+<pre class="prettyprint lang-bash">
+OS_NAME=`uname -s`
+if [ $OS_NAME == Linux ]; then
+   # start popfile
+   if [ -f $HOME/bin/popfile/popfile.pl ]; then
+      # @see http://getpopfile.org/docs/howtos:runlocation
+      pop_pid=`ps -ef | grep perl | grep popfile.pl | gawk '{print $2}'`
+      if [ "${pop_pid}" = "" ] ; then
+         cd $HOME/bin/popfile
+         perl popfile.pl &gt;&gt; /dev/null 2&gt;&amp;1 &amp;
+      fi
+      cd $HOME
+   fi
+fi
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-3">
+<h4 id="sec-6">Start the POPFile systemd service as a user (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-6">
+
+<p>My user name is cb. Put popfile.service in <i>usr/lib/systemd/system</i>. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
+</p>
+<p>
+here is content of popfile.service.
+</p>
+
+
+
+<pre class="prettyprint lang-conf">
+[Unit]
+Description=POPFile (Automatic Email Classification) Service
+
+[Service]
+WorkingDirectory=/home/cb/bin/popfile
+ExecStart=/usr/bin/perl popfile.pl
+User=cb
+
+[Install]
+WantedBy=multi-user.target
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-3">
+<h4 id="sec-7">Backup</h4>
+<div class="outline-text-3" id="text-7">
+
+<p>Please backup popfile.cfg and popfile.db.
+</p>
+<p>
+See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/docs/howtos:backup</a> for details.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-3">
+<h4 id="sec-8">Summary</h4>
+<div class="outline-text-3" id="text-8">
+
+<ul>
+<li>Portable
+</li>
+<li>No root privilege needed
+</li>
+<li>No X windows needed. I can finish all the email stuff in remote shell
+</li>
+</ul>
+
+</div>
+
+</div>
+</div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="emacs-lisp-bin-bu-nan-xue.html" rel="prev" title="Emacs Lisp并不难学">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="toggle-http-proxy-in-emacs-w3m.html" rel="next" title="Toggle http proxy in emacs-w3m">Next post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/use-popfile-at-linux.html",
+        disqus_title="Use POPFile at Linux",
+        disqus_identifier="cache/posts/use-popfile-at-linux.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

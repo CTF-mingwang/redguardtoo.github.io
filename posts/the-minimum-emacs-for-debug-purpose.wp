@@ -1,0 +1,58 @@
+<html><body><p>I've installed <a href="https://github.com/redguardtoo/emacs.d">more than 100 emacs plugins</a>. </p> <p> Since I publicized my .emacs at github, lots of people have copied my configuration. Now it becomes my obligation to solve all the plugin compatibility issue reported by my users. </p> <p> To solve the issue, I need a minimum .emacs for testing the plugin. </p> <p> So here is my minimum .emacs, </p>   
+
+
+<pre class="prettyprint ">
+
+(show-paren-mode 1)
+
+(eval-when-compile (require 'cl))
+
+
+
+;; test elisps download from internet here
+
+(setq test-elisp-dir "~/test-elisp/")
+
+(if (not (file-exists-p (expand-file-name test-elisp-dir)))
+    (make-directory (expand-file-name test-elisp-dir))
+    )
+
+
+(setq load-path
+      (append
+        (loop for dir in (directory-files test-elisp-dir)
+              unless (string-match "^\\." dir)
+              collecting (expand-file-name (concat test-elisp-dir dir)))
+        load-path))
+
+
+;; package repositories
+
+(require 'package)
+
+(add-to-list 'package-archives '("marmalade" .  "http://marmalade-repo.org/packages/") t)
+
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+
+
+;; ==== put your code below this line!
+
+;;
+</pre>
+
+
+
+   <p> The code is straight forward. I scan any sub-directories in ~/test-elisp and add them into load-path. I also add URLs of third party repositories so that I can download and install packages from internet conviniently. </p> <p> I also upload the .emacs to dropbox, so you can use one bash liner to download it: </p>   
+
+
+<pre class="prettyprint ">
+
+cd ~/;wget https://dl.dropboxusercontent.com/u/858862/emacs/.emacs;mkdir -p ~/test-elisp;
+</pre>
+
+
+
+  </body></html>

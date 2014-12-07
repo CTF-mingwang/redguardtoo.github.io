@@ -1,0 +1,109 @@
+<html><body><div id="outline-container-1" class="outline-3"> <h3 id="sec-1">List failed services</h3> <div class="outline-text-3" id="text-1">     
+
+
+<pre class="prettyprint ">
+
+sudo systemctl --failed
+</pre>
+
+
+
+   <p> I can also use `sudo journalctl -b` to get the log message when booting all the services. But not very useful. </p></div>  </div>  <div id="outline-container-2" class="outline-3"> <h3 id="sec-2">Find the root cause of failed service</h3> <div class="outline-text-3" id="text-2">     
+
+
+<pre class="prettyprint ">
+
+sudo systemctl status service-name
+</pre>
+
+
+
+  </div>  </div>  <div id="outline-container-3" class="outline-3"> <h3 id="sec-3">Why my /usr/lib/systemd/system/network-wifi.service does not work</h3> <div class="outline-text-3" id="text-3">  <p>Here is the content of my wifi service </p>   
+
+
+<pre class="prettyprint ">
+
+[Unit]
+
+Description=Wireless networkd connectivity (wlan0)
+
+Wants=network.target
+
+Before=network.target
+
+BindsTo=sys-subsystem-net-devices-wlan0.device
+
+After=sys-subsystem-net-devices-wlan0.device
+
+
+
+[Service]
+
+Type=oneshot
+
+RemainAfterExit=yes
+
+#EnvironmentFile=/etc/conf.d/network-wireless@wlan0
+
+
+
+ExecStart=/usr/bin/ip link set wlan0 up
+
+ExecStart=/usr/bin/wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/yang.conf
+
+ExecStart=/usr/bin/dhcpcd wlan0
+
+
+
+ExecStop=/usr/bin/ip addr flush dev wlan0
+
+ExecStop=/usr/bin/ip link set dev wlan0 down
+
+
+
+[Install]
+
+WantedBy=multi-user.target
+</pre>
+
+
+
+  <p> It's because netcfg.service blocks my network-wifi.service. </p> <p> Solutin is simple: </p>   
+
+
+<pre class="prettyprint ">
+
+sudo systemctl disable netcfg
+</pre>
+
+
+
+  </div>  </div>  <div id="outline-container-4" class="outline-3"> <h3 id="sec-4">How to start a service as as specific user (mpd, for example)</h3> <div class="outline-text-3" id="text-4">  <p>This is the content of /usr/lib/systemd/system/mpd.service:  </p>   
+
+
+<pre class="prettyprint ">
+
+[Unit]
+
+Description=Music Player Daemon
+
+After=network.target sound.target
+
+
+
+[Service]
+
+ExecStart=/usr/bin/mpd --no-daemon /home/cb/.mpd/config
+
+User=cb
+
+
+
+[Install]
+
+WantedBy=multi-user.target
+</pre>
+
+
+
+  </div> </div> </body></html>

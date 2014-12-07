@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+
+
+
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Use vimdiff to resolve git/subversion/mercurial merge conflicts effect">
+    <meta property="og:url" content="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html">
+    <meta property="og:description" content="If you are already a vim master and you are impatient, please jump to the Quick start section at the end of this article.   In this post, I use git as an example of version control software. But you c">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2013-06-10T19:08:00+00:00">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="git">
+           <meta property="article:tag" content="merge">
+           <meta property="article:tag" content="mergetool">
+           <meta property="article:tag" content="vim">
+
+    
+
+    
+
+
+
+</head>
+<body>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
+            
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2013-06-10T19:08:00+00:00">2013-06-10 19:08</time>
+            
+
+            
+          |  
+        <a href="use-vimdiff-to-resolve-git-merge-conflicts-effectively.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="../categories/merge.html" rel="tag">merge</a></li>
+           <li><a class="tag p-category" href="../categories/mergetool.html" rel="tag">mergetool</a></li>
+           <li><a class="tag p-category" href="../categories/vim.html" rel="tag">vim</a></li>
+        </ul>
+        </div>
+
+        </div>
+        <div class="body">
+            <div>
+<p></p>
+<p>If you are already a vim master and you are impatient, please jump to the <a href="use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#sec-7">Quick start</a> section at the end of this article. </p> <p> In this post, I use git as an example of version control software. But you can use any other version control softwares instead. </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">The reasons to use vimdiff to do the merge?</h4> <div class="outline-text-3" id="text-1">  <ul> <li>vimdiff is free (vim) </li> <li>vimdiff works on any OS  </li> <li>vimdiff works on non-GUI environment </li> <li>Efficient, all the operations are finished by keyboard </li> <li>light weight </li> </ul>  </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Set up vimdiff</h4> <div class="outline-text-3" id="text-2">  <p>The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code. </p> <p> First, add following code into your ~/.vimrc, </p>   
+<pre class="prettyprint ">
+
+set laststatus=2 "show the status line
+
+set statusline=%-10.3n  "buffer number
+</pre>
+
+<p></p>
+<p> The purpose of above two lines is to display buffer number at the status line of vim. It's OPTIONAL. You don't need see the buffer number is you are familiar with the all the buffer's position. The left top is buffer number 2. The middle top is buffer number 3. The right top is buffer number 4. </p> <p> Second, if you know the buffer number, you can use hot key like ",2" (press comma first, then press two key as quickly as possible) to pull change from buffer number 2. Add below code into your ~/.vimrc to set up hot keys: </p>   
+<pre class="prettyprint ">
+
+map &lt;silent&gt; &lt;leader&gt;2 :diffget 2&lt;CR&gt; :diffupdate&lt;CR&gt;
+
+map &lt;silent&gt; &lt;leader&gt;3 :diffget 3&lt;CR&gt; :diffupdate&lt;CR&gt;
+
+map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt; :diffupdate&lt;CR&gt;
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Set up git</h4> <div class="outline-text-3" id="text-3">  <p>To use vimdiff as default merge tool: </p>   
+<pre class="prettyprint ">
+
+git config --global merge.tool vimdiff
+
+git config --global mergetool.prompt false
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">Create a git project which has conflicting merges</h4> <div class="outline-text-3" id="text-4">  <p>I already set up a "hello world" project at <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a> for your practice. </p> <p> It has three branches "master", "bob", and "chen". </p>   
+<pre class="prettyprint ">
+
+git clone git://github.com/redguardtoo/test-git-mergetool.git
+
+cd test-git-mergetool
+
+git checkout -b bob origin/bob # create local mirror of bob branch
+
+git checkout -b chen origin/chen # create local mirror of chen branch
+</pre>
+
+<p></p>
+<p> Bob and Chen has edited same files. So please merge branch "bob" into "master" at first. Then merge from "chen". The merge conflicts will be created. </p>   
+<pre class="prettyprint ">
+
+git branch # double check that we got three local branches: master, bob, chen
+
+git checkout master # set master branch as main branch
+
+git merge bob #this is ok, because bob is the first one to merge changes
+
+git merge chen # now some conflicts created because Bob has already edited and merged same files
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">Resolve merge conflict</h4> <div class="outline-text-3" id="text-5">  <p>Now start merge tool: </p>   
+<pre class="prettyprint ">
+
+git mergetool
+</pre>
+
+<p></p>
+<p> Git will invoke vimdiff with the following window layout. There are four buffers in this layout: <img src="../wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png"> </p> <p> Here is the explanation of each buffer: </p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
+<col class="left">
+<col class="left">
+<col class="right"> </colgroup> <thead> <tr>
+<th scope="col" class="left">Buffer</th>
+<th scope="col" class="left">Explanation</th>
+<th scope="col" class="right">Buffer Number</th>
+</tr> </thead> <tbody> <tr>
+<td class="left">THEIRS (LOCAL)</td>
+<td class="left">contents of the file on the current branch</td>
+<td class="right">2</td>
+</tr> <tr>
+<td class="left">BASE</td>
+<td class="left">common base for the merge</td>
+<td class="right">3</td>
+</tr> <tr>
+<td class="left">YOURS (REMOTE)</td>
+<td class="left">contents of the file to be merged.</td>
+<td class="right">4</td>
+</tr> <tr>
+<td class="left">MERGED</td>
+<td class="left">The file containing the conflict markers. You need edit and commit this file.</td>
+<td class="right">1</td>
+</tr> </tbody> </table>   <p> Some people name THEIRS and YOURS buffer to LOCAL and REMOTE buffer. That's totally fine because names are just names. The point is that the top middle buffer is the BASE one which contains the original code before Bob and Chen committing any code. And the bottom buffer is the mess which contains resolved/unresolved conflicts where you actual editing work happens. </p> <p> You could press hot key ",2" (comma + two), Then you pick the content from THEIRS buffer (the top left buffer). It means you will use the Bob's code and discard Chen's code in MERGED buffer. </p> <p> You could press hot key ",3" (comma + three), Then you pick the content from BASE buffer (the top middle buffer). It means you will discard either Bob's code or Chen's code in MERGED buffer. </p> <p> You could press hot key ",4" (comma + four), Then you pick the content from YOURS buffer (the top right buffer). It means you will use Chen's code and discard Bob code in MERGED buffer. </p> <p> Or you can edit the content directly in MERGED buffer. Anyway, git only care about the file binding to MERGED buffer. Any other buffer will be ignored by git. </p> <p> You can use hot key "[c language=" and "][/c]c" to navigate to previous/next conflict (including the conflict resolved by git automatically) in current file which is binding to MERGED buffer. </p> <p> After finishing editing of the conflicting file in MERGED buffer, you can use hot key ":xa" to exit vimdiff. Git will open next conflicting file with vimdiff automatically. </p> <p> When you have resolved all the conflicts, follow the hint of git to commit your changes. </p> </div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">Tips</h4> <div class="outline-text-3" id="text-6">  <ul> <li>A vim plugin called fugitive.vim (<a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a>) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code. </li> <li>You can use Emacs to do the similar job (<a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool">http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool</a>). For me, Emacs start up time is too much for this task. Some people use emacsclient which has other overhead which I don't like. </li> <li>If you prefer merge tool with GUI, you can use command line <code>git mergetool -t gvimdiff</code> instead. </li> <li>The ":diffget" command is valid if and only if there are <b>MARKED</b> conflicts in merged buffer. If there are <b>NOT</b> any marked string like "&gt;&gt;&gt;&gt;" or "&lt;&lt;&lt;&lt;&lt;" around current change (you can jump to previous/next change by press "[c language=" or "][/c]c"), it means the git have automatically resolved potential conflict for you. Review this kind of change is still wise because git is not as smart as human. </li> <li>If you prefer navigating between the unresolved conflicts <b>only</b>, you can install Tim Pope's <a href="https://github.com/tpope/vim-unimpaired">vim-unimpaired</a> and use hot key "[n" and "]n" to do the navigation. </li> <li>I map "[n" and "]n" to more handy hot keys: </li> </ul>     
+<pre class="prettyprint ">
+
+map ]] ]n
+
+map [[ [n
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-7" class="outline-3"> <h4 id="sec-7"><a name="Quick-start" class="target">Quick start</a></h4> <div class="outline-text-3" id="text-7">  <p>You can use command line like "git mergetool -t vimdiff" to start vimdiff from git. </p> <p> So the minimum set up is adding three lines of code into your ~/.vimrc: </p>   
+<pre class="prettyprint ">
+
+map &lt;silent&gt; &lt;leader&gt;2 :diffget 2&lt;CR&gt; :diffupdate&lt;CR&gt;
+
+map &lt;silent&gt; &lt;leader&gt;3 :diffget 3&lt;CR&gt; :diffupdate&lt;CR&gt;
+
+map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt; :diffupdate&lt;CR&gt;
+</pre>
+
+<p></p>
+<p> Then you can press hot key ",2" ",3" ",4" in vimdiff to pull change from top three buffer. The bottom buffer is for editing the code with markers which is actually your only work space. </p> <p> ":help vimdiff" for other hot keys. </p> </div> </div> </div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="open-readme-under-git-root-directory-in-emacs.html" rel="prev" title="open README under git root directory in Emacs">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="an-example-to-abuse-the-git-merge.html" rel="next" title="An example to abuse the git merge">Next post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html",
+        disqus_title="Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively",
+        disqus_identifier="cache/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+var urlMap={
+695:'/posts/australia-food-brands.html',
+694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
+512:'/posts/moving-focus-and-buffer-between-emacs-window.html',
+357:'/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html',
+755:'/posts/niu-rou-mian-zuo-fa.html',
+750:'/posts/how-to-manage-emacs-packages.html',
+664:'/posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html',
+758:'/posts/nan-gua-zhou-zuo-fa.html',
+214:'/posts/wei-shen-men-chen-xu-yaun-chuang-ye-de-xiao-shi-gong-zi-shi-1000yuan-xiao-shi.html',
+1088:'/posts/use-firefox-in-emacs-way-3.html',
+198:'/posts/tui-jian-hao-shu-enterprise-rails.html',
+825:'/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html',
+823:'/posts/one-liner-to-load-m3u-into-mpd.html',
+636:'/posts/set-up-nfs-server-on-archlinux.html',
+191:'/posts/pin-gu-le-emacs-xia-zhi-chi-intellisense-de-ji-ge-fang-an.html',
+291:'/posts/chu-xue-zhe-shi-yong-emacs-de-nan-dian.html',
+847:'/posts/how-to-use-git-effectively.html',
+619:'/posts/an-example-to-abuse-the-git-merge.html',
+596:'/posts/i-became-a-true-emacs-geek-when-i-publicized-my-emacs-d-at-github-com.html',
+507:'/posts/commentuncomment-line-is-easy-in-emacs.html',
+748:'/posts/use-git-send-email-at-ubuntu.html',
+502:'http://blog.binchen.rg/posts/fa-biao-yi-nian-chen-wei-emacs-gao-shou-man-yi-zhou-nian-de-gan-wu.html',
+742:'/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html',
+739:'/posts/how-to-install-emacs-source-code-under-ubuntu.html',
+139:'/posts/mysqldump-for-sqlite3.html',
+222:'/posts/clean-up-emacs-mode-line-for-tiny-netbook.html',
+345:'/posts/zai-wo-de-osx-shang-wei-heroku-kai-fa-rails-chen-xu.html',
+884:'/posts/memo-on-upgrading-archlinux.html',
+341:'/posts/zhen-dui-ruby-on-rails-kai-fa-de-emacs-cha-jian.html',
+835:'/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html',
+48:'/posts/jian-chi-shi-yong-gnu-screen.html',
+832:'/posts/fan-qie-ji-dan-tang-zuo-fa.html',
+181:'/posts/my-herbstluftwm-configuration.html',
+1124:'/stories/test.html',
+589:'/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html',
+1105:'/posts/popup-function-your-cursor-is-in.html',
+424:'/posts/how-to-use-ftp-in-emacs.html',
+580:'/posts/how-to-write-javascripthtml-code-quickly.html',
+1128:'/stories/test-my-wordpress.html',
+537:'/posts/my-work-flow-to-debug-emacs-plugin.html',
+896:'/posts/why-some-systemd-service-on-archlinux-does-not-work.html',
+111:'/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html',
+890:'/posts/hao-you-shen-cai-zuo-fa.html',
+123:'/posts/my-emacs-configuration.html',
+1065:'/posts/debug-emacs-lisp-code-the-hard-way.html',
+803:'/posts/xiang-gu-shen-gun-niu-rou-wo-dan-zhou-zuo-fa.html',
+5:'/stories/about.html',
+692:'/posts/find-which-package-contains-a-file.html',
+430:'/posts/my-personal-emacs-customization-custom-el.html',
+436:'/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html',
+1103:'/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html',
+735:'/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html',
+730:'/posts/how-to-get-email-from-exchange-server-without-outlook.html',
+1016:'/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html',
+245:'/posts/always-turn-on-fpermissive-for-gcc-4-6.html',
+924:'/posts/notes-on-google-chromes-dev-tool.html',
+947:'/posts/how-to-execute-user-program-for-system-v-init-script.html',
+248:'/posts/hao-yong-de-ti-gao-shen-chan-li-de-firefox-cha-jian-leechblock.html',
+403:'/posts/notes-on-using-gnus.html',
+329:'/posts/guan-yu-yi-nian-chen-wei-emacs-gao-shou-yi-wen-de-da-yi.html',
+485:'/posts/import-gmail-contacts-into-bbdb.html',
+525:'/posts/start-wxwidgets-programming-on-linux.html',
+524:'/posts/notes-to-install-gentoo-linux.html',
+488:'/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html',
+521:'/posts/find-files-provided-by-the-installed-package.html',
+484:'/posts/use-emacs-keyboard-layout-under-archlinux-console-linuxemacsconsoleen.html',
+22:'/posts/yong-org2blog-emacs-fa-biao-bo-ke.html',
+950:'/posts/effective-spell-check-in-emacs.html',
+1029:'/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html',
+28:'/posts/yi-bu-wu-liao-de-zhen-zhi-xuan-chuan-pian.html',
+1118:'/posts/how-to-embed-button-in-wxdataviewlistctrl.html',
+773:'/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html',
+640:'/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html',
+583:'/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html',
+644:'/posts/shi-mian-yu-du-tang-shao-fa.html',
+818:'/posts/toggle-full-view-of-window-in-emacs.html',
+816:'/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html',
+812:'/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html',
+791:'/posts/install-gitso-v0-6-on-gentoo-linux.html',
+256:'/posts/start-wxwdigets-programming-on-windows.html',
+398:'/posts/the-latest-version-of-yasnippet-is-not-compatible-with-auto-complete-enemacsyasnippetauto-complete.html',
+377:'/posts/my-git-alias-in-bashrc.html',
+395:'/posts/why-facebook-app-for-android-pad-sucks.html',
+390:'/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html',
+314:'/posts/it-chuang-ye-de-bei-can-gu-shi.html',
+492:'/posts/open-url-in-emacs-with-external-browser.html',
+375:'/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html',
+553:'/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html',
+319:'/posts/emacs-zen-yang-gai-bian-le-wo-de-ren-shen.html',
+1002:'/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html',
+30:'/posts/dropbox-hen-you-chuang-yi.html',
+31:'/posts/perl-code-to-change-ip.html',
+38:'/posts/geek-chang-yong-ruan-jian-qin-dan.html',
+651:'/posts/how-to-use-terminal-in-emacs-effectively.html',
+650:'/posts/my-git-set-up.html',
+653:'/posts/how-to-do-the-screen-cast-in-linux.html',
+655:'/posts/poor-mans-github.html',
+654:'/posts/fan-qie-chao-dan-de-zuo-fa.html',
+710:'/posts/the-power-of-git-command-line-interface-4.html',
+1006:'/posts/code-rush.html',
+866:'/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html',
+864:'/posts/how-to-use-flyspell-in-web-mode.html',
+1041:'/posts/how-to-use-org2blog-effectively-as-a-programmer.html',
+260:'/posts/the-most-important-features-of-midnight-commander-mc.html',
+264:'/posts/copypaste-in-emacs.html',
+669:'/posts/hei-mu-er-chao-dan-de-zuo-fa.html',
+266:'/posts/hotkeys-for-moving-windows-in-emacs.html',
+268:'/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html',
+666:'/posts/666.html',
+173:'/posts/emacs-gdbgud-hotkeys.html',
+175:'/posts/gitorious-is-useless.html',
+303:'/posts/the-most-elegant-wordpress-theme-for-geeks.html',
+901:'/posts/why-emacs-is-better-editor.html',
+307:'/posts/fasd-make-me-10x-more-produtive-under-shell.html',
+789:'/posts/han-guo-da-jiang-tang-zuo-fa.html',
+1047:'/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html',
+543:'/posts/convert-multiple-line-into-one-big-string-in-emacs.html',
+542:'/posts/how-to-manage-my-software-configuration-at-github.html',
+545:'/posts/make-emacs-support-auto-completion-for-cmake.html',
+782:'/posts/how-to-use-expand-region-efficiently.html',
+1057:'/posts/how-to-use-ctags-in-emacs-effectively-3.html',
+575:'/posts/the-most-efficient-way-to-git-add-file-in-dired-mode-emacsendiredgit.html',
+979:'/posts/notes-on-set-up-nfs-on-archlinux.html',
+797:'/posts/use-org2blog-to-share-blog-efficiently.html',
+467:'/posts/toggle-http-proxy-in-emacs-w3m.html',
+464:'/posts/emacs-lisp-bin-bu-nan-xue.html',
+462:'/posts/use-popfile-at-linux.html',
+877:'/posts/notes-on-upgrading-gentoo-linux.html',
+166:'/posts/zhan-li-bian-chen-de-fu-zuo-yong.html',
+679:'/posts/hu-luo-bo-zhou-zuo-fa.html',
+93:'/posts/one-line-linux-cli-to-remove-span-tag.html',
+373:'/posts/convert-tex-to-pdf.html',
+371:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html',
+574:'/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html',
+332:'/posts/shi-yong-bootstrap-wen-zhang-de-xiao-jie.html',
+570:'/posts/the-minimum-emacs-for-debug-purpose.html',
+279:'/posts/how-to-debug-gtk-warning.html',
+277:'/posts/notes-for-js3-mode-in-emacs.html',
+668:'/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html',
+275:'/posts/tips-for-debug-c-code-in-emacs.html',
+18:'/posts/hello-word.html',
+170:'/posts/sample-python-code-to-resize-image.html',
+762:'/posts/my-salad.html',
+840:'/posts/san-wen-yu-dun-dou-fu-zuo-fa.html',
+478:'/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html',
+775:'/posts/navigateselect-html-tags-in-emacs.html',
+1021:'/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html',
+965:'/posts/git-merge-in-command-line.html',
+963:'/posts/switch-input-method-in-evil-mode.html',
+381:'/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html',
+728:'/posts/qin-jiao-chao-ji-rou-zuo-fa.html',
+686:'/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html',
+110:'/posts/multiple-ssh-private-keys.html',
+366:'/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html',
+363:'/posts/note-on-emacs-chat-between-john-wiegley-and-sacha-chua.html',
+118:'/posts/you-yong-de-emacs-kuai-jie-jian.html',
+368:'/posts/how-to-convert-org-to-pdf.html',
+689:'/posts/nai-you-bao-yu-gu.html',
+566:'/posts/how-to-use-keyboard-to-navigate-feedly-com.html',
+987:'/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html',
+201:'/posts/ncdu-best-disk-usage-analyzer-under-linux.html',
+1093:'/posts/upload-emacs-package-to-marmalade.html',
+62:'/posts/yong-mintty-zuo-wei-cyginw-de-console.html',
+87:'/posts/linux-zhuo-mian-shi-yong-zhi-dao.html',
+918:'/posts/my-grub2-configuration.html',
+281:'/posts/zhen-que-de-tou-bu-bao-jian.html',
+765:'/posts/dou-ban-jiang-gai-jiao-fan-zuo-fa.html',
+856:'/posts/suan-miao-chao-niu-rou-zuo-fa.html',
+1012:'/posts/add-current-directory-into-load-path-in-emacs.html',
+769:'/posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html',
+600:'/posts/open-readme-under-git-root-directory-in-emacs.html',
+601:'/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html'
+};
+
+var postId=parseInt(getParameterByName('p'),10);
+if(postId>0 && urlMap[postId]) {
+    window.location=urlMap[postId];
+}
+</script>
+<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+<a class="addthis_button_more">Share</a>
+<ul>
+<li>
+<a class="addthis_button_facebook"></a>
+</li>
+<li>
+<a class="addthis_button_google_plusone_share"></a>
+</li>
+<li>
+<a class="addthis_button_linkedin"></a>
+</li>
+<li>
+<a class="addthis_button_twitter"></a>
+</li>
+</ul>
+</div>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
+            $(function(){
+                $('.timeago').timeago();
+            });
+        </script>
+    
+</body>
+</html>

@@ -1,0 +1,43 @@
+<html><body><p>I will only talk about how to set up yasnippet 0.7.0 or higher version. </p>  <div id="outline-container-1" class="outline-3"> <h3 id="sec-1">If you follow `normal install` way, setup is simple</h3> <div class="outline-text-3" id="text-1">  <p>See its <a href="http://capitaomorte.github.com/yasnippet/">official documentation</a>. </p> <p> Install the yasnippet into somewhere and add following code into your .emacs: </p>   <pre class="src src-elisp">(add-to-list 'load-path
+              <span style="color: #87005f;">"~/.emacs.d/plugins/yasnippet-x.y.z"</span>)
+(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">yasnippet</span>) <span style="color: #af0000;">;; </span><span style="color: #af0000;">not yasnippet-bundle</span>
+
+(yas/initialize)
+
+(yas/load-directory <span style="color: #87005f;">"~/.emacs.d/plugins/yasnippet-x.y.z/snippets"</span>)
+
+</pre>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h3 id="sec-2">If you use elpa package system, setup is even simpler</h3> <div class="outline-text-3" id="text-2">  <p>After installation, you only need two lines in .emacs. </p>   <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">yasnippet</span>)
+
+(yas/initialize)
+
+</pre>   <p> Yasnippet 0.7.0 have already defined two locations for the snippets, "~/.emacs.d/yasnippet-install-path/yasnippet-x.y.z/snippets" and "~/.emacs.d/snippets". Yasnippet will load snippets in BOTH directories at startup. </p> <p> So you only put your own snippets in "~/.emacs.d/snippets" and done. No need to tweak .emacs at all. To verify my claim, you can `C-h v yas/snippet-dirs' to check value of "yas/snippet-dirs". Please note "yas/root-directory" is the alias of "yas/snippet-dirs". </p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h3 id="sec-3">The real world setup is NOT simple</h3> <div class="outline-text-3" id="text-3">  <p>I will explain the reasons at first and give my complete yasnippet configuration code at the end of the this post. </p> </div>  <div id="outline-container-3-1" class="outline-4"> <h4 id="sec-3-1">Two snippets may share the same key, so I need activate `yas/dropdown-prompt'</h4> <div class="outline-text-4" id="text-3-1">  <p>One issue is I need a user-friendly dropdown window popped up when the key I input has several candidates. For example, when I type "inc" in C code. There are two candicates `#include "…"' and `#include &lt;…&gt;' available. A handy dropdown popup will help me to choose one of them as efficient as possible. </p> <p> The good news is such fancy popup is a standard component of yasnippet. It's called `yas/dropdown-prompt'. Yasnippet's default algorithm will activate it at highest prority. </p> <p>  The bad news is for some wierd reason yasnippet won't load that dropdown-list by default. So you need manually load that component by one line of elisp code `(require 'dropdown-list)'. </p> </div>  </div>  <div id="outline-container-3-2" class="outline-4"> <h4 id="sec-3-2">`yas/dropdown-prompt' is not perfect</h4> <div class="outline-text-4" id="text-3-2">  <p>I cannot scroll down the dropdown window when there are more candidates it can display. That's especially annoying when calling `yas/insert-snippet'. In this case, we need use `yas/completing-prompt' instead. I will show the fix at the end of this article. </p> </div>  </div>  <div id="outline-container-3-3" class="outline-4"> <h4 id="sec-3-3">Yasnippets conflicts with other plugins</h4> <div class="outline-text-4" id="text-3-3">  <p>I use <a href="http://cx4a.org/software/auto-complete/">Auto Complete Mode</a> (version 20120327 in elpa).  There are two issuses when using it with yasnippets. </p> <p> First, it use TAB key to do the auto-complete thing while yasnippet also uses TAB key. So I need re-configure hotkeys of yasnippets. </p> <p> Second, yansippet changed its API `yas/get-snippet-tables' since version 0.7.0. This make the auto-complete cannot use yasnippet at all. This issue is <a href="https://github.com/m2ym/auto-complete/pull/107">reported</a> and <a href="https://github.com/tkf/auto-complete/commit/337caa2ccc254a79f615bb2417f0d2fb9552b547">fixed</a> by <a href="https://github.com/tkf">tkf</a>. Actually all you need do is simple: </p>   <pre class="src src-sh"><span style="color: #5f5f87;">cd</span> auto-complete-install-dir
+
+rm auto-complete-config.elc
+
+curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2fb9552b547/auto-complete-config.el &gt; auto-complete-config.el
+
+</pre>  </div> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h3 id="sec-4">My final yasnippet setup</h3> <div class="outline-text-3" id="text-4">     <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">yasnippet</span>)
+
+(yas/initialize)
+
+<span style="color: #af0000;">;; </span><span style="color: #af0000;">default TAB key is occupied by auto-complete</span>
+
+(global-set-key (kbd <span style="color: #87005f;">"C-c ; u"</span>) 'yas/expand)
+
+<span style="color: #af0000;">;; </span><span style="color: #af0000;">default hotkey `C-c &amp; C-s` is still valid</span>
+
+(global-set-key (kbd <span style="color: #87005f;">"C-c ; s"</span>) 'yas/insert-snippet)
+
+<span style="color: #af0000;">;; </span><span style="color: #af0000;">give yas/dropdown-prompt in yas/prompt-functions a chance</span>
+
+(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">dropdown-list</span>)
+
+<span style="color: #af0000;">;; </span><span style="color: #af0000;">use yas/completing-prompt when ONLY when `M-x yas/insert-snippet'</span>
+
+<span style="color: #af0000;">;; </span><span style="color: #af0000;">thanks to capitaomorte for providing the trick.</span>
+
+(<span style="color: #af00ff;">defadvice</span> <span style="color: #0000ff;">yas/insert-snippet</span> (around use-completing-prompt activate)
+     <span style="color: #87005f;">"Use `</span><span style="color: #008787;">yas/completing-prompt</span><span style="color: #87005f;">' for `</span><span style="color: #008787;">yas/prompt-functions</span><span style="color: #87005f;">' but only here..."</span>
+       (<span style="color: #af00ff;">let</span> ((yas/prompt-functions '(yas/completing-prompt)))
+             ad-do-it))
+</pre>  </div> </div> </body></html>

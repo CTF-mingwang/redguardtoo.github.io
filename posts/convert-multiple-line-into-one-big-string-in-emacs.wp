@@ -1,0 +1,39 @@
+<html><body><p>This command will convert selected region in Emacs into one string and put it into the kill ring. </p> <p> Why I need this command? I'm doing some web developement now. I've got a  javascript API whose parameter is a string in html syntax. I write that beautifully indented multiple lines string in html editor to make sure the string is correct. Then I convert the multiple lines  string into one string without line breaks so that I can paste the one line string into my javascript code. </p> <p> In certain situation, this method actually makes code more readable. </p> <p> Here is code you can paste into your .emacs: </p>   <pre class="src src-elisp">(<span style="color: #b5bd68;">defun</span> <span style="color: #81a2be;">strip-convert-lines-into-one-big-string</span> (beg end)
+<span style="color: #b294bb;">"strip and convert selected lines into one big string which is copied into kill ring.</span>
+
+<span style="color: #b294bb;">When transient-mark-mode is enabled, if no region is active then only the</span>
+
+<span style="color: #b294bb;">current line is acted upon.</span>
+
+
+
+<span style="color: #b294bb;">If the region begins or ends in the middle of a line, that entire line is</span>
+
+<span style="color: #b294bb;">copied, even if the region is narrowed to the middle of a line.</span>
+
+
+
+<span style="color: #b294bb;">Current position is preserved."</span>
+  (interactive <span style="color: #8abeb7;">"r"</span>)
+  (<span style="color: #b5bd68;">let</span> (str (orig-pos (point-marker)))
+  (<span style="color: #b5bd68;">save-restriction</span>
+    (widen)
+    (<span style="color: #b5bd68;">when</span> (and transient-mark-mode (not (use-region-p)))
+      (setq beg (line-beginning-position)
+            end (line-beginning-position 2)))
+
+    (goto-char beg)
+    (setq beg (line-beginning-position))
+    (goto-char end)
+    (<span style="color: #b5bd68;">unless</span> (= (point) (line-beginning-position))
+      (setq end (line-beginning-position 2)))
+
+    (goto-char beg)
+    (setq str (replace-regexp-in-string <span style="color: #8abeb7;">"[ \t]*\n"</span> <span style="color: #8abeb7;">""</span> (replace-regexp-in-string <span style="color: #8abeb7;">"^[ \t]+"</span> <span style="color: #8abeb7;">""</span> (buffer-substring-no-properties beg end))))
+    <span style="color: #969896; font-style: italic;">;; </span><span style="color: #969896; font-style: italic;">(message "str=%s" str)</span>
+    (kill-new str)
+    (goto-char orig-pos)))
+  )
+(global-set-key (kbd <span style="color: #8abeb7;">"C-c C-y"</span>) 'strip-convert-lines-into-one-big-string)
+
+</pre>  </body></html>

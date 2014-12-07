@@ -1,0 +1,26 @@
+<html><body><p>I will show you my typical workflow with <a href="https://github.com/clvv/fasd">fasd</a>. </p> <p> Quick visit my work folder named "NeonSite": </p>   <pre class="example">$ z neon
+4       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
+
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+
+</pre>  <p> I press '1' and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh? </p> <p> Copy file 'hello.c' to a folder named "NeonSite": </p>   <pre class="example">$ cp ~/hello.c `s neon`
+
+5       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
+
+4       4.41       /home/chenbi/work/raas/current/webapp/NeonSite/js/gallery2.js
+
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+
+</pre>  <p> I press '1' and 'hello.c' is copied into the corresponding folder. </p> <p> In order to install and setup fasd, you need only put fasd under some folder in $PATH and add the below code into you $HOME/.bashrc. </p>   <pre class="src src-sh"><span style="color: #c397d8;">eval</span> <span style="color: #70c0b1;">"$(fasd --init auto)"</span>
+
+alias <span style="color: #e7c547;">z</span>=<span style="color: #70c0b1;">'fasd_cd -di'</span>
+
+</pre>   <p> Please note you can use any POSIX shell (zsh, for example) with fasd. Check <a href="https://github.com/clvv/fasd/blob/master/README.md">fasd's documentation</a> for details. </p> <p> At last, I want to thank <a href="https://github.com/clvv">clvv (Wei Dai)</a> for designing such a elegant and beautiful tool. </p> <p> 你是我的大救星(you're my lifesaver),Wei Dai! </p></body></html>

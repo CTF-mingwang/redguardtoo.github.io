@@ -1,0 +1,29 @@
+<html><body><p>Below code will get error message if compiled by gcc 4.6+: </p>   <pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+</pre>    <pre class="src src-c++"><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">A</span>
+
+{
+   <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">a</span>();
+}
+
+<span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">B</span>
+
+{
+   <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>;
+}
+
+<span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">MyClass</span>:<span style="color: #00cdcd; font-weight: bold;">public</span> <span style="color: #00cd00;">B</span>
+
+{
+  <span style="color: #00cd00;">A</span> <span style="color: #cdcd00;">_a</span>;
+  <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>
+  {
+    _a.a(); <span style="color: #cd0000;">//</span><span style="color: #cd0000;">gcc complains here!</span>
+  }
+}
+
+</pre>  <p> Since I cannot modify class A and B, I need add "-fpermission" to CXX<sub>FLAG</sub>. Here is my <a href="http://www.cmake.org">cmake</a> code, </p>   <pre class="src src-cmake">if(CMAKE_COMPILER_IS_GNUCC)
+  # needed for gcc 4.6+
+  set(CMAKE_CXX_FLAGS <span style="color: #00cd00;">"${CMAKE_CXX_FLAGS} -fpermissive"</span>)
+endif()
+
+</pre>  </body></html>
