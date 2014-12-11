@@ -122,23 +122,11 @@ So here is my complete solution:
 </pre>
 
 <p>
-Here is the difference from EmacsWiki:
+The only difference from EmacsWiki is only one line:
 </p>
 
-<pre class="prettyprint lang-diff">
-diff --git a/lisp/init-web-mode.el b/lisp/init-web-mode.el
-index 63006c1..d1c19a6 100644
---- a/lisp/init-web-mode.el
-+++ b/lisp/init-web-mode.el
-@@ -31,7 +31,8 @@
-          '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
-          )
-     (set (make-local-variable 'flymake-err-line-patterns)
--         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)" nil 1 2 4))
-+         ;; pick up errors and warnings for HTML5
-+         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing\\|discarding.*\\)" nil 1 2 4))
-          )
-     (flymake-mode t)))
+<pre class="prettyprint lang-lisp">
+'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 </pre>
 </div>
             </div>
