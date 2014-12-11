@@ -1,5 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 08 Dec 2014 21:31:55 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 11 Dec 2014 17:02:39 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-05&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the &lt;a href="http://www.emacswiki.org/emacs/FlymakeHtml"&gt;solution from EmacsWiki&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I found it not effective because &lt;a href="https://github.com/w3c/tidy-html5"&gt;tidy&lt;/a&gt; is too strict to HTML5 and produces too much noise.
+&lt;/p&gt;
+
+&lt;p&gt;
+I only need validation of missing open/closed html tag(s). Nothing more!
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my complete solution:
+&lt;/p&gt;
+
+&lt;pre class="prettyprint lang-lisp"&gt;
+(defun flymake-html-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "tidy" (list local-file))))
+
+(defun flymake-html-load ()
+  (interactive)
+  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+    (set (make-local-variable 'flymake-allowed-file-name-masks)
+         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+         )
+    (set (make-local-variable 'flymake-err-line-patterns)
+         ;; only validate missing html tags
+         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+         )
+    (flymake-mode t)))
+
+(add-hook 'web-mode-hook 'flymake-html-load)
+(add-hook 'html-mode-hook 'flymake-html-load)
+(add-hook 'nxml-mode-hook 'flymake-html-load)
+(add-hook 'php-mode-hook 'flymake-html-load)
+&lt;/pre&gt;
+
+&lt;p&gt;
+Here is the difference from EmacsWiki:
+&lt;/p&gt;
+
+&lt;pre class="prettyprint lang-diff"&gt;
+diff --git a/lisp/init-web-mode.el b/lisp/init-web-mode.el
+index 63006c1..d1c19a6 100644
+--- a/lisp/init-web-mode.el
++++ b/lisp/init-web-mode.el
+@@ -31,7 +31,8 @@
+          '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+          )
+     (set (make-local-variable 'flymake-err-line-patterns)
+-         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)" nil 1 2 4))
++         ;; pick up errors and warnings for HTML5
++         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing\\|discarding.*\\)" nil 1 2 4))
+          )
+     (flymake-mode t)))
+&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -1082,137 +1150,4 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
 
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</guid><pubDate>Sat, 01 Nov 2014 11:06:17 GMT</pubDate></item><item><title>My Emacs skill is improved after 3 years</title><link>http://blog.binchen.org/posts/my-emacs-skills-is-improved-after-3-years.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;This is &lt;a href="http://blog.binchen.org/posts/you-yong-de-emacs-kuai-jie-jian.html"&gt;my note on useful commands/keybindings to memorize&lt;/a&gt; three years ago.
-&lt;/p&gt;
-
-&lt;p&gt;
-Most are obsolete because I'm more skillful now.
-&lt;/p&gt;
-
-&lt;p&gt;
-Basically I use &lt;b&gt;fewer&lt;/b&gt; but more powerful plugins. I write Emacs lisp if there is no suitable plugin.
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, column edit,
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;C-x r t yourstring RET (See "How to do select column then do editing in GNU Emacs ?"")
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now I use &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, save current position to register and jump to the position,
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;C-r SPC to save, C-j to jump (better-registers.el required) 
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now Evil.
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, save frame configuration to register,
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;C-r f (better-registers.el required) 
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now &lt;a href="https://github.com/pashinin/workgroups2"&gt;workgroups2.&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three year ago, (un)comment line,
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;M-; (qiang-comment-dwim-line required)
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now &lt;a href="https://github.com/redguardtoo/evil-nerd-commenter"&gt;evil-nerd-commenter.&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago for visiting the next/previous error message after compiling,
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;"M-g M-n" or "M-g M-p"
-&lt;/pre&gt;
-
-&lt;p&gt;
-I'm still using it.
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, find-tag/pop-tag-mark
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;"M-." and "M-*"
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now Evil
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, grep current work directory only or all sub-directories
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;M-x lgrep/rgrep
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now grep in shell plus &lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, visit multiple tags table 
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;M-x visit-tags-table
-&lt;/pre&gt;
-
-&lt;p&gt;
-&lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;hack tags-table-list directly&lt;/a&gt; might be simpler.
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, set countdown timer
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;M-x org-timer-set-timer, C-c C-x ;
-&lt;/pre&gt;
-
-&lt;p&gt;
-Now I don't push myself with the timer thing.
-&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Three years ago, mark subtree in org-mode
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;pre class="example"&gt;M-x org-mark-subtree
-&lt;/pre&gt;
-
-&lt;p&gt;
-It was used to select the text to post to my blog.
-&lt;/p&gt;
-
-&lt;p&gt;
-Now I use &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt;. The org-mark-subtree is hardcoded into org2nikola.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>skill</category><guid>http://blog.binchen.org/posts/my-emacs-skills-is-improved-after-3-years.html</guid><pubDate>Wed, 17 Sep 2014 13:30:34 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</guid><pubDate>Sat, 01 Nov 2014 11:06:17 GMT</pubDate></item></channel></rss>
