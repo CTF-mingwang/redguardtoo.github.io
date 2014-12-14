@@ -29,9 +29,13 @@
     <meta property="og:site_name" content="Chen's blog">
     <meta property="og:title" content="How to use expand-region.el in Emacs efficiently">
     <meta property="og:url" content="http://blog.binchen.org/posts/how-to-use-expand-region-efficiently.html">
-    <meta property="og:description" content="expand-region.el is very useful plugin. I use it to select a code segment and keep press its expand key until the selected region expand to the desired region.   The only issue is it's recommended hot">
+    <meta property="og:description" content='expand-region.el is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
+
+
+
+The only issue is its recommended hotkey for "er/expand-re'>
     <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2013-08-26T21:16:00+00:00">
+    <meta property="article:published_time" content="2013-08-26T23:16:00+00:00">
            <meta property="article:tag" content="emacs">
            <meta property="article:tag" content="en">
            <meta property="article:tag" content="expand">
@@ -67,7 +71,7 @@
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2013-08-26T21:16:00+00:00">2013-08-26 21:16</time>
+                <time class="timeago" datetime="2013-08-26T23:16:00+00:00">2013-08-26 23:16</time>
             
 
             
@@ -89,33 +93,50 @@
         </div>
         <div class="body">
             <div>
-<p></p>
-<p><a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful plugin. I use it to select a code segment and keep press its expand key until the selected region expand to the desired region. </p> <p> The only issue is it's recommended hot key for command "er/expand-region" is "C-=". A little bit hard to press. </p> <p> After marking a region by pressing "C-=", I need press "=" to expand region and "-" to contract region. </p> <p> As you may notice, to press "=" or "-" keys I need move my right hand. </p> <p> Myh solution is kind of simple, you press ",xx" to select initial region. Keep press "x" to expand. "z" to contract region. </p> <p> All you need is using <a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a> and <a href="https://github.com/cofi/evil-leader">evil-leader</a>. </p> <p> Here is my elisp code: </p>   
-<pre class="prettyprint ">
+<p><a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
+</p>
 
+<p>
+The only issue is its recommended hotkey for "er/expand-region" is "C-=". A little bit hard to press.
+</p>
+
+<p>
+After marking a region by pressing "C-=", I press "=" to expand the region and "-" to contract.
+</p>
+
+<p>
+As you may have noticed, I need move the right hand to press "=" or "-" so it's not quick enough.
+</p>
+
+<p>
+The solution is simple, press ",xx" to select the initial region. Keep press "x" to expand. "z" to contract region because "x" "z" is close to left hand fingers.
+</p>
+
+<p>
+<a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a> and <a href="https://github.com/cofi/evil-leader">evil-leader</a> is required to implement this.
+</p>
+
+<p>
+Here is the setup:
+</p>
+
+<pre class="prettyprint lang-lisp">
 (require 'evil)
-
 (require 'evil-leader)
-
 (evil-mode 1) ;; enable evil-mode
 
-
-
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
-
 (evil-leader/set-key "xx" 'er/expand-region)
 </pre>
-
-<p></p>
 </div>
         </div>
         
         <ul class="pager">
             <li class="previous">
-                <a href="navigateselect-html-tags-in-emacs.html" rel="prev" title="Navigate/Select html tags in Emacs">Previous post</a>
+                <a href="how-to-use-expand-region-el-in-emacs-efficiently.html" rel="prev" title="How to use expand-region.el in Emacs efficiently">Previous post</a>
             </li>
             <li class="next">
-                <a href="how-to-use-expand-region-el-in-emacs-efficiently.html" rel="next" title="How to use expand-region.el in Emacs efficiently">Next post</a>
+                <a href="han-guo-da-jiang-tang-zuo-fa.html" rel="next" title="韩国大酱汤做法">Next post</a>
             </li>
         </ul>
 
