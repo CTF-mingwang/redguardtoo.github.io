@@ -44,42 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/one-liner-to-load-m3u-into-mpd.html">One liner to load m3u into mpd</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-09-23T20:01:37+00:00">2013-09-23 20:01</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/one-liner-to-load-m3u-into-mpd.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-to-load-m3u-into-mpd.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/mpd.html" rel="tag">mpd</a></li>
-           <li><a class="tag p-category" href="categories/music.html" rel="tag">music</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<pre class="prettyprint ">
-
-<p>mpc clear;ln -s ~/Music/all.m3u ~/.mpd/playlists/all.m3u;mpc load all;mpc update;mpc shuffle;mpc play;
-</p></pre>
-<p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/toggle-full-view-of-window-in-emacs.html">Toggle full view of window in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -393,6 +357,71 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 <p></p>
 <ul> <li>买酱,见下图 </li> </ul>  <p><img src="wp-content/uploads/2013/08/wpid-korean-soup-sauce.jpg" alt="http://blog.binchen.org/wp-content/uploads/2013/08/wpid-korean-soup-sauce.jpg"> </p>
 <ul> <li>倒入白菜，菇，韩国豆芽等等，加冷水，煮开 </li> <li>倒入酱，加糖盐调味 </li> </ul>  <p><img src="wp-content/uploads/2013/08/wpid-korean-soup.jpg" alt="http://blog.binchen.org/wp-content/uploads/2013/08/wpid-korean-soup.jpg"> </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-expand-region-el-in-emacs-efficiently.html">How to use expand-region.el in Emacs efficiently</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-08-26T23:16:00+00:00">2013-08-26 23:16</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-expand-region-el-in-emacs-efficiently.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-expand-region-el-in-emacs-efficiently.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/expand.html" rel="tag">expand</a></li>
+           <li><a class="tag p-category" href="categories/region.html" rel="tag">region</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p><a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the selected region expand to the desired region.
+</p>
+
+<p>
+The only issue is its recommended hotkey for "er/expand-region" is "C-=". A little bit hard to press.
+</p>
+
+<p>
+After marking a region by pressing "C-=", I need press "=" to expand region and "-" to contract region.
+</p>
+
+<p>
+As you may have noticed, I need move the right hand to press "=" or "-" so it's not quick enough.
+</p>
+
+<p>
+My solution is simple, press ",xx" to select initial region. Keep press "x" to expand. "z" to contract region because "x" "z" is close to left hand fingers.
+</p>
+
+<p>
+All you need is using <a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a> and <a href="https://github.com/cofi/evil-leader">evil-leader</a>.
+</p>
+
+<p>
+Here is the setup:
+</p>
+
+<pre class="prettyprint lang-lisp">
+(require 'evil)
+(require 'evil-leader)
+(evil-mode 1) ;; enable evil-mode
+
+(eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
+(evil-leader/set-key "xx" 'er/expand-region)
+</pre>
 </div>
             </div>
         </div>

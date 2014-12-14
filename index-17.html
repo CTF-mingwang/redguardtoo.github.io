@@ -44,228 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/ccjava-code-indentation-in-emacs.html">C/C++/Java code indentation in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-05-09T09:19:18+00:00">2014-05-09 09:19</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/ccjava-code-indentation-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/ccjava-code-indentation-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/c.html" rel="tag">c</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Problem</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>There are two styles when insert curly braces in C like languages.
-</p>
-<p>
-Style 1:
-</p>
-
-
-
-<pre class="prettyprint lang-c">
-if(true) {
-    printf("hello world\n");
-}
-</pre>
-
-
-
-<p>
-Style 2:
-</p>
-
-
-
-<pre class="prettyprint lang-c">
-if(true)
-{
-    printf("hello world\n");
-}
-</pre>
-
-
-
-<p>
-Whatever style I use, I expect Emacs will properly handle the indentation for me.
-</p>
-<p>
-In "Style 1", when I press ENTER key after "{" at first line, I expect the new line will indent four spaces.
-</p>
-<p>
-In "Style 2", when I press ENTER key after ")" at first line, I expect the new line will NOT indent.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>Insert below code into ~/.emacs:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(defun fix-c-indent-offset-according-to-syntax-context (key val)
-  ;; remove the old element
-  (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
-  ;; new value
-  (add-to-list 'c-offsets-alist '(key . val)))
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
-              ;; indent
-              (fix-c-indent-offset-according-to-syntax-context 'substatement 0)
-              (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
-            ))
-
-</pre>
-
-
-
-<p>
-That's it.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Explanation</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>When you press the ENTER key, the function <b>c-indent-line</b> will be called.
-</p>
-<p>
-That function will do some simple syntax analysis and decide current syntactic context..
-</p>
-<p>
-It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
-</p>
-<p>
-For example, <b>substatement</b> corresponds to the code like below:
-</p>
-
-
-
-<pre class="prettyprint lang-c">
-if(true) // press ENTER here
-</pre>
-
-
-
-<p>
-And <b>func-decl-cont</b> corresponds to:
-</p>
-
-
-
-<pre class="prettyprint lang-c">
-void fn () //press ENTER here
-</pre>
-
-
-
-</div>
-
-</div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">Technical details</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
-</p>
-<p>
-<b>indent-according-to-mode</b> will actually call function object <b>indent-line-function</b> if it's not nil.
-</p>
-<p>
-In C/C++/Java, that object is actually <b>c-indent-line</b>.
-</p>
-<p>
-<b>c-indent-line</b> is defined in /usr/share/emacs/24.3/lisp/progmodes/cc-cmds.el (I use Emacs 24.3 on Gentoo Linux).
-</p>
-<p>
-In that function, just below the code line:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(setq c-syntactic-context (c-guess-basic-syntax))
-</pre>
-
-
-
-<p>
-Please insert insert log code:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(message "c-syntactic-context=%s" c-syntactic-context)
-</pre>
-
-
-
-<p>
-Then you will know the current syntactic context when you press ENTER key.
-</p>
-<p>
-<a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> said you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
-</p>
-<p>
-For example, the context <b>statement-cont</b> corresponds to the use case like this:
-</p>
-
-
-
-<pre class="prettyprint lang-c">
-int a=3, // press ENTER here
-</pre>
-
-
-
-<p>
-Please note syntax analysis in c-indent-line is turned on if and <b>only if</b> the global flag <b>c-syntactic-indentation</b> is true.
-</p>
-<p>
-Thanks for <a href="https://github.com/chengyi">chengyi</a> for <a href="https://github.com/redguardtoo/emacs.d/issues/98">reporting the issue and suggesting the fix</a>.
-</p>
-<p>
-BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.
-</p>
-</div>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1405,6 +1183,114 @@ Tanything will locate the tab by finding match in web page's title or URL.
 
 <p></p>
 <p> It turns out that some third party package I installed changes the emacs variable "display-buffer-function". I guess that's why the backtrace is blocked. Because backtrace is usually dumped into a backtrace buffer. And backtrace buffer's is actually influenced by the variable. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-11T18:52:00+00:00">2014-03-11 18:52</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-ctags-in-emacs-effectively-3.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-ctags-in-emacs-effectively-3.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p><a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> is a code navigation tool. It supports many language and could be integrated into Emacs well. </p> <p> Please read <a href="http://www.emacswiki.org/emacs/BuildTags">EmacsWiki</a> for basic usage. </p> <p> I will talk about how I manage my ctags. </p> <p> Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". </p> <p> An example of tags-table-list: </p>
+<pre class="prettyprint ">
+(setq tags-table-list '("~/wxWidgets-master/TAGS" "~/projs/Loris/src/desktop/TAGS"))
+</pre>
+
+<p></p>
+<p> Every time we you "M-x find-tag", the TAGS file in above list will be read from the scratch to locate the definition of the symbol under cursor. </p> <p> Here is my strategy to manage TAGS <b>automatically</b>: </p>
+<ul> <li>I hard coded full path of TAGS in .emacs because I usually don't change project path. </li> <li>In major mode hook like c++-mode-hook or js2-mode-hook I will check the directory path of current file. If it contains certain string, I suppose the file belong to certain project. </li> <li>Then I will create TAGS for that project if needed </li> <li>Every time when I save the file, I may update TAGS according to the value of tags-table-list. </li> </ul>   <p> Here is the code: </p>
+<pre class="prettyprint lang-lisp">
+(defun my-project-name-contains-substring (REGEX)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p REGEX dir)))
+
+(defun my-create-tags-if-needed (SRC-DIR &amp;optional FORCE)
+  "return the full path of tags file"
+  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
+       file)
+    (setq file (concat dir "TAGS"))
+    (when (or FORCE (not (file-exists-p file)))
+      (message "Creating TAGS in %s ..." dir)
+      (shell-command
+       (format "ctags -f %s -e -R %s" file dir))
+      )
+    file
+    ))
+
+(defvar my-tags-updated-time nil)
+
+(defun my-update-tags ()
+  (interactive)
+  "check the tags in tags-table-list and re-create it"
+  (dolist (tag tags-table-list)
+    (my-create-tags-if-needed (file-name-directory tag) t)
+    ))
+
+(defun my-auto-update-tags-when-save ()
+  (interactive)
+  (cond
+   ((not my-tags-updated-time)
+    (setq my-tags-updated-time (current-time)))
+   ((&lt; (- (float-time (current-time)) (float-time my-tags-updated-time)) 300)
+    ;; &lt; 300 seconds
+    ;; do nothing
+    )
+   (t
+    (setq my-tags-updated-time (current-time))
+    (my-update-tags)
+    (message "updated tags after %d seconds." (- (float-time (current-time))  (float-time my-tags-updated-time)))
+    )
+   ))
+
+(defun my-setup-develop-environment ()
+    (when (my-project-name-contains-substring "Loris")
+      (cond
+       ((my-project-name-contains-substring "src/desktop")
+        ;; C++ project don't need html tags
+        (setq tags-table-list (list
+                               (my-create-tags-if-needed
+                                (concat (file-name-as-directory (getenv "WXWIN")) "include"))
+                               (my-create-tags-if-needed "~/projs/Loris/loris/src/desktop")))
+        )
+       ((my-project-name-contains-substring "src/html")
+        ;; html project donot need C++ tags
+        (setq tags-table-list (list (my-create-tags-if-needed "~/projs/Loris/loris/src/html")))
+        ))))
+
+(add-hook 'after-save-hook 'my-auto-update-tags-when-save)
+(add-hook 'js2-mode-hook 'my-setup-develop-environment)
+(add-hook 'web-mode-hook 'my-setup-develop-environment)
+(add-hook 'c++-mode-hook 'my-setup-develop-environment)
+(add-hook 'c-mode-hook 'my-setup-develop-environment)
+</pre>
+
+<p></p>
+<p> UPDATE: There is some discussion at <a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3">Google Plus</a> about using ctags. Kaushal Modi recommended three emacs plugins: </p>
+<ol> <li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>   <p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
 </div>
             </div>
         </div>

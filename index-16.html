@@ -44,114 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-11T18:52:00+00:00">2014-03-11 18:52</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-use-ctags-in-emacs-effectively-3.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-ctags-in-emacs-effectively-3.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p><a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> is a code navigation tool. It supports many language and could be integrated into Emacs well. </p> <p> Please read <a href="http://www.emacswiki.org/emacs/BuildTags">EmacsWiki</a> for basic usage. </p> <p> I will talk about how I manage my ctags. </p> <p> Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". </p> <p> An example of tags-table-list: </p>
-<pre class="prettyprint ">
-(setq tags-table-list '("~/wxWidgets-master/TAGS" "~/projs/Loris/src/desktop/TAGS"))
-</pre>
-
-<p></p>
-<p> Every time we you "M-x find-tag", the TAGS file in above list will be read from the scratch to locate the definition of the symbol under cursor. </p> <p> Here is my strategy to manage TAGS <b>automatically</b>: </p>
-<ul> <li>I hard coded full path of TAGS in .emacs because I usually don't change project path. </li> <li>In major mode hook like c++-mode-hook or js2-mode-hook I will check the directory path of current file. If it contains certain string, I suppose the file belong to certain project. </li> <li>Then I will create TAGS for that project if needed </li> <li>Every time when I save the file, I may update TAGS according to the value of tags-table-list. </li> </ul>   <p> Here is the code: </p>
-<pre class="prettyprint lang-lisp">
-(defun my-project-name-contains-substring (REGEX)
-  (let ((dir (if (buffer-file-name)
-                 (file-name-directory (buffer-file-name))
-               "")))
-    (string-match-p REGEX dir)))
-
-(defun my-create-tags-if-needed (SRC-DIR &amp;optional FORCE)
-  "return the full path of tags file"
-  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
-       file)
-    (setq file (concat dir "TAGS"))
-    (when (or FORCE (not (file-exists-p file)))
-      (message "Creating TAGS in %s ..." dir)
-      (shell-command
-       (format "ctags -f %s -e -R %s" file dir))
-      )
-    file
-    ))
-
-(defvar my-tags-updated-time nil)
-
-(defun my-update-tags ()
-  (interactive)
-  "check the tags in tags-table-list and re-create it"
-  (dolist (tag tags-table-list)
-    (my-create-tags-if-needed (file-name-directory tag) t)
-    ))
-
-(defun my-auto-update-tags-when-save ()
-  (interactive)
-  (cond
-   ((not my-tags-updated-time)
-    (setq my-tags-updated-time (current-time)))
-   ((&lt; (- (float-time (current-time)) (float-time my-tags-updated-time)) 300)
-    ;; &lt; 300 seconds
-    ;; do nothing
-    )
-   (t
-    (setq my-tags-updated-time (current-time))
-    (my-update-tags)
-    (message "updated tags after %d seconds." (- (float-time (current-time))  (float-time my-tags-updated-time)))
-    )
-   ))
-
-(defun my-setup-develop-environment ()
-    (when (my-project-name-contains-substring "Loris")
-      (cond
-       ((my-project-name-contains-substring "src/desktop")
-        ;; C++ project don't need html tags
-        (setq tags-table-list (list
-                               (my-create-tags-if-needed
-                                (concat (file-name-as-directory (getenv "WXWIN")) "include"))
-                               (my-create-tags-if-needed "~/projs/Loris/loris/src/desktop")))
-        )
-       ((my-project-name-contains-substring "src/html")
-        ;; html project donot need C++ tags
-        (setq tags-table-list (list (my-create-tags-if-needed "~/projs/Loris/loris/src/html")))
-        ))))
-
-(add-hook 'after-save-hook 'my-auto-update-tags-when-save)
-(add-hook 'js2-mode-hook 'my-setup-develop-environment)
-(add-hook 'web-mode-hook 'my-setup-develop-environment)
-(add-hook 'c++-mode-hook 'my-setup-develop-environment)
-(add-hook 'c-mode-hook 'my-setup-develop-environment)
-</pre>
-
-<p></p>
-<p> UPDATE: There is some discussion at <a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3">Google Plus</a> about using ctags. Kaushal Modi recommended three emacs plugins: </p>
-<ol> <li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>   <p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html">Hack wordpress php and make cdnjs.com host js</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -966,6 +858,79 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
 
 </div>
 </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/notes-on-set-up-nfs-on-archlinux.html">Notes on set up nfs on ArchLinux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-07T17:24:09+00:00">2014-02-07 17:24</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/notes-on-set-up-nfs-on-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-set-up-nfs-on-archlinux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/archlinux.html" rel="tag">archlinux</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Key points</h4> <div class="outline-text-3" id="text-1">  <ul> <li>see <a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html">Redhat documenation</a>, best doc on exportfs </li> <li>
+<a href="http://superuser.com/questions/492989/understanding-subnet-mask">Understanding Subnet mask</a> and <a href="http://superuser.com/questions/186850/what-are-the-essentials-of-a-subnet-mask">essential Subnet mask</a> </li> <li>
+<code>sudo exportfs -r</code> to reload /etc/exports </li> <li>
+<code>sudo exportfs -v</code> to see current nfs exports </li> <li>content of /etc/exports: </li> </ul>     
+<pre class="prettyprint ">
+
+/srv/nfs4/z 192.168.0.0/16(ro,insecure,no_subtree_check)
+</pre>
+
+<p></p>
+<ul> <li>check <a href="http://alephnull.com/benchmarks/sata2012/nfsv4.html">optimizatioin tips</a> </li> <li>
+<code>man 5 exports</code> for the documentation of /etc/exports </li> <li>
+<a href="https://www.serverstack.com/blog/2012/11/21/debugging-nfs-file-access-on-server-and-client-side/">Debugging NFS File Access on Server and Client Side</a> </li> </ul>     
+<pre class="prettyprint ">
+
+# turn on the log
+
+sudo rpcdebug -m nfsd -s proc
+
+# turn off the log
+</pre>
+
+<p></p>
+<ul> <li>then <code>sudo tail -f /var/log/messages.log</code> </li> <li>Basically you need <code>sudo systemctl enable syslog-ng.service</code> to enable system log before you use rpcdebug </li> </ul>  </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Summary</h4> <div class="outline-text-3" id="text-2">  <p>On server side: </p>   
+<pre class="prettyprint ">
+
+sudo exportfs
+
+# got output like:
+
+# /srv/nfs4/z   192.168.0.0/16
+</pre>
+
+<p></p>
+<p> Then on client side: </p>   
+<pre class="prettyprint ">
+
+# 131072 is 128K
+
+sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodiratime,intr
+</pre>
+
+<p></p>
+</div> </div> </div>
             </div>
         </div>
     

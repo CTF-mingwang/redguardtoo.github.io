@@ -44,50 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/memo-on-upgrading-archlinux.html">Memo on upgrading ArchLinux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-11-03T20:29:55+00:00">2013-11-03 20:29</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/memo-on-upgrading-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/memo-on-upgrading-archlinux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/gentoo.html" rel="tag">gentoo</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/upgrade.html" rel="tag">upgrade</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<pre class="prettyprint ">
-
-<h2>shit happens</h2>
-<p>pacman -Syu </p>
-<h2>archlinux replace grub with grub2</h2>
-<h2>I cannot install grub2, blocklists stuff</h2>
-<h2>downgrade to grub-obsolete</h2>
-<h2>then grub</h2>
-<h2>setup (hd0) to install MBR</h2>
-<h2>restart netbook (make sure the boot priority is right)</h2>
-</pre>
-
-<p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/notes-on-upgrading-gentoo-linux.html">notes on upgrading Gentoo Linux</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -600,6 +556,42 @@ ff line-from-clipboard
                 <div>
 <p></p>
 <p>At <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=lsYdK0C2RvQ#t=308">4:57</a> it becomes interesting. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/one-liner-to-load-m3u-into-mpd.html">One liner to load m3u into mpd</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-23T20:01:37+00:00">2013-09-23 20:01</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/one-liner-to-load-m3u-into-mpd.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-to-load-m3u-into-mpd.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/mpd.html" rel="tag">mpd</a></li>
+           <li><a class="tag p-category" href="categories/music.html" rel="tag">music</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<pre class="prettyprint ">
+
+<p>mpc clear;ln -s ~/Music/all.m3u ~/.mpd/playlists/all.m3u;mpc load all;mpc update;mpc shuffle;mpc play;
+</p></pre>
+<p></p>
 </div>
             </div>
         </div>
