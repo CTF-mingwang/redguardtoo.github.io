@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 11 Dec 2014 17:02:39 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 16 Dec 2014 20:50:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
 &lt;/p&gt;
 
 &lt;pre class="prettyprint lang-sh"&gt;
@@ -9,6 +9,7 @@ sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 # install dependencies (requests is required by zen theme)
 sudo pip install markdown webassets phpserialize nikola requests
 
+# create root directory of nikola
 mkdir ~/projs/blog.binchen.org;cd ~/projs/blog.binchen.org
 
 # import from wordpress dump
@@ -18,6 +19,7 @@ nicola import_wordpress my_wordpress_dump.xml
 git init;git add .;git commit -m "first import"
 
 # since I use zen theme, I need install lessc
+# obviously NodeJS is required
 sudo npm install -g less
 
 # I use zen theme, before intalling new theme, clean the legacy theme at first
@@ -28,42 +30,21 @@ nikola build
 &lt;/pre&gt;
 
 &lt;p&gt;
-Then open the index.html in "output" directory.
-&lt;/p&gt;
-
-&lt;p&gt;
-Import comments into disqus.
-&lt;/p&gt;
-
-&lt;p&gt;
 Use below command to fix code embedded in the html:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-&lt;p&gt;
-Import comments into disqus.
-&lt;/p&gt;
-&lt;p&gt;
-Use below command to fix code embedded in the html:
-&lt;/p&gt;
-
-
 
 &lt;pre class="prettyprint lang-bash"&gt;
 find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
 &lt;/pre&gt;
 
-
-
 &lt;p&gt;
-manually fixed those articles with Chinese title and url_map.csv
-&lt;/p&gt;
-&lt;p&gt;
-use below script to fixed the xml dumped from wordpress
+Manually fixed those articles with Chinese title in url_map.csv
 &lt;/p&gt;
 
-
+&lt;p&gt;
+Use below script to fixed the xml dumped from wordpress:
+&lt;/p&gt;
 
 &lt;pre class="prettyprint lang-python"&gt;
 #!/usr/bin/python
@@ -110,14 +91,13 @@ if __name__ == '__main__':
     print content
 &lt;/pre&gt;
 
-
 &lt;p&gt;
-Import the xml int disqus.com.
+Import the xml into disqus.com.
 &lt;/p&gt;
+
 &lt;p&gt;
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 &lt;/p&gt;
-
 
 &lt;pre class="prettyprint lang-python"&gt;
 BODY_END = """
@@ -186,11 +166,10 @@ EXTRA_HEAD_DATA = """
 """
 &lt;/pre&gt;
 
-
-
 &lt;p&gt;
-In above code, shCoreEmacs.css is the color theme.
+In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 &lt;/p&gt;
+
 &lt;p&gt;
-To upload files into ftp, I suggest FileZilla, it'stable and fast. curlftpfs is too slow.
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.
+&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>

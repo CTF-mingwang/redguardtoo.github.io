@@ -192,6 +192,7 @@ sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 # install dependencies (requests is required by zen theme)
 sudo pip install markdown webassets phpserialize nikola requests
 
+# create root directory of nikola
 mkdir ~/projs/blog.binchen.org;cd ~/projs/blog.binchen.org
 
 # import from wordpress dump
@@ -201,6 +202,7 @@ nicola import_wordpress my_wordpress_dump.xml
 git init;git add .;git commit -m "first import"
 
 # since I use zen theme, I need install lessc
+# obviously NodeJS is required
 sudo npm install -g less
 
 # I use zen theme, before intalling new theme, clean the legacy theme at first
@@ -211,42 +213,21 @@ nikola build
 </pre>
 
 <p>
-Then open the index.html in "output" directory.
-</p>
-
-<p>
-Import comments into disqus.
-</p>
-
-<p>
 Use below command to fix code embedded in the html:
 </p>
-
-<div class="org-src-container">
-<p>
-Import comments into disqus.
-</p>
-<p>
-Use below command to fix code embedded in the html:
-</p>
-
-
 
 <pre class="prettyprint lang-bash">
 find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
 </pre>
 
-
-
 <p>
-manually fixed those articles with Chinese title and url_map.csv
-</p>
-<p>
-use below script to fixed the xml dumped from wordpress
+Manually fixed those articles with Chinese title in url_map.csv
 </p>
 
-
+<p>
+Use below script to fixed the xml dumped from wordpress:
+</p>
 
 <pre class="prettyprint lang-python">
 #!/usr/bin/python
@@ -293,14 +274,13 @@ if __name__ == '__main__':
     print content
 </pre>
 
-
 <p>
-Import the xml int disqus.com.
+Import the xml into disqus.com.
 </p>
+
 <p>
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 </p>
-
 
 <pre class="prettyprint lang-python">
 BODY_END = """
@@ -369,15 +349,13 @@ EXTRA_HEAD_DATA = """
 """
 </pre>
 
-
+<p>
+In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
+</p>
 
 <p>
-In above code, shCoreEmacs.css is the color theme.
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.
 </p>
-<p>
-To upload files into ftp, I suggest FileZilla, it'stable and fast. curlftpfs is too slow.
-</p>
-</div>
 </div>
             </div>
         </div>
