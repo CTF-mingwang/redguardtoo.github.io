@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 16 Dec 2014 20:50:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 04 Jan 2015 00:36:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
 &lt;/p&gt;
 
 &lt;pre class="prettyprint lang-sh"&gt;
@@ -10,13 +10,10 @@ sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 sudo pip install markdown webassets phpserialize nikola requests
 
 # create root directory of nikola
-mkdir ~/projs/blog.binchen.org;cd ~/projs/blog.binchen.org
+mkdir -p ~/.config/nikola;cd ~/.config/nikola
 
 # import from wordpress dump
 nicola import_wordpress my_wordpress_dump.xml
-
-# back up at first
-git init;git add .;git commit -m "first import"
 
 # since I use zen theme, I need install lessc
 # obviously NodeJS is required
@@ -24,13 +21,14 @@ sudo npm install -g less
 
 # I use zen theme, before intalling new theme, clean the legacy theme at first
 rm -rf themes/zen/;nikola install_theme zen
+# or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
 
 # build the web site
 nikola build
 &lt;/pre&gt;
 
 &lt;p&gt;
-Use below command to fix code embedded in the html:
+Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 
 &lt;pre class="prettyprint lang-bash"&gt;

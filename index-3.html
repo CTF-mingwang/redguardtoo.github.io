@@ -541,7 +541,7 @@ endif()
             <h1 class="title"><a href="posts/clean-up-emacs-mode-line-for-tiny-netbook.html">Clean up emacs mode line for tiny netbook</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2012-01-13T08:56:00+00:00">2012-01-13 08:56</time>
+                    <time class="timeago" datetime="2012-01-13T16:56:00+00:00">2012-01-13 16:56</time>
                 </div>
                 <div class="stats">
                     
@@ -563,71 +563,103 @@ endif()
             </div>
             <div class="body">
                 <div>
-<p></p>
-<p>Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>. </p> <p> It contains too much information for me because my screen is tiny (I use the netbook <a href="http://en.wikipedia.org/wiki/Asus_Eee_PC">Eee PC 701</a> whose LCD resolution is 800x480). </p> <p> For example, org-mode will append some information at the mode-line which is beyond my tiny screen. </p> <p> See <a href="http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html">customizing the mode-line</a> for the solution to clean up the mode-line. </p> <p> But there is one problem. The variable "global-mode-string" is missing in mode-line, so my favourite org-mode goodie "M-x org-timer-set-timer" won't work. </p> <p> Here is my fixed version. </p>
-<ul> <li>screenshot </li> </ul>  <p><img src="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png*" alt="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png* "> </p>
-<ul> <li>Elisp code </li> </ul>     <pre class="src src-elisp"><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">@see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html</span>
-<span style="color: #cd0000;">;; </span><span style="color: #cd0000;">But I need global-mode-string,</span>
-<p><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">@see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html</span></p>
-<p><span style="color: #cd0000;">;; </span><span style="color: #cd0000;">use setq-default to set it for /all/ modes</span></p>
-<p>(setq-default mode-line-format
+<p>Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
+</p>
+
+<p>
+It contains too much information for me because my screen is tiny (I use the netbook <a href="http://en.wikipedia.org/wiki/Asus_Eee_PC">Eee PC 701</a> whose LCD resolution is 800x480).
+</p>
+
+<p>
+For example, org-mode will append some information at the mode-line which is beyond my tiny screen.
+</p>
+
+<p>
+See <a href="http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html">customizing the mode-line</a> for the solution to clean up the mode-line.
+</p>
+
+<p>
+But there is one problem. The variable "global-mode-string" is missing in mode-line, so my favourite org-mode goodie "M-x org-timer-set-timer" won't work.
+</p>
+
+<p>
+Here is my fixed version.
+</p>
+
+<ul>
+<li>screenshot
+</li>
+</ul>
+
+<p><img src="wp-content/2012-01-14-034733-800x480.png" alt="2012-01-14-034733-800x480.png">
+</p>
+
+<ul>
+<li>Elisp code
+</li>
+</ul>
+
+<pre class="prettyprint lang-lisp">
+;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
+;; But I need global-mode-string,
+;; @see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html
+;; use setq-default to set it for /all/ modes
+(setq-default mode-line-format
   (list
-    <span style="color: #cd0000;">;; </span><span style="color: #cd0000;">the buffer name; the file name as a tool tip</span>
-    '(<span style="color: #0000ee; font-weight: bold;">:eval</span> (propertize <span style="color: #00cd00;">"%b "</span> 'face 'font-lock-keyword-face
-        'help-echo (buffer-file-name)))</p>
-<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>line and column<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"("<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>'%02' to set to 2 chars at least; prevents flickering<span class="nt">&lt;/span&gt;</span>
-  (propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%02l"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face) <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>","<span class="nt">&lt;/span&gt;</span>
-  (propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%02c"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face)
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>") "<span class="nt">&lt;/span&gt;</span>
+    ;; the buffer name; the file name as a tool tip
+    '(:eval (propertize "%b " 'face 'font-lock-keyword-face
+        'help-echo (buffer-file-name)))
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>relative position, size of file<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt;</span>
-<span class="s2">(propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">p</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-constant-face) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;% above top&lt;/span&gt;</span>
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">/</span><span class="s2">"&lt;/span&gt;</span>
-<span class="s2">(propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">I</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-constant-face) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;size&lt;/span&gt;</span>
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+    ;; line and column
+    "(" ;; '%02' to set to 2 chars at least; prevents flickering
+      (propertize "%02l" 'face 'font-lock-type-face) ","
+      (propertize "%02c" 'face 'font-lock-type-face)
+    ") "
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>the current major mode for the buffer.<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt;</span>
+    ;; relative position, size of file
+    "["
+    (propertize "%p" 'face 'font-lock-constant-face) ;; % above top
+    "/"
+    (propertize "%I" 'face 'font-lock-constant-face) ;; size
+    "] "
 
-<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="o">%</span><span class="nx">m</span><span class="s2">"&lt;/span&gt; 'face 'font-lock-string-face</span>
-<span class="s2">          'help-echo buffer-file-coding-system))</span>
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+    ;; the current major mode for the buffer.
+    "["
+
+    '(:eval (propertize "%m" 'face 'font-lock-string-face
+              'help-echo buffer-file-coding-system))
+    "] "
 
 
+    "[" ;; insert vs overwrite mode, input-method in a tooltip
+    '(:eval (propertize (if overwrite-mode "Ovr" "Ins")
+              'face 'font-lock-preprocessor-face
+              'help-echo (concat "Buffer is in "
+                           (if overwrite-mode "overwrite" "insert") " mode")))
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"<span class="cp">[</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;insert vs overwrite mode, input-method in a tooltip&lt;/span&gt;</span>
-<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (propertize (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;if&lt;/span&gt; overwrite-mode &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Ovr</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Ins</span><span class="s2">"&lt;/span&gt;)</span>
-<span class="s2">          'face 'font-lock-preprocessor-face</span>
-<span class="s2">          'help-echo (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="n">is</span> <span class="k">in</span> <span class="s2">"&lt;/span&gt;</span>
-<span class="s2">                       (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;if&lt;/span&gt; overwrite-mode &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">overwrite</span><span class="s2">"&lt;/span&gt; &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nb">insert</span><span class="s2">"&lt;/span&gt;) &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span> <span class="nb">mode</span><span class="s2">"&lt;/span&gt;)))</span>
+    ;; was this buffer modified since the last save?
+    '(:eval (when (buffer-modified-p)
+              (concat ","  (propertize "Mod"
+                             'face 'font-lock-warning-face
+                             'help-echo "Buffer has been modified"))))
 
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;was this buffer modified since the last save?&lt;/span&gt;</span>
-<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;when&lt;/span&gt; (buffer-modified-p)</span>
-<span class="s2">          (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="p">,</span><span class="s2">"&lt;/span&gt;  (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Mod</span><span class="s2">"&lt;/span&gt;</span>
-<span class="s2">                         'face 'font-lock-warning-face</span>
-<span class="s2">                         'help-echo &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="nx">has</span> <span class="nx">been</span> <span class="nx">modified</span><span class="s2">"&lt;/span&gt;))))</span>
+    ;; is this buffer read-only?
+    '(:eval (when buffer-read-only
+              (concat ","  (propertize "RO"
+                             'face 'font-lock-type-face
+                             'help-echo "Buffer is read-only"))))
+    "] "
 
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;;; &lt;/span&gt;&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#cd0000</span><span class="p">;</span><span class="s2">"&gt;is this buffer read-only?&lt;/span&gt;</span>
-<span class="s2">'(&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#0000</span><span class="nx">ee</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;:eval&lt;/span&gt; (&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cdcd</span><span class="p">;</span> <span class="nx">font</span><span class="na">-weight</span><span class="p">:</span> <span class="nx">bold</span><span class="p">;</span><span class="s2">"&gt;when&lt;/span&gt; buffer-read-only</span>
-<span class="s2">          (concat &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="p">,</span><span class="s2">"&lt;/span&gt;  (propertize &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">RO</span><span class="s2">"&lt;/span&gt;</span>
-<span class="s2">                         'face 'font-lock-type-face</span>
-<span class="s2">                         'help-echo &lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="nx">Buffer</span> <span class="nx">is</span> <span class="nb">read</span><span class="na">-only</span><span class="s2">"&lt;/span&gt;))))</span>
-<span class="s2">&lt;span style="</span><span class="nx">color</span><span class="p">:</span> <span class="vi">#00</span><span class="nx">cd00</span><span class="p">;</span><span class="s2">"&gt;"</span><span class="cp">]</span> "<span class="nt">&lt;/span&gt;</span>
+    ;;global-mode-string, org-timer-set-timer in org-mode need this
+    (propertize "%M" 'face 'font-lock-type-face)
 
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;;<span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>global-mode-string, org-timer-set-timer in org-mode need this<span class="nt">&lt;/span&gt;</span>
-(propertize <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%M"<span class="nt">&lt;/span&gt;</span> 'face 'font-lock-type-face)
-
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>" --"<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>i don't want to see minor-modes; but if you want, uncomment this:<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>minor-mode-alist  ;; list of minor modes<span class="nt">&lt;/span&gt;</span>
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #00cd00;"</span><span class="nt">&gt;</span>"%-"<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #cd0000;"</span><span class="nt">&gt;</span>fill with '-'<span class="nt">&lt;/span&gt;</span>
-))
+    " --"
+    ;; i don't want to see minor-modes; but if you want, uncomment this:
+    ;; minor-mode-alist  ;; list of minor modes
+    "%-" ;; fill with '-'
+    ))
 </pre>
-
-
-<p></p></pre>  </div>
+</div>
             </div>
         </div>
         <div class="post">
@@ -789,7 +821,7 @@ Version        : 1.8-1
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -984,8 +1016,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -997,6 +1031,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

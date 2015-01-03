@@ -29,15 +29,15 @@
     <meta property="og:site_name" content="Chen's blog">
     <meta property="og:title" content="How a programmer publish static HTML blog in Emacs">
     <meta property="og:url" content="http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html">
-    <meta property="og:description" content="I can publish my blog in five seconds, by running only one Emacs command!
+    <meta property="og:description" content="I can publish my blog in five seconds, running only one Emacs command!
 
 
 
-I will give you a minimum solution, then explain why and provide technical details.
+I give you a minimum solution at first, then I explain why and provide technical details.
 
 
 
-Basic Emacs lisp knowledges are requ">
+Basic Emacs lisp knowledges are r">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2014-11-15T04:16:31+00:00">
            <meta property="article:tag" content="emacs">
@@ -95,11 +95,11 @@ Basic Emacs lisp knowledges are requ">
         </div>
         <div class="body">
             <div>
-<p>I can publish my blog <b>in five seconds</b>, by running only <b>one Emacs command</b>!
+<p>I can publish my blog <b>in five seconds</b>, running only <b>one Emacs command</b>!
 </p>
 
 <p>
-I will give you a minimum solution, then explain why and provide technical details.
+I give you a minimum solution at first, then I explain why and provide technical details.
 </p>
 
 <p>
@@ -441,7 +441,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -636,8 +636,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -649,6 +651,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

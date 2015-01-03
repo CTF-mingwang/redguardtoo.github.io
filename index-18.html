@@ -791,7 +791,7 @@ That function will do some simple syntax analysis and decide current syntactic c
 It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
 </p>
 <p>
-For example, <b>substatement</b> corresponds to the code like below:
+For example, the context <b>substatement</b> corresponds to the code like below:
 </p>
 
 
@@ -803,7 +803,7 @@ if(true) // press ENTER here
 
 
 <p>
-And <b>func-decl-cont</b> corresponds to:
+And the context <b>func-decl-cont</b> corresponds to:
 </p>
 
 
@@ -825,7 +825,7 @@ void fn () //press ENTER here
 <p>When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
 </p>
 <p>
-<b>indent-according-to-mode</b> will actually call function object <b>indent-line-function</b> if it's not nil.
+<b>indent-according-to-mode</b> will call function object <b>indent-line-function</b> if it's not nil.
 </p>
 <p>
 In C/C++/Java, that object is actually <b>c-indent-line</b>.
@@ -846,7 +846,7 @@ In that function, just below the code line:
 
 
 <p>
-Please insert insert log code:
+You can insert log code as below:
 </p>
 
 
@@ -858,10 +858,10 @@ Please insert insert log code:
 
 
 <p>
-Then you will know the current syntactic context when you press ENTER key.
+You will know the current syntactic context when you press ENTER key through the output of log code.
 </p>
 <p>
-<a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> said you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
+<a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> says you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
 </p>
 <p>
 For example, the context <b>statement-cont</b> corresponds to the use case like this:
@@ -890,6 +890,201 @@ BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section
 </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/what-s-aop-in-java.html">What's AOP in Java</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-05-03T06:21:31+00:00">2014-05-03 06:21</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/what-s-aop-in-java.html#disqus_thread" data-disqus-identifier="cache/posts/what-s-aop-in-java.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
+           <li><a class="tag p-category" href="categories/lisp.html" rel="tag">lisp</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Yesterday in a interview I was asked what's AOP and how to use it. The two interviewers
+</p>
+
+<p>
+I was wordless then so I came back to read the documentation.
+</p>
+
+<p>
+It turns out AOP is simple. It's like emacs lisp's defadvice but less powerful. I've been using this since day one on different languages.
+</p>
+
+<p>
+Please read <a href="http://developers.slashdot.org/story/05/04/24/0343224/aspect-oriented-programming-considered-harmful">slashdot discussion</a> about AOP.
+</p>
+
+<p>
+Here is the comment from MarkusQ,
+</p>
+
+<pre class="example"> by MarkusQ (450076) on Sunday April 24, 2005 @11:01PM (#12333504) Journal
+
+Exactly.
+
+When I implemented this sort of thing for a project in Ruby a few years back, I just grabbed all the CLOS nomenclature because I was familiar with it. I didn't even realize I was using "AOP with funny names" until someone reading the code mentioned it. When he asked why I didn't use the "standard" terminology, I lent him a copy of "Object Oriented Programing in Common Lisp" (c) 1988, and asked why the AOP people had to invent new words for everything.
+
+I have yet to get an answer.
+
+--MarkusQ
+</pre>
+
+<p>
+So it's just some enterprise guy inventing new buzz words (<a href="http://en.wikipedia.org/wiki/Cross-cutting_concern">cross-cutting concern</a>, for example) on some old idea.
+</p>
+
+<p>
+Now as guy who got seven years academical training on system design (Bachelor and Master degree in system controlling major from <a href="http://en.wikipedia.org/wiki/Shanghai_Jiao_Tong_University">best engineering school in China</a>), I will give you some precious advice on how to use this thing (AOP in java, API hook in C, devadvice in Emacs lisp or whatever the buzz word is):
+</p>
+
+<p>
+<b>DO NOT USE IT IN ANY REAL SYSTEM OR APPLICATION!</b>
+</p>
+
+<p>
+Here are the reasons:
+</p>
+
+<ul>
+<li>The code change an external API's behavior
+</li>
+<li>The code's location is not close to the API's
+</li>
+<li>The system will detoriate quickly with those AOP things
+</li>
+</ul>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-30T12:46:31+00:00">2014-04-30 12:46</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/why-gnus-is-better-than-gmail.html#disqus_thread" data-disqus-identifier="cache/posts/why-gnus-is-better-than-gmail.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+</p>
+
+<p>
+My first reaction is to reply the email with "Great! Please forward my CV".
+</p>
+
+<p>
+Before I press the "Send" button, it occurs to me that other agents have possibily <b>already</b> submitted my CV to FF since it is a big organization. I need double check.
+</p>
+
+<p>
+I save current email as draft, search all the mails containing "FF" and forward them to the original email I've not sent yet. Then my agent could figure out whether other guys have already represented me for the same opportunity.
+</p>
+
+<p>
+This operation is doable in desktop application like Outlook. I need search emails in a new dialog box. Select emails. Then drag them to the original email.
+</p>
+
+<p>
+It's hard to do this kind of thing in Gmail.
+</p>
+
+<p>
+Now let me show you how Emacs get the job done:
+</p>
+
+<ul>
+<li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
+</li>
+<li>Step 2, Mark the emails I want to forward with hot key "#"
+</li>
+<li>Step 3, Press key "C-c C-f" or run command "M-x gnus-summary-mail-forward". A new buffer is created. It contains a big chuck of xml string wrapped by either "&lt;#multipart&gt;" tag or "&lt;#mml&gt;" tag.
+</li>
+<li>Step 4, Select and copy that string into you original email. Done!
+</li>
+</ul>
+
+<p>
+Well, some people may argue that step 4 could be improved a little bit.
+</p>
+
+<p>
+In Emacs, everyting could be optimized. Please copy below code into your ~/.emacs:
+</p>
+
+<pre class="prettyprint lang-lisp">
+(defun message-select-forwarded-email-tags ()
+  "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (let (start rlt)
+    (when (search-forward "&lt;#")
+      (setq start (point))
+      (push-mark (point) t t)
+      (goto-char (point-max))
+      (search-backward "&gt;")
+      (forward-char)
+      (setq rlt t))
+    rlt))
+
+(defun message-copy-select-forwarded-email-tags ()
+  "copy the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (save-excursion
+    (cond
+     ((message-select-forwarded-email-tags)
+      (copy-region-as-kill (region-beginning) (region-end))
+      (message "forwarded email tags copied!"))
+     (t (message "NO forwarded email tags found!"))
+     )
+    ))
+</pre>
+
+<p>
+All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
+</p>
+
+<p>
+UPDATE:
+This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
+</p>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -912,7 +1107,7 @@ BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -1107,8 +1302,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -1120,6 +1317,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

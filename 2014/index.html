@@ -97,10 +97,13 @@
 <a href="../posts/ccjava-code-indentation-in-emacs.html" class="listtitle">C/C++/Java code indentation in Emacs</a> <time class="listdate" datetime="2014-05-09T09:19:18+00:00" title="2014-05-09 09:19">2014-05-09 09:19</time>
 </li>
         <li>
+<a href="../posts/what-s-aop-in-java.html" class="listtitle">What's AOP in Java</a> <time class="listdate" datetime="2014-05-03T06:21:31+00:00" title="2014-05-03 06:21">2014-05-03 06:21</time>
+</li>
+        <li>
 <a href="../posts/why-gnus-is-better-than-gmail.html" class="listtitle">Why Gnus is better than Gmail</a> <time class="listdate" datetime="2014-04-30T12:46:31+00:00" title="2014-04-30 12:46">2014-04-30 12:46</time>
 </li>
         <li>
-<a href="../posts/migrate-blog-from-wordpress-into-nikola.html" class="listtitle">migrate blog from wordpress into nikola</a> <time class="listdate" datetime="2014-04-22T09:09:21+00:00" title="2014-04-22 09:09">2014-04-22 09:09</time>
+<a href="../posts/migrate-blog-from-wordpress-into-nikola.html" class="listtitle">Migrate blog from wordpress into nikola</a> <time class="listdate" datetime="2014-04-22T09:09:21+00:00" title="2014-04-22 09:09">2014-04-22 09:09</time>
 </li>
         <li>
 <a href="../posts/what-s-the-best-spell-check-set-up-in-emacs.html" class="listtitle">What's the best spell check set up in emacs</a> <time class="listdate" datetime="2014-04-21T08:25:20+00:00" title="2014-04-21 08:25">2014-04-21 08:25</time>
@@ -176,7 +179,7 @@
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -371,8 +374,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -384,6 +389,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

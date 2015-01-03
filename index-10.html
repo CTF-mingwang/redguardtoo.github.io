@@ -44,57 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/huang-jin-suan-tou-ji-tang-zuo-fa.html">黄金蒜头鸡汤做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-20T13:17:00+00:00">2013-07-20 13:17</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/huang-jin-suan-tou-ji-tang-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<ul>
-<li>
-<a href="http://www.youtube.com/watch?v=LOwEN6oDC1I">视频教程</a>
-</li>
-<li>
-<a href="http://blog.iset.com.tw/chef/?p=6916">型男大主厨的菜谱</a>
-</li>
-<li>蒜头煎的时候应该用勺子不断翻动，防止焦掉,两分钟足够了
-</li>
-<li>油少放，否则汤的颜色不好看
-</li>
-<li>鸡肉炒过后加开水小火煮15分钟(时间更少点也许鸡肉更嫩，10分钟也可以)
-</li>
-<li>如果要放豆腐,应少放,豆腐味道完全掩盖住蒜味.
-</li>
-<li>去除汤上泡沫
-</li>
-<li>最后可以自己加点香菜，胡椒粉
-</li>
-</ul>
-
-<p><img src="wp-content/fried-garlic-chicken-soup.jpg" alt="fried-garlic-chicken-soup.jpg">
-</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/hei-mu-er-chao-dan-de-zuo-fa.html">黑木耳炒蛋的做法</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -799,6 +748,46 @@ emerge -v deb2targz &amp;&amp;
 <p></p></pre>  </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/set-up-nfs-server-on-archlinux.html">set up nfs server on ArchLinux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-06-19T22:00:42+00:00">2013-06-19 22:00</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/set-up-nfs-server-on-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/set-up-nfs-server-on-archlinux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>The purpose of set up nfs server is to watch video stored on server through my android devices. </p>    <pre class="src src-sh">sudo pacman -S nfs-utils
+<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">donnot touch /etc/idmapd.conf</span>
+<p>mkdir -p /srv/nfs4/z</p>
+<p></p></pre>   <p> add following lines into /etc/fstab: </p>   <pre class="src src-conf"><span style="color: #e7c547;">UUID</span>=986C96596C9631CC /mnt/z ntfs-3g defaults,nofail 0 2
+<p>/mnt/z /srv/nfs4/z none bind,nofail 0 0</p>
+<p></p></pre>   <p> add this line into /etc/exports: </p>   <pre class="src src-conf"><span style="color: #e7c547;">/srv/nfs4/z</span> 192.168.0.0/24(async,rw,no_subtree_check,nohide,no_root_squash)
+<p></p></pre>   <p> make sure change in /etc/exports to take effect: </p>   <pre class="src src-sh">sudo exportfs -ra
+<p></p></pre>   <p> now enable and start the services: </p>   <pre class="src src-sh">sudo systemctl enable rpc-idmapd
+<p>sudo systemctl start rpc-idmapd</p>
+<p>sudo systemctl enable rpc-mountd</p>
+<p>sudo systemctl start rpc-mountd</p>
+<p></p></pre>  </div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -821,7 +810,7 @@ emerge -v deb2targz &amp;&amp;
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -1016,8 +1005,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -1029,6 +1020,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

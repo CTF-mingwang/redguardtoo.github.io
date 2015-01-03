@@ -44,49 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/notes-on-upgrading-gentoo-linux.html">notes on upgrading Gentoo Linux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-10-26T19:47:54+00:00">2013-10-26 19:47</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/notes-on-upgrading-gentoo-linux.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-upgrading-gentoo-linux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/gentoo.html" rel="tag">gentoo</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/upgrade.html" rel="tag">upgrade</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<pre class="prettyprint ">
-
-<p>sudo emerge --update --deep --with-bdeps=y --newuse world
-</p></pre>
-<p></p>
-<ul> <li>I get notified that some newer version package is required, so I have to manually install those package and re-run the <code>emerge world</code> </li> <li>Some package is gone (libreoffice-bin, for example). </li> </ul>   <p> Here is command to manually install package: </p>   
-<pre class="prettyprint ">
-
-sudo ebuild /usr/portage/www-client/firefox-bin/firefox-bin-23.0.ebuild unpack compile install qmerge clean
-</pre>
-
-<p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html">How to take screen shot for business people efficiently in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -595,6 +552,50 @@ ff line-from-clipboard
 </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/toggle-full-view-of-window-in-emacs.html">Toggle full view of window in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-14T12:56:00+00:00">2013-09-14 12:56</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/toggle-full-view-of-window-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/toggle-full-view-of-window-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Add below code into your ~/.emacs: </p>   
+<pre class="prettyprint ">
+
+(defun toggle-full-window()
+  "Toggle the full view of selected window"
+  (interactive)
+  ;; @see http://www.gnu.org/software/emacs/manual/html_node/elisp/Splitting-Windows.html
+  (if (window-parent)
+      (delete-other-windows)
+    (winner-undo)
+    ))
+</pre>
+
+<p></p>
+<p> I use <a href="http://www.emacswiki.org/emacs/Evil">evil</a>, so I assign hot key ",ff" to <code>toggle-full-window</code>. </p>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -617,7 +618,7 @@ ff line-from-clipboard
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -812,8 +813,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -825,6 +828,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

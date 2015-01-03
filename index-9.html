@@ -44,46 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/set-up-nfs-server-on-archlinux.html">set up nfs server on ArchLinux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-06-19T22:00:42+00:00">2013-06-19 22:00</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/set-up-nfs-server-on-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/set-up-nfs-server-on-archlinux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>The purpose of set up nfs server is to watch video stored on server through my android devices. </p>    <pre class="src src-sh">sudo pacman -S nfs-utils
-<span style="color: #969896; font-style: italic;"># </span><span style="color: #969896; font-style: italic;">donnot touch /etc/idmapd.conf</span>
-<p>mkdir -p /srv/nfs4/z</p>
-<p></p></pre>   <p> add following lines into /etc/fstab: </p>   <pre class="src src-conf"><span style="color: #e7c547;">UUID</span>=986C96596C9631CC /mnt/z ntfs-3g defaults,nofail 0 2
-<p>/mnt/z /srv/nfs4/z none bind,nofail 0 0</p>
-<p></p></pre>   <p> add this line into /etc/exports: </p>   <pre class="src src-conf"><span style="color: #e7c547;">/srv/nfs4/z</span> 192.168.0.0/24(async,rw,no_subtree_check,nohide,no_root_squash)
-<p></p></pre>   <p> make sure change in /etc/exports to take effect: </p>   <pre class="src src-sh">sudo exportfs -ra
-<p></p></pre>   <p> now enable and start the services: </p>   <pre class="src src-sh">sudo systemctl enable rpc-idmapd
-<p>sudo systemctl start rpc-idmapd</p>
-<p>sudo systemctl enable rpc-mountd</p>
-<p>sudo systemctl start rpc-mountd</p>
-<p></p></pre>  </div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/an-example-to-abuse-the-git-merge.html">An example to abuse the git merge</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -730,6 +690,89 @@ nice flac -s -T <span class="nt">&lt;span</span> <span class="na">style=</span><
 <p></p></pre>  </div> </div> </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/the-minimum-emacs-for-debug-purpose.html">The minimum .emacs for debug purpose</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-05-12T13:55:00+00:00">2013-05-12 13:55</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/the-minimum-emacs-for-debug-purpose.html#disqus_thread" data-disqus-identifier="cache/posts/the-minimum-emacs-for-debug-purpose.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/configuration.html" rel="tag">configuration</a></li>
+           <li><a class="tag p-category" href="categories/dot.html" rel="tag">dot</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/test.html" rel="tag">test</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>I've installed <a href="https://github.com/redguardtoo/emacs.d">more than 100 emacs plugins</a>. </p> <p> Since I publicized my .emacs at github, lots of people have copied my configuration. Now it becomes my obligation to solve all the plugin compatibility issue reported by my users. </p> <p> To solve the issue, I need a minimum .emacs for testing the plugin. </p> <p> So here is my minimum .emacs, </p>   
+<pre class="prettyprint ">
+
+(show-paren-mode 1)
+
+(eval-when-compile (require 'cl))
+
+
+
+;; test elisps download from internet here
+
+(setq test-elisp-dir "~/test-elisp/")
+
+(if (not (file-exists-p (expand-file-name test-elisp-dir)))
+    (make-directory (expand-file-name test-elisp-dir))
+    )
+
+
+(setq load-path
+      (append
+        (loop for dir in (directory-files test-elisp-dir)
+              unless (string-match "^\\." dir)
+              collecting (expand-file-name (concat test-elisp-dir dir)))
+        load-path))
+
+
+;; package repositories
+
+(require 'package)
+
+(add-to-list 'package-archives '("marmalade" .  "http://marmalade-repo.org/packages/") t)
+
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(package-initialize)
+
+
+
+;; ==== put your code below this line!
+
+;;
+</pre>
+
+<p></p>
+<p> The code is straight forward. I scan any sub-directories in ~/test-elisp and add them into load-path. I also add URLs of third party repositories so that I can download and install packages from internet conviniently. </p> <p> I also upload the .emacs to dropbox, so you can use one bash liner to download it: </p>   
+<pre class="prettyprint ">
+
+cd ~/;wget https://dl.dropboxusercontent.com/u/858862/emacs/.emacs;mkdir -p ~/test-elisp;
+</pre>
+
+<p></p>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -752,7 +795,7 @@ nice flac -s -T <span class="nt">&lt;span</span> <span class="na">style=</span><
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -947,8 +990,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -960,6 +1005,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

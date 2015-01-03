@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 11 Dec 2014 17:02:38 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 04 Jan 2015 00:36:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
@@ -95,7 +95,7 @@ That function will do some simple syntax analysis and decide current syntactic c
 It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
 &lt;/p&gt;
 &lt;p&gt;
-For example, &lt;b&gt;substatement&lt;/b&gt; corresponds to the code like below:
+For example, the context &lt;b&gt;substatement&lt;/b&gt; corresponds to the code like below:
 &lt;/p&gt;
 
 
@@ -107,7 +107,7 @@ if(true) // press ENTER here
 
 
 &lt;p&gt;
-And &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
+And the context &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
 &lt;/p&gt;
 
 
@@ -129,7 +129,7 @@ void fn () //press ENTER here
 &lt;p&gt;When you press ENTER key, the new line will be inserted. Then the function &lt;b&gt;indent-according-to-mode&lt;/b&gt; will always be called
 &lt;/p&gt;
 &lt;p&gt;
-&lt;b&gt;indent-according-to-mode&lt;/b&gt; will actually call function object &lt;b&gt;indent-line-function&lt;/b&gt; if it's not nil.
+&lt;b&gt;indent-according-to-mode&lt;/b&gt; will call function object &lt;b&gt;indent-line-function&lt;/b&gt; if it's not nil.
 &lt;/p&gt;
 &lt;p&gt;
 In C/C++/Java, that object is actually &lt;b&gt;c-indent-line&lt;/b&gt;.
@@ -150,7 +150,7 @@ In that function, just below the code line:
 
 
 &lt;p&gt;
-Please insert insert log code:
+You can insert log code as below:
 &lt;/p&gt;
 
 
@@ -162,10 +162,10 @@ Please insert insert log code:
 
 
 &lt;p&gt;
-Then you will know the current syntactic context when you press ENTER key.
+You will know the current syntactic context when you press ENTER key through the output of log code.
 &lt;/p&gt;
 &lt;p&gt;
-&lt;a href="http://www.emacswiki.org/emacs/IndentingC"&gt;EmacsWiki&lt;/a&gt; said you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
+&lt;a href="http://www.emacswiki.org/emacs/IndentingC"&gt;EmacsWiki&lt;/a&gt; says you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
 &lt;/p&gt;
 &lt;p&gt;
 For example, the context &lt;b&gt;statement-cont&lt;/b&gt; corresponds to the use case like this:

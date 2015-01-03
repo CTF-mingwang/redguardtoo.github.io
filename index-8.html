@@ -44,89 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/the-minimum-emacs-for-debug-purpose.html">The minimum .emacs for debug purpose</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-05-12T13:55:00+00:00">2013-05-12 13:55</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/the-minimum-emacs-for-debug-purpose.html#disqus_thread" data-disqus-identifier="cache/posts/the-minimum-emacs-for-debug-purpose.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/configuration.html" rel="tag">configuration</a></li>
-           <li><a class="tag p-category" href="categories/dot.html" rel="tag">dot</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/test.html" rel="tag">test</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>I've installed <a href="https://github.com/redguardtoo/emacs.d">more than 100 emacs plugins</a>. </p> <p> Since I publicized my .emacs at github, lots of people have copied my configuration. Now it becomes my obligation to solve all the plugin compatibility issue reported by my users. </p> <p> To solve the issue, I need a minimum .emacs for testing the plugin. </p> <p> So here is my minimum .emacs, </p>   
-<pre class="prettyprint ">
-
-(show-paren-mode 1)
-
-(eval-when-compile (require 'cl))
-
-
-
-;; test elisps download from internet here
-
-(setq test-elisp-dir "~/test-elisp/")
-
-(if (not (file-exists-p (expand-file-name test-elisp-dir)))
-    (make-directory (expand-file-name test-elisp-dir))
-    )
-
-
-(setq load-path
-      (append
-        (loop for dir in (directory-files test-elisp-dir)
-              unless (string-match "^\\." dir)
-              collecting (expand-file-name (concat test-elisp-dir dir)))
-        load-path))
-
-
-;; package repositories
-
-(require 'package)
-
-(add-to-list 'package-archives '("marmalade" .  "http://marmalade-repo.org/packages/") t)
-
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-(package-initialize)
-
-
-
-;; ==== put your code below this line!
-
-;;
-</pre>
-
-<p></p>
-<p> The code is straight forward. I scan any sub-directories in ~/test-elisp and add them into load-path. I also add URLs of third party repositories so that I can download and install packages from internet conviniently. </p> <p> I also upload the .emacs to dropbox, so you can use one bash liner to download it: </p>   
-<pre class="prettyprint ">
-
-cd ~/;wget https://dl.dropboxusercontent.com/u/858862/emacs/.emacs;mkdir -p ~/test-elisp;
-</pre>
-
-<p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/how-to-use-keyboard-to-navigate-feedly-com.html">How to use keyboard to navigate feedly.com</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -628,6 +545,155 @@ pacman -Ql emacs <span style="color: #5F7F5F;"># </span><span style="color: #7F9
 <p></p></pre>  </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/moving-focus-and-buffer-between-emacs-window.html">Moving focus and buffer between Emacs window</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-02-03T14:19:00+00:00">2013-02-03 14:19</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/moving-focus-and-buffer-between-emacs-window.html#disqus_thread" data-disqus-identifier="cache/posts/moving-focus-and-buffer-between-emacs-window.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/buffer.html" rel="tag">buffer</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/move.html" rel="tag">move</a></li>
+           <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
+</p>
+
+<p>
+Here is my summary of that article:
+</p>
+
+<ul>
+<li>you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
+</li>
+<li>
+<a href="https://github.com/dimitri/switch-window">switch-window.el</a> is great. The default hot key is "C-x o".
+</li>
+</ul>
+
+<p>
+I love switch-windows.el. It's only three key strikes to select a window.
+</p>
+
+<p>
+I also use other packages which is more efficient.
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">window-numbering.el</h4>
+<div class="outline-text-3" id="text-1">
+
+<p><a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>the best</b>. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
+</p>
+<p>
+Here is my configuration of window-numbering.el:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(require 'window-numbering)
+;; highlight the window number in pink color
+(custom-set-faces '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
+(window-numbering-mode 1)
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">evil-mode</h4>
+<div class="outline-text-3" id="text-2">
+
+<p><a href="http://emacswiki.org/emacs/Evil">evil-mode</a> is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">buffer-move.el</h4>
+<div class="outline-text-3" id="text-3">
+
+<p><a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
+</p>
+<p>
+Here is my configuration:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
+(global-set-key (kbd "C-c C-b C-j") 'buf-move-down)
+(global-set-key (kbd "C-c C-b C-h") 'buf-move-left)
+(global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">updated</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
+</p>
+<p>
+According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
+</p>
+<p>
+So it's necessary to optimize window-numbering.el further. By default, window-numbering.el uses "M-num" key to select window which is already efficient. But as a geek, I have a tendency to push the efficiency to the extreme end.
+</p>
+<p>
+Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1", "2", and "3".
+</p>
+<p>
+Here is the code:
+</p>
+
+
+
+<pre class="prettyprint lang-lisp">
+(define-key evil-normal-state-map ",1" 'select-window-1)
+(define-key evil-normal-state-map ",2" 'select-window-2)
+(define-key evil-normal-state-map ",3" 'select-window-3)
+(define-key evil-normal-state-map ",4" 'select-window-4)
+</pre>
+
+
+
+<p>
+Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
+</p>
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -650,7 +716,7 @@ pacman -Ql emacs <span style="color: #5F7F5F;"># </span><span style="color: #7F9
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -845,8 +911,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -858,6 +926,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

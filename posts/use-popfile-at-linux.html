@@ -139,34 +139,34 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-09-28 Sun
 <h4 id="sec-2">Install third party packages</h4>
 <div class="outline-text-3" id="text-2">
 
-<p>Run the command:
+<p>Run below command in shell:
 </p>
 
 
 
 <pre class="prettyprint lang-sh">
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 </pre>
 
 
 
 <p>
-BTW, don't let the cpan detect the mirror site automatically because the process takes several minutes. Choose the site manually!
+BTW, don't let cpan detect the mirror site automatically because it takes too much time. Choose the site manually!
 </p>
 <p>
-First question is would you like automatic setup? Yes!
+First question: Would you like automatic setup? Yes!
 </p>
 <p>
-Second quesiton, set up mirror site for you? No!
+Second quesiton: Set up mirror site for you? No!
 </p>
 <p>
-Third question, choose one mirror site from the list? No!
+Third question: Choose one mirror site from the list? No!
 </p>
 <p>
-Forth question, please input the site manullay. <a href="http://mirror.optusnet.com.au/CPAN/">http://mirror.optusnet.com.au/CPAN/</a>
+Forth question: Please input the site manually. <a href="http://mirror.optusnet.com.au/CPAN/">http://mirror.optusnet.com.au/CPAN/</a>
 </p>
 <p>
-This is my cpan setup (Please note I use proxy),
+This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 </p>
 
 
@@ -264,7 +264,7 @@ If there is any error:
 <pre class="prettyprint lang-sh">
 perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 </pre>
 
 
@@ -559,7 +559,7 @@ See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/doc
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -754,8 +754,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -767,6 +769,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

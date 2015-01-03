@@ -44,77 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">How to use ctags with Emacs effectively</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-11-22T12:35:00+00:00">2012-11-22 12:35</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>  See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. </p> <p>   According wiki page, people usually use ctags to do two things, </p>
-<ol> <li>Code navigation </li> <li>Auto-complete/Intellisense  <p>   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like <a href="http://cscope.sourceforge.net/">cscope</a> or <a href="http://www.gnu.org/software/global">GNU Global</a>. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like <a href="http://www.gnu.org/software/global">GNU Global</a>. See the head up from <a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451">Nick Alcock</a>. His summary of the Pro/Con of GNU Global is great. </p> <p>   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. </p> <p>   I found one missing piece from Emacswiki is the tip on how to <b>manage tags file</b> easily when the TAGS is built from some code of third party libraries (<a href="http://http://en.wikipedia.org/wiki/Qt_(framework)">QT</a>, <a href="http://www.wxwidgets.org">wxWidgets</a>, <a href="http://www.gtk.org">GTK</a>, <a href="http://www.boost.org">Boost</a>, just name a few). </p> <p>   My typical work flow is: </p>
-</li> <li>Load the tags file for my own code. </li> <li>Load other tags files built from third party libraries related to my current task. </li> <li>Unload third party tags immediately if its not needed.  <p>   The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". </p> <p>   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. </p>
-</li> </ol>   <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Produce tags files for all the environments</h4> <div class="outline-text-3" id="text-1">  <p>For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" </p>
-</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use git and github to manage the tags files</h4> <div class="outline-text-3" id="text-2">  <p>So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. </p> <p> Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. </p>
-</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Write emacs lisp code to load/unload these tags files</h4> <div class="outline-text-3" id="text-3">  <p>Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys. </p>   
-<pre class="prettyprint lang-lisp">
-; Set up tags built from third party libraries ===begin
-; define tags alias like "wx-tags" here
-(setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
-
-; @see &lt;Selecting a Tags Table&gt; in Emacs manual for details.
-; We only change the list "tags-table-list". It is documented officialy.
-(defun insert-into-tags-table-list(e)
-  (add-to-list 'tags-table-list e t)
-  )
-
-(defun delete-from-tags-table-list (e)
-  (setq tags-table-list (delete e tags-table-list))
-  )
-
-; This is a sample command, all you need is copy/paste this template
-; for other new commands
-(defun add-wx-tags (&amp;optional del)
-  "Add or delete(C-u) wxWidgets tags into tags-table-list"
-  (interactive "P")
-  (let (mytags)
-    ; here add your third party tags files
-    ; Usually you need load/unload tags files combination in one command
-    ; change below line to add them
-    (setq mytags (list wx-tags))
-    (if del (mapc 'delete-from-tags-table-list mytags)
-      (mapc 'insert-into-tags-table-list mytags)
-      )
-    )
-  )
-; === end
-</pre>
-
-<p></p>
-<p> This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. </p> <p> See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details. </p>
-</div> </div> </div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/my-personal-emacs-customization-custom-el.html">My personal emacs customization (custom.el)</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -124,6 +53,256 @@
                     
         
     <a href="posts/my-personal-emacs-customization-custom-el.html#disqus_thread" data-disqus-identifier="cache/posts/my-personal-emacs-customization-custom-el.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/personal.html" rel="tag">personal</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
+</p>
+
+<pre class="prettyprint lang-lisp">
+;; I'm in Australia now
+;; I'm in Australia now
+(setq system-time-locale "C")
+
+;; {{ stardict
+(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
+(setq sdcv-dictionary-complete-list '("WordNet"))
+;; }}
+
+;; {{ elpa-mirror
+(setq elpamr-default-output-directory "~/myelpa")
+(setq elpamr-repository-name "myelpa")
+(setq elpamr-repository-path "https://dl.dropboxusercontent.com/u/858862/myelpa/")
+(setq elpamr-email "myname@mydomain.com")
+;; }}
+
+;; lock my package
+(if (file-readable-p (expand-file-name "~/Dropbox/Public/myelpa/archive-contents"))
+     (setq package-archives '(("myelpa" . "~/Dropbox/Public/myelpa/"))))
+
+;; {{ Set up third party tags
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags
+    (setq mytags (list "~/tags/wx/osx/TAGS"))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+;; }}
+
+;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+;; (system-name) won't work because as Optus required, my /etc/hosts is changed
+(defun my/at-office ()
+  (interactive)
+  (let ((my-hostname (with-temp-buffer
+                       (shell-command "hostname" t)
+                       (goto-char (point-max))
+                       (delete-char -1)
+                       (buffer-string))
+                     ))
+    (and (string= my-hostname "my-sydney-workpc")
+         (not (or (string= my-hostname "sydneypc")
+                  (string= my-hostname "ChenBinMacAir")
+                  (string= my-hostname "eee")
+                  )))
+    ))
+
+(defun my/use-office-style ()
+  (interactive)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p "CompanyProject" dir)
+    ))
+
+(defun my/setup-develop-environment ()
+  (cond
+   ((my/use-office-style)
+    (message "Office code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 4)
+    (setq js-indent-level 4)
+    (setq js2-basic-offset 4)
+    (setq web-mode-indent-style 4))
+   (t
+    (message "My code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 2)
+    (setq js-indent-level 2)
+    (setq js2-basic-offset 2)
+    (setq web-mode-indent-style 2))
+   ))
+
+(add-hook 'js2-mode-hook 'my/setup-develop-environment)
+(add-hook 'web-mode-hook 'my/setup-develop-environment)
+
+(my/setup-develop-environment)
+
+;; {{ gnus setup
+(require 'nnir)
+
+;; ask encyption password once
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
+
+;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
+(if (my/at-office)
+    (add-to-list 'gnus-secondary-select-methods '(nnml "optus"))
+    (setq mail-sources
+      '((pop :server "localhost"
+         :port 1110
+         :user "CP111111"
+         :password "MyPassword"
+         :stream network)))
+    )
+
+
+(setq gnus-select-method
+             '(nnimap "gmail"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnimap-authinfo-file "~/.authinfo.gpg")
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)
+                      ))
+
+;;@see http://gnus.org/manual/gnus_397.html
+;; (add-to-list 'gnus-secondary-select-methods
+;;              )
+
+(setq-default
+  gnus-summary-line-format "%U%R%z %(%&amp;user-date;  %-15,15f  %B%s%)\n"
+  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+  gnus-sum-thread-tree-false-root ""
+  gnus-sum-thread-tree-indent ""
+  gnus-sum-thread-tree-leaf-with-other "-&gt; "
+  gnus-sum-thread-tree-root ""
+  gnus-sum-thread-tree-single-leaf "|_ "
+  gnus-sum-thread-tree-vertical "|")
+(setq gnus-thread-sort-functions
+      '(
+        (not gnus-thread-sort-by-date)
+        (not gnus-thread-sort-by-number)
+        ))
+
+;; we want to browse freely from gwene (RSS)
+(setq gnus-safe-html-newsgroups "\\`nntp[+:]news\\.gwene\\.org[+:]")
+
+; NO 'passive
+(setq gnus-use-cache t)
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-save-score t)
+(add-hook 'mail-citation-hook 'sc-cite-original)
+(add-hook 'message-sent-hook 'gnus-score-followup-article)
+(add-hook 'message-sent-hook 'gnus-score-followup-thread)
+; @see http://stackoverflow.com/questions/945419/how-dont-use-gnus-adaptive-scoring-in-some-newsgroups
+(setq gnus-parameters
+      '(("nnimap.*"
+         (gnus-use-scoring nil)) ;scoring is annoying when I check latest email
+        ))
+
+(defvar gnus-default-adaptive-score-alist
+  '((gnus-kill-file-mark (from -10))
+    (gnus-unread-mark)
+    (gnus-read-mark (from 10) (subject 30))
+    (gnus-catchup-mark (subject -10))
+    (gnus-killed-mark (from -1) (subject -30))
+    (gnus-del-mark (from -2) (subject -15))
+    (gnus-ticked-mark (from 10))
+    (gnus-dormant-mark (from 5))))
+
+;; Fetch only part of the article if we can.  I saw this in someone
+;; else's .gnus
+(setq gnus-read-active-file 'some)
+
+;; Tree view for groups.  I like the organisational feel this has.
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+;; Threads!  I hate reading un-threaded email -- especially mailing
+;; lists.  This helps a ton!
+(setq gnus-summary-thread-gathering-function
+      'gnus-gather-threads-by-subject)
+
+;; Also, I prefer to see only the top level message.  If a message has
+;; several replies or is part of a thread, only show the first
+;; message.  'gnus-thread-ignore-subject' will ignore the subject and
+;; look at 'In-Reply-To:' and 'References:' headers.
+(setq gnus-thread-hide-subtree t)
+(setq gnus-thread-ignore-subject t)
+
+; Personal Information
+(setq user-full-name "My Name"
+      user-mail-address (if (my/at-office) "myname@office.com" "myname@mydomain.com")
+      )
+
+;; Change email address for work folder.  This is one of the most
+;; interesting features of Gnus.  I plan on adding custom .sigs soon
+;; for different mailing lists.
+;; Usage, FROM: chen bin &lt;work&gt;
+(setq gnus-posting-styles
+      '((".*"
+         (name "My Name"
+          (address "myname@mydomain.com"
+                   (organization "")
+                   (signature-file "~/.signature")
+                   ("X-Troll" "Emacs is better than Vi")
+                   )))))
+
+
+(setq mm-text-html-renderer 'w3m)
+
+;; http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
+(setq gnus-use-correct-string-widths nil)
+;; @see http://emacs.1067599.n5.nabble.com/gnus-compile-td221680.html
+;;(gnus-compile)
+; =Gnus Tips=
+;; @see http://www.scottmcpeak.com/gnus.html
+;; }}
+</pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/my-personal-emacs-customization-customel.html">My personal emacs customization (custom.el)</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-16T12:10:02+00:00">2012-11-16 12:10</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-personal-emacs-customization-customel.html#disqus_thread" data-disqus-identifier="cache/posts/my-personal-emacs-customization-customel.html">Comments</a>
 
 
                 </div>
@@ -1775,7 +1954,7 @@ os.system(cmd)
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -1970,8 +2149,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -1983,6 +2164,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

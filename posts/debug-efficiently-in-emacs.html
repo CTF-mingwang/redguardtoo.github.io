@@ -239,15 +239,33 @@ BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the para
 </p>
 </div>
 
+</div>
+
 <div id="outline-container-7" class="outline-3">
-<h4 id="sec-7">Bonus</h4>
+<h4 id="sec-7">Insert JS debugger statement</h4>
 <div class="outline-text-3" id="text-7">
+
+<p>@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
+</p>
+<p>
+Snippets:
+<a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet</a>
+</p>
+<p>
+<a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet</a>
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-3">
+<h4 id="sec-8">Bonus</h4>
+<div class="outline-text-3" id="text-8">
 
 <p>Similar snippets for Emacs Lisp are defined <a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode">HERE</a>.
 </p>
 </div>
 
-</div>
 </div>
 </div>
         </div>
@@ -294,7 +312,7 @@ BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the para
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -489,8 +507,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -502,6 +522,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     

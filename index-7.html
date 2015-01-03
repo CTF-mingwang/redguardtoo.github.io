@@ -44,155 +44,6 @@
         <div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/moving-focus-and-buffer-between-emacs-window.html">Moving focus and buffer between Emacs window</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-02-03T14:19:00+00:00">2013-02-03 14:19</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/moving-focus-and-buffer-between-emacs-window.html#disqus_thread" data-disqus-identifier="cache/posts/moving-focus-and-buffer-between-emacs-window.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/buffer.html" rel="tag">buffer</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/move.html" rel="tag">move</a></li>
-           <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
-</p>
-
-<p>
-Here is my summary of that article:
-</p>
-
-<ul>
-<li>you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
-</li>
-<li>
-<a href="https://github.com/dimitri/switch-window">switch-window.el</a> is great. The default hot key is "C-x o".
-</li>
-</ul>
-
-<p>
-I love switch-windows.el. It's only three key strikes to select a window.
-</p>
-
-<p>
-I also use other packages which is more efficient.
-</p>
-
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">window-numbering.el</h4>
-<div class="outline-text-3" id="text-1">
-
-<p><a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>the best</b>. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
-</p>
-<p>
-Here is my configuration of window-numbering.el:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(require 'window-numbering)
-;; highlight the window number in pink color
-(custom-set-faces '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-(window-numbering-mode 1)
-</pre>
-
-
-
-</div>
-
-</div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">evil-mode</h4>
-<div class="outline-text-3" id="text-2">
-
-<p><a href="http://emacswiki.org/emacs/Evil">evil-mode</a> is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">buffer-move.el</h4>
-<div class="outline-text-3" id="text-3">
-
-<p><a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
-</p>
-<p>
-Here is my configuration:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
-(global-set-key (kbd "C-c C-b C-j") 'buf-move-down)
-(global-set-key (kbd "C-c C-b C-h") 'buf-move-left)
-(global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
-</pre>
-
-
-</div>
-
-</div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">updated</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
-</p>
-<p>
-According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
-</p>
-<p>
-So it's necessary to optimize window-numbering.el further. By default, window-numbering.el uses "M-num" key to select window which is already efficient. But as a geek, I have a tendency to push the efficiency to the extreme end.
-</p>
-<p>
-Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1", "2", and "3".
-</p>
-<p>
-Here is the code:
-</p>
-
-
-
-<pre class="prettyprint lang-lisp">
-(define-key evil-normal-state-map ",1" 'select-window-1)
-(define-key evil-normal-state-map ",2" 'select-window-2)
-(define-key evil-normal-state-map ",3" 'select-window-3)
-(define-key evil-normal-state-map ",4" 'select-window-4)
-</pre>
-
-
-
-<p>
-Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
-</p>
-</div>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/commentuncomment-line-is-easy-in-emacs.html">Comment/uncomment line(s) is easy in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -525,34 +376,34 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-09-28 Sun
 <h4 id="sec-2">Install third party packages</h4>
 <div class="outline-text-3" id="text-2">
 
-<p>Run the command:
+<p>Run below command in shell:
 </p>
 
 
 
 <pre class="prettyprint lang-sh">
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 </pre>
 
 
 
 <p>
-BTW, don't let the cpan detect the mirror site automatically because the process takes several minutes. Choose the site manually!
+BTW, don't let cpan detect the mirror site automatically because it takes too much time. Choose the site manually!
 </p>
 <p>
-First question is would you like automatic setup? Yes!
+First question: Would you like automatic setup? Yes!
 </p>
 <p>
-Second quesiton, set up mirror site for you? No!
+Second quesiton: Set up mirror site for you? No!
 </p>
 <p>
-Third question, choose one mirror site from the list? No!
+Third question: Choose one mirror site from the list? No!
 </p>
 <p>
-Forth question, please input the site manullay. <a href="http://mirror.optusnet.com.au/CPAN/">http://mirror.optusnet.com.au/CPAN/</a>
+Forth question: Please input the site manually. <a href="http://mirror.optusnet.com.au/CPAN/">http://mirror.optusnet.com.au/CPAN/</a>
 </p>
 <p>
-This is my cpan setup (Please note I use proxy),
+This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 </p>
 
 
@@ -650,7 +501,7 @@ If there is any error:
 <pre class="prettyprint lang-sh">
 perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode
+sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 </pre>
 
 
@@ -941,6 +792,77 @@ See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/doc
 </div> </div> </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">How to use ctags with Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-22T12:35:00+00:00">2012-11-22 12:35</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>  See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. </p> <p>   According wiki page, people usually use ctags to do two things, </p>
+<ol> <li>Code navigation </li> <li>Auto-complete/Intellisense  <p>   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like <a href="http://cscope.sourceforge.net/">cscope</a> or <a href="http://www.gnu.org/software/global">GNU Global</a>. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like <a href="http://www.gnu.org/software/global">GNU Global</a>. See the head up from <a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451">Nick Alcock</a>. His summary of the Pro/Con of GNU Global is great. </p> <p>   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. </p> <p>   I found one missing piece from Emacswiki is the tip on how to <b>manage tags file</b> easily when the TAGS is built from some code of third party libraries (<a href="http://http://en.wikipedia.org/wiki/Qt_(framework)">QT</a>, <a href="http://www.wxwidgets.org">wxWidgets</a>, <a href="http://www.gtk.org">GTK</a>, <a href="http://www.boost.org">Boost</a>, just name a few). </p> <p>   My typical work flow is: </p>
+</li> <li>Load the tags file for my own code. </li> <li>Load other tags files built from third party libraries related to my current task. </li> <li>Unload third party tags immediately if its not needed.  <p>   The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". </p> <p>   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. </p>
+</li> </ol>   <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Produce tags files for all the environments</h4> <div class="outline-text-3" id="text-1">  <p>For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" </p>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use git and github to manage the tags files</h4> <div class="outline-text-3" id="text-2">  <p>So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. </p> <p> Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. </p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Write emacs lisp code to load/unload these tags files</h4> <div class="outline-text-3" id="text-3">  <p>Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys. </p>   
+<pre class="prettyprint lang-lisp">
+; Set up tags built from third party libraries ===begin
+; define tags alias like "wx-tags" here
+(setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
+
+; @see &lt;Selecting a Tags Table&gt; in Emacs manual for details.
+; We only change the list "tags-table-list". It is documented officialy.
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+; This is a sample command, all you need is copy/paste this template
+; for other new commands
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags files
+    ; Usually you need load/unload tags files combination in one command
+    ; change below line to add them
+    (setq mytags (list wx-tags))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+; === end
+</pre>
+
+<p></p>
+<p> This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. </p> <p> See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details. </p>
+</div> </div> </div>
+            </div>
+        </div>
     
         <nav class="postindexpager">
         <ul class="pager">
@@ -963,7 +885,7 @@ See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/doc
 
              
         <footer id="footer" role="contentinfo">
-            <p>Contents © 2014         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 
@@ -1158,8 +1080,10 @@ if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
 </script>
-<script type="text/javascript" src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
 <script type="text/javascript">
+window.onload = function () {var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();};
+// google analytics setup
 var _gaq = _gaq || [];
 
 _gaq.push(['_setAccount', 'UA-29850823-2']);
@@ -1171,6 +1095,7 @@ _gaq.push(['_trackPageview']);
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
+
 </script>
 
     
