@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 11 Dec 2014 17:02:39 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;It's not good practice to use relative path in big project.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 04 Jan 2015 19:26:54 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;It's not good practice to use relative path in big project.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -188,23 +188,23 @@ chdir C:cygwinbin
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;p&gt; 原因为screen的开发者对于环境变量$TERM的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单. 在.Xdefaults中添加一行, &lt;/p&gt;   &lt;pre class="example"&gt;urxvt*termName: rxvt-256color
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; 在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="example"&gt;term rxvt-256color
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t &lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;因为Ctrl-a在bash和emacs中都是常用快捷键,在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;escape&lt;span style="color:#00cd00;"&gt;"^Tt"&lt;/span&gt;  &lt;span style="color:#cd0000;"&gt;#&lt;/span&gt;&lt;span style="color:#cd0000;"&gt;the default of A interferes with emacs keybindings for terminal, and I never use the emacs transpose command
-&lt;p&gt;&lt;/p&gt;&lt;/span&gt;&lt;/pre&gt;   &lt;p&gt; 这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 12:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(操作系统支持OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;作者: 陈斌 (redguardtoo)
+&lt;p&gt;&lt;/p&gt;&lt;/span&gt;&lt;/pre&gt;   &lt;p&gt; 这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 12:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;作者: 陈斌 (redguardtoo)
 &lt;/p&gt;
 
 &lt;p&gt;
-更新时间: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-04-14 Mon&lt;/span&gt;&lt;/span&gt;
+更新时间: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-01-04 Sun&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-原创时间: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2011-04-16 六 15:11&lt;/span&gt;&lt;/span&gt;
+原创时间: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2011-04-16 Sat&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-品味比较小众,如果你用几亿劳动人民都喜爱的某著名免费软件套装,这篇文章你就不用看下去了.
+品味较小众,如你用几亿人民都喜爱的某著名免费软件套装,本文就不用看了.
 &lt;/p&gt;
 
 &lt;p&gt;
-我选择软件的标准是:
+我的标准是:
 &lt;/p&gt;
 
 &lt;ul&gt;
@@ -259,9 +259,8 @@ chdir C:cygwinbin
 &lt;tr&gt;&lt;td class="left"&gt;ditto&lt;/td&gt;&lt;td class="left"&gt;剪贴板管理&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;CMake 2.8&lt;/td&gt;&lt;td class="left"&gt;跨平台build工具,相见恨晚&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;ColorPic 4.1&lt;/td&gt;&lt;td class="left"&gt;取色&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;comicsviewe&lt;/td&gt;&lt;td class="left"&gt;看漫画&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="left"&gt;comicsviewer&lt;/td&gt;&lt;td class="left"&gt;看漫画&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;DAEMON Tools&lt;/td&gt;&lt;td class="left"&gt;虚拟光驱&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Debugging Tools for Windows&lt;/td&gt;&lt;td class="left"&gt;如题&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Wink&lt;/td&gt;&lt;td class="left"&gt;录屏&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Dependency Walker&lt;/td&gt;&lt;td class="left"&gt;检查dll依赖&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;eMule&lt;/td&gt;&lt;td class="left"&gt;p2p下载&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
@@ -270,44 +269,32 @@ chdir C:cygwinbin
 &lt;tr&gt;&lt;td class="left"&gt;Foxit Reader&lt;/td&gt;&lt;td class="left"&gt;PDF阅读器&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;GhostScript&lt;/td&gt;&lt;td class="left"&gt;pdf解析引擎&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;GIMP&lt;/td&gt;&lt;td class="left"&gt;图像编辑&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;gnuplot&lt;/td&gt;&lt;td class="left"&gt;数据分析,主要用于数据显示&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;gtalk&lt;/td&gt;&lt;td class="left"&gt;即时通信,语音服务佳&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Picasa (google)&lt;/td&gt;&lt;td class="left"&gt;照片管理&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;google拼音&lt;/td&gt;&lt;td class="left"&gt;输入法,主要特色在于可以在线同步词库,资源消耗高&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;AVG Free&lt;/td&gt;&lt;td class="left"&gt;杀毒&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="left"&gt;ClamWin&lt;/td&gt;&lt;td class="left"&gt;开源杀毒&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;ImageMagick-6.3.5&lt;/td&gt;&lt;td class="left"&gt;命令行图像处理&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;InfraRecorder&lt;/td&gt;&lt;td class="left"&gt;刻录&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Inno Setup 5&lt;/td&gt;&lt;td class="left"&gt;打包,开发用&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Internet Explorer&lt;/td&gt;&lt;td class="left"&gt;系统自带&lt;/td&gt;&lt;td class="left"&gt;否&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;IPMsg&lt;/td&gt;&lt;td class="left"&gt;局域网通信&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;IrfanView&lt;/td&gt;&lt;td class="left"&gt;看图,可与total commander集成&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Mercurial&lt;/td&gt;&lt;td class="left"&gt;分布式版本控制&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Msn Messenger&lt;/td&gt;&lt;td class="left"&gt;微软的即时通信软件&lt;/td&gt;&lt;td class="left"&gt;否&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Microsoft Visual Studio Express 2010&lt;/td&gt;&lt;td class="left"&gt;C++ IDE&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Miranda IM&lt;/td&gt;&lt;td class="left"&gt;集成了yahoo,icq,qq,msn,gtalk,irc,msn的即时通信&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Firefox&lt;/td&gt;&lt;td class="left"&gt;网页浏览&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;mtPaint&lt;/td&gt;&lt;td class="left"&gt;mspaint的替代品,简单画图,界面费解&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;MWSnap&lt;/td&gt;&lt;td class="left"&gt;截图&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Notepad++&lt;/td&gt;&lt;td class="left"&gt;文本编辑,我用vim和Emacs,给别人用&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;LibreOffice&lt;/td&gt;&lt;td class="left"&gt;办公字处理,导出word到pdf.最,画组织结构图,中文教程少&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;OpenVPN&lt;/td&gt;&lt;td class="left"&gt;VPN&lt;/td&gt;&lt;td class="left"&gt;否&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Chrome&lt;/td&gt;&lt;td class="left"&gt;网页浏览&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Pandora Recovery&lt;/td&gt;&lt;td class="left"&gt;恢复误删除的文件&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Passcape&lt;/td&gt;&lt;td class="left"&gt;Mozilla套件密码恢复&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;password-recovery&lt;/td&gt;&lt;td class="left"&gt;密码恢复&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;PPLive&lt;/td&gt;&lt;td class="left"&gt;在线电视&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;reshacker&lt;/td&gt;&lt;td class="left"&gt;从可执行文件中提取资源(图标)&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Skype&lt;/td&gt;&lt;td class="left"&gt;即时通信,语音通话&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="left"&gt;Tango&lt;/td&gt;&lt;td class="left"&gt;即时通信,语音通话&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;StarDict&lt;/td&gt;&lt;td class="left"&gt;辞典&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;SumatraPDF&lt;/td&gt;&lt;td class="left"&gt;pdf阅读器&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;VirtualBox&lt;/td&gt;&lt;td class="left"&gt;虚拟机,用于模拟开发环境,或是网上银行专用的操作系统&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;QQ&lt;/td&gt;&lt;td class="left"&gt;如题&lt;/td&gt;&lt;td class="left"&gt;否&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;MiniThunder(迅雷)&lt;/td&gt;&lt;td class="left"&gt;下载&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;PDF-XChange Viewer&lt;/td&gt;&lt;td class="left"&gt;PDF阅读器(由于工作关系,我装了很多PDF阅读器)&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;UltraVNC&lt;/td&gt;&lt;td class="left"&gt;远程桌面控制&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Subtitle Workshop&lt;/td&gt;&lt;td class="left"&gt;字幕调整&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;USBOOT 1.7&lt;/td&gt;&lt;td class="left"&gt;使usb能够启动电脑,制作usb自启动盘时用&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;F…gate&lt;/td&gt;&lt;td class="left"&gt;翻墙&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="left"&gt;Goagent&lt;/td&gt;&lt;td class="left"&gt;翻墙&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Vim/GVim&lt;/td&gt;&lt;td class="left"&gt;文本编辑&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Total Commander&lt;/td&gt;&lt;td class="left"&gt;说是世界第一的文件管理器不算过分,未注册版&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;共享&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;bblean&lt;/td&gt;&lt;td class="left"&gt;windows shell&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;开源&lt;/td&gt;&lt;/tr&gt;
@@ -320,7 +307,6 @@ chdir C:cygwinbin
 &lt;tr&gt;&lt;td class="left"&gt;autoruns&lt;/td&gt;&lt;td class="left"&gt;检查启动时默认启动那些软件,用于手动杀木马&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;process explorer&lt;/td&gt;&lt;td class="left"&gt;检查电脑中有什么程序在运行,用于手动杀木马&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Everything&lt;/td&gt;&lt;td class="left"&gt;找文件&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;treewalk&lt;/td&gt;&lt;td class="left"&gt;缓存DNS&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;td class="left"&gt;免费&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -341,9 +327,8 @@ chdir C:cygwinbin
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td class="left"&gt;emacs&lt;/td&gt;&lt;td class="left"&gt;任何事&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;vi&lt;/td&gt;&lt;td class="left"&gt;文本编辑&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class="left"&gt;vim&lt;/td&gt;&lt;td class="left"&gt;文本编辑&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Firefox&lt;/td&gt;&lt;td class="left"&gt;网页浏览&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;pidgin&lt;/td&gt;&lt;td class="left"&gt;即时通信&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;terminator&lt;/td&gt;&lt;td class="left"&gt;Terminal&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;bash&lt;/td&gt;&lt;td class="left"&gt;shell&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;scrot&lt;/td&gt;&lt;td class="left"&gt;截图&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
@@ -393,7 +378,6 @@ chdir C:cygwinbin
 &lt;tr&gt;&lt;td class="left"&gt;Libreoffice&lt;/td&gt;&lt;td class="left"&gt;办公软件&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;迷你迅雷&lt;/td&gt;&lt;td class="left"&gt;下载&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;HomeBrew&lt;/td&gt;&lt;td class="left"&gt;开源软件包管理(Mac下少数几个亮点之一)&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Adium&lt;/td&gt;&lt;td class="left"&gt;即时通讯,支持多协议&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Clippings&lt;/td&gt;&lt;td class="left"&gt;剪贴板管理(收费)&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Mplayer X&lt;/td&gt;&lt;td class="left"&gt;类mplayer的视频播放器&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Monolingual&lt;/td&gt;&lt;td class="left"&gt;删除没用的多国语言和Mac自带的垃圾软件&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
@@ -428,22 +412,18 @@ chdir C:cygwinbin
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;&lt;td class="left"&gt;adblock plus&lt;/td&gt;&lt;td class="left"&gt;过滤广告,支持正则表达式&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Autoproxy&lt;/td&gt;&lt;td class="left"&gt;代理上网&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Firebug&lt;/td&gt;&lt;td class="left"&gt;最好的web开发工具&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;KeySnail&lt;/td&gt;&lt;td class="left"&gt;安装了HoK(快捷键设置)脚本代替vimperator&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;ImageBlock&lt;/td&gt;&lt;td class="left"&gt;和图片说再见&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;ColorZilla&lt;/td&gt;&lt;td class="left"&gt;取色&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Vacuum Palaces Improved&lt;/td&gt;&lt;td class="left"&gt;firefox使用的sqlite数据库加速&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;DownloadHelper&lt;/td&gt;&lt;td class="left"&gt;下载视频&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Magrent&lt;/td&gt;&lt;td class="left"&gt;转换链接为torrent文件&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;MozRepl&lt;/td&gt;&lt;td class="left"&gt;和Emacs交互,web前端开发必备&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;Greasemonkey&lt;/td&gt;&lt;td class="left"&gt;支持javascript写的脚本操作firefox&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;MeasureIt On&lt;/td&gt;&lt;td class="left"&gt;Firefox的尺子&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;QR Code Image Generator&lt;/td&gt;&lt;td class="left"&gt;产生QR码&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;JSONView&lt;/td&gt;&lt;td class="left"&gt;View JSON&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;Magrent&lt;/td&gt;&lt;td class="left"&gt;生成bt链接&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
 &lt;tr&gt;&lt;td class="left"&gt;LeechBlock&lt;/td&gt;&lt;td class="left"&gt;自绝于社交网络&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;DownloadHelper&lt;/td&gt;&lt;td class="left"&gt;下载视频&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -475,33 +455,8 @@ chdir C:cygwinbin
 &lt;h5 id="sec-4-3"&gt;vim插件&lt;/h5&gt;
 &lt;div class="outline-text-4" id="text-4-3"&gt;
 
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;
-&lt;/colgroup&gt;
-&lt;thead&gt;
-&lt;tr&gt;&lt;th scope="col" class="left"&gt;名称&lt;/th&gt;&lt;th scope="col" class="left"&gt;说明&lt;/th&gt;&lt;th scope="col" class="left"&gt;频率&lt;/th&gt;&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;&lt;td class="left"&gt;cmake&lt;/td&gt;&lt;td class="left"&gt;有时要编辑cmake&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;cscope_maps.vim&lt;/td&gt;&lt;td class="left"&gt;为vim中使用cscope(看c/c++代码工具)添加快捷键支持&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;LargeFile.vim&lt;/td&gt;&lt;td class="left"&gt;看大文件时自动优化vim&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;matchit.vim&lt;/td&gt;&lt;td class="left"&gt;跳转至匹配的符号,比如在匹配的括号见跳来跳去&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;NERD_commenter.vim&lt;/td&gt;&lt;td class="left"&gt;码(支持很多语言)添加/取消注释&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;taglist.vim&lt;/td&gt;&lt;td class="left"&gt;显示函数列表&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;vim-surround&lt;/td&gt;&lt;td class="left"&gt;成对改字符串最外围字符&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;ctrlp&lt;/td&gt;&lt;td class="left"&gt;搜索文件名&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;nerdtree&lt;/td&gt;&lt;td class="left"&gt;文件一览&lt;/td&gt;&lt;td class="left"&gt;中&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;vim-unimpaired&lt;/td&gt;&lt;td class="left"&gt;不知道&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;yankring&lt;/td&gt;&lt;td class="left"&gt;剪贴板管理&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;zoomwin&lt;/td&gt;&lt;td class="left"&gt;切换全屏buffer&lt;/td&gt;&lt;td class="left"&gt;高&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;vim-fugitive&lt;/td&gt;&lt;td class="left"&gt;在vim中操作git&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;seek&lt;/td&gt;&lt;td class="left"&gt;按s搜索最近两个字符&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td class="left"&gt;vim-autocolose&lt;/td&gt;&lt;td class="left"&gt;自动完成匹配符号&lt;/td&gt;&lt;td class="left"&gt;低&lt;/td&gt;&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
-&lt;/div&gt;
+&lt;p&gt;见&lt;a href="https://github.com/redguardtoo/vimrc"&gt;https://github.com/redguardtoo/vimrc&lt;/a&gt;.
+&lt;/p&gt;&lt;/div&gt;
 
 &lt;/div&gt;
 
@@ -509,7 +464,7 @@ chdir C:cygwinbin
 &lt;h5 id="sec-4-4"&gt;emacs插件&lt;/h5&gt;
 &lt;div class="outline-text-4" id="text-4-4"&gt;
 
-&lt;p&gt;我已转向emacs,我使用的插件较多,无法一一罗列,详见&lt;a href="https://github.com/redguardtoo/emacs.d"&gt;https://github.com/redguardtoo/emacs.d&lt;/a&gt;.
+&lt;p&gt;见&lt;a href="https://github.com/redguardtoo/emacs.d"&gt;https://github.com/redguardtoo/emacs.d&lt;/a&gt;.
 &lt;/p&gt;&lt;/div&gt;
 
 &lt;/div&gt;
