@@ -534,7 +534,7 @@ call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Stud
             <h1 class="title"><a href="posts/always-turn-on-fpermissive-for-gcc-4-6.html">Always turn on "-fpermissive" for GCC 4.6</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2012-01-14T10:38:00+00:00">2012-01-14 10:38</time>
+                    <time class="timeago" datetime="2012-01-14T18:38:00+00:00">2012-01-14 18:38</time>
                 </div>
                 <div class="stats">
                     
@@ -547,6 +547,7 @@ call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Stud
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
+           <li><a class="tag p-category" href="categories/cmake.html" rel="tag">cmake</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/gcc.html" rel="tag">gcc</a></li>
            <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
@@ -556,29 +557,43 @@ call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Stud
             </div>
             <div class="body">
                 <div>
-<p></p>
-<p>Below code will get error message if compiled by gcc 4.6+: </p>   <pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
-</pre>    <pre class="src src-c++"><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">A</span>
-<p>{
-   <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">a</span>();
-}</p>
-<p><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">B</span></p>
-<p>{
-   <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">void</span> <span style="color: #0000ee; font-weight: bold;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>;
-}</p>
-<p><span style="color: #00cdcd; font-weight: bold;">class</span> <span style="color: #00cd00;">MyClass</span>:<span style="color: #00cdcd; font-weight: bold;">public</span> <span style="color: #00cd00;">B</span></p>
-<p>{
-  <span style="color: #00cd00;">A</span> <span style="color: #cdcd00;">_a</span>;
-  <span style="color: #00cdcd; font-weight: bold;">virtual</span> <span style="color: #00cd00;">b</span>() <span style="color: #00cdcd; font-weight: bold;">const</span>
+<p>Below code will get error message if compiled by gcc 4.6+:
+</p>
+
+<pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+</pre>
+
+<pre class="prettyprint lang-c">
+class A
+{
+   void a();
+}
+class B
+{
+   virtual void b() const;
+}
+class MyClass:public B
+{
+  A _a;
+  virtual b() const
   {
-    _a.a(); <span style="color: #cd0000;">//</span><span style="color: #cd0000;">gcc complains here!</span>
+    _a.a(); //gcc complains here!
   }
-}</p>
-<p></p></pre>  <p> Since I cannot modify class A and B, I need add "-fpermission" to CXX<sub>FLAG</sub>. Here is my <a href="http://www.cmake.org">cmake</a> code, </p>   <pre class="src src-cmake">if(CMAKE_COMPILER_IS_GNUCC)
+}
+</pre>
+
+<p>
+Since I cannot modify class A and B, I need add "-fpermission" to CXX_FLAG.
+Here is my <a href="http://www.cmake.org">cmake</a> code,
+</p>
+
+<pre class="prettyprint lang-cmake">
+if(CMAKE_COMPILER_IS_GNUCC)
   # needed for gcc 4.6+
-  set(CMAKE_CXX_FLAGS <span style="color: #00cd00;">"${CMAKE_CXX_FLAGS} -fpermissive"</span>)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
-<p></p></pre>  </div>
+</pre>
+</div>
             </div>
         </div>
         <div class="post">
