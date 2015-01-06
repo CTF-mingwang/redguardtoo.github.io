@@ -1,98 +1,28 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>My answer to "How do you use Emacs without a directory tree on the side of the editor?" on quora.com | Chen's blog</title>
-
-    
-            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<style type="text/css">
-pre .str, code .str { color: #65B042; } /* string  - green */
-pre .kwd, code .kwd { color: #E28964; } /* keyword - dark pink */
-pre .com, code .com { color: #AEAEAE; font-style: italic; } /* comment - gray */
-pre .typ, code .typ { color: #89bdff; } /* type - light blue */
-pre .lit, code .lit { color: #3387CC; } /* literal - blue */
-pre .pun, code .pun { color: #fff; } /* punctuation - white */
-pre .pln, code .pln { color: #fff; } /* plaintext - white */
-pre .tag, code .tag { color: #89bdff; } /* html/xml tag    - light blue */
-pre .atn, code .atn { color: #bdb76b; } /* html/xml attribute name  - khaki */
-pre .atv, code .atv { color: #65B042; } /* html/xml attribute value - green */
-pre .dec, code .dec { color: #3387CC; } /* decimal - blue */
-
-pre.prettyprint, code.prettyprint {
-	background-color: #000;
-	border-radius: 8px;
-}
-
-pre.prettyprint {
-	width: 95%;
-	margin: 1em auto;
-	padding: 1em;
-	white-space: pre-wrap;
-}
-
-/* Specify class=linenums on a pre to get line numbering */
-ol.linenums { margin-top: 0; margin-bottom: 0; color: #AEAEAE; } /* IE indents via margin-left */
-li.L0,li.L1,li.L2,li.L3,li.L5,li.L6,li.L7,li.L8 { list-style-type: none }
-/* Alternate shading for lines */
-li.L1,li.L3,li.L5,li.L7,li.L9 { }
-
-@media print {
-  pre .str, code .str { color: #060; }
-  pre .kwd, code .kwd { color: #006; font-weight: bold; }
-  pre .com, code .com { color: #600; font-style: italic; }
-  pre .typ, code .typ { color: #404; font-weight: bold; }
-  pre .lit, code .lit { color: #044; }
-  pre .pun, code .pun { color: #440; }
-  pre .pln, code .pln { color: #000; }
-  pre .tag, code .tag { color: #006; font-weight: bold; }
-  pre .atn, code .atn { color: #404; }
-  pre .atv, code .atv { color: #060; }
-}
-</style>
-
-
-
-    
-
-    <meta name="author" content="Chen Bin">
-    
-    <meta property="og:site_name" content="Chen's blog">
-    <meta property="og:title" content='My answer to "How do you use Emacs without a directory tree on the sid'>
-    <meta property="og:url" content="http://blog.binchen.org/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">
-    <meta property="og:description" content="This is original link of the question. Please note I focus on programming for large projects. I need search/grep/modify files scattered in different places without documentation.   If your use case is">
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2014-02-19T21:40:00+00:00">
-           <meta property="article:tag" content="bash">
-           <meta property="article:tag" content="emacs">
-           <meta property="article:tag" content="en">
-           <meta property="article:tag" content="linux">
-
-    
-
-    
-
-
-
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>My answer to "How do you use Emacs without a directory tree on the side of the editor?" on quora.com | Chen's blog</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/monokai_sublime.min.css">
+<meta name="author" content="Chen Bin">
+<meta property="og:site_name" content="Chen's blog">
+<meta property="og:title" content='My answer to "How do you use Emacs without a directory tree on the sid'>
+<meta property="og:url" content="http://blog.binchen.org/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">
+<meta property="og:description" content="This is original link of the question. Please note I focus on programming for large projects. I need search/grep/modify files scattered in different places without documentation.   If your use case is">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2014-02-19T21:40:00+00:00">
+<meta property="article:tag" content="bash">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="en">
+<meta property="article:tag" content="linux">
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -100,10 +30,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
     <div class="post">
     
@@ -128,30 +55,35 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { }
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
         </ul>
-        </div>
+</div>
 
         </div>
         <div class="body">
             <div>
 <p></p>
-<p>This is <a href="http://www.quora.com/Emacs/How-do-you-use-Emacs-without-a-directory-tree-on-the-side-of-the-editor">original link of the question</a>. Please note I focus on programming for large projects. I need search/grep/modify files scattered in different places without documentation. </p> <p> If your use case is different, a embedded file explorer may be a better choice </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Tools I use to replace a file explorer</h4> <div class="outline-text-3" id="text-1">  <ol> <li>ido-find-file (emacs), just type any characters, it will fuzz search matched file in parent/sibling/current/or-whatever directory.  </li> <li>helm-find-file (emacs), this one use regular expression and has bigger window  </li> <li>recentf and helm (emacs), I use regular expression open recent opened files.  </li> <li>ctags, gtags or whatever tag tools (CLI tool), as mentioned by other people  </li> <li>I also use lots of bash functions written by myself, those functions are trivial, but combined with a wonderful tool called percol, they become really powerful.  </li> <li>I use some CLI clipboard tool so I can easily share the file path between terminal/emacs/firefox.  </li> <li>there is also a emacs bundled feature called speedbar, which is similar to the file explorer, I used it once, but it does not fit in my ninja style ;) It's fine but the UI is almost same to those average text editors.  </li> <li>I also write some elisp snippets, for example, convert absolute path to relative path; given one relative path, output one absolute path, etc …  </li> <li>there is also some git based emacs plugin: you can search file under the project root directory.  </li> <li>there is a CLI tool called fasd which can let you interactively select the file or folder you recently visited.  </li> <li>many other tools, plug-ins, code snippets I can use … </li> </ol>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use case</h4> <div class="outline-text-3" id="text-2">  <ol> <li>I need search a big project for a certain library (it's a freemarker file I need include) whose full path I don't know, I just search the API's name by type: </li> </ol>  <p>"gef keyword *". gef is my bash function based on grep. </p>
-<ol> <li>matched files are displayed instantly (grep is much more quick than IDEs, BTW) in a interactive console filter (use percol), I type a regular expression to filter file name and press enter </li> <li>the full path is in clipboard now, then I type ":e Shift-insert" to open that file. </li> </ol>  <p>This is the most difficult case, I usually strike less keys and not get out of Emacs. </p>
-<ol> <li>If i need insert this file's relative path, I press a hot key and another emacs plugin will correctly convert absolute path to relative one (relative to the file I'm editing in Emacs) and insert it into my editor. </li> </ol>   </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Demo</h4> <div class="outline-text-3" id="text-3">  <p>Here is screen cast. In this demo I grepped and open a ftl file and then search another js file in the same project. <img src="../wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif" alt="http://blog.binchen.org/wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif"> </p>
+<p>This is <a href="http://www.quora.com/Emacs/How-do-you-use-Emacs-without-a-directory-tree-on-the-side-of-the-editor">original link of the question</a>. Please note I focus on programming for large projects. I need search/grep/modify files scattered in different places without documentation. </p> <p> If your use case is different, a embedded file explorer may be a better choice </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Tools I use to replace a file explorer</h4> <div class="outline-text-3" id="text-1">  <ol>
+<li>ido-find-file (emacs), just type any characters, it will fuzz search matched file in parent/sibling/current/or-whatever directory.  </li> <li>helm-find-file (emacs), this one use regular expression and has bigger window  </li> <li>recentf and helm (emacs), I use regular expression open recent opened files.  </li> <li>ctags, gtags or whatever tag tools (CLI tool), as mentioned by other people  </li> <li>I also use lots of bash functions written by myself, those functions are trivial, but combined with a wonderful tool called percol, they become really powerful.  </li> <li>I use some CLI clipboard tool so I can easily share the file path between terminal/emacs/firefox.  </li> <li>there is also a emacs bundled feature called speedbar, which is similar to the file explorer, I used it once, but it does not fit in my ninja style ;) It's fine but the UI is almost same to those average text editors.  </li> <li>I also write some elisp snippets, for example, convert absolute path to relative path; given one relative path, output one absolute path, etc …  </li> <li>there is also some git based emacs plugin: you can search file under the project root directory.  </li> <li>there is a CLI tool called fasd which can let you interactively select the file or folder you recently visited.  </li> <li>many other tools, plug-ins, code snippets I can use … </li> </ol>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use case</h4> <div class="outline-text-3" id="text-2">  <ol>
+<li>I need search a big project for a certain library (it's a freemarker file I need include) whose full path I don't know, I just search the API's name by type: </li> </ol>
+<p>"gef keyword *". gef is my bash function based on grep. </p>
+<ol>
+<li>matched files are displayed instantly (grep is much more quick than IDEs, BTW) in a interactive console filter (use percol), I type a regular expression to filter file name and press enter </li> <li>the full path is in clipboard now, then I type ":e Shift-insert" to open that file. </li> </ol>
+<p>This is the most difficult case, I usually strike less keys and not get out of Emacs. </p>
+<ol>
+<li>If i need insert this file's relative path, I press a hot key and another emacs plugin will correctly convert absolute path to relative one (relative to the file I'm editing in Emacs) and insert it into my editor. </li> </ol>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Demo</h4> <div class="outline-text-3" id="text-3">  <p>Here is screen cast. In this demo I grepped and open a ftl file and then search another js file in the same project. <img src="../wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif" alt="http://blog.binchen.org/wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif"></p>
 </div> </div> </div>
         </div>
         
         <ul class="pager">
-            <li class="previous">
+<li class="previous">
                 <a href="one-liner-to-download-and-extract-emacs-lisp-source-code.html" rel="prev" title="One liner to download and install emacs lisp source code">Previous post</a>
             </li>
             <li class="next">
                 <a href="how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html" rel="next" title="How to adapt my work style to the employer's standard in Emacs">Next post</a>
             </li>
         </ul>
-
-            
-        
-        <div id="disqus_thread"></div>
+<div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html",
@@ -165,8 +97,7 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { }
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -176,20 +107,11 @@ li.L1,li.L3,li.L5,li.L7,li.L9 { }
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -376,14 +298,8 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.js?lang=lisp&amp;lang=clj&amp;skin=sunburst"></script>
-<script type="text/javascript">
-window.onload = function () {
-  var link = document.createElement('link');link.href = 'https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css';link.type = 'text/css'; link.rel = 'stylesheet'; link.media = 'screen,print'; document.getElementsByTagName( 'head' )[0].appendChild( link ); prettyPrint();
-
-  (function() {var script = document.createElement("script"); var head = document['head'] || document.getElementsByTagName("head")[0] || document.documentElementroot; script.onload = script.onerror = script.onreadystatechange = function () {if (script && (!script.readyState || /loaded|complete/.test(script.readyState))) {script.onerror = script.onload = script.onreadystatechange = null; if (script.parentNode) {script.parentNode.removeChild(script);} script = null;}}; script.type = 'text/javascript'; script.src = 'http://cdnjs.cloudflare.com/ajax/libs/prettify/r298/lang-lisp.min.js'; head.insertBefore(script, head.firstChild);})();
-};
+</script><script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script><script type="text/javascript">
+hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
 
@@ -397,14 +313,7 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-<!-- Social buttons -->
-<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
 <ul>
 <li>
@@ -421,16 +330,10 @@ _gaq.push(['_trackPageview']);
 </li>
 </ul>
 </div>
-<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
-<!-- End of social buttons -->
-
-
-    
-        <script type="text/javascript">
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (spell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/spell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 04 Jan 2015 00:36:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check set up in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;To save your time, I started from conclusion.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (spell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/spell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:03 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check set up in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;To save your time, I started from conclusion.
 &lt;/p&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -17,7 +17,7 @@ If you want to force Emacs use dictionary "en_US", copy below code into your ~/.
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ;; find aspell and hunspell automatically
 (cond
  ((executable-find "aspell")
@@ -27,7 +27,7 @@ If you want to force Emacs use dictionary "en_US", copy below code into your ~/.
   (setq ispell-program-name "hunspell")
   (setq ispell-extra-args '("-d en_US")))
  )
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -54,7 +54,7 @@ Please insert below code into your ~/.emacs:
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ;; if (aspell installed) { use aspell}
 ;; else if (hunspell installed) { use hunspell }
 ;; whatever spell checker I use, I always use English dictionary
@@ -100,7 +100,7 @@ Please insert below code into your ~/.emacs:
     (setq ispell-extra-args old-ispell-extra-args)
     (ispell-kill-ispell t)
     ))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -115,8 +115,7 @@ That's it.
 &lt;h4 id="sec-3"&gt;Why&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3"&gt;
 
-&lt;ul&gt;
-&lt;li id="sec-3-1"&gt;Aspell&lt;br&gt;
+&lt;ul&gt;&lt;li id="sec-3-1"&gt;Aspell&lt;br&gt;
 apell is recommended because its option "–run-together". That option could spell check the camel case word. Variable name often uses camel case naming convention these days. Read my &lt;a href="http://blog.binchen.org/?p=950"&gt;Effective spell check in Emacs&lt;/a&gt; for advanced tips on how to use flyspell to check variable names.
 
 &lt;p&gt;
@@ -127,24 +126,20 @@ This behaviour will be a problem if you want to let Emacs/aspell correct the typ
 &lt;/p&gt;
 &lt;p&gt;
 For example, for a typo "helle" Emacs will give you too many candidates. It's hard to find the desired word "hello":
-&lt;img src="http://blog.binchen.org/wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png"&gt;
-&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png"&gt;&lt;/p&gt;
 &lt;p&gt;
 The better solution is before running "M-x ispell-word", we'd better restart a aspell proces without the argument "–run-together".
 &lt;/p&gt;
 &lt;p&gt;
 Here is the screen shot after we applying this fix:
-&lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;
-&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;&lt;/p&gt;
 &lt;p&gt;
 As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
 &lt;/p&gt;
 &lt;p&gt;
 There is another variable named "ispell-cmd-args". It is actually some &lt;b&gt;extra&lt;/b&gt; arguments Emacs could send to an &lt;b&gt;existing&lt;/b&gt; spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are really confusing. "ispell-extra-args" is actually command line arguments the spell checker will always use. The "ispell-cmd-args" are actually the extra arguments will be used in certain cases.
 &lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ul&gt;
-&lt;li id="sec-3-2"&gt;Hunspell&lt;br&gt;
+&lt;/ul&gt;&lt;ul&gt;&lt;li id="sec-3-2"&gt;Hunspell&lt;br&gt;
 I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
 
 &lt;p&gt;
@@ -163,18 +158,17 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (setq ispell-program-name "hunspell")
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>aspell</category><category>check</category><category>emacs</category><category>en</category><category>hunspell</category><category>ispell</category><category>spell</category><guid>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</guid><pubDate>Mon, 21 Apr 2014 08:25:20 GMT</pubDate></item><item><title>Effective spell check in Emacs</title><link>http://blog.binchen.org/posts/effective-spell-check-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will use spell check for html as an example. But the solution also works for other languages.
 &lt;/p&gt;
@@ -182,12 +176,10 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
 &lt;div id="table-of-contents"&gt;
 &lt;h3&gt;Table of Contents&lt;/h3&gt;
 &lt;div id="text-table-of-contents"&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html#sec-1"&gt;1 Smart spell check in HTML&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html#sec-1"&gt;1 Smart spell check in HTML&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html#sec-2"&gt;2 Spell check the camel case strings&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html#sec-3"&gt;3 Summary&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -207,21 +199,17 @@ But a html file contains many html tags, spell-check everything is even worse th
 &lt;/p&gt;
 &lt;p&gt;
 The key point is make spell checker smarter:
-&lt;/p&gt;&lt;ul&gt;
-&lt;li&gt;only check text between html tag like `&amp;lt;label&amp;gt;Please input email&amp;lt;/label&amp;gt;`
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;only check text between html tag like `&amp;lt;label&amp;gt;Please input email&amp;lt;/label&amp;gt;`
 &lt;/li&gt;
 &lt;li&gt;only check the value of html input control like `&amp;lt;input type="text" value="Please input your name"&amp;gt;`
 &lt;/li&gt;
-&lt;/ul&gt;
-
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 Paste below code into ~/.emacs:
 &lt;/p&gt;
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ;; flyspell set up for web-mode
 (defun web-mode-flyspell-verify ()
   (let ((f (get-text-property (- (point) 1) 'face))
@@ -256,7 +244,7 @@ Paste below code into ~/.emacs:
     ))
 
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspell-verify)
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -285,7 +273,7 @@ Please paste below code into ~/.emacs,
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ;; if (aspell installed) { use aspell}
 ;; else if (hunspell installed) { use hunspell }
 ;; whatever spell checker I use, I always use English dictionary
@@ -296,7 +284,7 @@ Please paste below code into ~/.emacs,
 (setq ispell-program-name "aspell"
       ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
       ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -324,8 +312,7 @@ When I say "read code", I mean read the official elisp code bundled with emacs. 
 &lt;/p&gt;
 &lt;p&gt;
 Finally, let's see then screen shot (the typos are underscored):
-&lt;img src="http://blog.binchen.org/wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png"&gt;
-&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png"&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><category>spell</category><guid>http://blog.binchen.org/posts/effective-spell-check-in-emacs.html</guid><pubDate>Tue, 21 Jan 2014 12:00:00 GMT</pubDate></item></channel></rss>

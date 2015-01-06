@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 04 Jan 2015 00:36:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
@@ -11,11 +11,11 @@ Style 1:
 
 
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 if(true) {
     printf("hello world\n");
 }
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -25,12 +25,12 @@ Style 2:
 
 
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 if(true)
 {
     printf("hello world\n");
 }
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -56,7 +56,7 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
   (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
@@ -71,7 +71,7 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
               (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
             ))
 
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -100,9 +100,9 @@ For example, the context &lt;b&gt;substatement&lt;/b&gt; corresponds to the code
 
 
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 if(true) // press ENTER here
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -112,9 +112,9 @@ And the context &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
 
 
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 void fn () //press ENTER here
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -143,9 +143,9 @@ In that function, just below the code line:
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (setq c-syntactic-context (c-guess-basic-syntax))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -155,9 +155,9 @@ You can insert log code as below:
 
 
 
-&lt;pre class="prettyprint lang-lisp"&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (message "c-syntactic-context=%s" c-syntactic-context)
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -173,9 +173,9 @@ For example, the context &lt;b&gt;statement-cont&lt;/b&gt; corresponds to the us
 
 
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 int a=3, // press ENTER here
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 
 
@@ -196,7 +196,7 @@ BTW, &lt;a href="http://www.emacswiki.org/emacs/IndentingC"&gt;EmacsWiki has a s
 Here is the code:
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 void GuessRowSize(int* w, int* h) {
     //@see http://sourceforge.net/apps/trac/codelite/browser/trunk/LiteEditor/new_build_tab.cpp?rev=5804
 
@@ -256,7 +256,7 @@ private:
 protected:
     DECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewMyButtonRenderer)
 };
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;
 When user click one row, the ActivateCell is called, we can use some rect detect algorithm to find if the button rect is clicked.
@@ -274,7 +274,7 @@ To draw the button up effect, I need ask the parent wxDataViewListCtrl to refres
 Here is the part of implementation:
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-c"&gt;
+&lt;pre&gt;&lt;code class="lang-c"&gt;
 bool
 wxDataViewMyButtonRenderer::ActivateCell(const wxRect&amp;amp; rect,
     wxDataViewModel *model,
@@ -342,4 +342,4 @@ wxDataViewMyButtonRenderer::Render( wxRect rect, wxDC *dc, int state )
 
     return true;
 }
-&lt;/pre&gt;&lt;/div&gt;</description><category>c</category><category>en</category><category>wxwidgets</category><guid>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</guid><pubDate>Sun, 13 Apr 2014 15:39:28 GMT</pubDate></item><item><title>Make Emacs support auto-completion for CMake</title><link>http://blog.binchen.org/posts/make-emacs-support-auto-completion-for-cmake.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Easy. You only install company-mode and company-cmake.el according to the documentation &lt;a href="https://github.com/company-mode/company-cmake"&gt;HERE&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; company-cmake.el is written by me. I'm in the process of signing necessary copyright papers to make it part of company-mode. I was told the process could take one month because I'm deal with GNU foundation. So please be patient. &lt;/p&gt; &lt;p&gt; Anyway, you can use company-cmake.el right now with company-mode without any problem. &lt;/p&gt; &lt;p&gt; Please note I only tested this plugin with cmake 2.8. &lt;/p&gt; &lt;p&gt; Here is screen shot: &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/company-cmake-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/company-cmake-nq8.png"&gt; &lt;/p&gt; &lt;p&gt; UPDATED (12th Jan, 2014): Legal procedure is done. Now company-cmake.el is officially part of company-mode since version 0.6.12. &lt;/p&gt; &lt;p&gt; So all you need to do is install latest company-mode, no other set up required! &lt;/p&gt;&lt;/div&gt;</description><category>c</category><category>cmake</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/make-emacs-support-auto-completion-for-cmake.html</guid><pubDate>Mon, 22 Apr 2013 10:48:00 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>c</category><category>en</category><category>wxwidgets</category><guid>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</guid><pubDate>Sun, 13 Apr 2014 15:39:28 GMT</pubDate></item><item><title>Make Emacs support auto-completion for CMake</title><link>http://blog.binchen.org/posts/make-emacs-support-auto-completion-for-cmake.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Easy. You only install company-mode and company-cmake.el according to the documentation &lt;a href="https://github.com/company-mode/company-cmake"&gt;HERE&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; company-cmake.el is written by me. I'm in the process of signing necessary copyright papers to make it part of company-mode. I was told the process could take one month because I'm deal with GNU foundation. So please be patient. &lt;/p&gt; &lt;p&gt; Anyway, you can use company-cmake.el right now with company-mode without any problem. &lt;/p&gt; &lt;p&gt; Please note I only tested this plugin with cmake 2.8. &lt;/p&gt; &lt;p&gt; Here is screen shot: &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/company-cmake-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/company-cmake-nq8.png"&gt;&lt;/p&gt; &lt;p&gt; UPDATED (12th Jan, 2014): Legal procedure is done. Now company-cmake.el is officially part of company-mode since version 0.6.12. &lt;/p&gt; &lt;p&gt; So all you need to do is install latest company-mode, no other set up required! &lt;/p&gt;&lt;/div&gt;</description><category>c</category><category>cmake</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/make-emacs-support-auto-completion-for-cmake.html</guid><pubDate>Mon, 22 Apr 2013 10:48:00 GMT</pubDate></item></channel></rss>
