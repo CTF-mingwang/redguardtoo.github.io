@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:03 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:18 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -22,7 +22,8 @@ Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generato
 &lt;/p&gt;
 &lt;p&gt;
 Requirements:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Org-mode bundled with Emacs 24.x
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;Org-mode bundled with Emacs 24.x
 &lt;/li&gt;
 &lt;li&gt;Nikola as the blog generator 
 &lt;/li&gt;
@@ -32,7 +33,13 @@ Requirements:
 &lt;/li&gt;
 &lt;li&gt;Insert below code into ~/.emacs
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;/ul&gt;
+
+
+
+
+
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun org2nikola-after-hook-setup (title slug)
   (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
         (nikola-dir (file-truename "~/projs/nikola-root"))
@@ -61,7 +68,7 @@ Requirements:
     ))
 
 (add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -77,13 +84,17 @@ You can write blog into org file, export and publicize it with command `M-x org2
 &lt;div class="outline-text-3" id="text-2"&gt;
 
 &lt;p&gt;I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wordpress is slow to load web page
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;Wordpress is slow to load web page
 &lt;/li&gt;
 &lt;li&gt;I waste too much time to "manage" Wordpress (applying security patch, fighting with spam comment …)
 &lt;/li&gt;
 &lt;li&gt;As a programmer, I need publish code snippets. Wordpress is &lt;b&gt;BAD&lt;/b&gt; at rendering code.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by &lt;a href="https://github.com/punchagan"&gt;Puneeth Chaganti&lt;/a&gt;'s excellent work on org2blog.
 &lt;/p&gt;
 &lt;/div&gt;
@@ -123,7 +134,7 @@ Here is the Emacs lisp code I borrowed from Org2blog:
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun org2nikola-replace-pre (html)
   "Replace pre blocks with sourcecode shortcode blocks.
 shamelessly copied from org2blog/wp-replace-pre()"
@@ -168,7 +179,7 @@ shamelessly copied from org2blog/wp-replace-pre()"
         (setq html (buffer-substring-no-properties (point-min) (point-max))))
       ))
   html)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -235,9 +246,9 @@ The final output contain lines like:
 
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
+&lt;pre class="prettyprint lang-sh"&gt;
 ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 

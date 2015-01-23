@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (java)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/java.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:04 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (java)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/java.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:18 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
@@ -11,11 +11,11 @@ Style 1:
 
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
+&lt;pre class="prettyprint lang-c"&gt;
 if(true) {
     printf("hello world\n");
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -25,12 +25,12 @@ Style 2:
 
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
+&lt;pre class="prettyprint lang-c"&gt;
 if(true)
 {
     printf("hello world\n");
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -56,7 +56,7 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
   (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
@@ -71,7 +71,7 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
               (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
             ))
 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -100,9 +100,9 @@ For example, the context &lt;b&gt;substatement&lt;/b&gt; corresponds to the code
 
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
+&lt;pre class="prettyprint lang-c"&gt;
 if(true) // press ENTER here
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -112,9 +112,9 @@ And the context &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
 
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
+&lt;pre class="prettyprint lang-c"&gt;
 void fn () //press ENTER here
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -143,9 +143,9 @@ In that function, just below the code line:
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (setq c-syntactic-context (c-guess-basic-syntax))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -155,9 +155,9 @@ You can insert log code as below:
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (message "c-syntactic-context=%s" c-syntactic-context)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -173,9 +173,9 @@ For example, the context &lt;b&gt;statement-cont&lt;/b&gt; corresponds to the us
 
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
+&lt;pre class="prettyprint lang-c"&gt;
 int a=3, // press ENTER here
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -235,7 +235,8 @@ Now as guy who got seven years academical training on system design (Bachelor an
 Here are the reasons:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;The code change an external API's behavior
+&lt;ul&gt;
+&lt;li&gt;The code change an external API's behavior
 &lt;/li&gt;
 &lt;li&gt;The code's location is not close to the API's
 &lt;/li&gt;

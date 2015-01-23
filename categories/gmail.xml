@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gmail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gmail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:04 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Import Gmail contacts into BBDB</title><link>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Go to &lt;a href="http://contacts.google.com"&gt;http://contacts.google.com&lt;/a&gt;, click the menu "More&amp;gt;&amp;gt;Export…&amp;gt;&amp;gt;vCard format (blah, blah …)". &lt;/li&gt; &lt;li&gt;Click "Export" button. Download the contacts.vcf. &lt;/li&gt; &lt;li&gt;Make sure &lt;a href="https://github.com/trebb/bbdb-vcard"&gt;bbdb-vcard.el&lt;/a&gt; installed. &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-vcard-import-file" and input the full path of contacts.vcf &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-save" &lt;/li&gt; &lt;li&gt;Remove contacts whose names are empty. These are Google Plus people inserted automatically by Gmail: &lt;/li&gt; &lt;/ul&gt;&lt;p&gt;Run the command in shell: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;the orginal ~/.bbdb will be saved as ~/.bbdb.bak&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gmail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gmail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:18 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Import Gmail contacts into BBDB</title><link>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;Go to &lt;a href="http://contacts.google.com"&gt;http://contacts.google.com&lt;/a&gt;, click the menu "More&amp;gt;&amp;gt;Export…&amp;gt;&amp;gt;vCard format (blah, blah …)". &lt;/li&gt; &lt;li&gt;Click "Export" button. Download the contacts.vcf. &lt;/li&gt; &lt;li&gt;Make sure &lt;a href="https://github.com/trebb/bbdb-vcard"&gt;bbdb-vcard.el&lt;/a&gt; installed. &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-vcard-import-file" and input the full path of contacts.vcf &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-save" &lt;/li&gt; &lt;li&gt;Remove contacts whose names are empty. These are Google Plus people inserted automatically by Gmail: &lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;Run the command in shell: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;the orginal ~/.bbdb will be saved as ~/.bbdb.bak&lt;/span&gt;
 sed -i.bak &lt;span style="color: #70c0b1;"&gt;'/["" ""/d'&lt;/span&gt; ~/.bbdb
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>bbdb</category><category>emacs</category><category>en</category><category>gmail</category><category>google</category><guid>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</guid><pubDate>Sat, 26 Jan 2013 11:56:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Author: Chen Bin (redguardtoo)
 &lt;/p&gt;
@@ -27,11 +27,13 @@ Note: This article is maintained at &lt;a href="https://github.com/redguardtoo/m
 &lt;div id="table-of-contents"&gt;
 &lt;h3&gt;Table of Contents&lt;/h3&gt;
 &lt;div id="text-table-of-contents"&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-1"&gt;1 Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-1"&gt;1 Introduction&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-2"&gt;2 Why Gnus&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-3"&gt;3 A quick guide&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4"&gt;4 Essentail 5 percent of Gnus&lt;/a&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-1"&gt;4.1 Search emails&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-1"&gt;4.1 Search emails&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-2"&gt;4.2 Subscribe group (email folder)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-3"&gt;4.3 Reply email&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-4"&gt;4.4 Compose new email&lt;/a&gt;&lt;/li&gt;
@@ -43,9 +45,11 @@ Note: This article is maintained at &lt;a href="https://github.com/redguardtoo/m
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-10"&gt;4.10 Forward mail&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-11"&gt;4.11 Mark emails read&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-12"&gt;4.12 Auto complete email address when composing email&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5"&gt;5 Advanced tips&lt;/a&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-1"&gt;5.1 How to auto-complete email address&lt;/a&gt;&lt;/li&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-1"&gt;5.1 How to auto-complete email address&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-2"&gt;5.2 How to synchronize the Gmail contacts into BBDB's database&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-3"&gt;5.3 How to set up email "From" field for home and office&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-4"&gt;5.4 How to tag email&lt;/a&gt;&lt;/li&gt;
@@ -53,9 +57,11 @@ Note: This article is maintained at &lt;a href="https://github.com/redguardtoo/m
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-6"&gt;5.6 How to read HTML mail&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-7"&gt;5.7 How to read email offline&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-8"&gt;5.8 How to use multiple Gmail accounts&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-6"&gt;6 My Gnus configuration (for Gmail)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -78,7 +84,8 @@ So here is my guide. It will help you focus on that useful 5% features only.
 &lt;h4 id="sec-2"&gt;Why Gnus&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2"&gt;
 
-&lt;ul&gt;&lt;li&gt;less hardware resource required
+&lt;ul&gt;
+&lt;li&gt;less hardware resource required
 &lt;/li&gt;
 &lt;li&gt;email search and filter is good
 &lt;/li&gt;
@@ -86,7 +93,10 @@ So here is my guide. It will help you focus on that useful 5% features only.
 &lt;/li&gt;
 &lt;li&gt;support different environments. For example, if I want to see html email in Linux shell without X windows, Gnus can do it.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
+
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 
@@ -375,7 +385,8 @@ I use both "bbdb-complete-name" and company-mode.
 &lt;div class="outline-text-4" id="text-5-2"&gt;
 
 &lt;p&gt;Here are the steps,
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Go to &lt;a href="https://contacts.google.com"&gt;https://contacts.google.com&lt;/a&gt;
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;Go to &lt;a href="https://contacts.google.com"&gt;https://contacts.google.com&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;Click "More -&amp;gt; Export -&amp;gt; vCard Format -&amp;gt; Export".
 &lt;/li&gt;
@@ -383,7 +394,10 @@ I use both "bbdb-complete-name" and company-mode.
 &lt;/li&gt;
 &lt;li&gt;Move ~/.bbdb.el into ~/.emacs.d/.bbdb, The file ".bbdb" is defined in variable bbdb-file
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;
 There are other plugins which can do the similar thing. But they are dependent on certain version of BBDB. So if you install in-compatible version of BBDB, they won't work.
 &lt;/p&gt;
 &lt;p&gt;
@@ -434,7 +448,8 @@ Here is the code to be inserted into ~/.emacs:
 
 &lt;p&gt;
 Key points:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;$HOSTNAME is &lt;b&gt;not&lt;/b&gt; an environment variable.
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;$HOSTNAME is &lt;b&gt;not&lt;/b&gt; an environment variable.
 &lt;/li&gt;
 &lt;li&gt;I grab the output of command line program "hostname" instead using elisp function `(system-name)` which get wrong hostname at my office pc
 &lt;/li&gt;
@@ -444,7 +459,10 @@ Key points:
 &lt;/li&gt;
 &lt;li&gt;You need &lt;a href="http://support.google.com/a/bin/answer.py?hl=en&amp;amp;answer=22370"&gt;verify&lt;/a&gt; your email address in "From" field at Gmail's web interface if you are using google's SMTP server
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
+
+
+&lt;/div&gt;
 
 &lt;/div&gt;
 

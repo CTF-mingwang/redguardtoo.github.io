@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -70,7 +70,7 @@ The mozrepl trick basically will refresh the &lt;b&gt;current active page&lt;/b&
 So here is my improved solution:
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun my-moz-refresh-browser-condition (current-file)
   "Should return a boolean javascript expression or nil"
   (let (rlt)
@@ -104,7 +104,7 @@ So here is my improved solution:
               'moz-after-save
               'append 'local)
 ;; }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
+&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -165,15 +165,19 @@ BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a27
 In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;What's the `tags-table-list`
+&lt;ul&gt;
+&lt;li&gt;What's the `tags-table-list`
 &lt;/li&gt;
 &lt;li&gt;How the tags file are created by ctags
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 UPDATE:
 &lt;/p&gt;
 
-&lt;ol&gt;&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
+&lt;ol&gt;
+&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
 
 &lt;/li&gt;
 &lt;li&gt;I do use &lt;a href="http://www.gnu.org/software/global/"&gt;Gnu Global&lt;/a&gt; for &lt;b&gt;C/C++/Java&lt;/b&gt; code. I use it exactly in the &lt;b&gt;same way&lt;/b&gt; as ctags. Please `man global` for the details. Hint, all you need care is the environment variable &lt;b&gt;GTAGSLIBPATH&lt;/b&gt;.
@@ -181,13 +185,16 @@ UPDATE:
 &lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Please note:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
+&lt;ul&gt;
+&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
 &lt;/li&gt;
 &lt;li&gt;I'm good at most debuggers. The point of this article is to deal with &lt;b&gt;more difficult issues&lt;/b&gt; the debugger can not handle.
 &lt;/li&gt;
 &lt;li&gt;My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;/ul&gt;
+
+&lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
@@ -222,9 +229,9 @@ So my problem is how to insert logging code as quickly as possible.
 
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+&lt;pre class="prettyprint lang-javascript"&gt;
 console.log("var1=", var1)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -265,11 +272,11 @@ Snippet:
 
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+&lt;pre class="prettyprint lang-javascript"&gt;
 function hello() {
   console.log('hello is called');
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -300,12 +307,12 @@ The regular expressions could be used in &lt;b&gt;both&lt;/b&gt; js-mode and js2
 
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+&lt;pre class="prettyprint lang-javascript"&gt;
 function hello(v1, v2,
                v3, v4) {
   console.log("v1=", v1, "v2=", v2, "v3=", v3, "v4=", v4);
 }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -353,19 +360,24 @@ Snippets:
 
 &lt;p&gt;
 Screenshot:
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;&lt;/p&gt;
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;
+&lt;/p&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Environment&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
-&lt;ul&gt;&lt;li&gt;Bootstrap 2.3.2
+&lt;ul&gt;
+&lt;li&gt;Bootstrap 2.3.2
 &lt;/li&gt;
 &lt;li&gt;font-awesome 3.2.1
 &lt;/li&gt;
 &lt;li&gt;JQuery 1.8.2
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;
 I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/p&gt;
 &lt;/div&gt;
@@ -376,11 +388,18 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;h4 id="sec-2"&gt;Notes&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2"&gt;
 
-&lt;ul&gt;&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
+&lt;ul&gt;
+&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
 &lt;/li&gt;
 &lt;li&gt;IE7 does not support inline-block properly, I need below css code hack:
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-css"&gt;
+&lt;/ul&gt;
+
+
+
+
+
+&lt;pre&gt;&lt;code class="lang-css"&gt;
 .myclass {
   display: inline-block;
   /* ie7*/
@@ -390,11 +409,18 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;ul&gt;&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
+&lt;ul&gt;
+&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
 &lt;/li&gt;
 &lt;li&gt;add below code into javascript so that I can hack IE7-only css code:
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+&lt;/ul&gt;
+
+
+
+
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
 if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
@@ -411,13 +437,13 @@ if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
 Insert below code into ~/.emacs:
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (eval-after-load 'web-mode
   '(progn
      ;; angular imenu
      (add-to-list 'web-mode-imenu-regexp-list
                   '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-11-20 Thu&lt;/span&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-11-20 Thu&lt;/span&gt;&lt;/span&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-08 Mon&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -480,7 +506,8 @@ Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I 
 UPDATE:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
+&lt;ul&gt;
+&lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
 &lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
 &lt;/p&gt;
@@ -505,7 +532,8 @@ Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generato
 &lt;/p&gt;
 &lt;p&gt;
 Requirements:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Org-mode bundled with Emacs 24.x
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;Org-mode bundled with Emacs 24.x
 &lt;/li&gt;
 &lt;li&gt;Nikola as the blog generator 
 &lt;/li&gt;
@@ -515,7 +543,13 @@ Requirements:
 &lt;/li&gt;
 &lt;li&gt;Insert below code into ~/.emacs
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;/ul&gt;
+
+
+
+
+
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun org2nikola-after-hook-setup (title slug)
   (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
         (nikola-dir (file-truename "~/projs/nikola-root"))
@@ -544,7 +578,7 @@ Requirements:
     ))
 
 (add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -560,13 +594,17 @@ You can write blog into org file, export and publicize it with command `M-x org2
 &lt;div class="outline-text-3" id="text-2"&gt;
 
 &lt;p&gt;I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wordpress is slow to load web page
+&lt;/p&gt;&lt;ul&gt;
+&lt;li&gt;Wordpress is slow to load web page
 &lt;/li&gt;
 &lt;li&gt;I waste too much time to "manage" Wordpress (applying security patch, fighting with spam comment …)
 &lt;/li&gt;
 &lt;li&gt;As a programmer, I need publish code snippets. Wordpress is &lt;b&gt;BAD&lt;/b&gt; at rendering code.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+
+&lt;p&gt;
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by &lt;a href="https://github.com/punchagan"&gt;Puneeth Chaganti&lt;/a&gt;'s excellent work on org2blog.
 &lt;/p&gt;
 &lt;/div&gt;
@@ -606,7 +644,7 @@ Here is the Emacs lisp code I borrowed from Org2blog:
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defun org2nikola-replace-pre (html)
   "Replace pre blocks with sourcecode shortcode blocks.
 shamelessly copied from org2blog/wp-replace-pre()"
@@ -651,7 +689,7 @@ shamelessly copied from org2blog/wp-replace-pre()"
         (setq html (buffer-substring-no-properties (point-min) (point-max))))
       ))
   html)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -718,9 +756,9 @@ The final output contain lines like:
 
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
+&lt;pre class="prettyprint lang-sh"&gt;
 ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -778,7 +816,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
 
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;pre class="prettyprint lang-lisp"&gt;
 (defvar rimenu-position-pair nil "positions before and after imenu jump")
 (add-hook 'imenu-after-jump-hook
           (lambda ()
@@ -799,7 +837,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
           (goto-char p2)
           (goto-char p1))
       )))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 
 
@@ -919,10 +957,12 @@ app.controller('MyController', function ($scope, $http) {
 
 &lt;p&gt;
 &lt;b&gt;Emacs:&lt;/b&gt;
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"&gt;&lt;/p&gt;
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"&gt;
+&lt;/p&gt;
 &lt;p&gt;
 &lt;b&gt;Sublime3 (build 3047):&lt;/b&gt; 
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png"&gt;&lt;/p&gt;
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png"&gt;
+&lt;/p&gt;
 &lt;p&gt;
 Please note Emacs displays &lt;b&gt;two functions with the same name "test" correctly&lt;/b&gt;!
 &lt;/p&gt;

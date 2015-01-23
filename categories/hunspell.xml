@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (hunspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/hunspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check set up in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;To save your time, I started from conclusion.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (hunspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/hunspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:16 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check set up in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;To save your time, I started from conclusion.
 &lt;/p&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -115,7 +115,8 @@ That's it.
 &lt;h4 id="sec-3"&gt;Why&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3"&gt;
 
-&lt;ul&gt;&lt;li id="sec-3-1"&gt;Aspell&lt;br&gt;
+&lt;ul&gt;
+&lt;li id="sec-3-1"&gt;Aspell&lt;br&gt;
 apell is recommended because its option "–run-together". That option could spell check the camel case word. Variable name often uses camel case naming convention these days. Read my &lt;a href="http://blog.binchen.org/?p=950"&gt;Effective spell check in Emacs&lt;/a&gt; for advanced tips on how to use flyspell to check variable names.
 
 &lt;p&gt;
@@ -126,20 +127,24 @@ This behaviour will be a problem if you want to let Emacs/aspell correct the typ
 &lt;/p&gt;
 &lt;p&gt;
 For example, for a typo "helle" Emacs will give you too many candidates. It's hard to find the desired word "hello":
-&lt;img src="http://blog.binchen.org/wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png"&gt;&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png"&gt;
+&lt;/p&gt;
 &lt;p&gt;
 The better solution is before running "M-x ispell-word", we'd better restart a aspell proces without the argument "–run-together".
 &lt;/p&gt;
 &lt;p&gt;
 Here is the screen shot after we applying this fix:
-&lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;
+&lt;/p&gt;
 &lt;p&gt;
 As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
 &lt;/p&gt;
 &lt;p&gt;
 There is another variable named "ispell-cmd-args". It is actually some &lt;b&gt;extra&lt;/b&gt; arguments Emacs could send to an &lt;b&gt;existing&lt;/b&gt; spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are really confusing. "ispell-extra-args" is actually command line arguments the spell checker will always use. The "ispell-cmd-args" are actually the extra arguments will be used in certain cases.
 &lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;ul&gt;&lt;li id="sec-3-2"&gt;Hunspell&lt;br&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li id="sec-3-2"&gt;Hunspell&lt;br&gt;
 I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
 
 &lt;p&gt;
@@ -168,6 +173,7 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
 
 
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>aspell</category><category>check</category><category>emacs</category><category>en</category><category>hunspell</category><category>ispell</category><category>spell</category><guid>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</guid><pubDate>Mon, 21 Apr 2014 08:25:20 GMT</pubDate></item></channel></rss>

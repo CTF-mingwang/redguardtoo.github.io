@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="description" content="Linux, Programming, Emacs">
-<meta name="viewport" content="width=device-width">
-<title>Chen's blog | Chen's blog</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/index.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="//redguardtoo.github.io/assets/css/highlight/monokai_sublime.css">
+    <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Linux, Programming, Emacs">
+    <meta name="viewport" content="width=device-width">
+    <title>Chen's blog | Chen's blog</title>
+
+    
+            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/index.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+<link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+
+
+
+
+
 </head>
 <body>
-    <section class="social"><ul>
-<li><a href="#" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social">
+        <ul>
+        
+            <li><a href="#" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -20,14 +39,17 @@
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
             
         <div class="post">
             <h1 class="title"><a href="posts/how-to-validate-html5-code-with-flymake-effectively.html">How to validate HTML5 code with Flymake effectively</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-12-05T13:00:31+00:00">2014-12-05 13:00</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -45,7 +67,7 @@
            <li><a class="tag p-category" href="categories/tidy.html" rel="tag">tidy</a></li>
            <li><a class="tag p-category" href="categories/validation.html" rel="tag">validation</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -115,7 +137,7 @@ The only difference from EmacsWiki is only one line:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-12-03T08:44:27+00:00">2014-12-03 08:44</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -132,7 +154,7 @@ The only difference from EmacsWiki is only one line:
            <li><a class="tag p-category" href="categories/firefox.html" rel="tag">firefox</a></li>
            <li><a class="tag p-category" href="categories/mozrepl.html" rel="tag">mozrepl</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -152,7 +174,7 @@ The mozrepl trick basically will refresh the <b>current active page</b> in Firef
 So here is my improved solution:
 </p>
 
-<pre><code class="lang-lisp">
+<pre class="prettyprint lang-lisp">
 (defun my-moz-refresh-browser-condition (current-file)
   "Should return a boolean javascript expression or nil"
   (let (rlt)
@@ -186,7 +208,7 @@ So here is my improved solution:
               'moz-after-save
               'append 'local)
 ;; }}
-</code></pre>
+</pre>
 </div>
             </div>
         </div>
@@ -195,7 +217,7 @@ So here is my improved solution:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-28T05:13:11+00:00">2014-11-28 05:13</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -212,7 +234,7 @@ So here is my improved solution:
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -284,6 +306,7 @@ In summary, <b>there are ONLY two points</b>:
 <li>How the tags file are created by ctags
 </li>
 </ul>
+
 <p>
 UPDATE:
 </p>
@@ -303,7 +326,7 @@ UPDATE:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-23T12:45:18+00:00">2014-11-23 12:45</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -319,7 +342,7 @@ UPDATE:
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -335,6 +358,7 @@ UPDATE:
 <li>My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
 </li>
 </ul>
+
 <div id="outline-container-1" class="outline-3">
 <h4 id="sec-1">Problem</h4>
 <div class="outline-text-3" id="text-1">
@@ -370,9 +394,9 @@ So my problem is how to insert logging code as quickly as possible.
 
 
 
-<pre><code class="lang-javascript">
+<pre class="prettyprint lang-javascript">
 console.log("var1=", var1)
-</code></pre>
+</pre>
 
 
 
@@ -413,11 +437,11 @@ Snippet:
 
 
 
-<pre><code class="lang-javascript">
+<pre class="prettyprint lang-javascript">
 function hello() {
   console.log('hello is called');
 }
-</code></pre>
+</pre>
 
 
 
@@ -448,12 +472,12 @@ The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 
 
 
-<pre><code class="lang-javascript">
+<pre class="prettyprint lang-javascript">
 function hello(v1, v2,
                v3, v4) {
   console.log("v1=", v1, "v2=", v2, "v3=", v3, "v4=", v4);
 }
-</code></pre>
+</pre>
 
 
 
@@ -505,7 +529,7 @@ Snippets:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-23T07:37:10+00:00">2014-11-23 07:37</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -522,7 +546,7 @@ Snippets:
            <li><a class="tag p-category" href="categories/ie.html" rel="tag">ie</a></li>
            <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -533,7 +557,8 @@ Snippets:
 
 <p>
 Screenshot:
-<img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"></p>
+<img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png">
+</p>
 
 <div id="outline-container-1" class="outline-3">
 <h4 id="sec-1">Environment</h4>
@@ -547,6 +572,8 @@ Screenshot:
 <li>JQuery 1.8.2
 </li>
 </ul>
+
+
 <p>
 I only use the grid layout from bootstrap and minimum API from jQuery.
 </p>
@@ -564,6 +591,11 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 <li>IE7 does not support inline-block properly, I need below css code hack:
 </li>
 </ul>
+
+
+
+
+
 <pre><code class="lang-css">
 .myclass {
   display: inline-block;
@@ -580,6 +612,11 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 <li>add below code into javascript so that I can hack IE7-only css code:
 </li>
 </ul>
+
+
+
+
+
 <pre><code class="lang-javascript">
 if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
   that.ie7 = true;
@@ -599,7 +636,7 @@ if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-21T11:45:24+00:00">2014-11-21 11:45</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -616,7 +653,7 @@ if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -628,13 +665,13 @@ if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
 Insert below code into ~/.emacs:
 </p>
 
-<pre><code class="lang-lisp">
+<pre class="prettyprint lang-lisp">
 (eval-after-load 'web-mode
   '(progn
      ;; angular imenu
      (add-to-list 'web-mode-imenu-regexp-list
                   '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
-</code></pre>
+</pre>
 </div>
             </div>
         </div>
@@ -643,7 +680,7 @@ Insert below code into ~/.emacs:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-20T12:22:17+00:00">2014-11-20 12:22</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -661,7 +698,7 @@ Insert below code into ~/.emacs:
            <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
            <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -741,7 +778,7 @@ UPDATE:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-15T04:16:31+00:00">2014-11-15 04:16</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -757,7 +794,7 @@ UPDATE:
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/ftp.html" rel="tag">ftp</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -798,7 +835,12 @@ Requirements:
 <li>Insert below code into ~/.emacs
 </li>
 </ul>
-<pre><code class="lang-lisp">
+
+
+
+
+
+<pre class="prettyprint lang-lisp">
 (defun org2nikola-after-hook-setup (title slug)
   (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
         (nikola-dir (file-truename "~/projs/nikola-root"))
@@ -827,7 +869,7 @@ Requirements:
     ))
 
 (add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
-</code></pre>
+</pre>
 
 
 
@@ -852,6 +894,8 @@ You can write blog into org file, export and publicize it with command `M-x org2
 <li>As a programmer, I need publish code snippets. Wordpress is <b>BAD</b> at rendering code.
 </li>
 </ul>
+
+
 <p>
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by <a href="https://github.com/punchagan">Puneeth Chaganti</a>'s excellent work on org2blog.
 </p>
@@ -892,7 +936,7 @@ Here is the Emacs lisp code I borrowed from Org2blog:
 
 
 
-<pre><code class="lang-lisp">
+<pre class="prettyprint lang-lisp">
 (defun org2nikola-replace-pre (html)
   "Replace pre blocks with sourcecode shortcode blocks.
 shamelessly copied from org2blog/wp-replace-pre()"
@@ -937,7 +981,7 @@ shamelessly copied from org2blog/wp-replace-pre()"
         (setq html (buffer-substring-no-properties (point-min) (point-max))))
       ))
   html)
-</code></pre>
+</pre>
 
 
 
@@ -1004,9 +1048,9 @@ The final output contain lines like:
 
 
 
-<pre><code class="lang-sh">
+<pre class="prettyprint lang-sh">
 ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
-</code></pre>
+</pre>
 
 
 
@@ -1064,7 +1108,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-15T02:15:32+00:00">2014-11-15 02:15</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -1079,7 +1123,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -1096,7 +1140,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
 
 
 
-<pre><code class="lang-lisp">
+<pre class="prettyprint lang-lisp">
 (defvar rimenu-position-pair nil "positions before and after imenu jump")
 (add-hook 'imenu-after-jump-hook
           (lambda ()
@@ -1117,7 +1161,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
           (goto-char p2)
           (goto-char p1))
       )))
-</code></pre>
+</pre>
 
 
 
@@ -1151,7 +1195,7 @@ Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZ
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-01T11:06:17+00:00">2014-11-01 11:06</time>
-</div>
+                </div>
                 <div class="stats">
                     
         
@@ -1167,7 +1211,7 @@ Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZ
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
         </ul>
-</div>
+        </div>
 
             </div>
             <div class="body">
@@ -1269,10 +1313,12 @@ app.controller('MyController', function ($scope, $http) {
 
 <p>
 <b>Emacs:</b>
-<img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"></p>
+<img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png">
+</p>
 <p>
 <b>Sublime3 (build 3047):</b> 
-<img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png"></p>
+<img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png">
+</p>
 <p>
 Please note Emacs displays <b>two functions with the same name "test" correctly</b>!
 </p>
@@ -1472,15 +1518,32 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
             </div>
         </div>
     
-        <nav class="postindexpager"><ul class="pager">
-<li class="next">
+        <nav class="postindexpager">
+        <ul class="pager">
+            <li class="next">
                 <a href="index-18.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul>
+        </nav>
+
+    
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+    
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-</div>
-    </section><script type="text/javascript">
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -1667,7 +1730,9 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script><script type="text/javascript" src="//redguardtoo.github.io/assets/js/highlight.pack.js"></script><script type="text/javascript">
+</script>
+<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
+<script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -1682,7 +1747,14 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+</script>
+
+    
+    
+            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
 <ul>
 <li>
@@ -1699,10 +1771,16 @@ _gaq.push(['_trackPageview']);
 </li>
 </ul>
 </div>
-<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
+    
 </body>
 </html>

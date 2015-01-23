@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 06 Jan 2015 23:54:03 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:18 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
+&lt;pre class="prettyprint lang-sh"&gt;
 # install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 
@@ -25,16 +25,16 @@ rm -rf themes/zen/;nikola install_theme zen
 
 # build the web site
 nikola build
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
+&lt;pre class="prettyprint lang-bash"&gt;
 find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;
 Manually fixed those articles with Chinese title in url_map.csv
@@ -44,7 +44,7 @@ Manually fixed those articles with Chinese title in url_map.csv
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
+&lt;pre class="prettyprint lang-python"&gt;
 #!/usr/bin/python
 import getopt, sys, csv
 def usage():
@@ -87,7 +87,7 @@ if __name__ == '__main__':
              content=content.replace("&amp;gt;"+row[0]+"&amp;lt;","&amp;gt;"+row[1]+"&amp;lt;")
 
     print content
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;
 Import the xml into disqus.com.
@@ -97,7 +97,7 @@ Import the xml into disqus.com.
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
+&lt;pre class="prettyprint lang-python"&gt;
 BODY_END = """
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&amp;gt;&amp;lt;/script&amp;gt;
@@ -162,7 +162,7 @@ EXTRA_HEAD_DATA = """
 &amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&amp;gt;
 &amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&amp;gt;
 """
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/pre&gt;
 
 &lt;p&gt;
 In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
@@ -352,7 +352,7 @@ Besides, I find the wordpress theme produced by &lt;a href="http://automattic.co
       )))
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; BTW, use some clipboard manager to synchronize the X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>org2blog</category><category>wordpress</category><guid>http://blog.binchen.org/posts/use-org2blog-to-share-blog-efficiently.html</guid><pubDate>Fri, 30 Aug 2013 11:39:00 GMT</pubDate></item><item><title>Best wordpress theme for geeks</title><link>http://blog.binchen.org/posts/the-most-elegant-wordpress-theme-for-geeks.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I love the Wordpress theme &lt;a href="http://sixhours-demo.calobeedoodles.com/"&gt;Sixhours&lt;/a&gt; 1.5 designed the by &lt;a href="http://www.carolinemoore.net"&gt;Caroline Moore&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; It is purely simple text theme with dark background and elegant fonts. &lt;/p&gt; &lt;p&gt; But for geeks there are two shortcomings: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;The font color of the hyperlinks is almost same to the plain text. &lt;/li&gt; &lt;li&gt;The code block in &amp;lt;pre&amp;gt; element is not highlighted with solid border. &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; So here is my patch of style.css to fix these problems: &lt;/p&gt;   &lt;pre class="src src-diff"&gt;&lt;span style="color: #70c0b1;"&gt;--- &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:56:31.000000000 +0800&lt;/span&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; BTW, use some clipboard manager to synchronize the X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>org2blog</category><category>wordpress</category><guid>http://blog.binchen.org/posts/use-org2blog-to-share-blog-efficiently.html</guid><pubDate>Fri, 30 Aug 2013 11:39:00 GMT</pubDate></item><item><title>Best wordpress theme for geeks</title><link>http://blog.binchen.org/posts/the-most-elegant-wordpress-theme-for-geeks.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I love the Wordpress theme &lt;a href="http://sixhours-demo.calobeedoodles.com/"&gt;Sixhours&lt;/a&gt; 1.5 designed the by &lt;a href="http://www.carolinemoore.net"&gt;Caroline Moore&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; It is purely simple text theme with dark background and elegant fonts. &lt;/p&gt; &lt;p&gt; But for geeks there are two shortcomings: &lt;/p&gt;&lt;ol&gt; &lt;li&gt;The font color of the hyperlinks is almost same to the plain text. &lt;/li&gt; &lt;li&gt;The code block in &amp;lt;pre&amp;gt; element is not highlighted with solid border. &lt;/li&gt; &lt;/ol&gt;   &lt;p&gt; So here is my patch of style.css to fix these problems: &lt;/p&gt;   &lt;pre class="src src-diff"&gt;&lt;span style="color: #70c0b1;"&gt;--- &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:56:31.000000000 +0800&lt;/span&gt;
 &lt;span style="color: #70c0b1;"&gt;+++ &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:55:53.000000000 +0800&lt;/span&gt;
 &lt;p&gt;&lt;span style="color: #c397d8;"&gt;@@ -25,7 +25,7 @@&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style="color: #969896;"&gt; a:visited {&lt;/span&gt;&lt;/p&gt;
