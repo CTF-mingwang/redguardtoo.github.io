@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 18:58:25 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Here are the steps.
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-sh"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;
 # install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 
 # install dependencies (requests is required by zen theme)
-sudo pip install markdown webassets phpserialize nikola requests
+# sudo pip install markdown webassets phpserialize nikola requests
+# "sudo pip install" could screw up my python setup on Gentoo Linux
+# @see https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b
+# so install the python packages in my HOME directory might be better
+# @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
+pip install --user markdown webassets phpserialize nikola requests
+export PATH=$PATH:$HOME/.local/bin
 
 # create root directory of nikola
 mkdir -p ~/.config/nikola;cd ~/.config/nikola
@@ -25,16 +34,22 @@ rm -rf themes/zen/;nikola install_theme zen
 
 # build the web site
 nikola build
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-bash"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;
 find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Manually fixed those articles with Chinese title in url_map.csv
@@ -44,7 +59,9 @@ Manually fixed those articles with Chinese title in url_map.csv
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-python"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-python"&gt;
 #!/usr/bin/python
 import getopt, sys, csv
 def usage():
@@ -87,7 +104,9 @@ if __name__ == '__main__':
              content=content.replace("&amp;gt;"+row[0]+"&amp;lt;","&amp;gt;"+row[1]+"&amp;lt;")
 
     print content
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Import the xml into disqus.com.
@@ -97,7 +116,9 @@ Import the xml into disqus.com.
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 &lt;/p&gt;
 
-&lt;pre class="prettyprint lang-python"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-python"&gt;
 BODY_END = """
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&amp;gt;&amp;lt;/script&amp;gt;
@@ -162,15 +183,16 @@ EXTRA_HEAD_DATA = """
 &amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&amp;gt;
 &amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&amp;gt;
 """
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.
-&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
