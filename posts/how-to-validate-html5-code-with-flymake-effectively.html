@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -30,11 +45,11 @@
     <meta property="og:site_name" content="Chen's blog">
     <meta property="og:title" content="How to validate HTML5 code with Flymake effectively">
     <meta property="og:url" content="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html">
-    <meta property="og:description" content="UPDATED:  2014-12-11 
+    <meta property="og:description" content="UPDATED: &lt;2014-12-11&gt; 
 
 
 
-CREATED:  2014-12-05
+CREATED: &lt;2014-12-05&gt;
 
 
 
@@ -46,7 +61,7 @@ I found it not effective because tidy is too strict to HTML5 and produces too mu
 
 
 
-I only need valida">
+I only need vali">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2014-12-05T13:00:31+00:00">
            <meta property="article:tag" content="emacs">
@@ -108,11 +123,12 @@ I only need valida">
         </div>
         <div class="body">
             <div>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-12-11</span></span> 
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11&gt;</span></span> 
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-12-05</span></span>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05&gt;</span></span>
 </p>
 
 <p>
@@ -130,6 +146,8 @@ I only need validation of missing open/closed html tag(s). Nothing more!
 <p>
 So here is my complete solution:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (defun flymake-html-init ()
@@ -158,13 +176,19 @@ So here is my complete solution:
 (add-hook 'php-mode-hook 'flymake-html-load)
 </code></pre>
 
+</div>
+
 <p>
 The only difference from EmacsWiki is only one line:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">
 '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 </code></pre>
+
+</div>
 </div>
         </div>
         

@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -94,7 +109,8 @@ The first tip is to use global variable `tags">
         </div>
         <div class="body">
             <div>
-<p><a href="http://ctags.sourceforge.net/">Ctags</a> is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from <a href="http://company-mode.github.io/">company-mode</a>.
+<p>
+<a href="http://ctags.sourceforge.net/">Ctags</a> is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from <a href="http://company-mode.github.io/">company-mode</a>.
 </p>
 
 <p>
@@ -105,9 +121,13 @@ The first tip is to use global variable `tags-table-list` instead of `tags-file-
 Here is the value of `tags-table-list` for one project:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">
 ("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 </code></pre>
+
+</div>
 
 <p>
 The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan <b>less</b> code files.
@@ -121,9 +141,13 @@ The second tip is we can avoid feeding big js files to ctags. Currently one of m
 Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-bash">
 find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 </code></pre>
+
+</div>
 
 <p>
 The point is the option `-not -size +16k`. It means only handle files less thank 16k.
@@ -132,6 +156,8 @@ The point is the option `-not -size +16k`. It means only handle files less thank
 <p>
 Here is the Emacs lisp function to wrap above shell command:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;optional FORCE)
@@ -147,6 +173,8 @@ Here is the Emacs lisp function to wrap above shell command:
     file))
 </code></pre>
 
+</div>
+
 <p>
 BTW, here is my <a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags">~/.ctags</a>.
 </p>
@@ -155,7 +183,7 @@ BTW, here is my <a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9
 In summary, <b>there are ONLY two points</b>:
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>What's the `tags-table-list`
 </li>
 <li>How the tags file are created by ctags
@@ -166,10 +194,10 @@ In summary, <b>there are ONLY two points</b>:
 UPDATE:
 </p>
 
-<ol>
+<ol class="org-ol">
 <li>My tags file management strategy is described at <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a>. It's effective to me. But it may be not generic enough to apply to others' use cases.
-
 </li>
+
 <li>I do use <a href="http://www.gnu.org/software/global/">Gnu Global</a> for <b>C/C++/Java</b> code. I use it exactly in the <b>same way</b> as ctags. Please `man global` for the details. Hint, all you need care is the environment variable <b>GTAGSLIBPATH</b>.
 </li>
 </ol>

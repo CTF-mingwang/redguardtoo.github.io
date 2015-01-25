@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -33,22 +48,21 @@
     <meta property="og:description" content="Table of Contents
 
 
+1. Key points
+2. Solution
+
+
+
+
+
 1 Key points
-2 Solution
-
-
-
-
-
-Key points
-
 
 
 support Mac/Linux/Windows(cygwin).
 
 works well in Emacs with or WITHOUT X support.
 
-tested on different versions of Linux (Gentoo, Ubuntu">
+tested on different versions of Linux (Gentoo, Ubu">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2013-05-31T09:25:00+00:00">
            <meta property="article:tag" content="clipboard">
@@ -112,17 +126,17 @@ tested on different versions of Linux (Gentoo, Ubuntu">
 <h3>Table of Contents</h3>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="the-reliable-way-to-access-system-clipboard-from-emacs.html#sec-1">1 Key points</a></li>
-<li><a href="the-reliable-way-to-access-system-clipboard-from-emacs.html#sec-2">2 Solution</a></li>
+<li><a href="the-reliable-way-to-access-system-clipboard-from-emacs.html#sec-1">1. Key points</a></li>
+<li><a href="the-reliable-way-to-access-system-clipboard-from-emacs.html#sec-2">2. Solution</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Key points</h4>
-<div class="outline-text-3" id="text-1">
-
-<ul>
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Key points</h3>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
 <li>support Mac/Linux/Windows(cygwin).
 </li>
 <li>works well in Emacs with or WITHOUT X support.
@@ -134,19 +148,17 @@ tested on different versions of Linux (Gentoo, Ubuntu">
 <li>It's easy to support remote X clipboard when you use Emacs in ssh based on my code.
 </li>
 </ul>
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>All you need to do is to add below code into your .emacs:
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+All you need to do is to add below code into your .emacs:
 </p>
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (setq *is-a-mac* (eq system-type 'darwin))
@@ -189,13 +201,14 @@ tested on different versions of Linux (Gentoo, Ubuntu">
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
 
-
+</div>
 
 <p>
 BTW, on Linux I suggest installing a clipboard manager and tick its option of synchronizing the X clipboard.
 </p>
-</div>
 
+<p></p>
+</div>
 </div>
 </div>
         </div>

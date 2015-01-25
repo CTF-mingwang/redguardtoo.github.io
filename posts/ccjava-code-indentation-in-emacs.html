@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -30,10 +45,11 @@
     <meta property="og:site_name" content="Chen's blog">
     <meta property="og:title" content="C/C++/Java code indentation in Emacs">
     <meta property="og:url" content="http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html">
-    <meta property="og:description" content='Problem
+    <meta property="og:description" content='1 Problem
 
 
 There are two styles when insert curly braces in C like languages.
+
 
 
 Style 1:
@@ -60,9 +76,6 @@ if(true)
 {
     printf("hello world\n");
 }
-
-
-
 
 '>
     <meta property="og:type" content="article">
@@ -124,64 +137,68 @@ if(true)
         </div>
         <div class="body">
             <div>
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Problem</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>There are two styles when insert curly braces in C like languages.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Problem</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+There are two styles when insert curly braces in C like languages.
 </p>
+
 <p>
 Style 1:
 </p>
+<div class="org-src-container">
 
 
-
-<pre class="prettyprint lang-c">
+<pre><code class="lang-c">
 if(true) {
     printf("hello world\n");
 }
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 Style 2:
 </p>
 
+<div class="org-src-container">
 
-
-<pre class="prettyprint lang-c">
+<pre><code class="lang-c">
 if(true)
 {
     printf("hello world\n");
 }
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 Whatever style I use, I expect Emacs will properly handle the indentation for me.
 </p>
+
 <p>
 In "Style 1", when I press ENTER key after "{" at first line, I expect the new line will indent four spaces.
 </p>
+
 <p>
 In "Style 2", when I press ENTER key after ")" at first line, I expect the new line will NOT indent.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>Insert below code into ~/.emacs:
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+Insert below code into ~/.emacs:
 </p>
+<div class="org-src-container">
 
-
-
-<pre class="prettyprint lang-lisp">
+<pre><code class="lang-lisp">
 (defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
   (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
@@ -195,126 +212,137 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
               (fix-c-indent-offset-according-to-syntax-context 'substatement 0)
               (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
             ))
+</code></pre>
 
-</pre>
-
-
+</div>
 
 <p>
 That's it.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Explanation</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>When you press the ENTER key, the function <b>c-indent-line</b> will be called.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Explanation</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+When you press the ENTER key, the function <b>c-indent-line</b> will be called.
 </p>
+
 <p>
 That function will do some simple syntax analysis and decide current syntactic context..
 </p>
+
 <p>
 It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
 </p>
+
 <p>
 For example, the context <b>substatement</b> corresponds to the code like below:
 </p>
+<div class="org-src-container">
 
 
-
-<pre class="prettyprint lang-c">
+<pre><code class="lang-c">
 if(true) // press ENTER here
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 And the context <b>func-decl-cont</b> corresponds to:
 </p>
 
+<div class="org-src-container">
 
-
-<pre class="prettyprint lang-c">
+<pre><code class="lang-c">
 void fn () //press ENTER here
-</pre>
-
-
+</code></pre>
 
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">Technical details</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
+</div>
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">
+<span class="section-number-2">4</span> Technical details</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
 </p>
+
 <p>
 <b>indent-according-to-mode</b> will call function object <b>indent-line-function</b> if it's not nil.
 </p>
+
 <p>
 In C/C++/Java, that object is actually <b>c-indent-line</b>.
 </p>
+
 <p>
 <b>c-indent-line</b> is defined in /usr/share/emacs/24.3/lisp/progmodes/cc-cmds.el (I use Emacs 24.3 on Gentoo Linux).
 </p>
+
 <p>
 In that function, just below the code line:
 </p>
+<div class="org-src-container">
 
 
-
-<pre class="prettyprint lang-lisp">
+<pre><code class="lang-lisp">
 (setq c-syntactic-context (c-guess-basic-syntax))
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 You can insert log code as below:
 </p>
 
+<div class="org-src-container">
 
-
-<pre class="prettyprint lang-lisp">
+<pre><code class="lang-lisp">
 (message "c-syntactic-context=%s" c-syntactic-context)
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 You will know the current syntactic context when you press ENTER key through the output of log code.
 </p>
+
 <p>
 <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> says you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
 </p>
+
 <p>
 For example, the context <b>statement-cont</b> corresponds to the use case like this:
 </p>
 
+<div class="org-src-container">
 
-
-<pre class="prettyprint lang-c">
+<pre><code class="lang-c">
 int a=3, // press ENTER here
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 Please note syntax analysis in c-indent-line is turned on if and <b>only if</b> the global flag <b>c-syntactic-indentation</b> is true.
 </p>
+
 <p>
 Thanks for <a href="https://github.com/chengyi">chengyi</a> for <a href="https://github.com/redguardtoo/emacs.d/issues/98">reporting the issue and suggesting the fix</a>.
 </p>
-<p>
-BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.
-</p>
-</div>
 
+<p>
+BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.</p>
+
+<p></p>
+</div>
 </div>
 </div>
         </div>

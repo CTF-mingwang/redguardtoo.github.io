@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -92,7 +107,8 @@ Second, intergrating some command line clipboard too'>
         </div>
         <div class="body">
             <div>
-<p>First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
+<p>
+First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
 </p>
 
 <p>
@@ -102,6 +118,8 @@ Second, intergrating some command line clipboard tool into Emacs is better than 
 <p>
 Here is the code:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (defun paste-from-x-clipboard()
@@ -121,6 +139,8 @@ Here is the code:
 
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
+
+</div>
 </div>
         </div>
         

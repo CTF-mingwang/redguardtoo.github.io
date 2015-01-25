@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -94,7 +109,8 @@ The only issue is its recommended hotkey for "er/expand-re'>
         </div>
         <div class="body">
             <div>
-<p><a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
+<p>
+<a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
 </p>
 
 <p>
@@ -121,6 +137,8 @@ The solution is simple, press ",xx" to select the initial region. Keep press "x"
 Here is the setup:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">
 (require 'evil)
 (require 'evil-leader)
@@ -129,6 +147,8 @@ Here is the setup:
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
 (evil-leader/set-key "xx" 'er/expand-region)
 </code></pre>
+
+</div>
 </div>
         </div>
         

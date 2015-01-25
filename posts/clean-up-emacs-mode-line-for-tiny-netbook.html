@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -96,7 +111,8 @@ For example, org-mod">
         </div>
         <div class="body">
             <div>
-<p>Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
+<p>
+Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
 </p>
 
 <p>
@@ -119,20 +135,24 @@ But there is one problem. The variable "global-mode-string" is missing in mode-l
 Here is my fixed version.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>screenshot
 </li>
 </ul>
 
+<div class="figure">
 <p><img src="../wp-content/2012-01-14-034733-800x480.png" alt="2012-01-14-034733-800x480.png">
 </p>
+</div>
 
-<ul>
+<ul class="org-ul">
 <li>Elisp code
 </li>
 </ul>
 
-<pre class="prettyprint lang-lisp">
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">
 ;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
 ;; But I need global-mode-string,
 ;; @see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html
@@ -191,7 +211,13 @@ Here is my fixed version.
     ;; minor-mode-alist  ;; list of minor modes
     "%-" ;; fill with '-'
     ))
-</pre>
+</code></pre>
+
+</div>
+
+<p>
+#+./image/2012-01-14-034733-800x480.png <img src="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png" alt="wpid-2012-01-14-034733-800x4802.png">*
+</p>
 </div>
         </div>
         

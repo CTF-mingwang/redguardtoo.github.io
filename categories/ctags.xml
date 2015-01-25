@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 19:36:15 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -10,9 +11,13 @@ The first tip is to use global variable `tags-table-list` instead of `tags-file-
 Here is the value of `tags-table-list` for one project:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan &lt;b&gt;less&lt;/b&gt; code files.
@@ -26,9 +31,13 @@ The second tip is we can avoid feeding big js files to ctags. Currently one of m
 Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;
 find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The point is the option `-not -size +16k`. It means only handle files less thank 16k.
@@ -37,6 +46,8 @@ The point is the option `-not -size +16k`. It means only handle files less thank
 &lt;p&gt;
 Here is the Emacs lisp function to wrap above shell command:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
@@ -52,6 +63,8 @@ Here is the Emacs lisp function to wrap above shell command:
     file))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags"&gt;~/.ctags&lt;/a&gt;.
 &lt;/p&gt;
@@ -60,7 +73,7 @@ BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a27
 In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 &lt;/p&gt;
 
-&lt;ul&gt;
+&lt;ul class="org-ul"&gt;
 &lt;li&gt;What's the `tags-table-list`
 &lt;/li&gt;
 &lt;li&gt;How the tags file are created by ctags
@@ -71,10 +84,10 @@ In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 UPDATE:
 &lt;/p&gt;
 
-&lt;ol&gt;
+&lt;ol class="org-ol"&gt;
 &lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
-
 &lt;/li&gt;
+
 &lt;li&gt;I do use &lt;a href="http://www.gnu.org/software/global/"&gt;Gnu Global&lt;/a&gt; for &lt;b&gt;C/C++/Java&lt;/b&gt; code. I use it exactly in the &lt;b&gt;same way&lt;/b&gt; as ctags. Please `man global` for the details. Hint, all you need care is the environment variable &lt;b&gt;GTAGSLIBPATH&lt;/b&gt;.
 &lt;/li&gt;
 &lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>How to use ctags in Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Exuberant Ctags&lt;/a&gt; is a code navigation tool. It supports many language and could be integrated into Emacs well. &lt;/p&gt; &lt;p&gt; Please read &lt;a href="http://www.emacswiki.org/emacs/BuildTags"&gt;EmacsWiki&lt;/a&gt; for basic usage. &lt;/p&gt; &lt;p&gt; I will talk about how I manage my ctags. &lt;/p&gt; &lt;p&gt; Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". &lt;/p&gt; &lt;p&gt; An example of tags-table-list: &lt;/p&gt;

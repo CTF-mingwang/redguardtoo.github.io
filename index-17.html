@@ -21,6 +21,21 @@
 
     
 <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -44,117 +59,6 @@
     <section class="page-content">
         <div class="content" rel="main">
             
-        <div class="post">
-            <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-04-30T12:46:31+00:00">2014-04-30 12:46</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/why-gnus-is-better-than-gmail.html#disqus_thread" data-disqus-identifier="cache/posts/why-gnus-is-better-than-gmail.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
-</p>
-
-<p>
-My first reaction is to reply the email with "Great! Please forward my CV".
-</p>
-
-<p>
-Before I press the "Send" button, it occurs to me that other agents have possibily <b>already</b> submitted my CV to FF since it is a big organization. I need double check.
-</p>
-
-<p>
-I save current email as draft, search all the mails containing "FF" and forward them to the original email I've not sent yet. Then my agent could figure out whether other guys have already represented me for the same opportunity.
-</p>
-
-<p>
-This operation is doable in desktop application like Outlook. I need search emails in a new dialog box. Select emails. Then drag them to the original email.
-</p>
-
-<p>
-It's hard to do this kind of thing in Gmail.
-</p>
-
-<p>
-Now let me show you how Emacs get the job done:
-</p>
-
-<ul>
-<li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
-</li>
-<li>Step 2, Mark the emails I want to forward with hot key "#"
-</li>
-<li>Step 3, Press key "C-c C-f" or run command "M-x gnus-summary-mail-forward". A new buffer is created. It contains a big chuck of xml string wrapped by either "&lt;#multipart&gt;" tag or "&lt;#mml&gt;" tag.
-</li>
-<li>Step 4, Select and copy that string into you original email. Done!
-</li>
-</ul>
-
-<p>
-Well, some people may argue that step 4 could be improved a little bit.
-</p>
-
-<p>
-In Emacs, everyting could be optimized. Please copy below code into your ~/.emacs:
-</p>
-
-<pre class="prettyprint lang-lisp">
-(defun message-select-forwarded-email-tags ()
-  "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
-  (interactive)
-  (let (start rlt)
-    (when (search-forward "&lt;#")
-      (setq start (point))
-      (push-mark (point) t t)
-      (goto-char (point-max))
-      (search-backward "&gt;")
-      (forward-char)
-      (setq rlt t))
-    rlt))
-
-(defun message-copy-select-forwarded-email-tags ()
-  "copy the &lt;#mml-or-what-ever&gt; tags in message-mode"
-  (interactive)
-  (save-excursion
-    (cond
-     ((message-select-forwarded-email-tags)
-      (copy-region-as-kill (region-beginning) (region-end))
-      (message "forwarded email tags copied!"))
-     (t (message "NO forwarded email tags found!"))
-     )
-    ))
-</pre>
-
-<p>
-All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
-</p>
-
-<p>
-UPDATE:
-This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
-</p>
-</div>
-            </div>
-        </div>
         <div class="post">
             <h1 class="title"><a href="posts/migrate-blog-from-wordpress-into-nikola.html">Migrate blog from wordpress into nikola</a></h1>
             <div class="meta">
@@ -410,22 +314,26 @@ I use FileZilla to upload files to FTP. ncftp is a command line alternative.</p>
             </div>
             <div class="body">
                 <div>
-<p>To save your time, I started from conclusion.
+<p>
+To save your time, I started from conclusion.
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Suggestion for non-programmers</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>Emacs will find the right dictionary by querying your locale.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Suggestion for non-programmers</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+Emacs will find the right dictionary by querying your locale.
 </p>
+
 <p>
 Run command "locale" in your shell to get current locale.
 </p>
+
 <p>
 If you want to force Emacs use dictionary "en_US", copy below code into your ~/.emacs:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -440,29 +348,32 @@ If you want to force Emacs use dictionary "en_US", copy below code into your ~/.
  )
 </code></pre>
 
-
+</div>
 
 <p>
 That's it!
 </p>
+
 <p>
 Please run command "man aspell" or "man hunspell" in shell if you have more questions. I've nothing more to say.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Suggestion for programmers</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>I strongly recommend aspell instead of hunspell (Though hunspell is fine).
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Suggestion for programmers</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+I strongly recommend aspell instead of hunspell (Though hunspell is fine).
 </p>
+
 <p>
 Please insert below code into your ~/.emacs:
 </p>
 
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -513,67 +424,85 @@ Please insert below code into your ~/.emacs:
     ))
 </code></pre>
 
-
+</div>
 
 <p>
 That's it.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Why</h4>
-<div class="outline-text-3" id="text-3">
-
-<ul>
-<li id="sec-3-1">Aspell<br>
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Why</h3>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h4 id="sec-3-1">
+<span class="section-number-3">3.1</span> Aspell</h4>
+<div class="outline-text-3" id="text-3-1">
+<p>
 apell is recommended because its option "–run-together". That option could spell check the camel case word. Variable name often uses camel case naming convention these days. Read my <a href="http://blog.binchen.org/?p=950">Effective spell check in Emacs</a> for advanced tips on how to use flyspell to check variable names.
+</p>
 
 <p>
 If Emacs start a aspell process with "–run-together" option, that process is not closed so it can be re-used by other commands.
 </p>
+
 <p>
 This behaviour will be a problem if you want to let Emacs/aspell correct the typo by running the command "ispell-word" because a apell process with "–run-together" will produce much noise.
 </p>
+
 <p>
 For example, for a typo "helle" Emacs will give you too many candidates. It's hard to find the desired word "hello":
 <img src="wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png">
 </p>
+
 <p>
 The better solution is before running "M-x ispell-word", we'd better restart a aspell proces without the argument "–run-together".
 </p>
+
 <p>
 Here is the screen shot after we applying this fix:
 <img src="wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png">
 </p>
+
 <p>
 As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
 </p>
+
 <p>
 There is another variable named "ispell-cmd-args". It is actually some <b>extra</b> arguments Emacs could send to an <b>existing</b> spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are really confusing. "ispell-extra-args" is actually command line arguments the spell checker will always use. The "ispell-cmd-args" are actually the extra arguments will be used in certain cases.
 </p>
-</li>
-</ul>
-<ul>
-<li id="sec-3-2">Hunspell<br>
-I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
+</div>
 
+<p></p>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h4 id="sec-3-2">
+<span class="section-number-3">3.2</span> Hunspell</h4>
+<div class="outline-text-3" id="text-3-2">
+<p>
+I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
+</p>
 <p>
 Hunspell has some design flaw. It will always check the environment variable LC_ALL, LC_MESSAGES and LANG <b>at first</b> to find the default dictionary unless you specify the dictionary in the command line. If it cannot find the default dictionary, the spell checker process won't start. Aspell does not have this issue, if it cannot find the zh_CN dictionary, it will fall back into English.
 </p>
+
 <p>
 Specify the ispell-extra-args <b>won't stop hunspell to search for the default dictionary</b> at the beginning.
 </p>
+
 <p>
 For example, I am a Chinese and my locale is "zh_CN.utf-8". So hunspell will always search the dictionary zh_CN. Even I'm only interested in English spell checking.
 </p>
+
 <p>
 To specify the dictionary explicitly, I need hack the Emacs code which is kind of mess. Finally, I figure out. It's just several lines of elisp code:
 </p>
 
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (setq ispell-program-name "hunspell")
@@ -582,12 +511,11 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
 </code></pre>
 
-
-
-</li>
-</ul>
 </div>
 
+<p></p>
+</div>
+</div>
 </div>
 </div>
             </div>
@@ -618,12 +546,15 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
             </div>
             <div class="body">
                 <div>
-<p>Before creating wxDataViewListCtrl, it's better to detect information about text size so that we can set the column width and height intelligently.
+<p>
+Before creating wxDataViewListCtrl, it's better to detect information about text size so that we can set the column width and height intelligently.
 </p>
 
 <p>
 Here is the code:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-c">
 void GuessRowSize(int* w, int* h) {
@@ -687,6 +618,8 @@ protected:
 };
 </code></pre>
 
+</div>
+
 <p>
 When user click one row, the ActivateCell is called, we can use some rect detect algorithm to find if the button rect is clicked.
 </p>
@@ -702,6 +635,8 @@ To draw the button up effect, I need ask the parent wxDataViewListCtrl to refres
 <p>
 Here is the part of implementation:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-c">
 bool
@@ -772,6 +707,8 @@ wxDataViewMyButtonRenderer::Render( wxRect rect, wxDC *dc, int state )
     return true;
 }
 </code></pre>
+
+</div>
 </div>
             </div>
         </div>
@@ -800,7 +737,8 @@ wxDataViewMyButtonRenderer::Render( wxRect rect, wxDC *dc, int state )
             </div>
             <div class="body">
                 <div>
-<p><a href="http://www.emacswiki.org/emacs/WhichFuncMode">Which Func Mode</a> will display the current function name in the mode line.
+<p>
+<a href="http://www.emacswiki.org/emacs/WhichFuncMode">Which Func Mode</a> will display the current function name in the mode line.
 </p>
 
 <p>
@@ -822,6 +760,8 @@ So I choose to display the function name in a popup.
 <p>
 Insert below code into ~/.emacs,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (autoload 'which-function "which-func")
@@ -846,6 +786,8 @@ Insert below code into ~/.emacs,
     ))
 </code></pre>
 
+</div>
+
 <p>
 The extra bonus is "popup-which-function" will also insert the function name into clipboard and kill ring.
 </p>
@@ -857,6 +799,7 @@ The above code need package <a href="https://github.com/auto-complete/popup-el">
 <p>
 Screen shot:
 <img src="wp-content/pop-which-func-nq8.png" alt="pop-which-func-nq8.png">
+#+image/pop-which-func-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/04/wpid-pop-which-func-nq8.png" alt="wpid-pop-which-func-nq8.png">
 </p>
 </div>
             </div>
@@ -887,7 +830,8 @@ Screen shot:
             </div>
             <div class="body">
                 <div>
-<p>First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
+<p>
+First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
 </p>
 
 <p>
@@ -897,6 +841,8 @@ Second, intergrating some command line clipboard tool into Emacs is better than 
 <p>
 Here is the code:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">
 (defun paste-from-x-clipboard()
@@ -916,6 +862,8 @@ Here is the code:
 
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
+
+</div>
 </div>
             </div>
         </div>
@@ -988,11 +936,12 @@ curl -L https://raw.githubusercontent.com/lunaryorn/dotfiles/master/emacs/bin/ma
             </div>
             <div class="body">
                 <div>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-05-20 Tue</span></span>
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-05-20 Tue&gt;</span></span>
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-03-23 Sun</span></span>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-03-23 Sun&gt;</span></span>
 </p>
 
 <p>
@@ -1007,16 +956,18 @@ I install keysnail's own plugins "HoK" and "Tanything".
 Here are the use cases of keysnail.
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Click &amp; Copy the links</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Click &amp; Copy the links</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
 </p>
+
 <p>
 Insert below code into ~/.keysnail.js:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -1052,44 +1003,47 @@ key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
 key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
         ext.exec("hok-start-continuous-mode", aArg);
 }, "Start continuous HaH", true);
-
 </code></pre>
 
-
+</div>
 
 <p>
 Now I can press "Ctrl-C Ctrl-F" to select the links to click.
 </p>
+
 <p>
 The links will be highlighted as below screen shot:
 <img src="wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png">
 </p>
+
 <p>
 I can press the highlighted hint to click the link.
 </p>
+
 <p>
 Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Copy the text of link</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Copy the text of link</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
 </p>
+
 <p>
 That's error prone because:
 </p>
-<ol>
+<ol class="org-ol">
 <li>The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
 </li>
 <li>The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, <a href="https://www.atlassian.com/software/jira">JIRA</a> will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
 </li>
 </ol>
-
 
 <p>
 If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
@@ -1098,16 +1052,18 @@ If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
 
 </div>
 
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Switch tab</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Switch tab</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
 </p>
+
 <p>
 Insert below code into ~/.keysnail.js:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -1116,25 +1072,31 @@ key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
 }, "view all tabs", true);
 </code></pre>
 
-
+</div>
 
 <p>
 Press "Ctrl-C Ctrl-A", you got below UI:
 <img src="wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png">
 </p>
+
 <p>
 Tanything will locate the tab by finding match in web page's title or URL.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">My keysnail set up</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">
+<span class="section-number-2">4</span> My keysnail set up</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
 </p>
+
+<p>
+#+image/keysnail-hok-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/wpid-keysnail-hok-nq8.png" alt="wpid-keysnail-hok-nq8.png">
+#+image/keysnail-tanything-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"></p>
 </div>
 
 </div>
@@ -1290,6 +1252,128 @@ Tanything will locate the tab by finding match in web page's title or URL.
 <p></p>
 <p> UPDATE: There is some discussion at <a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3">Google Plus</a> about using ctags. Kaushal Modi recommended three emacs plugins: </p>
 <ol> <li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>   <p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html">Hack wordpress php and make cdnjs.com host js</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-07T00:58:00+00:00">2014-03-07 00:58</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html#disqus_thread" data-disqus-identifier="cache/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
+           <li><a class="tag p-category" href="categories/php.html" rel="tag">php</a></li>
+           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+For jquery.js, see <a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/">http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/</a>.
+</p>
+
+<p>
+I added below code into bottom of functions.php (Appearance =&gt; Editor):
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-php">
+add_action('wp_enqueue_scripts', 'CDNJS_scripts');
+function CDNJS_scripts() 
+{
+    wp_deregister_script('jquery');
+    wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
+    wp_enqueue_script('jquery');
+}
+</code></pre>
+
+</div>
+
+<p>
+For js from SyntaxHighlighter Evolved (Plugins =&gt; Installed Plugins =&gt; Edit):
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-diff">
+diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
+index db8c668..e41ec12 100644
+--- a/syntaxhighlighter.php
++++ b/syntaxhighlighter.php
+@@ -117,30 +117,30 @@ class SyntaxHighlighter {
+        }
+
+        // Register brush scripts
+-       wp_register_script( 'syntaxhighlighter-core',             plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shCore.js'),            array(),                         $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-as3',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushAS3.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-bash',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushBash.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-coldfusion', plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushColdFusion.js'), array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-cpp',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCpp.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-csharp',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCSharp.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-css',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCss.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-delphi',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushDelphi.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-diff',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushDiff.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-erlang',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushErlang.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-groovy',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushGroovy.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-java',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJava.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-javafx',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJavaFX.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-jscript',    plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJScript.js'),    array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-perl',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPerl.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-php',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPhp.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-plain',      plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPlain.js'),      array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-powershell', plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPowerShell.js'), array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-python',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPython.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-ruby',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushRuby.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-scala',      plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushScala.js'),      array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-sql',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushSql.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-vb',         plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushVb.js'),         array('syntaxhighlighter-core'), $this-&gt;agshver );
+-       wp_register_script( 'syntaxhighlighter-brush-xml',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushXml.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-core',             '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js',            array(),                         $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-as3',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushAS3.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-bash',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushBash.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-coldfusion', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushColdFusion.js', array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-cpp',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCpp.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-csharp',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-css',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCss.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-delphi',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushDelphi.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-diff',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushDiff.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-erlang',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushErlang.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-groovy',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushGroovy.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-java',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-javafx',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJavaFX.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-jscript',    '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js',    array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-perl',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPerl.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-php',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPhp.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-plain',      '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.js',      array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-powershell', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPowerShell.js', array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-python',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPython.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-ruby',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushRuby.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-scala',      '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushScala.js',      array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-sql',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushSql.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-vb',         '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushVb.js',         array('syntaxhighlighter-core'), $this-&gt;agshver );
++       wp_register_script( 'syntaxhighlighter-brush-xml',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
+
+        // Register some popular third-party brushes
+        wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
+</code></pre>
+
+</div>
 </div>
             </div>
         </div>

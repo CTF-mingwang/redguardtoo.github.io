@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 18:58:24 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 19:36:16 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Here are the steps.
 &lt;/p&gt;
 
@@ -192,12 +192,15 @@ In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 I added below code into bottom of functions.php (Appearance =&amp;gt; Editor):
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-php"&gt;
 add_action('wp_enqueue_scripts', 'CDNJS_scripts');
@@ -206,12 +209,16 @@ function CDNJS_scripts()
     wp_deregister_script('jquery');
     wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
     wp_enqueue_script('jquery');
-} 
+}
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 For js from SyntaxHighlighter Evolved (Plugins =&amp;gt; Installed Plugins =&amp;gt; Edit):
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;
 diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
@@ -273,7 +280,10 @@ index db8c668..e41ec12 100644
 
         // Register some popular third-party brushes
         wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to use org2blog effectively as a programmer</title><link>http://blog.binchen.org/posts/how-to-use-org2blog-effectively-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/punchagan/org2blog"&gt;org2blog&lt;/a&gt; is a beautiful plugin to post to wordpress blog.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to use org2blog effectively as a programmer</title><link>http://blog.binchen.org/posts/how-to-use-org2blog-effectively-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/punchagan/org2blog"&gt;org2blog&lt;/a&gt; is a beautiful plugin to post to wordpress blog.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -296,6 +306,8 @@ If you grep org2blog's code, you will find a variable "org2blog/wp-sourcecode-la
 So all you need to do is insert below code into ~/.emacs:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (setq org2blog/wp-sourcecode-langs
       '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
@@ -305,6 +317,8 @@ So all you need to do is insert below code into ~/.emacs:
         "sh" "elisp" "lisp" "lua"))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Then you need install the wordpress plugin &lt;a href="http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/"&gt;SyntaxHighlighter Evolved&lt;/a&gt; to do the syntax highlight thing. Well, you will find the languages like elisp is not supported by this plugin.
 &lt;/p&gt;
@@ -312,6 +326,8 @@ Then you need install the wordpress plugin &lt;a href="http://www.viper007bond.c
 &lt;p&gt;
 That's easy to fix. Please log into your blog, modify that plugin online:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;
 diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
@@ -329,6 +345,8 @@ index 53b4815..808b14b 100644
 +           'lua'           =&amp;gt; 'ruby',
         ) );
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 As you can see, I use clojure syntax to highlight elisp and use ruby syntax to highlight lua.

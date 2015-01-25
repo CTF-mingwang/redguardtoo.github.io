@@ -21,6 +21,21 @@
 
     
 <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -44,57 +59,6 @@
     <section class="page-content">
         <div class="content" rel="main">
             
-        <div class="post">
-            <h1 class="title"><a href="posts/huang-jin-suan-tou-ji-tang-zuo-fa.html">黄金蒜头鸡汤做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-20T13:17:00+00:00">2013-07-20 13:17</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/huang-jin-suan-tou-ji-tang-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/huang-jin-suan-tou-ji-tang-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<ul>
-<li>
-<a href="http://www.youtube.com/watch?v=LOwEN6oDC1I">视频教程</a>
-</li>
-<li>
-<a href="http://blog.iset.com.tw/chef/?p=6916">型男大主厨的菜谱</a>
-</li>
-<li>蒜头煎的时候应该用勺子不断翻动，防止焦掉,两分钟足够了
-</li>
-<li>油少放，否则汤的颜色不好看
-</li>
-<li>鸡肉炒过后加开水小火煮15分钟(时间更少点也许鸡肉更嫩，10分钟也可以)
-</li>
-<li>如果要放豆腐,应少放,豆腐味道完全掩盖住蒜味.
-</li>
-<li>去除汤上泡沫
-</li>
-<li>最后可以自己加点香菜，胡椒粉
-</li>
-</ul>
-
-<p><img src="wp-content/fried-garlic-chicken-soup.jpg" alt="fried-garlic-chicken-soup.jpg">
-</p>
-</div>
-            </div>
-        </div>
         <div class="post">
             <h1 class="title"><a href="posts/hei-mu-er-chao-dan-de-zuo-fa.html">黑木耳炒蛋的做法</a></h1>
             <div class="meta">
@@ -328,6 +292,66 @@
 <p></p>
 <p>See <a href="http://askubuntu.com/questions/107726/how-to-create-animated-gif-images-of-a-screencast">http://askubuntu.com/questions/107726/how-to-create-animated-gif-images-of-a-screencast</a>.  </p> <p> Issues: </p>
 <ul> <li>does not work in i3. </li> <li>I'd better put all the files in ram disk because it takes time for the conversion </li> <li>gifsicle is NOT needed </li> <li>I need find some way to adjust the record frame </li> <li>I use gimp to crop the gif </li> </ul>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-terminal-in-emacs-effectively.html">How to use terminal in Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-07-10T12:11:00+00:00">2013-07-10 12:11</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-terminal-in-emacs-effectively.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-terminal-in-emacs-effectively.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/shell.html" rel="tag">shell</a></li>
+           <li><a class="tag p-category" href="categories/terminal.html" rel="tag">terminal</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+I'm an experienced bash user before learning Emacs. Now as a die hard Emacs user, I still want to use my bash skill. 
+</p>
+
+<p>
+The Emacs terminator simulator <a href="http://www.emacswiki.org/emacs/AnsiTerm">Ansi Term</a> help me on this purpose. Check <a href="https://github.com/redguardtoo/emacs.d/blob/master/init-term-mode.el">my setup</a> and the <a href="http://www.emacswiki.org/emacs/AnsiTermHints">EmacsWiki</a> for the guide.
+</p>
+
+<p>
+I need copy the output in ansi-term to somewhere else frequently. So I often got the issue about selecting output <b>effectively</b>?
+</p>
+
+<p>
+<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Term-Mode.html">Emacs manual</a> says I can "M-x term-line-mode" to switch to term-line-mode to select text. Then I need restore to the original mode by "M-x term-char-mode".
+</p>
+
+<p>
+That's many keys to press. Besides, I can not tell what's the current mode, term-char-mode or term-line-mode?
+</p>
+
+<p>
+My solution is <a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a>. I press C-z to toggle on vim simulator in ansi-term. I can press C-z again to toggle off the vim simulator.
+</p>
+
+<p>
+The beauty is I've got the Vi power to select,search, filter, yank.
+</p>
+
+<p>
+BTW, "C-z" is the default hot key from evil-mode. Evil-mode assign "C-x C-z" for "M-x suspend-frame".</p>
+</div>
             </div>
         </div>
         <div class="post">

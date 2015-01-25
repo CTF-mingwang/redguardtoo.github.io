@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (export)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/export.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-11-20 Thu&lt;/span&gt;&lt;/span&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-08 Mon&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (export)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/export.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 19:36:16 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-11-20 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-08 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -26,6 +27,8 @@ In order to solve the issue, I write a small function which will be called at th
 &lt;p&gt;
 The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defvar cached-normal-file-full-path nil)
@@ -54,6 +57,8 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 &lt;/p&gt;
@@ -62,7 +67,7 @@ Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I 
 UPDATE:
 &lt;/p&gt;
 
-&lt;ul&gt;
+&lt;ul class="org-ul"&gt;
 &lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
 &lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item></channel></rss>

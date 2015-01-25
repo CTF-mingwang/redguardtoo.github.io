@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 24 Jan 2015 00:24:18 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to accept the github pull request efficiently</title><link>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use keyboard only in order to maximize my productivity.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 19:36:15 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to accept the github pull request efficiently</title><link>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use keyboard only in order to maximize my productivity.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Preparation&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Install Firefox addon &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keysnail&lt;/a&gt; and its plugin &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HOK&lt;/a&gt;. From now on, all the web browsing is done ONLY in keyboard.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Preparation&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Install Firefox addon &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keysnail&lt;/a&gt; and its plugin &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HOK&lt;/a&gt;. From now on, all the web browsing is done ONLY in keyboard.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Step 1&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Open pull request page at github.com, click the link "command line".
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Step 1&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Open pull request page at github.com, click the link "command line".
 &lt;/p&gt;
+
 &lt;p&gt;
 In a real world project, I rarely accept a pull request without some modification. So I usually avoid pressing the big green button "merge pull request" on that page.
 &lt;/p&gt;
+
 &lt;p&gt;
 In the "command line" page, github is kind enough to list the command lines to "check out a new branch and test the changes" from the pull request. The command lines are like:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;
@@ -32,29 +34,33 @@ git checkout -b her-master master
 git pull git@github.com:her/myproject.git master
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
 
 &lt;p&gt;
 I have installed a Greasemonkey user script &lt;a href="https://github.com/redguardtoo/NinjaWebCoder"&gt;NinjaWebCoder&lt;/a&gt; in order to &lt;b&gt;use keyboard&lt;/b&gt; to copy those command lines from the browser into clipboard. Then I paste the command lines into terminal.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Step 2&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;I open the code file with Emacs.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Step 2&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+I open the code file with Emacs.
 &lt;/p&gt;
+
 &lt;p&gt;
 There is an Emacs addon called &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter&lt;/a&gt;. I use its command "git-gutter:next-hunk" to move the cursor to the next "diff hunk".
 &lt;/p&gt;
+
 &lt;p&gt;
 Let me explain what's the diff hunk. When you edit some code under git's control, you code has some difference with the HEAD version. Every difference corresponds to the pair of a file name and a line number. That file-name-line-number pair is defined as a "diff hunk".
 &lt;/p&gt;
+
 &lt;p&gt;
 Now comes &lt;b&gt;the most important part of this article&lt;/b&gt;. Since version 0.71, git-gutter added a new command "git-gutter:set-start-version". If I "git-gutter:set-start-revision" to the "HEAD^" version. I can jump to "diff hunk" of the difference between "HEAD" and "HEAD^".
 &lt;/p&gt;
+
 &lt;p&gt;
 In short, I can &lt;b&gt;review the latest commit and change the code in one step&lt;/b&gt;.
 &lt;/p&gt;
@@ -62,18 +68,20 @@ In short, I can &lt;b&gt;review the latest commit and change the code in one ste
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Done&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Done&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
 &lt;/p&gt;
+
 &lt;p&gt;
 Every operation in previous steps is optimized with some shortcut. For example, in shell I use alias "g" instead of full command line "git status".
 &lt;/p&gt;
+
 &lt;p&gt;
-Please enlighten me if the work flow could be improved.
-&lt;/p&gt;&lt;/div&gt;
+Please enlighten me if the work flow could be improved.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</guid><pubDate>Fri, 01 Aug 2014 13:52:18 GMT</pubDate></item><item><title>Git merge in command line</title><link>http://blog.binchen.org/posts/git-merge-in-command-line.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;List and filter all the files need resolve conflict, then apply certain git operation on them: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;

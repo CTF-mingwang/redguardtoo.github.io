@@ -20,6 +20,21 @@
 
     
 <link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -34,10 +49,10 @@
 
 
 
-Solution
+1 Solution
 
 
-Insert b">
+Insert">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2014-11-15T02:15:32+00:00">
            <meta property="article:tag" content="emacs">
@@ -93,19 +108,20 @@ Insert b">
         </div>
         <div class="body">
             <div>
-<p>As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
+<p>
+As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Solution</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>Insert below code to ~/.emacs:
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Solution</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+Insert below code to ~/.emacs:
 </p>
+<div class="org-src-container">
 
-
-
-<pre class="prettyprint lang-lisp">
+<pre><code class="lang-lisp">
 (defvar rimenu-position-pair nil "positions before and after imenu jump")
 (add-hook 'imenu-after-jump-hook
           (lambda ()
@@ -126,31 +142,34 @@ Insert b">
           (goto-char p2)
           (goto-char p1))
       )))
-</pre>
+</code></pre>
 
-
+</div>
 
 <p>
 Now you can use `M-x rimenu-jump` to jump.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Technical details</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Technical details</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
 </p>
 <p>
 I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
 </p>
+
 <p>
 Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ">original discussion on G+</a>. Thanks to <a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts">Jorge A. Alfaro Murillo</a> for enlightening me on the solution.
 </p>
-</div>
 
+<p></p>
+</div>
 </div>
 </div>
         </div>

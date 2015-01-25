@@ -21,6 +21,21 @@
 
     
 <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<style type="text/css">
+td, th {
+ border: 1px solid #CCC;
+}
+th {
+ background: #DFDFDF;
+ font-weight: bold;
+}
+td {
+ background: #FAFAFA;
+ text-align: center;
+}
+tr:nth-child(even) td { background: #F1F1F1; }
+tr:nth-child(odd) td { background: #FEFEFE; }
+</style>
 
 
 
@@ -44,40 +59,6 @@
     <section class="page-content">
         <div class="content" rel="main">
             
-        <div class="post">
-            <h1 class="title"><a href="posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html">苦瓜胡萝卜炒鸡蛋做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-08-21T18:31:21+00:00">2013-08-21 18:31</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/ku-gua-hu-luo-bo-chao-ji-dan-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/carrot.html" rel="tag">carrot</a></li>
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/egg.html" rel="tag">egg</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<ul> <li>
-<a href="http://www.xinshipu.com/%E8%8B%A6%E7%93%9C%E8%83%A1%E8%90%9D%E5%8D%9C%E7%85%8E%E8%9B%8B-83797.htm">菜谱</a> </li> <li>尽量切小丁 </li> <li>
-<em>小火</em>煎蛋 </li> <li>我先炒了胡萝卜 </li> </ul>  <p><img src="wp-content/uploads/2013/08/wpid-bitter-melon-carrot-fried-egg.jpg" alt="http://blog.binchen.org/wp-content/uploads/2013/08/wpid-bitter-melon-carrot-fried-egg.jpg"> </p>
-</div>
-            </div>
-        </div>
         <div class="post">
             <h1 class="title"><a href="posts/take-bavarian-tasting-platter-at-bavarian-bier-cafe-parramatta.html">Take bavarian tasting platter at Bavarian Bier Cafe Parramatta</a></h1>
             <div class="meta">
@@ -398,6 +379,73 @@
 
 <p></p>
 </div>  <p> BTW, I assign hot key "C-h C-f" to command "find-fuction" which "Find the definition of the FUNCTION near point". </p> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html">How to avoid Repeated Strain Injury when using emacs by re-assigning hotkeys</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-08-09T08:05:00+00:00">2013-08-09 08:05</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/evil.html" rel="tag">evil</a></li>
+           <li><a class="tag p-category" href="categories/rsi.html" rel="tag">rsi</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p> I've read all the Emacs RSI related articles from the internet. </p>  <p> Typical solutions are: </p> <ul class="org-ul"> <li>buy special hardwares </li> <li>remap ctrl key (because Emacs users press Ctrl key too often) </li> <li>use Vi key binding </li> <li>other Emacs keybinding with some hacking </li> <li>voice input </li> </ul>  <p> I will disscuss the third item "use Vim key binding" because there is still room to improve. </p>  <p> Here is my observation. Even I use Vi keybinding, there are top three frequently pressed keys which may hurt my left hand: "ESC", "C-x", "C-g" </p>  <p> These top three need me move my left hands too often. That may be the problem of RSI. In this case, A little knowledge of Vim will help. </p>  <p> In vi, we use key combination start with &lt;leader&gt; key. The leader key is actually the comma key ",". </p>  <p> As you can see, comma key is close to the right hand fingers. So using key combination with leader key as the first key to press will give more spare hot keys to replace "ESC", "C-x" and "C-g". </p>  <p> The princple here is <b>DO NOT</b> move hands at all. Following this example, I can figure out many practical solution. </p>  <p> For example, by using <a href="http://www.emacswiki.org/emacs/Evil">evil</a> and <a href="https://github.com/cofi/evil-leader">evil-leader</a>. With hot key prefix "C-x", I use ",x" to replace. For example, "C-x C-c" is replaced with ",xc", </p> <div class="org-src-container">
+<br>
+<pre class="prettyprint ">
+<p>(require 'evil-leader)</p>
+<p>(evil-leader/set-key
+  "xf" 'ido-find-file
+  "xb" 'ido-switch-buffer
+  "xc" 'save-buffers-kill-terminal
+  "jj" 'w3mext-search-js-api-mdn
+  "xz" 'suspend-frame
+  "xvv" 'vc-next-action
+  "xv=" 'vc-diff
+  "xvl" 'vc-print-log
+  )</p>
+</pre>
+
+<p></p>
+</div>  <p> On some keyboard, the "Alt" key is easy to press because it's big and just under the big thumb. So I can assign some key combination like "M-k" to replace "C-g". </p>  <p> Please note "Alt" and "k" is also close to my fingers. Here is my setup in .emacs: </p> <div class="org-src-container">
+<br>
+<pre class="prettyprint ">
+<p>(global-set-key (kbd "M-k") 'keyboard-quit)</p>
+<p>(define-key evil-insert-state-map (kbd "M-k") 'evil-normal-state)</p>
+<p>(define-key evil-visual-state-map (kbd ",k") 'evil-exit-visual-state)</p>
+<p>(define-key minibuffer-local-map (kbd ",k") 'abort-recursive-edit)</p>
+<p>(define-key evil-insert-state-map (kbd "M-j") 'yas-expand)</p>
+</pre>
+
+<p></p>
+</div>  <p> Some minor modes will re-assign the hot key "C-g", so when I say replace "C-g" with ",k". It may be a bit more elisp code: </p> <div class="org-src-container">
+<br>
+<pre class="prettyprint ">
+<p>;; the original hot key of helm-keyboard-quit is "C-g"</p>
+<p>(define-key helm-map (kbd ",k") 'helm-keyboard-quit)</p>
+</pre>
+
+<p></p>
+</div>  <p> The key point is to understand the princiles instead copy my configuration: </p> <ul class="org-ul"> <li>comma is a good key for hot key prefix, it's used by vi users for ages </li> <li>use keys close to fingers (L,J,K,L, for example) in hot keys  </li> <li>Other keys close to right hand is also useful in key combinations </li> <li>Avoid move left hand </li> </ul> </div>
             </div>
         </div>
     
