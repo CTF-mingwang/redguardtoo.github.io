@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (validation)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/validation.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 25 Jan 2015 19:36:17 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (validation)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/validation.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 31 Jan 2015 21:59:34 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-05&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -22,8 +21,6 @@ I only need validation of missing open/closed html tag(s). Nothing more!
 &lt;p&gt;
 So here is my complete solution:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun flymake-html-init ()
@@ -52,16 +49,10 @@ So here is my complete solution:
 (add-hook 'php-mode-hook 'flymake-html-load)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 The only difference from EmacsWiki is only one line:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item></channel></rss>

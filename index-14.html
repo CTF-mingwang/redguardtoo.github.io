@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Linux, Programming, Emacs">
-    <meta name="viewport" content="width=device-width">
-    <title>Chen's blog (old posts, page 14) | Chen's blog</title>
-
-    
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/index-14.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Linux, Programming, Emacs">
+<meta name="viewport" content="width=device-width">
+<title>Chen's blog (old posts, page 14) | Chen's blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/index-14.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -36,17 +24,10 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-
-
-
-
-
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -54,21 +35,18 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/notes-on-set-up-nfs-on-archlinux.html">Notes on set up nfs on ArchLinux</a></h1>
+            <h1 class="title"><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html">How to take screen shot for business people efficiently in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2014-02-07T17:24:09+00:00">2014-02-07 17:24</time>
-                </div>
+                    <time class="timeago" datetime="2013-10-23T14:31:00+00:00">2013-10-23 14:31</time>
+</div>
                 <div class="stats">
                     
         
-    <a href="posts/notes-on-set-up-nfs-on-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-set-up-nfs-on-archlinux.html">Comments</a>
+    <a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html">Comments</a>
 
 
                 </div>
@@ -76,72 +54,112 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
-           <li><a class="tag p-category" href="categories/archlinux.html" rel="tag">archlinux</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/screenshot.html" rel="tag">screenshot</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
 <p></p>
-<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Key points</h4> <div class="outline-text-3" id="text-1">  <ul> <li>see <a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html">Redhat documenation</a>, best doc on exportfs </li> <li>
-<a href="http://superuser.com/questions/492989/understanding-subnet-mask">Understanding Subnet mask</a> and <a href="http://superuser.com/questions/186850/what-are-the-essentials-of-a-subnet-mask">essential Subnet mask</a> </li> <li>
-<code>sudo exportfs -r</code> to reload /etc/exports </li> <li>
-<code>sudo exportfs -v</code> to see current nfs exports </li> <li>content of /etc/exports: </li> </ul>     
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Required tools</h4> <div class="outline-text-3" id="text-1">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption> <colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">Name</th>
+<th scope="col" class="left">Description</th>
+<th scope="col" class="left">Minimum version</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left">org-mode</td>
+<td class="left">create org-file which could be converted to odt file</td>
+<td class="left">7.8</td>
+</tr>
+<tr>
+<td class="left">scrot</td>
+<td class="left">command line tool to take screen shot</td>
+<td class="left">any version</td>
+</tr>
+<tr>
+<td class="left">libreoffice</td>
+<td class="left">convert odt to word document</td>
+<td class="left">any version</td>
+</tr>
+<tr>
+<td class="left">xsel</td>
+<td class="left">X clipboard tool</td>
+<td class="left">any version</td>
+</tr>
+</tbody>
+</table>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Work flow</h4> <div class="outline-text-3" id="text-2">   </div>  <div id="outline-container-2-1" class="outline-4"> <h5 id="sec-2-1">Use scrot to take screen shot and put its full path into clipboard</h5> <div class="outline-text-4" id="text-2-1">     
 <pre class="prettyprint ">
-
-/srv/nfs4/z 192.168.0.0/16(ro,insecure,no_subtree_check)
+scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
 </pre>
 
 <p></p>
-<ul> <li>check <a href="http://alephnull.com/benchmarks/sata2012/nfsv4.html">optimizatioin tips</a> </li> <li>
-<code>man 5 exports</code> for the documentation of /etc/exports </li> <li>
-<a href="https://www.serverstack.com/blog/2012/11/21/debugging-nfs-file-access-on-server-and-client-side/">Debugging NFS File Access on Server and Client Side</a> </li> </ul>     
-<pre class="prettyprint ">
+</div>  </div>  <div id="outline-container-2-2" class="outline-4"> <h5 id="sec-2-2">Create org file in Emacs and insert the path of screen shot</h5> <div class="outline-text-4" id="text-2-2">  <p>Actually I use below elisp command to do the insertion for me. </p>   
+<pre class="prettyprint lang-lisp">
+(defun insert-file-link-from-clipboard ()
+  "Make sure the full path of file exist in clipboard. This command will convert
+The full path into relative path and insert it as a local file link in org-mode"
+  (interactive)
+  (let (str)
+    (with-temp-buffer
+      (shell-command
+       (cond
+        ((eq system-type 'cygwin) "getclip")
+        ((eq system-type 'darwin) "pbpaste")
+        (t "xsel -ob")
+        )
+       1)
+      (setq str (buffer-string))
+      )
 
-# turn on the log
-
-sudo rpcdebug -m nfsd -s proc
-
-# turn off the log
+    ;; convert to relative path (relative to current buffer) if possible
+    (let ((m (string-match (file-name-directory (buffer-file-name)) str) ))
+      (when m
+        (if (= 0 m )
+            (setq str (substring str (length (file-name-directory (buffer-file-name)))))
+          )
+        )
+        (insert (format "[[file:%s]]" str))
+      )
+    ))
 </pre>
 
 <p></p>
-<ul> <li>then <code>sudo tail -f /var/log/messages.log</code> </li> <li>Basically you need <code>sudo systemctl enable syslog-ng.service</code> to enable system log before you use rpcdebug </li> </ul>  </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Summary</h4> <div class="outline-text-3" id="text-2">  <p>On server side: </p>   
-<pre class="prettyprint ">
-
-sudo exportfs
-
-# got output like:
-
-# /srv/nfs4/z   192.168.0.0/16
+</div>  </div>  <div id="outline-container-2-3" class="outline-4"> <h5 id="sec-2-3">Export the org to odt file in Emacs</h5> <div class="outline-text-4" id="text-2-3">  <p>Run the command "org-export" whose hot key is "C-c C-e". </p> </div>  </div>  <div id="outline-container-2-4" class="outline-4"> <h5 id="sec-2-4">Convert the odt file into word file in Emacs</h5> <div class="outline-text-4" id="text-2-4">  <p>This is automatically done if you insert below code into your ~/.emacs: </p>   
+<pre class="prettyprint lang-lisp">
+(setq org-export-odt-preferred-output-format "doc")
 </pre>
 
 <p></p>
-<p> Then on client side: </p>   
-<pre class="prettyprint ">
-
-# 131072 is 128K
-
-sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodiratime,intr
+<p> Basically this flag make emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs. </p> </div>  </div>  <div id="outline-container-2-5" class="outline-4"> <h5 id="sec-2-5">Tips</h5> <div class="outline-text-4" id="text-2-5">  <p>If you need insert page break in the exported document, insert below line into you org file: </p>   
+<pre class="example">
+#+ODT: &lt;text:p text:style-name="PageBreak"/&gt;
 </pre>
 
 <p></p>
-</div> </div> </div>
+</div> </div> </div> </div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/git-merge-in-command-line.html">Git merge in command line</a></h1>
+            <h1 class="title"><a href="posts/how-to-use-flyspell-in-web-mode.html">How to use flyspell in web-mode</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2014-01-28T16:53:00+00:00">2014-01-28 16:53</time>
-                </div>
+                    <time class="timeago" datetime="2013-10-22T05:54:00+00:00">2013-10-22 05:54</time>
+</div>
                 <div class="stats">
                     
         
-    <a href="posts/git-merge-in-command-line.html#disqus_thread" data-disqus-identifier="cache/posts/git-merge-in-command-line.html">Comments</a>
+    <a href="posts/how-to-use-flyspell-in-web-mode.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-flyspell-in-web-mode.html">Comments</a>
 
 
                 </div>
@@ -149,379 +167,461 @@ sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodi
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Insert below code into your ~/.emacs and you are good to go: </p>   
+<pre class="prettyprint lang-lisp">
+(defun web-mode-flyspefll-verify ()
+  (let ((f (get-text-property (- (point) 1) 'face)))
+    (not (memq f '(web-mode-html-attr-value-face
+                   web-mode-html-tag-face
+                   web-mode-html-attr-name-face
+                   web-mode-doctype-face
+                   web-mode-keyword-face
+                   web-mode-function-name-face
+                   web-mode-variable-name-face
+                   web-mode-css-property-name-face
+                   web-mode-css-selector-face
+                   web-mode-css-color-face
+                   web-mode-type-face
+                   )
+               ))))
+(put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspefll-verify)
+
+(add-hook 'web-mode-hook
+          (lambda ()
+            (flyspell-mode 1)
+            ))
+</pre>
+
+<p></p>
+<p> Screen shot: <img src="wp-content/uploads/2013/10/wpid-web-mode-flyspell-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2013/10/wpid-web-mode-flyspell-nq8.png"></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/suan-miao-chao-niu-rou-zuo-fa.html">蒜苗炒牛肉做法</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-10-19T19:53:00+00:00">2013-10-19 19:53</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/suan-miao-chao-niu-rou-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/suan-miao-chao-niu-rou-zuo-fa.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/beef.html" rel="tag">beef</a></li>
+           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
+           <li><a class="tag p-category" href="categories/garlic.html" rel="tag">garlic</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<ul>
+<li>
+<a href="http://www.xinshipu.com/%E7%89%9B%E8%82%89%E7%82%92%E8%92%9C%E8%8B%97-83979.htm">菜谱</a> </li> <li>甜面酱本身带盐了 </li> <li>蒜苗可以大火快炒,更嫩一点 </li> </ul>
+<p> <img src="wp-content/uploads/2013/10/wpid-stir-fried-beef-and-garlic-stem1.jpg" alt="lightbox"></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-git-effectively.html">How to use git effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-10-11T09:38:00+00:00">2013-10-11 09:38</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-git-effectively.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-git-effectively.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>List and filter all the files need resolve conflict, then apply certain git operation on them: </p>   
-<pre class="prettyprint ">
-
-git diff --name-only --diff-filter=U|grep "\.html\|\.min\.js"|xargs -I{} sh -c "git checkout --theirs {} &amp;&amp; git add {}"
-</pre>
-
-<p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/switch-input-method-in-evil-mode.html">Switch input method in evil-mode (在Evil中快速切换输入法)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-01-27T22:12:22+00:00">2014-01-27 22:12</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/switch-input-method-in-evil-mode.html#disqus_thread" data-disqus-identifier="cache/posts/switch-input-method-in-evil-mode.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>I need toggle on input method to input Chinese (or any other language) in Emacs. The default hot key is "C-\" which corresponds the command "toggle-input-method". </p> <p> My problem is since I'm using <a href="http://www.emacswiki.org/emacs/Evil">evil-mode</a> (a Vim simulation), I need switch evil state from "normal" to "insert" before toggling on input method. </p> <p> That extra step is not necessary if you insert below code into ~/.emacs: </p>    
-<pre class="prettyprint ">
-
-(defun evil-toggle-input-method ()
-  "when toggle on input method, switch to evil-insert-state if possible.
-when toggle off input method, switch to evil-normal-state if current state is evil-insert-state"
-  (interactive)
-  (if (not current-input-method)
-      (if (not (string= evil-state "insert"))
-          (evil-insert-state))
-    (if (string= evil-state "insert")
-        (evil-normal-state)
-        ))
-  (toggle-input-method))
-
-
-(global-set-key (kbd "C-\\") 'evil-toggle-input-method)
-</pre>
-
-<p></p>
-<p> BTW, I strongly recommend the Chinese input method <a href="https://github.com/wenbinye/emacs-eim">eim</a> written in pure elisp. </p> <p> Emacs中切换其自带输入法的快捷键是"C-\",对应的命令是"toggle-input-method". </p> <p> 我遇到的问题是如果使用<a href="http://www.emacswiki.org/emacs/Evil">Evil</a>(一种Vim模拟)则切换输入法不方便.我需要先切换evil-state至insert,然后才能切换输入法. </p> <p> 只要将以上代码贴入~/.emacs,则切换输入法可以更加高效: </p> <p> 顺便提一下,<a href="https://github.com/wenbinye/emacs-eim">eim</a>是我强烈推荐的中文输入法.  </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/how-to-execute-user-program-for-system-v-init-script.html">How to execute user program for System V init script</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-01-18T09:37:10+00:00">2014-01-18 09:37</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-execute-user-program-for-system-v-init-script.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-execute-user-program-for-system-v-init-script.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/init.html" rel="tag">init</a></li>
            <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
         </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>Memo for my self. </p>   
-<pre class="prettyprint ">
-
-sudo ls -1 /etc/{rc,init}.d/|grep local
-
-# then read the file either rc.local or local
-</pre>
-
-<p></p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/notes-on-google-chromes-dev-tool.html">Notes on Google Chrome's dev tool</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-01-13T12:32:00+00:00">2014-01-13 12:32</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/notes-on-google-chromes-dev-tool.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-google-chromes-dev-tool.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/chrome.html" rel="tag">chrome</a></li>
-           <li><a class="tag p-category" href="categories/debug.html" rel="tag">debug</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/google.html" rel="tag">google</a></li>
-           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
-        </ul>
-        </div>
 
             </div>
             <div class="body">
                 <div>
 <p></p>
-<ul> <li>C-[ or C-] to switch panel </li> <li>C-S-J to toggle dev tools and focus <b>Console panel</b>, see <a href="https://developers.google.com/chrome-developer-tools/docs/commandline-api">command line reference</a> </li> <li>C-S-I to toggle dev tools, then C-o to switch to <b>Sources panel</b> if needed </li> <li>C-S-C to <b>open</b> dev tools and focus on <b>Elements panel</b> </li> <li>See <a href="https://developers.google.com/chrome-developer-tools/docs/shortcuts">https://developers.google.com/chrome-developer-tools/docs/shortcuts</a> for all hot keys </li> <li>See <a href="https://developers.google.com/chrome-developer-tools/docs/javascript-debugging">https://developers.google.com/chrome-developer-tools/docs/javascript-debugging</a> </li> <li>Click <a href="http://javascript-library.googlecode.com/svn/trunk/javascript/goog/demos/hovercard.html">here</a> for test </li> </ul>   <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
-<col class="left">
-<col class="left"> </colgroup> <thead> <tr>
-<th scope="col" class="left">command in source panel</th>
-<th scope="col" class="left">hotkey</th>
-</tr> </thead> <tbody> <tr>
-<td class="left">Continue</td>
-<td class="left">C-\</td>
-</tr> <tr>
-<td class="left">Toggle break point</td>
-<td class="left">C-B</td>
-</tr> <tr>
-<td class="left">Step over</td>
-<td class="left">C-'</td>
-</tr> <tr>
-<td class="left">Step into</td>
-<td class="left">C-;</td>
-</tr> <tr>
-<td class="left">Step out</td>
-<td class="left">S-C-;</td>
-</tr> <tr>
-<td class="left">Up call stack</td>
-<td class="left">C-,</td>
-</tr> <tr>
-<td class="left">Down call stack</td>
-<td class="left">C-.</td>
-</tr> <tr>
-<td class="left">Toggle console view</td>
-<td class="left">ESC</td>
-</tr> <tr>
-<td class="left">Goto line</td>
-<td class="left">C-G</td>
-</tr> <tr>
-<td class="left">Goto file</td>
-<td class="left">C-P</td>
-</tr> <tr>
-<td class="left">Jump to method</td>
-<td class="left">S-C-O</td>
-</tr> </tbody> </table>  <ul> <li>I don't use hotkey F1~F12 because my windows manager is different from most developers </li> <li>live editing does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. Anyway, I don't need this functionality </li> <li>hotkeys of "Continue" button in <b>Sources panel</b> does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. </li> <li>"Break on" inspected element is extremely useful </li> </ul>  </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/my-grub2-configuration.html">My grub2 configuration</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-12-31T19:09:00+00:00">2013-12-31 19:09</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/my-grub2-configuration.html#disqus_thread" data-disqus-identifier="cache/posts/my-grub2-configuration.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/grub.html" rel="tag">grub</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>/etc/grub.d/11_windows </p> <br>
+<p>To take the full power of git, you need forget GUI and use CLI only. A little knowledge of script language like Bash/Perl/Python may be helpful. </p> <p> Here is an example how I use git. </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Problem</h4> <div class="outline-text-3" id="text-1">  <p>I'm working for a big enterprise project which uses git as version control software.  My daily routine is find what files I changed. So I often use git commands with "–stat" paramters. </p>    
 <pre class="prettyprint ">
-<h2>!/bin/sh -e</h2>
-<p>echo "#        Adding Windows GRUB 2 menu"</p>
-<p>cat &amp;lt;&amp;lt; EOF</p>
-<p>menuentry "Windows XP" {</p>
-<p>savedefault</p>
-<p>insmod chain</p>
-<p>insmod ntfs</p>
-<p>set root=(hd0,1)</p>
-<p>chainloader +1</p>
-<p>}</p>
-<p>EOF</p>
+
+git show --stat
+
+git diff --cached --stat
+
+git log --stat
+
+git diff --stat
 </pre>
 
 <p></p>
-<p> /etc/default/grub </p> <br>
+<p> Since I use CLI git in bash shell only. I set alias for these commands in bash. For example, I need only type <code>gds</code> in bash instead of "git diff –stat". </p> <p> Git commands with "–stat" option usually only display relative paths, so I write some bash function which enable me select that relative path interactively (without using mouse, of course), convert that path to absolute path, and copy that absolute path into clipboard. </p> <p> Getting full path into clipboard is useful because in big projects I need do lots of communication with managers and colleagues. For example, I need list files I changed in our bug tracking system (JIRA) and also email them by using Outlook. If you still don't understand why it's hard in big project, let me give you some hint. Big project is usually a big shit. Say you will edit file A, you will find another 10 files distributed in different location with <b>same file name</b> and <b>similar code</b>. Those another 10 files are not your business and if you dare touch them, you need deal with another 10 managers from ten teams. </p> </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Set up</h4> <div class="outline-text-3" id="text-2">  <p>Now you understand the problme. Here comes the solution. </p> <p> Step 1, You need install percol by <code>sudo pip install percol</code>. Percol will provide some interactive UI to help you select the line in shell. </p> <p> Step 2, install xsel or xclip under Linux to support paste text into X clipboard. BTW, you did install some clipboard manager under Linux, didn't you? </p> <p> Step 3, insert below code into your ~/.bash: </p>   
 <pre class="prettyprint ">
-<h2>Copyright 1999-2013 Gentoo Foundation</h2>
-<h2>Distributed under the terms of the GNU General Public License v2</h2>
-<h2>$Header: /var/cvsroot/gentoo-x86/sys-boot/grub/files/grub.default-2,v 1.4 2013/09/21 18:10:55 floppym Exp $</h2>
-<h2></h2>
-<h2>To populate all changes in this file you need to regenerate your</h2>
-<h2>grub configuration file afterwards:</h2>
-<h2>'grub2-mkconfig -o /boot/grub/grub.cfg'</h2>
-<h2></h2>
-<h2>See the grub info page for documentation on possible variables and</h2>
-<h2>their associated values.</h2>
-<p>GRUB_DISTRIBUTOR="Gentoo"</p>
-<p>GRUB_DEFAULT=saved</p>
-<p>GRUB_SAVEDEFAULT=true</p>
-<p>GRUB_HIDDEN_TIMEOUT=0</p>
-<p>GRUB_HIDDEN_TIMEOUT_QUIET=true</p>
-<p>GRUB_TIMEOUT=10</p>
-<h2>Append parameters to the linux kernel command line</h2>
-<p>GRUB_CMDLINE_LINUX="libata.dma=1"</p>
-<h2>Append parameters to the linux kernel command line for non-recovery entries</h2>
-<h2>GRUB_CMDLINE_LINUX_DEFAULT=""</h2>
-<h2>Uncomment to disable graphical terminal (grub-pc only)</h2>
-<h2>GRUB_TERMINAL=console</h2>
-<h2>The resolution used on graphical terminal.</h2>
-<h2>Note that you can use only modes which your graphic card supports via VBE.</h2>
-<h2>You can see them in real GRUB with the command `vbeinfo'.</h2>
-<h2>GRUB_GFXMODE=640x480</h2>
-<h2>Path to theme spec txt file.</h2>
-<h2>The starfield is by default provided with use truetype.</h2>
-<h2>NOTE: when enabling custom theme, ensure you have required font/etc.</h2>
-<h2>GRUB_THEME="/boot/grub/themes/starfield/theme.txt"</h2>
-<h2>Background image used on graphical terminal.</h2>
-<h2>Can be in various bitmap formats.</h2>
-<h2>GRUB_BACKGROUND="/boot/grub/mybackground.png"</h2>
-<h2>Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to kernel</h2>
-<h2>GRUB_DISABLE_LINUX_UUID=true</h2>
-<h2>Uncomment to disable generation of recovery mode menu entries</h2>
-<h2>GRUB_DISABLE_RECOVERY=true</h2>
+
+# search the file and pop up dialog, then put the full path in clipboard
+
+
+
+function pclip() {
+    if [ $OS_NAME == CYGWIN ]; then
+        putclip $@;
+    elif [ $OS_NAME == Darwin ]; then
+        pbcopy $@;
+    else
+        if [ -x /usr/bin/xsel ]; then
+            xsel -ib $@;
+        else
+            if [ -x /usr/bin/xclip ]; then
+                xclip -selection c $@;
+            else
+                echo "Neither xsel or xclip is installed!"
+            fi
+        fi
+    fi
+}
+
+
+
+function glsf () {
+    local str=`git --no-pager log --oneline --decorate --stat $* |percol`
+    if [[ $str =~ ^[[:space:]]*([a-z0-9A-Z_.\/-]*).*$ ]]; then
+        echo -n ${BASH_REMATCH[1]} |pclip;
+        echo ${BASH_REMATCH[1]}
+    fi
+}
+
+
+
+function ff()
+
+{
+    # @see http://stackoverflow.com/questions/13373249/extract-substring-using-regexp-in-plain-bash
+    local fullpath=$*
+    local filename=${fullpath##*/}
+    local filter=${fullpath##*./}
+    #  only the filename without path is needed
+    # filename should be reasonable
+    local cli=`find $PWD -type f -iname '*'${filename}'*'|grep ${filter}|percol`
+    echo ${cli}
+    echo -n ${cli} |pclip;
+}
 </pre>
 
 <p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/why-emacs-is-better-editor.html">Why Emacs is better editor - a case study for javascript developer</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-12-15T19:02:00+00:00">2013-12-15 19:02</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/why-emacs-is-better-editor.html#disqus_thread" data-disqus-identifier="cache/posts/why-emacs-is-better-editor.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
-           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
-           <li><a class="tag p-category" href="categories/web.html" rel="tag">web</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-01-15 Wed</span></span> </p> <p> Let's see an example in real life development. </p> <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Note</h4> <div class="outline-text-3" id="text-1">  <p>For people who does not get the key points of this article, here are the points: </p>
-<ul> <li>Emacs has an embedded <b>javascript interpreter</b> which I extend a little bit. </li> <li>Other editors just use external tools or regular expression to do the semantic analysis. </li> <li>The difference of above two is bigger than the difference between machine gun and spear. </li> </ul>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Problem</h4> <div class="outline-text-3" id="text-2">  <p>I'm maintaining a big javascript file with thousands of lines of legacy code. </p> <p> My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. </p> <p> The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. </p> <p> To understand what "complex" means, let's check some code from real world application: </p>   
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Usage</h4> <div class="outline-text-3" id="text-3">     
 <pre class="prettyprint ">
 
-$(el.completeRegistrationForm).validate({
-    ignore: " :hidden",
-    rules : {
-        password : {
-            required : function () { return $(el.password).is(":visible"); }
-        },
-        accountNumber : {
-            required : function () {
-                return $(el.accountNumber).is(":visible");
-            },
-            digits : true
-        }
-        // ... I skipped next 200 lines which are similar to above lines
+glsf
 
-    },
-    messages : {
-        password: {
-            required : "Please input a valid password"
-        },
-        accountNumber: {
-            required : "Please provide a valid account number",
-            digits : "Please enter only digits",
-        }
-        // ... I skipped next 200 lines which are similar to above lines
-    }
-});
+ff line-from-clipboard
+
+# now I can paste the full path into firefox, outlook ...
 </pre>
 
 <p></p>
-<p> Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: <img src="wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"> </p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Solution</h4> <div class="outline-text-3" id="text-3">  <p>Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>. </p> <p> Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode. </p>
-<p> I already submitted the patch to mooz so everyone will enjoy this feature in the future. </p>
-
-<p></p>
-<p> Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>: <img src="wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"> </p> <p> The screen shot after we applying the above patch:  <img src="wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"> </p> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">Summary</h4> <div class="outline-text-3" id="text-4">  <p>That's an example of beauty of Emacs. </p> <p> It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. </p>
-</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">Update</h4> <div class="outline-text-3" id="text-5">  <p>My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager. </p> <p> After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature: </p>   
-<pre class="prettyprint ">
-(js2-imenu-extras-mode)
-</pre>
-
-<p></p>
-<p> The UI to display the candidate in this actile is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm. </p> <p> The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>. </p> <p> After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>: </p> <p> <img src="wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"> </p>
+<p> Here is the screen cast: <img src="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif" alt="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif"></p>
 </div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/san-wen-yu-dun-dou-fu-zuo-fa.html">三文鱼炖豆腐做法</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-10-02T21:15:00+00:00">2013-10-02 21:15</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/san-wen-yu-dun-dou-fu-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/san-wen-yu-dun-dou-fu-zuo-fa.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
+           <li><a class="tag p-category" href="categories/salmon.html" rel="tag">salmon</a></li>
+           <li><a class="tag p-category" href="categories/soup.html" rel="tag">soup</a></li>
+           <li><a class="tag p-category" href="categories/toufu.html" rel="tag">toufu</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<ul>
+<li>
+<a href="http://blog.sina.com.cn/s/blog_4cc524d50102dzgv.html">菜谱, 全文如下</a> </li> </ul>
+<pre class="example">用料:
+三文鱼、老豆腐、面粉、黑胡椒粒、甜椒、葱、
+<p>大蒜、姜、松子、香菜、盐、老抽、生抽、糖。</p>
+<p>做法：</p>
+<p>1: 三文鱼去掉鱼骨，拔出鱼刺，和豆腐切成大小相仿的小块，</p>
+<p>并用厨房纸巾稍稍擦干水份，三文鱼块里撒入适量的黑胡椒粒，</p>
+<p>放入2勺面粉稍微裹以下;</p>
+<p>鱼炖豆腐好吃2字诀-三文鱼炖豆腐</p>
+<p>2: 其他材料备好;</p>
+<p>鱼炖豆腐好吃2字诀-三文鱼炖豆腐</p>
+<p>3: 锅底用姜片擦一遍，放入姜片、三文鱼2面煎黄取出，</p>
+<p>再放入豆腐块煎黄;</p>
+<p>鱼炖豆腐好吃2字诀-三文鱼炖豆腐</p>
+<p>4: 倒入适量老抽上色，生抽、盐、糖、大蒜调味，</p>
+<p>一次性倒入足量的开水，大火煮开，中火炖至快干;</p>
+<p>鱼炖豆腐好吃2字诀-三文鱼炖豆腐</p>
+<p>5: 放入甜椒块翻炒一下，撒入松子、香菜段即可起锅。</p>
+<p>鱼炖豆腐好吃2字诀-三文鱼炖豆腐</p>
+<p>小牛贴心提示：</p>
+<p>1：炖豆腐和鱼，想要好吃，关键要时间，</p>
+<p>即是老话所说"千滚的豆腐万滚的鱼";</p>
+<p>2：鱼块裹面粉、生姜擦锅都能防止鱼不沾锅;</p>
+<p>3：一次性加入足量的开水，中途不要频繁加水。</p>
+<p></p></pre>  <ul>
+<li>生抽至少两大勺,我放得太少 </li> <li>炖得时候我放水太少,一开始就要多放,至少半大碗水 </li> <li>鱼和豆腐煎的黄一点,一开始用纸吸干水份较好,否则油到处溅 </li> <li>老抽没有了,所以颜色很难看 </li> <li>诀窍1,黑胡椒之类的辛香料都是油炸过后才更香 </li> <li>诀窍2,如果做汤的话,鱼和豆腐炖的时间越长越好吃,也有营养 </li> </ul>
+<p> <a href="http://www.meishij.net/zuofa/sanwenyudoufutang.html">另附有三文鱼豆腐汤</a>的做法 </p> <p> <img src="wp-content/uploads/2013/10/wpid-salmon-dun-doufu.jpg" alt="http://blog.binchen.org/wp-content/uploads/2013/10/wpid-salmon-dun-doufu.jpg"></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html">Copy file name or full path of file from Emacs dired buffer into system clipboard</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-25T20:46:00+00:00">2013-09-25 20:46</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html#disqus_thread" data-disqus-identifier="cache/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/clipboard.html" rel="tag">clipboard</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Simple, insert below code into your ~/.emacs: </p>   
+<pre class="prettyprint ">
+
+;; {{ copy the file-name/full-path in dired buffer into clipboard
+
+;; `w` =&gt; copy file name
+
+;; `C-u 0 w` =&gt; copy full path
+
+(defadvice dired-copy-filename-as-kill (after dired-filename-to-clipboard activate)
+  (with-temp-buffer
+    (insert (current-kill 0))
+    (shell-command-on-region (point-min) (point-max)
+                             (cond
+                              ((eq system-type 'cygwin) "putclip")
+                              ((eq system-type 'darwin) "pbcopy")
+                              (t "xsel -ib")
+                              )))
+  (message "%s =&gt; clipboard" (current-kill 0))
+  )
+</pre>
+
+<p></p>
+<p> It support Cygwin and OSX out of the box. You need install xsel under Linux. </p> <p> BTW, I suggest installing a clipboard manager like parcellite under Linux to sync the two X clipboards. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/fan-qie-ji-dan-tang-zuo-fa.html">番茄鸡蛋汤做法</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-25T19:54:19+00:00">2013-09-25 19:54</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/fan-qie-ji-dan-tang-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/fan-qie-ji-dan-tang-zuo-fa.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
+           <li><a class="tag p-category" href="categories/soup.html" rel="tag">soup</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<ul>
+<li>放蒜(可以加姜,葱)大火爆炒,也可以加点老抽 </li> <li>放入番茄超出茄红素 </li> <li>加水煮,调味放盐糖 </li> <li>最后放入打碎鸡蛋,五秒钟后起锅 </li> </ul>
+<p>有人介绍下面也是类似原理,加葱花老抽爆炒,然后放水煮面 </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html">Matthew Keeler video tutorial on org-mode in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-23T20:21:25+00:00">2013-09-23 20:21</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>At <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=lsYdK0C2RvQ#t=308">4:57</a> it becomes interesting. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/one-liner-to-load-m3u-into-mpd.html">One liner to load m3u into mpd</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-23T20:01:37+00:00">2013-09-23 20:01</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/one-liner-to-load-m3u-into-mpd.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-to-load-m3u-into-mpd.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/mpd.html" rel="tag">mpd</a></li>
+           <li><a class="tag p-category" href="categories/music.html" rel="tag">music</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<pre class="prettyprint ">
+
+<p>mpc clear;ln -s ~/Music/all.m3u ~/.mpd/playlists/all.m3u;mpc load all;mpc update;mpc shuffle;mpc play;
+</p></pre>
+<p></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/toggle-full-view-of-window-in-emacs.html">Toggle full view of window in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-09-14T12:56:00+00:00">2013-09-14 12:56</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/toggle-full-view-of-window-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/toggle-full-view-of-window-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Add below code into your ~/.emacs: </p>   
+<pre class="prettyprint ">
+
+(defun toggle-full-window()
+  "Toggle the full view of selected window"
+  (interactive)
+  ;; @see http://www.gnu.org/software/emacs/manual/html_node/elisp/Splitting-Windows.html
+  (if (window-parent)
+      (delete-other-windows)
+    (winner-undo)
+    ))
+</pre>
+
+<p></p>
+<p> I use <a href="http://www.emacswiki.org/emacs/Evil">evil</a>, so I assign hot key ",ff" to <code>toggle-full-window</code>. </p>
+</div>
             </div>
         </div>
     
-        <nav class="postindexpager">
-        <ul class="pager">
-            <li class="previous">
-                <a href="index.html" rel="prev">Newer posts</a>
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
+                <a href="index-15.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-13.html" rel="next">Older posts</a>
             </li>
-        </ul>
-        </nav>
-
-    
-        
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-    
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -708,9 +808,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
-<script type="text/javascript">
+</script><script type="text/javascript" src="assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -725,14 +823,7 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-<!-- Social buttons -->
-<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
 <ul>
 <li>
@@ -749,16 +840,10 @@ _gaq.push(['_trackPageview']);
 </li>
 </ul>
 </div>
-<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
-<!-- End of social buttons -->
-
-
-    
-        <script type="text/javascript">
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>
