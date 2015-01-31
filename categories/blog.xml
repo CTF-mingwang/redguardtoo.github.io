@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 31 Jan 2015 14:22:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 31 Jan 2015 14:43:17 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-01-31 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
 Here are the steps. Tested on Cygwin/Mac/Linux.
 &lt;/p&gt;
 
@@ -29,11 +37,11 @@ See &lt;a href="http://getnikola.com/handbook.html#libxml-libxslt-files-missing-
 &lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Install Nikola&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-1"&gt;
 &lt;p&gt;
-Please note "requests" is required by zen theme, so it's optional.
+Please note the package "requests" is required by zen theme, so it's optional.
 &lt;/p&gt;
 
 &lt;p&gt;
-I prefer isntall packages into my HOME directory because it versatile and safe.
+I prefer install packages into my HOME directory because it versatile and safe.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -55,16 +63,21 @@ export PATH=$PATH:$HOME/.local/bin
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
 &lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Install theme (OPTIONAL)&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-2"&gt;
+&lt;p&gt;
+I use zen theme,
+&lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;
-# I use zen theme, before installing new theme, clean the legacy theme at first
-#  
 rm -rf themes/zen/;nikola install_theme zen
 # or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
+
+&lt;p&gt;
+Backup you theme under "~/.config/nikola/themes/zen". You won't need above command any more.
+&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -72,13 +85,30 @@ rm -rf themes/zen/;nikola install_theme zen
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Usage&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
+&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Create root directory&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-1"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;
-mkdir -p ~/.config/nikola;cd ~/.config/nikola
-# import from wordpress dump
+mkdir -p ~/.config/;nikola init "nikola";cd ~/.config/nikola;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Please note `nikola init "nikola"` creates "conf.py" for you. Backup this file and you never need `nikola init`. 
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
+&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Import old posts and build new site&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-2"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;
 nicola import_wordpress my_wordpress_dump.xml
-# build the web site
 nikola build
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -89,6 +119,7 @@ The website is create at "~/.config/nikola/output".
 &lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
 &lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Tips (OPTIONAL)&lt;/h3&gt;
@@ -114,7 +145,7 @@ Manually fixed those articles with Chinese titles in url_map.csv
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-4-2" class="outline-3"&gt;
-&lt;h4 id="sec-4-2"&gt;&lt;span class="section-number-3"&gt;4.2&lt;/span&gt; Import comments to Disqus&lt;/h4&gt;
+&lt;h4 id="sec-4-2"&gt;&lt;span class="section-number-3"&gt;4.2&lt;/span&gt; Import comments into Disqus&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-4-2"&gt;
 &lt;p&gt;
 &lt;a href="https://disqus.com/"&gt;Disqus&lt;/a&gt; is a blog comment hosting service.
