@@ -1,40 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 31 Jan 2015 21:59:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;python code:
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Feb 2015 20:42:01 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+It's becasue Emacs has great documentation and API.
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
-import getopt, sys
-if __name__ == '__main__':
-    opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            sys.exit()
-        else:
-            assert False, "unhandled option"
-    print "hello world";
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Documentation&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+The quality of documention is the best.
+&lt;/p&gt;
+
+&lt;p&gt;
+It even helps me on non-Emacs stuff.
+&lt;/p&gt;
+
+&lt;p&gt;
+When I set up the font for &lt;a href="http://en.wikipedia.org/wiki/Terminator_(terminal_emulator)"&gt;Terminator&lt;/a&gt; I found its manual is not clear. The manual says "An Pango font name" is required but doesn't explain what is "Pango font name".  After googling, I found the best documentation is Emacs manual which explains &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/GTK-Resource-Basics.html"&gt;Pango font name&lt;/a&gt; and lists &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html#Fonts"&gt;everything I need about Linux fonts&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, "fc-list" is mentioned to list the installed fonts. I just type below command in shell:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;
+fc-list | grep Mono
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;
-This is table:
-&lt;/p&gt;
-
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;code completion&lt;/td&gt;&lt;td class="left"&gt;auto-complete&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;
-This is list:
-&lt;/p&gt;
-
-&lt;ul&gt;&lt;li&gt;list item 1
-&lt;/li&gt;
-&lt;li&gt;list item 2
-&lt;/li&gt;
-&lt;li&gt;list item 3
-&lt;/li&gt;
-&lt;li&gt;list item 4
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
-&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-05&lt;/span&gt;&lt;/span&gt;
+The output is like:
+&lt;/p&gt;
+
+&lt;pre class="example"&gt;
+/usr/share/fonts/urw-fonts/n022003l.pfb: Nimbus Mono L:style=Regular
+/usr/share/fonts/urw-fonts/n022024l.pfb: Nimbus Mono L:style=Bold Oblique
+/usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf: Liberation Mono:style=Regular
+/usr/share/fonts/urw-fonts/n022004l.pfb: Nimbus Mono L:style=Bold
+/usr/share/fonts/liberation-fonts/LiberationMono-BoldItalic.ttf: Liberation Mono:style=Bold Italic
+/usr/share/fonts/liberation-fonts/LiberationMono-Bold.ttf: Liberation Mono:style=Bold
+/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc: 文泉驿等宽正黑,文泉驛等寬正黑,WenQuanYi Zen Hei Mono:style=Medium,中等
+/usr/share/fonts/liberation-fonts/LiberationMono-Italic.ttf: Liberation Mono:style=Italic
+/usr/share/fonts/urw-fonts/n022023l.pfb: Nimbus Mono L:style=Regular Oblique
+&lt;/pre&gt;
+
+&lt;p&gt;
+Since Emacs manual explain the meaning of output, I know I need pick the font name "WenQuanYi Zen Hei Mono" which is key component of "Pango font name"
+&lt;/p&gt;
+
+&lt;p&gt;
+Because the manual also gives the details of other components of "Pango font name", the final "~/.config/terminator/config" is like:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;
+[profiles]
+  [[default]]
+  use_system_font = False
+  # @see emacs manual for tools and explanation of font formats
+  # https://www.gnu.org/software/emacs/manual/html_node/emacs/GTK-Resource-Basics.html
+  # https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html#Fonts
+  font =  WenQuanYi Zen Hei Mono 16
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; API&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+I create a &lt;a href="https://github.com/redguardtoo/find-by-pinyin-dired"&gt;new Emacs plugin&lt;/a&gt; which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the &lt;a href="http://www.gnu.org/software/findutils/"&gt;GNU find&lt;/a&gt; as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
+&lt;/p&gt;
+
+&lt;p&gt;
+I know Emacs has enough APIs. I always can find &lt;b&gt;at least two APIs&lt;/b&gt; to do the same thing. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -52,6 +104,8 @@ I only need validation of missing open/closed html tag(s). Nothing more!
 &lt;p&gt;
 So here is my complete solution:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun flymake-html-init ()
@@ -80,13 +134,20 @@ So here is my complete solution:
 (add-hook 'php-mode-hook 'flymake-html-load)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 The only difference from EmacsWiki is only one line:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -100,6 +161,8 @@ The mozrepl trick basically will refresh the &lt;b&gt;current active page&lt;/b&
 &lt;p&gt;
 So here is my improved solution:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun my-moz-refresh-browser-condition (current-file)
@@ -135,7 +198,10 @@ So here is my improved solution:
               'moz-after-save
               'append 'local)
 ;; }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -146,9 +212,13 @@ The first tip is to use global variable `tags-table-list` instead of `tags-file-
 Here is the value of `tags-table-list` for one project:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan &lt;b&gt;less&lt;/b&gt; code files.
@@ -162,9 +232,13 @@ The second tip is we can avoid feeding big js files to ctags. Currently one of m
 Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;
 find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The point is the option `-not -size +16k`. It means only handle files less thank 16k.
@@ -173,6 +247,8 @@ The point is the option `-not -size +16k`. It means only handle files less thank
 &lt;p&gt;
 Here is the Emacs lisp function to wrap above shell command:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
@@ -188,6 +264,8 @@ Here is the Emacs lisp function to wrap above shell command:
     file))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags"&gt;~/.ctags&lt;/a&gt;.
 &lt;/p&gt;
@@ -196,37 +274,47 @@ BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a27
 In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;What's the `tags-table-list`
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;What's the `tags-table-list`
 &lt;/li&gt;
 &lt;li&gt;How the tags file are created by ctags
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 UPDATE:
 &lt;/p&gt;
 
-&lt;ol&gt;&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
-
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
 &lt;/li&gt;
+
 &lt;li&gt;I do use &lt;a href="http://www.gnu.org/software/global/"&gt;Gnu Global&lt;/a&gt; for &lt;b&gt;C/C++/Java&lt;/b&gt; code. I use it exactly in the &lt;b&gt;same way&lt;/b&gt; as ctags. Please `man global` for the details. Hint, all you need care is the environment variable &lt;b&gt;GTAGSLIBPATH&lt;/b&gt;.
 &lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Please note:
+&lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Please note:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
 &lt;/li&gt;
 &lt;li&gt;I'm good at most debuggers. The point of this article is to deal with &lt;b&gt;more difficult issues&lt;/b&gt; the debugger can not handle.
 &lt;/li&gt;
 &lt;li&gt;My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 &lt;/p&gt;
+
 &lt;p&gt;
 The only way to debug such application is to insert as many as possible logging code, watch the output, and think.
 &lt;/p&gt;
+
 &lt;p&gt;
 So my problem is how to insert logging code as quickly as possible.
 &lt;/p&gt;
@@ -234,51 +322,51 @@ So my problem is how to insert logging code as quickly as possible.
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Logging simple JS variable&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;Given a variable name like "var1", I need insert javascript code as below:
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Logging simple JS variable&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;
 console.log("var1=", var1)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet&lt;/a&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 This snippet need you input variable name once.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Logging complex JS variable&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Logging complex JS variable&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 &lt;/p&gt;
+
 &lt;p&gt;
 So the solution is that I copy the JS variable into kill ring where my snippet will read the variable name.
 &lt;/p&gt;
+
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet&lt;/a&gt;
@@ -287,14 +375,13 @@ Snippet:
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-5" class="outline-3"&gt;
-&lt;h4 id="sec-5"&gt;Logging JS function name when it's called&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-5"&gt;
-
-&lt;p&gt;In below example, I need insert  "console.log('hello is called');" in function "hello":
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Logging JS function name when it's called&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+In below example, I need insert  "console.log('hello is called');" in function "hello":
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;
 function hello() {
@@ -302,34 +389,35 @@ function hello() {
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet&lt;/a&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 This snippet use the Emacs command `which-function`. If you read the code of `which-function`, you will find that it's &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu-mode&lt;/a&gt;
 who actually extracts the function name. But Imenu-mode requires you pre-define &lt;b&gt;enough regular expressions&lt;/b&gt;. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Please check &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el&lt;/a&gt;. I have defined many regular expressions for &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; and JQuery.
 &lt;/p&gt;
+
 &lt;p&gt;
 The regular expressions could be used in &lt;b&gt;both&lt;/b&gt; js-mode and js2-mode.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-6" class="outline-3"&gt;
-&lt;h4 id="sec-6"&gt;Logging JS function name with its parameters&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-6"&gt;
-
-&lt;p&gt;JS example:
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Logging JS function name with its parameters&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+JS example:
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;
 function hello(v1, v2,
@@ -338,32 +426,35 @@ function hello(v1, v2,
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 I copy the parameter of JS function named "hello". It's just the content between "hello(" and ")", then Emacs Lisp code embedded in the snippet will parse and output the right content from kill ring.
 &lt;/p&gt;
+
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet&lt;/a&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 BTW, since I use &lt;a href="http://www.emacswiki.org/Evil"&gt;Evil&lt;/a&gt;, copy the parameter into kill-ring is as simple as pressing "yi(".
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-7" class="outline-3"&gt;
-&lt;h4 id="sec-7"&gt;Insert JS debugger statement&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-7"&gt;
-
-&lt;p&gt;@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Insert JS debugger statement&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
+&lt;p&gt;
+@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
 &lt;/p&gt;
+
 &lt;p&gt;
 Snippets:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet&lt;/a&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet&lt;/a&gt;
 &lt;/p&gt;
@@ -371,47 +462,53 @@ Snippets:
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-8" class="outline-3"&gt;
-&lt;h4 id="sec-8"&gt;Bonus&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-8"&gt;
-
-&lt;p&gt;Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</guid><pubDate>Sun, 23 Nov 2014 12:45:18 GMT</pubDate></item><item><title>Use bootstrap+font-awesome+jquery for IE7 web application</title><link>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Live demo:
+&lt;div id="outline-container-sec-8" class="outline-2"&gt;
+&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Bonus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-8"&gt;
+&lt;p&gt;
+Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</guid><pubDate>Sun, 23 Nov 2014 12:45:18 GMT</pubDate></item><item><title>Use bootstrap+font-awesome+jquery for IE7 web application</title><link>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Live demo:
 &lt;a href="http://binchen.org/schools/"&gt;http://binchen.org/schools/&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 Screenshot:
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;&lt;/p&gt;
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;
+&lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Environment&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;ul&gt;&lt;li&gt;Bootstrap 2.3.2
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Environment&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Bootstrap 2.3.2
 &lt;/li&gt;
 &lt;li&gt;font-awesome 3.2.1
 &lt;/li&gt;
 &lt;li&gt;JQuery 1.8.2
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Notes&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Notes&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
 &lt;/li&gt;
 &lt;li&gt;IE7 does not support inline-block properly, I need below css code hack:
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-css"&gt;
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-css"&gt;
 .myclass {
   display: inline-block;
   /* ie7*/
@@ -420,27 +517,36 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
 
-&lt;ul&gt;&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
 &lt;/li&gt;
 &lt;li&gt;add below code into javascript so that I can hack IE7-only css code:
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+&lt;/ul&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
 if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Make web-mode support HTML with AngularJS data-binding</title><link>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I find it very useful to use `M-x imenu` to jump to the  &lt;a href="http://angularjs.org"&gt;AngularJS&lt;/a&gt; binding point of one HTML file.
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Make web-mode support HTML with AngularJS data-binding</title><link>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I find it very useful to use `M-x imenu` to jump to the  &lt;a href="http://angularjs.org"&gt;AngularJS&lt;/a&gt; binding point of one HTML file.
 &lt;/p&gt;
 
 &lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (eval-after-load 'web-mode
@@ -448,8 +554,11 @@ Insert below code into ~/.emacs:
      ;; angular imenu
      (add-to-list 'web-mode-imenu-regexp-list
                   '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-11-20 Thu&lt;/span&gt;&lt;/span&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-08 Mon&lt;/span&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-11-20 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-08 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -475,6 +584,8 @@ In order to solve the issue, I write a small function which will be called at th
 &lt;p&gt;
 The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defvar cached-normal-file-full-path nil)
@@ -503,6 +614,8 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 &lt;/p&gt;
@@ -511,9 +624,11 @@ Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I 
 UPDATE:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
+&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -528,15 +643,18 @@ Basic Emacs lisp knowledges are required.
 Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generator like &lt;a href="http://getnikola.com/blog/"&gt;Nikola&lt;/a&gt; or &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt;.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Tested on &lt;b&gt;Linux and OSX&lt;/b&gt;.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Tested on &lt;b&gt;Linux and OSX&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 Requirements:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Org-mode bundled with Emacs 24.x
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Org-mode bundled with Emacs 24.x
 &lt;/li&gt;
 &lt;li&gt;Nikola as the blog generator 
 &lt;/li&gt;
@@ -546,7 +664,11 @@ Requirements:
 &lt;/li&gt;
 &lt;li&gt;Insert below code into ~/.emacs
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defun org2nikola-after-hook-setup (title slug)
   (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
         (nikola-dir (file-truename "~/projs/nikola-root"))
@@ -577,64 +699,70 @@ Requirements:
 (add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Why&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Wordpress is slow to load web page
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Why&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Wordpress is slow to load web page
 &lt;/li&gt;
 &lt;li&gt;I waste too much time to "manage" Wordpress (applying security patch, fighting with spam comment …)
 &lt;/li&gt;
 &lt;li&gt;As a programmer, I need publish code snippets. Wordpress is &lt;b&gt;BAD&lt;/b&gt; at rendering code.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by &lt;a href="https://github.com/punchagan"&gt;Puneeth Chaganti&lt;/a&gt;'s excellent work on org2blog.
 &lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Technical Details&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3-1" class="outline-4"&gt;
-&lt;h5 id="sec-3-1"&gt;Generating HTML&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-3-1"&gt;
-
-&lt;p&gt;As I said, Nikola is my blog generator which converts my org file into HTML.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Technical Details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
+&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Generating HTML&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-1"&gt;
+&lt;p&gt;
+As I said, Nikola is my blog generator which converts my org file into HTML.
 &lt;/p&gt;
+
 &lt;p&gt;
 But I prefer using &lt;a href="http://orgmode.org/"&gt;Org-mode&lt;/a&gt; to do the HTML rendering. Nikola only need handle remaining minor book keeping stuff (creating RSS feed, for example).
 &lt;/p&gt;
+
 &lt;p&gt;
 It's because I want to minimize the dependency. I may switch to other blog generator in the future. But my web site always has the &lt;b&gt;same look and feel&lt;/b&gt; because the HTML is generated by Org-mode.
 &lt;/p&gt;
+
 &lt;p&gt;
 I learned this trick from Org2blog.
 &lt;/p&gt;
+
 &lt;p&gt;
 If we only use org-mode to create HTML, then extracting code snippet is really easy. All we need is to use regular expression to extract the content between HTML tag "&amp;lt;pre&amp;gt;".
 &lt;/p&gt;
+
 &lt;p&gt;
 Actually I don't even bother doing the extraction. I just replace all the "&amp;lt;pre&amp;gt;" tag with my own tag because I &lt;b&gt;assume&lt;/b&gt; the HTML produced by org-mode is stable.
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is the Emacs lisp code I borrowed from Org2blog:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
@@ -684,36 +812,38 @@ shamelessly copied from org2blog/wp-replace-pre()"
   html)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 The code snippet inside "&amp;lt;pre&amp;gt;" tag could be rendered by 3rd party javascript library &lt;a href="https://code.google.com/p/google-code-prettify/"&gt;google-code-prettify&lt;/a&gt; or &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/"&gt;SyntaxHighlighter&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3-2" class="outline-4"&gt;
-&lt;h5 id="sec-3-2"&gt;Create blog posts&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-3-2"&gt;
-
-&lt;p&gt;Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
+&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
+&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Create blog posts&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-2"&gt;
+&lt;p&gt;
+Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
 &lt;/p&gt;
+
 &lt;p&gt;
 Nikola's duty is simple. Basically it only copy my stuff from its input folder to its output folder when I trigger "nikola build" command.
 &lt;/p&gt;
+
 &lt;p&gt;
 The "nikola build" command will also dump the list of files to be uploaded into stdout.
 &lt;/p&gt;
+
 &lt;p&gt;
 The build message dumped:
 &lt;/p&gt;
-
-
-&lt;pre class="example"&gt;Scanning posts....done!
+&lt;pre class="example"&gt;
+Scanning posts....done!
 .  render_archive:output/2014/index.html
 .  render_sources:output/posts/jump-to-the-positions-before-and-after-m-x-imenu.wp
 .  render_posts:cache/posts/jump-to-the-positions-before-and-after-m-x-imenu.html
@@ -729,7 +859,6 @@ The build message dumped:
 .  render_tags:output/categories/en.xml
 &lt;/pre&gt;
 
-
 &lt;p&gt;
 Only the files in sub-folder "output" need be uploaded.
 &lt;/p&gt;
@@ -737,77 +866,81 @@ Only the files in sub-folder "output" need be uploaded.
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-3-3" class="outline-4"&gt;
-&lt;h5 id="sec-3-3"&gt;Preprocess nikola output&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-3-3"&gt;
-
-&lt;p&gt;It's all done by Emacs Lisp.
+&lt;div id="outline-container-sec-3-3" class="outline-3"&gt;
+&lt;h4 id="sec-3-3"&gt;&lt;span class="section-number-3"&gt;3.3&lt;/span&gt; Preprocess nikola output&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-3"&gt;
+&lt;p&gt;
+It's all done by Emacs Lisp.
 &lt;/p&gt;
+
 &lt;p&gt;
 The final output contain lines like:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;
 ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 As you can see, each line is a ftp upload command we need execute in shell.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-3-4" class="outline-4"&gt;
-&lt;h5 id="sec-3-4"&gt;FTP upload&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-3-4"&gt;
-
-&lt;p&gt;Ncftp is my choice of FTP client. It's solid and efficient.
+&lt;div id="outline-container-sec-3-4" class="outline-3"&gt;
+&lt;h4 id="sec-3-4"&gt;&lt;span class="section-number-3"&gt;3.4&lt;/span&gt; FTP upload&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3-4"&gt;
+&lt;p&gt;
+Ncftp is my choice of FTP client. It's solid and efficient.
 &lt;/p&gt;
 &lt;p&gt;
 Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is &lt;b&gt;extremely fast&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 I use Emacs Lisp API `file-truename` to convert all relative path to absolute path to avoid any platform (OSX) issue.
 &lt;/p&gt;
+
 &lt;p&gt;
 BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Summary&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;The workflow is simple.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+The workflow is simple.
 &lt;/p&gt;
 &lt;p&gt;
 Emacs and third party JS libraries are responsible for the look and feel of my website.
 &lt;/p&gt;
+
 &lt;p&gt;
 Blog generator like Nikola is just a thin layer to relay the HTML files created by Emacs.
 &lt;/p&gt;
+
 &lt;p&gt;
-Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.
-&lt;/p&gt;&lt;/div&gt;
+Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.&lt;/p&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ftp</category><guid>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</guid><pubDate>Sat, 15 Nov 2014 04:16:31 GMT</pubDate></item><item><title>Jump to the positions before and after `M-x imenu`</title><link>http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ftp</category><guid>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</guid><pubDate>Sat, 15 Nov 2014 04:16:31 GMT</pubDate></item><item><title>Jump to the positions before and after `M-x imenu`</title><link>http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Insert below code to ~/.emacs:
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Insert below code to ~/.emacs:
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (defvar rimenu-position-pair nil "positions before and after imenu jump")
@@ -832,26 +965,27 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
       )))
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Now you can use `M-x rimenu-jump` to jump.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Technical details&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
 &lt;/p&gt;
 &lt;p&gt;
 I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is the &lt;a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ"&gt;original discussion on G+&lt;/a&gt;. Thanks to &lt;a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts"&gt;Jorge A. Alfaro Murillo&lt;/a&gt; for enlightening me on the solution.
 &lt;/p&gt;
-&lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html</guid><pubDate>Sat, 15 Nov 2014 02:15:32 GMT</pubDate></item></channel></rss>
