@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (terminator)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/terminator.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Feb 2015 20:42:45 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (terminator)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/terminator.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 27 Feb 2015 16:14:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 It's becasue Emacs has great documentation and enough APIs.
 &lt;/p&gt;
 
@@ -11,15 +11,15 @@ The quality of documention is the best.
 &lt;/p&gt;
 
 &lt;p&gt;
-It even helps me on non-Emacs stuff.
+It helps me even on non-Emacs stuff.
 &lt;/p&gt;
 
 &lt;p&gt;
-When I set up the font for &lt;a href="http://en.wikipedia.org/wiki/Terminator_(terminal_emulator)"&gt;Terminator&lt;/a&gt; I found its manual is not clear. The manual says "An Pango font name" is required but doesn't explain what is "Pango font name".  After googling, I found the best documentation is Emacs manual which explains &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/GTK-Resource-Basics.html"&gt;Pango font name&lt;/a&gt; and lists &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html#Fonts"&gt;everything I need about Linux fonts&lt;/a&gt;.
+When configuring the font for &lt;a href="http://gnometerminator.blogspot.com/p/introduction.html"&gt;Terminator&lt;/a&gt; (a terminal emulator) I found its manual is NOT clear. The manual didn't explain what is "Pango font name". After googling, I found the Emacs manual which explained it and also provided related toolchain.
 &lt;/p&gt;
 
 &lt;p&gt;
-For example, "fc-list" is mentioned to list the installed fonts. I just type below command in shell:
+For example, "fc-list" is mentioned to list the installed fonts. Since terminal use Mono font, I can type below command:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -47,7 +47,7 @@ The output is like:
 &lt;/pre&gt;
 
 &lt;p&gt;
-Since Emacs manual explain the meaning of output, I know I need pick the font name "WenQuanYi Zen Hei Mono" which is key component of "Pango font name"
+Since Emacs manual explains the meaning of output, I know the font name "WenQuanYi Zen Hei Mono" is the key component of "Pango font name"
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -74,11 +74,10 @@ Because the manual also gives the details of other components of "Pango font nam
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; API&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-I create a &lt;a href="https://github.com/redguardtoo/find-by-pinyin-dired"&gt;new Emacs plugin&lt;/a&gt; which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the &lt;a href="http://www.gnu.org/software/findutils/"&gt;GNU find&lt;/a&gt; as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
+I create a new Emacs plugin which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
 &lt;/p&gt;
-
 &lt;p&gt;
-I know Emacs has enough APIs. I always can find &lt;b&gt;at least two APIs&lt;/b&gt; to do the same thing. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.&lt;/p&gt;
-&lt;/div&gt;
+Emacs has enough APIs for anything. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item></channel></rss>

@@ -1,7 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gmail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gmail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 31 Jan 2015 21:59:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Import Gmail contacts into BBDB</title><link>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Go to &lt;a href="http://contacts.google.com"&gt;http://contacts.google.com&lt;/a&gt;, click the menu "More&amp;gt;&amp;gt;Export…&amp;gt;&amp;gt;vCard format (blah, blah …)". &lt;/li&gt; &lt;li&gt;Click "Export" button. Download the contacts.vcf. &lt;/li&gt; &lt;li&gt;Make sure &lt;a href="https://github.com/trebb/bbdb-vcard"&gt;bbdb-vcard.el&lt;/a&gt; installed. &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-vcard-import-file" and input the full path of contacts.vcf &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-save" &lt;/li&gt; &lt;li&gt;Remove contacts whose names are empty. These are Google Plus people inserted automatically by Gmail: &lt;/li&gt; &lt;/ul&gt;&lt;p&gt;Run the command in shell: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;the orginal ~/.bbdb will be saved as ~/.bbdb.bak&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gmail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gmail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 27 Feb 2015 16:14:28 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Import Gmail contacts into BBDB</title><link>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;Go to &lt;a href="http://contacts.google.com"&gt;http://contacts.google.com&lt;/a&gt;, click the menu "More&amp;gt;&amp;gt;Export…&amp;gt;&amp;gt;vCard format (blah, blah …)". &lt;/li&gt; &lt;li&gt;Click "Export" button. Download the contacts.vcf. &lt;/li&gt; &lt;li&gt;Make sure &lt;a href="https://github.com/trebb/bbdb-vcard"&gt;bbdb-vcard.el&lt;/a&gt; installed. &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-vcard-import-file" and input the full path of contacts.vcf &lt;/li&gt; &lt;li&gt;In Emacs run "M-x bbdb-save" &lt;/li&gt; &lt;li&gt;Remove contacts whose names are empty. These are Google Plus people inserted automatically by Gmail: &lt;/li&gt; &lt;/ul&gt;  &lt;p&gt;Run the command in shell: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;the orginal ~/.bbdb will be saved as ~/.bbdb.bak&lt;/span&gt;
 sed -i.bak &lt;span style="color: #70c0b1;"&gt;'/["" ""/d'&lt;/span&gt; ~/.bbdb
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>bbdb</category><category>emacs</category><category>en</category><category>gmail</category><category>google</category><guid>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</guid><pubDate>Sat, 26 Jan 2013 11:56:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Author: Chen Bin (redguardtoo)
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>bbdb</category><category>emacs</category><category>en</category><category>gmail</category><category>google</category><guid>http://blog.binchen.org/posts/import-gmail-contacts-into-bbdb.html</guid><pubDate>Sat, 26 Jan 2013 11:56:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="table-of-contents"&gt;
+&lt;h3&gt;Table of Contents&lt;/h3&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-1"&gt;1. Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-2"&gt;2. Why Gnus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-3"&gt;3. A quick guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4"&gt;4. Essentail 5 percent of Gnus&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-1"&gt;4.1. Search emails&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-2"&gt;4.2. Subscribe group (email folder)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-3"&gt;4.3. Reply email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-4"&gt;4.4. Compose new email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-5"&gt;4.5. Attach a file&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-6"&gt;4.6. Download attachment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-7"&gt;4.7. Send email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-8"&gt;4.8. Refresh "Summary Buffer" in Gnus (check new emails)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-9"&gt;4.9. Make ALL emails in "Summary Buffer" visible (IMPORTANT)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-10"&gt;4.10. Forward mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-11"&gt;4.11. Mark emails read&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-12"&gt;4.12. Auto complete email address when composing email&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5"&gt;5. Advanced tips&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-1"&gt;5.1. How to auto-complete email address&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-2"&gt;5.2. How to synchronize the Gmail contacts into BBDB's database&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-3"&gt;5.3. How to set up email "From" field for home and office&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-4"&gt;5.4. How to tag email&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-5"&gt;5.5. How to send HTML mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-6"&gt;5.6. How to read HTML mail&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-7"&gt;5.7. How to read email offline&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-8"&gt;5.8. How to use multiple Gmail accounts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-6"&gt;6. My Gnus configuration (for Gmail)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Author: Chen Bin (redguardtoo)
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -9,11 +50,11 @@ Version: 20140809
 &lt;/p&gt;
 
 &lt;p&gt;
-Updated: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-08-09 Sat&lt;/span&gt;&lt;/span&gt;
+Updated:  &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-08-09 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Created: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2012-10-12 Mon&lt;/span&gt;&lt;/span&gt;
+Created: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2012-10-12 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -24,49 +65,17 @@ Copyright: This work is licensed under the &lt;a href="http://creativecommons.or
 Note: This article is maintained at &lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide"&gt;https://github.com/redguardtoo/mastering-emacs-in-one-year-guide&lt;/a&gt;. Please send me your feedback at github's issue tracker.
 &lt;/p&gt;
 
-&lt;div id="table-of-contents"&gt;
-&lt;h3&gt;Table of Contents&lt;/h3&gt;
-&lt;div id="text-table-of-contents"&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-1"&gt;1 Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-2"&gt;2 Why Gnus&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-3"&gt;3 A quick guide&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4"&gt;4 Essentail 5 percent of Gnus&lt;/a&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-1"&gt;4.1 Search emails&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-2"&gt;4.2 Subscribe group (email folder)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-3"&gt;4.3 Reply email&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-4"&gt;4.4 Compose new email&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-5"&gt;4.5 Attach a file&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-6"&gt;4.6 Download attachment&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-7"&gt;4.7 Send email&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-8"&gt;4.8 Refresh "Summary Buffer" in Gnus (check new emails)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-9"&gt;4.9 Make ALL emails in "Summary Buffer" visible (IMPORTANT)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-10"&gt;4.10 Forward mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-11"&gt;4.11 Mark emails read&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-4-12"&gt;4.12 Auto complete email address when composing email&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5"&gt;5 Advanced tips&lt;/a&gt;
-&lt;ul&gt;&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-1"&gt;5.1 How to auto-complete email address&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-2"&gt;5.2 How to synchronize the Gmail contacts into BBDB's database&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-3"&gt;5.3 How to set up email "From" field for home and office&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-4"&gt;5.4 How to tag email&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-5"&gt;5.5 How to send HTML mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-6"&gt;5.6 How to read HTML mail&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-7"&gt;5.7 How to read email offline&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-5-8"&gt;5.8 How to use multiple Gmail accounts&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-6"&gt;6 My Gnus configuration (for Gmail)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Introduction&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Gnus is a good email client. Sometimes I find it's more user friendly than Gmail's own UI.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Introduction&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Gnus is a good email client. Sometimes I find it's more user friendly than Gmail's own UI.
 &lt;/p&gt;
+
 &lt;p&gt;
 Many people complain that Gnus is hard. I don't agree with them. It's easy to use if you know how to &lt;b&gt;locate the essential 5% features and ignore the other 95%&lt;/b&gt;..
 &lt;/p&gt;
+
 &lt;p&gt;
 So here is my guide. It will help you focus on that useful 5% features only.
 &lt;/p&gt;
@@ -74,11 +83,11 @@ So here is my guide. It will help you focus on that useful 5% features only.
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Why Gnus&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;less hardware resource required
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Why Gnus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;less hardware resource required
 &lt;/li&gt;
 &lt;li&gt;email search and filter is good
 &lt;/li&gt;
@@ -86,35 +95,40 @@ So here is my guide. It will help you focus on that useful 5% features only.
 &lt;/li&gt;
 &lt;li&gt;support different environments. For example, if I want to see html email in Linux shell without X windows, Gnus can do it.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;A quick guide&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;In the rest of the article,  "C" means "Ctrl"" key and "M" means "Alt"" key. For example, "M-x" means pressing "Alt" and "x" key together.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; A quick guide&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+In the rest of the article,  "C" means "Ctrl"" key and "M" means "Alt"" key. For example, "M-x" means pressing "Alt" and "x" key together.
 &lt;/p&gt;
+
 &lt;p&gt;
 See &lt;a href="http://www.emacswiki.org/emacs/GnusGmail"&gt;http://www.emacswiki.org/emacs/GnusGmail&lt;/a&gt; on setting up Gnus for Gmail. You can also copy my Gmail setting at the end of this article.
 &lt;/p&gt;
 
+
 &lt;p&gt;
 In order to start Gnus, you need run command "M-x gnus".
 &lt;/p&gt;
+
 &lt;p&gt;
 If the Gnus properly set up, you will come to the "Group Buffer" window. The "Group Buffer" lists the email folders. In Gnus, the folder is named "Group". By default, the groups (email folders) are &lt;b&gt;invisible&lt;/b&gt;!
 &lt;/p&gt;
+
 &lt;p&gt;
 You need subscribe the groups to make it visible. For example, my Gmail folder "Inbox" is a group named "nnimap+gmail:INBOX" in "Group Buffer" and &lt;b&gt;it's invisible by default&lt;/b&gt;!. If I don't subscribe that group, I can't read email in my INBOX. I know this is confusing. But this is the way of Gnus.
 &lt;/p&gt;
+
 &lt;p&gt;
 Check section "Subscribe groups" for details.
 After subscribing the group INBOX, the INBOX could still be &lt;b&gt;invisible&lt;/b&gt; if INBOX does not contain unread emails. That makes no sense for an email client (It does make sense for a stone age news reader)! Anyway, the solution is simple, `C-u 5 gnus-group-list-all-groups` will get desired result. I assigned hotkey "o" to it. Here is my elisp code you could paste into your .emacs. See the &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Listing-Groups.html"&gt;Gnus Manual on Listing Groups&lt;/a&gt; for more details.
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
@@ -129,77 +143,88 @@ After subscribing the group INBOX, the INBOX could still be &lt;b&gt;invisible&l
            )
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 In the "Group Buffer", you can select a group (email folder) by pressing "RET" to check emails in that folder. But I strongly suggest pressing "C-u RET" instead because your true intention is to see ALL the emails instead of the emails filtered by "smart" Gnus.
 &lt;/p&gt;
+
 &lt;p&gt;
 After selecting a group and pressing "RET", you reach the "Summary Buffer" which is, as I said before, a list of your emails.
 &lt;/p&gt;
+
 &lt;p&gt;
 Now everything is simple, you can press "RET" to see the email and use normail Emacs hotkeys for navigation. Hotkey "q" is for quitting "Summary Buffer".
 &lt;/p&gt;
+
 &lt;p&gt;
 In summary, you only need remember "Group Buffer" is the list of mail folders and "Summary Buffer" is the list of mails.
 &lt;/p&gt;
+
 &lt;p&gt;
-That's all you need to know about Gnus. If you want to start use Gnus for Gmail right now. Please check section &lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-6"&gt;My Gnus configuration (for Gmail)&lt;/a&gt; and copy my minimum set up for Gmail.
-&lt;/p&gt;&lt;/div&gt;
+That's all you need to know about Gnus. If you want to start use Gnus for Gmail right now. Please check section &lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html#sec-6"&gt;6&lt;/a&gt; and copy my minimum set up for Gmail.
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Essentail 5 percent of Gnus&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;Don't try to memorize all the key bindings here. Pick up the commands you actually use only.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Essentail 5 percent of Gnus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+Don't try to memorize all the key bindings here. Pick up the commands you actually use only.
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-1" class="outline-4"&gt;
-&lt;h5 id="sec-4-1"&gt;Search emails&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-1"&gt;
-
-&lt;p&gt;"G G" to search email at &lt;b&gt;server side&lt;/b&gt; in "Group Buffer". You can use "#" ("M-#" to unmark)to mark the group you want to search. If you don't mark the groups, the curent group under cursor is searched. If you put the cursor at the first line above any group, all the groups will be searched. You could use &lt;a href="http://tools.ietf.org/html/rfc3501#section-6.4.4"&gt;more advanced syntax&lt;/a&gt; instead of simple keyword. I suggest not doing so.
+&lt;div id="outline-container-sec-4-1" class="outline-3"&gt;
+&lt;h4 id="sec-4-1"&gt;&lt;span class="section-number-3"&gt;4.1&lt;/span&gt; Search emails&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-1"&gt;
+&lt;p&gt;
+"G G" to search email at &lt;b&gt;server side&lt;/b&gt; in "Group Buffer". You can use "#" ("M-#" to unmark)to mark the group you want to search. If you don't mark the groups, the curent group under cursor is searched. If you put the cursor at the first line above any group, all the groups will be searched. You could use &lt;a href="http://tools.ietf.org/html/rfc3501#section-6.4.4"&gt;more advanced syntax&lt;/a&gt; instead of simple keyword. I suggest not doing so.
 &lt;/p&gt;
 &lt;p&gt;
 "/ /" to limit the emails by subject at "Summary Buffer". "Limiting" is means searching mail &lt;b&gt;locally&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 "/ a" to limit the emails by author at "Summary Buffer".
 &lt;/p&gt;
+
 &lt;p&gt;
 "/ w" to cancel the current filter.
 &lt;/p&gt;
+
 &lt;p&gt;
 You can apply the limits sequentially and cancel them one by one using "/ w"
 &lt;/p&gt;
+
 &lt;p&gt;
 BTW, I love "Limiting" in Gnus. See &lt;a href="http://www.gnu.org/software/emacs/manual/html_mono/gnus.html#Limiting"&gt;http://www.gnu.org/software/emacs/manual/html_mono/gnus.html#Limiting&lt;/a&gt; for more limiting tricks.
 &lt;/p&gt;
+
 &lt;p&gt;
 See &lt;a href="http://sachachua.com/blog/2008/05/emacs-gnus-searching-mail/"&gt;http://sachachua.com/blog/2008/05/emacs-gnus-searching-mail/&lt;/a&gt; for details.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-4-2" class="outline-4"&gt;
-&lt;h5 id="sec-4-2"&gt;Subscribe group (email folder)&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-2"&gt;
-
-&lt;p&gt;"A A" in "Group Buffer" to list all groups on all the connected server. It may take a while. I suggest pressing "L" to avoid querying data from all the servers if possible.
+&lt;div id="outline-container-sec-4-2" class="outline-3"&gt;
+&lt;h4 id="sec-4-2"&gt;&lt;span class="section-number-3"&gt;4.2&lt;/span&gt; Subscribe group (email folder)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-2"&gt;
+&lt;p&gt;
+"A A" in "Group Buffer" to list all groups on all the connected server. It may take a while. I suggest pressing "L" to avoid querying data from all the servers if possible.
 &lt;/p&gt;
+
 &lt;p&gt;
 After getting the list of all subscribed/unsubscribed groups, press "u" to subscribe/unsubscribe specific group.
 &lt;/p&gt;
+
 &lt;p&gt;
 I repeat, in order to see the emails in "INBOX" folder/group, you need &lt;b&gt;MANUALLY&lt;/b&gt; subscribe the group "INBOX"!
 &lt;/p&gt;
+
 &lt;p&gt;
 "l" to navigate back the default view of group buffer which you may find confusing, as I mentioned before. Press "o" is much better if you uses my elisp code to show all the subscribed groups.
 &lt;/p&gt;
+
 &lt;p&gt;
 "g" to refresh groups list.
 &lt;/p&gt;
@@ -207,116 +232,114 @@ I repeat, in order to see the emails in "INBOX" folder/group, you need &lt;b&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-4-3" class="outline-4"&gt;
-&lt;h5 id="sec-4-3"&gt;Reply email&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-3"&gt;
-
-&lt;p&gt;"R" to reply with quoted text. "r" to reply without quoted.
+&lt;div id="outline-container-sec-4-3" class="outline-3"&gt;
+&lt;h4 id="sec-4-3"&gt;&lt;span class="section-number-3"&gt;4.3&lt;/span&gt; Reply email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-3"&gt;
+&lt;p&gt;
+"R" to reply with quoted text. "r" to reply without quoted.
 &lt;/p&gt;
+
 &lt;p&gt;
 "S W" (press S then press W) to reply all (It's named "wide reply" in Emacs) with quoted text. "S w" to reply all without quoted.
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-4-4" class="outline-4"&gt;
-&lt;h5 id="sec-4-4"&gt;Compose new email&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-4"&gt;
-
-&lt;p&gt;The hot key is "a" or "m" in "Summary Buffer".
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-4-4" class="outline-3"&gt;
+&lt;h4 id="sec-4-4"&gt;&lt;span class="section-number-3"&gt;4.4&lt;/span&gt; Compose new email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-4"&gt;
+&lt;p&gt;
+The hot key is "a" or "m" in "Summary Buffer".
 &lt;/p&gt;
 &lt;p&gt;
 BTW, you don't need open Gnus to compose a mail. You can type "C-x m" anywhere in Emacs.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-5" class="outline-4"&gt;
-&lt;h5 id="sec-4-5"&gt;Attach a file&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-5"&gt;
-
-&lt;p&gt;The hot key is "C-c C-a"
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;div id="outline-container-sec-4-5" class="outline-3"&gt;
+&lt;h4 id="sec-4-5"&gt;&lt;span class="section-number-3"&gt;4.5&lt;/span&gt; Attach a file&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-5"&gt;
+&lt;p&gt;
+The hot key is "C-c C-a"
+&lt;/p&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-6" class="outline-4"&gt;
-&lt;h5 id="sec-4-6"&gt;Download attachment&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-6"&gt;
-
-&lt;p&gt;The hot key is "o". See "&lt;a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Using-MIME.html"&gt;Using Mime&lt;/a&gt;" in Emacs manual for details.
-&lt;/p&gt;&lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-7" class="outline-4"&gt;
-&lt;h5 id="sec-4-7"&gt;Send email&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-7"&gt;
-
-&lt;p&gt;"C-c C-c".
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;div id="outline-container-sec-4-6" class="outline-3"&gt;
+&lt;h4 id="sec-4-6"&gt;&lt;span class="section-number-3"&gt;4.6&lt;/span&gt; Download attachment&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-6"&gt;
+&lt;p&gt;
+The hot key is "o". See "&lt;a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Using-MIME.html"&gt;Using Mime&lt;/a&gt;" in Emacs manual for details.
+&lt;/p&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-8" class="outline-4"&gt;
-&lt;h5 id="sec-4-8"&gt;Refresh "Summary Buffer" in Gnus (check new emails)&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-8"&gt;
-
-&lt;p&gt;Hot key "/ N" or command "M-x gnus-summary-insert-new-articles"
-&lt;/p&gt;&lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-9" class="outline-4"&gt;
-&lt;h5 id="sec-4-9"&gt;Make ALL emails in "Summary Buffer" visible (IMPORTANT)&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-9"&gt;
-
-&lt;p&gt;"C-u RET" on the selected group (email folder) in "Group Buffer", or "C-u M-g" in "Summary Buffer".
+&lt;div id="outline-container-sec-4-7" class="outline-3"&gt;
+&lt;h4 id="sec-4-7"&gt;&lt;span class="section-number-3"&gt;4.7&lt;/span&gt; Send email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-7"&gt;
+&lt;p&gt;
+"C-c C-c".
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4-8" class="outline-3"&gt;
+&lt;h4 id="sec-4-8"&gt;&lt;span class="section-number-3"&gt;4.8&lt;/span&gt; Refresh "Summary Buffer" in Gnus (check new emails)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-8"&gt;
+&lt;p&gt;
+Hot key "/ N" or command "M-x gnus-summary-insert-new-articles"
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4-9" class="outline-3"&gt;
+&lt;h4 id="sec-4-9"&gt;&lt;span class="section-number-3"&gt;4.9&lt;/span&gt; Make ALL emails in "Summary Buffer" visible (IMPORTANT)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-9"&gt;
+&lt;p&gt;
+"C-u RET" on the selected group (email folder) in "Group Buffer", or "C-u M-g" in "Summary Buffer".
 &lt;/p&gt;
 &lt;p&gt;
 That's the most important part of this article! Gnus only display unread emails. Kind of stupid for an email client. Say my client call me to discuss his proposal in his old emails. I open my Gnus but client's emails are invisible in "Summary Buffer" because they are marked expired by Gnus. Can I ask my client hang on for five minutes because I cannot find the emails he sent?
 &lt;/p&gt;
+
 &lt;p&gt;
 Check &lt;a href="http://stackoverflow.com/questions/4982831/i-dont-want-to-expire-mail-in-gnus"&gt;http://stackoverflow.com/questions/4982831/i-dont-want-to-expire-mail-in-gnus&lt;/a&gt; for the details.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-10" class="outline-4"&gt;
-&lt;h5 id="sec-4-10"&gt;Forward mail&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-10"&gt;
-
-&lt;p&gt;"C-c C-f" or "M-x gnus-summary-mail-forward" in "Summary Buffer".
+&lt;div id="outline-container-sec-4-10" class="outline-3"&gt;
+&lt;h4 id="sec-4-10"&gt;&lt;span class="section-number-3"&gt;4.10&lt;/span&gt; Forward mail&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-10"&gt;
+&lt;p&gt;
+"C-c C-f" or "M-x gnus-summary-mail-forward" in "Summary Buffer".
 &lt;/p&gt;
 &lt;p&gt;
 BTW, you can mark several emails you want to forward (hot key is "#") and then forward them all at once (&lt;a href="https://plus.google.com/112423173565156165016/posts"&gt;Holger Schauer&lt;/a&gt; provided this tip).
 &lt;/p&gt;
+
 &lt;p&gt;
 After the forwarded email is created, you may copy the body of that email without sending it. The copied content could be inserted into any other email.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-11" class="outline-4"&gt;
-&lt;h5 id="sec-4-11"&gt;Mark emails read&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-11"&gt;
-
-&lt;p&gt;Press "c" is enough. Either in summary buffer or group buffer. &lt;b&gt;This is the most useful Gnus command because Gmail sucks&lt;/b&gt;.
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;div id="outline-container-sec-4-11" class="outline-3"&gt;
+&lt;h4 id="sec-4-11"&gt;&lt;span class="section-number-3"&gt;4.11&lt;/span&gt; Mark emails read&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-11"&gt;
+&lt;p&gt;
+Press "c" is enough. Either in summary buffer or group buffer. &lt;b&gt;This is the most useful Gnus command because Gmail sucks&lt;/b&gt;.
+&lt;/p&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4-12" class="outline-4"&gt;
-&lt;h5 id="sec-4-12"&gt;Auto complete email address when composing email&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-4-12"&gt;
-
-&lt;p&gt;I use &lt;a href="http://www.emacswiki.org/emacs/CategoryBbdb"&gt;BBDB&lt;/a&gt;. The only command from BBDB I use is bbdb-complete-name.
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4-12" class="outline-3"&gt;
+&lt;h4 id="sec-4-12"&gt;&lt;span class="section-number-3"&gt;4.12&lt;/span&gt; Auto complete email address when composing email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4-12"&gt;
+&lt;p&gt;
+I use &lt;a href="http://www.emacswiki.org/emacs/CategoryBbdb"&gt;BBDB&lt;/a&gt;. The only command from BBDB I use is bbdb-complete-name.
 &lt;/p&gt;
 &lt;p&gt;
 I assign TAB key to this command,
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (add-hook 'message-mode-hook
@@ -324,30 +347,25 @@ I assign TAB key to this command,
              (local-set-key "&amp;lt;TAB&amp;gt;" 'bbdb-complete-name)))
 &lt;/code&gt;&lt;/pre&gt;
 
-
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-5" class="outline-3"&gt;
-&lt;h4 id="sec-5"&gt;Advanced tips&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-5"&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-5-1" class="outline-4"&gt;
-&lt;h5 id="sec-5-1"&gt;How to auto-complete email address&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-1"&gt;
-
-&lt;p&gt;You need install &lt;a href="http://bbdb.sourceforge.net/"&gt;BBDB&lt;/a&gt; which is a database to store email address. I recommend installing it through &lt;a href="http://melpa.milkbox.net/#/bbdb"&gt;melpa&lt;/a&gt;.
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Advanced tips&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-5-1" class="outline-3"&gt;
+&lt;h4 id="sec-5-1"&gt;&lt;span class="section-number-3"&gt;5.1&lt;/span&gt; How to auto-complete email address&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-1"&gt;
+&lt;p&gt;
+You need install &lt;a href="http://bbdb.sourceforge.net/"&gt;BBDB&lt;/a&gt; which is a database to store email address. I recommend installing it through &lt;a href="http://melpa.milkbox.net/#/bbdb"&gt;melpa&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 Then insert below code into ~/.emacs,
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
@@ -358,24 +376,26 @@ Then insert below code into ~/.emacs,
              (local-set-key "&amp;lt;TAB&amp;gt;" 'bbdb-complete-name)))
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 You can also install &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt; which requires no setup at all.
 &lt;/p&gt;
+
 &lt;p&gt;
 I use both "bbdb-complete-name" and company-mode.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-5-2" class="outline-4"&gt;
-&lt;h5 id="sec-5-2"&gt;How to synchronize the Gmail contacts into BBDB's database&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-2"&gt;
-
-&lt;p&gt;Here are the steps,
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Go to &lt;a href="https://contacts.google.com"&gt;https://contacts.google.com&lt;/a&gt;
+&lt;div id="outline-container-sec-5-2" class="outline-3"&gt;
+&lt;h4 id="sec-5-2"&gt;&lt;span class="section-number-3"&gt;5.2&lt;/span&gt; How to synchronize the Gmail contacts into BBDB's database&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-2"&gt;
+&lt;p&gt;
+Here are the steps,
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Go to &lt;a href="https://contacts.google.com"&gt;https://contacts.google.com&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;Click "More -&amp;gt; Export -&amp;gt; vCard Format -&amp;gt; Export".
 &lt;/li&gt;
@@ -383,29 +403,33 @@ I use both "bbdb-complete-name" and company-mode.
 &lt;/li&gt;
 &lt;li&gt;Move ~/.bbdb.el into ~/.emacs.d/.bbdb, The file ".bbdb" is defined in variable bbdb-file
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 There are other plugins which can do the similar thing. But they are dependent on certain version of BBDB. So if you install in-compatible version of BBDB, they won't work.
 &lt;/p&gt;
+
 &lt;p&gt;
 gmail2bbdb has no dependency.
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-5-3" class="outline-4"&gt;
-&lt;h5 id="sec-5-3"&gt;How to set up email "From" field for home and office&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-3"&gt;
-
-&lt;p&gt;What I want to do is, if I send emails from office "From" will be my company's email address. But in the email sent from my home pc, the "From" is my personal address.
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-5-3" class="outline-3"&gt;
+&lt;h4 id="sec-5-3"&gt;&lt;span class="section-number-3"&gt;5.3&lt;/span&gt; How to set up email "From" field for home and office&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-3"&gt;
+&lt;p&gt;
+What I want to do is, if I send emails from office "From" will be my company's email address. But in the email sent from my home pc, the "From" is my personal address.
 &lt;/p&gt;
 &lt;p&gt;
 My solution is use $HOSTNAME to detect which computer I am using.
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is the code to be inserted into ~/.emacs:
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
@@ -430,11 +454,14 @@ Here is the code to be inserted into ~/.emacs:
       )
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Key points:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;$HOSTNAME is &lt;b&gt;not&lt;/b&gt; an environment variable.
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;$HOSTNAME is &lt;b&gt;not&lt;/b&gt; an environment variable.
 &lt;/li&gt;
 &lt;li&gt;I grab the output of command line program "hostname" instead using elisp function `(system-name)` which get wrong hostname at my office pc
 &lt;/li&gt;
@@ -444,96 +471,100 @@ Key points:
 &lt;/li&gt;
 &lt;li&gt;You need &lt;a href="http://support.google.com/a/bin/answer.py?hl=en&amp;amp;answer=22370"&gt;verify&lt;/a&gt; your email address in "From" field at Gmail's web interface if you are using google's SMTP server
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-5-4" class="outline-4"&gt;
-&lt;h5 id="sec-5-4"&gt;How to tag email&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-4"&gt;
-
-&lt;p&gt;Gmail's own system annoys me. I use a third party software &lt;a href="http://getpopfile.org/"&gt;Popfile&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-5-5" class="outline-4"&gt;
-&lt;h5 id="sec-5-5"&gt;How to send HTML mail&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-5"&gt;
-
-&lt;p&gt;Check &lt;a href="http://orgmode.org/worg/org-contrib/org-mime.html"&gt;org-mime&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-5-6" class="outline-4"&gt;
-&lt;h5 id="sec-5-6"&gt;How to read HTML mail&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-6"&gt;
-
-&lt;p&gt;You need install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and a Emacs plugin &lt;a href="http://www.emacswiki.org/emacs/emacs-w3m"&gt;emacs-w3m&lt;/a&gt;.
+&lt;div id="outline-container-sec-5-4" class="outline-3"&gt;
+&lt;h4 id="sec-5-4"&gt;&lt;span class="section-number-3"&gt;5.4&lt;/span&gt; How to tag email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-4"&gt;
+&lt;p&gt;
+Gmail's own system annoys me. I use a third party software &lt;a href="http://getpopfile.org/"&gt;Popfile&lt;/a&gt;.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-5-5" class="outline-3"&gt;
+&lt;h4 id="sec-5-5"&gt;&lt;span class="section-number-3"&gt;5.5&lt;/span&gt; How to send HTML mail&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-5"&gt;
+&lt;p&gt;
+Check &lt;a href="http://orgmode.org/worg/org-contrib/org-mime.html"&gt;org-mime&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-5-6" class="outline-3"&gt;
+&lt;h4 id="sec-5-6"&gt;&lt;span class="section-number-3"&gt;5.6&lt;/span&gt; How to read HTML mail&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-6"&gt;
+&lt;p&gt;
+You need install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and a Emacs plugin &lt;a href="http://www.emacswiki.org/emacs/emacs-w3m"&gt;emacs-w3m&lt;/a&gt;.
+&lt;/p&gt;
+
 &lt;p&gt;
 Then insert below code into ~/.emacs,
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (setq mm-text-html-renderer 'w3m)
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-5-7" class="outline-4"&gt;
-&lt;h5 id="sec-5-7"&gt;How to read email offline&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-7"&gt;
-
-&lt;p&gt;Go to the "Summary Buffer". "Summary Buffer" list the emails in one email folder.
+&lt;div id="outline-container-sec-5-7" class="outline-3"&gt;
+&lt;h4 id="sec-5-7"&gt;&lt;span class="section-number-3"&gt;5.7&lt;/span&gt; How to read email offline&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-7"&gt;
+&lt;p&gt;
+Go to the "Summary Buffer". "Summary Buffer" list the emails in one email folder.
 &lt;/p&gt;
 &lt;p&gt;
 You need mark the emails you want to read offline by "M-x gnus-summary-tick-article-forward".
 &lt;/p&gt;
+
 &lt;p&gt;
 The marked article will enter the disk cache.
 &lt;/p&gt;
+
 &lt;p&gt;
 You can remove the article from the disk cache by "M-x gnus-summary-put-mark-as-read".
 &lt;/p&gt;
+
 &lt;p&gt;
 The disk cache is actually the directory "~/News/cache/". I suggest backing up it with Github's private repository.
 &lt;/p&gt;
+
 &lt;p&gt;
 You also need insert below code into ~/.emacs,
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (setq gnus-use-cache t)
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-5-8" class="outline-4"&gt;
-&lt;h5 id="sec-5-8"&gt;How to use multiple Gmail accounts&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-5-8"&gt;
-
-&lt;p&gt;As you can see from my Gmail configuration.
+&lt;div id="outline-container-sec-5-8" class="outline-3"&gt;
+&lt;h4 id="sec-5-8"&gt;&lt;span class="section-number-3"&gt;5.8&lt;/span&gt; How to use multiple Gmail accounts&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5-8"&gt;
+&lt;p&gt;
+As you can see from my Gmail configuration.
 &lt;/p&gt;
 &lt;p&gt;
 You only need copy the code containing "gnus-secondary-select-methods" from my configuration and rename some line,
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is a sample,
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 (add-to-list 'gnus-secondary-select-methods
@@ -550,25 +581,22 @@ Here is a sample,
                       ))
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 "gnus-secondary-select-methods" means the list of your email accounts.
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-6" class="outline-3"&gt;
-&lt;h4 id="sec-6"&gt;My Gnus configuration (for Gmail)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-6"&gt;
-
-&lt;p&gt;The ~/.gnus.el
 &lt;/p&gt;
 
-
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; My Gnus configuration (for Gmail)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+The ~/.gnus.el
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
 ; -*- Lisp -*-
 (require 'nnir)
@@ -720,23 +748,24 @@ Here is a sample,
 (gnus-compile)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 The ~/.authinfo.gpg
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;
 machine imap.gmail.com login username@gmail.com password my-secret-password port 993
 machine smtp.gmail.com login username@gmail.com password my-secret-password port 587
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Please note .authinfo.gpg is a encrypted file. You must use Emacs to edit it. Emacs will do the encryption/descryption automatically. See &lt;a href="http://emacswiki.org/emacs/EasyPG"&gt;http://emacswiki.org/emacs/EasyPG&lt;/a&gt; for technical details.
-&lt;/p&gt;&lt;/div&gt;
+&lt;/p&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/notes-on-using-gnus.html</guid><pubDate>Fri, 12 Oct 2012 17:14:00 GMT</pubDate></item></channel></rss>

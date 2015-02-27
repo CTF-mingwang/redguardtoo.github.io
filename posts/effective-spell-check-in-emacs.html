@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Effective spell check in Emacs | Chen's blog</title>
-<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Effective spell check in Emacs | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+<link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -23,34 +35,49 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-<meta name="author" content="Chen Bin">
-<meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Effective spell check in Emacs">
-<meta property="og:url" content="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
-<meta property="og:description" content="I will use spell check for html as an example. But the solution also works for other languages.
 
 
 
-Table of Contents
+    
 
-1 Smart spell check in HTML
-2 Spell check the camel case strings
-3 Summary
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Effective spell check in Emacs">
+    <meta property="og:url" content="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
+    <meta property="og:description" content="Table of Contents
+
+
+1. Smart spell check in HTML
+2. Spell check the camel case strings
+3. Summary
 
 
 
 
-Sma">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2014-01-21T12:00:00+00:00">
-<meta property="article:tag" content="emacs">
-<meta property="article:tag" content="en">
-<meta property="article:tag" content="linux">
-<meta property="article:tag" content="spell">
+
+I will use spell check for html as an example. But the solution also works for other languages.
+
+">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2014-01-21T12:00:00+00:00">
+           <meta property="article:tag" content="emacs">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="linux">
+           <meta property="article:tag" content="spell">
+
+    
+
+    
+
+
+
 </head>
 <body>
-    <section class="social"><ul>
-<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -58,7 +85,10 @@ Sma">
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
             
     <div class="post">
     
@@ -83,53 +113,60 @@ Sma">
            <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
            <li><a class="tag p-category" href="../categories/spell.html" rel="tag">spell</a></li>
         </ul>
-</div>
+        </div>
 
         </div>
         <div class="body">
             <div>
-<p>I will use spell check for html as an example. But the solution also works for other languages.
-</p>
-
 <div id="table-of-contents">
 <h3>Table of Contents</h3>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="effective-spell-check-in-emacs.html#sec-1">1 Smart spell check in HTML</a></li>
-<li><a href="effective-spell-check-in-emacs.html#sec-2">2 Spell check the camel case strings</a></li>
-<li><a href="effective-spell-check-in-emacs.html#sec-3">3 Summary</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-1">1. Smart spell check in HTML</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-2">2. Spell check the camel case strings</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-3">3. Summary</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Smart spell check in HTML</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>These days I'm maintaining some legacy web application.
+<p>
+I will use spell check for html as an example. But the solution also works for other languages.
 </p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Smart spell check in HTML</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+These days I'm maintaining some legacy web application.
+</p>
+
 <p>
 My customer is very serious about the content displayed because it's used by many people. For example, any wording change will be reviewed by team from legal team, business team and QA team. Any typo will bring me much paper work in this flow.
 </p>
+
 <p>
 Certainly I can use <a href="http://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> to do the spell check thing.
 </p>
+
 <p>
 But a html file contains many html tags, spell-check everything is even worse than no spell check.
 </p>
+
 <p>
 The key point is make spell checker smarter:
 </p>
-<ul>
+<ul class="org-ul">
 <li>only check text between html tag like `&lt;label&gt;Please input email&lt;/label&gt;`
 </li>
 <li>only check the value of html input control like `&lt;input type="text" value="Please input your name"&gt;`
 </li>
 </ul>
+
 <p>
 Paste below code into ~/.emacs:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -169,31 +206,35 @@ Paste below code into ~/.emacs:
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspell-verify)
 </code></pre>
 
-
+</div>
 
 <p>
 I use <a href="http://web-mode.org/">web-mode</a> for html file editing. But you can figure out similar solution for other major modes.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Spell check the camel case strings</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>Another issue is that we use camel case naming convention. The variable name is usually very long. For example, name like "moduleServiceControllerLoginManager" is below average length.
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Spell check the camel case strings</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+Another issue is that we use camel case naming convention. The variable name is usually very long. For example, name like "moduleServiceControllerLoginManager" is below average length.
 </p>
+
 <p>
 I need Emacs to spell check the each word from the camel case string.
 </p>
+
 <p>
 The solution is let Emacs use <a href="http://aspell.net/">aspell</a> with some extra arguments.
 </p>
+
 <p>
 Please paste below code into ~/.emacs,
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">
@@ -209,33 +250,40 @@ Please paste below code into ~/.emacs,
       ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 </code></pre>
 
-
+</div>
 
 <p>
 Please note the option "–run-together-min=2" means the minimum length of <b>each word</b> extracted from camel case string is two. Please `man aspell` for details.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Summary</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>If you read <a href="http://www.emacswiki.org/emacs/FlySpell">Emacs wiki on fly spell</a>, you may find code like `(flyspell-prog-mode)` is suggested for most programming environment.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Summary</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+If you read <a href="http://www.emacswiki.org/emacs/FlySpell">Emacs wiki on fly spell</a>, you may find code like `(flyspell-prog-mode)` is suggested for most programming environment.
 </p>
+
 <p>
 But as I proved in above two examples, I can <b>do more</b> than simply copy code from internet, if I can spend some time to read code and manual.
 </p>
+
 <p>
 When I say "read code", I mean read the official elisp code bundled with emacs. For example, after "M-x describe ENTER flyspell-buffer ENTER", I realized that the strength of fly spell is its powerful APIs. Common setup around the internet only use small percentage of its power.
 </p>
+
 <p>
 "Read manual" means reading official manual. For example, Emacswiki has some outdated tips about aspell which misguided me. After wasting one hour on mess with aspell, it occurs to me that `man aspell` to check out official manual may help. And it does. It should be a simple task if I had read the manual at the beginning. 
 </p>
+
 <p>
 Finally, let's see then screen shot (the typos are underscored):
-<img src="../wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png"></p>
+<img src="../wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png">
+#+image/spell-check-html-in-emacs.png <img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-spell-check-html-in-emacs.png" alt="wpid-spell-check-html-in-emacs.png">
+</p>
 </div>
 
 </div>
@@ -243,14 +291,17 @@ Finally, let's see then screen shot (the typos are underscored):
         </div>
         
         <ul class="pager">
-<li class="previous">
+            <li class="previous">
                 <a href="how-to-execute-user-program-for-system-v-init-script.html" rel="prev" title="How to execute user program for System V init script">Previous post</a>
             </li>
             <li class="next">
                 <a href="switch-input-method-in-evil-mode.html" rel="next" title="Switch input method in evil-mode (在Evil中快速切换输入法)">Next post</a>
             </li>
         </ul>
-<div id="disqus_thread"></div>
+
+            
+        
+        <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html",
@@ -264,7 +315,8 @@ Finally, let's see then screen shot (the typos are underscored):
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -274,11 +326,20 @@ Finally, let's see then screen shot (the typos are underscored):
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-</div>
-    </section><script type="text/javascript">
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -465,7 +526,9 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
+</script>
+<script type="text/javascript" src="../assets/js/highlight.pack.js"></script>
+<script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -480,7 +543,14 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><!-- Social buttons --><div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+<!-- Social buttons -->
+<div id="addthisbox" class="addthis_toolbox addthis_peekaboo_style addthis_default_style addthis_label_style addthis_32x32_style">
 <a class="addthis_button_more">Share</a>
 <ul>
 <li>
@@ -497,10 +567,16 @@ _gaq.push(['_trackPageview']);
 </li>
 </ul>
 </div>
-<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script><!-- End of social buttons --><script type="text/javascript">
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7088a56bb93798"></script>
+<!-- End of social buttons -->
+
+
+    
+        <script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
+    
 </body>
 </html>

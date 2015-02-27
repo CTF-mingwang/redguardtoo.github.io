@@ -56,11 +56,11 @@ The quality of documention is the best.
 
 
 
-It even helps me on non-Emacs stuff.
+It helps me even on non-Emacs stuff.
 
 
 
-When I set up the font for Terminato">
+When configuring the font for Termin">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2015-02-01T09:40:44+00:00">
            <meta property="article:tag" content="emacs">
@@ -137,15 +137,15 @@ The quality of documention is the best.
 </p>
 
 <p>
-It even helps me on non-Emacs stuff.
+It helps me even on non-Emacs stuff.
 </p>
 
 <p>
-When I set up the font for <a href="http://en.wikipedia.org/wiki/Terminator_(terminal_emulator)">Terminator</a> I found its manual is not clear. The manual says "An Pango font name" is required but doesn't explain what is "Pango font name".  After googling, I found the best documentation is Emacs manual which explains <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/GTK-Resource-Basics.html">Pango font name</a> and lists <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html#Fonts">everything I need about Linux fonts</a>.
+When configuring the font for <a href="http://gnometerminator.blogspot.com/p/introduction.html">Terminator</a> (a terminal emulator) I found its manual is NOT clear. The manual didn't explain what is "Pango font name". After googling, I found the Emacs manual which explained it and also provided related toolchain.
 </p>
 
 <p>
-For example, "fc-list" is mentioned to list the installed fonts. I just type below command in shell:
+For example, "fc-list" is mentioned to list the installed fonts. Since terminal use Mono font, I can type below command:
 </p>
 <div class="org-src-container">
 
@@ -173,7 +173,7 @@ The output is like:
 </pre>
 
 <p>
-Since Emacs manual explain the meaning of output, I know I need pick the font name "WenQuanYi Zen Hei Mono" which is key component of "Pango font name"
+Since Emacs manual explains the meaning of output, I know the font name "WenQuanYi Zen Hei Mono" is the key component of "Pango font name"
 </p>
 
 <p>
@@ -202,20 +202,20 @@ Because the manual also gives the details of other components of "Pango font nam
 <span class="section-number-2">2</span> API</h3>
 <div class="outline-text-2" id="text-2">
 <p>
-I create a <a href="https://github.com/redguardtoo/find-by-pinyin-dired">new Emacs plugin</a> which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the <a href="http://www.gnu.org/software/findutils/">GNU find</a> as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
+I create a new Emacs plugin which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
 </p>
-
 <p>
-I know Emacs has enough APIs. I always can find <b>at least two APIs</b> to do the same thing. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.</p>
-</div>
+Emacs has enough APIs for anything. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.</p>
 
+<p></p>
+</div>
 </div>
 </div>
         </div>
         
         <ul class="pager">
             <li class="previous">
-                <a href="demo-blog-1.html" rel="prev" title="Demo blog post created by nikola&amp;org2nikola">Previous post</a>
+                <a href="migrate-blog-from-wordpress-into-nikola.html" rel="prev" title="Migrate blog from wordpress into nikola">Previous post</a>
             </li>
         </ul>
 
