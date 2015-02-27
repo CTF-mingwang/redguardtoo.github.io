@@ -202,7 +202,7 @@ Because the manual also gives the details of other components of "Pango font nam
 <span class="section-number-2">2</span> API</h3>
 <div class="outline-text-2" id="text-2">
 <p>
-I create a new Emacs plugin which lists files whose name containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
+I create a new Emacs plugin which lists file names containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
 </p>
 <p>
 Emacs has enough APIs for anything. After some research I found another pure Lisp version called "find-lisp-find-dired". So problem solved.</p>
