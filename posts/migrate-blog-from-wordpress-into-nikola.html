@@ -45,25 +45,17 @@ tr:nth-child(odd) td { background: #FEFEFE; }
     <meta property="og:site_name" content="Chen's blog">
     <meta property="og:title" content="Migrate blog from wordpress into nikola">
     <meta property="og:url" content="http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html">
-    <meta property="og:description" content='UPDATED: &lt;2015-01-31 Sat&gt;
+    <meta property="og:description" content='Here are the steps.
 
-
-
-CREATED: &lt;2014-04-22&gt;
-
-
-
-Here are the steps. Tested on Cygwin/Mac/Linux.
-
-
-
-1 Requirements
 
 
 
 
 # install python2 and make sure sqlite is supported
-sudo USE="sqlite" emerge'>
+sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# install dependencies (requests is required by zen theme)
+# sudo pi'>
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2014-04-22T09:09:21+00:00">
            <meta property="article:tag" content="blog">
@@ -126,154 +118,50 @@ sudo USE="sqlite" emerge'>
         <div class="body">
             <div>
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-01-31 Sat&gt;</span></span>
+Here are the steps.
 </p>
 
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-04-22&gt;</span></span>
-</p>
-
-<p>
-Here are the steps. Tested on Cygwin/Mac/Linux.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Requirements</h3>
-<div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">
 # install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
-</code></pre>
 
-</div>
-
-<p>
-Make sure gcc libxslt-devel libxml2-devel zlib-devel installed, especially on cygwin.
-See <a href="http://getnikola.com/handbook.html#libxml-libxslt-files-missing-errors">http://getnikola.com/handbook.html#libxml-libxslt-files-missing-errors</a>.
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Install</h3>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">
-<span class="section-number-3">2.1</span> Install Nikola</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-Please note the package "requests" is required by zen theme, so it's optional.
-</p>
-
-<p>
-I prefer install packages into my HOME directory because it versatile and safe.
-</p>
-
-<p>
-For example, "sudo pip install" could <a href="https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b">screw up python on Gentoo Linux</a>.
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-sh">
+# install dependencies (requests is required by zen theme)
+# sudo pip install markdown webassets phpserialize nikola requests
+# "sudo pip install" could screw up my python setup on Gentoo Linux
+# @see https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b
+# so install the python packages in my HOME directory might be better
 # @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
-pip install --user markdown webassets nikola requests
+pip install --user markdown webassets phpserialize nikola requests
 export PATH=$PATH:$HOME/.local/bin
-</code></pre>
 
-</div>
+# create root directory of nikola
+mkdir -p ~/.config/nikola;cd ~/.config/nikola
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">
-<span class="section-number-3">2.2</span> Install theme (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-2-2">
-<p>
-I use zen theme,
-</p>
-<div class="org-src-container">
+# import from wordpress dump
+nicola import_wordpress my_wordpress_dump.xml
 
-<pre><code class="lang-sh">
+# since I use zen theme, I need install lessc
+# obviously NodeJS is required
+sudo npm install -g less
+
+# I use zen theme, before intalling new theme, clean the legacy theme at first
 rm -rf themes/zen/;nikola install_theme zen
 # or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
-</code></pre>
 
-</div>
-
-<p>
-Backup you theme under "~/.config/nikola/themes/zen". You won't need above command any more.
-</p>
-
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Usage</h3>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h4 id="sec-3-1">
-<span class="section-number-3">3.1</span> Create root directory</h4>
-<div class="outline-text-3" id="text-3-1">
-<div class="org-src-container">
-
-<pre><code class="lang-sh">
-mkdir -p ~/.config/;nikola init "nikola";cd ~/.config/nikola;
-</code></pre>
-
-</div>
-
-<p>
-Please note `nikola init "nikola"` creates "conf.py" for you. Backup this file and you never need `nikola init`. 
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h4 id="sec-3-2">
-<span class="section-number-3">3.2</span> Import old posts and build new site</h4>
-<div class="outline-text-3" id="text-3-2">
-<div class="org-src-container">
-
-<pre><code class="lang-sh">
-nicola import_wordpress my_wordpress_dump.xml
+# build the web site
 nikola build
 </code></pre>
 
 </div>
 
 <p>
-The website is create at "~/.config/nikola/output".
-</p>
-
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Tips (OPTIONAL)</h3>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-sec-4-1" class="outline-3">
-<h4 id="sec-4-1">
-<span class="section-number-3">4.1</span> If wordpress use 3rd parth JS to render code</h4>
-<div class="outline-text-3" id="text-4-1">
-<p>
 Use below command to fix embedded code in HTML files:
 </p>
+
 <div class="org-src-container">
+
 <pre><code class="lang-bash">
 find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
@@ -282,25 +170,14 @@ find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~
 </div>
 
 <p>
-Manually fixed those articles with Chinese titles in url_map.csv
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h4 id="sec-4-2">
-<span class="section-number-3">4.2</span> Import comments into Disqus</h4>
-<div class="outline-text-3" id="text-4-2">
-<p>
-<a href="https://disqus.com/">Disqus</a> is a blog comment hosting service.
+Manually fixed those articles with Chinese title in url_map.csv
 </p>
 
 <p>
-Use below script to fixed the comment dumped from wordpress before importing it into Disqus:
+Use below script to fixed the xml dumped from wordpress:
 </p>
+
 <div class="org-src-container">
-
 
 <pre><code class="lang-python">
 #!/usr/bin/python
@@ -349,16 +226,14 @@ if __name__ == '__main__':
 
 </div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-4-3" class="outline-3">
-<h4 id="sec-4-3">
-<span class="section-number-3">4.3</span> Setup 3rd party JS libraries on new site</h4>
-<div class="outline-text-3" id="text-4-3">
+<p>
+Import the xml into disqus.com.
+</p>
+
 <p>
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-python">
@@ -434,24 +309,8 @@ EXTRA_HEAD_DATA = """
 In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 </p>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-4-4" class="outline-3">
-<h4 id="sec-4-4">
-<span class="section-number-3">4.4</span> Upload</h4>
-<div class="outline-text-3" id="text-4-4">
 <p>
-I use <a href="https://filezilla-project.org/">FileZilla</a> as a FTP client. <a href="http://www.ncftp.com/">NcFTP</a> is a command line alternative.
-</p>
-
-<p>
-The best way to upload HTML files is <a href="http://git-scm.com/">Git</a>.</p>
-</div>
-
-<p></p>
-</div>
-</div>
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.</p>
 </div>
         </div>
         
@@ -460,7 +319,7 @@ The best way to upload HTML files is <a href="http://git-scm.com/">Git</a>.</p>
                 <a href="what-s-the-best-spell-check-set-up-in-emacs.html" rel="prev" title="What's the best spell check set up in emacs">Previous post</a>
             </li>
             <li class="next">
-                <a href="why-people-say-emacs-is-the-best-operating-system.html" rel="next" title="Why people say " emacs is the best operating system>Next post</a>
+                <a href="why-gnus-is-better-than-gmail.html" rel="next" title="Why Gnus is better than Gmail">Next post</a>
             </li>
         </ul>
 

@@ -1,5 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 27 Feb 2015 17:03:16 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:29 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary with hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
+&lt;/p&gt;
+
+&lt;p&gt;
+I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+This solution works &lt;b&gt;in any environment&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Step1 (OPTIONAL), download &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt; and place it under "~/.emacs.d/misc/".
+&lt;/li&gt;
+
+&lt;li&gt;Step 2, Copy below setup into ~/.emacs and use key binding "M-/" to complete the word:
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; The actual expansion function
+(defun try-expand-by-dict (old)
+  ;; old is true if we have already attempted an expansion
+  (unless (bound-and-true-p ispell-minor-mode)
+    (ispell-minor-mode 1))
+
+  ;; english-words.txt is the fallback dicitonary
+  (if (not ispell-alternate-dictionary)
+      (setq ispell-alternate-dictionary (file-truename "~/.emacs.d/misc/english-words.txt")))
+  (let ((lookup-func (if (fboundp 'ispell-lookup-words)
+                       'ispell-lookup-words
+                       'lookup-words)))
+    (unless old
+      (he-init-string (he-lisp-symbol-beg) (point))
+      (if (not (he-string-member he-search-string he-tried-table))
+        (setq he-tried-table (cons he-search-string he-tried-table)))
+      (setq he-expand-list
+            (and (not (equal he-search-string ""))
+                 (funcall lookup-func (concat (buffer-substring-no-properties (he-lisp-symbol-beg) (point)) "*")))))
+    (if (null he-expand-list)
+      (if old (he-reset-string))
+      (he-substitute-string (car he-expand-list))
+      (setq he-expand-list (cdr he-expand-list))
+      t)
+    ))
+
+(setq hippie-expand-try-functions-list
+      '(;; try-expand-dabbrev
+        ;; try-expand-dabbrev-all-buffers
+        try-expand-by-dict))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;lazy load of ispell-mode to speed Emacs startup
+&lt;/li&gt;
+&lt;li&gt;add a fallback dictionary "english-words.txt" so autocompletion never fails
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ispell-lookup-words&lt;/code&gt; or &lt;code&gt;lookup-words&lt;/code&gt; simply does grep thing, so english-words.txt is just a plain text file.
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>autocomplete</category><category>dictionary</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</guid><pubDate>Mon, 30 Mar 2015 03:53:40 GMT</pubDate></item><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 It's becasue Emacs has great documentation and enough APIs.
 &lt;/p&gt;
 
@@ -80,1007 +158,630 @@ I create a new Emacs plugin which lists file names containing Chinese characters
 Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired". Problem solved.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-01-31 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+python code:
 &lt;/p&gt;
 
-&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-Here are the steps. Tested on Cygwin/Mac/Linux.
-&lt;/p&gt;
-
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Requirements&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-# install python2 and make sure sqlite is supported
-sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Make sure gcc libxslt-devel libxml2-devel zlib-devel installed, especially on cygwin.
-See &lt;a href="http://getnikola.com/handbook.html#libxml-libxslt-files-missing-errors"&gt;http://getnikola.com/handbook.html#libxml-libxslt-files-missing-errors&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Install&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Install Nikola&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-1"&gt;
-&lt;p&gt;
-Please note the package "requests" is required by zen theme, so it's optional.
-&lt;/p&gt;
-
-&lt;p&gt;
-I prefer install packages into my HOME directory because it versatile and safe.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, "sudo pip install" could &lt;a href="https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b"&gt;screw up python on Gentoo Linux&lt;/a&gt;.
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-# @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
-pip install --user markdown webassets nikola requests
-export PATH=$PATH:$HOME/.local/bin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Install theme (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-2"&gt;
-&lt;p&gt;
-I use zen theme,
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-rm -rf themes/zen/;nikola install_theme zen
-# or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Backup you theme under "~/.config/nikola/themes/zen". You won't need above command any more.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Usage&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
-&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Create root directory&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-1"&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-mkdir -p ~/.config/;nikola init "nikola";cd ~/.config/nikola;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Please note `nikola init "nikola"` creates "conf.py" for you. Backup this file and you never need `nikola init`. 
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
-&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Import old posts and build new site&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-2"&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-nicola import_wordpress my_wordpress_dump.xml
-nikola build
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-The website is create at "~/.config/nikola/output".
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Tips (OPTIONAL)&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-4-1" class="outline-3"&gt;
-&lt;h4 id="sec-4-1"&gt;&lt;span class="section-number-3"&gt;4.1&lt;/span&gt; If wordpress use 3rd parth JS to render code&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4-1"&gt;
-&lt;p&gt;
-Use below command to fix embedded code in HTML files:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
-find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Manually fixed those articles with Chinese titles in url_map.csv
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4-2" class="outline-3"&gt;
-&lt;h4 id="sec-4-2"&gt;&lt;span class="section-number-3"&gt;4.2&lt;/span&gt; Import comments into Disqus&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4-2"&gt;
-&lt;p&gt;
-&lt;a href="https://disqus.com/"&gt;Disqus&lt;/a&gt; is a blog comment hosting service.
-&lt;/p&gt;
-
-&lt;p&gt;
-Use below script to fixed the comment dumped from wordpress before importing it into Disqus:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;
-#!/usr/bin/python
-import getopt, sys, csv
-def usage():
-    print '''
-NAME
-    fix url mapping when migrate wordpress blog into nikola
-Usage
-    python fix-url-map.py [options]
-'''[1:-1]
-
+import getopt, sys
 if __name__ == '__main__':
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], "hf:x:", ["help", "file=","xml="])
-    except getopt.GetoptError as err:
-        # print help information and exit:
-        print str(err) # will print something like "option -a not recognized"
-        usage()
-        sys.exit(2)
-
-    file=""
-    xml=""
-
+    opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
     for o, a in opts:
         if o in ("-h", "--help"):
-            usage()
             sys.exit()
-        elif o in ("-f", "--file"):
-            file= a
-        elif o in ("-x", "--xml"):
-            xml=a
         else:
             assert False, "unhandled option"
-
-    with open(xml, 'r') as content_file:
-        content = content_file.read()
-
-    with open(file, 'rb') as csvfile:
-         spamreader = csv.reader(csvfile, delimiter=',')
-         for row in spamreader:
-             content=content.replace("&amp;gt;"+row[0]+"&amp;lt;","&amp;gt;"+row[1]+"&amp;lt;")
-
-    print content
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4-3" class="outline-3"&gt;
-&lt;h4 id="sec-4-3"&gt;&lt;span class="section-number-3"&gt;4.3&lt;/span&gt; Setup 3rd party JS libraries on new site&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4-3"&gt;
-&lt;p&gt;
-Install syntaxhighlighter and google analytics, insert below code into conf.py:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-python"&gt;
-BODY_END = """
-&amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
-function path()
-{
-  var args = arguments,
-      result = [];
-
-  for(var i = 0; i &amp;lt; args.length; i++){
-    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
-  }
-
-  return result;
-};
-
-SyntaxHighlighter.autoloader.apply(null, path(
-  'applescript            @shBrushAppleScript.min.js',
-  'actionscript3 as3      @shBrushAS3.min.js',
-  'bash shell             @shBrushBash.min.js',
-  'coldfusion cf          @shBrushColdFusion.min.js',
-  'cpp c c++              @shBrushCpp.min.js',
-  'clojure                @shBrushScala.min.js',
-  'c# c-sharp csharp      @shBrushCSharp.min.js',
-  'css                    @shBrushCss.min.js',
-  'delphi pascal          @shBrushDelphi.min.js',
-  'diff patch pas         @shBrushDiff.min.js',
-  'erl erlang             @shBrushErlang.min.js',
-  'groovy                 @shBrushGroovy.min.js',
-  'java                   @shBrushJava.min.js',
-  'jfx javafx             @shBrushJavaFX.min.js',
-  'js jscript javascript  @shBrushJScript.min.js',
-  'perl pl                @shBrushPerl.min.js',
-  'php                    @shBrushPhp.min.js',
-  'text plain             @shBrushPlain.min.js',
-  'py python              @shBrushPython.min.js',
-  'ruby rails ror rb      @shBrushRuby.min.js',
-  'sass scss              @shBrushSass.min.js',
-  'scala                  @shBrushScala.min.js',
-  'sql                    @shBrushSql.min.js',
-  'vb vbnet               @shBrushVb.min.js',
-  'xml xhtml xslt html    @shBrushXml.min.js'
-));
-SyntaxHighlighter.all();
-&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
-var _gaq = _gaq || [];
-
-_gaq.push(['_setAccount', 'UA-29850823-2']);
-_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-&amp;lt;/script&amp;gt;
-"""
-
-EXTRA_HEAD_DATA = """
-&amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&amp;gt;
-&amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&amp;gt;
-"""
+    print "hello world";
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
+This is table:
 &lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4-4" class="outline-3"&gt;
-&lt;h4 id="sec-4-4"&gt;&lt;span class="section-number-3"&gt;4.4&lt;/span&gt; Upload&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4-4"&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+
+&lt;colgroup&gt;
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;code completion&lt;/td&gt;
+&lt;td class="left"&gt;auto-complete&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;p&gt;
-I use &lt;a href="https://filezilla-project.org/"&gt;FileZilla&lt;/a&gt; as a FTP client. &lt;a href="http://www.ncftp.com/"&gt;NcFTP&lt;/a&gt; is a command line alternative.
+This is list:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;list item 1
+&lt;/li&gt;
+&lt;li&gt;list item 2
+&lt;/li&gt;
+&lt;li&gt;list item 3
+&lt;/li&gt;
+&lt;li&gt;list item 4
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
-The best way to upload HTML files is &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>What's the best spell check set up in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-To save your time, I started from conclusion.
-&lt;/p&gt;
-
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Suggestion for non-programmers&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-Emacs will find the right dictionary by querying your locale.
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Run command "locale" in your shell to get current locale.
+Here is the &lt;a href="http://www.emacswiki.org/emacs/FlymakeHtml"&gt;solution from EmacsWiki&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-If you want to force Emacs use dictionary "en_US", copy below code into your ~/.emacs:
+I found it not effective because &lt;a href="https://github.com/w3c/tidy-html5"&gt;tidy&lt;/a&gt; is too strict to HTML5 and produces too much noise.
 &lt;/p&gt;
+
+&lt;p&gt;
+I only need validation of missing open/closed html tag(s). Nothing more!
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my complete solution:
+&lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
-
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; find aspell and hunspell automatically
-(cond
- ((executable-find "aspell")
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
- ((executable-find "hunspell")
-  (setq ispell-program-name "hunspell")
-  (setq ispell-extra-args '("-d en_US")))
- )
+(defun flymake-html-init ()
+       (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                          'flymake-create-temp-inplace))
+              (local-file (file-relative-name
+                           temp-file
+                           (file-name-directory buffer-file-name))))
+         (list "tidy" (list local-file))))
+
+(defun flymake-html-load ()
+  (interactive)
+  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
+    (set (make-local-variable 'flymake-allowed-file-name-masks)
+         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
+         )
+    (set (make-local-variable 'flymake-err-line-patterns)
+         ;; only validate missing html tags
+         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+         )
+    (flymake-mode t)))
+
+(add-hook 'web-mode-hook 'flymake-html-load)
+(add-hook 'html-mode-hook 'flymake-html-load)
+(add-hook 'nxml-mode-hook 'flymake-html-load)
+(add-hook 'php-mode-hook 'flymake-html-load)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-That's it!
-&lt;/p&gt;
-
-&lt;p&gt;
-Please run command "man aspell" or "man hunspell" in shell if you have more questions. I've nothing more to say.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Suggestion for programmers&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-I strongly recommend aspell instead of hunspell (Though hunspell is fine).
-&lt;/p&gt;
-
-&lt;p&gt;
-Please insert below code into your ~/.emacs:
+The only difference from EmacsWiki is only one line:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I find it annoying instead of helpful in real world usage.
+&lt;/p&gt;
+
+&lt;p&gt;
+The mozrepl trick basically will refresh the &lt;b&gt;current active page&lt;/b&gt; in Firefox. It's not smart enough. When developing a web application, I will open many stackoverflow pages to look for technical solution. I don't like my stackoverflow page being refreshed when I'm saving the HTML code for some web application.
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my improved solution:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; if (aspell installed) { use aspell}
-;; else if (hunspell installed) { use hunspell }
-;; whatever spell checker I use, I always use English dictionary
-;; I prefer use aspell because:
-;; 1. aspell is older
-;; 2. looks Kevin Atkinson still get some road map for aspell:
-;; @see http://lists.gnu.org/archive/html/aspell-announce/2011-09/msg00000.html
-(defun flyspell-detect-ispell-args (&amp;amp;optional RUN-TOGETHER)
-  "if RUN-TOGETHER is true, spell check the CamelCase words"
-  (let (args)
+(defun my-moz-refresh-browser-condition (current-file)
+  "Should return a boolean javascript expression or nil"
+  (let (rlt)
     (cond
-     ((string-match  "aspell$" ispell-program-name)
-      ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
-      (setq args (list "--sug-mode=ultra" "--lang=en_US"))
-      (if RUN-TOGETHER
-          (setq args (append args '("--run-together" "--run-together-limit=5" "--run-together-min=2")))))
-     ((string-match "hunspell$" ispell-program-name)
-      (setq args nil)))
-    args
-    ))
+     ((string-match "\\(beeta\\|cb_tutorial\\)" current-file)
+      (setq rlt "content.document.location.href.indexOf(':8001')!==-1"))
+     (t
+      (setq rlt nil)))
+    rlt))
 
-(cond
- ((executable-find "aspell")
-  (setq ispell-program-name "aspell"))
- ((executable-find "hunspell")
-  (setq ispell-program-name "hunspell")
-  ;; just reset dictionary to the safe one "en_US" for hunspell.
-  ;; if we need use different dictionary, we specify it in command line arguments
-  (setq ispell-local-dictionary "en_US")
-  (setq ispell-local-dictionary-alist
-        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
- (t (setq ispell-program-name nil)))
-
-;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
-;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
-(setq ispell-extra-args (flyspell-detect-ispell-args t))
-;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
-(defadvice ispell-word (around my-ispell-word activate)
-  (let ((old-ispell-extra-args ispell-extra-args))
-    (ispell-kill-ispell t)
-    (setq ispell-extra-args (flyspell-detect-ispell-args))
-    ad-do-it
-    (setq ispell-extra-args old-ispell-extra-args)
-    (ispell-kill-ispell t)
-    ))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-That's it.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Why&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
-&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Aspell&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-1"&gt;
-&lt;p&gt;
-apell is recommended because its option "–run-together". That option could spell check the camel case word. Variable name often uses camel case naming convention these days. Read my &lt;a href="http://blog.binchen.org/?p=950"&gt;Effective spell check in Emacs&lt;/a&gt; for advanced tips on how to use flyspell to check variable names.
-&lt;/p&gt;
-
-&lt;p&gt;
-If Emacs start a aspell process with "–run-together" option, that process is not closed so it can be re-used by other commands.
-&lt;/p&gt;
-
-&lt;p&gt;
-This behaviour will be a problem if you want to let Emacs/aspell correct the typo by running the command "ispell-word" because a apell process with "–run-together" will produce much noise.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, for a typo "helle" Emacs will give you too many candidates. It's hard to find the desired word "hello":
-&lt;img src="http://blog.binchen.org/wp-content/aspell-camelcase-suggest-nq8.png" alt="aspell-camelcase-suggest-nq8.png"&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-The better solution is before running "M-x ispell-word", we'd better restart a aspell proces without the argument "–run-together".
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the screen shot after we applying this fix:
-&lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
-&lt;/p&gt;
-
-&lt;p&gt;
-There is another variable named "ispell-cmd-args". It is actually some &lt;b&gt;extra&lt;/b&gt; arguments Emacs could send to an &lt;b&gt;existing&lt;/b&gt; spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are really confusing. "ispell-extra-args" is actually command line arguments the spell checker will always use. The "ispell-cmd-args" are actually the extra arguments will be used in certain cases.
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
-&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Hunspell&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-2"&gt;
-&lt;p&gt;
-I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
-&lt;/p&gt;
-&lt;p&gt;
-Hunspell has some design flaw. It will always check the environment variable LC_ALL, LC_MESSAGES and LANG &lt;b&gt;at first&lt;/b&gt; to find the default dictionary unless you specify the dictionary in the command line. If it cannot find the default dictionary, the spell checker process won't start. Aspell does not have this issue, if it cannot find the zh_CN dictionary, it will fall back into English.
-&lt;/p&gt;
-
-&lt;p&gt;
-Specify the ispell-extra-args &lt;b&gt;won't stop hunspell to search for the default dictionary&lt;/b&gt; at the beginning.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, I am a Chinese and my locale is "zh_CN.utf-8". So hunspell will always search the dictionary zh_CN. Even I'm only interested in English spell checking.
-&lt;/p&gt;
-
-&lt;p&gt;
-To specify the dictionary explicitly, I need hack the Emacs code which is kind of mess. Finally, I figure out. It's just several lines of elisp code:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "en_US")
-(setq ispell-local-dictionary-alist
-      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>aspell</category><category>check</category><category>emacs</category><category>en</category><category>hunspell</category><category>ispell</category><category>spell</category><guid>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</guid><pubDate>Mon, 21 Apr 2014 08:25:20 GMT</pubDate></item><item><title>How to embed button in wxDataViewListCtrl</title><link>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Before creating wxDataViewListCtrl, it's better to detect information about text size so that we can set the column width and height intelligently.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the code:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-void GuessRowSize(int* w, int* h) {
-    //@see http://sourceforge.net/apps/trac/codelite/browser/trunk/LiteEditor/new_build_tab.cpp?rev=5804
-
-// Determine the row height
-    wxBitmap tmpBmp(1, 1);
-    wxMemoryDC memDc;
-    memDc.SelectObject(tmpBmp);
-    wxFont f = wxSystemSettings::GetFont(wxSYS_ANSI_FIXED_FONT);
-    int xx, yy;
-    memDc.GetTextExtent(wxT("Tp"), &amp;amp;xx, &amp;amp;yy, NULL, NULL, &amp;amp;f);
-
-    //enough height for ICON
-    *h=yy&amp;lt;16? 16: yy;
-
-    memDc.GetTextExtent("Wp", &amp;amp;xx, &amp;amp;yy, NULL, NULL, &amp;amp;f);
-    *w=xx/2;
-
-    return;
-}
-wxDataViewListCtrl* ctrl=new wxDataViewListCtrl(parent,-1);
-ctrl-&amp;gt;Create(parent,id,wxDefaultPosition,wxDefaultSize);
-int w,h;
-GuessRowSize(&amp;amp;w,&amp;amp;h);
-//hard code width may not be good, may be can use w ,h
-AppendTextColumn(_T("Column 1"),wxDATAVIEW_CELL_INERT,200 /*width*/);
-//must be called after Create()
-ctrl-&amp;gt;SetRowHeight(h+6);
-
-
-// well I need provide button render by myself
-class wxDataViewMyButtonRenderer: public wxDataViewCustomRenderer, public wxTimer
-{
-public:
-    wxDataViewMyButtonRenderer( const wxString &amp;amp;varianttype = wxT("wxString"),
-                              int align = wxDVR_DEFAULT_ALIGNMENT );
-
-    virtual bool SetValue( const wxVariant &amp;amp;value );
-    virtual bool GetValue( wxVariant &amp;amp;value ) const;
-
-    virtual bool Render( wxRect, wxDC*, int);
-    virtual wxSize GetSize() const;
-    virtual void Notify();
-    void SetParent(GalleryListView*);
-    // Implementation only, don't use nor override
-    virtual bool ActivateCell(const wxRect&amp;amp; rect,
-        wxDataViewModel *model,
-        const wxDataViewItem&amp;amp; item,
-        unsigned int col,
-        const wxMouseEvent *mouseEvent);
-
-private:
-    wxString m_value;
-    bool m_button_clicked;
-    wxRect m_cell_rect;
-    GalleryListView* m_parent;
-
-protected:
-    DECLARE_DYNAMIC_CLASS_NO_COPY(wxDataViewMyButtonRenderer)
-};
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-When user click one row, the ActivateCell is called, we can use some rect detect algorithm to find if the button rect is clicked.
-&lt;/p&gt;
-
-&lt;p&gt;
-There is no mouse up event handler! So I have to hack, basically start a wxTimer when button clicked and draw the button up effect after about 1 second in Notify(). That's why I ask wxDataViewMyButtonRenderer to inherit from wxTimer.
-&lt;/p&gt;
-
-&lt;p&gt;
-To draw the button up effect, I need ask the parent wxDataViewListCtrl to refresh itself, so that the button's Render() method has a chance to be called. That's why we need SetParent().
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the part of implementation:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-bool
-wxDataViewMyButtonRenderer::ActivateCell(const wxRect&amp;amp; rect,
-    wxDataViewModel *model,
-    const wxDataViewItem&amp;amp; item,
-    unsigned int col,
-    const wxMouseEvent *mouseEvent)
-{
-    wxDataViewListStore* store=(wxDataViewListStore*) model;
-
-    if ( mouseEvent ) {
-        if ( !wxRect(GetSize()).Contains(mouseEvent-&amp;gt;GetPosition()) ){
-            return false;
-        }
-        wxVariant item_value_pdf;
-        store-&amp;gt;GetValueByRow(item_value_pdf , store-&amp;gt;GetRow(item),0);
-        wxVariant item_value_created;
-        store-&amp;gt;GetValueByRow(item_value_created , store-&amp;gt;GetRow(item),1);
-
-        m_button_clicked=true;
-        m_cell_rect=rect;
-    } else {
-        wxLogDebug(_T("Sorry, I don't handle keyboard"));
-    }
-
-    return true;
-}
-
-bool
-wxDataViewMyButtonRenderer::Render( wxRect rect, wxDC *dc, int state )
-{
-    wxLogDebug(_T("Render called"));
-    // Ensure that the check boxes always have at least the minimal required
-    // size, otherwise DrawCheckBox() doesn't really work well. If this size is
-    // greater than the rect size, the checkbox will be truncated but this is a
-    // lesser evil.
-    wxSize size = rect.GetSize();
-    size.IncTo(GetSize());
-    rect.SetSize(size);
-
-    // draw button
-    if(m_button_clicked==true &amp;amp;&amp;amp; rect.Intersects(m_cell_rect)){
-        //draw the button when clicked
-        dc-&amp;gt;SetBrush(wxBrush(wxColour(65, 150, 65), wxBRUSHSTYLE_SOLID));
-        dc-&amp;gt;SetPen( *wxBLACK_PEN );
-        dc-&amp;gt;DrawRectangle(rect);
-
-        // draw button push down effect. since we cannot detect mouse up event, we use
-        // timer to draw it
-        const int time_to_button_up=350;
-        StartOnce(time_to_button_up);
-    } else {
-        // draw normal button
-        dc-&amp;gt;SetBrush(wxBrush(wxColour(84, 174, 84), wxBRUSHSTYLE_SOLID));
-        dc-&amp;gt;SetPen( *wxBLACK_PEN );
-        dc-&amp;gt;DrawRectangle(rect);
-
-        //draw inner white border
-        rect.Deflate(1);
-        dc-&amp;gt;SetPen( *wxWHITE_PEN );
-        dc-&amp;gt;DrawRectangle(rect);
-    }
-
-    dc-&amp;gt;SetTextForeground(*wxWHITE);
-    dc-&amp;gt;DrawLabel(m_value,wxRect(dc-&amp;gt;GetTextExtent(m_value)).CentreIn(rect));
-
-    return true;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>en</category><category>wxwidgets</category><guid>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</guid><pubDate>Sun, 13 Apr 2014 15:39:28 GMT</pubDate></item><item><title>popup function where your cursor is in</title><link>http://blog.binchen.org/posts/popup-function-your-cursor-is-in.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="http://www.emacswiki.org/emacs/WhichFuncMode"&gt;Which Func Mode&lt;/a&gt; will display the current function name in the mode line.
-&lt;/p&gt;
-
-&lt;p&gt;
-But I can't use it.
-&lt;/p&gt;
-
-&lt;p&gt;
-It's because I reduce my mode-line into minimum to make it work with my tiny netbook.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;a href="http://emacsredux.com/blog/2014/04/05/which-function-mode/"&gt;Showing the function in header&lt;/a&gt; is also not possible because it conflicts with my color theme.
-&lt;/p&gt;
-
-&lt;p&gt;
-So I choose to display the function name in a popup.
-&lt;/p&gt;
-
-&lt;p&gt;
-Insert below code into ~/.emacs,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(autoload 'which-function "which-func")
-(autoload 'popup-tip "popup")
-
-(defun copy-yank-str (msg)
-  (kill-new msg)
-  (with-temp-buffer
-    (insert msg)
-    (shell-command-on-region (point-min) (point-max)
-                             (cond
-                              ((eq system-type 'cygwin) "putclip")
-                              ((eq system-type 'darwin) "pbcopy")
-                              (t "xsel -ib")
-                              ))))
-
-(defun popup-which-function ()
+;; {{ mozrepl auto-refresh browser
+(defun moz-reload-browser ()
   (interactive)
-  (let ((msg (which-function)))
-    (popup-tip msg)
-    (copy-yank-str msg)
+  (let (js-cond cmd)
+    (if (fboundp 'my-moz-refresh-browser-condition)
+        (setq js-cond (funcall 'my-moz-refresh-browser-condition (buffer-file-name))))
+    (cond
+     (js-cond
+      (setq cmd (concat "if(" js-cond "){setTimeout(function(){content.document.location.reload(true);}, '500');}")))
+     (t
+      (setq cmd "setTimeout(function(){content.document.location.reload(true);}, '500');")))
+    (comint-send-string (inferior-moz-process) cmd)
     ))
+
+(defun moz-after-save ()
+  (interactive)
+  (when (memq major-mode '(web-mode html-mode nxml-mode nxhml-mode php-mode))
+    (moz-reload-browser)))
+
+(add-hook 'after-save-hook
+              'moz-after-save
+              'append 'local)
+;; }}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
-&lt;p&gt;
-The extra bonus is "popup-which-function" will also insert the function name into clipboard and kill ring.
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-The above code need package &lt;a href="https://github.com/auto-complete/popup-el"&gt;"popup.el"&lt;/a&gt; to be installed.
+The first tip is to use global variable `tags-table-list` instead of `tags-file-name`.  The Emacs documentation says you should NOT set both. `tags-table-list` is better because it's a list, where you can store multiple tag files.
 &lt;/p&gt;
 
 &lt;p&gt;
-Screen shot:
-&lt;img src="http://blog.binchen.org/wp-content/pop-which-func-nq8.png" alt="pop-which-func-nq8.png"&gt;
-#+image/pop-which-func-nq8.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/04/wpid-pop-which-func-nq8.png" alt="wpid-pop-which-func-nq8.png"&gt;
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/popup-function-your-cursor-is-in.html</guid><pubDate>Tue, 08 Apr 2014 22:59:00 GMT</pubDate></item><item><title>paste string from clipboard into minibuffer in Emacs</title><link>http://blog.binchen.org/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
-&lt;/p&gt;
-
-&lt;p&gt;
-Second, intergrating some command line clipboard tool into Emacs is better than Emacs X clipboard. Command line tool works in any environment. For example, when you log into a remote server with ssh, your local computer could share clipboard with your Emacs in remote shell. Please note in this example, you need using X11 forward over ssh, usually it's already set up on server.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the code:
+Here is the value of `tags-table-list` for one project:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun paste-from-x-clipboard()
-  (interactive)
-  (shell-command
-   (cond
-    (*cygwin* "getclip")
-    (*is-a-mac* "pbpaste")
-    (t "xsel -ob")
-    )
-   1)
-  )
-
-(defun my/paste-in-minibuffer ()
-  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
-  )
-
-(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html</guid><pubDate>Tue, 08 Apr 2014 22:17:00 GMT</pubDate></item><item><title>Upload emacs package to marmalade</title><link>http://blog.binchen.org/posts/upload-emacs-package-to-marmalade.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Thanks to &lt;a href="https://plus.google.com/+SebastianWiesner/posts"&gt;Sebastian Wiesner&lt;/a&gt; for providing a python script to upload package to &lt;a href="http://marmalade-repo.org/"&gt;http://marmalade-repo.org/&lt;/a&gt;. &lt;/p&gt;    
-&lt;pre class="prettyprint "&gt;
+&lt;/div&gt;
 
-sudo pip install requests keyring
-
-curl -L https://raw.githubusercontent.com/lunaryorn/dotfiles/master/emacs/bin/marmalade-upload &amp;gt; ~/bin/marmalade-upload &amp;amp;&amp;amp; chmod +x ~/bin/marmalade-upload
-
-~/bin/marmalade-upload -h # see help
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Please note if the same version already exists on server, I need delete it before uploading. &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>marmalade</category><guid>http://blog.binchen.org/posts/upload-emacs-package-to-marmalade.html</guid><pubDate>Fri, 28 Mar 2014 07:26:01 GMT</pubDate></item><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-05-20 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;p&gt;
+The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan &lt;b&gt;less&lt;/b&gt; code files.
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-03-23 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+The second tip is we can avoid feeding big js files to ctags. Currently one of my client's project is not managed well. They place the concatenated js files, third party js libraries, and normal code file into one folder. The naming of files is a mess. So I can not tell which is which from file name or file path. The tag file created from those big concatenated js files will &lt;a href="https://github.com/company-mode/company-mode/issues/243"&gt;crash my Emacs&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;keysnail&lt;/a&gt;. it's a firefox addon to convert firefox into Emacs.
+Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;
+find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The point is the option `-not -size +16k`. It means only handle files less thank 16k.
 &lt;/p&gt;
 
 &lt;p&gt;
-I install keysnail's own plugins "HoK" and "Tanything".
+Here is the Emacs lisp function to wrap above shell command:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
+  "return the full path of tags file"
+  ;; TODO save the CTAGS-OPTS into hash
+  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
+       file
+       cmd)
+    (setq file (concat dir "TAGS"))
+    (when (or FORCE (not (file-exists-p file)))
+      (setq cmd (format "find %s -type f -not -iwholename '*TAGS' -not -size +24k | ctags -f %s -e  %s -L -" dir file CTAGS-OPTS))
+      (shell-command cmd))
+    file))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags"&gt;~/.ctags&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-Here are the use cases of keysnail.
+In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 &lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;What's the `tags-table-list`
+&lt;/li&gt;
+&lt;li&gt;How the tags file are created by ctags
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+UPDATE:
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
+&lt;/li&gt;
+
+&lt;li&gt;I do use &lt;a href="http://www.gnu.org/software/global/"&gt;Gnu Global&lt;/a&gt; for &lt;b&gt;C/C++/Java&lt;/b&gt; code. I use it exactly in the &lt;b&gt;same way&lt;/b&gt; as ctags. Please `man global` for the details. Hint, all you need care is the environment variable &lt;b&gt;GTAGSLIBPATH&lt;/b&gt;.
+&lt;/li&gt;
+&lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Please note:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
+&lt;/li&gt;
+&lt;li&gt;I'm good at most debuggers. The point of this article is to deal with &lt;b&gt;more difficult issues&lt;/b&gt; the debugger can not handle.
+&lt;/li&gt;
+&lt;li&gt;My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
+&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Click &amp;amp; Copy the links&lt;/h3&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HoK&lt;/a&gt;.
+As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 &lt;/p&gt;
 
 &lt;p&gt;
-Insert below code into ~/.keysnail.js:
+The only way to debug such application is to insert as many as possible logging code, watch the output, and think.
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-hook.setHook("PluginLoaded", function () {
-    if (!plugins.hok) return;
-
-    /* HoK 1.3.9+ required */
-    plugins.hok.pOptions.selector = plugins.hok.pOptions.selector
-    /* feedly */
-    + ", *[data-uri]" + ", *[data-selector-toggle]" + ", *[data-page-action]" + ", *[data-app-action]"
-    /* google plus */
-    + ", *[guidedhelpid]"
-    /* twitter */
-    + ", *[data-item-count]";
-});
-
-key.setGlobalKey(["C-c","C-f"], function (aEvent, aArg) {
-        ext.exec("hok-start-foreground-mode", aArg);
-}, "Hok - Foreground hint mode", true);
-
-key.setGlobalKey(["C-c","C-b"], function (aEvent, aArg) {
-        ext.exec("hok-start-background-mode", aArg);
-}, "HoK - Background hint mode", true);
-
-key.setGlobalKey(["C-c","C-y"], function (aEvent, aArg) {
-        ext.exec("hok-yank-foreground-mode", aArg);
-}, "HoK - Background hint mode", true);
-
-key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
-        ext.exec("hok-start-extended-mode", aArg);
-}, "HoK - Extented hint mode", true);
-
-key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
-        ext.exec("hok-start-continuous-mode", aArg);
-}, "Start continuous HaH", true);
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;
+So my problem is how to insert logging code as quickly as possible.
+&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;p&gt;
-Now I can press "Ctrl-C Ctrl-F" to select the links to click.
-&lt;/p&gt;
-
-&lt;p&gt;
-The links will be highlighted as below screen shot:
-&lt;img src="http://blog.binchen.org/wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png"&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-I can press the highlighted hint to click the link.
-&lt;/p&gt;
-
-&lt;p&gt;
-Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Copy the text of link&lt;/h3&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
-&lt;/p&gt;
-
-&lt;p&gt;
-That's error prone because:
-&lt;/p&gt;
-&lt;ol class="org-ol"&gt;
-&lt;li&gt;The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
-&lt;/li&gt;
-&lt;li&gt;The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, &lt;a href="https://www.atlassian.com/software/jira"&gt;JIRA&lt;/a&gt; will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
-&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;
-If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
+My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Switch tab&lt;/h3&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Logging simple JS variable&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;Tanything&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Insert below code into ~/.keysnail.js:
+Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
-  ext.exec("tanything", arg);
-}, "view all tabs", true);
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+console.log("var1=", var1)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-Press "Ctrl-C Ctrl-A", you got below UI:
-&lt;img src="http://blog.binchen.org/wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"&gt;
+Snippet:
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Tanything will locate the tab by finding match in web page's title or URL.
+This snippet need you input variable name once.
 &lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; My keysnail set up&lt;/h3&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Logging complex JS variable&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
-You can download my ~/.keysnail.js from &lt;a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js"&gt;HERE&lt;/a&gt;.
+In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 &lt;/p&gt;
 
 &lt;p&gt;
-#+image/keysnail-hok-nq8.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/03/wpid-keysnail-hok-nq8.png" alt="wpid-keysnail-hok-nq8.png"&gt;
-#+image/keysnail-tanything-nq8.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/03/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"&gt;&lt;/p&gt;
+So the solution is that I copy the JS variable into kill ring where my snippet will read the variable name.
+&lt;/p&gt;
+
+&lt;p&gt;
+Snippet:
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet&lt;/a&gt;
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>keysnail</category><guid>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</guid><pubDate>Sun, 23 Mar 2014 20:03:00 GMT</pubDate></item><item><title>Debug Emacs Lisp code the hard way</title><link>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I &lt;a href="https://github.com/emacs-helm/helm/issues/448"&gt;met some issue&lt;/a&gt; when using helm several days ago. &lt;/p&gt; &lt;p&gt; With the help from Michael Heerdegen, I can locate the line error message is dumped. &lt;/p&gt; &lt;p&gt; But the problem is I cannot get the backtrace at all. &lt;/p&gt; &lt;p&gt; So I insert some &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html"&gt;backtrace printing code&lt;/a&gt; above that line and "M-x eval-buffer": &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;/div&gt;
 
-(with-output-to-temp-buffer "backtrace-output"
-  (let ((var 1))
-    (save-excursion
-      (setq var (eval '(progn
-                         (1+ var)
-                         (list 'testing (backtrace))))))))
-&lt;/pre&gt;
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Logging JS function name when it's called&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+In below example, I need insert  "console.log('hello is called');" in function "hello":
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; It turns out that some third party package I installed changes the emacs variable "display-buffer-function". I guess that's why the backtrace is blocked. Because backtrace is usually dumped into a backtrace buffer. And backtrace buffer's is actually influenced by the variable. &lt;/p&gt;&lt;/div&gt;</description><category>debug</category><category>elisp</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</guid><pubDate>Wed, 19 Mar 2014 19:45:00 GMT</pubDate></item><item><title>How to use ctags in Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Exuberant Ctags&lt;/a&gt; is a code navigation tool. It supports many language and could be integrated into Emacs well. &lt;/p&gt; &lt;p&gt; Please read &lt;a href="http://www.emacswiki.org/emacs/BuildTags"&gt;EmacsWiki&lt;/a&gt; for basic usage. &lt;/p&gt; &lt;p&gt; I will talk about how I manage my ctags. &lt;/p&gt; &lt;p&gt; Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". &lt;/p&gt; &lt;p&gt; An example of tags-table-list: &lt;/p&gt;
-&lt;pre class="prettyprint "&gt;
-(setq tags-table-list '("~/wxWidgets-master/TAGS" "~/projs/Loris/src/desktop/TAGS"))
-&lt;/pre&gt;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+function hello() {
+  console.log('hello is called');
+}
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Every time we you "M-x find-tag", the TAGS file in above list will be read from the scratch to locate the definition of the symbol under cursor. &lt;/p&gt; &lt;p&gt; Here is my strategy to manage TAGS &lt;b&gt;automatically&lt;/b&gt;: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;I hard coded full path of TAGS in .emacs because I usually don't change project path. &lt;/li&gt; &lt;li&gt;In major mode hook like c++-mode-hook or js2-mode-hook I will check the directory path of current file. If it contains certain string, I suppose the file belong to certain project. &lt;/li&gt; &lt;li&gt;Then I will create TAGS for that project if needed &lt;/li&gt; &lt;li&gt;Every time when I save the file, I may update TAGS according to the value of tags-table-list. &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; Here is the code: &lt;/p&gt;
-&lt;pre class="prettyprint lang-lisp"&gt;
-(defun my-project-name-contains-substring (REGEX)
-  (let ((dir (if (buffer-file-name)
-                 (file-name-directory (buffer-file-name))
-               "")))
-    (string-match-p REGEX dir)))
+&lt;/div&gt;
 
-(defun my-create-tags-if-needed (SRC-DIR &amp;amp;optional FORCE)
-  "return the full path of tags file"
-  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
-       file)
-    (setq file (concat dir "TAGS"))
-    (when (or FORCE (not (file-exists-p file)))
-      (message "Creating TAGS in %s ..." dir)
-      (shell-command
-       (format "ctags -f %s -e -R %s" file dir))
-      )
-    file
-    ))
+&lt;p&gt;
+Snippet:
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet&lt;/a&gt;
+&lt;/p&gt;
 
-(defvar my-tags-updated-time nil)
+&lt;p&gt;
+This snippet use the Emacs command `which-function`. If you read the code of `which-function`, you will find that it's &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu-mode&lt;/a&gt;
+who actually extracts the function name. But Imenu-mode requires you pre-define &lt;b&gt;enough regular expressions&lt;/b&gt;. 
+&lt;/p&gt;
 
-(defun my-update-tags ()
+&lt;p&gt;
+Please check &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el&lt;/a&gt;. I have defined many regular expressions for &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; and JQuery.
+&lt;/p&gt;
+
+&lt;p&gt;
+The regular expressions could be used in &lt;b&gt;both&lt;/b&gt; js-mode and js2-mode.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Logging JS function name with its parameters&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+JS example:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+function hello(v1, v2,
+               v3, v4) {
+  console.log("v1=", v1, "v2=", v2, "v3=", v3, "v4=", v4);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+I copy the parameter of JS function named "hello". It's just the content between "hello(" and ")", then Emacs Lisp code embedded in the snippet will parse and output the right content from kill ring.
+&lt;/p&gt;
+
+&lt;p&gt;
+Snippet:
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+BTW, since I use &lt;a href="http://www.emacswiki.org/Evil"&gt;Evil&lt;/a&gt;, copy the parameter into kill-ring is as simple as pressing "yi(".
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Insert JS debugger statement&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
+&lt;p&gt;
+@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
+&lt;/p&gt;
+
+&lt;p&gt;
+Snippets:
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet&lt;/a&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-8" class="outline-2"&gt;
+&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Bonus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-8"&gt;
+&lt;p&gt;
+Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</guid><pubDate>Sun, 23 Nov 2014 12:45:18 GMT</pubDate></item><item><title>Use bootstrap+font-awesome+jquery for IE7 web application</title><link>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Live demo:
+&lt;a href="http://binchen.org/schools/"&gt;http://binchen.org/schools/&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Screenshot:
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Environment&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Bootstrap 2.3.2
+&lt;/li&gt;
+&lt;li&gt;font-awesome 3.2.1
+&lt;/li&gt;
+&lt;li&gt;JQuery 1.8.2
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+I only use the grid layout from bootstrap and minimum API from jQuery.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Notes&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
+&lt;/li&gt;
+&lt;li&gt;IE7 does not support inline-block properly, I need below css code hack:
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-css"&gt;
+.myclass {
+  display: inline-block;
+  /* ie7*/
+  *display: inline;
+  zoom: 1;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
+&lt;/li&gt;
+&lt;li&gt;add below code into javascript so that I can hack IE7-only css code:
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
+  that.ie7 = true;
+  $('body').addClass('ie7');
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Make web-mode support HTML with AngularJS data-binding</title><link>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I find it very useful to use `M-x imenu` to jump to the  &lt;a href="http://angularjs.org"&gt;AngularJS&lt;/a&gt; binding point of one HTML file.
+&lt;/p&gt;
+
+&lt;p&gt;
+Insert below code into ~/.emacs:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(eval-after-load 'web-mode
+  '(progn
+     ;; angular imenu
+     (add-to-list 'web-mode-imenu-regexp-list
+                  '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item><item><title>Export org file embedded with code snippets</title><link>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-11-20 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-08 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+I use &lt;a href="http://orgmode.org/"&gt;Org-mode&lt;/a&gt; to record all my notes.
+&lt;/p&gt;
+
+&lt;p&gt;
+As a developer, I place code snippets from many programming languages into one org file.
+&lt;/p&gt;
+
+&lt;p&gt;
+The issue is when exporting the org file, major mode for each language will be loaded to render the code snippet.
+&lt;/p&gt;
+
+&lt;p&gt;
+It means the hooks of the major modes will be executed. Since I put lots of heavy weight setup things in those hooks, my exporting is extremely slow.
+&lt;/p&gt;
+
+&lt;p&gt;
+In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
+&lt;/p&gt;
+
+&lt;p&gt;
+The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(defvar cached-normal-file-full-path nil)
+(defun is-buffer-file-temp ()
   (interactive)
-  "check the tags in tags-table-list and re-create it"
-  (dolist (tag tags-table-list)
-    (my-create-tags-if-needed (file-name-directory tag) t)
-    ))
+  "If (buffer-file-name) is nil or a temp file or HTML file converted from org file"
+  (let ((f (buffer-file-name))
+        org
+        (rlt t))
+    (cond
+     ((not f)
+      ;; file does not exist at all
+      (setq rlt t))
+     ((string= f cached-normal-file-full-path)
+      (setq rlt nil))
+     ((string-match (concat "^" temporary-file-directory) f)
+      ;; file is create from temp directory
+      (setq rlt t))
+     ((and (string-match "\.html$" f)
+           (file-exists-p (setq org (replace-regexp-in-string "\.html$" ".org" f))))
+      ;; file is a html file exported from org-mode
+      (setq rlt t))
+     (t
+      (setq cached-normal-file-full-path f)
+      (setq rlt nil)))
+    rlt))
+&lt;/code&gt;&lt;/pre&gt;
 
-(defun my-auto-update-tags-when-save ()
-  (interactive)
-  (cond
-   ((not my-tags-updated-time)
-    (setq my-tags-updated-time (current-time)))
-   ((&amp;lt; (- (float-time (current-time)) (float-time my-tags-updated-time)) 300)
-    ;; &amp;lt; 300 seconds
-    ;; do nothing
-    )
-   (t
-    (setq my-tags-updated-time (current-time))
-    (my-update-tags)
-    (message "updated tags after %d seconds." (- (float-time (current-time))  (float-time my-tags-updated-time)))
-    )
-   ))
+&lt;/div&gt;
 
-(defun my-setup-develop-environment ()
-    (when (my-project-name-contains-substring "Loris")
-      (cond
-       ((my-project-name-contains-substring "src/desktop")
-        ;; C++ project don't need html tags
-        (setq tags-table-list (list
-                               (my-create-tags-if-needed
-                                (concat (file-name-as-directory (getenv "WXWIN")) "include"))
-                               (my-create-tags-if-needed "~/projs/Loris/loris/src/desktop")))
-        )
-       ((my-project-name-contains-substring "src/html")
-        ;; html project donot need C++ tags
-        (setq tags-table-list (list (my-create-tags-if-needed "~/projs/Loris/loris/src/html")))
-        ))))
+&lt;p&gt;
+Another tip is that exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
+&lt;/p&gt;
 
-(add-hook 'after-save-hook 'my-auto-update-tags-when-save)
-(add-hook 'js2-mode-hook 'my-setup-develop-environment)
-(add-hook 'web-mode-hook 'my-setup-develop-environment)
-(add-hook 'c++-mode-hook 'my-setup-develop-environment)
-(add-hook 'c-mode-hook 'my-setup-develop-environment)
-&lt;/pre&gt;
+&lt;p&gt;
+UPDATE:
+&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; UPDATE: There is some discussion at &lt;a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3"&gt;Google Plus&lt;/a&gt; about using ctags. Kaushal Modi recommended three emacs plugins: &lt;/p&gt;&lt;ol&gt; &lt;li&gt;ctags-update &lt;/li&gt; &lt;li&gt;etags-table &lt;/li&gt; &lt;li&gt;etags-select &lt;/li&gt; &lt;/ol&gt;   &lt;p&gt; I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about &lt;b&gt;only one global variable tags-table-list&lt;/b&gt; makes my code shorter. &lt;/p&gt; &lt;p&gt; But I do like etags-select, it provide better UI for finding tag and I will use it from now on. &lt;/p&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html</guid><pubDate>Tue, 11 Mar 2014 18:52:00 GMT</pubDate></item></channel></rss>
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item></channel></rss>
