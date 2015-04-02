@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:29 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (c)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/c.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:54 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -12,8 +12,7 @@ Style 1:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-if(true) {
+&lt;pre&gt;&lt;code class="lang-c"&gt;if(true) {
     printf("hello world\n");
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -26,8 +25,7 @@ Style 2:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-if(true)
+&lt;pre&gt;&lt;code class="lang-c"&gt;if(true)
 {
     printf("hello world\n");
 }
@@ -57,8 +55,7 @@ Insert below code into ~/.emacs:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun fix-c-indent-offset-according-to-syntax-context (key val)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
   (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
   ;; new value
@@ -102,8 +99,7 @@ For example, the context &lt;b&gt;substatement&lt;/b&gt; corresponds to the code
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-if(true) // press ENTER here
+&lt;pre&gt;&lt;code class="lang-c"&gt;if(true) // press ENTER here
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -114,8 +110,7 @@ And the context &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-void fn () //press ENTER here
+&lt;pre&gt;&lt;code class="lang-c"&gt;void fn () //press ENTER here
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -147,8 +142,7 @@ In that function, just below the code line:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq c-syntactic-context (c-guess-basic-syntax))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq c-syntactic-context (c-guess-basic-syntax))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -159,8 +153,7 @@ You can insert log code as below:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(message "c-syntactic-context=%s" c-syntactic-context)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(message "c-syntactic-context=%s" c-syntactic-context)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -179,8 +172,7 @@ For example, the context &lt;b&gt;statement-cont&lt;/b&gt; corresponds to the us
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-int a=3, // press ENTER here
+&lt;pre&gt;&lt;code class="lang-c"&gt;int a=3, // press ENTER here
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -207,8 +199,7 @@ Here is the code:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-void GuessRowSize(int* w, int* h) {
+&lt;pre&gt;&lt;code class="lang-c"&gt;void GuessRowSize(int* w, int* h) {
     //@see http://sourceforge.net/apps/trac/codelite/browser/trunk/LiteEditor/new_build_tab.cpp?rev=5804
 
 // Determine the row height
@@ -289,8 +280,7 @@ Here is the part of implementation:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-c"&gt;
-bool
+&lt;pre&gt;&lt;code class="lang-c"&gt;bool
 wxDataViewMyButtonRenderer::ActivateCell(const wxRect&amp;amp; rect,
     wxDataViewModel *model,
     const wxDataViewItem&amp;amp; item,

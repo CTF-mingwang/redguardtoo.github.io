@@ -112,8 +112,7 @@ So all you need to do is insert below code into ~/.emacs:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq org2blog/wp-sourcecode-langs
+<pre><code class="lang-lisp">(setq org2blog/wp-sourcecode-langs
       '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
         "erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
         "objc" "perl" "php" "text" "powershell" "python" "ruby" "scala" "sql"
@@ -133,8 +132,7 @@ That's easy to fix. Please log into your blog, modify that plugin online:
 
 <div class="org-src-container">
 
-<pre><code class="lang-diff">
-diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
+<pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index 53b4815..808b14b 100644
 --- a/syntaxhighlighter.php
 +++ b/syntaxhighlighter.php
@@ -624,8 +622,7 @@ Here is a complete example (note how I use setTimeout) written in javascript,
 <div class="org-src-container">
 
 
-<pre><code class="lang-javascript">
-$('#serviceId').val('0451235550');
+<pre><code class="lang-javascript">$('#serviceId').val('0451235550');
 $('#serviceId').keyup();
 console.log('hi');
 setTimeout(function(){
@@ -678,8 +675,7 @@ Step 2, Please insert below code into your ~/.emacs:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun moz-goto-content-and-run-cmd (cmd)
+<pre><code class="lang-lisp">(defun moz-goto-content-and-run-cmd (cmd)
   (comint-send-string (inferior-moz-process)
                       (concat "repl.enter(content);"
                               cmd
@@ -743,8 +739,7 @@ Here is javascript code,
 
 <div class="org-src-container">
 
-<pre><code class="lang-javascript">
-var url=document.URL;
+<pre><code class="lang-javascript">var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
    console.log("for regitration module");
 } else if (/^.*mycompany\.com\.au.*my-account\/my-profile/.test(url)) {
@@ -772,8 +767,7 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun moz-reload-browser ()
+<pre><code class="lang-lisp">(defun moz-reload-browser ()
   (interactive)
   (comint-send-string (inferior-moz-process)
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))

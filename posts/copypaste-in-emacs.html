@@ -197,8 +197,7 @@ Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x pas
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(setq *is-a-mac* (eq system-type 'darwin))
+<pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
 (setq *cygwin* (eq system-type 'cygwin) )
 (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
 (defun copy-to-x-clipboard ()
@@ -266,8 +265,7 @@ Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
 <div class="org-src-container">
 
 
-<pre><code class="lang-conf">
-[rc]
+<pre><code class="lang-conf">[rc]
 use_copy=true
 use_primary=true
 synchronize=true
@@ -307,8 +305,7 @@ Use below command to ssh the Linux server. Then you can share the clipboard betw
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-ssh -X -C -c blowfish-cbc,arcfour $@
+<pre><code class="lang-sh">ssh -X -C -c blowfish-cbc,arcfour $@
 </code></pre>
 
 </div>

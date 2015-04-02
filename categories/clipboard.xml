@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:29 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 ;; {{ copy the file-name/full-path in dired buffer into clipboard
@@ -57,8 +57,7 @@ All you need to do is to add below code into your .emacs:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq *is-a-mac* (eq system-type 'darwin))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq *is-a-mac* (eq system-type 'darwin))
 (setq *cygwin* (eq system-type 'cygwin) )
 (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
 (defun copy-to-x-clipboard ()
@@ -168,8 +167,7 @@ Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x pas
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq *is-a-mac* (eq system-type 'darwin))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq *is-a-mac* (eq system-type 'darwin))
 (setq *cygwin* (eq system-type 'cygwin) )
 (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
 (defun copy-to-x-clipboard ()
@@ -233,8 +231,7 @@ Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-[rc]
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[rc]
 use_copy=true
 use_primary=true
 synchronize=true
@@ -272,8 +269,7 @@ Use below command to ssh the Linux server. Then you can share the clipboard betw
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-ssh -X -C -c blowfish-cbc,arcfour $@
+&lt;pre&gt;&lt;code class="lang-sh"&gt;ssh -X -C -c blowfish-cbc,arcfour $@
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;

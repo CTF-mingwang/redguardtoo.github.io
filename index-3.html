@@ -197,8 +197,7 @@ Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x pas
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(setq *is-a-mac* (eq system-type 'darwin))
+<pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
 (setq *cygwin* (eq system-type 'cygwin) )
 (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
 (defun copy-to-x-clipboard ()
@@ -266,8 +265,7 @@ Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
 <div class="org-src-container">
 
 
-<pre><code class="lang-conf">
-[rc]
+<pre><code class="lang-conf">[rc]
 use_copy=true
 use_primary=true
 synchronize=true
@@ -307,8 +305,7 @@ Use below command to ssh the Linux server. Then you can share the clipboard betw
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-ssh -X -C -c blowfish-cbc,arcfour $@
+<pre><code class="lang-sh">ssh -X -C -c blowfish-cbc,arcfour $@
 </code></pre>
 
 </div>
@@ -545,8 +542,7 @@ Below code will get error message if compiled by gcc 4.6+:
 
 <div class="org-src-container">
 
-<pre><code class="lang-c">
-class A
+<pre><code class="lang-c">class A
 {
    void a();
 }
@@ -573,8 +569,7 @@ Here is my <a href="http://www.cmake.org">cmake</a> code,
 
 <div class="org-src-container">
 
-<pre><code class="lang-cmake">
-if(CMAKE_COMPILER_IS_GNUCC)
+<pre><code class="lang-cmake">if(CMAKE_COMPILER_IS_GNUCC)
   # needed for gcc 4.6+
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
@@ -651,8 +646,7 @@ Here is my fixed version.
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
+<pre><code class="lang-lisp">;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
 ;; But I need global-mode-string,
 ;; @see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html
 ;; use setq-default to set it for /all/ modes

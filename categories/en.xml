@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:13:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Because I've been asked on this issue so many times, I will anwser here once for all.
+&lt;/p&gt;
+
+&lt;p&gt;
+Insert below code into ~/.emacs:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-indent (n)
+  ;; web development
+  (setq coffee-tab-width n) ; coffeescript
+  (setq javascript-indent-level n) ;; javascript-mode
+  (setq js-indent-level n) ; js-mode
+  (setq js2-basic-offset n) ; js2-mode
+  (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq css-indent-offset n) ; css-mode
+  )
+
+(defun my-office-code-style ()
+  (interactive)
+  (message "Office code style!")
+  (setq indent-tabs-mode t) ; use tab instead space
+  (my-setup-indent 4) ;indent 4 spaces
+  )
+
+(defun my-personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  (setq indent-tabs-mode nil) ; use space instead of tab
+  (my-setup-indent 2) ; indent 2 spaces
+  )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Combine above functions with `prog-mode-hook` and `buffer-file-name`, you can do the per project setup easily.
+&lt;/p&gt;
+
+&lt;p&gt;
+I do this thing when switching project. It takes me &lt;b&gt;no more than one minute&lt;/b&gt;. Since my project last at least three months, one minute is not a big deal.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
@@ -220,8 +265,7 @@ This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(global-set-key (kbd "M-/") 'hippie-expand)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; The actual expansion function
 (defun try-expand-by-dict (old)
@@ -298,8 +342,7 @@ For example, "fc-list" is mentioned to list the installed fonts. Since terminal 
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-fc-list | grep Mono
+&lt;pre&gt;&lt;code class="lang-bash"&gt;fc-list | grep Mono
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -330,8 +373,7 @@ Because the manual also gives the details of other components of "Pango font nam
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-[profiles]
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[profiles]
   [[default]]
   use_system_font = False
   # @see emacs manual for tools and explanation of font formats
@@ -360,8 +402,7 @@ python code:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
-import getopt, sys
+&lt;pre&gt;&lt;code class="lang-python"&gt;import getopt, sys
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
     for o, a in opts:
@@ -460,8 +501,7 @@ So here is my complete solution:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun flymake-html-init ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun flymake-html-init ()
        (let* ((temp-file (flymake-init-create-temp-buffer-copy
                           'flymake-create-temp-inplace))
               (local-file (file-relative-name
@@ -495,8 +535,7 @@ The only difference from EmacsWiki is only one line:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
@@ -517,8 +556,7 @@ So here is my improved solution:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-moz-refresh-browser-condition (current-file)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-moz-refresh-browser-condition (current-file)
   "Should return a boolean javascript expression or nil"
   (let (rlt)
     (cond
@@ -567,8 +605,7 @@ Here is the value of `tags-table-list` for one project:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -587,8 +624,7 @@ Change the ctags command line underhood will solve the problem. Here is the actu
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+&lt;pre&gt;&lt;code class="lang-bash"&gt;find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -603,8 +639,7 @@ Here is the Emacs lisp function to wrap above shell command:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
   "return the full path of tags file"
   ;; TODO save the CTAGS-OPTS into hash
   (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
@@ -692,8 +727,7 @@ Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-console.log("var1=", var1)
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;console.log("var1=", var1)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -736,8 +770,7 @@ In below example, I need insert  "console.log('hello is called');" in function "
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-function hello() {
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello() {
   console.log('hello is called');
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -772,8 +805,7 @@ JS example:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-function hello(v1, v2,
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello(v1, v2,
                v3, v4) {
   console.log("v1=", v1, "v2=", v2, "v3=", v3, "v4=", v4);
 }
@@ -861,8 +893,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/ul&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-css"&gt;
-.myclass {
+&lt;pre&gt;&lt;code class="lang-css"&gt;.myclass {
   display: inline-block;
   /* ie7*/
   *display: inline;
@@ -881,8 +912,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
 }
@@ -891,22 +921,4 @@ if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
 &lt;/div&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Make web-mode support HTML with AngularJS data-binding</title><link>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I find it very useful to use `M-x imenu` to jump to the  &lt;a href="http://angularjs.org"&gt;AngularJS&lt;/a&gt; binding point of one HTML file.
-&lt;/p&gt;
-
-&lt;p&gt;
-Insert below code into ~/.emacs:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(eval-after-load 'web-mode
-  '(progn
-     ;; angular imenu
-     (add-to-list 'web-mode-imenu-regexp-list
-                  '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>angular</category><category>emacs</category><category>en</category><category>html</category><guid>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</guid><pubDate>Fri, 21 Nov 2014 11:45:24 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item></channel></rss>

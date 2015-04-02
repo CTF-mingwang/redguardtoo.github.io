@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:13:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
@@ -209,8 +209,7 @@ Here is the value of `tags-table-list` for one project:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -229,8 +228,7 @@ Change the ctags command line underhood will solve the problem. Here is the actu
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+&lt;pre&gt;&lt;code class="lang-bash"&gt;find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -245,8 +243,7 @@ Here is the Emacs lisp function to wrap above shell command:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
   "return the full path of tags file"
   ;; TODO save the CTAGS-OPTS into hash
   (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )

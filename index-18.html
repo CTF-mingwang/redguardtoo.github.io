@@ -97,8 +97,7 @@ Insert below code to ~/.emacs:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(defvar rimenu-position-pair nil "positions before and after imenu jump")
+<pre><code class="lang-lisp">(defvar rimenu-position-pair nil "positions before and after imenu jump")
 (add-hook 'imenu-after-jump-hook
           (lambda ()
             (let ((start-point (marker-position (car mark-ring)))
@@ -210,8 +209,7 @@ In modern MVC javascript frameworks (<a href="https://angularjs.org/">Angular</a
 <div class="org-src-container">
 
 
-<pre><code class="lang-javascript">
-app.controller('MyController', function ($scope, $http) {
+<pre><code class="lang-javascript">app.controller('MyController', function ($scope, $http) {
   // ...
 });
 </code></pre>
@@ -246,8 +244,7 @@ For a simple <a href="https://gist.github.com/redguardtoo/558ea0133daa72010b73#f
 
 <div class="org-src-container">
 
-<pre><code class="lang-javascript">
-function helloworld() {
+<pre><code class="lang-javascript">function helloworld() {
   console.log('hello called');
 }
 
@@ -335,8 +332,7 @@ In the meantime, you can paste below code into your ~/.emacs before the patch is
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-;; below regex list could be used in both js-mode and js2-mode
+<pre><code class="lang-lisp">;; below regex list could be used in both js-mode and js2-mode
 (setq javascript-common-imenu-regex-list
       '(("Controller" "\.controller( *'\\([^']+\\)" 1)
         ("Filter" "\.filter( *'\\([^']+\\)" 1)
@@ -725,8 +721,7 @@ In the "command line" page, github is kind enough to list the command lines to "
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-git checkout -b her-master master
+<pre><code class="lang-sh">git checkout -b her-master master
 git pull git@github.com:her/myproject.git master
 </code></pre>
 
@@ -864,8 +859,7 @@ The path should be shared easily to other application like Emacs.
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+<pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -942,8 +936,7 @@ For example, <b>for "/home/cb/projs/web-portal/app/styles/bootstrap/main.css", y
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">
-ff .../grunt-docs/*bootstrap*css
+<pre><code class="lang-bash">ff .../grunt-docs/*bootstrap*css
 ff web-port*ma*css
 ff styles
 </code></pre>
@@ -987,8 +980,7 @@ Code to insert ~/.bashrc:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-function h () {
+<pre><code class="lang-sh">function h () {
     # reverse history, pick up one line, remove new line characters and put it into clipboard
     if [ -z "$1" ]; then
         history | sed '1!G;h;$!d' | ~/bin/percol.py | sed -n 's/^ *[0-9][0-9]* *\(.*\)$/\1/p'| tr -d '\n' | pclip
@@ -1021,8 +1013,7 @@ Code to insert ~/.bashrc:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-function glsf () {
+<pre><code class="lang-sh">function glsf () {
     local str=`git --no-pager log --oneline --stat $* |  ~/bin/percol.py`
     if [[ $str =~ ^[[:space:]]*([a-z0-9A-Z_.\/-]*).*$ ]]; then
         echo -n ${BASH_REMATCH[1]} |pclip;
@@ -1084,8 +1075,7 @@ Here is the script,
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-#!/bin/bash
+<pre><code class="lang-sh">#!/bin/bash
 [ -z "$EMACS_VERSION" ] &amp;&amp; EMACS_VERSION="23.4"
 [ -z "$EMACS_URL" ] &amp;&amp; EMACS_URL="http://gnu.mirror.uber.com.au/emacs"
 # I've assign 12G memory to /tmp as ramdisk
@@ -1106,8 +1096,7 @@ Usage:
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-./install-emacs
+<pre><code class="lang-sh">./install-emacs
 #or
 EMACS_VERSION=23.4 ./install-emacs
 </code></pre>
@@ -1185,8 +1174,7 @@ Insert below code into ~/.bashrc so TTAGROOT value is set when you logged into b
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-export TTAGROOT="/home/cb/projects/app1"
+<pre><code class="lang-sh">export TTAGROOT="/home/cb/projects/app1"
 </code></pre>
 
 </div>
@@ -1201,8 +1189,7 @@ Here is a sample file named test.sh:
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-#!/bin/bash
+<pre><code class="lang-sh">#!/bin/bash
 [ -z "$TTAGROOT" ] &amp;&amp; TTAGROOT="hard-coded-full-path"
 echo "TTAGROOT = $TTAGROOT"
 </code></pre>
@@ -1219,8 +1206,7 @@ Or you can override the TTAGROOT value when you executing "test.sh":
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-TTAGROOT="hello" ./test.sh
+<pre><code class="lang-sh">TTAGROOT="hello" ./test.sh
 </code></pre>
 
 </div>
@@ -1271,8 +1257,7 @@ Style 1:
 <div class="org-src-container">
 
 
-<pre><code class="lang-c">
-if(true) {
+<pre><code class="lang-c">if(true) {
     printf("hello world\n");
 }
 </code></pre>
@@ -1285,8 +1270,7 @@ Style 2:
 
 <div class="org-src-container">
 
-<pre><code class="lang-c">
-if(true)
+<pre><code class="lang-c">if(true)
 {
     printf("hello world\n");
 }
@@ -1318,8 +1302,7 @@ Insert below code into ~/.emacs:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(defun fix-c-indent-offset-according-to-syntax-context (key val)
+<pre><code class="lang-lisp">(defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
   (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
   ;; new value
@@ -1365,8 +1348,7 @@ For example, the context <b>substatement</b> corresponds to the code like below:
 <div class="org-src-container">
 
 
-<pre><code class="lang-c">
-if(true) // press ENTER here
+<pre><code class="lang-c">if(true) // press ENTER here
 </code></pre>
 
 </div>
@@ -1377,8 +1359,7 @@ And the context <b>func-decl-cont</b> corresponds to:
 
 <div class="org-src-container">
 
-<pre><code class="lang-c">
-void fn () //press ENTER here
+<pre><code class="lang-c">void fn () //press ENTER here
 </code></pre>
 
 </div>
@@ -1412,8 +1393,7 @@ In that function, just below the code line:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(setq c-syntactic-context (c-guess-basic-syntax))
+<pre><code class="lang-lisp">(setq c-syntactic-context (c-guess-basic-syntax))
 </code></pre>
 
 </div>
@@ -1424,8 +1404,7 @@ You can insert log code as below:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(message "c-syntactic-context=%s" c-syntactic-context)
+<pre><code class="lang-lisp">(message "c-syntactic-context=%s" c-syntactic-context)
 </code></pre>
 
 </div>
@@ -1444,8 +1423,7 @@ For example, the context <b>statement-cont</b> corresponds to the use case like 
 
 <div class="org-src-container">
 
-<pre><code class="lang-c">
-int a=3, // press ENTER here
+<pre><code class="lang-c">int a=3, // press ENTER here
 </code></pre>
 
 </div>
@@ -1629,8 +1607,7 @@ In Emacs, everyting could be optimized. Please copy below code into your ~/.emac
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(defun message-select-forwarded-email-tags ()
+<pre><code class="lang-lisp">(defun message-select-forwarded-email-tags ()
   "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
   (interactive)
   (let (start rlt)

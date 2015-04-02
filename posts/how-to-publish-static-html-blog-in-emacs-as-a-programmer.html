@@ -153,8 +153,7 @@ Requirements:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun org2nikola-after-hook-setup (title slug)
+<pre><code class="lang-lisp">(defun org2nikola-after-hook-setup (title slug)
   (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
         (nikola-dir (file-truename "~/projs/nikola-root"))
         (password "yourpassowrd")
@@ -255,8 +254,7 @@ Here is the Emacs lisp code I borrowed from Org2blog:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun org2nikola-replace-pre (html)
+<pre><code class="lang-lisp">(defun org2nikola-replace-pre (html)
   "Replace pre blocks with sourcecode shortcode blocks.
 shamelessly copied from org2blog/wp-replace-pre()"
   (save-excursion
@@ -372,8 +370,7 @@ The final output contain lines like:
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
+<pre><code class="lang-sh">ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
 </code></pre>
 
 </div>

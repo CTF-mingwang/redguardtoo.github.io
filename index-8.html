@@ -172,8 +172,7 @@ I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">gith
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
+<pre><code class="lang-lisp">(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
     (add-to-list 'yas-snippet-dirs my-yasnippets))
 ;; yasnippet set up code, blah blah ...
@@ -617,8 +616,7 @@ Here is my configuration of window-numbering.el:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(require 'window-numbering)
+<pre><code class="lang-lisp">(require 'window-numbering)
 ;; highlight the window number in pink color
 (custom-set-faces '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
 (window-numbering-mode 1)
@@ -653,8 +651,7 @@ Here is my configuration:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
+<pre><code class="lang-lisp">(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
 (global-set-key (kbd "C-c C-b C-j") 'buf-move-down)
 (global-set-key (kbd "C-c C-b C-h") 'buf-move-left)
 (global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
@@ -690,8 +687,7 @@ Here is the code:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(define-key evil-normal-state-map ",1" 'select-window-1)
+<pre><code class="lang-lisp">(define-key evil-normal-state-map ",1" 'select-window-1)
 (define-key evil-normal-state-map ",2" 'select-window-2)
 (define-key evil-normal-state-map ",3" 'select-window-3)
 (define-key evil-normal-state-map ",4" 'select-window-4)

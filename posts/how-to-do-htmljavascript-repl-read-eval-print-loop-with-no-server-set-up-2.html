@@ -217,8 +217,7 @@ Here is a complete example (note how I use setTimeout) written in javascript,
 <div class="org-src-container">
 
 
-<pre><code class="lang-javascript">
-$('#serviceId').val('0451235550');
+<pre><code class="lang-javascript">$('#serviceId').val('0451235550');
 $('#serviceId').keyup();
 console.log('hi');
 setTimeout(function(){
@@ -271,8 +270,7 @@ Step 2, Please insert below code into your ~/.emacs:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun moz-goto-content-and-run-cmd (cmd)
+<pre><code class="lang-lisp">(defun moz-goto-content-and-run-cmd (cmd)
   (comint-send-string (inferior-moz-process)
                       (concat "repl.enter(content);"
                               cmd
@@ -336,8 +334,7 @@ Here is javascript code,
 
 <div class="org-src-container">
 
-<pre><code class="lang-javascript">
-var url=document.URL;
+<pre><code class="lang-javascript">var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
    console.log("for regitration module");
 } else if (/^.*mycompany\.com\.au.*my-account\/my-profile/.test(url)) {
@@ -365,8 +362,7 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun moz-reload-browser ()
+<pre><code class="lang-lisp">(defun moz-reload-browser ()
   (interactive)
   (comint-send-string (inferior-moz-process)
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))

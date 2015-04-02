@@ -341,8 +341,7 @@ custom.el is my personal emacs configuration. I use it with my publicized <a hre
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-;; I'm in Australia now
+<pre><code class="lang-lisp">;; I'm in Australia now
 ;; I'm in Australia now
 (setq system-time-locale "C")
 
@@ -760,8 +759,7 @@ After subscribing the group INBOX, the INBOX could still be <b>invisible</b> if 
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(defun my-gnus-group-list-subscribed-groups ()
+<pre><code class="lang-lisp">(defun my-gnus-group-list-subscribed-groups ()
   "List all subscribed groups with or without un-read messages"
   (interactive)
   (gnus-group-list-all-groups 5)
@@ -989,8 +987,7 @@ I assign TAB key to this command,
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(add-hook 'message-mode-hook
+<pre><code class="lang-lisp">(add-hook 'message-mode-hook
           '(lambda ()
              (local-set-key "&lt;TAB&gt;" 'bbdb-complete-name)))
 </code></pre>
@@ -1020,8 +1017,7 @@ Then insert below code into ~/.emacs,
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(add-hook 'message-mode-hook
+<pre><code class="lang-lisp">(add-hook 'message-mode-hook
           '(lambda ()
              (bbdb-initialize 'message)
              (bbdb-initialize 'gnus)
@@ -1087,8 +1083,7 @@ Here is the code to be inserted into ~/.emacs:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+<pre><code class="lang-lisp">;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
 ;; (system-name) won't work because as Optus required, my /etc/hosts is changed
 (setq my-hostname (with-temp-buffer
         (shell-command "hostname" t)
@@ -1166,8 +1161,7 @@ Then insert below code into ~/.emacs,
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-(setq mm-text-html-renderer 'w3m)
+<pre><code class="lang-lisp">(setq mm-text-html-renderer 'w3m)
 </code></pre>
 
 </div>
@@ -1204,8 +1198,7 @@ You also need insert below code into ~/.emacs,
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq gnus-use-cache t)
+<pre><code class="lang-lisp">(setq gnus-use-cache t)
 </code></pre>
 
 </div>
@@ -1230,8 +1223,7 @@ Here is a sample,
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(add-to-list 'gnus-secondary-select-methods
+<pre><code class="lang-lisp">(add-to-list 'gnus-secondary-select-methods
              '(nnimap "gmail-second"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
@@ -1263,8 +1255,7 @@ Here is a sample,
 The ~/.gnus.el
 </p>
 <div class="org-src-container">
-<pre><code class="lang-lisp">
-; -*- Lisp -*-
+<pre><code class="lang-lisp">; -*- Lisp -*-
 (require 'nnir)
 
 ;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
@@ -1422,8 +1413,7 @@ The ~/.authinfo.gpg
 
 <div class="org-src-container">
 
-<pre><code class="lang-conf">
-machine imap.gmail.com login username@gmail.com password my-secret-password port 993
+<pre><code class="lang-conf">machine imap.gmail.com login username@gmail.com password my-secret-password port 993
 machine smtp.gmail.com login username@gmail.com password my-secret-password port 587
 </code></pre>
 

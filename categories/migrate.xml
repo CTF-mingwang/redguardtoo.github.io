@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:28 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Here are the steps.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-# install python2 and make sure sqlite is supported
+&lt;pre&gt;&lt;code class="lang-sh"&gt;# install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 
 # install dependencies (requests is required by zen theme)
@@ -44,8 +43,7 @@ Use below command to fix embedded code in HTML files:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
+&lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -61,8 +59,7 @@ Use below script to fixed the xml dumped from wordpress:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
-#!/usr/bin/python
+&lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
 import getopt, sys, csv
 def usage():
     print '''
@@ -118,8 +115,7 @@ Install syntaxhighlighter and google analytics, insert below code into conf.py:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-python"&gt;
-BODY_END = """
+&lt;pre&gt;&lt;code class="lang-python"&gt;BODY_END = """
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&amp;gt;&amp;lt;/script&amp;gt;
 &amp;lt;script type='text/javascript'&amp;gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (firefox)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/firefox.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (firefox)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/firefox.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -17,8 +17,7 @@ So here is my improved solution:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-moz-refresh-browser-condition (current-file)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-moz-refresh-browser-condition (current-file)
   "Should return a boolean javascript expression or nil"
   (let (rlt)
     (cond
@@ -86,8 +85,7 @@ Insert below code into ~/.keysnail.js:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-hook.setHook("PluginLoaded", function () {
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;hook.setHook("PluginLoaded", function () {
     if (!plugins.hok) return;
 
     /* HoK 1.3.9+ required */
@@ -179,8 +177,7 @@ Insert below code into ~/.keysnail.js:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
   ext.exec("tanything", arg);
 }, "view all tabs", true);
 &lt;/code&gt;&lt;/pre&gt;

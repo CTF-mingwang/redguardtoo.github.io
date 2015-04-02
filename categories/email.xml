@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:30 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 &lt;/p&gt;
 
@@ -48,8 +48,7 @@ In Emacs, everyting could be optimized. Please copy below code into your ~/.emac
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun message-select-forwarded-email-tags ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun message-select-forwarded-email-tags ()
   "select the &amp;lt;#mml-or-what-ever&amp;gt; tags in message-mode"
   (interactive)
   (let (start rlt)
@@ -163,8 +162,7 @@ Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LD
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
 # ubuntu/debian only; for other distribution, just download src package
 sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 &lt;/code&gt;&lt;/pre&gt;
@@ -246,8 +244,7 @@ Insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; gnus+davmail bug, so I have to use pop3 for davmail
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; gnus+davmail bug, so I have to use pop3 for davmail
 ;; http://permalink.gmane.org/gmane.emacs.gnus.general/83301
 ;; but delete all the mails on server is scary
 (setq pop3-leave-mail-on-server t)
@@ -305,8 +302,7 @@ I publicize my .emacs.d at &lt;a href="https://github.com/redguardtoo/emacs.d"&g
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
     (add-to-list 'yas-snippet-dirs my-yasnippets))
 ;; yasnippet set up code, blah blah ...
@@ -368,8 +364,7 @@ Run below command in shell:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -400,8 +395,7 @@ This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-perl"&gt;
-# content of /root/.cpan/CPAN/MyConfig.pm
+&lt;pre&gt;&lt;code class="lang-perl"&gt;# content of /root/.cpan/CPAN/MyConfig.pm
 $CPAN::Config = {
   'applypatch' =&amp;gt; q[],
   'auto_commit' =&amp;gt; q[0],
@@ -478,8 +472,7 @@ After packages installed, double check them locally:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-perl -MDBI -e 'print $MIME::DBI::VERSION'
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -MDBI -e 'print $MIME::DBI::VERSION'
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -490,8 +483,7 @@ If there is any error:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-perl -V
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
 sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 &lt;/code&gt;&lt;/pre&gt;
@@ -517,8 +509,7 @@ Run the below command to fix the root issue.
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -529,8 +520,7 @@ Here is my popfile setup for davmail server (please note ssl is disabled),
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-bayes_bad_sqlite_version 4.0.0
+&lt;pre&gt;&lt;code class="lang-conf"&gt;bayes_bad_sqlite_version 4.0.0
 bayes_corpus corpus
 bayes_database popfile.db
 bayes_dbauth 
@@ -640,8 +630,7 @@ See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopf
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-cd ~/bin/popfile;perl popfile.pl
+&lt;pre&gt;&lt;code class="lang-sh"&gt;cd ~/bin/popfile;perl popfile.pl
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -655,8 +644,7 @@ cd ~/bin/popfile;perl popfile.pl
 Insert below code in ~/.bashrc:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-OS_NAME=`uname -s`
+&lt;pre&gt;&lt;code class="lang-bash"&gt;OS_NAME=`uname -s`
 if [ $OS_NAME == Linux ]; then
    # start popfile
    if [ -f $HOME/bin/popfile/popfile.pl ]; then
@@ -686,8 +674,7 @@ here is content of popfile.service.
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-[Unit]
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[Unit]
 Description=POPFile (Automatic Email Classification) Service
 
 [Service]
@@ -858,8 +845,7 @@ After subscribing the group INBOX, the INBOX could still be &lt;b&gt;invisible&l
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-gnus-group-list-subscribed-groups ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-gnus-group-list-subscribed-groups ()
   "List all subscribed groups with or without un-read messages"
   (interactive)
   (gnus-group-list-all-groups 5)
@@ -1068,8 +1054,7 @@ I assign TAB key to this command,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-hook 'message-mode-hook
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'message-mode-hook
           '(lambda ()
              (local-set-key "&amp;lt;TAB&amp;gt;" 'bbdb-complete-name)))
 &lt;/code&gt;&lt;/pre&gt;
@@ -1095,8 +1080,7 @@ Then insert below code into ~/.emacs,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-hook 'message-mode-hook
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'message-mode-hook
           '(lambda ()
              (bbdb-initialize 'message)
              (bbdb-initialize 'gnus)
@@ -1158,8 +1142,7 @@ Here is the code to be inserted into ~/.emacs:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
 ;; (system-name) won't work because as Optus required, my /etc/hosts is changed
 (setq my-hostname (with-temp-buffer
         (shell-command "hostname" t)
@@ -1233,8 +1216,7 @@ Then insert below code into ~/.emacs,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq mm-text-html-renderer 'w3m)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq mm-text-html-renderer 'w3m)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -1269,8 +1251,7 @@ You also need insert below code into ~/.emacs,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq gnus-use-cache t)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-use-cache t)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -1293,8 +1274,7 @@ Here is a sample,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-to-list 'gnus-secondary-select-methods
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'gnus-secondary-select-methods
              '(nnimap "gmail-second"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
@@ -1324,8 +1304,7 @@ Here is a sample,
 The ~/.gnus.el
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-; -*- Lisp -*-
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;; -*- Lisp -*-
 (require 'nnir)
 
 ;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
@@ -1483,8 +1462,7 @@ The ~/.authinfo.gpg
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-machine imap.gmail.com login username@gmail.com password my-secret-password port 993
+&lt;pre&gt;&lt;code class="lang-conf"&gt;machine imap.gmail.com login username@gmail.com password my-secret-password port 993
 machine smtp.gmail.com login username@gmail.com password my-secret-password port 587
 &lt;/code&gt;&lt;/pre&gt;
 

@@ -160,8 +160,7 @@ All you need to do is to add below code into your .emacs:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq *is-a-mac* (eq system-type 'darwin))
+<pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
 (setq *cygwin* (eq system-type 'cygwin) )
 (setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
 (defun copy-to-x-clipboard ()

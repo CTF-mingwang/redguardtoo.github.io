@@ -152,8 +152,7 @@ Insert below code into ~/.bashrc so TTAGROOT value is set when you logged into b
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-export TTAGROOT="/home/cb/projects/app1"
+<pre><code class="lang-sh">export TTAGROOT="/home/cb/projects/app1"
 </code></pre>
 
 </div>
@@ -168,8 +167,7 @@ Here is a sample file named test.sh:
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-#!/bin/bash
+<pre><code class="lang-sh">#!/bin/bash
 [ -z "$TTAGROOT" ] &amp;&amp; TTAGROOT="hard-coded-full-path"
 echo "TTAGROOT = $TTAGROOT"
 </code></pre>
@@ -186,8 +184,7 @@ Or you can override the TTAGROOT value when you executing "test.sh":
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-TTAGROOT="hello" ./test.sh
+<pre><code class="lang-sh">TTAGROOT="hello" ./test.sh
 </code></pre>
 
 </div>

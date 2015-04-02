@@ -161,8 +161,7 @@ Run below command in shell:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
+<pre><code class="lang-sh">sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 </code></pre>
 
 </div>
@@ -193,8 +192,7 @@ This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 
 <div class="org-src-container">
 
-<pre><code class="lang-perl">
-# content of /root/.cpan/CPAN/MyConfig.pm
+<pre><code class="lang-perl"># content of /root/.cpan/CPAN/MyConfig.pm
 $CPAN::Config = {
   'applypatch' =&gt; q[],
   'auto_commit' =&gt; q[0],
@@ -271,8 +269,7 @@ After packages installed, double check them locally:
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-perl -MDBI -e 'print $MIME::DBI::VERSION'
+<pre><code class="lang-sh">perl -MDBI -e 'print $MIME::DBI::VERSION'
 </code></pre>
 
 </div>
@@ -283,8 +280,7 @@ If there is any error:
 
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-perl -V
+<pre><code class="lang-sh">perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
 sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 </code></pre>
@@ -312,8 +308,7 @@ Run the below command to fix the root issue.
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+<pre><code class="lang-sh">sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
 </code></pre>
 
 </div>
@@ -324,8 +319,7 @@ Here is my popfile setup for davmail server (please note ssl is disabled),
 
 <div class="org-src-container">
 
-<pre><code class="lang-conf">
-bayes_bad_sqlite_version 4.0.0
+<pre><code class="lang-conf">bayes_bad_sqlite_version 4.0.0
 bayes_corpus corpus
 bayes_database popfile.db
 bayes_dbauth 
@@ -437,8 +431,7 @@ See <a href="http://getpopfile.org/docs/howtos:runlocation">http://getpopfile.or
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-cd ~/bin/popfile;perl popfile.pl
+<pre><code class="lang-sh">cd ~/bin/popfile;perl popfile.pl
 </code></pre>
 
 </div>
@@ -454,8 +447,7 @@ cd ~/bin/popfile;perl popfile.pl
 Insert below code in ~/.bashrc:
 </p>
 <div class="org-src-container">
-<pre><code class="lang-bash">
-OS_NAME=`uname -s`
+<pre><code class="lang-bash">OS_NAME=`uname -s`
 if [ $OS_NAME == Linux ]; then
    # start popfile
    if [ -f $HOME/bin/popfile/popfile.pl ]; then
@@ -487,8 +479,7 @@ here is content of popfile.service.
 
 <div class="org-src-container">
 
-<pre><code class="lang-conf">
-[Unit]
+<pre><code class="lang-conf">[Unit]
 Description=POPFile (Automatic Email Classification) Service
 
 [Service]

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gnus)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gnus.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gnus)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gnus.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:52 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 &lt;/p&gt;
 
@@ -48,8 +48,7 @@ In Emacs, everyting could be optimized. Please copy below code into your ~/.emac
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun message-select-forwarded-email-tags ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun message-select-forwarded-email-tags ()
   "select the &amp;lt;#mml-or-what-ever&amp;gt; tags in message-mode"
   (interactive)
   (let (start rlt)
@@ -158,8 +157,7 @@ Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LD
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
 # ubuntu/debian only; for other distribution, just download src package
 sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 &lt;/code&gt;&lt;/pre&gt;
@@ -241,8 +239,7 @@ Insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; gnus+davmail bug, so I have to use pop3 for davmail
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; gnus+davmail bug, so I have to use pop3 for davmail
 ;; http://permalink.gmane.org/gmane.emacs.gnus.general/83301
 ;; but delete all the mails on server is scary
 (setq pop3-leave-mail-on-server t)
@@ -401,8 +398,7 @@ After subscribing the group INBOX, the INBOX could still be &lt;b&gt;invisible&l
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-gnus-group-list-subscribed-groups ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-gnus-group-list-subscribed-groups ()
   "List all subscribed groups with or without un-read messages"
   (interactive)
   (gnus-group-list-all-groups 5)
@@ -611,8 +607,7 @@ I assign TAB key to this command,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-hook 'message-mode-hook
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'message-mode-hook
           '(lambda ()
              (local-set-key "&amp;lt;TAB&amp;gt;" 'bbdb-complete-name)))
 &lt;/code&gt;&lt;/pre&gt;
@@ -638,8 +633,7 @@ Then insert below code into ~/.emacs,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-hook 'message-mode-hook
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'message-mode-hook
           '(lambda ()
              (bbdb-initialize 'message)
              (bbdb-initialize 'gnus)
@@ -701,8 +695,7 @@ Here is the code to be inserted into ~/.emacs:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
 ;; (system-name) won't work because as Optus required, my /etc/hosts is changed
 (setq my-hostname (with-temp-buffer
         (shell-command "hostname" t)
@@ -776,8 +769,7 @@ Then insert below code into ~/.emacs,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq mm-text-html-renderer 'w3m)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq mm-text-html-renderer 'w3m)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -812,8 +804,7 @@ You also need insert below code into ~/.emacs,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq gnus-use-cache t)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-use-cache t)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -836,8 +827,7 @@ Here is a sample,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(add-to-list 'gnus-secondary-select-methods
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'gnus-secondary-select-methods
              '(nnimap "gmail-second"
                       (nnimap-address "imap.gmail.com")
                       (nnimap-server-port 993)
@@ -867,8 +857,7 @@ Here is a sample,
 The ~/.gnus.el
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-; -*- Lisp -*-
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;; -*- Lisp -*-
 (require 'nnir)
 
 ;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
@@ -1026,8 +1015,7 @@ The ~/.authinfo.gpg
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-machine imap.gmail.com login username@gmail.com password my-secret-password port 993
+&lt;pre&gt;&lt;code class="lang-conf"&gt;machine imap.gmail.com login username@gmail.com password my-secret-password port 993
 machine smtp.gmail.com login username@gmail.com password my-secret-password port 587
 &lt;/code&gt;&lt;/pre&gt;
 

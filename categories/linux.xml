@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:32 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 It's becasue Emacs has great documentation and enough APIs.
 &lt;/p&gt;
 
@@ -24,8 +24,7 @@ For example, "fc-list" is mentioned to list the installed fonts. Since terminal 
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-fc-list | grep Mono
+&lt;pre&gt;&lt;code class="lang-bash"&gt;fc-list | grep Mono
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -56,8 +55,7 @@ Because the manual also gives the details of other components of "Pango font nam
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-[profiles]
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[profiles]
   [[default]]
   use_system_font = False
   # @see emacs manual for tools and explanation of font formats
@@ -170,8 +168,7 @@ Paste below code into ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; flyspell set up for web-mode
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; flyspell set up for web-mode
 (defun web-mode-flyspell-verify ()
   (let ((f (get-text-property (- (point) 1) 'face))
         thing
@@ -236,8 +233,7 @@ Please paste below code into ~/.emacs,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; if (aspell installed) { use aspell}
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; if (aspell installed) { use aspell}
 ;; else if (hunspell installed) { use hunspell }
 ;; whatever spell checker I use, I always use English dictionary
 ;; I prefer use aspell because:

@@ -144,8 +144,7 @@ Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LD
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
+<pre><code class="lang-sh">sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
 # ubuntu/debian only; for other distribution, just download src package
 sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 </code></pre>
@@ -232,8 +231,7 @@ Insert below code into your ~/.emacs:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-;; gnus+davmail bug, so I have to use pop3 for davmail
+<pre><code class="lang-lisp">;; gnus+davmail bug, so I have to use pop3 for davmail
 ;; http://permalink.gmane.org/gmane.emacs.gnus.general/83301
 ;; but delete all the mails on server is scary
 (setq pop3-leave-mail-on-server t)

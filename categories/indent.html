@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Jump to the positions before and after `M-x imenu` | Chen's blog</title>
+    <title>Posts about indent | Chen's blog</title>
 
     
             <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
@@ -11,7 +11,7 @@
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 
-      <link rel="canonical" href="http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html">
+      <link rel="canonical" href="http://blog.binchen.org/categories/indent.html">
 
 
 
@@ -40,28 +40,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
     
 
-    <meta name="author" content="Chen Bin">
-    
-    <meta property="og:site_name" content="Chen's blog">
-    <meta property="og:title" content="Jump to the positions before and after `M-x imenu`">
-    <meta property="og:url" content="http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html">
-    <meta property="og:description" content="As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
-
-
-
-1 Solution
-
-
-Insert">
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2014-11-15T02:15:32+00:00">
-           <meta property="article:tag" content="emacs">
-           <meta property="article:tag" content="en">
-
-    
-
-    
-
+        <link rel="alternate" type="application/rss+xml" title="RSS for tag indent" href="indent.xml">
 
 
 </head>
@@ -71,7 +50,7 @@ Insert">
         
             <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
             <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
@@ -82,136 +61,19 @@ Insert">
     <section class="page-content">
         <div class="content" rel="main">
             
-    <div class="post">
-    
-    <h1 class="p-name entry-title" itemprop="headline name">Jump to the positions before and after `M-x imenu`</h1>
-
-        <div class="meta">
-            <div class="authordate">
-                <time class="timeago" datetime="2014-11-15T02:15:32+00:00">2014-11-15 02:15</time>
-            
-
-            
-          |  
-        <a href="jump-to-the-positions-before-and-after-m-x-imenu.wp" id="sourcelink">Source</a>
-
-            </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-        </ul>
+<article class="tagpage">
+    <header>
+        <h1>Posts about indent</h1>
+        <div class="metadata">
+                <p class="feedlink"><a href="indent.xml" type="application/rss+xml">RSS feed</a></p>
         </div>
-
-        </div>
-        <div class="body">
-            <div>
-<p>
-As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Solution</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-Insert below code to ~/.emacs:
-</p>
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defvar rimenu-position-pair nil "positions before and after imenu jump")
-(add-hook 'imenu-after-jump-hook
-          (lambda ()
-            (let ((start-point (marker-position (car mark-ring)))
-                  (end-point (point)))
-              (setq rimenu-position-pair (list start-point end-point)))))
-
-(defun rimenu-jump ()
-  "jump to the closest before/after position of latest imenu jump"
-  (interactive)
-  (when rimenu-position-pair
-    (let ((p1 (car rimenu-position-pair))
-          (p2 (cadr rimenu-position-pair)))
-
-      ;; jump to the far way point of the rimenu-position-pair
-      (if (&lt; (abs (- (point) p1))
-             (abs (- (point) p2)))
-          (goto-char p2)
-          (goto-char p1))
-      )))
-</code></pre>
-
-</div>
-
-<p>
-Now you can use `M-x rimenu-jump` to jump.
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Technical details</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
-</p>
-<p>
-I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
-</p>
-
-<p>
-Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ">original discussion on G+</a>. Thanks to <a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts">Jorge A. Alfaro Murillo</a> for enlightening me on the solution.
-</p>
-
-<p></p>
-</div>
-</div>
-</div>
-        </div>
-        
-        <ul class="pager">
-            <li class="previous">
-                <a href="why-emacs-is-better-editor-part-two.html" rel="prev" title="Why Emacs is a better editor, part two">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="how-to-publish-static-html-blog-in-emacs-as-a-programmer.html" rel="next" title="How a programmer publish static HTML blog in Emacs">Next post</a>
-            </li>
-        </ul>
-
-            
-        
-        <div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/jump-to-the-positions-before-and-after-m-x-imenu.html",
-        disqus_title="Jump to the positions before and after `M-x imenu`",
-        disqus_identifier="cache/posts/jump-to-the-positions-before-and-after-m-x-imenu.html",
-        disqus_config = function () {
-            this.language = "en";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-        
-
-    </div>
-
-        
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
+    </header>
+    <ul class="postlist">
+        <li>
+<a href="../posts/easy-indentation-setup-in-emacs-for-web-development.html" class="listtitle">Easy indentation setup in Emacs for web development</a> <time class="listdate" datetime="2015-04-02T13:57:48+00:00" title="2015-04-02 13:57">2015-04-02 13:57</time>
+</li>
+    </ul>
+</article>
 
              
         <footer id="footer" role="contentinfo">

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:28 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
@@ -25,8 +25,7 @@ So here is my complete solution:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun flymake-html-init ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun flymake-html-init ()
        (let* ((temp-file (flymake-init-create-temp-buffer-copy
                           'flymake-create-temp-inplace))
               (local-file (file-relative-name
@@ -60,8 +59,7 @@ The only difference from EmacsWiki is only one line:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Make web-mode support HTML with AngularJS data-binding</title><link>http://blog.binchen.org/posts/make-web-mode-support-html-with-angularjs-data-binding.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
@@ -74,8 +72,7 @@ Insert below code into ~/.emacs:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(eval-after-load 'web-mode
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'web-mode
   '(progn
      ;; angular imenu
      (add-to-list 'web-mode-imenu-regexp-list
@@ -113,8 +110,7 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defvar cached-normal-file-full-path nil)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar cached-normal-file-full-path nil)
 (defun is-buffer-file-temp ()
   (interactive)
   "If (buffer-file-name) is nil or a temp file or HTML file converted from org file"
@@ -248,8 +244,7 @@ Here is a complete example (note how I use setTimeout) written in javascript,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-$('#serviceId').val('0451235550');
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;$('#serviceId').val('0451235550');
 $('#serviceId').keyup();
 console.log('hi');
 setTimeout(function(){
@@ -300,8 +295,7 @@ Step 2, Please insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-goto-content-and-run-cmd (cmd)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-goto-content-and-run-cmd (cmd)
   (comint-send-string (inferior-moz-process)
                       (concat "repl.enter(content);"
                               cmd
@@ -361,8 +355,7 @@ Here is javascript code,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-var url=document.URL;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
    console.log("for regitration module");
 } else if (/^.*mycompany\.com\.au.*my-account\/my-profile/.test(url)) {
@@ -388,8 +381,7 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-reload-browser ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-reload-browser ()
   (interactive)
   (comint-send-string (inferior-moz-process)
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))

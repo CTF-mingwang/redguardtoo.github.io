@@ -149,8 +149,7 @@ So here is my complete solution:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(defun flymake-html-init ()
+<pre><code class="lang-lisp">(defun flymake-html-init ()
        (let* ((temp-file (flymake-init-create-temp-buffer-copy
                           'flymake-create-temp-inplace))
               (local-file (file-relative-name
@@ -184,8 +183,7 @@ The only difference from EmacsWiki is only one line:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
+<pre><code class="lang-lisp">'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 </code></pre>
 
 </div>

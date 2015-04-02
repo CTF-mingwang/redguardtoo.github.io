@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:13:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
@@ -209,8 +209,7 @@ Here is the value of `tags-table-list` for one project:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -229,8 +228,7 @@ Change the ctags command line underhood will solve the problem. Here is the actu
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+&lt;pre&gt;&lt;code class="lang-bash"&gt;find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -245,8 +243,7 @@ Here is the Emacs lisp function to wrap above shell command:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
   "return the full path of tags file"
   ;; TODO save the CTAGS-OPTS into hash
   (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
@@ -334,8 +331,7 @@ Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-console.log("var1=", var1)
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;console.log("var1=", var1)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -378,8 +374,7 @@ In below example, I need insert  "console.log('hello is called');" in function "
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-function hello() {
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello() {
   console.log('hello is called');
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -414,8 +409,7 @@ JS example:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-function hello(v1, v2,
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello(v1, v2,
                v3, v4) {
   console.log("v1=", v1, "v2=", v2, "v3=", v3, "v4=", v4);
 }
@@ -503,8 +497,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/ul&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-css"&gt;
-.myclass {
+&lt;pre&gt;&lt;code class="lang-css"&gt;.myclass {
   display: inline-block;
   /* ie7*/
   *display: inline;
@@ -523,8 +516,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
 }
@@ -566,8 +558,7 @@ In modern MVC javascript frameworks (&lt;a href="https://angularjs.org/"&gt;Angu
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-app.controller('MyController', function ($scope, $http) {
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;app.controller('MyController', function ($scope, $http) {
   // ...
 });
 &lt;/code&gt;&lt;/pre&gt;
@@ -600,8 +591,7 @@ For a simple &lt;a href="https://gist.github.com/redguardtoo/558ea0133daa72010b7
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-function helloworld() {
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function helloworld() {
   console.log('hello called');
 }
 
@@ -687,8 +677,7 @@ In the meantime, you can paste below code into your ~/.emacs before the patch is
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; below regex list could be used in both js-mode and js2-mode
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; below regex list could be used in both js-mode and js2-mode
 (setq javascript-common-imenu-regex-list
       '(("Controller" "\.controller( *'\\([^']+\\)" 1)
         ("Filter" "\.filter( *'\\([^']+\\)" 1)
@@ -851,8 +840,7 @@ I added below code into bottom of functions.php (Appearance =&amp;gt; Editor):
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-php"&gt;
-add_action('wp_enqueue_scripts', 'CDNJS_scripts');
+&lt;pre&gt;&lt;code class="lang-php"&gt;add_action('wp_enqueue_scripts', 'CDNJS_scripts');
 function CDNJS_scripts() 
 {
     wp_deregister_script('jquery');
@@ -869,8 +857,7 @@ For js from SyntaxHighlighter Evolved (Plugins =&amp;gt; Installed Plugins =&amp
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-diff"&gt;
-diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
+&lt;pre&gt;&lt;code class="lang-diff"&gt;diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index db8c668..e41ec12 100644
 --- a/syntaxhighlighter.php
 +++ b/syntaxhighlighter.php
@@ -1026,8 +1013,7 @@ Here is a complete example (note how I use setTimeout) written in javascript,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-$('#serviceId').val('0451235550');
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;$('#serviceId').val('0451235550');
 $('#serviceId').keyup();
 console.log('hi');
 setTimeout(function(){
@@ -1078,8 +1064,7 @@ Step 2, Please insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-goto-content-and-run-cmd (cmd)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-goto-content-and-run-cmd (cmd)
   (comint-send-string (inferior-moz-process)
                       (concat "repl.enter(content);"
                               cmd
@@ -1139,8 +1124,7 @@ Here is javascript code,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-var url=document.URL;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
    console.log("for regitration module");
 } else if (/^.*mycompany\.com\.au.*my-account\/my-profile/.test(url)) {
@@ -1166,8 +1150,7 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-reload-browser ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-reload-browser ()
   (interactive)
   (comint-send-string (inferior-moz-process)
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))

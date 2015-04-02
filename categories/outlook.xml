@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (outlook)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/outlook.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to get email from exchange server without Outlook</title><link>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="table-of-contents"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (outlook)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/outlook.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:52 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to get email from exchange server without Outlook</title><link>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="table-of-contents"&gt;
 &lt;h3&gt;Table of Contents&lt;/h3&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
@@ -51,8 +51,7 @@ Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LD
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
 # ubuntu/debian only; for other distribution, just download src package
 sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 &lt;/code&gt;&lt;/pre&gt;
@@ -134,8 +133,7 @@ Insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-;; gnus+davmail bug, so I have to use pop3 for davmail
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; gnus+davmail bug, so I have to use pop3 for davmail
 ;; http://permalink.gmane.org/gmane.emacs.gnus.general/83301
 ;; but delete all the mails on server is scary
 (setq pop3-leave-mail-on-server t)

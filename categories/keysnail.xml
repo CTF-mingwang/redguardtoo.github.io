@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:32 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-05-20 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -32,8 +32,7 @@ Insert below code into ~/.keysnail.js:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-hook.setHook("PluginLoaded", function () {
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;hook.setHook("PluginLoaded", function () {
     if (!plugins.hok) return;
 
     /* HoK 1.3.9+ required */
@@ -125,8 +124,7 @@ Insert below code into ~/.keysnail.js:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
   ext.exec("tanything", arg);
 }, "view all tabs", true);
 &lt;/code&gt;&lt;/pre&gt;

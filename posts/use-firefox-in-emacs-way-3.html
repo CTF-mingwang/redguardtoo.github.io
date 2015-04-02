@@ -155,8 +155,7 @@ Insert below code into ~/.keysnail.js:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-hook.setHook("PluginLoaded", function () {
+<pre><code class="lang-lisp">hook.setHook("PluginLoaded", function () {
     if (!plugins.hok) return;
 
     /* HoK 1.3.9+ required */
@@ -251,8 +250,7 @@ Insert below code into ~/.keysnail.js:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
+<pre><code class="lang-lisp">key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
   ext.exec("tanything", arg);
 }, "view all tabs", true);
 </code></pre>

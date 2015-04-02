@@ -144,8 +144,7 @@ If you want to force Emacs use dictionary "en_US", copy below code into your ~/.
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-;; find aspell and hunspell automatically
+<pre><code class="lang-lisp">;; find aspell and hunspell automatically
 (cond
  ((executable-find "aspell")
   (setq ispell-program-name "aspell")
@@ -184,8 +183,7 @@ Please insert below code into your ~/.emacs:
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">
-;; if (aspell installed) { use aspell}
+<pre><code class="lang-lisp">;; if (aspell installed) { use aspell}
 ;; else if (hunspell installed) { use hunspell }
 ;; whatever spell checker I use, I always use English dictionary
 ;; I prefer use aspell because:
@@ -312,8 +310,7 @@ To specify the dictionary explicitly, I need hack the Emacs code which is kind o
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq ispell-program-name "hunspell")
+<pre><code class="lang-lisp">(setq ispell-program-name "hunspell")
 (setq ispell-local-dictionary "en_US")
 (setq ispell-local-dictionary-alist
       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (spam)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/spam.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:28 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (spam)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/spam.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:53 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2012-12-28&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -28,8 +28,7 @@ Run below command in shell:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -60,8 +59,7 @@ This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-perl"&gt;
-# content of /root/.cpan/CPAN/MyConfig.pm
+&lt;pre&gt;&lt;code class="lang-perl"&gt;# content of /root/.cpan/CPAN/MyConfig.pm
 $CPAN::Config = {
   'applypatch' =&amp;gt; q[],
   'auto_commit' =&amp;gt; q[0],
@@ -138,8 +136,7 @@ After packages installed, double check them locally:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-perl -MDBI -e 'print $MIME::DBI::VERSION'
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -MDBI -e 'print $MIME::DBI::VERSION'
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -150,8 +147,7 @@ If there is any error:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-perl -V
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
 sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 &lt;/code&gt;&lt;/pre&gt;
@@ -177,8 +173,7 @@ Run the below command to fix the root issue.
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -189,8 +184,7 @@ Here is my popfile setup for davmail server (please note ssl is disabled),
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-bayes_bad_sqlite_version 4.0.0
+&lt;pre&gt;&lt;code class="lang-conf"&gt;bayes_bad_sqlite_version 4.0.0
 bayes_corpus corpus
 bayes_database popfile.db
 bayes_dbauth 
@@ -300,8 +294,7 @@ See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopf
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-cd ~/bin/popfile;perl popfile.pl
+&lt;pre&gt;&lt;code class="lang-sh"&gt;cd ~/bin/popfile;perl popfile.pl
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -315,8 +308,7 @@ cd ~/bin/popfile;perl popfile.pl
 Insert below code in ~/.bashrc:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-OS_NAME=`uname -s`
+&lt;pre&gt;&lt;code class="lang-bash"&gt;OS_NAME=`uname -s`
 if [ $OS_NAME == Linux ]; then
    # start popfile
    if [ -f $HOME/bin/popfile/popfile.pl ]; then
@@ -346,8 +338,7 @@ here is content of popfile.service.
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
-[Unit]
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[Unit]
 Description=POPFile (Automatic Email Classification) Service
 
 [Service]

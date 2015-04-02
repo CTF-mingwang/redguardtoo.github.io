@@ -166,8 +166,7 @@ The path should be shared easily to other application like Emacs.
 <div class="org-src-container">
 
 
-<pre><code class="lang-sh">
-[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+<pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -244,8 +243,7 @@ For example, <b>for "/home/cb/projs/web-portal/app/styles/bootstrap/main.css", y
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">
-ff .../grunt-docs/*bootstrap*css
+<pre><code class="lang-bash">ff .../grunt-docs/*bootstrap*css
 ff web-port*ma*css
 ff styles
 </code></pre>
@@ -289,8 +287,7 @@ Code to insert ~/.bashrc:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-function h () {
+<pre><code class="lang-sh">function h () {
     # reverse history, pick up one line, remove new line characters and put it into clipboard
     if [ -z "$1" ]; then
         history | sed '1!G;h;$!d' | ~/bin/percol.py | sed -n 's/^ *[0-9][0-9]* *\(.*\)$/\1/p'| tr -d '\n' | pclip
@@ -323,8 +320,7 @@ Code to insert ~/.bashrc:
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-sh">
-function glsf () {
+<pre><code class="lang-sh">function glsf () {
     local str=`git --no-pager log --oneline --stat $* |  ~/bin/percol.py`
     if [[ $str =~ ^[[:space:]]*([a-z0-9A-Z_.\/-]*).*$ ]]; then
         echo -n ${BASH_REMATCH[1]} |pclip;

@@ -54,8 +54,7 @@ I added below code into bottom of functions.php (Appearance =&gt; Editor):
 
 
 
-
-add_action('wp_enqueue_scripts', 'CDNJS_sc">
+add_action('wp_enqueue_scripts', 'CDNJS_scr">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2014-03-07T00:58:00+00:00">
            <meta property="article:tag" content="blog">
@@ -127,8 +126,7 @@ I added below code into bottom of functions.php (Appearance =&gt; Editor):
 
 <div class="org-src-container">
 
-<pre><code class="lang-php">
-add_action('wp_enqueue_scripts', 'CDNJS_scripts');
+<pre><code class="lang-php">add_action('wp_enqueue_scripts', 'CDNJS_scripts');
 function CDNJS_scripts() 
 {
     wp_deregister_script('jquery');
@@ -145,8 +143,7 @@ For js from SyntaxHighlighter Evolved (Plugins =&gt; Installed Plugins =&gt; Edi
 
 <div class="org-src-container">
 
-<pre><code class="lang-diff">
-diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
+<pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index db8c668..e41ec12 100644
 --- a/syntaxhighlighter.php
 +++ b/syntaxhighlighter.php

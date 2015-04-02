@@ -123,8 +123,7 @@ Here is the value of `tags-table-list` for one project:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
+<pre><code class="lang-lisp">("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 </code></pre>
 
 </div>
@@ -143,8 +142,7 @@ Change the ctags command line underhood will solve the problem. Here is the actu
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">
-find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
+<pre><code class="lang-bash">find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 </code></pre>
 
 </div>
@@ -159,8 +157,7 @@ Here is the Emacs lisp function to wrap above shell command:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;optional FORCE)
+<pre><code class="lang-lisp">(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;optional FORCE)
   "return the full path of tags file"
   ;; TODO save the CTAGS-OPTS into hash
   (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )

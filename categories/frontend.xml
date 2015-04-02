@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:28 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:57:52 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -94,8 +94,7 @@ Here is a complete example (note how I use setTimeout) written in javascript,
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-$('#serviceId').val('0451235550');
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;$('#serviceId').val('0451235550');
 $('#serviceId').keyup();
 console.log('hi');
 setTimeout(function(){
@@ -146,8 +145,7 @@ Step 2, Please insert below code into your ~/.emacs:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-goto-content-and-run-cmd (cmd)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-goto-content-and-run-cmd (cmd)
   (comint-send-string (inferior-moz-process)
                       (concat "repl.enter(content);"
                               cmd
@@ -207,8 +205,7 @@ Here is javascript code,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-var url=document.URL;
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
    console.log("for regitration module");
 } else if (/^.*mycompany\.com\.au.*my-account\/my-profile/.test(url)) {
@@ -234,8 +231,7 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun moz-reload-browser ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-reload-browser ()
   (interactive)
   (comint-send-string (inferior-moz-process)
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))

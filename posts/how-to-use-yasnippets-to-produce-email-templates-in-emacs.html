@@ -140,8 +140,7 @@ I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">gith
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
+<pre><code class="lang-lisp">(setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
     (add-to-list 'yas-snippet-dirs my-yasnippets))
 ;; yasnippet set up code, blah blah ...
