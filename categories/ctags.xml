@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:11:54 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:13:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
@@ -7,7 +7,7 @@ I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. 
 &lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-In a typical Angular application. A function is defined in a javascript file and called in a html file.
+In a Anwular application, a function is defined in a javascript file and called in a html file.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -16,8 +16,7 @@ javascript file:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-html"&gt;
-&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
+&lt;pre&gt;&lt;code class="lang-html"&gt;&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
   &amp;lt;button ng-click="onClick()"&amp;gt;&amp;lt;/button&amp;gt;
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
@@ -30,8 +29,7 @@ html file:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;
-angular.module['myapp'].controller('MyController', function ($scope, $http) {
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;angular.module['myapp'].controller('MyController', function ($scope, $http) {
 
   $scope.init = function () {
   };
@@ -77,8 +75,7 @@ Create a file named ".ctags":
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-conf"&gt;
---langdef=html
+&lt;pre&gt;&lt;code class="lang-conf"&gt;--langdef=html
 --langmap=html:.htm.html.erb
 --regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
 --regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
@@ -131,8 +128,7 @@ On Mac, location of ".ctags":
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-/Users/yourname/.ctags
+&lt;pre&gt;&lt;code class="lang-bash"&gt;/Users/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -143,8 +139,7 @@ On Linux, location of ".ctags":
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-/home/yourname/.ctags
+&lt;pre&gt;&lt;code class="lang-bash"&gt;/home/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -171,8 +166,7 @@ Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&
 Run CTags at least once:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-bash"&gt;
-ctags -e -R -f /app/path/TAGS
+&lt;pre&gt;&lt;code class="lang-bash"&gt;ctags -e -R -f /app/path/TAGS
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -183,8 +177,7 @@ Then insert below code into your ~/.emacs:
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(setq tags-table-list '("/app/path/TAGS"))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list '("/app/path/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;

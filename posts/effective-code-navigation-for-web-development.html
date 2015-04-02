@@ -52,11 +52,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 1 Problem
 
 
-In a typical Angular application. A function is defined in a javascript file and called in a html file.
+In a Anwular application, a function is defined in a javascript file and called in a html file.
 
 
 
-">
+javascri">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2015-04-02T12:51:21+00:00">
            <meta property="article:tag" content="ctags">
@@ -125,7 +125,7 @@ I use <a href="https://angularjs.org/">AngularJS</a> as an example. The techniqu
 <span class="section-number-2">1</span> Problem</h3>
 <div class="outline-text-2" id="text-1">
 <p>
-In a typical Angular application. A function is defined in a javascript file and called in a html file.
+In a Anwular application, a function is defined in a javascript file and called in a html file.
 </p>
 
 <p>
@@ -134,8 +134,7 @@ javascript file:
 <div class="org-src-container">
 
 
-<pre><code class="lang-html">
-&lt;div ng-controller="MyController" ng-init="init()"&gt;
+<pre><code class="lang-html">&lt;div ng-controller="MyController" ng-init="init()"&gt;
   &lt;button ng-click="onClick()"&gt;&lt;/button&gt;
 &lt;/div&gt;
 </code></pre>
@@ -148,8 +147,7 @@ html file:
 
 <div class="org-src-container">
 
-<pre><code class="lang-javascript">
-angular.module['myapp'].controller('MyController', function ($scope, $http) {
+<pre><code class="lang-javascript">angular.module['myapp'].controller('MyController', function ($scope, $http) {
 
   $scope.init = function () {
   };
@@ -198,8 +196,7 @@ Create a file named ".ctags":
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-conf">
---langdef=html
+<pre><code class="lang-conf">--langdef=html
 --langmap=html:.htm.html.erb
 --regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
 --regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
@@ -252,8 +249,7 @@ On Mac, location of ".ctags":
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">
-/Users/yourname/.ctags
+<pre><code class="lang-bash">/Users/yourname/.ctags
 </code></pre>
 
 </div>
@@ -264,8 +260,7 @@ On Linux, location of ".ctags":
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">
-/home/yourname/.ctags
+<pre><code class="lang-bash">/home/yourname/.ctags
 </code></pre>
 
 </div>
@@ -297,8 +292,7 @@ Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and foll
 Run CTags at least once:
 </p>
 <div class="org-src-container">
-<pre><code class="lang-bash">
-ctags -e -R -f /app/path/TAGS
+<pre><code class="lang-bash">ctags -e -R -f /app/path/TAGS
 </code></pre>
 
 </div>
@@ -309,8 +303,7 @@ Then insert below code into your ~/.emacs:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">
-(setq tags-table-list '("/app/path/TAGS"))
+<pre><code class="lang-lisp">(setq tags-table-list '("/app/path/TAGS"))
 </code></pre>
 
 </div>
