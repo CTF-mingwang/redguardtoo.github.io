@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 02:11:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 02:20:58 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Because I've been asked on this issue so many times, I will anwser here once for all.
 &lt;/p&gt;
 
@@ -12,7 +12,7 @@ Insert below code into ~/.emacs:
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-indent (n)
   ;; web development
   (setq coffee-tab-width n) ; coffeescript
-  (setq javascript-indent-level n) ;; javascript-mode
+  (setq javascript-indent-level n) ; javascript-mode
   (setq js-indent-level n) ; js-mode
   (setq js2-basic-offset n) ; js2-mode
   (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
@@ -25,14 +25,14 @@ Insert below code into ~/.emacs:
   (interactive)
   (message "Office code style!")
   (setq indent-tabs-mode t) ; use tab instead of space
-  (my-setup-indent 4) ;indent 4 spaces
+  (my-setup-indent 4) ; indent 4 spaces width
   )
 
 (defun my-personal-code-style ()
   (interactive)
   (message "My personal code style!")
   (setq indent-tabs-mode nil) ; use space instead of tab
-  (my-setup-indent 2) ; indent 2 spaces
+  (my-setup-indent 2) ; indent 2 spaces width
   )
 &lt;/code&gt;&lt;/pre&gt;
 

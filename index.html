@@ -99,7 +99,7 @@ Insert below code into ~/.emacs:
 <pre><code class="lang-lisp">(defun my-setup-indent (n)
   ;; web development
   (setq coffee-tab-width n) ; coffeescript
-  (setq javascript-indent-level n) ;; javascript-mode
+  (setq javascript-indent-level n) ; javascript-mode
   (setq js-indent-level n) ; js-mode
   (setq js2-basic-offset n) ; js2-mode
   (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
@@ -112,14 +112,14 @@ Insert below code into ~/.emacs:
   (interactive)
   (message "Office code style!")
   (setq indent-tabs-mode t) ; use tab instead of space
-  (my-setup-indent 4) ;indent 4 spaces
+  (my-setup-indent 4) ; indent 4 spaces width
   )
 
 (defun my-personal-code-style ()
   (interactive)
   (message "My personal code style!")
   (setq indent-tabs-mode nil) ; use space instead of tab
-  (my-setup-indent 2) ; indent 2 spaces
+  (my-setup-indent 2) ; indent 2 spaces width
   )
 </code></pre>
 
