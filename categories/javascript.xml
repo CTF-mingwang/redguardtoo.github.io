@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:02:41 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+In a typical Angular application. A javascript function is defined in a javascript file and called in a html file.
+&lt;/p&gt;
+
+&lt;p&gt;
+javascript file:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-html"&gt;
+&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
+  &amp;lt;button ng-click="onClick()"&amp;gt;&amp;lt;/button&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+html file:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+angular.module['myapp'].controller('MyController', function ($scope, $http) {
+
+  $scope.init = function () {
+  };
+
+  $scope.onClick= function() {
+  };
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I use CTags instead of IDEs because:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
+&lt;/li&gt;
+&lt;li&gt;As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
+&lt;/li&gt;
+&lt;li&gt;Setup of ctags and text editors is easy. Once the first set up, others are just five minutes of copy&amp;amp;paste
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
+&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; CTags setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;p&gt;
+Create a file named ".ctags":
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;
+--langdef=html
+--langmap=html:.htm.html.erb
+--regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-click[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-change[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-show[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-if[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-blur[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-focus[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-disabled[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-repeat[ \t]*=[ \t]*['"][^'"]+ in \([^'"]+\)['"]/\1/o,object/
+
+--langdef=js
+--langmap=js:.js
+--regex-js=/\$scope\.([A-Za-z0-9._\$]+)[ \t]*[:=]/\1/,variable/
+--regex-js=/\.controller[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,controller/
+--regex-js=/\.filter[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,filter/
+--regex-js=/\.factory[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,factory/
+--regex-js=/\.service[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,service/
+--regex-js=/\.directive[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,directive/
+--regex-js=/.*[.][\s]*module\(['"]([a-zA-Z0-9_.]+)['"]/\1/m,module/
+--regex-js=/[.](when\(['"][a-zA-Z0-9_\/]+['"])/\1/r,ngRoute/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\5/,object/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\5/,function/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\5/,array/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*(true|false)/\5/,boolean/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[0-9]+/\5/,number/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*[ \t]*([,;]|$)/\5/,variable/
+--regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\{/\2/,object/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\[/\2/,array/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^"]'[^']*/\2/,string/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*(true|false)/\2/,boolean/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[0-9]+/\2/,number/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The key point of this setup is the regular expression for HTML should be &lt;b&gt;as simple as possible&lt;/b&gt;!
+&lt;/p&gt;
+
+&lt;p&gt;
+On Mac, place ".ctags" at "&lt;i&gt;Users/yourname&lt;/i&gt;".
+&lt;/p&gt;
+
+&lt;p&gt;
+On Linux, place ".ctags" at "&lt;i&gt;home/yourname&lt;/i&gt;"
+&lt;/p&gt;
+
+&lt;p&gt;
+On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; &lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+Run CTags at least once:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre&gt;&lt;code class="lang-bash"&gt;
+ctags -e -R -f /app/path/TAGS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Then insert below code into your ~/.emacs:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(setq tags-table-list '("/app/path/TAGS"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Open Emacs and `M-x find-tag` to start code navigation. That's all.
+&lt;/p&gt;
+
+&lt;p&gt;
+If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; UI, install it and `M-x helm-etags-select` instead.
+&lt;/p&gt;
+
+&lt;p&gt;
+Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -1092,4 +1279,4 @@ $(el.completeRegistrationForm).validate({
            &lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt;(){
              console.log(&lt;span style="color: #8abeb7;"&gt;'&amp;lt;li&amp;gt;NO&amp;lt;/li&amp;gt;'&lt;/span&gt;);
            });
-&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; This is a kind of radical example. I'm only demonstrating the power of new style. I'm not suggesting you should convert any logic statement into function call. New style is not a silver bullet. It's only a useful if used properly in right timing. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>programming</category><guid>http://blog.binchen.org/posts/how-to-write-javascripthtml-code-quickly.html</guid><pubDate>Wed, 22 May 2013 10:24:00 GMT</pubDate></item><item><title>Notes for js3-mode in emacs</title><link>http://blog.binchen.org/posts/notes-for-js3-mode-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Mark: 3 =&amp;gt; cool, 2 =&amp;gt; useful, 1 =&amp;gt; rarely used &lt;/p&gt;&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="right"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt;&lt;th scope="col" class="left"&gt;Function&lt;/th&gt;&lt;th scope="col" class="left"&gt;Hotkey&lt;/th&gt;&lt;th scope="col" class="left"&gt;Comment&lt;/th&gt;&lt;th scope="col" class="right"&gt;Mark&lt;/th&gt;&lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-mode-toggle-hide-functions&lt;/td&gt;&lt;td class="left"&gt;C-c C-f&lt;/td&gt;&lt;td class="left"&gt;show/hide ALL functions&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-narrow-to-defun&lt;/td&gt;&lt;td class="left"&gt;C-x n d&lt;/td&gt;&lt;td class="left"&gt;(C-x n w to wide)&lt;/td&gt;&lt;td class="right"&gt;3&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-mode-display-warnings-and-errors&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="right"&gt;1&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js-toggle-element&lt;/td&gt;&lt;td class="left"&gt;C-c C-o&lt;/td&gt;&lt;td class="left"&gt;show/hide code snippet between {}&lt;/td&gt;&lt;td class="right"&gt;3&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-next-error&lt;/td&gt;&lt;td class="left"&gt;M-g M-n or C-x `&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="right"&gt;1&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-beginning-of-defun&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="left"&gt;jump to the beginning of function&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-end-of-defun&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="left"&gt;jump to the end of function&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-mark-defun&lt;/td&gt;&lt;td class="left"&gt;C-M-h&lt;/td&gt;&lt;td class="left"&gt;Select the function body&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;js3-enter-mirror-mode&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;td class="left"&gt;Automatically insert [],()…&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;  &lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js3</category><category>mode</category><guid>http://blog.binchen.org/posts/notes-for-js3-mode-in-emacs.html</guid><pubDate>Fri, 10 Feb 2012 18:21:00 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; This is a kind of radical example. I'm only demonstrating the power of new style. I'm not suggesting you should convert any logic statement into function call. New style is not a silver bullet. It's only a useful if used properly in right timing. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>programming</category><guid>http://blog.binchen.org/posts/how-to-write-javascripthtml-code-quickly.html</guid><pubDate>Wed, 22 May 2013 10:24:00 GMT</pubDate></item></channel></rss>

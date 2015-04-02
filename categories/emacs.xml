@@ -1,5 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 31 Mar 2015 14:06:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary with hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 03 Apr 2015 00:02:42 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+In a typical Angular application. A javascript function is defined in a javascript file and called in a html file.
+&lt;/p&gt;
+
+&lt;p&gt;
+javascript file:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-html"&gt;
+&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
+  &amp;lt;button ng-click="onClick()"&amp;gt;&amp;lt;/button&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+html file:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;
+angular.module['myapp'].controller('MyController', function ($scope, $http) {
+
+  $scope.init = function () {
+  };
+
+  $scope.onClick= function() {
+  };
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I use CTags instead of IDEs because:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
+&lt;/li&gt;
+&lt;li&gt;As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
+&lt;/li&gt;
+&lt;li&gt;Setup of ctags and text editors is easy. Once the first set up, others are just five minutes of copy&amp;amp;paste
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
+&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; CTags setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;p&gt;
+Create a file named ".ctags":
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;
+--langdef=html
+--langmap=html:.htm.html.erb
+--regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-click[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-change[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-show[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-if[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-blur[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-focus[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-disabled[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-repeat[ \t]*=[ \t]*['"][^'"]+ in \([^'"]+\)['"]/\1/o,object/
+
+--langdef=js
+--langmap=js:.js
+--regex-js=/\$scope\.([A-Za-z0-9._\$]+)[ \t]*[:=]/\1/,variable/
+--regex-js=/\.controller[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,controller/
+--regex-js=/\.filter[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,filter/
+--regex-js=/\.factory[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,factory/
+--regex-js=/\.service[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,service/
+--regex-js=/\.directive[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,directive/
+--regex-js=/.*[.][\s]*module\(['"]([a-zA-Z0-9_.]+)['"]/\1/m,module/
+--regex-js=/[.](when\(['"][a-zA-Z0-9_\/]+['"])/\1/r,ngRoute/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\5/,object/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\5/,function/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\5/,array/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*(true|false)/\5/,boolean/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[0-9]+/\5/,number/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*[ \t]*([,;]|$)/\5/,variable/
+--regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\{/\2/,object/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\[/\2/,array/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^"]'[^']*/\2/,string/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*(true|false)/\2/,boolean/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[0-9]+/\2/,number/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The key point of this setup is the regular expression for HTML should be &lt;b&gt;as simple as possible&lt;/b&gt;!
+&lt;/p&gt;
+
+&lt;p&gt;
+On Mac, place ".ctags" at "&lt;i&gt;Users/yourname&lt;/i&gt;".
+&lt;/p&gt;
+
+&lt;p&gt;
+On Linux, place ".ctags" at "&lt;i&gt;home/yourname&lt;/i&gt;"
+&lt;/p&gt;
+
+&lt;p&gt;
+On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; &lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+Run CTags at least once:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre&gt;&lt;code class="lang-bash"&gt;
+ctags -e -R -f /app/path/TAGS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Then insert below code into your ~/.emacs:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;
+(setq tags-table-list '("/app/path/TAGS"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Open Emacs and `M-x find-tag` to start code navigation. That's all.
+&lt;/p&gt;
+
+&lt;p&gt;
+If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; UI, install it and `M-x helm-etags-select` instead.
+&lt;/p&gt;
+
+&lt;p&gt;
+Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
 &lt;/p&gt;
 
@@ -714,307 +901,4 @@ UPDATE:
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Add some cache system to avoid calling file-exists-p too often because it's slow!
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I can publish my blog &lt;b&gt;in five seconds&lt;/b&gt;, running only &lt;b&gt;one Emacs command&lt;/b&gt;!
-&lt;/p&gt;
-
-&lt;p&gt;
-I give you a minimum solution at first, then I explain why and provide technical details.
-&lt;/p&gt;
-
-&lt;p&gt;
-Basic Emacs lisp knowledges are required.
-&lt;/p&gt;
-
-&lt;p&gt;
-Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generator like &lt;a href="http://getnikola.com/blog/"&gt;Nikola&lt;/a&gt; or &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-Tested on &lt;b&gt;Linux and OSX&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Requirements:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Org-mode bundled with Emacs 24.x
-&lt;/li&gt;
-&lt;li&gt;Nikola as the blog generator 
-&lt;/li&gt;
-&lt;li&gt;FTP client &lt;a href="http://www.ncftp.com/ncftp/"&gt;ncftp&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Latest &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; (v0.0.9+)
-&lt;/li&gt;
-&lt;li&gt;Insert below code into ~/.emacs
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun org2nikola-after-hook-setup (title slug)
-  (let ((url (concat "http://blog.yourdomain.net/posts/" slug ".html"))
-        (nikola-dir (file-truename "~/projs/nikola-root"))
-        (password "yourpassowrd")
-        (username "yourusername")
-        dir
-        file
-        lines
-        rlt
-        res
-        cmd)
-    (kill-new title)
-    (kill-new url)
-    (message "%s =&amp;gt; kill-ring" url)
-    (setq rlt (shell-command-to-string (format "cd %s; nikola build" nikola-dir)))
-    (setq lines (split-string rlt "\n"))
-    (dolist (l lines)
-      (when (string-match "output\\(.*/\\)*\\([^/]*\\)$" l)
-        (setq dir (match-string 1 l))
-        (setq file (match-string 2 l))
-        (setq cmd (format "ncftpput -b -u %s -p %s ftp.yourdomain.net /blog%s %s/output%s%s"
-                          username password dir nikola-dir dir file))
-        (message "cmd=%s" cmd)
-        (shell-command cmd)
-        ))
-    ))
-
-(add-hook 'org2nikola-after-hook 'org2nikola-after-hook-setup)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Why&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Wordpress is slow to load web page
-&lt;/li&gt;
-&lt;li&gt;I waste too much time to "manage" Wordpress (applying security patch, fighting with spam comment …)
-&lt;/li&gt;
-&lt;li&gt;As a programmer, I need publish code snippets. Wordpress is &lt;b&gt;BAD&lt;/b&gt; at rendering code.
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
-Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by &lt;a href="https://github.com/punchagan"&gt;Puneeth Chaganti&lt;/a&gt;'s excellent work on org2blog.
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Technical Details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
-&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Generating HTML&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-1"&gt;
-&lt;p&gt;
-As I said, Nikola is my blog generator which converts my org file into HTML.
-&lt;/p&gt;
-
-&lt;p&gt;
-But I prefer using &lt;a href="http://orgmode.org/"&gt;Org-mode&lt;/a&gt; to do the HTML rendering. Nikola only need handle remaining minor book keeping stuff (creating RSS feed, for example).
-&lt;/p&gt;
-
-&lt;p&gt;
-It's because I want to minimize the dependency. I may switch to other blog generator in the future. But my web site always has the &lt;b&gt;same look and feel&lt;/b&gt; because the HTML is generated by Org-mode.
-&lt;/p&gt;
-
-&lt;p&gt;
-I learned this trick from Org2blog.
-&lt;/p&gt;
-
-&lt;p&gt;
-If we only use org-mode to create HTML, then extracting code snippet is really easy. All we need is to use regular expression to extract the content between HTML tag "&amp;lt;pre&amp;gt;".
-&lt;/p&gt;
-
-&lt;p&gt;
-Actually I don't even bother doing the extraction. I just replace all the "&amp;lt;pre&amp;gt;" tag with my own tag because I &lt;b&gt;assume&lt;/b&gt; the HTML produced by org-mode is stable.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the Emacs lisp code I borrowed from Org2blog:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;
-(defun org2nikola-replace-pre (html)
-  "Replace pre blocks with sourcecode shortcode blocks.
-shamelessly copied from org2blog/wp-replace-pre()"
-  (save-excursion
-    (let (pos code lang info params header code-start code-end html-attrs pre-class)
-      (with-temp-buffer
-        (insert html)
-        (goto-char (point-min))
-        (save-match-data
-          (while (re-search-forward "&amp;lt;pre\\(.*?\\)&amp;gt;" nil t 1)
-
-            ;; When the codeblock is a src_block
-            (unless
-                (save-match-data
-                  (setq pre-class (match-string-no-properties 1))
-                  (string-match "example" pre-class))
-              ;; Replace the &amp;lt;pre...&amp;gt; text
-              (setq lang (replace-regexp-in-string ".*src-\\([a-zA-Z0-9]+\\).*" "\\1" pre-class)  )
-
-              (replace-match "")
-              (setq code-start (point))
-
-              ;; Go to end of code and remove &amp;lt;/pre&amp;gt;
-              (re-search-forward "&amp;lt;/pre.*?&amp;gt;" nil t 1)
-              (replace-match "")
-              (setq code-end (point))
-              (setq code (buffer-substring-no-properties code-start code-end))
-
-              ;; Delete the code
-              (delete-region code-start code-end)
-              ;; Stripping out all the code highlighting done by htmlize
-              (setq code (replace-regexp-in-string "&amp;lt;.*?&amp;gt;" "" code))
-              ;; class linenums will add stripes which will destory the 3rd party skins
-              (insert (concat "\n&amp;lt;pre class=\"prettyprint lang-"
-                              (org2nikola-fix-unsupported-language lang)
-                              "\"&amp;gt;\n"
-                              code
-                              "&amp;lt;/pre&amp;gt;\n"))
-              )))
-
-        ;; Get the new html!
-        (setq html (buffer-substring-no-properties (point-min) (point-max))))
-      ))
-  html)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-The code snippet inside "&amp;lt;pre&amp;gt;" tag could be rendered by 3rd party javascript library &lt;a href="https://code.google.com/p/google-code-prettify/"&gt;google-code-prettify&lt;/a&gt; or &lt;a href="http://alexgorbatchev.com/SyntaxHighlighter/"&gt;SyntaxHighlighter&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
-&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Create blog posts&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-2"&gt;
-&lt;p&gt;
-Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
-&lt;/p&gt;
-
-&lt;p&gt;
-Nikola's duty is simple. Basically it only copy my stuff from its input folder to its output folder when I trigger "nikola build" command.
-&lt;/p&gt;
-
-&lt;p&gt;
-The "nikola build" command will also dump the list of files to be uploaded into stdout.
-&lt;/p&gt;
-
-&lt;p&gt;
-The build message dumped:
-&lt;/p&gt;
-&lt;pre class="example"&gt;
-Scanning posts....done!
-.  render_archive:output/2014/index.html
-.  render_sources:output/posts/jump-to-the-positions-before-and-after-m-x-imenu.wp
-.  render_posts:cache/posts/jump-to-the-positions-before-and-after-m-x-imenu.html
-.  render_indexes:output/index.html
-.  render_indexes:output/index-17.html
-.  render_tags:output/categories/en.html
-.  render_tags:output/categories/emacs.html
-.  render_tags:output/assets/js/tag_cloud_data.json
-.  render_tags:output/categories/emacs.xml
-.  generate_rss:output/rss.xml
-.  render_pages:output/posts/jump-to-the-positions-before-and-after-m-x-imenu.html
-.  render_pages:output/posts/why-emacs-is-better-editor-part-two.html
-.  render_tags:output/categories/en.xml
-&lt;/pre&gt;
-
-&lt;p&gt;
-Only the files in sub-folder "output" need be uploaded.
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-sec-3-3" class="outline-3"&gt;
-&lt;h4 id="sec-3-3"&gt;&lt;span class="section-number-3"&gt;3.3&lt;/span&gt; Preprocess nikola output&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-3"&gt;
-&lt;p&gt;
-It's all done by Emacs Lisp.
-&lt;/p&gt;
-
-&lt;p&gt;
-The final output contain lines like:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-sh"&gt;
-ncftpput -b -u yourname -p yourpassword ftp.yourdomain.net /blog/2014/ /home/yourname/nikola-root/output/2014/index.html
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-As you can see, each line is a ftp upload command we need execute in shell.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3-4" class="outline-3"&gt;
-&lt;h4 id="sec-3-4"&gt;&lt;span class="section-number-3"&gt;3.4&lt;/span&gt; FTP upload&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-4"&gt;
-&lt;p&gt;
-Ncftp is my choice of FTP client. It's solid and efficient.
-&lt;/p&gt;
-&lt;p&gt;
-Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is &lt;b&gt;extremely fast&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-I use Emacs Lisp API `file-truename` to convert all relative path to absolute path to avoid any platform (OSX) issue.
-&lt;/p&gt;
-
-&lt;p&gt;
-BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
-&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;p&gt;
-The workflow is simple.
-&lt;/p&gt;
-&lt;p&gt;
-Emacs and third party JS libraries are responsible for the look and feel of my website.
-&lt;/p&gt;
-
-&lt;p&gt;
-Blog generator like Nikola is just a thin layer to relay the HTML files created by Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ftp</category><guid>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</guid><pubDate>Sat, 15 Nov 2014 04:16:31 GMT</pubDate></item></channel></rss>
+&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item></channel></rss>
