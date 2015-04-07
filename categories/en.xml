@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 07 Apr 2015 18:19:52 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 07 Apr 2015 18:34:08 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I will explain how to resolve code merge conflicts with plain vim. No third party plugins required.
 &lt;/p&gt;
 
@@ -29,7 +29,7 @@ bye world
 &lt;/div&gt;
 
 &lt;p&gt;
-Let's call lines like "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;a id="and" name="and"&gt;", "&lt;code&gt;=====&lt;/code&gt;", and "&lt;/a&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;" conflict markers.
+Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "&lt;code&gt;=====&lt;/code&gt;" conflict markers.
 &lt;/p&gt;
 
 &lt;p&gt;
