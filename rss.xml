@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 07 Apr 2015 18:34:08 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I will explain how to resolve code merge conflicts with plain vim. No third party plugins required.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 07 Apr 2015 18:44:09 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-The reason to use plain vim is that I can't use vimdiff as merge tool for certain VCS (CVS, Subversion, Perforce, …).
+The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
