@@ -49,17 +49,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
 
 
-1 Problem
-
-
-A typical code file in conflict is like this:
+The reason of this solution is it is a little hard for me to set up merge tool for subversion.
 
 
 
-hello world
-hello world
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; .mine
-">
+1">
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2015-04-07T07:19:37+00:00">
            <meta property="article:tag" content="en">
@@ -119,12 +113,16 @@ hello world
 I will explain how to resolve code merge conflicts with plain vim. No third party plugins needed.
 </p>
 
+<p>
+The reason of this solution is it is a little hard for me to set up merge tool for subversion.
+</p>
+
 <div id="outline-container-sec-1" class="outline-2">
 <h3 id="sec-1">
 <span class="section-number-2">1</span> Problem</h3>
 <div class="outline-text-2" id="text-1">
 <p>
-A typical code file in conflict is like this:
+A typical file in conflict is like:
 </p>
 <div class="org-src-container">
 
@@ -142,7 +140,7 @@ bye world
 </div>
 
 <p>
-Let call lines like "&lt;&lt;&lt;&lt;<a id="and" name="and">", "<code>=====</code>", and "</a>&gt;&gt;&gt;&gt;" conflict markers.
+Let's call lines like "&lt;&lt;&lt;&lt;<a id="and" name="and">", "<code>=====</code>", and "</a>&gt;&gt;&gt;&gt;" conflict markers.
 </p>
 
 <p>
@@ -198,10 +196,6 @@ map &lt;leader&gt;dg2 d]ndd]ndd
 </code></pre>
 
 </div>
-
-<p>
-The reason of this solution is that I find it a little hard to set up merge tool for subversion.
-</p>
 
 <p></p>
 </div>
