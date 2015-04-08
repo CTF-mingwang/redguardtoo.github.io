@@ -221,7 +221,7 @@ Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x pas
   (interactive)
   (cond
    ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-selection 'CLIPBOARD)))
+    (insert (x-get-selection 'CLIPBOARD)))
    (t (shell-command
        (cond
         (*cygwin* "getclip")

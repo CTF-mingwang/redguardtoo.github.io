@@ -404,7 +404,7 @@ All you need to do is to add below code into your .emacs:
   (interactive)
   (cond
    ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-selection 'CLIPBOARD)))
+    (insert (x-get-selection 'CLIPBOARD)))
    (t (shell-command
        (cond
         (*cygwin* "getclip")
