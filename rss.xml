@@ -1,94 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Apr 2015 15:43:40 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 10 Apr 2015 09:47:52 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
+&lt;/p&gt;
 
-&lt;colgroup&gt;
-&lt;col class="right"&gt;
+&lt;p&gt;
+After "M-x git-timemachine", a new read-only buffer is created and I need only use six key bindings: "n", "q", "p", "w", "W", "g".
+&lt;/p&gt;
 
-&lt;col class="left"&gt;
+&lt;p&gt;
+The problem is I'm using &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;. How to make git-timemachine's key bindings override Evil's?
+&lt;/p&gt;
 
-&lt;col class="left"&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td class="right"&gt;7:00&lt;/td&gt;
-&lt;td class="left"&gt;起床时刻&lt;/td&gt;
-&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;
-&lt;/tr&gt;
+&lt;p&gt;
+I consulted the issue with Frank Fischer.
+&lt;/p&gt;
 
-&lt;tr&gt;
-&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;
-&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;
-&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;
-&lt;/tr&gt;
+&lt;p&gt;
+The solution is simple. Insert below code into ~/.emacs:
+&lt;/p&gt;
 
-&lt;tr&gt;
-&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;
-&lt;td class="left"&gt;避免运动&lt;/td&gt;
-&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;
-&lt;/tr&gt;
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+(eval-after-load 'git-timemachine
+  '(progn
+     (evil-make-overriding-map git-timemachine-mode-map 'normal)
+     ;; force update evil keymaps after git-timemachine-mode loaded
+     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;tr&gt;
-&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;
-&lt;td class="left"&gt;困难工作&lt;/td&gt;
-&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;10:30&lt;/td&gt;
-&lt;td class="left"&gt;眼睛休息&lt;/td&gt;
-&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;11:00&lt;/td&gt;
-&lt;td class="left"&gt;吃点水果&lt;/td&gt;
-&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;
-&lt;td class="left"&gt;多吃豆类&lt;/td&gt;
-&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;
-&lt;td class="left"&gt;小睡一会&lt;/td&gt;
-&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;16:00&lt;/td&gt;
-&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;
-&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;19:00&lt;/td&gt;
-&lt;td class="left"&gt;锻炼时间&lt;/td&gt;
-&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;20:00&lt;/td&gt;
-&lt;td class="left"&gt;电视或书&lt;/td&gt;
-&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;22:00&lt;/td&gt;
-&lt;td class="left"&gt;洗热水澡&lt;/td&gt;
-&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;22:30&lt;/td&gt;
-&lt;td class="left"&gt;上床睡觉&lt;/td&gt;
-&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
+&lt;p&gt;
+I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;7:00&lt;/td&gt;&lt;td class="left"&gt;起床时刻&lt;/td&gt;&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;&lt;td class="left"&gt;避免运动&lt;/td&gt;&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;&lt;td class="left"&gt;困难工作&lt;/td&gt;&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;10:30&lt;/td&gt;&lt;td class="left"&gt;眼睛休息&lt;/td&gt;&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;11:00&lt;/td&gt;&lt;td class="left"&gt;吃点水果&lt;/td&gt;&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;&lt;td class="left"&gt;多吃豆类&lt;/td&gt;&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;&lt;td class="left"&gt;小睡一会&lt;/td&gt;&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16:00&lt;/td&gt;&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19:00&lt;/td&gt;&lt;td class="left"&gt;锻炼时间&lt;/td&gt;&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20:00&lt;/td&gt;&lt;td class="left"&gt;电视或书&lt;/td&gt;&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:00&lt;/td&gt;&lt;td class="left"&gt;洗热水澡&lt;/td&gt;&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:30&lt;/td&gt;&lt;td class="left"&gt;上床睡觉&lt;/td&gt;&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -114,8 +54,6 @@ Step 1, install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and &l
 &lt;p&gt;
 Step 2, insert below code into ~/.emacs:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun w3m-get-url-from-search-engine-alist (k l)
   (let (rlt)
@@ -166,24 +104,23 @@ Step 2, insert below code into ~/.emacs:
     (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
+Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-A typical file in conflict is like:
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;A typical file in conflict is like:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;hello world
 hello world
@@ -196,73 +133,65 @@ bye world
 bye world
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
-Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "&lt;code&gt;=====&lt;/code&gt;" conflict markers.
+Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "=======" conflict markers.
 &lt;/p&gt;
-
 &lt;p&gt;
 Resolving conflicts is the operation of picking up &lt;b&gt;either or both&lt;/b&gt; of the sections between markers.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Basic knowledge of Vim&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Basic knowledge of Vim&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
 &lt;/li&gt;
 &lt;li&gt;"dd" delete current line
 &lt;/li&gt;
 &lt;li&gt;"d]n" delete from current line to the next marker (next marker exclusive)
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Our workflow is actually simple:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Step 1, find the next marker by pressing "]n"
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Our workflow is actually simple:
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Step 1, find the next marker by pressing "]n"
 &lt;/li&gt;
 &lt;li&gt;Step 2, "]nd]n[ndd[ndd" to pick up the section 1
 &lt;/li&gt;
 &lt;li&gt;Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 This workflow is compatible with any version control software.
 &lt;/p&gt;
-
 &lt;p&gt;
 &lt;b&gt;Optionally&lt;/b&gt; you can set the shortcut for step 2 and step 3:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-vimrc"&gt;map &amp;lt;leader&amp;gt;dg1 ]nd]n[ndd[ndd
 map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Because I've been asked on this issue so many times, I will anwser here once for all.
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Because I've been asked on this issue so many times, I will anwser here once for all.
 &lt;/p&gt;
 
 &lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-indent (n)
   ;; web development
@@ -291,28 +220,25 @@ Insert below code into ~/.emacs:
   )
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 Combine above functions with `prog-mode-hook` and `buffer-file-name`, you can do the per project setup easily.
 &lt;/p&gt;
 
 &lt;p&gt;
-I do this thing when switching project. It takes me &lt;b&gt;no more than one minute&lt;/b&gt;. Since my project last at least three months, one minute is not a big deal.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
+I do this thing when switching project. It takes me &lt;b&gt;no more than one minute&lt;/b&gt;. Since my project last at least three months, one minute is not a big deal.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-In Angular application, a function is defined in a javascript file and called in a html file.
-&lt;/p&gt;
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
+&lt;p&gt;In Angular application, a function is defined in a javascript file and called in a html file.
+&lt;/p&gt;
 &lt;p&gt;
 javascript file:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-html"&gt;&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
@@ -320,13 +246,13 @@ javascript file:
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 html file:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;angular.module['myapp'].controller('MyController', function ($scope, $http) {
 
@@ -338,41 +264,39 @@ html file:
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
-&lt;/p&gt;
 
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
 &lt;p&gt;
 I use CTags instead of IDEs because:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
 &lt;/li&gt;
 &lt;li&gt;As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
 &lt;/li&gt;
 &lt;li&gt;Setup of ctags and text editors is easy. Once the first project is set up, others are just five minutes of copy&amp;amp;paste jobs.
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; CTags setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-1"&gt;
-&lt;p&gt;
-Create a file named ".ctags":
+&lt;div id="outline-container-2-1" class="outline-4"&gt;
+&lt;h5 id="sec-2-1"&gt;CTags setup&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-2-1"&gt;
+
+&lt;p&gt;Create a file named ".ctags":
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;--langdef=html
 --langmap=html:.htm.html.erb
@@ -415,110 +339,104 @@ Create a file named ".ctags":
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 The key point of this setup is the regular expression for HTML should be &lt;b&gt;as simple as possible&lt;/b&gt;!
 &lt;/p&gt;
-
 &lt;p&gt;
 On Mac, location of ".ctags":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/Users/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 On Linux, location of ".ctags":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/home/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;Run CTags at least once:
 &lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; &lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;p&gt;
-Run CTags at least once:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;ctags -e -R -f /app/path/TAGS
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Then insert below code into your ~/.emacs:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list '("/app/path/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Open Emacs and `M-x find-tag` to start code navigation. That's all.
 &lt;/p&gt;
-
 &lt;p&gt;
 If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; UI, install it and `M-x helm-etags-select` instead.
 &lt;/p&gt;
-
 &lt;p&gt;
-Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.&lt;/p&gt;
+Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
+&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
+&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
 &lt;/p&gt;
 
 &lt;p&gt;
 I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-This solution works &lt;b&gt;in any environment&lt;/b&gt;.
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;Step1 (OPTIONAL), download &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt; and place it under "~/.emacs.d/misc/".
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Step1 (OPTIONAL), download &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt; and place it under "~/.emacs.d/misc/".
 &lt;/li&gt;
-
 &lt;li&gt;Step 2, Copy below setup into ~/.emacs and use key binding "M-/" to complete the word:
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-/") 'hippie-expand)
+&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; The actual expansion function
 (defun try-expand-by-dict (old)
@@ -552,60 +470,58 @@ This solution works &lt;b&gt;in any environment&lt;/b&gt;.
         try-expand-by-dict))
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technical details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Technical details&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;lazy load of ispell-mode to speed Emacs startup
 &lt;/li&gt;
 &lt;li&gt;add a fallback dictionary "english-words.txt" so autocompletion never fails
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ispell-lookup-words&lt;/code&gt; or &lt;code&gt;lookup-words&lt;/code&gt; simply does grep thing, so english-words.txt is just a plain text file.
+&lt;li&gt;`ispell-lookup-words` or `lookup-words` simply does grep thing, so english-words.txt is just a plain text file.
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>autocomplete</category><category>dictionary</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</guid><pubDate>Mon, 30 Mar 2015 03:53:40 GMT</pubDate></item><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-It's becasue Emacs has great documentation and enough APIs.
+&lt;/ul&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>autocomplete</category><category>dictionary</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</guid><pubDate>Mon, 30 Mar 2015 03:53:40 GMT</pubDate></item><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;It's becasue Emacs has great documentation and enough APIs.
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Documentation&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-Its quality is the best.
-&lt;/p&gt;
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Documentation&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
+&lt;p&gt;Its quality is the best.
+&lt;/p&gt;
 &lt;p&gt;
 It helps me even on non-Emacs stuff.
 &lt;/p&gt;
-
 &lt;p&gt;
 When configuring the font for &lt;a href="http://gnometerminator.blogspot.com/p/introduction.html"&gt;Terminator&lt;/a&gt; (a terminal emulator) I found its manual is NOT clear. The manual didn't explain what is "Pango font name". After googling, I found the Emacs manual which explained it and also provided related toolchain.
 &lt;/p&gt;
-
 &lt;p&gt;
 For example, "fc-list" is mentioned to list the installed fonts. Since terminal use Mono font, I can type below command:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;fc-list | grep Mono
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 The output is like:
 &lt;/p&gt;
 
-&lt;pre class="example"&gt;
-/usr/share/fonts/urw-fonts/n022003l.pfb: Nimbus Mono L:style=Regular
+
+
+&lt;pre class="example"&gt;/usr/share/fonts/urw-fonts/n022003l.pfb: Nimbus Mono L:style=Regular
 /usr/share/fonts/urw-fonts/n022024l.pfb: Nimbus Mono L:style=Bold Oblique
 /usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf: Liberation Mono:style=Regular
 /usr/share/fonts/urw-fonts/n022004l.pfb: Nimbus Mono L:style=Bold
@@ -616,15 +532,16 @@ The output is like:
 /usr/share/fonts/urw-fonts/n022023l.pfb: Nimbus Mono L:style=Regular Oblique
 &lt;/pre&gt;
 
+
 &lt;p&gt;
 Since Emacs manual explains the meaning of output, I know the font name "WenQuanYi Zen Hei Mono" is the key component of "Pango font name"
 &lt;/p&gt;
-
 &lt;p&gt;
 Because the manual also gives the details of other components of "Pango font name", the final "~/.config/terminator/config" is like:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;[profiles]
   [[default]]
@@ -635,25 +552,23 @@ Because the manual also gives the details of other components of "Pango font nam
   font =  WenQuanYi Zen Hei Mono 16
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; API&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-I create a new Emacs plugin which lists file names containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;API&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;I create a new Emacs plugin which lists file names containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
 &lt;/p&gt;
 &lt;p&gt;
-Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired". Problem solved.&lt;/p&gt;
+Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired". Problem solved.
+&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-python code:
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>font</category><category>linux</category><category>terminal</category><category>terminator</category><guid>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</guid><pubDate>Sun, 01 Feb 2015 09:40:44 GMT</pubDate></item><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;python code:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;import getopt, sys
 if __name__ == '__main__':
@@ -666,61 +581,15 @@ if __name__ == '__main__':
     print "hello world";
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 This is table:
 &lt;/p&gt;
 
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-
-&lt;colgroup&gt;
-&lt;col class="left"&gt;
-
-&lt;col class="left"&gt;
-
-&lt;col class="left"&gt;
-&lt;/colgroup&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;
-&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;
-&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;
-&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;
-&lt;td class="left"&gt;none&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;
-&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;
-&lt;td class="left"&gt;none&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;
-&lt;td class="left"&gt;code completion&lt;/td&gt;
-&lt;td class="left"&gt;auto-complete&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;
-&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;
-&lt;td class="left"&gt;none&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;code completion&lt;/td&gt;&lt;td class="left"&gt;auto-complete&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;
 This is list:
 &lt;/p&gt;
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;list item 1
+&lt;ul&gt;&lt;li&gt;list item 1
 &lt;/li&gt;
 &lt;li&gt;list item 2
 &lt;/li&gt;
@@ -728,12 +597,11 @@ This is list:
 &lt;/li&gt;
 &lt;li&gt;list item 4
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
+&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-11&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-12-05&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -751,8 +619,6 @@ I only need validation of missing open/closed html tag(s). Nothing more!
 &lt;p&gt;
 So here is my complete solution:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun flymake-html-init ()
        (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -780,68 +646,9 @@ So here is my complete solution:
 (add-hook 'php-mode-hook 'flymake-html-load)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 The only difference from EmacsWiki is only one line:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &amp;lt;\/[a-z0-9A-Z]+&amp;gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item><item><title>Advanced tip on using mozrepl to automatically refresh browser</title><link>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Here is &lt;a href="http://www.emacswiki.org/emacs/MozRepl"&gt;the setup on Emacswiki&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-I find it annoying instead of helpful in real world usage.
-&lt;/p&gt;
-
-&lt;p&gt;
-The mozrepl trick basically will refresh the &lt;b&gt;current active page&lt;/b&gt; in Firefox. It's not smart enough. When developing a web application, I will open many stackoverflow pages to look for technical solution. I don't like my stackoverflow page being refreshed when I'm saving the HTML code for some web application.
-&lt;/p&gt;
-
-&lt;p&gt;
-So here is my improved solution:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-moz-refresh-browser-condition (current-file)
-  "Should return a boolean javascript expression or nil"
-  (let (rlt)
-    (cond
-     ((string-match "\\(beeta\\|cb_tutorial\\)" current-file)
-      (setq rlt "content.document.location.href.indexOf(':8001')!==-1"))
-     (t
-      (setq rlt nil)))
-    rlt))
-
-;; {{ mozrepl auto-refresh browser
-(defun moz-reload-browser ()
-  (interactive)
-  (let (js-cond cmd)
-    (if (fboundp 'my-moz-refresh-browser-condition)
-        (setq js-cond (funcall 'my-moz-refresh-browser-condition (buffer-file-name))))
-    (cond
-     (js-cond
-      (setq cmd (concat "if(" js-cond "){setTimeout(function(){content.document.location.reload(true);}, '500');}")))
-     (t
-      (setq cmd "setTimeout(function(){content.document.location.reload(true);}, '500');")))
-    (comint-send-string (inferior-moz-process) cmd)
-    ))
-
-(defun moz-after-save ()
-  (interactive)
-  (when (memq major-mode '(web-mode html-mode nxml-mode nxhml-mode php-mode))
-    (moz-reload-browser)))
-
-(add-hook 'after-save-hook
-              'moz-after-save
-              'append 'local)
-;; }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>mozrepl</category><guid>http://blog.binchen.org/posts/advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html</guid><pubDate>Wed, 03 Dec 2014 08:44:27 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>tidy</category><category>validation</category><guid>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</guid><pubDate>Fri, 05 Dec 2014 13:00:31 GMT</pubDate></item></channel></rss>
