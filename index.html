@@ -60,6 +60,139 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         <div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/emacs-speed-up-1000.html">Emacs speed up 1000%</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-05-08T11:58:13+00:00">2015-05-08 11:58</time>
+                </div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-speed-up-1000.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-speed-up-1000.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+        </div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+I'm still <b>NOT</b> satisfied to my Emacs performance after applying below tricks:
+</p>
+
+<ul class="org-ul">
+<li>autoload packages
+</li>
+<li>idle-load packages 
+</li>
+<li>compiling *.el to  *.elc
+</li>
+</ul>
+
+<p>
+After some research, I found I could make my Emacs 1000% fast <b>in 1 minute</b>.
+</p>
+
+<p>
+The solution is really simple.
+</p>
+
+<p>
+Since I'm a Linux guy and my computer got enough memory. I can place my setup on <a href="http://en.wikipedia.org/wiki/Tmpfs">memory</a> only.
+</p>
+
+<p>
+Step 1, insert below line into /etc/fstab and restart computer (I've got 24G memory):
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-conf">tmpfs       /tmp        tmpfs       nodev,nosuid,size=8G    0   0
+</code></pre>
+
+</div>
+
+<p>
+Step 2, run the script "emacs2ram":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">#!/bin/sh
+
+if [ -z "$1" ];then
+    echo "Usage:"
+    echo "  emacs2ram start"
+    echo "  emacs2ram restore"
+    exit 1
+fi
+
+
+if [ "$1" == "start" ];then
+    backup=emacs.d-backup
+    link=.emacs.d
+    volatile=/tmp/.emacs.d-$USER
+
+    IFS=
+    set -efu
+
+    cd ~/
+
+    if [ ! -r $volatile ]; then
+        mkdir -m0700 $volatile
+    fi
+
+    # link -&gt; volatie does not exist
+    if [ "$(readlink $link)" != "$volatile" ]; then
+        # backup project at first
+        mv $link $backup
+        # create the link
+        ln -s $volatile $link
+    fi
+
+    if [ -e $link/.unpacked ]; then
+        echo "Sync .emacs.d from memory to backup ..."
+        rsync -avq --delete --exclude .unpacked ./$link/ ./$backup/
+        echo "DONE!"
+    else
+        echo "Sync .emacs.d from disk to memory ..."
+        rsync -avq ./$backup/ ./$link/
+        touch $link/.unpacked
+        echo "DONE!"
+    fi
+else
+    echo "Moving .emacs.d back to disk ..."
+    backup=$2-backup
+    link=$2
+    volatile=/tmp/$2-$USER
+    cd ~/projs
+    rm $link &amp;&amp; mv $backup $link &amp;&amp; rm -rf $volatile
+    echo "DONE!"
+fi
+</code></pre>
+
+</div>
+
+<p>
+That's all! Please enjoy Emacs as usual.
+</p>
+
+<p>
+The original script is from ArchLinux Wiki. I learned this technique eight years ago. I'm just wondering why I need eight years to apply it?
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-git-timemachine-with-evil.html">Use git-timemachine with Evil</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1008,7 +1141,7 @@ Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/demo-blog-post-created-by-nikolaorg2nikola.html">Demo blog post created by nikola&amp;org2nikola</a></h1>
+            <h1 class="title"><a href="posts/demo-blog-1.html">Demo blog post created by nikola&amp;org2nikola</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2015-01-25T10:11:19+00:00">2015-01-25 10:11</time>
@@ -1016,21 +1149,11 @@ Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired
                 <div class="stats">
                     
         
-    <a href="posts/demo-blog-post-created-by-nikolaorg2nikola.html#disqus_thread" data-disqus-identifier="cache/posts/demo-blog-post-created-by-nikolaorg2nikola.html">Comments</a>
+    <a href="posts/demo-blog-1.html#disqus_thread" data-disqus-identifier="cache/posts/demo-blog-1.html">Comments</a>
 
 
                 </div>
             
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/nikola.html" rel="tag">nikola</a></li>
-           <li><a class="tag p-category" href="categories/org2nikola.html" rel="tag">org2nikola</a></li>
-        </ul>
-        </div>
 
             </div>
             <div class="body">
@@ -1041,7 +1164,8 @@ python code:
 
 <div class="org-src-container">
 
-<pre><code class="lang-python">import getopt, sys
+<pre><code class="lang-python">
+import getopt, sys
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
     for o, a in opts:
@@ -1115,101 +1239,6 @@ This is list:
 <li>list item 4
 </li>
 </ul>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/how-to-validate-html5-code-with-flymake-effectively.html">How to validate HTML5 code with Flymake effectively</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-12-05T13:00:31+00:00">2014-12-05 13:00</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-validate-html5-code-with-flymake-effectively.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-validate-html5-code-with-flymake-effectively.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
-           <li><a class="tag p-category" href="categories/tidy.html" rel="tag">tidy</a></li>
-           <li><a class="tag p-category" href="categories/validation.html" rel="tag">validation</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11&gt;</span></span> 
-</p>
-
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05&gt;</span></span>
-</p>
-
-<p>
-Here is the <a href="http://www.emacswiki.org/emacs/FlymakeHtml">solution from EmacsWiki</a>.
-</p>
-
-<p>
-I found it not effective because <a href="https://github.com/w3c/tidy-html5">tidy</a> is too strict to HTML5 and produces too much noise.
-</p>
-
-<p>
-I only need validation of missing open/closed html tag(s). Nothing more!
-</p>
-
-<p>
-So here is my complete solution:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun flymake-html-init ()
-       (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                          'flymake-create-temp-inplace))
-              (local-file (file-relative-name
-                           temp-file
-                           (file-name-directory buffer-file-name))))
-         (list "tidy" (list local-file))))
-
-(defun flymake-html-load ()
-  (interactive)
-  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
-    (set (make-local-variable 'flymake-allowed-file-name-masks)
-         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
-         )
-    (set (make-local-variable 'flymake-err-line-patterns)
-         ;; only validate missing html tags
-         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-         )
-    (flymake-mode t)))
-
-(add-hook 'web-mode-hook 'flymake-html-load)
-(add-hook 'html-mode-hook 'flymake-html-load)
-(add-hook 'nxml-mode-hook 'flymake-html-load)
-(add-hook 'php-mode-hook 'flymake-html-load)
-</code></pre>
-
-</div>
-
-<p>
-The only difference from EmacsWiki is only one line:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-</code></pre>
-
-</div>
 </div>
             </div>
         </div>
