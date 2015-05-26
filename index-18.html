@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Linux, Programming, Emacs">
-    <meta name="viewport" content="width=device-width">
-    <title>Chen's blog (old posts, page 18) | Chen's blog</title>
-
-    
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/index-18.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Linux, Programming, Emacs">
+<meta name="viewport" content="width=device-width">
+<title>Chen's blog (old posts, page 18) | Chen's blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/index-18.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -36,17 +24,10 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-
-
-
-
-
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -54,17 +35,14 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
             <h1 class="title"><a href="posts/jump-to-the-positions-before-and-after-m-x-imenu.html">Jump to the positions before and after `M-x imenu`</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-15T02:15:32+00:00">2014-11-15 02:15</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -79,23 +57,22 @@ tr:nth-child(odd) td { background: #FEFEFE; }
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
+<p>As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Solution</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-Insert below code to ~/.emacs:
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Solution</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Insert below code to ~/.emacs:
 </p>
-<div class="org-src-container">
+
+
 
 <pre><code class="lang-lisp">(defvar rimenu-position-pair nil "positions before and after imenu jump")
 (add-hook 'imenu-after-jump-hook
@@ -119,32 +96,29 @@ Insert below code to ~/.emacs:
       )))
 </code></pre>
 
-</div>
+
 
 <p>
 Now you can use `M-x rimenu-jump` to jump.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Technical details</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Technical details</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
 </p>
 <p>
 I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
 </p>
-
 <p>
 Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ">original discussion on G+</a>. Thanks to <a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts">Jorge A. Alfaro Murillo</a> for enlightening me on the solution.
 </p>
-
-<p></p>
 </div>
+
 </div>
 </div>
             </div>
@@ -154,7 +128,7 @@ Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZ
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-11-01T11:06:17+00:00">2014-11-01 11:06</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -170,43 +144,37 @@ Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZ
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.emacs. That's all you need to do!
+<p>If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.emacs. That's all you need to do!
 </p>
 
 <p>
 No extra setup needed! Then keep using your js2-mode happily, as if nothing happened. ;) 
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-In my previous article <a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">Why Emacs is better editor - a case study for javascript developer</a>, I proved that Emacs is better than <a href="http://www.sublimetext.com/">Sublime Text</a>.
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
 
+<p>In my previous article <a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">Why Emacs is better editor - a case study for javascript developer</a>, I proved that Emacs is better than <a href="http://www.sublimetext.com/">Sublime Text</a>.
+</p>
 <p>
 So for this so-called "Goto Symbol" feature, Emacs wins.
 </p>
-
 <p>
 It's because we use a plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a>. It's actually a javascript parser which creates the symbols from AST.
 </p>
-
 <p>
 But in real world, regular expression is better, sometimes.
 </p>
-
 <p>
 In modern MVC javascript frameworks (<a href="https://angularjs.org/">Angular</a>, for example), you will meet below code,
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-javascript">app.controller('MyController', function ($scope, $http) {
@@ -214,35 +182,32 @@ In modern MVC javascript frameworks (<a href="https://angularjs.org/">Angular</a
 });
 </code></pre>
 
-</div>
+
 
 <p>
 As you can see, using regular expression to extract the string "MyController" is more versatile and simpler.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Solution</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-My latest <a href="https://github.com/mooz/js2-mode/pull/169">contribution to js2-mode</a> solves this problem perfectly. It <b>combines the powers of AST and regular expression</b>.
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Solution</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>My latest <a href="https://github.com/mooz/js2-mode/pull/169">contribution to js2-mode</a> solves this problem perfectly. It <b>combines the powers of AST and regular expression</b>.
 </p>
 <p>
 The js2-mode will integrate this feature soon. I will notify you when next version is ready.
 </p>
-
 <p>
 Let's cut off the boring technical details and see the demo,
 </p>
-
 <p>
 For a simple <a href="https://gist.github.com/redguardtoo/558ea0133daa72010b73#file-hello-js">hello.js</a> with below content,
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-javascript">function helloworld() {
   console.log('hello called');
@@ -275,62 +240,51 @@ app.controller('MyController', function ($scope, $http) {
 });
 </code></pre>
 
-</div>
+
 
 <p>
 <b>Emacs:</b>
-<img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png">
-</p>
-
+<img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"></p>
 <p>
 <b>Sublime3 (build 3047):</b> 
-<img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="c33b8fee-61ae-11e4-8072-671935b68d6b.png">
-</p>
-
+<img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png"></p>
 <p>
 Please note Emacs displays <b>two functions with the same name "test" correctly</b>!
 </p>
-
 <p>
 BTW, my previous "Why Emacs is better" article got many feedbacks from Sublime users.
 </p>
-
 <p>
 One feedback is that my comparison is not fair because I'm <b>comparing Emacs plugin with naked Sublime</b>. Though I did some research before writing the article,
 I could be wrong. Please enlighten me if you know such Sublime plugins.
 </p>
-
 <p>
 Another valuable feedback is that native Sublime provides better experience <b>out of the box</b> for junior developers. I admit that's a good point. But Emacs provides many awesome choices <b>out of the box</b> if junior guys start from <a href="https://github.com/purcell">setups of the masters (like Steven Purcell)</a>.
 </p>
-
 <p>
 Sublime users also argue that Sublime3 uses <a href="https://www.python.org/">Python</a>. Python is a <b>better programming language</b>. I'm qualified to answer this question because I wrote some large commercial Python application when I worked in Kodak R&amp;D. First version I used was v2.2. So I've got about <b>10 years experience</b> in Python. And I write lots of <a href="https://github.com/redguardtoo/">Emacs Lisp code</a> these days. My opinion is that both languages are good enough as DSL for text editors. In Python, you can use OO. In Emacs Lisp, you can treat function as object and there are <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Macros.html">Macros</a> and <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html">Advising</a>. Both languages have enough widgets to shoot yourself in the foot. Python is surely newbie-friendly. But <b>number of newbies</b> doesn't matter in high-end rival.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Quick Start</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Quick Start</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
 </p>
 <p>
 Dmitry Gutov updated the algorithm to parse the imenu items by walking the AST instead. It's better than my REGEX hacking because AST could show the context of the function.
 </p>
-
 <p>
 But my patch is still useful for extract strings from modern JS framework, as I've shown you in Angular example. I'm just updating my pull request to be compatible with the new AST walk algorithm.
 </p>
-
 <p>
 In the meantime, you can paste below code into your ~/.emacs before the patch is officially merged.
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-lisp">;; below regex list could be used in both js-mode and js2-mode
 (setq javascript-common-imenu-regex-list
@@ -482,10 +436,11 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
 ;; }}
 </code></pre>
 
+
+
+
 </div>
 
-<p></p>
-</div>
 </div>
 </div>
             </div>
@@ -495,7 +450,7 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-09-17T13:30:34+00:00">2014-09-17 13:30</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -511,13 +466,12 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/skill.html" rel="tag">skill</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-This is <a href="http://blog.binchen.org/posts/you-yong-de-emacs-kuai-jie-jian.html">my note on useful commands/keybindings to memorize</a> three years ago.
+<p>This is <a href="http://blog.binchen.org/posts/you-yong-de-emacs-kuai-jie-jian.html">my note on useful commands/keybindings to memorize</a> three years ago.
 </p>
 
 <p>
@@ -528,130 +482,110 @@ Most are obsolete because I'm more skillful now.
 Basically I use <b>fewer</b> but more powerful plugins. I write Emacs lisp if there is no suitable plugin.
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, column edit,
 </li>
 </ul>
-
-<pre class="example">
-C-x r t yourstring RET (See "How to do select column then do editing in GNU Emacs ?"")
+<pre class="example">C-x r t yourstring RET (See "How to do select column then do editing in GNU Emacs ?"")
 </pre>
 
 <p>
 Now I use <a href="http://www.emacswiki.org/emacs/Evil">Evil</a>
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, save current position to register and jump to the position,
 </li>
 </ul>
-
-<pre class="example">
-C-r SPC to save, C-j to jump (better-registers.el required)
+<pre class="example">C-r SPC to save, C-j to jump (better-registers.el required) 
 </pre>
 
 <p>
 Now Evil.
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, save frame configuration to register,
 </li>
 </ul>
-
-<pre class="example">
-C-r f (better-registers.el required)
+<pre class="example">C-r f (better-registers.el required) 
 </pre>
 
 <p>
 Now <a href="https://github.com/pashinin/workgroups2">workgroups2.</a>
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three year ago, (un)comment line,
 </li>
 </ul>
-
-<pre class="example">
-M-; (qiang-comment-dwim-line required)
+<pre class="example">M-; (qiang-comment-dwim-line required)
 </pre>
 
 <p>
 Now <a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter.</a>
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago for visiting the next/previous error message after compiling,
 </li>
 </ul>
-
-<pre class="example">
-"M-g M-n" or "M-g M-p"
+<pre class="example">"M-g M-n" or "M-g M-p"
 </pre>
 
 <p>
 I'm still using it.
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, find-tag/pop-tag-mark
 </li>
 </ul>
-
-<pre class="example">
-"M-." and "M-*"
+<pre class="example">"M-." and "M-*"
 </pre>
 
 <p>
 Now Evil
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, grep current work directory only or all sub-directories
 </li>
 </ul>
-
-<pre class="example">
-M-x lgrep/rgrep
+<pre class="example">M-x lgrep/rgrep
 </pre>
 
 <p>
 Now grep in shell plus <a href="https://github.com/mooz/percol">percol</a>
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, visit multiple tags table 
 </li>
 </ul>
-
-<pre class="example">
-M-x visit-tags-table
+<pre class="example">M-x visit-tags-table
 </pre>
 
 <p>
 <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">hack tags-table-list directly</a> might be simpler.
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, set countdown timer
 </li>
 </ul>
-
-<pre class="example">
-M-x org-timer-set-timer, C-c C-x ;
+<pre class="example">M-x org-timer-set-timer, C-c C-x ;
 </pre>
 
 <p>
 Now I don't push myself with the timer thing.
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Three years ago, mark subtree in org-mode
 </li>
 </ul>
-
-<pre class="example">
-M-x org-mark-subtree
+<pre class="example">M-x org-mark-subtree
 </pre>
 
 <p>
@@ -659,7 +593,8 @@ It was used to select the text to post to my blog.
 </p>
 
 <p>
-Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. The org-mark-subtree is hardcoded into org2nikola.</p>
+Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. The org-mark-subtree is hardcoded into org2nikola.
+</p>
 </div>
             </div>
         </div>
@@ -668,7 +603,7 @@ Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. Th
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-08-01T13:52:18+00:00">2014-08-01 13:52</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -684,76 +619,66 @@ Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. Th
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-I use keyboard only in order to maximize my productivity.
+<p>I use keyboard only in order to maximize my productivity.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Preparation</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-Install Firefox addon <a href="https://github.com/mooz/keysnail/wiki">Keysnail</a> and its plugin <a href="https://github.com/mooz/keysnail/wiki/plugin">HOK</a>. From now on, all the web browsing is done ONLY in keyboard.
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Preparation</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>Install Firefox addon <a href="https://github.com/mooz/keysnail/wiki">Keysnail</a> and its plugin <a href="https://github.com/mooz/keysnail/wiki/plugin">HOK</a>. From now on, all the web browsing is done ONLY in keyboard.
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Step 1</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Open pull request page at github.com, click the link "command line".
-</p>
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Step 1</h4>
+<div class="outline-text-3" id="text-2">
 
+<p>Open pull request page at github.com, click the link "command line".
+</p>
 <p>
 In a real world project, I rarely accept a pull request without some modification. So I usually avoid pressing the big green button "merge pull request" on that page.
 </p>
-
 <p>
 In the "command line" page, github is kind enough to list the command lines to "check out a new branch and test the changes" from the pull request. The command lines are like:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-sh">git checkout -b her-master master
 git pull git@github.com:her/myproject.git master
 </code></pre>
 
-</div>
 
 <p>
 I have installed a Greasemonkey user script <a href="https://github.com/redguardtoo/NinjaWebCoder">NinjaWebCoder</a> in order to <b>use keyboard</b> to copy those command lines from the browser into clipboard. Then I paste the command lines into terminal.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Step 2</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-I open the code file with Emacs.
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Step 2</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>I open the code file with Emacs.
 </p>
-
 <p>
 There is an Emacs addon called <a href="https://github.com/syohex/emacs-git-gutter">git-gutter</a>. I use its command "git-gutter:next-hunk" to move the cursor to the next "diff hunk".
 </p>
-
 <p>
 Let me explain what's the diff hunk. When you edit some code under git's control, you code has some difference with the HEAD version. Every difference corresponds to the pair of a file name and a line number. That file-name-line-number pair is defined as a "diff hunk".
 </p>
-
 <p>
 Now comes <b>the most important part of this article</b>. Since version 0.71, git-gutter added a new command "git-gutter:set-start-version". If I "git-gutter:set-start-revision" to the "HEAD^" version. I can jump to "diff hunk" of the difference between "HEAD" and "HEAD^".
 </p>
-
 <p>
 In short, I can <b>review the latest commit and change the code in one step</b>.
 </p>
@@ -761,20 +686,18 @@ In short, I can <b>review the latest commit and change the code in one step</b>.
 
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Done</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
-</p>
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Done</h4>
+<div class="outline-text-3" id="text-4">
 
+<p>After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
+</p>
 <p>
 Every operation in previous steps is optimized with some shortcut. For example, in shell I use alias "g" instead of full command line "git status".
 </p>
-
 <p>
-Please enlighten me if the work flow could be improved.</p>
+Please enlighten me if the work flow could be improved.
+</p>
 </div>
 
 </div>
@@ -786,7 +709,7 @@ Please enlighten me if the work flow could be improved.</p>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-06-15T13:51:02+00:00">2014-06-15 13:51</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -801,17 +724,16 @@ Please enlighten me if the work flow could be improved.</p>
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-06-15&gt;</span></span>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-06-15</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-02-21 Sat&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-02-21 Sat</span></span>
 </p>
 
 <p>
@@ -822,14 +744,12 @@ The solutin is based on the ideas of top geeks. I only did the implementation.
 Mendel Cooper provided the original design in <a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting Guide</a>. Masafumi Oyamada (AKA mooz) added the missing piece by creating <a href="https://github.com/mooz/percol">percol</a>.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-How to find full path of a file by fuzz search?
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
 
+<p>How to find full path of a file by fuzz search?
+</p>
 <p>
 The path should be shared easily to other application like Emacs.
 </p>
@@ -837,29 +757,17 @@ The path should be shared easily to other application like Emacs.
 
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Installation</h3>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">
-<span class="section-number-3">2.1</span> Step 1, Install percol</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-<a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
-</p>
-</div>
-</div>
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Installation</h4>
+<div class="outline-text-3" id="text-2">
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">
-<span class="section-number-3">2.2</span> Step 2, Insert below code into ~/.bashrc:</h4>
-<div class="outline-text-3" id="text-2-2">
-<div class="org-src-container">
+<ul>
+<li id="sec-2-1">Step 1, Install percol<br><a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
 
-
-<pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+</li>
+</ul>
+<ul>
+<li id="sec-2-2">Step 2, Insert below code into ~/.bashrc:<br><pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -909,76 +817,67 @@ function cf()
 }
 </code></pre>
 
-</div>
+
 
 <p>
 `cf` is similar to `ff`. It will output Windows path under cygwin.
 </p>
+</li>
+</ul>
+</div>
 
-<p></p>
 </div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Usage</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Usage</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
 </p>
 <p>
 The paritials-of-file-path could contain wildcard character.
 </p>
-
 <p>
 For example, <b>for "/home/cb/projs/web-portal/app/styles/bootstrap/main.css", you can type either of below command</b>:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-bash">ff .../grunt-docs/*bootstrap*css
 ff web-port*ma*css
 ff styles
 </code></pre>
 
-</div>
+
 
 <p>
 Here is the screen shot when I type "ff el" in my ~/.emacs.d:
-<img src="wp-content/use-ff-in-shell.png" alt="use-ff-in-shell.png">
-</p>
-
+<img src="wp-content/use-ff-in-shell.png" alt="use-ff-in-shell.png"></p>
 <p>
 You will notice that I input the string "inflect" to filter the result.
 </p>
-
 <p>
 I can scroll up/down (press Ctrl-P or Ctrl-N) to select the exact file.
 </p>
-
 <p>
 In Emacs community, people try to embed a file explorer into Emacs (Sr speedbar, for example). This solution may make embedded file explorer unnecessary.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Advanced usage</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-More examples follow.
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Advanced usage</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>More examples follow.
 </p>
-</div>
-<div id="outline-container-sec-4-1" class="outline-3">
-<h4 id="sec-4-1">
-<span class="section-number-3">4.1</span> Search the bash history.</h4>
-<div class="outline-text-3" id="text-4-1">
-<p>
+<ul>
+<li id="sec-4-1">Search the bash history.<br>
 Code to insert ~/.bashrc:
-</p>
-<div class="org-src-container">
+
+
+
 
 <pre><code class="lang-sh">function h () {
     # reverse history, pick up one line, remove new line characters and put it into clipboard
@@ -990,28 +889,22 @@ Code to insert ~/.bashrc:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Though grep is quick enough for me, it can be replaced by <a href="https://github.com/ggreer/the_silver_searcher">Silver Searcher</a>.
 </p>
-
 <p>
 Screenshot:
-<img src="wp-content/use-h-in-shell.png" alt="use-h-in-shell.png">
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h4 id="sec-4-2">
-<span class="section-number-3">4.2</span> Select a file in git commit</h4>
-<div class="outline-text-3" id="text-4-2">
-<p>
+<img src="wp-content/use-h-in-shell.png" alt="use-h-in-shell.png"></p>
+</li>
+</ul>
+<ul>
+<li id="sec-4-2">Select a file in git commit<br>
 Code to insert ~/.bashrc:
-</p>
-<div class="org-src-container">
+
+
+
 
 <pre><code class="lang-sh">function glsf () {
     local str=`git --no-pager log --oneline --stat $* |  ~/bin/percol.py`
@@ -1022,25 +915,25 @@ Code to insert ~/.bashrc:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Screenshot:
-<img src="wp-content/use-glsf-in-shell.png" alt="use-glsf-in-shell.png">
-</p>
+<img src="wp-content/use-glsf-in-shell.png" alt="use-glsf-in-shell.png"></p>
+</li>
+</ul>
+</div>
 
-<p></p>
 </div>
-</div>
-</div>
-<div id="outline-container-sec-5" class="outline-2">
-<h3 id="sec-5">
-<span class="section-number-2">5</span> Summary</h3>
-<div class="outline-text-2" id="text-5">
-<p>
-The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
+
+<div id="outline-container-5" class="outline-3">
+<h4 id="sec-5">Summary</h4>
+<div class="outline-text-3" id="text-5">
+
+<p>The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
 </p>
 </div>
+
 </div>
 </div>
             </div>
@@ -1050,7 +943,7 @@ The key idea is that I have full freedom to get job done in any way. Emacs is no
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-05-31T03:47:53+00:00">2014-05-31 03:47</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1065,16 +958,13 @@ The key idea is that I have full freedom to get job done in any way. Emacs is no
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-Here is the script,
+<p>Here is the script,
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-sh">#!/bin/bash
 [ -z "$EMACS_VERSION" ] &amp;&amp; EMACS_VERSION="23.4"
@@ -1089,23 +979,18 @@ cd $EMACS_TMP/emacs-$EMACS_VERSION;mkdir -p $HOME/myemacs/$EMACS_VERSION;rm -rf 
  rm -rf $EMACS_TMP/emacs-$EMACS_VERSION
 </code></pre>
 
-</div>
-
 <p>
 Usage:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-sh">./install-emacs
 #or
 EMACS_VERSION=23.4 ./install-emacs
 </code></pre>
 
-</div>
-
 <p>
-The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION</p>
+The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION
+</p>
 </div>
             </div>
         </div>
@@ -1114,7 +999,7 @@ The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION</p>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-05-29T01:31:35+00:00">2014-05-29 01:31</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1131,20 +1016,19 @@ The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION</p>
            <li><a class="tag p-category" href="categories/engineering.html" rel="tag">engineering</a></li>
            <li><a class="tag p-category" href="categories/software.html" rel="tag">software</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-It's not good practice to use relative path in big project.
+<p>It's not good practice to use relative path in big project.
 </p>
 
 <p>
 Reasons:
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>If file B refer to file A with "../A". Then B's position in the project *CANNOT be changed. Or else its reference to A will be wrong.
 </li>
 <li>Relative path is not intuitive when debugging.
@@ -1152,7 +1036,6 @@ Reasons:
 <li>If the dependency is complex. Figure out the right path is mission impossible. For example, file A refer to file B with "./a/../../B" and file B refer to file C  "../../b/C".
 </li>
 </ul>
-
 <p>
 So you should <b>ALWAYS use the absolute path</b>.
 </p>
@@ -1173,12 +1056,8 @@ For example, we can replace absolute path "/home/cb/projects/app1/src/test.c" wi
 Insert below code into ~/.bashrc so TTAGROOT value is set when you logged into bash:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-sh">export TTAGROOT="/home/cb/projects/app1"
 </code></pre>
-
-</div>
 
 <p>
 In you script to do the real job, you could make TTAGROOT optional and still use your full path happily. It's just one bash liner.
@@ -1188,14 +1067,10 @@ In you script to do the real job, you could make TTAGROOT optional and still use
 Here is a sample file named test.sh:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-sh">#!/bin/bash
 [ -z "$TTAGROOT" ] &amp;&amp; TTAGROOT="hard-coded-full-path"
 echo "TTAGROOT = $TTAGROOT"
 </code></pre>
-
-</div>
 
 <p>
 You could use test.sh without $TTAGROOT. Or you can set up default value of $TTAGROOT in ~/.bashrc as I already mentioned.
@@ -1205,15 +1080,12 @@ You could use test.sh without $TTAGROOT. Or you can set up default value of $TTA
 Or you can override the TTAGROOT value when you executing "test.sh":
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-sh">TTAGROOT="hello" ./test.sh
 </code></pre>
 
-</div>
-
 <p>
-BTW, don't abuse this technique. Set <b>one environment variable</b> for the root directory of project is enough.</p>
+BTW, don't abuse this technique. Set <b>one environment variable</b> for the root directory of project is enough.
+</p>
 </div>
             </div>
         </div>
@@ -1222,7 +1094,7 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-05-09T09:19:18+00:00">2014-05-09 09:19</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1239,23 +1111,21 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-There are two styles when insert curly braces in C like languages.
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
 
+<p>There are two styles when insert curly braces in C like languages.
+</p>
 <p>
 Style 1:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-c">if(true) {
@@ -1263,13 +1133,13 @@ Style 1:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Style 2:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-c">if(true)
 {
@@ -1277,31 +1147,29 @@ Style 2:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Whatever style I use, I expect Emacs will properly handle the indentation for me.
 </p>
-
 <p>
 In "Style 1", when I press ENTER key after "{" at first line, I expect the new line will indent four spaces.
 </p>
-
 <p>
 In "Style 2", when I press ENTER key after ")" at first line, I expect the new line will NOT indent.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Solution</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Insert below code into ~/.emacs:
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Solution</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Insert below code into ~/.emacs:
 </p>
-<div class="org-src-container">
+
+
 
 <pre><code class="lang-lisp">(defun fix-c-indent-offset-according-to-syntax-context (key val)
   ;; remove the old element
@@ -1316,132 +1184,121 @@ Insert below code into ~/.emacs:
               (fix-c-indent-offset-according-to-syntax-context 'substatement 0)
               (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
             ))
+
 </code></pre>
 
-</div>
+
 
 <p>
 That's it.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Explanation</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-When you press the ENTER key, the function <b>c-indent-line</b> will be called.
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Explanation</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>When you press the ENTER key, the function <b>c-indent-line</b> will be called.
 </p>
-
 <p>
 That function will do some simple syntax analysis and decide current syntactic context..
 </p>
-
 <p>
 It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
 </p>
-
 <p>
 For example, the context <b>substatement</b> corresponds to the code like below:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-c">if(true) // press ENTER here
 </code></pre>
 
-</div>
+
 
 <p>
 And the context <b>func-decl-cont</b> corresponds to:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-c">void fn () //press ENTER here
 </code></pre>
 
+
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Technical details</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Technical details</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
 </p>
-
 <p>
 <b>indent-according-to-mode</b> will call function object <b>indent-line-function</b> if it's not nil.
 </p>
-
 <p>
 In C/C++/Java, that object is actually <b>c-indent-line</b>.
 </p>
-
 <p>
 <b>c-indent-line</b> is defined in /usr/share/emacs/24.3/lisp/progmodes/cc-cmds.el (I use Emacs 24.3 on Gentoo Linux).
 </p>
-
 <p>
 In that function, just below the code line:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-lisp">(setq c-syntactic-context (c-guess-basic-syntax))
 </code></pre>
 
-</div>
+
 
 <p>
 You can insert log code as below:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(message "c-syntactic-context=%s" c-syntactic-context)
 </code></pre>
 
-</div>
+
 
 <p>
 You will know the current syntactic context when you press ENTER key through the output of log code.
 </p>
-
 <p>
 <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> says you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
 </p>
-
 <p>
 For example, the context <b>statement-cont</b> corresponds to the use case like this:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-c">int a=3, // press ENTER here
 </code></pre>
 
-</div>
+
 
 <p>
 Please note syntax analysis in c-indent-line is turned on if and <b>only if</b> the global flag <b>c-syntactic-indentation</b> is true.
 </p>
-
 <p>
 Thanks for <a href="https://github.com/chengyi">chengyi</a> for <a href="https://github.com/redguardtoo/emacs.d/issues/98">reporting the issue and suggesting the fix</a>.
 </p>
-
 <p>
-BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.</p>
-
-<p></p>
+BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.
+</p>
 </div>
+
 </div>
 </div>
             </div>
@@ -1451,7 +1308,7 @@ BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-05-03T06:21:31+00:00">2014-05-03 06:21</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1468,13 +1325,12 @@ BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section
            <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
            <li><a class="tag p-category" href="categories/lisp.html" rel="tag">lisp</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-Yesterday in a interview I was asked what's AOP and how to use it. The two interviewers
+<p>Yesterday in a interview I was asked what's AOP and how to use it. The two interviewers
 </p>
 
 <p>
@@ -1493,8 +1349,7 @@ Please read <a href="http://developers.slashdot.org/story/05/04/24/0343224/aspec
 Here is the comment from MarkusQ,
 </p>
 
-<pre class="example">
- by MarkusQ (450076) on Sunday April 24, 2005 @11:01PM (#12333504) Journal
+<pre class="example"> by MarkusQ (450076) on Sunday April 24, 2005 @11:01PM (#12333504) Journal
 
 Exactly.
 
@@ -1521,7 +1376,7 @@ Now as guy who got seven years academical training on system design (Bachelor an
 Here are the reasons:
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>The code change an external API's behavior
 </li>
 <li>The code's location is not close to the API's
@@ -1537,7 +1392,7 @@ Here are the reasons:
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2014-04-30T12:46:31+00:00">2014-04-30 12:46</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1554,13 +1409,12 @@ Here are the reasons:
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+<p>Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 </p>
 
 <p>
@@ -1587,7 +1441,7 @@ It's hard to do this kind of thing in Gmail.
 Now let me show you how Emacs get the job done:
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
 </li>
 <li>Step 2, Mark the emails I want to forward with hot key "#"
@@ -1597,7 +1451,6 @@ Now let me show you how Emacs get the job done:
 <li>Step 4, Select and copy that string into you original email. Done!
 </li>
 </ul>
-
 <p>
 Well, some people may argue that step 4 could be improved a little bit.
 </p>
@@ -1605,8 +1458,6 @@ Well, some people may argue that step 4 could be improved a little bit.
 <p>
 In Emacs, everyting could be optimized. Please copy below code into your ~/.emacs:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun message-select-forwarded-email-tags ()
   "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
@@ -1634,48 +1485,30 @@ In Emacs, everyting could be optimized. Please copy below code into your ~/.emac
     ))
 </code></pre>
 
-</div>
-
 <p>
 All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
 </p>
 
 <p>
 UPDATE:
-This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.</p>
+This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
+</p>
 </div>
             </div>
         </div>
     
-        <nav class="postindexpager">
-        <ul class="pager">
-            <li class="previous">
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
                 <a href="index-19.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-17.html" rel="next">Older posts</a>
             </li>
-        </ul>
-        </nav>
-
-    
-        
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-    
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -1862,9 +1695,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
-<script type="text/javascript">
+</script><script type="text/javascript" src="assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -1879,19 +1710,10 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-
-    
-        <script type="text/javascript">
+</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>

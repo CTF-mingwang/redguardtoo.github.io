@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Start wxWdigets programming on Windows | Chen's blog</title>
-
-    
-            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Start wxWdigets programming on Windows | Chen's blog</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -35,37 +23,22 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-
-
-
-    
-
-    <meta name="author" content="Chen Bin">
-    
-    <meta property="og:site_name" content="Chen's blog">
-    <meta property="og:title" content="Start wxWdigets programming on Windows">
-    <meta property="og:url" content="http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html">
-    <meta property="og:description" content='Download wxWidgets  Extracted it somewhere. "c:\wxWidgets-2.8.12", for example.  Create environment variable WXWIN with value "c:\wxWidgets-2.8.12"  Install Visual Studio (Express version is fine if y'>
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2012-01-18T11:28:00+00:00">
-           <meta property="article:tag" content="emacs">
-           <meta property="article:tag" content="en">
-           <meta property="article:tag" content="mathjax">
-           <meta property="article:tag" content="win32">
-           <meta property="article:tag" content="wxwidgets">
-
-    
-
-    
-
-
-
+<meta name="author" content="Chen Bin">
+<meta property="og:site_name" content="Chen's blog">
+<meta property="og:title" content="Start wxWdigets programming on Windows">
+<meta property="og:url" content="http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html">
+<meta property="og:description" content='Download wxWidgets  Extracted it somewhere. "c:\wxWidgets-2.8.12", for example.  Create environment variable WXWIN with value "c:\wxWidgets-2.8.12"  Install Visual Studio (Express version is fine if y'>
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2012-01-18T11:28:00+00:00">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="en">
+<meta property="article:tag" content="mathjax">
+<meta property="article:tag" content="win32">
+<meta property="article:tag" content="wxwidgets">
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -73,10 +46,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
     <div class="post">
     
@@ -102,18 +72,22 @@ tr:nth-child(odd) td { background: #FEFEFE; }
            <li><a class="tag p-category" href="../categories/win32.html" rel="tag">win32</a></li>
            <li><a class="tag p-category" href="../categories/wxwidgets.html" rel="tag">wxwidgets</a></li>
         </ul>
-        </div>
+</div>
 
         </div>
         <div class="body">
             <div>
 <p></p>
-<ul> <li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a> </li> <li>Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. </li> <li>Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" </li> <li>Install Visual Studio (Express version is fine if you installed WIN32 SDK too) </li> <li>Compile wxWidgets library by running the dos batch file: </li> </ul>     <pre class="src src-sh">@echo off
+<ul>
+<li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a> </li> <li>Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. </li> <li>Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" </li> <li>Install Visual Studio (Express version is fine if you installed WIN32 SDK too) </li> <li>Compile wxWidgets library by running the dos batch file: </li> </ul>
+<pre class="src src-sh">@echo off
 call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span>
 <p>nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=debug</p>
 <p>nmake -f %WXWIN%\build\msw\makefile.vc <span style="color: #e7c547;">UNICODE</span>=1  <span style="color: #e7c547;">BUILD</span>=release</p>
 <p></p></pre>   <p> We use vcvars32.bat to set up the CLI tool chains. </p> <p> "Unicode=1" because our application will support i18n. </p>
-<ul> <li>Install <a href="http://www.cmake.org">CMake</a> </li> <li>Create a simple project with files main.cpp, main.hpp, CMakeLists.txt </li> </ul>  <p>main.cpp and main.hpp containts normal C++ code. </p> <p> CMakeLists.txt is the project file for CMake: </p>   <pre class="src src-cmake"><span style="color: #7aa6da;">PROJECT</span>(main)
+<ul>
+<li>Install <a href="http://www.cmake.org">CMake</a> </li> <li>Create a simple project with files main.cpp, main.hpp, CMakeLists.txt </li> </ul>
+<p>main.cpp and main.hpp containts normal C++ code. </p> <p> CMakeLists.txt is the project file for CMake: </p>   <pre class="src src-cmake"><span style="color: #7aa6da;">PROJECT</span>(main)
 <p><span style="color: #7aa6da;">CMAKE_MINIMUM_REQUIRED</span>(VERSION 2.6)</p>
 <p><span style="color: #969896; font-style: italic;"># sets variable SOURCES to the project source files.</span></p>
 <p><span style="color: #7aa6da;">set</span>(XRCS
@@ -174,25 +148,26 @@ call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Stud
   <span style="color: #7aa6da;">set</span>(LIBS ${LIBS} ole32 uuid oleaut32)
 <span style="color: #7aa6da;">endif</span>()</p>
 <p><span style="color: #7aa6da;">target_link_libraries</span>(main ${LIBS})</p>
-<p></p></pre>   <ul> <li>Running the below dos batch the create Visual Studio Project Files </li> </ul>     <pre class="src src-sh">@echo off
+<p></p></pre>   <ul>
+<li>Running the below dos batch the create Visual Studio Project Files </li> </ul>
+<pre class="src src-sh">@echo off
 <p>call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"</span></p>
 <p>cmake path/of/directory/which/contains/CMakeLists.txt/</p>
-<p></p></pre>  <ul> <li>Enjoy! </li> </ul>   <p> BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>. </p>
+<p></p></pre>  <ul>
+<li>Enjoy! </li> </ul>
+<p> BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>. </p>
 </div>
         </div>
         
         <ul class="pager">
-            <li class="previous">
+<li class="previous">
                 <a href="always-turn-on-fpermissive-for-gcc-4-6.html" rel="prev" title="Always turn on " for gcc>Previous post</a>
             </li>
             <li class="next">
                 <a href="the-most-important-features-of-midnight-commander-mc.html" rel="next" title="The most important features of Midnight Commander (MC)">Next post</a>
             </li>
         </ul>
-
-            
-        
-        <div id="disqus_thread"></div>
+<div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html",
@@ -206,34 +181,22 @@ call <span style="color: #70c0b1;">"C:\Program Files (x86)\Microsoft Visual Stud
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
         <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script>
-        <script src="../assets/js/mathjax.js"></script>
-
-    </div>
+        MathJax.Hub.Config({tex2jax: {inlineMath: [['$latex ','$'], ['\\(','\\)']]}});</script><script src="../assets/js/mathjax.js"></script>
+</div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -420,9 +383,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="../assets/js/highlight.pack.js"></script>
-<script type="text/javascript">
+</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -437,19 +398,10 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-
-    
-        <script type="text/javascript">
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>
