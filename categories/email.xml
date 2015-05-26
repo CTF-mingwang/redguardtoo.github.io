@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 May 2015 21:40:25 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 May 2015 21:56:41 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -379,7 +379,7 @@ It will automatically fetch the first name of agent,
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-09-28 Sun&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-05-26 Tue&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -656,8 +656,16 @@ xmlrpc_port 8081
 
 
 &lt;p&gt;
-The only issue is user name. If your user name contains "\", you should &lt;b&gt;replace it with "\\"* when input it in Popfile! *&lt;/b&gt;  Run the program 
-See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
+The only issue is user name. If your user name contains "\", you should replace it with "\\" when inputting in Popfile!
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;Run the program&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
 &lt;/p&gt;
 
 
@@ -670,9 +678,9 @@ See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopf
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Start the POPFile automatically when bash login&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
+&lt;div id="outline-container-5" class="outline-3"&gt;
+&lt;h4 id="sec-5"&gt;Start the POPFile automatically when bash login&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5"&gt;
 
 &lt;p&gt;Insert below code in ~/.bashrc:
 &lt;/p&gt;
@@ -699,9 +707,9 @@ fi
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-5" class="outline-3"&gt;
-&lt;h4 id="sec-5"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-5"&gt;
+&lt;div id="outline-container-6" class="outline-3"&gt;
+&lt;h4 id="sec-6"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-6"&gt;
 
 &lt;p&gt;My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
 &lt;/p&gt;
@@ -729,9 +737,9 @@ WantedBy=multi-user.target
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-6" class="outline-3"&gt;
-&lt;h4 id="sec-6"&gt;Backup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-6"&gt;
+&lt;div id="outline-container-7" class="outline-3"&gt;
+&lt;h4 id="sec-7"&gt;Backup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-7"&gt;
 
 &lt;p&gt;Please backup popfile.cfg and popfile.db.
 &lt;/p&gt;
@@ -741,9 +749,9 @@ See &lt;a href="http://getpopfile.org/docs/howtos:backup"&gt;http://getpopfile.o
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-7" class="outline-3"&gt;
-&lt;h4 id="sec-7"&gt;Summary&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-7"&gt;
+&lt;div id="outline-container-8" class="outline-3"&gt;
+&lt;h4 id="sec-8"&gt;Summary&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-8"&gt;
 
 &lt;ul&gt;&lt;li&gt;Portable
 &lt;/li&gt;
