@@ -1,5 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 08 Apr 2015 23:09:51 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 03 Aug 2015 22:08:36 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use which-func-mode with js2-mode</title><link>http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Two years ago in my article "&lt;a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html"&gt;Why Emacs is better editor - a case study for javascript developer&lt;/a&gt;" I proved that Emacs is a better javascript editor because its &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt; can parse the tags ) in opened file more intelligently.
+&lt;/p&gt;
+
+&lt;p&gt;
+Since then, the js2-mode keeps improving and becomes better every day. I'm absolutely satisfied with it except one minor issue.
+&lt;/p&gt;
+
+&lt;p&gt;
+For performance reason, js2-mode place the &lt;a href="http://emacswiki.org/emacs/ImenuMode"&gt;imenu&lt;/a&gt; results into a cache which is updated by a timer.
+&lt;/p&gt;
+
+&lt;p&gt;
+`(which-function)` from which-func-mode take advantage of the imenu results if you read its code. So the result of `(which-function)` may be incorrect if the cache is not updated by timer yet
+&lt;/p&gt;
+
+&lt;p&gt;
+The solution is to re-define a `my-which-function`:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-which-function ()
+  ;; clean the imenu cache
+  ;; @see http://stackoverflow.com/questions/13426564/how-to-force-a-rescan-in-imenu-by-a-function
+  (setq imenu--index-alist nil)
+  (which-function))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+The new API is very useful when I use &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;yasnippet&lt;/a&gt; to insert logging code in javascript file.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is a sample (log-which-func.yasnippet):
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-snippet"&gt;# -*- coding: utf-8; mode: snippet -*-
+# name: console.log which function called
+# key: lwf
+# --
+console.log('${1:`(my-which-function)`} called');
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html</guid><pubDate>Mon, 03 Aug 2015 12:08:29 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -1111,57 +1150,4 @@ $(el.completeRegistrationForm).validate({
 (js2-imenu-extras-mode)
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; The UI to display the candidate in this actile is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;. But there are many other UI front end for imenu instead of helm. &lt;/p&gt; &lt;p&gt; The helm version should be 20140125.1101 or higher, you can install helm from &lt;a href="http://melpa.milkbox.net/"&gt;melpa&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;: &lt;/p&gt; &lt;p&gt; &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</guid><pubDate>Sun, 15 Dec 2013 19:02:00 GMT</pubDate></item><item><title>How to write javascript/html code quickly</title><link>http://blog.binchen.org/posts/how-to-write-javascripthtml-code-quickly.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;mixing code of javascript and html is a big problem&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;   &lt;p&gt; If we mix the javascript code into html file as below: &lt;/p&gt;   &lt;pre class="src src-html"&gt;&amp;lt;&lt;span style="color: #81a2be;"&gt;ul&lt;/span&gt;&amp;gt;
-  &amp;lt;% for(var key in service.get('Detail')){ %&amp;gt;
-    &amp;lt;&lt;span style="color: #000000; background-color: #ff00ff; font-weight: bold; text-decoration: underline;"&gt;%&lt;/span&gt; if(key!='creditcard_number){ %&amp;gt;
-      &amp;lt;&lt;span style="color: #81a2be;"&gt;li&lt;/span&gt;&amp;gt;
-        &amp;lt;&lt;span style="color: #81a2be;"&gt;label&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;for&lt;/span&gt;='&amp;lt;%= key %&amp;gt;'&amp;gt;&amp;lt;%= key %&amp;gt;&amp;lt;/&lt;span style="color: #81a2be;"&gt;label&lt;/span&gt;&amp;gt;
-          &amp;lt;&lt;span style="color: #81a2be;"&gt;div&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;id&lt;/span&gt;='&amp;lt;%=key %&amp;gt;'&amp;gt;&amp;lt;%= service.get('Details')[key] %&amp;gt;&amp;lt;/&lt;span style="color: #81a2be;"&gt;div&lt;/span&gt;&amp;gt;
-        &amp;lt;/&lt;span style="color: #81a2be;"&gt;li&lt;/span&gt;&amp;gt;
-    &amp;lt;% }&lt;span style="color: #000000; background-color: #ff00ff; font-weight: bold; text-decoration: underline;"&gt;%&lt;/span&gt;&amp;gt;
-&amp;lt;% } &lt;span style="color: #000000; background-color: #ff00ff; font-weight: bold; text-decoration: underline;"&gt;%&lt;/span&gt;&amp;gt;
-&lt;p&gt;&amp;lt;/&lt;span style="color: #81a2be;"&gt;ul&lt;/span&gt;&amp;gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;p&gt; Then it's hard to write/debug/fix the javascript code because: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;html code becomes noise for javascript development. &lt;/li&gt; &lt;li&gt;The syntax checker for javascript will not work properly. &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; If  we mix the html code into javascript file as below: &lt;/p&gt;   &lt;pre class="src src-javascript"&gt;&lt;span style="color: #b5bd68;"&gt;for&lt;/span&gt;(&lt;span style="color: #b5bd68;"&gt;var&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;key&lt;/span&gt; &lt;span style="color: #b5bd68;"&gt;in&lt;/span&gt; service.get(&lt;span style="color: #8abeb7;"&gt;'Detail'&lt;/span&gt;)){
-  &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt;(key!=&lt;span style="color: #8abeb7;"&gt;'creditcard_number'&lt;/span&gt;){
-    htmlRender(formatString(&lt;span style="color: #8abeb7;"&gt;"&amp;lt;li&amp;gt;&amp;lt;label for='%s'&amp;gt;%s&amp;lt;/label&amp;gt;&amp;lt;div id='%s'&amp;gt;%s&amp;lt;/div&amp;gt;"&lt;/span&gt;,key,key,service.get(&lt;span style="color: #8abeb7;"&gt;'Details'&lt;/span&gt;)[key]));
-  }
-}
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;p&gt; Now html code becomes hard to write/debug/fix because: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;javascript code becomes noise for html development. &lt;/li&gt; &lt;li&gt;The syntax checker for html will not work properly. &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; In summary, mixing code in different language syntax will: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;make code hard to read &lt;/li&gt; &lt;li&gt;make syntax checker dysfunctional &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; These are the top two causes why we can not code fast in real application. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Use functional programming to avoid mix the javascript and html&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;So here is our objective: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;We need put the business logic into javascript file. The logic usually contains "for/while/if" statements. &lt;/li&gt; &lt;li&gt;Html tags like "&amp;lt;div&amp;gt;/&amp;lt;span&amp;gt;/&amp;lt;ul&amp;gt;/&amp;lt;li&amp;gt;" need be placed in html file. &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; The solution is actually simple. We just need apply a little bit of functional programming skill. &lt;/p&gt; &lt;p&gt; So here is our html file in functional programming style: &lt;/p&gt;   &lt;pre class="src src-html"&gt;&amp;lt;% forEachAttributeInService(service,function(service,key) { %&amp;gt;
-   &amp;lt;&lt;span style="color: #81a2be;"&gt;li&lt;/span&gt;&amp;gt;
-     &amp;lt;&lt;span style="color: #81a2be;"&gt;label&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;for&lt;/span&gt;='&amp;lt;%= key %&amp;gt;'&amp;gt;&amp;lt;%= key %&amp;gt;&amp;lt;/&lt;span style="color: #81a2be;"&gt;label&lt;/span&gt;&amp;gt;
-     &amp;lt;&lt;span style="color: #81a2be;"&gt;div&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;id&lt;/span&gt;='&amp;lt;%=key %&amp;gt;'&amp;gt;&amp;lt;%= formatServiceAttributes(service,key) %&amp;gt;&amp;lt;/&lt;span style="color: #81a2be;"&gt;div&lt;/span&gt;&amp;gt;
-   &amp;lt;/&lt;span style="color: #81a2be;"&gt;li&lt;/span&gt;&amp;gt;
-&amp;lt;%  }); &lt;span style="color: #000000; background-color: #ff00ff; font-weight: bold; text-decoration: underline;"&gt;%&lt;/span&gt;&amp;gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; Here is the javascript file: &lt;/p&gt;   &lt;pre class="src src-javascript"&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;forEachAttributeInService&lt;/span&gt;(&lt;span style="color: #f0c674;"&gt;service&lt;/span&gt;,&lt;span style="color: #f0c674;"&gt;fn&lt;/span&gt;) {
-  &lt;span style="color: #b5bd68;"&gt;for&lt;/span&gt;(&lt;span style="color: #b5bd68;"&gt;var&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;key&lt;/span&gt; &lt;span style="color: #b5bd68;"&gt;in&lt;/span&gt; service.get(&lt;span style="color: #8abeb7;"&gt;'Detail'&lt;/span&gt;)){
-    &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt;(key!=&lt;span style="color: #8abeb7;"&gt;'creditcard_number'&lt;/span&gt;){
-      fn(service,key)
-    }
-  }
-}
-&lt;p&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;formatServiceAttributes&lt;/span&gt;(&lt;span style="color: #f0c674;"&gt;service&lt;/span&gt;,&lt;span style="color: #f0c674;"&gt;key&lt;/span&gt;) {
-  &lt;span style="color: #b5bd68;"&gt;return&lt;/span&gt; service.get(&lt;span style="color: #8abeb7;"&gt;'Details'&lt;/span&gt;)[key];
-}&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; Now let's check what happens. &lt;/p&gt; &lt;p&gt; In the html file, the business logic is converted into combination of functional calls. &lt;/p&gt; &lt;p&gt; In javascript file, all the code dealing with hard coded html tags are converted to the call of anonymous functions. Those anonymous function is basically dump of html tags which is defined in html file. &lt;/p&gt; &lt;p&gt; You can use this technique to convert any existing code into new style. For example, a simple "if else" statement could be re-written in new style: &lt;/p&gt;   &lt;pre class="src src-javascript"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;/&lt;em&gt; &lt;/em&gt;&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;code in old style /&lt;/span&gt;
-&lt;p&gt;&lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt; (&lt;span style="color: #de935f;"&gt;true&lt;/span&gt;){
-  console.log(&lt;span style="color: #8abeb7;"&gt;'&amp;lt;li&amp;gt;YES&amp;lt;/li&amp;gt;'&lt;/span&gt;);
-} &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt; {
-  console.log(&lt;span style="color: #8abeb7;"&gt;'&amp;lt;li&amp;gt;NO&amp;lt;/li&amp;gt;'&lt;/span&gt;);
-}&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #969896; font-style: italic;"&gt;/&lt;em&gt; &lt;/em&gt;&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;code in new style /&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;func_if_else&lt;/span&gt;(&lt;span style="color: #f0c674;"&gt;f1&lt;/span&gt;,&lt;span style="color: #f0c674;"&gt;f2&lt;/span&gt;,&lt;span style="color: #f0c674;"&gt;f3&lt;/span&gt;){
-  &lt;span style="color: #b5bd68;"&gt;if&lt;/span&gt;(f1()){
-    f2();
-  } &lt;span style="color: #b5bd68;"&gt;else&lt;/span&gt; {
-    f3();
-  }
-}&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #969896; font-style: italic;"&gt;/&lt;em&gt; &lt;/em&gt;&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;the execution of func_if_else() /&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;func_if_else(&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt;(){ &lt;span style="color: #b5bd68;"&gt;return&lt;/span&gt; &lt;span style="color: #de935f;"&gt;true&lt;/span&gt; },
-           &lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt;(){
-             console.log(&lt;span style="color: #8abeb7;"&gt;'&amp;lt;li&amp;gt;YES&amp;lt;/li&amp;gt;'&lt;/span&gt;);
-           },
-           &lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt;(){
-             console.log(&lt;span style="color: #8abeb7;"&gt;'&amp;lt;li&amp;gt;NO&amp;lt;/li&amp;gt;'&lt;/span&gt;);
-           });
-&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; This is a kind of radical example. I'm only demonstrating the power of new style. I'm not suggesting you should convert any logic statement into function call. New style is not a silver bullet. It's only a useful if used properly in right timing. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>programming</category><guid>http://blog.binchen.org/posts/how-to-write-javascripthtml-code-quickly.html</guid><pubDate>Wed, 22 May 2013 10:24:00 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; The UI to display the candidate in this actile is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;. But there are many other UI front end for imenu instead of helm. &lt;/p&gt; &lt;p&gt; The helm version should be 20140125.1101 or higher, you can install helm from &lt;a href="http://melpa.milkbox.net/"&gt;melpa&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;: &lt;/p&gt; &lt;p&gt; &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</guid><pubDate>Sun, 15 Dec 2013 19:02:00 GMT</pubDate></item></channel></rss>
