@@ -3,7 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>Posts about win32 | Chen's blog</title>
+    <title>Evil text object to select nearby file path | Chen's blog</title>
 
     
             <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
@@ -11,7 +11,7 @@
     
             <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 
-      <link rel="canonical" href="http://blog.binchen.org/categories/win32.html">
+      <link rel="canonical" href="http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html">
 
 
 
@@ -40,7 +40,30 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
     
 
-        <link rel="alternate" type="application/rss+xml" title="RSS for tag win32" href="win32.xml">
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Evil text object to select nearby file path">
+    <meta property="og:url" content="http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html">
+    <meta property="og:description" content='Insert below code into ~/.emacs:
+
+
+
+
+;; {{ file path in current line as text object,
+;;      - "vif" to select only basename
+;;      - "vaf" to select the full path
+;;  Example: "/hello/world" "/test/'>
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2015-08-08T13:16:39+00:00">
+           <meta property="article:tag" content="emacs">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="evil">
+
+    
+
+    
+
 
 
 </head>
@@ -50,7 +73,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         
             <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
             <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
@@ -61,22 +84,152 @@ tr:nth-child(odd) td { background: #FEFEFE; }
     <section class="page-content">
         <div class="content" rel="main">
             
-<article class="tagpage">
-    <header>
-        <h1>Posts about win32</h1>
-        <div class="metadata">
-                <p class="feedlink"><a href="win32.xml" type="application/rss+xml">RSS feed</a></p>
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Evil text object to select nearby file path</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2015-08-08T13:16:39+00:00">2015-08-08 13:16</time>
+            
+
+            
+          |  
+        <a href="evil-text-object-to-select-nearby-file-path.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/evil.html" rel="tag">evil</a></li>
+        </ul>
         </div>
-    </header>
-    <ul class="postlist">
-        <li>
-<a href="../posts/start-wxwdigets-programming-on-windows.html" class="listtitle">Start wxWdigets programming on Windows</a> <time class="listdate" datetime="2012-01-18T11:28:00+00:00" title="2012-01-18 11:28">2012-01-18 11:28</time>
-</li>
-        <li>
-<a href="../posts/geek-chang-yong-ruan-jian-qin-dan.html" class="listtitle">奇客(Geek)的常用软件清单(OS X, Windows, Linux)</a> <time class="listdate" datetime="2011-04-16T15:11:00+00:00" title="2011-04-16 15:11">2011-04-16 15:11</time>
-</li>
-    </ul>
-</article>
+
+        </div>
+        <div class="body">
+            <div>
+<p>
+Insert below code into ~/.emacs:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">;; {{ file path in current line as text object,
+;;      - "vif" to select only basename
+;;      - "vaf" to select the full path
+;;  Example: "/hello/world" "/test/back.exe"
+(defun evil-filepath-extract-region ()
+  (interactive)
+  "Find the closest file path"
+  (let (rlt
+        (ch (following-char))
+        (path-chars (string-to-list "_.-/") )
+        f1 l1
+        f2 l2
+        (re-path "[^a-zA-Z0-9_.-/]\\([a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+\\)"))
+
+    ;; maybe (point) is in the middle of the path
+    (when (or (and (&gt;= ch 97) (&lt;= ch 122)) ; a-z
+              (and (&gt;= ch 65) (&lt;= ch 90)) ; A-Z
+              (and (&gt;= ch 48) (&lt;= ch 57)) ; 0-9
+              (memq ch path-chars))
+      (let (b e s)
+        (save-excursion
+          (setq b (search-backward-regexp "[^a-zA-Z0-9_.-/]" (point-min) t)))
+        (save-excursion
+          (setq e (search-forward-regexp "[^a-zA-Z0-9_.-/]" (point-max) t)))
+        (when (and b e)
+          (setq b (+ 1 b))
+          (setq e (- e 1))
+          (setq s (buffer-substring-no-properties b e))
+          (when (string-match "[a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+" s)
+            (setq f1 b)
+            (setq l1 (length s))))))
+
+    ;; a file path is a string contains "/"
+    (unless f1
+      (save-excursion
+        (setq f1 (search-backward-regexp re-path (point-min) t))
+        (setq l1 (length (match-string 1))))
+      (save-excursion
+        (setq f2 (search-forward-regexp re-path (point-max) t))
+        (setq l2 (length (match-string 1))))
+
+      ;; from now on, we use f1,l1
+      (if (&gt; (- (point) (+ f1 l1)) (- (- f2 l2) (point)))
+          (setq f1 (- f2 l2)
+                l1 l2)
+        (setq f1 (+ f1 1))))
+
+    (if (and f1 l1)
+        (setq rlt (list f1
+                        (save-excursion
+                          (goto-char (+ f1 l1))
+                          (search-backward "/")
+                          (+ 1 (point)))
+                        (+ f1 l1 -1))))
+    rlt))
+
+(evil-define-text-object evil-filepath-inner-text-object (&amp;optional count begin end type)
+  "File name of nearby path"
+  (let ((selected-region (evil-filepath-extract-region)))
+    (if selected-region
+        (evil-range (nth 1 selected-region) (nth 2 selected-region) :expanded t))))
+
+(evil-define-text-object evil-filepath-outer-text-object (&amp;optional NUM begin end type)
+  "Nearby path"
+  (let ((selected-region (evil-filepath-extract-region)))
+    (if selected-region
+        (evil-range (car selected-region) (+ 1 (nth 2 selected-region)) type :expanded t))))
+
+(define-key evil-inner-text-objects-map "f" 'evil-filepath-inner-text-object)
+(define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
+;; }}
+</code></pre>
+
+</div>
+</div>
+        </div>
+        
+        <ul class="pager">
+            <li class="previous">
+                <a href="jian-bu-zhai-ming-tang-sgow-chrouk-soup.html" rel="prev" title="柬埔寨名汤(Sgow Chrouk Soup)">Previous post</a>
+            </li>
+        </ul>
+
+            
+        
+        <div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html",
+        disqus_title="Evil text object to select nearby file path",
+        disqus_identifier="cache/posts/evil-text-object-to-select-nearby-file-path.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
 
              
         <footer id="footer" role="contentinfo">
