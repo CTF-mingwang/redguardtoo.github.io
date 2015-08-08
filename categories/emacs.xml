@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 08 Aug 2015 23:17:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 08 Aug 2015 23:18:38 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ file path in current line as text object,
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ Treat file path nearby as text object,
 ;;      - "vif" to select only basename
 ;;      - "vaf" to select the full path
 ;;  Example: "/hello/world" "/test/back.exe"
