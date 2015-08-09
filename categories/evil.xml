@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 08 Aug 2015 23:18:38 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Aug 2015 11:26:37 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ Treat file path nearby as text object,
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
 ;;      - "vaf" to select the full path
-;;  Example: "/hello/world" "/test/back.exe"
+;;
+;;  example: "/hello/world" "/test/back.exe"
+;;               "C:hello\\hello\\world\\test.exe" "D:blah\\hello\\world\\base.exe"
 (defun evil-filepath-extract-region ()
   (interactive)
   "Find the closest file path"
   (let (rlt
         (ch (following-char))
-        (path-chars (string-to-list "_.-/") )
+        (path-chars (string-to-list "_.-/\\") )
         f1 l1
         f2 l2
-        (re-path "[^a-zA-Z0-9_.-/]\\([a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+\\)"))
+        (re-path "[^a-zA-Z0-9_.-\\/]\\([a-zA-Z0-9_.-\\/]*[\\/][a-zA-Z0-9_.-]+\\)"))
 
     ;; maybe (point) is in the middle of the path
     (when (or (and (&amp;gt;= ch 97) (&amp;lt;= ch 122)) ; a-z
@@ -26,18 +28,18 @@ Insert below code into ~/.emacs:
               (memq ch path-chars))
       (let (b e s)
         (save-excursion
-          (setq b (search-backward-regexp "[^a-zA-Z0-9_.-/]" (point-min) t)))
+          (setq b (search-backward-regexp "[^a-zA-Z0-9_.-\\/]" (point-min) t)))
         (save-excursion
-          (setq e (search-forward-regexp "[^a-zA-Z0-9_.-/]" (point-max) t)))
+          (setq e (search-forward-regexp "[^a-zA-Z0-9_.-\\/]" (point-max) t)))
         (when (and b e)
           (setq b (+ 1 b))
           (setq e (- e 1))
           (setq s (buffer-substring-no-properties b e))
-          (when (string-match "[a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+" s)
+          (when (string-match "[a-zA-Z0-9_.-\\/]*[\\/][a-zA-Z0-9_.-]+" s)
             (setq f1 b)
             (setq l1 (length s))))))
 
-    ;; a file path is a string contains "/"
+    ;; a file path is a string contains slash character
     (unless f1
       (save-excursion
         (setq f1 (search-backward-regexp re-path (point-min) t))
@@ -56,7 +58,7 @@ Insert below code into ~/.emacs:
         (setq rlt (list f1
                         (save-excursion
                           (goto-char (+ f1 l1))
-                          (search-backward "/")
+                          (search-backward-regexp "[\\/]")
                           (+ 1 (point)))
                         (+ f1 l1 -1))))
     rlt))

@@ -50,10 +50,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
 
 
-;; {{ Treat file path nearby as text object,
+;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
 ;;      - "vaf" to select the full path
-;;  Example: "/hello/world" "/test/bac'>
+;;
+;;  example: "/hello/world" "/test/back.e'>
     <meta property="og:type" content="article">
     <meta property="article:published_time" content="2015-08-08T13:16:39+00:00">
            <meta property="article:tag" content="emacs">
@@ -117,19 +118,21 @@ Insert below code into ~/.emacs:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">;; {{ Treat file path nearby as text object,
+<pre><code class="lang-lisp">;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
 ;;      - "vaf" to select the full path
-;;  Example: "/hello/world" "/test/back.exe"
+;;
+;;  example: "/hello/world" "/test/back.exe"
+;;               "C:hello\\hello\\world\\test.exe" "D:blah\\hello\\world\\base.exe"
 (defun evil-filepath-extract-region ()
   (interactive)
   "Find the closest file path"
   (let (rlt
         (ch (following-char))
-        (path-chars (string-to-list "_.-/") )
+        (path-chars (string-to-list "_.-/\\") )
         f1 l1
         f2 l2
-        (re-path "[^a-zA-Z0-9_.-/]\\([a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+\\)"))
+        (re-path "[^a-zA-Z0-9_.-\\/]\\([a-zA-Z0-9_.-\\/]*[\\/][a-zA-Z0-9_.-]+\\)"))
 
     ;; maybe (point) is in the middle of the path
     (when (or (and (&gt;= ch 97) (&lt;= ch 122)) ; a-z
@@ -138,18 +141,18 @@ Insert below code into ~/.emacs:
               (memq ch path-chars))
       (let (b e s)
         (save-excursion
-          (setq b (search-backward-regexp "[^a-zA-Z0-9_.-/]" (point-min) t)))
+          (setq b (search-backward-regexp "[^a-zA-Z0-9_.-\\/]" (point-min) t)))
         (save-excursion
-          (setq e (search-forward-regexp "[^a-zA-Z0-9_.-/]" (point-max) t)))
+          (setq e (search-forward-regexp "[^a-zA-Z0-9_.-\\/]" (point-max) t)))
         (when (and b e)
           (setq b (+ 1 b))
           (setq e (- e 1))
           (setq s (buffer-substring-no-properties b e))
-          (when (string-match "[a-zA-Z0-9_.-/]*/[a-zA-Z0-9_.-]+" s)
+          (when (string-match "[a-zA-Z0-9_.-\\/]*[\\/][a-zA-Z0-9_.-]+" s)
             (setq f1 b)
             (setq l1 (length s))))))
 
-    ;; a file path is a string contains "/"
+    ;; a file path is a string contains slash character
     (unless f1
       (save-excursion
         (setq f1 (search-backward-regexp re-path (point-min) t))
@@ -168,7 +171,7 @@ Insert below code into ~/.emacs:
         (setq rlt (list f1
                         (save-excursion
                           (goto-char (+ f1 l1))
-                          (search-backward "/")
+                          (search-backward-regexp "[\\/]")
                           (+ 1 (point)))
                         (+ f1 l1 -1))))
     rlt))
