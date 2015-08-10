@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 08 Apr 2015 23:09:51 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 10 Aug 2015 18:23:20 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# one debian/ubuntu, you need `apt-get install libxml2-dev libxslt1-dev python-dev` for lxml
 
 # install dependencies (requests is required by zen theme)
 # sudo pip install markdown webassets phpserialize nikola requests
