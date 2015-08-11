@@ -241,6 +241,7 @@ org-export-odt-preferred-output-format "doc"
 org-odt-preferred-output-format "doc"
 ;; BTW, you can assign "pdf" in above variables if you prefer PDF format
 
+;; Only OSX need below setup
 (defun my-setup-odt-org-convert-process ()
   (interactive)
   (let ((cmd "/Applications/LibreOffice.app/Contents/MacOS/soffice"))
@@ -250,14 +251,13 @@ org-odt-preferred-output-format "doc"
       ;; org v8
       (setq org-odt-convert-processes '(("LibreOffice" "/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to %f%x --outdir %d %i"))))
     ))
-;; Only OSX need extra setup
 (my-setup-odt-org-convert-process)
 </code></pre>
 
 
 
 <p>
-Then emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs.
+Emacs will find the binary "soffice" from libreoffice to do the conversion.
 </p>
 </div>
 
@@ -267,7 +267,7 @@ Then emacs find the binary "soffice" which is from libreoffice and use the CLI t
 <h5 id="sec-2-4">Tips</h5>
 <div class="outline-text-4" id="text-2-4">
 
-<p>If you need insert page break in the exported document, insert below line into you org file:
+<p>If you need page break in exported document, insert below snippet into the org file:
 </p>
 
 

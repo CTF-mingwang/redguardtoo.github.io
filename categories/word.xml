@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (word)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/word.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:17:44 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to take screen shot for business people efficiently in Emacs</title><link>http://blog.binchen.org/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2013-10-23 Wed&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (word)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/word.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:20:37 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to take screen shot for business people efficiently in Emacs</title><link>http://blog.binchen.org/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2013-10-23 Wed&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -107,6 +107,7 @@ org-export-odt-preferred-output-format "doc"
 org-odt-preferred-output-format "doc"
 ;; BTW, you can assign "pdf" in above variables if you prefer PDF format
 
+;; Only OSX need below setup
 (defun my-setup-odt-org-convert-process ()
   (interactive)
   (let ((cmd "/Applications/LibreOffice.app/Contents/MacOS/soffice"))
@@ -116,14 +117,13 @@ org-odt-preferred-output-format "doc"
       ;; org v8
       (setq org-odt-convert-processes '(("LibreOffice" "/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to %f%x --outdir %d %i"))))
     ))
-;; Only OSX need extra setup
 (my-setup-odt-org-convert-process)
 &lt;/code&gt;&lt;/pre&gt;
 
 
 
 &lt;p&gt;
-Then emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs.
+Emacs will find the binary "soffice" from libreoffice to do the conversion.
 &lt;/p&gt;
 &lt;/div&gt;
 
@@ -133,7 +133,7 @@ Then emacs find the binary "soffice" which is from libreoffice and use the CLI t
 &lt;h5 id="sec-2-4"&gt;Tips&lt;/h5&gt;
 &lt;div class="outline-text-4" id="text-2-4"&gt;
 
-&lt;p&gt;If you need insert page break in the exported document, insert below line into you org file:
+&lt;p&gt;If you need page break in exported document, insert below snippet into the org file:
 &lt;/p&gt;
 
 
