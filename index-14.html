@@ -41,7 +41,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <h1 class="title"><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html">How to take screen shot for business people efficiently in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2013-10-23T14:31:00+00:00">2013-10-23 14:31</time>
+                    <time class="timeago" datetime="2013-10-23T17:31:00+00:00">2013-10-23 17:31</time>
 </div>
                 <div class="stats">
                     
@@ -56,16 +56,48 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/office.html" rel="tag">office</a></li>
+           <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
            <li><a class="tag p-category" href="categories/screenshot.html" rel="tag">screenshot</a></li>
+           <li><a class="tag p-category" href="categories/word.html" rel="tag">word</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
                 <div>
-<p></p>
-<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Required tools</h4> <div class="outline-text-3" id="text-1">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption></caption> <colgroup>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2013-10-23 Wed</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-08-11 Tue</span></span>
+</p>
+
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-1">1 Tools</a></li>
+<li>
+<a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-2">2 Work flow</a>
+<ul>
+<li><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-2-1">2.1 Use scrot to screenshot and put its path into clipboard</a></li>
+<li><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-2-2">2.2 Create org file and insert path of screen shot</a></li>
+<li><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-2-3">2.3 Convert org file into Microsoft Word format</a></li>
+<li><a href="posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html#sec-2-4">2.4 Tips</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Tools</h4>
+<div class="outline-text-3" id="text-1">
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
 <col class="left">
 <col class="left">
 <col class="left">
@@ -77,7 +109,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </tr></thead>
 <tbody>
 <tr>
-<td class="left">org-mode</td>
+<td class="left">Org-mode</td>
 <td class="left">create org-file which could be converted to odt file</td>
 <td class="left">7.8</td>
 </tr>
@@ -88,7 +120,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </tr>
 <tr>
 <td class="left">libreoffice</td>
-<td class="left">convert odt to word document</td>
+<td class="left">convert odt to Microsoft Word</td>
 <td class="left">any version</td>
 </tr>
 <tr>
@@ -98,15 +130,43 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </tr>
 </tbody>
 </table>
-</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Work flow</h4> <div class="outline-text-3" id="text-2">   </div>  <div id="outline-container-2-1" class="outline-4"> <h5 id="sec-2-1">Use scrot to take screen shot and put its full path into clipboard</h5> <div class="outline-text-4" id="text-2-1">     
-<pre class="prettyprint ">
-scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
-</pre>
+</div>
 
-<p></p>
-</div>  </div>  <div id="outline-container-2-2" class="outline-4"> <h5 id="sec-2-2">Create org file in Emacs and insert the path of screen shot</h5> <div class="outline-text-4" id="text-2-2">  <p>Actually I use below elisp command to do the insertion for me. </p>   
-<pre class="prettyprint lang-lisp">
-(defun insert-file-link-from-clipboard ()
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Work flow</h4>
+<div class="outline-text-3" id="text-2">
+
+</div>
+
+<div id="outline-container-2-1" class="outline-4">
+<h5 id="sec-2-1">Use scrot to screenshot and put its path into clipboard</h5>
+<div class="outline-text-4" id="text-2-1">
+
+
+
+
+
+<pre><code class="lang-bash">scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
+</code></pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-4">
+<h5 id="sec-2-2">Create org file and insert path of screen shot</h5>
+<div class="outline-text-4" id="text-2-2">
+
+<p>Actually I use below elisp command to do the insertion for me.
+</p>
+
+
+
+<pre><code class="lang-lisp">(defun insert-file-link-from-clipboard ()
   "Make sure the full path of file exist in clipboard. This command will convert
 The full path into relative path and insert it as a local file link in org-mode"
   (interactive)
@@ -116,38 +176,85 @@ The full path into relative path and insert it as a local file link in org-mode"
        (cond
         ((eq system-type 'cygwin) "getclip")
         ((eq system-type 'darwin) "pbpaste")
-        (t "xsel -ob")
-        )
+        (t "xsel -ob"))
        1)
-      (setq str (buffer-string))
-      )
+      (setq str (buffer-string)))
 
     ;; convert to relative path (relative to current buffer) if possible
     (let ((m (string-match (file-name-directory (buffer-file-name)) str) ))
       (when m
         (if (= 0 m )
             (setq str (substring str (length (file-name-directory (buffer-file-name)))))
-          )
-        )
-        (insert (format "[[file:%s]]" str))
-      )
+          ))
+        (insert (format "[[file:%s]]" str)))
     ))
-</pre>
+</code></pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-4">
+<h5 id="sec-2-3">Convert org file into Microsoft Word format</h5>
+<div class="outline-text-4" id="text-2-3">
+
+<p>Run the command "M-x org-export-as-odt".
+</p>
+<p>
+Word document is <b>automatically created</b> if you insert below code into your ~/.emacs:
+</p>
+
+
+
+<pre><code class="lang-lisp">;; This setup is tested on Emacs 24.3 &amp; Emacs 24.4 on Linux/OSX
+;; org v7 bundled with Emacs 24.3
+org-export-odt-preferred-output-format "doc"
+;; org v8 bundled with Emacs 24.4
+org-odt-preferred-output-format "doc"
+;; BTW, you can assign "pdf" in above variables if you prefer PDF format
+
+(defun my-setup-odt-org-convert-process ()
+  (interactive)
+  (let ((cmd "/Applications/LibreOffice.app/Contents/MacOS/soffice"))
+    (when (and (eq system-type 'darwin) (file-exists-p cmd))
+      ;; org v7
+      (setq org-export-odt-convert-processes '(("LibreOffice" "/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to %f%x --outdir %d %i")))
+      ;; org v8
+      (setq org-odt-convert-processes '(("LibreOffice" "/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to %f%x --outdir %d %i"))))
+    ))
+;; Only OSX need extra setup
+(my-setup-odt-org-convert-process)
+</code></pre>
+
+
+
+<p>
+Then emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-4">
+<h5 id="sec-2-4">Tips</h5>
+<div class="outline-text-4" id="text-2-4">
+
+<p>If you need insert page break in the exported document, insert below line into you org file:
+</p>
+
+
+
+<pre><code class="lang-html">#+ODT: &lt;text:p text:style-name="PageBreak"/&gt;
+</code></pre>
+
+
+</div>
 
 <p></p>
-</div>  </div>  <div id="outline-container-2-3" class="outline-4"> <h5 id="sec-2-3">Export the org to odt file in Emacs</h5> <div class="outline-text-4" id="text-2-3">  <p>Run the command "org-export" whose hot key is "C-c C-e". </p> </div>  </div>  <div id="outline-container-2-4" class="outline-4"> <h5 id="sec-2-4">Convert the odt file into word file in Emacs</h5> <div class="outline-text-4" id="text-2-4">  <p>This is automatically done if you insert below code into your ~/.emacs: </p>   
-<pre class="prettyprint lang-lisp">
-(setq org-export-odt-preferred-output-format "doc")
-</pre>
-
-<p></p>
-<p> Basically this flag make emacs find the binary "soffice" which is from libreoffice and use the CLI to do the conversion thing. If you are interested in what CLI org-mode uses, "C-h v org-export-odt-convert-processes" in Emacs. </p> </div>  </div>  <div id="outline-container-2-5" class="outline-4"> <h5 id="sec-2-5">Tips</h5> <div class="outline-text-4" id="text-2-5">  <p>If you need insert page break in the exported document, insert below line into you org file: </p>   
-<pre class="example">
-#+ODT: &lt;text:p text:style-name="PageBreak"/&gt;
-</pre>
-
-<p></p>
-</div> </div> </div> </div>
+</div>
+</div>
+</div>
             </div>
         </div>
         <div class="post">
