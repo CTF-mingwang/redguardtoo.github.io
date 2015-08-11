@@ -146,7 +146,7 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-08-11 Tue
 <td class="left">any version</td>
 </tr>
 <tr>
-<td class="left">libreoffice</td>
+<td class="left"><a href="https://www.libreoffice.org/download/libreoffice-fresh/">Libreoffice</a></td>
 <td class="left">convert odt to Microsoft Word</td>
 <td class="left">any version</td>
 </tr>
@@ -226,7 +226,10 @@ The full path into relative path and insert it as a local file link in org-mode"
 <h5 id="sec-2-3">Convert org file into Microsoft Word format</h5>
 <div class="outline-text-4" id="text-2-3">
 
-<p>Run the command "M-x org-export-as-odt".
+<p>I'm sure this method works even on Windows. But I don't have Windows PC to validate my belief. Libreoffice is required.
+</p>
+<p>
+Run the command "M-x org-export-as-odt".
 </p>
 <p>
 Word document is <b>automatically created</b> if you insert below code into your ~/.emacs:
@@ -236,9 +239,9 @@ Word document is <b>automatically created</b> if you insert below code into your
 
 <pre><code class="lang-lisp">;; This setup is tested on Emacs 24.3 &amp; Emacs 24.4 on Linux/OSX
 ;; org v7 bundled with Emacs 24.3
-org-export-odt-preferred-output-format "doc"
+(setq org-export-odt-preferred-output-format "doc")
 ;; org v8 bundled with Emacs 24.4
-org-odt-preferred-output-format "doc"
+(setq org-odt-preferred-output-format "doc")
 ;; BTW, you can assign "pdf" in above variables if you prefer PDF format
 
 ;; Only OSX need below setup
