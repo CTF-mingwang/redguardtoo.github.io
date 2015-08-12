@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:25:25 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Insert below code into ~/.emacs:
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 12 Aug 2015 23:23:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Insert below code into ~/.emacs:
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ nearby file path as text object,
@@ -22,11 +22,18 @@
   "Check ascii table for charctater "
   (let (rlt)
     (if (or (and (&amp;lt;= 0 ch) (&amp;lt;= ch 32))
+            (= ch 96) ; `
+            (= ch 39) ; single quote
             (= ch 34) ; double quotes
             (and (&amp;lt;= 59 ch) (&amp;lt;= ch 63))
             (= 127 ch))
         (setq rlt t))
     rlt))
+
+(defun evil-filepath-char-not-placed-at-end-of-path (ch)
+  (or (= 44 ch) ; ,
+      (= 46 ch) ; .
+      ))
 
 (defun evil-filepath-calculate-path (b e)
   (let (rlt f)
@@ -44,15 +51,27 @@
     (save-excursion
       (setq b (evil-filepath-search-forward-char 'evil-filepath-not-path-char t)))
     (save-excursion
-      (setq e (evil-filepath-search-forward-char 'evil-filepath-not-path-char)))
+      (setq e (evil-filepath-search-forward-char 'evil-filepath-not-path-char))
+      (when e
+        (goto-char (- e 1))
+        ;; example: hello/world,
+        (if (evil-filepath-char-not-placed-at-end-of-path (following-char))
+            (setq e (- e 1)))
+        ))
     (evil-filepath-calculate-path b e)))
 
 (defun evil-filepath-search-forward-char (fn &amp;amp;optional backward)
-  (let (found rlt)
+  (let (found rlt (limit (if backward (point-min) (point-max))) out)
     (save-excursion
-      (while (or (= (point) (if backward (point-min) (point-max)))
-                 (not (setq found (apply fn (list (following-char))))))
-        (if backward (backward-char) (forward-char)))
+      (while (not out)
+        ;; for the char, exit
+        (if (setq found (apply fn (list (following-char))))
+            (setq out t)
+          ;; reach the limit, exit
+          (if (= (point) limit)
+              (setq out t)
+            ;; keep moving
+            (if backward (backward-char) (forward-char)))))
       (if found (setq rlt (point))))
     rlt))
 

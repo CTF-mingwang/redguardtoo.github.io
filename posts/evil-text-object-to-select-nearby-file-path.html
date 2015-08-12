@@ -103,11 +103,18 @@ tr:nth-child(odd) td { background: #FEFEFE; }
   "Check ascii table for charctater "
   (let (rlt)
     (if (or (and (&lt;= 0 ch) (&lt;= ch 32))
+            (= ch 96) ; `
+            (= ch 39) ; single quote
             (= ch 34) ; double quotes
             (and (&lt;= 59 ch) (&lt;= ch 63))
             (= 127 ch))
         (setq rlt t))
     rlt))
+
+(defun evil-filepath-char-not-placed-at-end-of-path (ch)
+  (or (= 44 ch) ; ,
+      (= 46 ch) ; .
+      ))
 
 (defun evil-filepath-calculate-path (b e)
   (let (rlt f)
@@ -125,15 +132,27 @@ tr:nth-child(odd) td { background: #FEFEFE; }
     (save-excursion
       (setq b (evil-filepath-search-forward-char 'evil-filepath-not-path-char t)))
     (save-excursion
-      (setq e (evil-filepath-search-forward-char 'evil-filepath-not-path-char)))
+      (setq e (evil-filepath-search-forward-char 'evil-filepath-not-path-char))
+      (when e
+        (goto-char (- e 1))
+        ;; example: hello/world,
+        (if (evil-filepath-char-not-placed-at-end-of-path (following-char))
+            (setq e (- e 1)))
+        ))
     (evil-filepath-calculate-path b e)))
 
 (defun evil-filepath-search-forward-char (fn &amp;optional backward)
-  (let (found rlt)
+  (let (found rlt (limit (if backward (point-min) (point-max))) out)
     (save-excursion
-      (while (or (= (point) (if backward (point-min) (point-max)))
-                 (not (setq found (apply fn (list (following-char))))))
-        (if backward (backward-char) (forward-char)))
+      (while (not out)
+        ;; for the char, exit
+        (if (setq found (apply fn (list (following-char))))
+            (setq out t)
+          ;; reach the limit, exit
+          (if (= (point) limit)
+              (setq out t)
+            ;; keep moving
+            (if backward (backward-char) (forward-char)))))
       (if found (setq rlt (point))))
     rlt))
 
