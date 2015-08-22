@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:17:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 22 Aug 2015 18:05:54 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Here are the steps.
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
@@ -34,13 +37,19 @@ rm -rf themes/zen/;nikola install_theme zen
 nikola build
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Manually fixed those articles with Chinese title in url_map.csv
@@ -49,6 +58,8 @@ Manually fixed those articles with Chinese title in url_map.csv
 &lt;p&gt;
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
 import getopt, sys, csv
@@ -94,6 +105,8 @@ if __name__ == '__main__':
     print content
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Import the xml into disqus.com.
 &lt;/p&gt;
@@ -101,6 +114,8 @@ Import the xml into disqus.com.
 &lt;p&gt;
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;BODY_END = """
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
@@ -168,18 +183,22 @@ EXTRA_HEAD_DATA = """
 """
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.
-&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 I added below code into bottom of functions.php (Appearance =&amp;gt; Editor):
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-php"&gt;add_action('wp_enqueue_scripts', 'CDNJS_scripts');
 function CDNJS_scripts() 
@@ -187,12 +206,16 @@ function CDNJS_scripts()
     wp_deregister_script('jquery');
     wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
     wp_enqueue_script('jquery');
-} 
+}
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 For js from SyntaxHighlighter Evolved (Plugins =&amp;gt; Installed Plugins =&amp;gt; Edit):
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index db8c668..e41ec12 100644
@@ -253,7 +276,10 @@ index db8c668..e41ec12 100644
 
         // Register some popular third-party brushes
         wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to use org2blog effectively as a programmer</title><link>http://blog.binchen.org/posts/how-to-use-org2blog-effectively-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/punchagan/org2blog"&gt;org2blog&lt;/a&gt; is a beautiful plugin to post to wordpress blog.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to use org2blog effectively as a programmer</title><link>http://blog.binchen.org/posts/how-to-use-org2blog-effectively-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/punchagan/org2blog"&gt;org2blog&lt;/a&gt; is a beautiful plugin to post to wordpress blog.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -276,6 +302,8 @@ If you grep org2blog's code, you will find a variable "org2blog/wp-sourcecode-la
 So all you need to do is insert below code into ~/.emacs:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq org2blog/wp-sourcecode-langs
       '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
         "erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
@@ -284,6 +312,8 @@ So all you need to do is insert below code into ~/.emacs:
         "sh" "elisp" "lisp" "lua"))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Then you need install the wordpress plugin &lt;a href="http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/"&gt;SyntaxHighlighter Evolved&lt;/a&gt; to do the syntax highlight thing. Well, you will find the languages like elisp is not supported by this plugin.
 &lt;/p&gt;
@@ -291,6 +321,8 @@ Then you need install the wordpress plugin &lt;a href="http://www.viper007bond.c
 &lt;p&gt;
 That's easy to fix. Please log into your blog, modify that plugin online:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index 53b4815..808b14b 100644
@@ -307,6 +339,8 @@ index 53b4815..808b14b 100644
 +           'lua'           =&amp;gt; 'ruby',
         ) );
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 As you can see, I use clojure syntax to highlight elisp and use ruby syntax to highlight lua.
@@ -352,7 +386,7 @@ Besides, I find the wordpress theme produced by &lt;a href="http://automattic.co
       )))
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; BTW, use some clipboard manager to synchronize the X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>org2blog</category><category>wordpress</category><guid>http://blog.binchen.org/posts/use-org2blog-to-share-blog-efficiently.html</guid><pubDate>Fri, 30 Aug 2013 11:39:00 GMT</pubDate></item><item><title>Best wordpress theme for geeks</title><link>http://blog.binchen.org/posts/the-most-elegant-wordpress-theme-for-geeks.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I love the Wordpress theme &lt;a href="http://sixhours-demo.calobeedoodles.com/"&gt;Sixhours&lt;/a&gt; 1.5 designed the by &lt;a href="http://www.carolinemoore.net"&gt;Caroline Moore&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; It is purely simple text theme with dark background and elegant fonts. &lt;/p&gt; &lt;p&gt; But for geeks there are two shortcomings: &lt;/p&gt;&lt;ol&gt;&lt;li&gt;The font color of the hyperlinks is almost same to the plain text. &lt;/li&gt; &lt;li&gt;The code block in &amp;lt;pre&amp;gt; element is not highlighted with solid border. &lt;/li&gt; &lt;/ol&gt;&lt;p&gt; So here is my patch of style.css to fix these problems: &lt;/p&gt;   &lt;pre class="src src-diff"&gt;&lt;span style="color: #70c0b1;"&gt;--- &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:56:31.000000000 +0800&lt;/span&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; BTW, use some clipboard manager to synchronize the X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>org2blog</category><category>wordpress</category><guid>http://blog.binchen.org/posts/use-org2blog-to-share-blog-efficiently.html</guid><pubDate>Fri, 30 Aug 2013 11:39:00 GMT</pubDate></item><item><title>Best wordpress theme for geeks</title><link>http://blog.binchen.org/posts/the-most-elegant-wordpress-theme-for-geeks.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I love the Wordpress theme &lt;a href="http://sixhours-demo.calobeedoodles.com/"&gt;Sixhours&lt;/a&gt; 1.5 designed the by &lt;a href="http://www.carolinemoore.net"&gt;Caroline Moore&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; It is purely simple text theme with dark background and elegant fonts. &lt;/p&gt; &lt;p&gt; But for geeks there are two shortcomings: &lt;/p&gt;&lt;ol&gt; &lt;li&gt;The font color of the hyperlinks is almost same to the plain text. &lt;/li&gt; &lt;li&gt;The code block in &amp;lt;pre&amp;gt; element is not highlighted with solid border. &lt;/li&gt; &lt;/ol&gt;   &lt;p&gt; So here is my patch of style.css to fix these problems: &lt;/p&gt;   &lt;pre class="src src-diff"&gt;&lt;span style="color: #70c0b1;"&gt;--- &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:56:31.000000000 +0800&lt;/span&gt;
 &lt;span style="color: #70c0b1;"&gt;+++ &lt;/span&gt;&lt;span style="color: #7aa6da; font-weight: bold;"&gt;style.css   2012-03-08 23:55:53.000000000 +0800&lt;/span&gt;
 &lt;p&gt;&lt;span style="color: #c397d8;"&gt;@@ -25,7 +25,7 @@&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span style="color: #969896;"&gt; a:visited {&lt;/span&gt;&lt;/p&gt;
