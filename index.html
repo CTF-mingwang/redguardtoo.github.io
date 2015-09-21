@@ -181,10 +181,7 @@ Insert below code into ~/.emacs:
 
 (defun evil-filepath-extract-region ()
   "Find the closest file path"
-  (let (rlt
-        b
-        f1
-        f2)
+  (let (rlt b f1 f2)
 
     (if (and (not (evil-filepath-not-path-char (following-char)))
              (setq rlt (evil-filepath-get-path-already-inside)))
