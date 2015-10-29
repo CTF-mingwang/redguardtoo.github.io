@@ -96,7 +96,7 @@ So javascript developers have to deal with JSON frequently.
 </p>
 
 <p>
-When dealing with JSON, the most boring and error prone task is get the full path of specific field.
+When working on JSON, the most boring and error prone task is get the full path of specific field.
 </p>
 
 <p>
@@ -117,11 +117,11 @@ For example, given the JSON response like:
 </div>
 
 <p>
-I need figure out the full path of "key3" which is "key1.subkey1.arr1<sup><a id="fnr.1" name="fnr.1" class="footref" href="posts/use-js2-mode-to-print-json-path.html#fn.1">1</a></sup>.key3".
+The developer need figure out the full path of "key3" which is "key1.subkey1.arr1<sup><a id="fnr.1" name="fnr.1" class="footref" href="posts/use-js2-mode-to-print-json-path.html#fn.1">1</a></sup>.key3".
 </p>
 
 <p>
-My solution is take advantage of AST created by <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
+My solution is to take advantage of AST created by <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
 </p>
 
 <p>
