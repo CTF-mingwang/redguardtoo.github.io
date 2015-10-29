@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gcc)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gcc.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:17:45 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Always turn on "-fpermissive" for GCC 4.6</title><link>http://blog.binchen.org/posts/always-turn-on-fpermissive-for-gcc-4-6.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Below code will get error message if compiled by gcc 4.6+:
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gcc)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gcc.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 01:19:57 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Always turn on "-fpermissive" for GCC 4.6</title><link>http://blog.binchen.org/posts/always-turn-on-fpermissive-for-gcc-4-6.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Below code will get error message if compiled by gcc 4.6+:
 &lt;/p&gt;
 
-&lt;pre class="example"&gt;"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+&lt;pre class="example"&gt;
+"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
 &lt;/pre&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;class A
 {
@@ -23,13 +27,19 @@ class MyClass:public B
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Since I cannot modify class A and B, I need add "-fpermission" to CXX_FLAG.
 Here is my &lt;a href="http://www.cmake.org"&gt;cmake&lt;/a&gt; code,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-cmake"&gt;if(CMAKE_COMPILER_IS_GNUCC)
   # needed for gcc 4.6+
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>cmake</category><category>en</category><category>gcc</category><category>linux</category><guid>http://blog.binchen.org/posts/always-turn-on-fpermissive-for-gcc-4-6.html</guid><pubDate>Sat, 14 Jan 2012 18:38:00 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>cmake</category><category>en</category><category>gcc</category><category>linux</category><guid>http://blog.binchen.org/posts/always-turn-on-fpermissive-for-gcc-4-6.html</guid><pubDate>Sat, 14 Jan 2012 18:38:00 GMT</pubDate></item></channel></rss>

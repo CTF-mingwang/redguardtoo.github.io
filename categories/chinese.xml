@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (chinese)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/chinese.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:17:44 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-01-31 Sat&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (chinese)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/chinese.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 01:20:00 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-01-31 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2011-04-29&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2011-04-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -22,17 +23,22 @@ cygwin1.7在我的电脑上不能显示中文,已困扰我很久了.
 安装后在宽屏显示器上字可能较小, 解决办法如下：
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;或参考&lt;a href="http://mintty.googlecode.com/svn-history/r1065/trunk/docs/mintty.1.html"&gt;其手册&lt;/a&gt;缩放字体.
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;或参考&lt;a href="http://mintty.googlecode.com/svn-history/r1065/trunk/docs/mintty.1.html"&gt;其手册&lt;/a&gt;缩放字体.
 &lt;/li&gt;
 &lt;li&gt;或右击左上角设置字体, "新宋体 常规 三号"
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 另外设置scroll back 80000行. 右侧滚动条无.
 &lt;/p&gt;
 
 &lt;p&gt;
 以下是我的cygwin.bat,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;@echo off
 set EDITOR=vi
@@ -76,4 +82,6 @@ set _termapp=%_cygwinroot%\bin\mintty.exe
 start %_termapp% -w full /bin/bash --login -i
 :EOF
 exit
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>chinese</category><category>cygwin</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</guid><pubDate>Fri, 29 Apr 2011 15:00:00 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>chinese</category><category>cygwin</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</guid><pubDate>Fri, 29 Apr 2011 15:00:00 GMT</pubDate></item></channel></rss>

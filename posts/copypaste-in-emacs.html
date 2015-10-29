@@ -1,13 +1,25 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Copy/Paste in Emacs | Chen's blog</title>
-<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/copypaste-in-emacs.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Copy/Paste in Emacs | Chen's blog</title>
+
+    
+            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+
+    
+            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+
+      <link rel="canonical" href="http://blog.binchen.org/posts/copypaste-in-emacs.html">
+
+
+
+    
+        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+
+    
+<link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -23,40 +35,61 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-<meta name="author" content="Chen Bin">
-<meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Copy/Paste in Emacs">
-<meta property="og:url" content="http://blog.binchen.org/posts/copypaste-in-emacs.html">
-<meta property="og:description" content="CREATED:  2012-01-30
 
 
 
-UPDATED:  2014-08-23 Sat
+    
+
+    <meta name="author" content="Chen Bin">
+    
+    <meta property="og:site_name" content="Chen's blog">
+    <meta property="og:title" content="Copy/Paste in Emacs">
+    <meta property="og:url" content="http://blog.binchen.org/posts/copypaste-in-emacs.html">
+    <meta property="og:description" content="Table of Contents
+
+
+1. Prepare
+2. Solution
+3. Advanced Tips
+
+3.1. Clipboard manager
+3.2. Remote clipboard
 
 
 
-See http://www.emacswiki.org/emacs/CopyAndPaste for discussion.
 
 
 
-Table of Contents
 
-1 Prepare
-2 Solution
-3 Advanced Tips
-3.1 Clipboard manager
-3.2">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2012-01-30T10:52:00+00:00">
-<meta property="article:tag" content="clipboard">
-<meta property="article:tag" content="cygwin">
-<meta property="article:tag" content="emacs">
-<meta property="article:tag" content="en">
-<meta property="article:tag" content="linux">
+CREATED: &lt;2012-01-30&gt;
+
+
+
+UPDATED: &lt;2014-08-23 Sat&gt;
+
+
+
+See http://www.emacswiki.org/emac">
+    <meta property="og:type" content="article">
+    <meta property="article:published_time" content="2012-01-30T10:52:00+00:00">
+           <meta property="article:tag" content="clipboard">
+           <meta property="article:tag" content="cygwin">
+           <meta property="article:tag" content="emacs">
+           <meta property="article:tag" content="en">
+           <meta property="article:tag" content="linux">
+
+    
+
+    
+
+
+
 </head>
 <body>
-    <section class="social"><ul>
-<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social">
+        <ul>
+        
+            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -64,7 +97,10 @@ Table of Contents
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul></section><section class="page-content"><div class="content" rel="main">
+        </ul>
+    </section>
+    <section class="page-content">
+        <div class="content" rel="main">
             
     <div class="post">
     
@@ -90,51 +126,56 @@ Table of Contents
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="../categories/linux.html" rel="tag">linux</a></li>
         </ul>
-</div>
+        </div>
 
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2012-01-30</span></span>
-</p>
-
-<p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-08-23 Sat</span></span>
-</p>
-
-<p>
-See <a href="http://www.emacswiki.org/emacs/CopyAndPaste">http://www.emacswiki.org/emacs/CopyAndPaste</a> for discussion.
-</p>
-
 <div id="table-of-contents">
 <h3>Table of Contents</h3>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="copypaste-in-emacs.html#sec-1">1 Prepare</a></li>
-<li><a href="copypaste-in-emacs.html#sec-2">2 Solution</a></li>
+<li><a href="copypaste-in-emacs.html#sec-1">1. Prepare</a></li>
+<li><a href="copypaste-in-emacs.html#sec-2">2. Solution</a></li>
 <li>
-<a href="copypaste-in-emacs.html#sec-3">3 Advanced Tips</a>
+<a href="copypaste-in-emacs.html#sec-3">3. Advanced Tips</a>
 <ul>
-<li><a href="copypaste-in-emacs.html#sec-3-1">3.1 Clipboard manager</a></li>
-<li><a href="copypaste-in-emacs.html#sec-3-2">3.2 Remote clipboard</a></li>
+<li><a href="copypaste-in-emacs.html#sec-3-1">3.1. Clipboard manager</a></li>
+<li><a href="copypaste-in-emacs.html#sec-3-2">3.2. Remote clipboard</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Prepare</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>For Emacs console version under Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2012-01-30&gt;</span></span>
 </p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-23 Sat&gt;</span></span>
+</p>
+
+<p>
+See <a href="http://www.emacswiki.org/emacs/CopyAndPaste">http://www.emacswiki.org/emacs/CopyAndPaste</a> for discussion.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Prepare</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+For Emacs console version under Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
+</p>
+
 <p>
 For Emacs GUI version on any OS, NO external tool is needed.
 </p>
+
 <p>
 For Emacs under Cygwin, you need install its package "cygutils-extra".
 </p>
+
 <p>
 For Emacs console version under OS X, NO external tool is needed.
 </p>
@@ -142,16 +183,18 @@ For Emacs console version under OS X, NO external tool is needed.
 
 </div>
 
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>This solution works reliably at <b>any environment</b>.
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+This solution works reliably at <b>any environment</b>.
 </p>
+
 <p>
 Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x paste-from-xclipboard' to paste.
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
@@ -194,31 +237,32 @@ Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x pas
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
 
-
-
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Advanced Tips</h4>
-<div class="outline-text-3" id="text-3">
-
 </div>
-
-<div id="outline-container-3-1" class="outline-4">
-<h5 id="sec-3-1">Clipboard manager</h5>
-<div class="outline-text-4" id="text-3-1">
-
-<p>Clipboard manager is handy sometimes.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Advanced Tips</h3>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h4 id="sec-3-1">
+<span class="section-number-3">3.1</span> Clipboard manager</h4>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Clipboard manager is handy sometimes.
 </p>
+
 <p>
 I suggest <a href="http://parcellite.sourceforge.net/">parcellite</a> at Linux, <a href="http://ditto-cp.sourceforge.net/">ditto</a> under windows.
 </p>
+
 <p>
 Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-conf">[rc]
@@ -247,25 +291,22 @@ trim_wspace_begend=false
 trim_newline=false
 </code></pre>
 
-
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-3-2" class="outline-4">
-<h5 id="sec-3-2">Remote clipboard</h5>
-<div class="outline-text-4" id="text-3-2">
-
-<p>Use below command to ssh the Linux server. Then you can share the clipboard between the server and your local computer seamlessly. No furthe setup needed.
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h4 id="sec-3-2">
+<span class="section-number-3">3.2</span> Remote clipboard</h4>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Use below command to ssh the Linux server. Then you can share the clipboard between the server and your local computer seamlessly. No furthe setup needed.
 </p>
-
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-sh">ssh -X -C -c blowfish-cbc,arcfour $@
 </code></pre>
-
-
 
 </div>
 
@@ -273,17 +314,21 @@ trim_newline=false
 </div>
 </div>
 </div>
+</div>
         </div>
         
         <ul class="pager">
-<li class="previous">
+            <li class="previous">
                 <a href="the-most-important-features-of-midnight-commander-mc.html" rel="prev" title="The most important features of Midnight Commander (MC)">Previous post</a>
             </li>
             <li class="next">
                 <a href="hotkeys-for-moving-windows-in-emacs.html" rel="next" title="Hotkeys for moving windows in emacs">Next post</a>
             </li>
         </ul>
-<div id="disqus_thread"></div>
+
+            
+        
+        <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/copypaste-in-emacs.html",
@@ -297,7 +342,8 @@ trim_newline=false
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -307,11 +353,20 @@ trim_newline=false
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer" role="contentinfo"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+
+
+
+             
+        <footer id="footer" role="contentinfo">
+            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-</div>
-    </section><script type="text/javascript">
+
+        </div>
+    </section>
+    
+<script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -498,7 +553,9 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
+</script>
+<script type="text/javascript" src="../assets/js/highlight.pack.js"></script>
+<script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -513,10 +570,19 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
+</script>
+
+    
+    
+            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
+    
+
+    
+        <script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
+    
 </body>
 </html>

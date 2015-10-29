@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (autocomplete)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/autocomplete.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 11 Aug 2015 21:17:43 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (autocomplete)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/autocomplete.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 01:20:02 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most of the time. Sometimes I use &lt;a href="http://emacswiki.org/emacs/HippieExpand"&gt;Hippie Expand&lt;/a&gt; to autocomplete the English words from a dictionary.
 &lt;/p&gt;
 
 &lt;p&gt;
 I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;This solution works &lt;b&gt;in any environment&lt;/b&gt;.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Step1 (OPTIONAL), download &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt; and place it under "~/.emacs.d/misc/".
 
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Step1 (OPTIONAL), download &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt; and place it under "~/.emacs.d/misc/".
 &lt;/li&gt;
+
 &lt;li&gt;Step 2, Copy below setup into ~/.emacs and use key binding "M-/" to complete the word:
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-/") 'hippie-expand)
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-/") 'hippie-expand)
 
 ;; The actual expansion function
 (defun try-expand-by-dict (old)
@@ -51,25 +58,24 @@ I surely can do this in company-mode too. But I prefer hippie-expand because I c
         try-expand-by-dict))
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Technical details&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;lazy load of ispell-mode to speed Emacs startup
 &lt;/li&gt;
 &lt;li&gt;add a fallback dictionary "english-words.txt" so autocompletion never fails
 &lt;/li&gt;
-&lt;li&gt;`ispell-lookup-words` or `lookup-words` simply does grep thing, so english-words.txt is just a plain text file.
+&lt;li&gt;&lt;code&gt;ispell-lookup-words&lt;/code&gt; or &lt;code&gt;lookup-words&lt;/code&gt; simply does grep thing, so english-words.txt is just a plain text file.
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>autocomplete</category><category>dictionary</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</guid><pubDate>Mon, 30 Mar 2015 03:53:40 GMT</pubDate></item><item><title>How to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode</title><link>http://blog.binchen.org/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I will only talk about how to set up yasnippet 0.7.0 or higher version. &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;If you follow &lt;code&gt;normal install&lt;/code&gt; way, setup is simple&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;See its &lt;a href="http://capitaomorte.github.com/yasnippet/"&gt;official documentation&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Install the yasnippet into somewhere and add following code into your .emacs: &lt;/p&gt;   &lt;pre class="src src-elisp"&gt;(add-to-list 'load-path
               &lt;span style="color: #87005f;"&gt;"~/.emacs.d/plugins/yasnippet-x.y.z"&lt;/span&gt;)
 (&lt;span style="color: #af00ff;"&gt;require&lt;/span&gt; '&lt;span style="color: #008787;"&gt;yasnippet&lt;/span&gt;) &lt;span style="color: #af0000;"&gt;;; &lt;/span&gt;&lt;span style="color: #af0000;"&gt;not yasnippet-bundle&lt;/span&gt;
