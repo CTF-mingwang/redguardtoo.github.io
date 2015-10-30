@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (search)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/search.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 01:31:55 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (search)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/search.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 00:19:27 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -26,8 +25,6 @@ Step 1, install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and &l
 &lt;p&gt;
 Step 2, insert below code into ~/.emacs:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun w3m-get-url-from-search-engine-alist (k l)
   (let (rlt)
@@ -78,10 +75,9 @@ Step 2, insert below code into ~/.emacs:
     (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Search at both stackoverflow and google code in Emacs</title><link>http://blog.binchen.org/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Two programming sites are most valuable to me: &lt;/p&gt;&lt;dl&gt; &lt;dt&gt;stackoverflow.com&lt;/dt&gt;&lt;dd&gt;solution design and code prototype &lt;/dd&gt; &lt;dt&gt;google code search&lt;/dt&gt;&lt;dd&gt;code sample from real product &lt;/dd&gt; &lt;/dl&gt;   &lt;p&gt; So I write some elisp code w3mext-hacker-search to automate the workflow. &lt;/p&gt; &lt;p&gt; Copy the into ~/.emacs and you can use hotkey "C-c ; s" to open search results in external browser (firefox, for example): &lt;/p&gt;   &lt;pre class="src src-elisp"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;; &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;external browser should be firefox&lt;/span&gt;
+Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Search at both stackoverflow and google code in Emacs</title><link>http://blog.binchen.org/posts/search-the-word-under-cursor-in-stackoverflow-com-and-google-code-search.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Two programming sites are most valuable to me: &lt;/p&gt;&lt;dl&gt;&lt;dt&gt;stackoverflow.com&lt;/dt&gt;&lt;dd&gt;solution design and code prototype &lt;/dd&gt; &lt;dt&gt;google code search&lt;/dt&gt;&lt;dd&gt;code sample from real product &lt;/dd&gt; &lt;/dl&gt;&lt;p&gt; So I write some elisp code w3mext-hacker-search to automate the workflow. &lt;/p&gt; &lt;p&gt; Copy the into ~/.emacs and you can use hotkey "C-c ; s" to open search results in external browser (firefox, for example): &lt;/p&gt;   &lt;pre class="src src-elisp"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;; &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;external browser should be firefox&lt;/span&gt;
 (setq browse-url-generic-program
       (&lt;span style="color: #b9ca4a;"&gt;cond&lt;/span&gt;
        (&lt;em&gt;is-a-mac&lt;/em&gt; &lt;span style="color: #70c0b1;"&gt;"open"&lt;/span&gt;)
