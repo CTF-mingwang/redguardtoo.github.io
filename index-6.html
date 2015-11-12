@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="description" content="Linux, Programming, Emacs">
-    <meta name="viewport" content="width=device-width">
-    <title>Chen's blog (old posts, page 6) | Chen's blog</title>
-
-    
-            <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/index-6.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Linux, Programming, Emacs">
+<meta name="viewport" content="width=device-width">
+<title>Chen's blog (old posts, page 6) | Chen's blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/index-6.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -36,17 +24,10 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-
-
-
-
-
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -54,17 +35,263 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
+        <div class="post">
+            <h1 class="title"><a href="posts/my-personal-emacs-customization-customel.html">My personal emacs customization (custom.el)</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-16T12:10:02+00:00">2012-11-16 12:10</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-personal-emacs-customization-customel.html#disqus_thread" data-disqus-identifier="cache/posts/my-personal-emacs-customization-customel.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/personal.html" rel="tag">personal</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
+</p>
+
+<pre><code class="lang-lisp">;; I'm in Australia now
+;; I'm in Australia now
+(setq system-time-locale "C")
+
+;; {{ stardict
+(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
+(setq sdcv-dictionary-complete-list '("WordNet"))
+;; }}
+
+;; {{ elpa-mirror
+(setq elpamr-default-output-directory "~/myelpa")
+(setq elpamr-repository-name "myelpa")
+(setq elpamr-repository-path "https://dl.dropboxusercontent.com/u/858862/myelpa/")
+(setq elpamr-email "myname@mydomain.com")
+;; }}
+
+;; lock my package
+(if (file-readable-p (expand-file-name "~/Dropbox/Public/myelpa/archive-contents"))
+     (setq package-archives '(("myelpa" . "~/Dropbox/Public/myelpa/"))))
+
+;; {{ Set up third party tags
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags
+    (setq mytags (list "~/tags/wx/osx/TAGS"))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+;; }}
+
+;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+;; (system-name) won't work because as Optus required, my /etc/hosts is changed
+(defun my/at-office ()
+  (interactive)
+  (let ((my-hostname (with-temp-buffer
+                       (shell-command "hostname" t)
+                       (goto-char (point-max))
+                       (delete-char -1)
+                       (buffer-string))
+                     ))
+    (and (string= my-hostname "my-sydney-workpc")
+         (not (or (string= my-hostname "sydneypc")
+                  (string= my-hostname "ChenBinMacAir")
+                  (string= my-hostname "eee")
+                  )))
+    ))
+
+(defun my/use-office-style ()
+  (interactive)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p "CompanyProject" dir)
+    ))
+
+(defun my/setup-develop-environment ()
+  (cond
+   ((my/use-office-style)
+    (message "Office code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 4)
+    (setq js-indent-level 4)
+    (setq js2-basic-offset 4)
+    (setq web-mode-indent-style 4))
+   (t
+    (message "My code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 2)
+    (setq js-indent-level 2)
+    (setq js2-basic-offset 2)
+    (setq web-mode-indent-style 2))
+   ))
+
+(add-hook 'js2-mode-hook 'my/setup-develop-environment)
+(add-hook 'web-mode-hook 'my/setup-develop-environment)
+
+(my/setup-develop-environment)
+
+;; {{ gnus setup
+(require 'nnir)
+
+;; ask encyption password once
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
+
+;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
+;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
+(if (my/at-office)
+    (add-to-list 'gnus-secondary-select-methods '(nnml "optus"))
+    (setq mail-sources
+      '((pop :server "localhost"
+         :port 1110
+         :user "CP111111"
+         :password "MyPassword"
+         :stream network)))
+    )
+
+
+(setq gnus-select-method
+             '(nnimap "gmail"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnimap-authinfo-file "~/.authinfo.gpg")
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)
+                      ))
+
+;;@see http://gnus.org/manual/gnus_397.html
+;; (add-to-list 'gnus-secondary-select-methods
+;;              )
+
+(setq-default
+  gnus-summary-line-format "%U%R%z %(%&amp;user-date;  %-15,15f  %B%s%)\n"
+  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
+  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
+  gnus-sum-thread-tree-false-root ""
+  gnus-sum-thread-tree-indent ""
+  gnus-sum-thread-tree-leaf-with-other "-&gt; "
+  gnus-sum-thread-tree-root ""
+  gnus-sum-thread-tree-single-leaf "|_ "
+  gnus-sum-thread-tree-vertical "|")
+(setq gnus-thread-sort-functions
+      '(
+        (not gnus-thread-sort-by-date)
+        (not gnus-thread-sort-by-number)
+        ))
+
+;; we want to browse freely from gwene (RSS)
+(setq gnus-safe-html-newsgroups "\\`nntp[+:]news\\.gwene\\.org[+:]")
+
+; NO 'passive
+(setq gnus-use-cache t)
+(setq gnus-use-adaptive-scoring t)
+(setq gnus-save-score t)
+(add-hook 'mail-citation-hook 'sc-cite-original)
+(add-hook 'message-sent-hook 'gnus-score-followup-article)
+(add-hook 'message-sent-hook 'gnus-score-followup-thread)
+; @see http://stackoverflow.com/questions/945419/how-dont-use-gnus-adaptive-scoring-in-some-newsgroups
+(setq gnus-parameters
+      '(("nnimap.*"
+         (gnus-use-scoring nil)) ;scoring is annoying when I check latest email
+        ))
+
+(defvar gnus-default-adaptive-score-alist
+  '((gnus-kill-file-mark (from -10))
+    (gnus-unread-mark)
+    (gnus-read-mark (from 10) (subject 30))
+    (gnus-catchup-mark (subject -10))
+    (gnus-killed-mark (from -1) (subject -30))
+    (gnus-del-mark (from -2) (subject -15))
+    (gnus-ticked-mark (from 10))
+    (gnus-dormant-mark (from 5))))
+
+;; Fetch only part of the article if we can.  I saw this in someone
+;; else's .gnus
+(setq gnus-read-active-file 'some)
+
+;; Tree view for groups.  I like the organisational feel this has.
+(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+
+;; Threads!  I hate reading un-threaded email -- especially mailing
+;; lists.  This helps a ton!
+(setq gnus-summary-thread-gathering-function
+      'gnus-gather-threads-by-subject)
+
+;; Also, I prefer to see only the top level message.  If a message has
+;; several replies or is part of a thread, only show the first
+;; message.  'gnus-thread-ignore-subject' will ignore the subject and
+;; look at 'In-Reply-To:' and 'References:' headers.
+(setq gnus-thread-hide-subtree t)
+(setq gnus-thread-ignore-subject t)
+
+; Personal Information
+(setq user-full-name "My Name"
+      user-mail-address (if (my/at-office) "myname@office.com" "myname@mydomain.com")
+      )
+
+;; Change email address for work folder.  This is one of the most
+;; interesting features of Gnus.  I plan on adding custom .sigs soon
+;; for different mailing lists.
+;; Usage, FROM: chen bin &lt;work&gt;
+(setq gnus-posting-styles
+      '((".*"
+         (name "My Name"
+          (address "myname@mydomain.com"
+                   (organization "")
+                   (signature-file "~/.signature")
+                   ("X-Troll" "Emacs is better than Vi")
+                   )))))
+
+
+(setq mm-text-html-renderer 'w3m)
+
+;; http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
+(setq gnus-use-correct-string-widths nil)
+;; @see http://emacs.1067599.n5.nabble.com/gnus-compile-td221680.html
+;;(gnus-compile)
+; =Gnus Tips=
+;; @see http://www.scottmcpeak.com/gnus.html
+;; }}
+</code></pre>
+</div>
+            </div>
+        </div>
         <div class="post">
             <h1 class="title"><a href="posts/my-personal-emacs-customization-custom-el.html">My personal emacs customization (custom.el)</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-11-16T12:10:02+00:00">2012-11-16 12:10</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -80,7 +307,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/personal.html" rel="tag">personal</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
@@ -310,265 +537,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/my-personal-emacs-customization-customel.html">My personal emacs customization (custom.el)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-11-16T12:10:02+00:00">2012-11-16 12:10</time>
-                </div>
-                <div class="stats">
-                    
-        
-    <a href="posts/my-personal-emacs-customization-customel.html#disqus_thread" data-disqus-identifier="cache/posts/my-personal-emacs-customization-customel.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/personal.html" rel="tag">personal</a></li>
-        </ul>
-        </div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">;; I'm in Australia now
-;; I'm in Australia now
-(setq system-time-locale "C")
-
-;; {{ stardict
-(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
-(setq sdcv-dictionary-complete-list '("WordNet"))
-;; }}
-
-;; {{ elpa-mirror
-(setq elpamr-default-output-directory "~/myelpa")
-(setq elpamr-repository-name "myelpa")
-(setq elpamr-repository-path "https://dl.dropboxusercontent.com/u/858862/myelpa/")
-(setq elpamr-email "myname@mydomain.com")
-;; }}
-
-;; lock my package
-(if (file-readable-p (expand-file-name "~/Dropbox/Public/myelpa/archive-contents"))
-     (setq package-archives '(("myelpa" . "~/Dropbox/Public/myelpa/"))))
-
-;; {{ Set up third party tags
-(defun insert-into-tags-table-list(e)
-  (add-to-list 'tags-table-list e t)
-  )
-(defun delete-from-tags-table-list (e)
-  (setq tags-table-list (delete e tags-table-list))
-  )
-
-(defun add-wx-tags (&amp;optional del)
-  "Add or delete(C-u) wxWidgets tags into tags-table-list"
-  (interactive "P")
-  (let (mytags)
-    ; here add your third party tags
-    (setq mytags (list "~/tags/wx/osx/TAGS"))
-    (if del (mapc 'delete-from-tags-table-list mytags)
-      (mapc 'insert-into-tags-table-list mytags)
-      )
-    )
-  )
-;; }}
-
-;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
-;; (system-name) won't work because as Optus required, my /etc/hosts is changed
-(defun my/at-office ()
-  (interactive)
-  (let ((my-hostname (with-temp-buffer
-                       (shell-command "hostname" t)
-                       (goto-char (point-max))
-                       (delete-char -1)
-                       (buffer-string))
-                     ))
-    (and (string= my-hostname "my-sydney-workpc")
-         (not (or (string= my-hostname "sydneypc")
-                  (string= my-hostname "ChenBinMacAir")
-                  (string= my-hostname "eee")
-                  )))
-    ))
-
-(defun my/use-office-style ()
-  (interactive)
-  (let ((dir (if (buffer-file-name)
-                 (file-name-directory (buffer-file-name))
-               "")))
-    (string-match-p "CompanyProject" dir)
-    ))
-
-(defun my/setup-develop-environment ()
-  (cond
-   ((my/use-office-style)
-    (message "Office code style!")
-    (setq coffee-tab-width 4)
-    (setq javascript-indent-level 4)
-    (setq js-indent-level 4)
-    (setq js2-basic-offset 4)
-    (setq web-mode-indent-style 4))
-   (t
-    (message "My code style!")
-    (setq coffee-tab-width 4)
-    (setq javascript-indent-level 2)
-    (setq js-indent-level 2)
-    (setq js2-basic-offset 2)
-    (setq web-mode-indent-style 2))
-   ))
-
-(add-hook 'js2-mode-hook 'my/setup-develop-environment)
-(add-hook 'web-mode-hook 'my/setup-develop-environment)
-
-(my/setup-develop-environment)
-
-;; {{ gnus setup
-(require 'nnir)
-
-;; ask encyption password once
-(setq epa-file-cache-passphrase-for-symmetric-encryption t)
-
-
-;;@see http://www.emacswiki.org/emacs/GnusGmail#toc1
-;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gmane.org"))
-;; (add-to-list 'gnus-secondary-select-methods '(nntp "news.gwene.org"))
-(if (my/at-office)
-    (add-to-list 'gnus-secondary-select-methods '(nnml "optus"))
-    (setq mail-sources
-      '((pop :server "localhost"
-         :port 1110
-         :user "CP111111"
-         :password "MyPassword"
-         :stream network)))
-    )
-
-
-(setq gnus-select-method
-             '(nnimap "gmail"
-                      (nnimap-address "imap.gmail.com")
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl)
-                      (nnir-search-engine imap)
-                      (nnimap-authinfo-file "~/.authinfo.gpg")
-                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
-                      ;; press 'E' to expire email
-                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
-                      (nnmail-expiry-wait 90)
-                      ))
-
-;;@see http://gnus.org/manual/gnus_397.html
-;; (add-to-list 'gnus-secondary-select-methods
-;;              )
-
-(setq-default
-  gnus-summary-line-format "%U%R%z %(%&amp;user-date;  %-15,15f  %B%s%)\n"
-  gnus-user-date-format-alist '((t . "%Y-%m-%d %H:%M"))
-  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
-  gnus-sum-thread-tree-false-root ""
-  gnus-sum-thread-tree-indent ""
-  gnus-sum-thread-tree-leaf-with-other "-&gt; "
-  gnus-sum-thread-tree-root ""
-  gnus-sum-thread-tree-single-leaf "|_ "
-  gnus-sum-thread-tree-vertical "|")
-(setq gnus-thread-sort-functions
-      '(
-        (not gnus-thread-sort-by-date)
-        (not gnus-thread-sort-by-number)
-        ))
-
-;; we want to browse freely from gwene (RSS)
-(setq gnus-safe-html-newsgroups "\\`nntp[+:]news\\.gwene\\.org[+:]")
-
-; NO 'passive
-(setq gnus-use-cache t)
-(setq gnus-use-adaptive-scoring t)
-(setq gnus-save-score t)
-(add-hook 'mail-citation-hook 'sc-cite-original)
-(add-hook 'message-sent-hook 'gnus-score-followup-article)
-(add-hook 'message-sent-hook 'gnus-score-followup-thread)
-; @see http://stackoverflow.com/questions/945419/how-dont-use-gnus-adaptive-scoring-in-some-newsgroups
-(setq gnus-parameters
-      '(("nnimap.*"
-         (gnus-use-scoring nil)) ;scoring is annoying when I check latest email
-        ))
-
-(defvar gnus-default-adaptive-score-alist
-  '((gnus-kill-file-mark (from -10))
-    (gnus-unread-mark)
-    (gnus-read-mark (from 10) (subject 30))
-    (gnus-catchup-mark (subject -10))
-    (gnus-killed-mark (from -1) (subject -30))
-    (gnus-del-mark (from -2) (subject -15))
-    (gnus-ticked-mark (from 10))
-    (gnus-dormant-mark (from 5))))
-
-;; Fetch only part of the article if we can.  I saw this in someone
-;; else's .gnus
-(setq gnus-read-active-file 'some)
-
-;; Tree view for groups.  I like the organisational feel this has.
-(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
-
-;; Threads!  I hate reading un-threaded email -- especially mailing
-;; lists.  This helps a ton!
-(setq gnus-summary-thread-gathering-function
-      'gnus-gather-threads-by-subject)
-
-;; Also, I prefer to see only the top level message.  If a message has
-;; several replies or is part of a thread, only show the first
-;; message.  'gnus-thread-ignore-subject' will ignore the subject and
-;; look at 'In-Reply-To:' and 'References:' headers.
-(setq gnus-thread-hide-subtree t)
-(setq gnus-thread-ignore-subject t)
-
-; Personal Information
-(setq user-full-name "My Name"
-      user-mail-address (if (my/at-office) "myname@office.com" "myname@mydomain.com")
-      )
-
-;; Change email address for work folder.  This is one of the most
-;; interesting features of Gnus.  I plan on adding custom .sigs soon
-;; for different mailing lists.
-;; Usage, FROM: chen bin &lt;work&gt;
-(setq gnus-posting-styles
-      '((".*"
-         (name "My Name"
-          (address "myname@mydomain.com"
-                   (organization "")
-                   (signature-file "~/.signature")
-                   ("X-Troll" "Emacs is better than Vi")
-                   )))))
-
-
-(setq mm-text-html-renderer 'w3m)
-
-;; http://www.gnu.org/software/emacs/manual/html_node/gnus/_005b9_002e2_005d.html
-(setq gnus-use-correct-string-widths nil)
-;; @see http://emacs.1067599.n5.nabble.com/gnus-compile-td221680.html
-;;(gnus-compile)
-; =Gnus Tips=
-;; @see http://www.scottmcpeak.com/gnus.html
-;; }}
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/how-to-use-ftp-in-emacs.html">How to use FTP in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-11-11T13:05:00+00:00">2012-11-11 13:05</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -587,7 +560,7 @@ custom.el is my personal emacs configuration. I use it with my publicized <a hre
            <li><a class="tag p-category" href="categories/mac.html" rel="tag">mac</a></li>
            <li><a class="tag p-category" href="categories/mount.html" rel="tag">mount</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
@@ -602,7 +575,7 @@ custom.el is my personal emacs configuration. I use it with my publicized <a hre
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-10-12T17:14:00+00:00">2012-10-12 17:14</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -619,12 +592,12 @@ custom.el is my personal emacs configuration. I use it with my publicized <a hre
            <li><a class="tag p-category" href="categories/gmail.html" rel="tag">gmail</a></li>
            <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
-                <p>
-This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org">Github</a></p>
+                <p>This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org">Github</a>
+</p>
             </div>
         </div>
         <div class="post">
@@ -632,7 +605,7 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-09-28T20:54:00+00:00">2012-09-28 20:54</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -650,7 +623,7 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/yasnippet.html" rel="tag">yasnippet</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
@@ -665,7 +638,7 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-09-28T19:50:00+00:00">2012-09-28 19:50</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -682,17 +655,19 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/facebook.html" rel="tag">facebook</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
 <p></p>
 <p>I don't use facebook. I just record my roommates' complaining. </p> <p> Here are his points, </p>
-<dl> <dt>failed to take full advantage of big screen of android pad</dt>
+<dl>
+<dt>failed to take full advantage of big screen of android pad</dt>
 <dd>The right blank margin could be used to display comments instead, as some application has done. </dd> <dt>scroll down/up to view the images sucks</dt>
 <dd>Slow and hard to locate the exact item he wants. </dd> <dt>Performance may be not good enough</dt>
-<dd>Especially when viewing the images, it's not as fluent as other applications. </dd> </dl>  </div>
+<dd>Especially when viewing the images, it's not as fluent as other applications. </dd> </dl>
+</div>
             </div>
         </div>
         <div class="post">
@@ -700,7 +675,7 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-08-22T12:08:00+00:00">2012-08-22 12:08</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -717,7 +692,7 @@ This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs
            <li><a class="tag p-category" href="categories/mysql.html" rel="tag">mysql</a></li>
            <li><a class="tag p-category" href="categories/python.html" rel="tag">python</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
@@ -1011,7 +986,7 @@ os.system(cmd)
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-08-21T12:50:00+00:00">2012-08-21 12:50</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1028,48 +1003,62 @@ os.system(cmd)
            <li><a class="tag p-category" href="categories/intellisense.html" rel="tag">intellisense</a></li>
            <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
 <p></p>
 <p>作者: 陈斌(redguardtoo) </p> <p> 版本号: 20131106 </p> <p> 更新时间: <span class="timestamp-wrapper"> <span class="timestamp">2013-11-06 Wed</span></span> 原创时间: <span class="timestamp-wrapper"> <span class="timestamp">2012-08-21 二</span></span> </p> <p> 所谓"自动完成",就是emacs智能猜测用户想输入的是什么词,帮助用户自动输入,如果emacs找到多个可选项,也可能弹出下拉菜单让用户来选择. </p> <p> 通常我们所说的IDE中的Intellisense,也可以认为是某种"自动完成". </p> <p> Emacs的自动完成远比篇普通IDE的Intellisense强大得多,例如Emacs可以自动输入当前打开的文件的名字(带或者不带文件名后缀都可以). </p> <p> 我不是来赞美Emacs的强大的,我是来吐槽的.Emacs中的自动完成框架实在是太多了,很多框架的功能是重叠的,让人实在困扰. </p> <p> 所以本文的目的有两个, </p>
-<ol> <li>说明哪些自动完成框架是主流的 </li> <li>如何配置使用自动完成框架 </li> </ol>    <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">概述</h4> <div class="outline-text-3" id="text-1">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"> <caption></caption> <colgroup>
+<ol>
+<li>说明哪些自动完成框架是主流的 </li> <li>如何配置使用自动完成框架 </li> </ol>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">概述</h4> <div class="outline-text-3" id="text-1">  <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption> <colgroup>
 <col class="left">
 <col class="left">
 <col class="left">
-<col class="left"> </colgroup> <thead> <tr>
+<col class="left">
+</colgroup>
+<thead><tr>
 <th scope="col" class="left">函数/插件名</th>
 <th scope="col" class="left">快捷键</th>
 <th scope="col" class="left">推荐度</th>
 <th scope="col" class="left">使用频率</th>
-</tr> </thead> <tbody> <tr>
+</tr></thead>
+<tbody>
+<tr>
 <td class="left">complete-symbol</td>
 <td class="left">C-M-i</td>
 <td class="left">中</td>
 <td class="left">低</td>
-</tr> <tr>
+</tr>
+<tr>
 <td class="left">auto-complete (结合clang)</td>
 <td class="left">TAB</td>
 <td class="left">优</td>
 <td class="left">低</td>
-</tr> <tr>
+</tr>
+<tr>
 <td class="left">company-mode (结合clang)</td>
 <td class="left">不需要</td>
 <td class="left">优</td>
 <td class="left">中</td>
-</tr> <tr>
+</tr>
+<tr>
 <td class="left">hippie-expand</td>
 <td class="left">M-/</td>
 <td class="left">良</td>
 <td class="left">高</td>
-</tr> <tr>
+</tr>
+<tr>
 <td class="left">evil-mode</td>
 <td class="left">C-n/C-p(完成词),C-x C-n/p(完成行)</td>
 <td class="left">中</td>
 <td class="left">高</td>
-</tr> </tbody> </table>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">auto-complete结合clang</h4> <div class="outline-text-3" id="text-2">  <p><a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,完美提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟). </p> <p> 而<a href="http://clang.llvm.org">clang</a>是苹果公司开发的目前最优秀的C/C++/Objective-C编译器,对C++语法的解析又快又好. </p> <p> 显然,这种方案只适用于clang支持的语言.支持Mac/Linux/Cygwin平台,我不知道是否支持Windows平台. </p> <p> 需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件auto-complete和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>. </p> <p> 如果你是重度IDE用户,喜欢和IDE一样的Intellisense功能,这就是你需要的了. </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-auto-complete.el">init-auto-complete.el</a>. </p> <p> 顺便说一下,关于elpa的配置,可能你需要参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-elpa.el">init-elpa.el</a>,因现在有多个AppStore,且直到Emacs24对elpa的支持才开始自带. </p>
+</tr>
+</tbody>
+</table>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">auto-complete结合clang</h4> <div class="outline-text-3" id="text-2">  <p><a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,完美提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟). </p> <p> 而<a href="http://clang.llvm.org">clang</a>是苹果公司开发的目前最优秀的C/C++/Objective-C编译器,对C++语法的解析又快又好. </p> <p> 显然,这种方案只适用于clang支持的语言.支持Mac/Linux/Cygwin平台,我不知道是否支持Windows平台. </p> <p> 需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件auto-complete和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>. </p> <p> 如果你是重度IDE用户,喜欢和IDE一样的Intellisense功能,这就是你需要的了. </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-auto-complete.el">init-auto-complete.el</a>. </p> <p> 顺便说一下,关于elpa的配置,可能你需要参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-elpa.el">init-elpa.el</a>,因现在有多个AppStore,且直到Emacs24对elpa的支持才开始自带. </p>
 </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">company-mode</h4> <div class="outline-text-3" id="text-3">  <p><a href="https://github.com/company-mode/company-mode">company-mode</a>和auto-complete功能类似，唯一的区别是clang以及其他语言支持已内置，所以不需要安装其他elisp插件或者额外配置.目前我已用company-mode代替了auto-complete. </p>
 </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">hippie-expand</h4> <div class="outline-text-3" id="text-4">  <p><a href="http://emacswiki.org/emacs/HippieExpand">hippie-expand</a>是Emacs自带的自动完成框架,其默认的一些自动完成特色功能可作为auto-complete的补充,例如自动完成词/文件名/行的功能. </p> <p> 既然是框架,当然可以扩充,在<a href="http://emacswiki.org/emacs/HippieExpand">Emacs Wiki</a>中提供了和<a href="http://ctags.sourceforge.net">ctags</a>结合的方案. </p> <p> ctags类似clang,对各种语言做语法解析的后端,但是智能程度远不如clang及后文提到的semantic,优点是所有语言通吃(例如javascript),支持所有操作系统,解析速度快(废话,正则表达式当然快). </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-hippie-expand.el">init-hippie-expand.el</a>. </p>
 </div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">complete-symbol</h4> <div class="outline-text-3" id="text-5">  <p>Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,它默认仅仅调用了后台的ctags而已. </p> <p> hippie-expand经过调教也可调用ctags,且其默认的特色功能比complete-symbol多,所以我没兴趣配置第三个自动完成框架了. </p> <p> 之所以还值得介绍,是因为我通过阅读Emacs24的changelog,发觉complete-symbol经过配置后可以用semantic作为语法解析后端(我试用后,发觉Emacs23.4也支持,不明白为什么要把该特性放在Emacs24的changelog介绍). </p> <p> <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html">semantic</a>是lisp写的语法解析器,Emacs自带,智能程度介于ctags和clang之间,解析速度比较慢,如果机器配置比较差(例如我的eeepc701上网本),会让emacs很卡. </p> <p> 我个人不是很喜欢这个语法解析器,过去在semantic尚且是开源项目<a href="http://cedet.sourceforge.net">Cedet</a>的一个组件未被集成进Emacs中时,我折腾过Cedet,当时的感觉是速度慢,配置繁琐,不稳定. </p> <p> 也许现在集成进Emacs后的semantic要好很多吧. </p> <p> Semantic支持多种语言,如C++/Java,如果你是Java程序员,可以考虑complete-symbol加semantic的方案. </p> <p> 具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-semantic.el">init-semantic.el</a>(注意,我不用semantic,所以相应的代码被注释了.如果你要用semantic,取消注释). </p>
@@ -1083,7 +1072,7 @@ os.system(cmd)
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-07-20T17:22:02+00:00">2012-07-20 17:22</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1102,7 +1091,7 @@ os.system(cmd)
            <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
            <li><a class="tag p-category" href="categories/version.html" rel="tag">version</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
@@ -1138,7 +1127,7 @@ os.system(cmd)
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-07-20T14:56:00+00:00">2012-07-20 14:56</time>
-                </div>
+</div>
                 <div class="stats">
                     
         
@@ -1155,13 +1144,15 @@ os.system(cmd)
            <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
            <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
         </ul>
-        </div>
+</div>
 
             </div>
             <div class="body">
                 <div>
 <p></p>
-<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">典型的工作流</h4> <div class="outline-text-3" id="text-1">  <ol> <li>在两个子窗口中对比文件内容 </li> <li>打开更多的窗口以参考其他信息. </li> <li>对某个窗口内容比较有兴趣,跳转到该窗口,将该窗口最大化 </li> <li>看完最大化的窗口内容后,undo最大化操作,重新回到早先的多个小窗口模式以便继续纵览全局 </li> </ol>  </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">将子窗口自动编号,然后按M-0…9跳转(最爱)</h4> <div class="outline-text-3" id="text-2">  <p>安装<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">window-numbering</span>)
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">典型的工作流</h4> <div class="outline-text-3" id="text-1">  <ol>
+<li>在两个子窗口中对比文件内容 </li> <li>打开更多的窗口以参考其他信息. </li> <li>对某个窗口内容比较有兴趣,跳转到该窗口,将该窗口最大化 </li> <li>看完最大化的窗口内容后,undo最大化操作,重新回到早先的多个小窗口模式以便继续纵览全局 </li> </ol>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">将子窗口自动编号,然后按M-0…9跳转(最爱)</h4> <div class="outline-text-3" id="text-2">  <p>安装<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">window-numbering</span>)
 (window-numbering-mode 1)
 <p></p></pre>  </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">undo/redo之前的窗口操作(最爱)</h4> <div class="outline-text-3" id="text-3">  <p>安装<a href="http://www.emacswiki.org/emacs/WinnerMode">Winner Mode</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(winner-mode 1)
 <p><span style="color: #af0000;">;; </span><span style="color: #af0000;">copied from http://puntoblogspot.blogspot.com/2011/05/undo-layouts-in-emacs.html</span></p>
@@ -1177,35 +1168,18 @@ os.system(cmd)
             </div>
         </div>
     
-        <nav class="postindexpager">
-        <ul class="pager">
-            <li class="previous">
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
                 <a href="index-7.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-5.html" rel="next">Older posts</a>
             </li>
-        </ul>
-        </nav>
-
-    
-        
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-    
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -1392,9 +1366,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="assets/js/highlight.pack.js"></script>
-<script type="text/javascript">
+</script><script type="text/javascript" src="assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -1409,19 +1381,10 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-
-    
-        <script type="text/javascript">
+</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>
