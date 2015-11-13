@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:02:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Nov 2015 02:09:14 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Why Gnus is better than Gmail</title><link>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -262,7 +262,7 @@ Another tip is whenever open a folder in Gnus, press "C-u ENTER" instead of "ENT
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-05-21&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-13 Fri&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;div id="outline-container-1" class="outline-3"&gt;
@@ -272,12 +272,12 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;20
 &lt;p&gt;As a freelancer, I need reply agent's email frequently.
 &lt;/p&gt;
 &lt;p&gt;
-So there are several issues I need resolve:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;avoid writing muliple mails with similar contents
+So I have several issues to resolve:
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Avoid writing multiple mails with similar content
 &lt;/li&gt;
-&lt;li&gt;avoid attached same resume again and again
+&lt;li&gt;Avoid attaching same resume again and again
 &lt;/li&gt;
-&lt;li&gt;get the agent's name right. This is not easy since I'm living in Sydney
+&lt;li&gt;Get the agent's name right. This is not easy since I'm living in Sydney
 &lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;
 
@@ -287,7 +287,7 @@ So there are several issues I need resolve:
 &lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2"&gt;
 
-&lt;p&gt;&lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt; is the best solution for email templates because you can embed Lisp code in the snippet.
+&lt;p&gt;&lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt; is the best solution for email templates because you can embed Lisp code in the template.
 &lt;/p&gt;
 &lt;/div&gt;
 
@@ -309,7 +309,7 @@ Here is a sample template to reply my agents (jobok.yasnippet):
 # name: email for OK job
 # key: jobok
 # --
-Hi ${1:`(my-yas-get-first-name-from-to-field)},
+Hi ${1:`(my-yas-get-first-name-from-to-field)`},
 
 Thank you very much for providing me this great opportunity.
 

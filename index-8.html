@@ -127,7 +127,7 @@ key.setViewKey(<span style="color: #70c0b1;">'e'</span>, <span style="color: #b9
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-21</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-13 Fri</span></span>
 </p>
 
 <div id="outline-container-1" class="outline-3">
@@ -137,14 +137,14 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-21</sp
 <p>As a freelancer, I need reply agent's email frequently.
 </p>
 <p>
-So there are several issues I need resolve:
+So I have several issues to resolve:
 </p>
 <ul>
-<li>avoid writing muliple mails with similar contents
+<li>Avoid writing multiple mails with similar content
 </li>
-<li>avoid attached same resume again and again
+<li>Avoid attaching same resume again and again
 </li>
-<li>get the agent's name right. This is not easy since I'm living in Sydney
+<li>Get the agent's name right. This is not easy since I'm living in Sydney
 </li>
 </ul>
 </div>
@@ -155,7 +155,7 @@ So there are several issues I need resolve:
 <h4 id="sec-2">Solution</h4>
 <div class="outline-text-3" id="text-2">
 
-<p><a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a> is the best solution for email templates because you can embed Lisp code in the snippet.
+<p><a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a> is the best solution for email templates because you can embed Lisp code in the template.
 </p>
 </div>
 
@@ -177,7 +177,7 @@ Here is a sample template to reply my agents (jobok.yasnippet):
 # name: email for OK job
 # key: jobok
 # --
-Hi ${1:`(my-yas-get-first-name-from-to-field)},
+Hi ${1:`(my-yas-get-first-name-from-to-field)`},
 
 Thank you very much for providing me this great opportunity.
 
