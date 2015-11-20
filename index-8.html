@@ -284,7 +284,7 @@ It will automatically fetch the first name of agent,
             <h1 class="title"><a href="posts/convert-multiple-line-into-one-big-string-in-emacs.html">Convert multiple line into one big string in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2013-04-17T12:14:17+00:00">2013-04-17 12:14</time>
+                    <time class="timeago" datetime="2013-04-17T14:14:00+00:00">2013-04-17 14:14</time>
 </div>
                 <div class="stats">
                     
@@ -306,38 +306,53 @@ It will automatically fetch the first name of agent,
             </div>
             <div class="body">
                 <div>
-<p></p>
-<p>This command will convert selected region in Emacs into one string and put it into the kill ring. </p> <p> Why I need this command? I'm doing some web developement now. I've got a  javascript API whose parameter is a string in html syntax. I write that beautifully indented multiple lines string in html editor to make sure the string is correct. Then I convert the multiple lines  string into one string without line breaks so that I can paste the one line string into my javascript code. </p> <p> In certain situation, this method actually makes code more readable. </p> <p> Here is code you can paste into your .emacs: </p>   <pre class="src src-elisp">(<span style="color: #b5bd68;">defun</span> <span style="color: #81a2be;">strip-convert-lines-into-one-big-string</span> (beg end)
-<span style="color: #b294bb;">"strip and convert selected lines into one big string which is copied into kill ring.</span>
-<p><span style="color: #b294bb;">When transient-mark-mode is enabled, if no region is active then only the</span></p>
-<p><span style="color: #b294bb;">current line is acted upon.</span></p>
-<p><span style="color: #b294bb;">If the region begins or ends in the middle of a line, that entire line is</span></p>
-<p><span style="color: #b294bb;">copied, even if the region is narrowed to the middle of a line.</span></p>
-<p><span style="color: #b294bb;">Current position is preserved."</span>
-  (interactive <span style="color: #8abeb7;">"r"</span>)
-  (<span style="color: #b5bd68;">let</span> (str (orig-pos (point-marker)))
-  (<span style="color: #b5bd68;">save-restriction</span>
+<p>This command converts selected region in Emacs into one string and put it into the kill ring.
+</p>
+
+<p>
+Why I need this command? I'm doing some web developement now. I've got a  javascript API whose parameter is a string in html syntax. I write that beautifully indented multiple lines string in html editor to make sure the string is correct. Then I convert the multiple lines  string into one string without line breaks so that I can paste the one line string into my javascript code.
+</p>
+
+<p>
+In certain situation, this method actually makes code more readable.
+</p>
+
+<p>
+Here is code you can paste into your .emacs:
+</p>
+
+<pre><code class="lang-lisp">(defun strip-convert-lines-into-one-big-string (beg end)
+"strip and convert selected lines into one big string which is copied into kill ring.
+When transient-mark-mode is enabled, if no region is active then only the
+current line is acted upon.
+
+If the region begins or ends in the middle of a line, that entire line is
+copied, even if the region is narrowed to the middle of a line.
+
+Current position is preserved."
+  (interactive "r")
+  (let (str (orig-pos (point-marker)))
+  (save-restriction
     (widen)
-    (<span style="color: #b5bd68;">when</span> (and transient-mark-mode (not (use-region-p)))
+    (when (and transient-mark-mode (not (use-region-p)))
       (setq beg (line-beginning-position)
-            end (line-beginning-position 2)))</p>
-<pre class="code literal-block">(goto-char beg)
-(setq beg (line-beginning-position))
-(goto-char end)
-(<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b5bd68;"</span><span class="nt">&gt;</span>unless<span class="nt">&lt;/span&gt;</span> (= (point) (line-beginning-position))
-  (setq end (line-beginning-position 2)))
+            end (line-beginning-position 2)))
 
-(goto-char beg)
-(setq str (replace-regexp-in-string <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #8abeb7;"</span><span class="nt">&gt;</span>"[ \t]*\n"<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #8abeb7;"</span><span class="nt">&gt;</span>""<span class="nt">&lt;/span&gt;</span> (replace-regexp-in-string <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #8abeb7;"</span><span class="nt">&gt;</span>"^[ \t]+"<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #8abeb7;"</span><span class="nt">&gt;</span>""<span class="nt">&lt;/span&gt;</span> (buffer-substring-no-properties beg end))))
-<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>;; <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>(message "str=%s" str)<span class="nt">&lt;/span&gt;</span>
-(kill-new str)
-(goto-char orig-pos)))
-</pre>
+    (goto-char beg)
+    (setq beg (line-beginning-position))
+    (goto-char end)
+    (unless (= (point) (line-beginning-position))
+      (setq end (line-beginning-position 2)))
 
-
-<p>)
-(global-set-key (kbd <span style="color: #8abeb7;">"C-c C-y"</span>) 'strip-convert-lines-into-one-big-string)</p>
-<p></p></pre>  </div>
+    (goto-char beg)
+    (setq str (replace-regexp-in-string "[ \t]*\n" "" (replace-regexp-in-string "^[ \t]+" "" (buffer-substring-no-properties beg end))))
+    ;; (message "str=%s" str)
+    (kill-new str)
+    (goto-char orig-pos)))
+  )
+(global-set-key (kbd "C-c C-y") 'strip-convert-lines-into-one-big-string)
+</code></pre>
+</div>
             </div>
         </div>
         <div class="post">
