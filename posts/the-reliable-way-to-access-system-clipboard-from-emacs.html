@@ -27,16 +27,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="The reliable way to access system clipboard from Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html">
-<meta property="og:description" content="Key points
+<meta property="og:description" content="CREATED:  2015-05-31
 
 
-support Mac/Linux/Windows(cygwin).
 
-works well in Emacs with or WITHOUT X support.
+UPDATED:  2015-11-20 Fri
 
-tested on different versions of Linux (Gentoo, Ubuntu 12.04, Centos 6, ArchLinux).
 
-On Linux, you need ">
+
+The Emacs clipboard questions has been asked so many times. Yet few give a complete and reliable solution. 
+
+
+
+Only a dedicated project maintained b">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-05-31T09:25:00Z">
 <meta property="article:tag" content="clipboard">
@@ -84,83 +87,52 @@ On Linux, you need ">
         </div>
         <div class="body">
             <div>
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Key points</h4>
-<div class="outline-text-3" id="text-1">
-
-<ul>
-<li>support Mac/Linux/Windows(cygwin).
-</li>
-<li>works well in Emacs with or WITHOUT X support.
-</li>
-<li>tested on different versions of Linux (Gentoo, Ubuntu 12.04, Centos 6, ArchLinux).
-</li>
-<li>On Linux, you need use xsel instead of xclip (version 0.1.2) because xclip has some compatible issue when called from Emacs.
-</li>
-<li>It's easy to support remote X clipboard when you use Emacs in ssh based on my code.
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>All you need to do is to add below code into your .emacs:
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-31</span></span>
 </p>
-
-
-
-<pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
-(setq *cygwin* (eq system-type 'cygwin) )
-(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
-(defun copy-to-x-clipboard ()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (cond
-         ((and (display-graphic-p) x-select-enable-clipboard)
-          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
-         (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
-            ))
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-        (message "No region active; can't yank to clipboard!")))
-
-(defun paste-from-x-clipboard()
-  (interactive)
-  (cond
-   ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-get-selection 'CLIPBOARD)))
-   (t (shell-command
-       (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
-        (t "xsel -ob"))
-       1))
-   ))
-
-(defun my/paste-in-minibuffer ()
-  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
-  )
-
-(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
-</code></pre>
-
-
 
 <p>
-BTW, on Linux I suggest installing a clipboard manager and tick its option of synchronizing the X clipboard.
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-20 Fri</span></span>
 </p>
-</div>
 
-</div>
+<p>
+The <a href="http://emacs.stackexchange.com/search?q=clipboard">Emacs clipboard questions</a> has been asked so many times. Yet few give a complete and reliable solution. 
+</p>
+
+<p>
+Only a dedicated project maintained by professional developer could solve this issue once for all.
+</p>
+
+<p>
+<a href="https://github.com/rolandwalker/simpleclip">simpleclip</a> is such a project.
+</p>
+
+<p>
+I only use its APIs `simpleclip-get-contents` and `simpleclip-set-contents`.
+</p>
+
+<p>
+Here is my setup:
+</p>
+
+<pre><code class="lang-lisp">(require 'simpleclip)
+(defun copy-to-x-clipboard ()
+  (interactive)
+  (let ((thing (if (region-active-p)
+                   (buffer-substring-no-properties (region-beginning) (region-end))
+                 (thing-at-point 'symbol))))
+    (simpleclip-set-contents thing)
+    (message "thing =&gt; clipboard!")))
+
+(defun paste-from-x-clipboard()
+  "Paste string clipboard"
+  (interactive)
+  (insert (simpleclip-get-contents)))
+
+;; Press `Alt-u' to paste from clibpoard when in minibuffer
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard))
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+</code></pre>
 </div>
         </div>
         

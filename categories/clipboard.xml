@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:03:01 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 20 Nov 2015 02:59:38 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 ;; {{ copy the file-name/full-path in dired buffer into clipboard
@@ -21,81 +21,52 @@
   )
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; It support Cygwin and OSX out of the box. You need install xsel under Linux. &lt;/p&gt; &lt;p&gt; BTW, I suggest installing a clipboard manager like parcellite under Linux to sync the two X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>clipboard</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</guid><pubDate>Wed, 25 Sep 2013 20:46:00 GMT</pubDate></item><item><title>The reliable way to access system clipboard from Emacs</title><link>http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Key points&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;ul&gt;&lt;li&gt;support Mac/Linux/Windows(cygwin).
-&lt;/li&gt;
-&lt;li&gt;works well in Emacs with or WITHOUT X support.
-&lt;/li&gt;
-&lt;li&gt;tested on different versions of Linux (Gentoo, Ubuntu 12.04, Centos 6, ArchLinux).
-&lt;/li&gt;
-&lt;li&gt;On Linux, you need use xsel instead of xclip (version 0.1.2) because xclip has some compatible issue when called from Emacs.
-&lt;/li&gt;
-&lt;li&gt;It's easy to support remote X clipboard when you use Emacs in ssh based on my code.
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;All you need to do is to add below code into your .emacs:
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; It support Cygwin and OSX out of the box. You need install xsel under Linux. &lt;/p&gt; &lt;p&gt; BTW, I suggest installing a clipboard manager like parcellite under Linux to sync the two X clipboards. &lt;/p&gt;&lt;/div&gt;</description><category>clipboard</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</guid><pubDate>Wed, 25 Sep 2013 20:46:00 GMT</pubDate></item><item><title>The reliable way to access system clipboard from Emacs</title><link>http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-05-31&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq *is-a-mac* (eq system-type 'darwin))
-(setq *cygwin* (eq system-type 'cygwin) )
-(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
-(defun copy-to-x-clipboard ()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (cond
-         ((and (display-graphic-p) x-select-enable-clipboard)
-          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
-         (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
-            ))
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-        (message "No region active; can't yank to clipboard!")))
-
-(defun paste-from-x-clipboard()
-  (interactive)
-  (cond
-   ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-get-selection 'CLIPBOARD)))
-   (t (shell-command
-       (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
-        (t "xsel -ob"))
-       1))
-   ))
-
-(defun my/paste-in-minibuffer ()
-  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
-  )
-
-(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
-&lt;/code&gt;&lt;/pre&gt;
-
-
 
 &lt;p&gt;
-BTW, on Linux I suggest installing a clipboard manager and tick its option of synchronizing the X clipboard.
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-20 Fri&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
-&lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>clipboard</category><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html</guid><pubDate>Fri, 31 May 2013 09:25:00 GMT</pubDate></item><item><title>Copy/Paste in Emacs</title><link>http://blog.binchen.org/posts/copypaste-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2012-01-30&lt;/span&gt;&lt;/span&gt;
+&lt;p&gt;
+The &lt;a href="http://emacs.stackexchange.com/search?q=clipboard"&gt;Emacs clipboard questions&lt;/a&gt; has been asked so many times. Yet few give a complete and reliable solution. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Only a dedicated project maintained by professional developer could solve this issue once for all.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="https://github.com/rolandwalker/simpleclip"&gt;simpleclip&lt;/a&gt; is such a project.
+&lt;/p&gt;
+
+&lt;p&gt;
+I only use its APIs `simpleclip-get-contents` and `simpleclip-set-contents`.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is my setup:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'simpleclip)
+(defun copy-to-x-clipboard ()
+  (interactive)
+  (let ((thing (if (region-active-p)
+                   (buffer-substring-no-properties (region-beginning) (region-end))
+                 (thing-at-point 'symbol))))
+    (simpleclip-set-contents thing)
+    (message "thing =&amp;gt; clipboard!")))
+
+(defun paste-from-x-clipboard()
+  "Paste string clipboard"
+  (interactive)
+  (insert (simpleclip-get-contents)))
+
+;; Press `Alt-u' to paste from clibpoard when in minibuffer
+(defun my/paste-in-minibuffer ()
+  (local-set-key (kbd "M-y") 'paste-from-x-clipboard))
+(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>clipboard</category><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html</guid><pubDate>Fri, 31 May 2013 09:25:00 GMT</pubDate></item><item><title>Copy/Paste in Emacs</title><link>http://blog.binchen.org/posts/copypaste-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2012-01-30&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
