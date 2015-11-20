@@ -377,7 +377,7 @@ Here is my setup:
   (interactive)
   (insert (simpleclip-get-contents)))
 
-;; Press `Alt-u' to paste from clibpoard when in minibuffer
+;; Press `Alt-Y' to paste from clibpoard when in minibuffer
 (defun my/paste-in-minibuffer ()
   (local-set-key (kbd "M-y") 'paste-from-x-clipboard))
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
