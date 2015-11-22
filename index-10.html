@@ -38,38 +38,6 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/hei-mu-er-chao-dan-de-zuo-fa.html">黑木耳炒蛋的做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-20T11:17:00+00:00">2013-07-20 11:17</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/hei-mu-er-chao-dan-de-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/hei-mu-er-chao-dan-de-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<ul>
-<li>到少量油，四成热，蛋打碎，用小汤勺缓慢搅拌 </li> <li>蛋炒熟后捞出，放入木耳单独炒 </li> <li>炒木耳要多放盐 </li> <li>最后一起炒 </li> </ul>
-<p><img src="wp-content/uploads/2013/07/wpid-black-mushroom-fried-egg.jpg" alt="image/black-mushroom-fried-egg.jpg"></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/elisp-code-copy-full-path-of-current-file-into-os-clipboard-and-yank-ring.html">Elisp code: copy full path of current file into OS clipboard and yank ring</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -307,7 +275,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             </div>
             <div class="body">
                 <div>
-<p>I'm an experienced bash user before learning Emacs. Now as a die hard Emacs user, I still want to use my bash skill. 
+<p>
+I'm an experienced bash user before learning Emacs. Now as a die hard Emacs user, I still want to use my bash skill. 
 </p>
 
 <p>
@@ -335,8 +304,7 @@ The beauty is I've got the Vi power to select,search, filter, yank.
 </p>
 
 <p>
-BTW, "C-z" is the default hot key from evil-mode. Evil-mode assign "C-x C-z" for "M-x suspend-frame".
-</p>
+BTW, "C-z" is the default hot key from evil-mode. Evil-mode assign "C-x C-z" for "M-x suspend-frame".</p>
 </div>
             </div>
         </div>
@@ -820,6 +788,41 @@ emerge -v deb2targz &amp;&amp;
 <p>sudo systemctl enable rpc-mountd</p>
 <p>sudo systemctl start rpc-mountd</p>
 <p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/an-example-to-abuse-the-git-merge.html">An example to abuse the git merge</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-06-13T14:23:00+00:00">2013-06-13 14:23</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/an-example-to-abuse-the-git-merge.html#disqus_thread" data-disqus-identifier="cache/posts/an-example-to-abuse-the-git-merge.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/branch.html" rel="tag">branch</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="categories/merge.html" rel="tag">merge</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>WARNING, this is BAD practice. I'm showing you anti-pattern you'd better avoid. </p> <p> The work flow is simple at the beginning. There is only one master branch where several developers submit the code. </p> <p> Then come bad rules:  </p>
+<ul>
+<li>Rule 1, any feature should be done on new branch (this rule is actually good if without next three rules)  </li> <li>Rule 2, <code>git rebase</code> is forbidden and any minor branch created by developers should be publicized immediately.  </li> <li>Rule 3, keep using your same feature branch forever even it's behind master branch for a very long time.   </li> <li>Rule 4, <code>git merge</code> between feature and master branches frequently </li> </ul>
+<p> After three months developement, this is the result of <code>git log –graph –oneline</code>: <img src="wp-content/uploads/2013/06/git-merge-mess-nq82.png" alt="image/git-merge-mess-nq8.png"></p> <p> Can you see the "M" at the top right corner. It's "M" from "Merge". </p>
+</div>
             </div>
         </div>
     

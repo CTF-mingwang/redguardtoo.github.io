@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (archlinux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/archlinux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 30 Oct 2015 01:31:57 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Notes on set up nfs on ArchLinux</title><link>http://blog.binchen.org/posts/notes-on-set-up-nfs-on-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Key points&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;ul&gt; &lt;li&gt;see &lt;a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html"&gt;Redhat documenation&lt;/a&gt;, best doc on exportfs &lt;/li&gt; &lt;li&gt;&lt;a href="http://superuser.com/questions/492989/understanding-subnet-mask"&gt;Understanding Subnet mask&lt;/a&gt; and &lt;a href="http://superuser.com/questions/186850/what-are-the-essentials-of-a-subnet-mask"&gt;essential Subnet mask&lt;/a&gt; &lt;/li&gt; &lt;li&gt;&lt;code&gt;sudo exportfs -r&lt;/code&gt; to reload /etc/exports &lt;/li&gt; &lt;li&gt;&lt;code&gt;sudo exportfs -v&lt;/code&gt; to see current nfs exports &lt;/li&gt; &lt;li&gt;content of /etc/exports: &lt;/li&gt; &lt;/ul&gt;     
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (archlinux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/archlinux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Notes on set up nfs on ArchLinux</title><link>http://blog.binchen.org/posts/notes-on-set-up-nfs-on-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Key points&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;ul&gt; &lt;li&gt;see &lt;a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html"&gt;Redhat documenation&lt;/a&gt;, best doc on exportfs &lt;/li&gt; &lt;li&gt;&lt;a href="http://superuser.com/questions/492989/understanding-subnet-mask"&gt;Understanding Subnet mask&lt;/a&gt; and &lt;a href="http://superuser.com/questions/186850/what-are-the-essentials-of-a-subnet-mask"&gt;essential Subnet mask&lt;/a&gt; &lt;/li&gt; &lt;li&gt;&lt;code&gt;sudo exportfs -r&lt;/code&gt; to reload /etc/exports &lt;/li&gt; &lt;li&gt;&lt;code&gt;sudo exportfs -v&lt;/code&gt; to see current nfs exports &lt;/li&gt; &lt;li&gt;content of /etc/exports: &lt;/li&gt; &lt;/ul&gt;     
 &lt;pre class="prettyprint "&gt;
 
 /srv/nfs4/z 192.168.0.0/16(ro,insecure,no_subtree_check)
@@ -121,4 +121,56 @@ User=cb
 WantedBy=multi-user.target
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>archlinux</category><category>en</category><category>systemd</category><guid>http://blog.binchen.org/posts/why-some-systemd-service-on-archlinux-does-not-work.html</guid><pubDate>Sun, 01 Dec 2013 14:53:00 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>archlinux</category><category>en</category><category>systemd</category><guid>http://blog.binchen.org/posts/why-some-systemd-service-on-archlinux-does-not-work.html</guid><pubDate>Sun, 01 Dec 2013 14:53:00 GMT</pubDate></item><item><title>Use screen/rtorrent/cronie to manage torrent client</title><link>http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+For &lt;a href="http://www.archlinux.org"&gt;ArchLinux&lt;/a&gt; only:
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;Prepare directory
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/bt/{session,finished,torrent}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;install
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sudo pacman -S cronie
+sudo systemctl enable cronie
+sudo systemctl start cronie
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;Add cron task to start and stop rtorrent service
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;crontab -e #add cron task as current user
+##+END_SRC
+
+The default editor will be open, input below content:
+#+BEGIN_SRC conf
+#start rtorrent sesssion at 1am
+0 1 * * * /usr/bin/screen -fa -d -m -S torrent /usr/bin/rtorrent
+# kill it at  9am
+0 10 * * * /usr/bin/screen -S torrent -X quit
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Done!
+&lt;/p&gt;&lt;/div&gt;</description><category>archlinux</category><category>linux</category><category>torrent</category><guid>http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html</guid><pubDate>Sat, 09 Mar 2013 15:08:00 GMT</pubDate></item></channel></rss>

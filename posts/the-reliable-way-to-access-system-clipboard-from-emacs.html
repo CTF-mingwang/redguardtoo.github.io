@@ -27,11 +27,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="The reliable way to access system clipboard from Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/the-reliable-way-to-access-system-clipboard-from-emacs.html">
-<meta property="og:description" content="CREATED:  2013-05-31
+<meta property="og:description" content="CREATED: &lt;2013-05-31&gt;
 
 
 
-UPDATED:  2015-11-20 Fri
+UPDATED: &lt;2015-11-20 Fri&gt;
 
 
 
@@ -39,7 +39,7 @@ The Emacs clipboard questions has been asked so many times. Yet few give a compl
 
 
 
-Only a dedicated project maintained b">
+Only a dedicated project maintained">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-05-31T09:25:00Z">
 <meta property="article:tag" content="clipboard">
@@ -87,11 +87,12 @@ Only a dedicated project maintained b">
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2013-05-31</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-31&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-20 Fri</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-20 Fri&gt;</span></span>
 </p>
 
 <p>
@@ -114,6 +115,8 @@ I only use its APIs `simpleclip-get-contents` and `simpleclip-set-contents`.
 Here is my setup:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'simpleclip)
 (defun copy-to-x-clipboard ()
   (interactive)
@@ -133,6 +136,8 @@ Here is my setup:
   (local-set-key (kbd "M-y") 'paste-from-x-clipboard))
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
+
+</div>
 </div>
         </div>
         

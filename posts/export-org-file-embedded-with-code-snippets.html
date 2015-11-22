@@ -27,24 +27,22 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Export org file embedded with code snippets">
 <meta property="og:url" content="http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html">
-<meta property="og:description" content="CREATED:  2014-11-20 Thu
+<meta property="og:description" content="CREATED: &lt;2014-11-20 Thu&gt;
 
 
 
-UPDATED:  2015-06-06 Sat
+UPDATED: &lt;2015-06-06 Sat&gt;
 
 
 
-problem
+1 problem
 
 
 I use Org-mode to record all my notes.
 
 
-As a developer, I place code snippets from many programming languages into one org file.
 
-
-Th">
+As a developer, I place code snippets from many programming languages into one org file.">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-11-20T12:22:17Z">
 <meta property="article:tag" content="emacs">
@@ -94,53 +92,58 @@ Th">
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-11-20 Thu</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-11-20 Thu&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-06-06 Sat</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-06-06 Sat&gt;</span></span>
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">problem</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>I use <a href="http://orgmode.org/">Org-mode</a> to record all my notes.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> problem</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+I use <a href="http://orgmode.org/">Org-mode</a> to record all my notes.
 </p>
+
 <p>
 As a developer, I place code snippets from many programming languages into one org file.
 </p>
+
 <p>
 The issue is when exporting the org file, major mode for each language will be loaded to render the code snippet.
 </p>
+
 <p>
 It means the hooks of the major modes will be executed. Since I put lots of heavy weight setup things in those hooks, my exporting is extremely slow.
 </p>
+
 <p>
 My hooks are also dependent on third party tools. So if anyone else uses my setup without those tools, his/her exporting will <a href="https://github.com/redguardtoo/emacs.d/issues/316">fail</a>.
 </p>
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Solution</h3>
+<div class="outline-text-2" id="text-2">
 </div>
-
-<div id="outline-container-2-1" class="outline-4">
-<h5 id="sec-2-1">Setup</h5>
-<div class="outline-text-4" id="text-2-1">
-
-<p>In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
+<div id="outline-container-sec-2-1" class="outline-3">
+<h4 id="sec-2-1">
+<span class="section-number-3">2.1</span> Setup</h4>
+<div class="outline-text-3" id="text-2-1">
+<p>
+In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
 </p>
 <p>
 The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
 </p>
 
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defvar load-user-customized-major-mode-hook t)
 (defvar cached-normal-file-full-path nil)
@@ -171,20 +174,19 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
     rlt))
 </code></pre>
 
-
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-2-2" class="outline-4">
-<h5 id="sec-2-2">Usage</h5>
-<div class="outline-text-4" id="text-2-2">
-
-<p>I use python-mode-hook setup as an example:
+</div>
+<div id="outline-container-sec-2-2" class="outline-3">
+<h4 id="sec-2-2">
+<span class="section-number-3">2.2</span> Usage</h4>
+<div class="outline-text-3" id="text-2-2">
+<p>
+I use python-mode-hook setup as an example:
 </p>
-
-
-
+<div class="org-src-container">
 <pre><code class="lang-lisp">(add-hook 'python-mode-hook
           '(lambda ()
              (unless (is-buffer-file-temp)
@@ -196,50 +198,46 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
                )))
 </code></pre>
 
-
+<p></p>
 </div>
-
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Tips</h4>
-<div class="outline-text-3" id="text-3">
-
 </div>
-
-<div id="outline-container-3-1" class="outline-4">
-<h5 id="sec-3-1">Export shell code</h5>
-<div class="outline-text-4" id="text-3-1">
-
-<p>Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Tips</h3>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h4 id="sec-3-1">
+<span class="section-number-3">3.1</span> Export shell code</h4>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Exporting shell code will fail if <code>sh-mode</code> is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-3-2" class="outline-4">
-<h5 id="sec-3-2">Yasnippet setup</h5>
-<div class="outline-text-4" id="text-3-2">
-
-<p>To avoid loading yasnippets when exporting, I have to <a href="https://github.com/capitaomorte/yasnippet#use-yas-minor-mode-on-a-per-buffer-basis">"use yas-minor-mode on a per-buffer basis"</a>.
+<div id="outline-container-sec-3-2" class="outline-3">
+<h4 id="sec-3-2">
+<span class="section-number-3">3.2</span> Yasnippet setup</h4>
+<div class="outline-text-3" id="text-3-2">
+<p>
+To avoid loading yasnippets when exporting, I have to <a href="https://github.com/capitaomorte/yasnippet#use-yas-minor-mode-on-a-per-buffer-basis">"use yas-minor-mode on a per-buffer basis"</a>.
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-3-3" class="outline-4">
-<h5 id="sec-3-3">Manually turn off the major-mode hook</h5>
-<div class="outline-text-4" id="text-3-3">
-
-<p>It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
+<div id="outline-container-sec-3-3" class="outline-3">
+<h4 id="sec-3-3">
+<span class="section-number-3">3.3</span> Manually turn off the major-mode hook</h4>
+<div class="outline-text-3" id="text-3-3">
+<p>
+It's controlled by global flag <code>load-user-customized-major-mode-hook</code>, as you can see from the "Setup" section.
 </p>
 <p>
 Say I want to turn off the major mode hooks when `M-x org-publish`, here is the setup:
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defadvice org-publish (around org-publish-advice activate)
   "Stop running major-mode hook when org-publish"
@@ -249,20 +247,18 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
     (setq load-user-customized-major-mode-hook old)))
 </code></pre>
 
-
-</div>
-
-</div>
-
-<div id="outline-container-3-4" class="outline-4">
-<h5 id="sec-3-4">after-save-hook</h5>
-<div class="outline-text-4" id="text-3-4">
-
-<p>`after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files
-</p>
 </div>
 
 <p></p>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h4 id="sec-3-4">
+<span class="section-number-3">3.4</span> after-save-hook</h4>
+<div class="outline-text-3" id="text-3-4">
+<p>
+<code>after-save-hook</code> is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files</p>
+</div>
 </div>
 </div>
 </div>

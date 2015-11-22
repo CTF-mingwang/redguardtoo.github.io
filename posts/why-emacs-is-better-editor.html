@@ -1,25 +1,13 @@
 <!DOCTYPE html>
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-    <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Why Emacs is better editor - a case study for javascript developer | Chen's blog</title>
-
-    
-            <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-
-    
-            <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-
-      <link rel="canonical" href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">
-
-
-
-    
-        <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
-
-    
-<link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>Why Emacs is better editor - a case study for javascript developer | Chen's blog</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -35,37 +23,22 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-
-
-
-    
-
-    <meta name="author" content="Chen Bin">
-    
-    <meta property="og:site_name" content="Chen's blog">
-    <meta property="og:title" content="Why Emacs is better editor - a case study for javascript developer">
-    <meta property="og:url" content="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">
-    <meta property="og:description" content="UPDATED:  2014-01-15 Wed   Let's see an example in real life development.   Note   For people who does not get the key points of this article, here are the points:  Emacs has an embedded javascript in">
-    <meta property="og:type" content="article">
-    <meta property="article:published_time" content="2013-12-15T19:02:00+00:00">
-           <meta property="article:tag" content="emacs">
-           <meta property="article:tag" content="en">
-           <meta property="article:tag" content="html">
-           <meta property="article:tag" content="javascript">
-           <meta property="article:tag" content="web">
-
-    
-
-    
-
-
-
+<meta name="author" content="Chen Bin">
+<meta property="og:site_name" content="Chen's blog">
+<meta property="og:title" content="Why Emacs is better editor - a case study for javascript developer">
+<meta property="og:url" content="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">
+<meta property="og:description" content="UPDATED:  2014-01-15 Wed   Let's see an example in real life development.   Note   For people who does not get the key points of this article, here are the points:  Emacs has an embedded javascript in">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2013-12-15T19:02:00Z">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="en">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="web">
 </head>
 <body>
-    <section class="social">
-        <ul>
-        
-            <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+    <section class="social"><ul>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
             <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
@@ -73,10 +46,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
-        </ul>
-    </section>
-    <section class="page-content">
-        <div class="content" rel="main">
+        </ul></section><section class="page-content"><div class="content" rel="main">
             
     <div class="post">
     
@@ -102,14 +72,16 @@ tr:nth-child(odd) td { background: #FEFEFE; }
            <li><a class="tag p-category" href="../categories/javascript.html" rel="tag">javascript</a></li>
            <li><a class="tag p-category" href="../categories/web.html" rel="tag">web</a></li>
         </ul>
-        </div>
+</div>
 
         </div>
         <div class="body">
             <div>
 <p></p>
 <p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-01-15 Wed</span></span> </p> <p> Let's see an example in real life development. </p> <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Note</h4> <div class="outline-text-3" id="text-1">  <p>For people who does not get the key points of this article, here are the points: </p>
-<ul> <li>Emacs has an embedded <b>javascript interpreter</b> which I extend a little bit. </li> <li>Other editors just use external tools or regular expression to do the semantic analysis. </li> <li>The difference of above two is bigger than the difference between machine gun and spear. </li> </ul>   </div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Problem</h4> <div class="outline-text-3" id="text-2">  <p>I'm maintaining a big javascript file with thousands of lines of legacy code. </p> <p> My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. </p> <p> The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. </p> <p> To understand what "complex" means, let's check some code from real world application: </p>   
+<ul>
+<li>Emacs has an embedded <b>javascript interpreter</b> which I extend a little bit. </li> <li>Other editors just use external tools or regular expression to do the semantic analysis. </li> <li>The difference of above two is bigger than the difference between machine gun and spear. </li> </ul>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Problem</h4> <div class="outline-text-3" id="text-2">  <p>I'm maintaining a big javascript file with thousands of lines of legacy code. </p> <p> My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. </p> <p> The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. </p> <p> To understand what "complex" means, let's check some code from real world application: </p>   
 <pre class="prettyprint ">
 
 $(el.completeRegistrationForm).validate({
@@ -141,33 +113,30 @@ $(el.completeRegistrationForm).validate({
 </pre>
 
 <p></p>
-<p> Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: <img src="../wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"> </p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Solution</h4> <div class="outline-text-3" id="text-3">  <p>Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>. </p> <p> Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode. </p>
+<p> Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: <img src="../wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"></p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Solution</h4> <div class="outline-text-3" id="text-3">  <p>Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>. </p> <p> Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode. </p>
 <p> I already submitted the patch to mooz so everyone will enjoy this feature in the future. </p>
 
 <p></p>
-<p> Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>: <img src="../wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"> </p> <p> The screen shot after we applying the above patch:  <img src="../wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"> </p> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">Summary</h4> <div class="outline-text-3" id="text-4">  <p>That's an example of beauty of Emacs. </p> <p> It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. </p>
+<p> Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>: <img src="../wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"></p> <p> The screen shot after we applying the above patch:  <img src="../wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"></p> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">Summary</h4> <div class="outline-text-3" id="text-4">  <p>That's an example of beauty of Emacs. </p> <p> It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. </p>
 </div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">Update</h4> <div class="outline-text-3" id="text-5">  <p>My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager. </p> <p> After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature: </p>   
 <pre class="prettyprint ">
 (js2-imenu-extras-mode)
 </pre>
 
 <p></p>
-<p> The UI to display the candidate in this actile is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm. </p> <p> The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>. </p> <p> After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>: </p> <p> <img src="../wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"> </p>
+<p> The UI to display the candidate in this actile is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm. </p> <p> The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>. </p> <p> After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>: </p> <p> <img src="../wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"></p>
 </div> </div> </div>
         </div>
         
-        <ul class="pager">
-            <li class="previous">
+        <ul class="pager hidden-print">
+<li class="previous">
                 <a href="why-some-systemd-service-on-archlinux-does-not-work.html" rel="prev" title="Why some systemd service on ArchLinux does not work">Previous post</a>
             </li>
             <li class="next">
                 <a href="my-grub2-configuration.html" rel="next" title="My grub2 configuration">Next post</a>
             </li>
         </ul>
-
-            
-        
-        <div id="disqus_thread"></div>
+<div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/why-emacs-is-better-editor.html",
@@ -181,8 +150,7 @@ $(el.completeRegistrationForm).validate({
             dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
     <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
@@ -192,20 +160,11 @@ $(el.completeRegistrationForm).validate({
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
-
-
-
-             
-        <footer id="footer" role="contentinfo">
-            <p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
-
-        </div>
-    </section>
-    
-<script type="text/javascript">
+</div>
+    </section><script type="text/javascript">
 function getParameterByName(name) {
     name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
     var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
@@ -392,9 +351,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script>
-<script type="text/javascript" src="../assets/js/highlight.pack.js"></script>
-<script type="text/javascript">
+</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -409,19 +366,10 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script>
-
-    
-    
-            <script src="../assets/js/all-nocdn.js" type="text/javascript"></script>
-    
-
-    
-        <script type="text/javascript">
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });
         </script>
-    
 </body>
 </html>

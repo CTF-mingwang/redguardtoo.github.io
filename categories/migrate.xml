@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:03:02 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Here are the steps.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:24 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Here are the steps.
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# install python2 and make sure sqlite is supported
 sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
@@ -34,13 +37,19 @@ rm -rf themes/zen/;nikola install_theme zen
 nikola build
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Manually fixed those articles with Chinese title in url_map.csv
@@ -49,6 +58,8 @@ Manually fixed those articles with Chinese title in url_map.csv
 &lt;p&gt;
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
 import getopt, sys, csv
@@ -94,6 +105,8 @@ if __name__ == '__main__':
     print content
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Import the xml into disqus.com.
 &lt;/p&gt;
@@ -101,6 +114,8 @@ Import the xml into disqus.com.
 &lt;p&gt;
 Install syntaxhighlighter and google analytics, insert below code into conf.py:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;BODY_END = """
 &amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
@@ -168,10 +183,11 @@ EXTRA_HEAD_DATA = """
 """
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.
-&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>

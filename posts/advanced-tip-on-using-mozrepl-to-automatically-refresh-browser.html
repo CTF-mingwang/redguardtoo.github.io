@@ -83,7 +83,8 @@ The mozrepl trick basically will refresh the current active page in Firefox. It'
         </div>
         <div class="body">
             <div>
-<p>Here is <a href="http://www.emacswiki.org/emacs/MozRepl">the setup on Emacswiki</a>.
+<p>
+Here is <a href="http://www.emacswiki.org/emacs/MozRepl">the setup on Emacswiki</a>.
 </p>
 
 <p>
@@ -97,6 +98,8 @@ The mozrepl trick basically will refresh the <b>current active page</b> in Firef
 <p>
 So here is my improved solution:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun my-moz-refresh-browser-condition (current-file)
   "Should return a boolean javascript expression or nil"
@@ -132,6 +135,8 @@ So here is my improved solution:
               'append 'local)
 ;; }}
 </code></pre>
+
+</div>
 </div>
         </div>
         

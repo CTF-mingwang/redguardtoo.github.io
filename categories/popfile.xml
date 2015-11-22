@@ -1,58 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (popfile)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/popfile.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:02:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2012-12-28&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (popfile)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/popfile.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:25 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2012-12-28&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-05-26 Tue&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-05-26 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 &lt;a href="http://getpopfile.org"&gt;POPFile&lt;/a&gt; automatically sorts my email messages.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Install POPFile&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Download and extract the zip file to ~/bin/popfile/.
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Install POPFile&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Download and extract the zip file to ~/bin/popfile/.
+&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Install third party packages&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Run below command in shell:
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Install third party packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Run below command in shell:
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 BTW, don't let cpan detect the mirror site automatically because it takes too much time. Choose the site manually!
 &lt;/p&gt;
+
 &lt;p&gt;
 First question: Would you like automatic setup? Yes!
 &lt;/p&gt;
+
 &lt;p&gt;
 Second quesiton: Set up mirror site for you? No!
 &lt;/p&gt;
+
 &lt;p&gt;
 Third question: Choose one mirror site from the list? No!
 &lt;/p&gt;
+
 &lt;p&gt;
 Forth question: Please input the site manually. &lt;a href="http://mirror.optusnet.com.au/CPAN/"&gt;http://mirror.optusnet.com.au/CPAN/&lt;/a&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 This is my cpan setup (Please note I use HTTP proxy which is OPTIONAL),
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-perl"&gt;# content of /root/.cpan/CPAN/MyConfig.pm
 $CPAN::Config = {
@@ -123,61 +128,61 @@ $CPAN::Config = {
 __END__
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 After packages installed, double check them locally:
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;perl -MDBI -e 'print $MIME::DBI::VERSION'
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 If there is any error:
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;perl -V
 sudo rm -rf /usr/lib/perl5/site_perl/*
 sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
 &lt;/code&gt;&lt;/pre&gt;
 
-
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;I only use IMAP. The purpose of setting up POP3 port is to make the program executable without root permission.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Setup&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+I only use IMAP. The purpose of setting up POP3 port is to make the program executable without root permission.
 &lt;/p&gt;
+
 &lt;p&gt;
 See &lt;a href="http://getpopfile.org/docs/howtos:mayneedroot"&gt;http://getpopfile.org/docs/howtos:mayneedroot&lt;/a&gt; for details.
 &lt;/p&gt;
+
 &lt;p&gt;
 Run the below command to fix the root issue.
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Here is my popfile setup for davmail server (please note ssl is disabled),
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;bayes_bad_sqlite_version 4.0.0
 bayes_corpus corpus
@@ -277,40 +282,34 @@ xmlrpc_local 1
 xmlrpc_port 8081
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 The only issue is user name. If your user name contains "\", you should replace it with "\\" when inputting in Popfile!
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Run the program&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
 &lt;/p&gt;
 
-
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Run the program&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 &lt;pre&gt;&lt;code class="lang-sh"&gt;cd ~/bin/popfile;perl popfile.pl
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-5" class="outline-3"&gt;
-&lt;h4 id="sec-5"&gt;Start the POPFile automatically when bash login&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-5"&gt;
-
-&lt;p&gt;Insert below code in ~/.bashrc:
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Start the POPFile automatically when bash login&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+Insert below code in ~/.bashrc:
 &lt;/p&gt;
-
-
-
+&lt;div class="org-src-container"&gt;
 &lt;pre&gt;&lt;code class="lang-bash"&gt;OS_NAME=`uname -s`
 if [ $OS_NAME == Linux ]; then
    # start popfile
@@ -326,22 +325,20 @@ if [ $OS_NAME == Linux ]; then
 fi
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
-
-&lt;div id="outline-container-6" class="outline-3"&gt;
-&lt;h4 id="sec-6"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-6"&gt;
-
-&lt;p&gt;My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Start the POPFile systemd service as a user (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run &lt;code&gt;systemctl enable popfile&lt;/code&gt; to install service. Run &lt;code&gt;systemctl start popfile&lt;/code&gt; to start the service. My Linux distribution is ArchLinux.
 &lt;/p&gt;
 &lt;p&gt;
 here is content of popfile.service.
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;[Unit]
 Description=POPFile (Automatic Email Classification) Service
@@ -355,34 +352,33 @@ User=cb
 WantedBy=multi-user.target
 &lt;/code&gt;&lt;/pre&gt;
 
-
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-7" class="outline-3"&gt;
-&lt;h4 id="sec-7"&gt;Backup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-7"&gt;
-
-&lt;p&gt;Please backup popfile.cfg and popfile.db.
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Backup&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
+&lt;p&gt;
+Please backup popfile.cfg and popfile.db.
 &lt;/p&gt;
+
 &lt;p&gt;
 See &lt;a href="http://getpopfile.org/docs/howtos:backup"&gt;http://getpopfile.org/docs/howtos:backup&lt;/a&gt; for details.
-&lt;/p&gt;&lt;/div&gt;
-
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-8" class="outline-3"&gt;
-&lt;h4 id="sec-8"&gt;Summary&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-8"&gt;
-
-&lt;ul&gt;&lt;li&gt;Portable
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-8" class="outline-2"&gt;
+&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-8"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Portable
 &lt;/li&gt;
 &lt;li&gt;No root privilege needed
 &lt;/li&gt;
 &lt;li&gt;No X windows needed. I can finish manage the mails in remote shell
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>email</category><category>en</category><category>filter</category><category>linux</category><category>popfile</category><category>spam</category><guid>http://blog.binchen.org/posts/use-popfile-at-linux.html</guid><pubDate>Fri, 28 Dec 2012 13:37:00 GMT</pubDate></item></channel></rss>

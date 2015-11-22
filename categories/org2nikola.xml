@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (org2nikola)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/org2nikola.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:03:02 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;python code:
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (org2nikola)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/org2nikola.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:24 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+python code:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;import getopt, sys
 if __name__ == '__main__':
@@ -13,15 +16,61 @@ if __name__ == '__main__':
     print "hello world";
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 This is table:
 &lt;/p&gt;
 
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;code completion&lt;/td&gt;&lt;td class="left"&gt;auto-complete&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;&lt;td class="left"&gt;none&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+
+&lt;colgroup&gt;
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="left"&gt;Name&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Description&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Alternatives&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;convert Emacs into vim&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="http://orgmode.org"&gt;org-mode&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;&lt;a href="http://en.wikipedia.org/wiki/Getting_Things_Done"&gt;Get Things Done (GTD)&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;code completion&lt;/td&gt;
+&lt;td class="left"&gt;auto-complete&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;&lt;a href="https://github.com/magnars/expand-region.el"&gt;expand-region&lt;/a&gt;&lt;/td&gt;
+&lt;td class="left"&gt;selection region efficiently&lt;/td&gt;
+&lt;td class="left"&gt;none&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;
 This is list:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;list item 1
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;list item 1
 &lt;/li&gt;
 &lt;li&gt;list item 2
 &lt;/li&gt;

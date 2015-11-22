@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Nov 2015 06:02:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-05-20 Tue&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:27 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-05-20 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-03-23 Sun&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-03-23 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -18,16 +19,17 @@ I install keysnail's own plugins "HoK" and "Tanything".
 Here are the use cases of keysnail.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Click &amp;amp; Copy the links&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HoK&lt;/a&gt;.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Click &amp;amp; Copy the links&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HoK&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 Insert below code into ~/.keysnail.js:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;hook.setHook("PluginLoaded", function () {
@@ -62,56 +64,64 @@ key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
 key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
         ext.exec("hok-start-continuous-mode", aArg);
 }, "Start continuous HaH", true);
-
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Now I can press "Ctrl-C Ctrl-F" to select the links to click.
 &lt;/p&gt;
+
 &lt;p&gt;
 The links will be highlighted as below screen shot:
-&lt;img src="http://blog.binchen.org/wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png"&gt;&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png"&gt;
+&lt;/p&gt;
+
 &lt;p&gt;
 I can press the highlighted hint to click the link.
 &lt;/p&gt;
+
 &lt;p&gt;
 Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Copy the text of link&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Copy the text of link&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
 &lt;/p&gt;
+
 &lt;p&gt;
 That's error prone because:
-&lt;/p&gt;&lt;ol&gt;&lt;li&gt;The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
+&lt;/p&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
 &lt;/li&gt;
 &lt;li&gt;The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, &lt;a href="https://www.atlassian.com/software/jira"&gt;JIRA&lt;/a&gt; will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
 &lt;/li&gt;
-&lt;/ol&gt;&lt;p&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
 If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
 &lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Switch tab&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;Tanything&lt;/a&gt;.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Switch tab&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Install the &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;Tanything&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 Insert below code into ~/.keysnail.js:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
@@ -119,27 +129,32 @@ Insert below code into ~/.keysnail.js:
 }, "view all tabs", true);
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Press "Ctrl-C Ctrl-A", you got below UI:
-&lt;img src="http://blog.binchen.org/wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"&gt;&lt;/p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"&gt;
+&lt;/p&gt;
+
 &lt;p&gt;
 Tanything will locate the tab by finding match in web page's title or URL.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;My keysnail set up&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;You can download my ~/.keysnail.js from &lt;a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js"&gt;HERE&lt;/a&gt;.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; My keysnail set up&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+You can download my ~/.keysnail.js from &lt;a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js"&gt;HERE&lt;/a&gt;.
 &lt;/p&gt;
+
+&lt;p&gt;
+#+image/keysnail-hok-nq8.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/03/wpid-keysnail-hok-nq8.png" alt="wpid-keysnail-hok-nq8.png"&gt;
+#+image/keysnail-tanything-nq8.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/03/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"&gt;&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>keysnail</category><guid>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</guid><pubDate>Sun, 23 Mar 2014 20:03:00 GMT</pubDate></item><item><title>How to use keyboard to navigate feedly.com</title><link>http://blog.binchen.org/posts/how-to-use-keyboard-to-navigate-feedly-com.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Here is the detailed steps, &lt;/p&gt;&lt;ol&gt;&lt;li&gt;Install &lt;a href="https://github.com/mooz/keysnail"&gt;keysnail&lt;/a&gt; (a firefox addon) &lt;/li&gt; &lt;li&gt;Install &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HoK&lt;/a&gt; (no less than version 1.3.9) through keysnail &lt;/li&gt; &lt;li&gt;Add below code into .keysnail.js &lt;/li&gt; &lt;/ol&gt;&lt;pre class="src src-javascript"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;/*&lt;em&gt; &lt;/em&gt;&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;HoK /&lt;/span&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>keysnail</category><guid>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</guid><pubDate>Sun, 23 Mar 2014 20:03:00 GMT</pubDate></item><item><title>How to use keyboard to navigate feedly.com</title><link>http://blog.binchen.org/posts/how-to-use-keyboard-to-navigate-feedly-com.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Here is the detailed steps, &lt;/p&gt;&lt;ol&gt; &lt;li&gt;Install &lt;a href="https://github.com/mooz/keysnail"&gt;keysnail&lt;/a&gt; (a firefox addon) &lt;/li&gt; &lt;li&gt;Install &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HoK&lt;/a&gt; (no less than version 1.3.9) through keysnail &lt;/li&gt; &lt;li&gt;Add below code into .keysnail.js &lt;/li&gt; &lt;/ol&gt;     &lt;pre class="src src-javascript"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;/*&lt;em&gt; &lt;/em&gt;&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;HoK /&lt;/span&gt;
 key.setViewKey(&lt;span style="color: #70c0b1;"&gt;'e'&lt;/span&gt;, &lt;span style="color: #b9ca4a;"&gt;function&lt;/span&gt; (&lt;span style="color: #e7c547;"&gt;aEvent&lt;/span&gt;, &lt;span style="color: #e7c547;"&gt;aArg&lt;/span&gt;) {
         ext.exec(&lt;span style="color: #70c0b1;"&gt;"hok-start-foreground-mode"&lt;/span&gt;, aArg);
 }, &lt;span style="color: #70c0b1;"&gt;'Hok - Foreground hint mode'&lt;/span&gt;, &lt;span style="color: #c397d8;"&gt;true&lt;/span&gt;);
@@ -164,4 +179,4 @@ key.setViewKey(&lt;span style="color: #70c0b1;"&gt;'e'&lt;/span&gt;, &lt;span st
     + &lt;span style="color: #70c0b1;"&gt;", [data-app-action]"&lt;/span&gt;
   ;
 });&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;ol&gt;&lt;li&gt;Restart Firefox, logged into &lt;a href="http://www.feedly.com"&gt;http://www.feedly.com&lt;/a&gt; and press hot key "e" &lt;/li&gt; &lt;li&gt;Enjoy! &lt;/li&gt; &lt;/ol&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>keysnail</category><guid>http://blog.binchen.org/posts/how-to-use-keyboard-to-navigate-feedly-com.html</guid><pubDate>Mon, 06 May 2013 21:59:00 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;ol&gt; &lt;li&gt;Restart Firefox, logged into &lt;a href="http://www.feedly.com"&gt;http://www.feedly.com&lt;/a&gt; and press hot key "e" &lt;/li&gt; &lt;li&gt;Enjoy! &lt;/li&gt; &lt;/ol&gt;  &lt;/div&gt;</description><category>emacs</category><category>en</category><category>keysnail</category><guid>http://blog.binchen.org/posts/how-to-use-keyboard-to-navigate-feedly-com.html</guid><pubDate>Mon, 06 May 2013 21:59:00 GMT</pubDate></item></channel></rss>

@@ -34,7 +34,9 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 I added below code into bottom of functions.php (Appearance =&gt; Editor):
 
 
-add_action('wp_enqueue_scripts', 'CDNJS_scrip">
+
+
+add_action('wp_enqueue_scripts', 'CDNJS_scr">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-03-07T00:58:00Z">
 <meta property="article:tag" content="blog">
@@ -84,12 +86,15 @@ add_action('wp_enqueue_scripts', 'CDNJS_scrip">
         </div>
         <div class="body">
             <div>
-<p>For jquery.js, see <a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/">http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/</a>.
+<p>
+For jquery.js, see <a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/">http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/</a>.
 </p>
 
 <p>
 I added below code into bottom of functions.php (Appearance =&gt; Editor):
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-php">add_action('wp_enqueue_scripts', 'CDNJS_scripts');
 function CDNJS_scripts() 
@@ -97,12 +102,16 @@ function CDNJS_scripts()
     wp_deregister_script('jquery');
     wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
     wp_enqueue_script('jquery');
-} 
+}
 </code></pre>
+
+</div>
 
 <p>
 For js from SyntaxHighlighter Evolved (Plugins =&gt; Installed Plugins =&gt; Edit):
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index db8c668..e41ec12 100644
@@ -164,6 +173,8 @@ index db8c668..e41ec12 100644
         // Register some popular third-party brushes
         wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
 </code></pre>
+
+</div>
 </div>
         </div>
         

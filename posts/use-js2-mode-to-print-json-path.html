@@ -83,7 +83,8 @@ When working on JSON, the most boring and error prone task is to get the full p"
         </div>
         <div class="body">
             <div>
-<p>These days most web applications are based on RESTful.
+<p>
+These days most web applications are based on RESTful.
 </p>
 
 <p>
@@ -98,6 +99,8 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-javascript">{
   key1: {
     subkey1: {
@@ -106,6 +109,8 @@ For example, given the JSON response like:
   }
 }
 </code></pre>
+
+</div>
 
 <p>
 The developer need figure out the full path of "key3" which is "<code>key1.subkey1.arr1[0].key3</code>".
@@ -118,6 +123,8 @@ My solution is to take advantage of AST created by <a href="https://github.com/m
 <p>
 <b>Step 1</b>, insert below code into ~/.emacs,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun js2-print-json-path ()
   "Print the path to the JSON value under point, and save it in the kill ring."
@@ -152,9 +159,10 @@ My solution is to take advantage of AST created by <a href="https://github.com/m
     rlt))
 </code></pre>
 
+</div>
+
 <p>
-<b>Step 2</b>, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
-</p>
+<b>Step 2</b>, move the cursor over the key/value of the field and `M-x js2-print-json-path`.</p>
 </div>
         </div>
         
