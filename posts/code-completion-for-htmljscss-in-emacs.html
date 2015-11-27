@@ -2,13 +2,12 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="description" content="Linux, Programming, Emacs">
 <meta name="viewport" content="width=device-width">
-<title>Archive | Chen's blog</title>
-<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/archive.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+<title>Code completion for HTML/JS/CSS in Emacs | Chen's blog</title>
+<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
  border: 1px solid #CCC;
@@ -24,50 +23,187 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
+<meta name="author" content="Chen Bin">
+<meta property="og:site_name" content="Chen's blog">
+<meta property="og:title" content="Code completion for HTML/JS/CSS in Emacs">
+<meta property="og:url" content="http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html">
+<meta property="og:description" content="Now company-mode is very popular in Emacs user. It supports code completion out of box.
+
+
+
+Its company-etags.el can use TAGS created by ctags/etags.
+
+
+
+Setup is easy.
+
+
+
+Step 1, create TAGS:
+
+
+
+
+cd ~/">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-11-27T11:43:59Z">
+<meta property="article:tag" content="css">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="en">
+<meta property="article:tag" content="html">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="web">
 </head>
 <body>
     <section class="social"><ul>
-<li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="#" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
-            <li><a href="stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
             <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
 
         </ul></section><section class="page-content"><div class="content" rel="main">
             
-<article class="listpage"><header><h1>Archive</h1>
-    </header><ul class="postlist">
-<li>
-<a href="2015/index.html">2015</a>
-            (15)
-        </li>
-<li>
-<a href="2014/index.html">2014</a>
-            (42)
-        </li>
-<li>
-<a href="2013/index.html">2013</a>
-            (84)
-        </li>
-<li>
-<a href="2012/index.html">2012</a>
-            (40)
-        </li>
-<li>
-<a href="2011/index.html">2011</a>
-            (20)
-        </li>
-<li>
-<a href="2009/index.html">2009</a>
-            (2)
-        </li>
-<li>
-<a href="2006/index.html">2006</a>
-            (1)
-    </li>
-</ul></article><footer id="footer"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Code completion for HTML/JS/CSS in Emacs</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2015-11-27T11:43:59+00:00">2015-11-27 11:43</time>
+            
+
+            
+          |  
+        <a href="code-completion-for-htmljscss-in-emacs.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/css.html" rel="tag">css</a></li>
+           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/html.html" rel="tag">html</a></li>
+           <li><a class="tag p-category" href="../categories/javascript.html" rel="tag">javascript</a></li>
+           <li><a class="tag p-category" href="../categories/web.html" rel="tag">web</a></li>
+        </ul>
+</div>
+
+        </div>
+        <div class="body">
+            <div>
+<p>
+Now <a href="https://github.com/company-mode/company-mode">company-mode</a> is very popular in Emacs user. It supports code completion out of box.
+</p>
+
+<p>
+Its <a href="https://github.com/company-mode/company-mode/blob/master/company-etags.el">company-etags.el</a> can use TAGS created by ctags/etags.
+</p>
+
+<p>
+Setup is easy.
+</p>
+
+<p>
+Step 1, create TAGS:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
+</code></pre>
+
+</div>
+
+<p>
+Step 2, add below code into "~/.emacs.d/init.el":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
+</code></pre>
+
+</div>
+
+<p>
+That's OK for most programming languages.
+</p>
+
+<p>
+But <b>not enough</b> for web developers who use <a href="https://github.com/fxbois/web-mode">web-mode</a> and <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
+</p>
+
+<p>
+First, you need upgrade web-mode to <a href="https://github.com/fxbois/web-mode/pull/640">latest version</a> so that when inputting "btn-" or "data-" code completion still works.
+</p>
+
+<p>
+Second, you need add below code into your "~/.emacs.d/init.el",
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags
+  '(progn
+     (add-to-list 'company-etags-modes 'js2-mode)
+     (add-to-list 'company-etags-modes 'web-mode)))
+</code></pre>
+
+</div>
+
+<p>
+You need above setup because web-mode <b>conditionally</b> inherit from prog-mode and js2-mode does <b>not</b> inherit from prog-mode.
+</p>
+
+<p>
+I tested on Emacs23.4 and Emacs24.4.
+</p>
+
+<p>
+Screenshot of my setup:
+</p>
+
+<div class="figure">
+<p><img src="../wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
+</div>
+</div>
+        </div>
+        
+        <ul class="pager hidden-print">
+<li class="previous">
+                <a href="use-js2-mode-to-print-json-path.html" rel="prev" title="Use js2-mode to print json path">Previous post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html",
+        disqus_title="Code completion for HTML/JS/CSS in Emacs",
+        disqus_identifier="cache/posts/code-completion-for-htmljscss-in-emacs.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
@@ -258,7 +394,7 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script><script type="text/javascript" src="assets/js/highlight.pack.js"></script><script type="text/javascript">
+</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
@@ -273,7 +409,7 @@ _gaq.push(['_trackPageview']);
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
 
-</script><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
+</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
             $(function(){
                 $('.timeago').timeago();
             });

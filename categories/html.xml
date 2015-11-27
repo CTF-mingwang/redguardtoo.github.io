@@ -1,5 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:24 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 27 Nov 2015 11:44:07 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Now &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt; is very popular in Emacs user. It supports code completion out of box.
+&lt;/p&gt;
+
+&lt;p&gt;
+Its &lt;a href="https://github.com/company-mode/company-mode/blob/master/company-etags.el"&gt;company-etags.el&lt;/a&gt; can use TAGS created by ctags/etags.
+&lt;/p&gt;
+
+&lt;p&gt;
+Setup is easy.
+&lt;/p&gt;
+
+&lt;p&gt;
+Step 1, create TAGS:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 2, add below code into "~/.emacs.d/init.el":
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+That's OK for most programming languages.
+&lt;/p&gt;
+
+&lt;p&gt;
+But &lt;b&gt;not enough&lt;/b&gt; for web developers who use &lt;a href="https://github.com/fxbois/web-mode"&gt;web-mode&lt;/a&gt; and &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mode/pull/640"&gt;latest version&lt;/a&gt; so that when inputting "btn-" or "data-" code completion still works.
+&lt;/p&gt;
+
+&lt;p&gt;
+Second, you need add below code into your "~/.emacs.d/init.el",
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
+  '(progn
+     (add-to-list 'company-etags-modes 'js2-mode)
+     (add-to-list 'company-etags-modes 'web-mode)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode and js2-mode does &lt;b&gt;not&lt;/b&gt; inherit from prog-mode.
+&lt;/p&gt;
+
+&lt;p&gt;
+I tested on Emacs23.4 and Emacs24.4.
+&lt;/p&gt;
+
+&lt;p&gt;
+Screenshot of my setup:
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>How to validate HTML5 code with Flymake effectively</title><link>http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-12-11&amp;gt;&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 

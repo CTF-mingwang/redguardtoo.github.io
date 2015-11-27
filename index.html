@@ -38,6 +38,113 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/code-completion-for-htmljscss-in-emacs.html">Code completion for HTML/JS/CSS in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-11-27T11:43:59+00:00">2015-11-27 11:43</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/code-completion-for-htmljscss-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/code-completion-for-htmljscss-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/css.html" rel="tag">css</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
+           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
+           <li><a class="tag p-category" href="categories/web.html" rel="tag">web</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+Now <a href="https://github.com/company-mode/company-mode">company-mode</a> is very popular in Emacs user. It supports code completion out of box.
+</p>
+
+<p>
+Its <a href="https://github.com/company-mode/company-mode/blob/master/company-etags.el">company-etags.el</a> can use TAGS created by ctags/etags.
+</p>
+
+<p>
+Setup is easy.
+</p>
+
+<p>
+Step 1, create TAGS:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
+</code></pre>
+
+</div>
+
+<p>
+Step 2, add below code into "~/.emacs.d/init.el":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
+</code></pre>
+
+</div>
+
+<p>
+That's OK for most programming languages.
+</p>
+
+<p>
+But <b>not enough</b> for web developers who use <a href="https://github.com/fxbois/web-mode">web-mode</a> and <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
+</p>
+
+<p>
+First, you need upgrade web-mode to <a href="https://github.com/fxbois/web-mode/pull/640">latest version</a> so that when inputting "btn-" or "data-" code completion still works.
+</p>
+
+<p>
+Second, you need add below code into your "~/.emacs.d/init.el",
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags
+  '(progn
+     (add-to-list 'company-etags-modes 'js2-mode)
+     (add-to-list 'company-etags-modes 'web-mode)))
+</code></pre>
+
+</div>
+
+<p>
+You need above setup because web-mode <b>conditionally</b> inherit from prog-mode and js2-mode does <b>not</b> inherit from prog-mode.
+</p>
+
+<p>
+I tested on Emacs23.4 and Emacs24.4.
+</p>
+
+<p>
+Screenshot of my setup:
+</p>
+
+<div class="figure">
+<p><img src="wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-js2-mode-to-print-json-path.html">Use js2-mode to print json path</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1152,235 +1259,6 @@ For <b>any new programming language</b> not covered in this post, there are two 
 <li>Because I use <a href="http://www.emacswiki.org/emacs/Evil">Evil</a>, indenting the whole file is as simple as pressing `gg=G`
 </li>
 </ul>
-<p></p>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/effective-code-navigation-for-web-development.html">Effective code navigation for web development</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-04-02T12:51:21+00:00">2015-04-02 12:51</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/effective-code-navigation-for-web-development.html#disqus_thread" data-disqus-identifier="cache/posts/effective-code-navigation-for-web-development.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-I use <a href="https://angularjs.org/">AngularJS</a> as an example. The technique applies to other web frameworks.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-In Angular application, a function is defined in a javascript file and called in a html file.
-</p>
-
-<p>
-javascript file:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-html">&lt;div ng-controller="MyController" ng-init="init()"&gt;
-  &lt;button ng-click="onClick()"&gt;&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
-
-</div>
-
-<p>
-html file:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">angular.module['myapp'].controller('MyController', function ($scope, $http) {
-
-  $scope.init = function () {
-  };
-
-  $scope.onClick= function() {
-  };
-});
-</code></pre>
-
-</div>
-
-<p>
-As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is <b>regular expression</b>.
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Solution</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-CTags is good at parsing files with <b>regular expression</b>.
-</p>
-
-<p>
-I use CTags instead of IDEs because:
-</p>
-<ul class="org-ul">
-<li>New web frameworks keep popping up. I don't want to waste time&amp;money on upgrading IDE frequently
-</li>
-<li>As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
-</li>
-<li>Setup of ctags and text editors is easy. Once the first project is set up, others are just five minutes of copy&amp;paste jobs.
-</li>
-</ul>
-</div>
-
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">CTags setup</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-Create a file named ".ctags":
-</p>
-<div class="org-src-container">
-
-<pre><code class="lang-conf">--langdef=html
---langmap=html:.htm.html.erb
---regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-click[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-change[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-show[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-if[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-blur[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-focus[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-disabled[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
---regex-html=/[ \t]+ng-repeat[ \t]*=[ \t]*['"][^'"]+ in \([^'"]+\)['"]/\1/o,object/
-
---langdef=js
---langmap=js:.js
---regex-js=/\$scope\.([A-Za-z0-9._\$]+)[ \t]*[:=]/\1/,variable/
---regex-js=/\.controller[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,controller/
---regex-js=/\.filter[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,filter/
---regex-js=/\.factory[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,factory/
---regex-js=/\.service[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,service/
---regex-js=/\.directive[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,directive/
---regex-js=/.*[.][\s]*module\(['"]([a-zA-Z0-9_.]+)['"]/\1/m,module/
---regex-js=/[.](when\(['"][a-zA-Z0-9_\/]+['"])/\1/r,ngRoute/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\5/,object/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\5/,function/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\5/,array/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*(true|false)/\5/,boolean/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[0-9]+/\5/,number/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
---regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*[ \t]*([,;]|$)/\5/,variable/
---regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\{/\2/,object/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\[/\2/,array/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^"]'[^']*/\2/,string/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*(true|false)/\2/,boolean/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[0-9]+/\2/,number/
---regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
-</code></pre>
-
-</div>
-
-<p>
-The key point of this setup is the regular expression for HTML should be <b>as simple as possible</b>!
-</p>
-
-<p>
-On Mac, location of ".ctags":
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-bash">/Users/yourname/.ctags
-</code></pre>
-
-</div>
-
-<p>
-On Linux, location of ".ctags":
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-bash">/home/yourname/.ctags
-</code></pre>
-
-</div>
-
-<p>
-On Windows, place ".ctags" anywhere. Then <a href="http://support.microsoft.com/en-us/kb/310519">create an environment variable</a> named "HOME" whose value is the parent directory of ".ctags".
-</p>
-
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3"><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
-<div class="outline-text-2" id="text-3">
-<p>
-Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and follow its instruction.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h3>
-<div class="outline-text-2" id="text-4">
-<p>
-Run CTags at least once:
-</p>
-<div class="org-src-container">
-<pre><code class="lang-bash">ctags -e -R -f /app/path/TAGS
-</code></pre>
-
-</div>
-
-<p>
-Then insert below code into your ~/.emacs:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(setq tags-table-list '("/app/path/TAGS"))
-</code></pre>
-
-</div>
-
-<p>
-Open Emacs and `M-x find-tag` to start code navigation. That's all.
-</p>
-
-<p>
-If you prefer <a href="https://github.com/emacs-helm/helm">Helm</a> UI, install it and `M-x helm-etags-select` instead.
-</p>
-
-<p>
-Please install the latest helm because I <a href="https://github.com/emacs-helm/helm/pull/965">enhanced helm-etags-select</a> for this problem.</p>
-
 <p></p>
 </div>
 </div>
