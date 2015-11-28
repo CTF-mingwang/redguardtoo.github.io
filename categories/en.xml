@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 27 Nov 2015 11:44:07 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 28 Nov 2015 01:07:17 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Now &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt; is very popular in Emacs user. It supports code completion out of box.
 &lt;/p&gt;
 
@@ -38,7 +38,7 @@ That's OK for most programming languages.
 &lt;/p&gt;
 
 &lt;p&gt;
-But &lt;b&gt;not enough&lt;/b&gt; for web developers who use &lt;a href="https://github.com/fxbois/web-mode"&gt;web-mode&lt;/a&gt; and &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt;.
+But &lt;b&gt;not enough&lt;/b&gt; for web developers who use &lt;a href="https://github.com/fxbois/web-mode"&gt;web-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -53,18 +53,17 @@ Second, you need add below code into your "~/.emacs.d/init.el",
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
-     (add-to-list 'company-etags-modes 'js2-mode)
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode and js2-mode does &lt;b&gt;not&lt;/b&gt; inherit from prog-mode.
+You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
-I tested on Emacs23.4 and Emacs24.4.
+Tested on Emacs23.4 and Emacs24.4.
 &lt;/p&gt;
 
 &lt;p&gt;

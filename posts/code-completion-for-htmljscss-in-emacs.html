@@ -135,7 +135,7 @@ That's OK for most programming languages.
 </p>
 
 <p>
-But <b>not enough</b> for web developers who use <a href="https://github.com/fxbois/web-mode">web-mode</a> and <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
+But <b>not enough</b> for web developers who use <a href="https://github.com/fxbois/web-mode">web-mode</a>.
 </p>
 
 <p>
@@ -150,18 +150,17 @@ Second, you need add below code into your "~/.emacs.d/init.el",
 
 <pre><code class="lang-lisp">(eval-after-load 'company-etags
   '(progn
-     (add-to-list 'company-etags-modes 'js2-mode)
      (add-to-list 'company-etags-modes 'web-mode)))
 </code></pre>
 
 </div>
 
 <p>
-You need above setup because web-mode <b>conditionally</b> inherit from prog-mode and js2-mode does <b>not</b> inherit from prog-mode.
+You need above setup because web-mode <b>conditionally</b> inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for <a href="https://github.com/dgutov">Dmitry Gutov</a> pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
 </p>
 
 <p>
-I tested on Emacs23.4 and Emacs24.4.
+Tested on Emacs23.4 and Emacs24.4.
 </p>
 
 <p>
