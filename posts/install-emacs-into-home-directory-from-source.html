@@ -30,13 +30,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content="Here is the script,
 
 
-
-
 #!/bin/bash
 [ -z &quot;$EMACS_VERSION&quot; ] &amp;&amp; EMACS_VERSION=&quot;23.4&quot;
 [ -z &quot;$EMACS_URL&quot; ] &amp;&amp; EMACS_URL=&quot;http://gnu.mirror.uber.com.au/emacs&quot;
 # I've assign 12G memory to /tmp as ramdisk
-[">
+[ -">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-05-31T03:47:53Z">
 <meta property="article:tag" content="emacs">
@@ -80,11 +78,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </div>
         <div class="body">
             <div>
-<p>
-Here is the script,
+<p>Here is the script,
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-sh">#!/bin/bash
 [ -z "$EMACS_VERSION" ] &amp;&amp; EMACS_VERSION="23.4"
@@ -99,23 +94,18 @@ cd $EMACS_TMP/emacs-$EMACS_VERSION;mkdir -p $HOME/myemacs/$EMACS_VERSION;rm -rf 
  rm -rf $EMACS_TMP/emacs-$EMACS_VERSION
 </code></pre>
 
-</div>
-
 <p>
 Usage:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-sh">./install-emacs
 #or
 EMACS_VERSION=23.4 ./install-emacs
 </code></pre>
 
-</div>
-
 <p>
-The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION</p>
+The emacs will be installed into the directory $HOME/myemacs/$EMACS_VERSION
+</p>
 </div>
         </div>
         

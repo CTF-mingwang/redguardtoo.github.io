@@ -27,20 +27,21 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Effective spell check in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
-<meta property="og:description" content="Table of Contents
-
-
-1. Smart spell check in HTML
-2. Spell check the camel case strings
-3. Summary
+<meta property="og:description" content="CREATED:  2014-01-21
 
 
 
+UPDATED:  2015-11-30 Mon
 
 
-I will use spell check for html as an example. But the solution also works for other languages.
 
-">
+I use Flyspell in HTML as an example. My solution is also useful when editing othe programming languages in Emacs.
+
+
+
+Table of Contents
+
+1 Smart spe">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-01-21T12:00:00Z">
 <meta property="article:tag" content="emacs">
@@ -88,58 +89,50 @@ I will use spell check for html as an example. But the solution also works for o
         </div>
         <div class="body">
             <div>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-01-21</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-30 Mon</span></span>
+</p>
+
+<p>
+I use <a href="http://www.emacswiki.org/emacs/FlySpell">Flyspell</a> in HTML as an example. My solution is also useful when editing othe programming languages in Emacs.
+</p>
+
 <div id="table-of-contents">
 <h3>Table of Contents</h3>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="effective-spell-check-in-emacs.html#sec-1">1. Smart spell check in HTML</a></li>
-<li><a href="effective-spell-check-in-emacs.html#sec-2">2. Spell check the camel case strings</a></li>
-<li><a href="effective-spell-check-in-emacs.html#sec-3">3. Summary</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-1">1 Smart spell check in HTML</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-2">2 Doublon (double word) is NOT error in HTML</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-3">3 Spell check the camel case strings</a></li>
+<li><a href="effective-spell-check-in-emacs.html#sec-4">4 Summary</a></li>
 </ul>
 </div>
 </div>
 
-<p>
-I will use spell check for html as an example. But the solution also works for other languages.
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Smart spell check in HTML</h4>
+<div class="outline-text-3" id="text-1">
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Smart spell check in HTML</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-These days I'm maintaining some legacy web application.
+<p>As a web developer, I found spell checking HTML code instead of typo in comments,
 </p>
-
-<p>
-My customer is very serious about the content displayed because it's used by many people. For example, any wording change will be reviewed by team from legal team, business team and QA team. Any typo will bring me much paper work in this flow.
-</p>
-
-<p>
-Certainly I can use <a href="http://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> to do the spell check thing.
-</p>
-
-<p>
-But a html file contains many html tags, spell-check everything is even worse than no spell check.
-</p>
-
-<p>
-The key point is make spell checker smarter:
-</p>
-<ul class="org-ul">
-<li>only check text between html tag like `&lt;label&gt;Please input email&lt;/label&gt;`
+<ul>
+<li>Text between html tag like `&lt;label&gt;Please input email&lt;/label&gt;`
 </li>
-<li>only check the value of html input control like `&lt;input type="text" value="Please input your name"&gt;`
+<li>Value of html input control like `&lt;input type="text" value="Please input your name"&gt;`
+</li>
+<li>CSS class name like `&lt;div class="btn btn-default" /&gt;`
 </li>
 </ul>
 <p>
 Paste below code into ~/.emacs:
 </p>
-<div class="org-src-container">
 
 
-<pre><code class="lang-lisp">;; flyspell set up for web-mode
-(defun web-mode-flyspell-verify ()
+
+<pre><code class="lang-lisp">(defun web-mode-flyspell-verify ()
   (let ((f (get-text-property (- (point) 1) 'face))
         thing
         rlt)
@@ -168,41 +161,63 @@ Paste below code into ~/.emacs:
         (setq rlt (string-match "^\\(value\\|class\\|ng[A-Za-z0-9-]*\\)$" thing))
         rlt))
      (t t))
-    rlt
-    ))
+    rlt))
 
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspell-verify)
 </code></pre>
 
+
+
+<p>
+I use <a href="http://web-mode.org/">web-mode</a> for HTML files. The technique applies on other modes (php-mode, html-mode ….) 
+</p>
 </div>
 
-<p>
-I use <a href="http://web-mode.org/">web-mode</a> for html file editing. But you can figure out similar solution for other major modes.
-</p>
-
-<p></p>
 </div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Doublon (double word) is NOT error in HTML</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Modern CSS frameworks like <a href="http://getbootstrap.com/">Bootstrap</a> make doublons unavoidable. For example, CSS class name "btn btn-default" contains double word "btn".
+</p>
+<p>
+So we need stop displaying doublon as error in some major mode,
+</p>
+
+
+
+<pre><code class="lang-lisp">(defvar flyspell-check-doublon t
+  "Check doublon (double word) when calling `flyspell-highlight-incorrect-region'.")
+ (make-variable-buffer-local 'flyspell-check-doublon)
+
+(defadvice flyspell-highlight-incorrect-region (around flyspell-highlight-incorrect-region-hack activate)
+  (if (or flyspell-check-doublon (not (eq 'doublon (ad-get-arg 2))))
+      ad-do-it))
+
+(defun web-mode-hook-setup ()
+  (flyspell-mode 1)
+  (setq flyspell-check-doublon nil))
+
+(add-hook 'web-mode-hook 'web-mode-hook-setup)
+</code></pre>
+
+
+
 </div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Spell check the camel case strings</h3>
-<div class="outline-text-2" id="text-2">
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Spell check the camel case strings</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>We can also spell check camel cased string/variable/function if <a href="http://aspell.net/">aspell</a> is used.
+</p>
 <p>
-Another issue is that we use camel case naming convention. The variable name is usually very long. For example, name like "moduleServiceControllerLoginManager" is below average length.
+Insert below code into ~/.emacs,
 </p>
 
-<p>
-I need Emacs to spell check the each word from the camel case string.
-</p>
-
-<p>
-The solution is let Emacs use <a href="http://aspell.net/">aspell</a> with some extra arguments.
-</p>
-
-<p>
-Please paste below code into ~/.emacs,
-</p>
-<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">;; if (aspell installed) { use aspell}
@@ -217,39 +232,27 @@ Please paste below code into ~/.emacs,
       ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
 </code></pre>
 
+
+
+<p>
+Please note the option "–run-together-min=2" means the minimum length of <b>each word</b> extracted from camel case string is two. Please run `man aspell` in shell for details.
+</p>
 </div>
 
-<p>
-Please note the option "–run-together-min=2" means the minimum length of <b>each word</b> extracted from camel case string is two. Please `man aspell` for details.
-</p>
-
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Summary</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-If you read <a href="http://www.emacswiki.org/emacs/FlySpell">Emacs wiki on fly spell</a>, you may find code like `(flyspell-prog-mode)` is suggested for most programming environment.
-</p>
 
-<p>
-But as I proved in above two examples, I can <b>do more</b> than simply copy code from internet, if I can spend some time to read code and manual.
-</p>
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Summary</h4>
+<div class="outline-text-3" id="text-4">
 
-<p>
-When I say "read code", I mean read the official elisp code bundled with emacs. For example, after "M-x describe ENTER flyspell-buffer ENTER", I realized that the strength of fly spell is its powerful APIs. Common setup around the internet only use small percentage of its power.
+<p><a href="http://www.emacswiki.org/emacs/FlySpell">EmacsWiki</a> suggests `(flyspell-prog-mode)` which only check typo in comments.
 </p>
-
 <p>
-"Read manual" means reading official manual. For example, Emacswiki has some outdated tips about aspell which misguided me. After wasting one hour on mess with aspell, it occurs to me that `man aspell` to check out official manual may help. And it does. It should be a simple task if I had read the manual at the beginning. 
+But as I have proved in above examples, a little critcal thinking plus some manual reading could make flyspell much more useful.
 </p>
-
 <p>
-Finally, let's see then screen shot (the typos are underscored):
-<img src="../wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png">
-#+image/spell-check-html-in-emacs.png <img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-spell-check-html-in-emacs.png" alt="wpid-spell-check-html-in-emacs.png"></p>
+Screen shot (typos are underscored):
+<img src="../wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png"></p>
 </div>
 
 </div>

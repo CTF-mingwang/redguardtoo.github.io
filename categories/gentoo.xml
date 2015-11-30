@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Nov 2015 02:08:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Nov 2015 11:27:25 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
 
 &lt;h2&gt;shit happens&lt;/h2&gt;
 &lt;p&gt;pacman -Syu &lt;/p&gt;
@@ -15,7 +15,7 @@
 
 &lt;p&gt;sudo emerge --update --deep --with-bdeps=y --newuse world
 &lt;/p&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;I get notified that some newer version package is required, so I have to manually install those package and re-run the &lt;code&gt;emerge world&lt;/code&gt; &lt;/li&gt; &lt;li&gt;Some package is gone (libreoffice-bin, for example). &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; Here is command to manually install package: &lt;/p&gt;   
+&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;I get notified that some newer version package is required, so I have to manually install those package and re-run the &lt;code&gt;emerge world&lt;/code&gt; &lt;/li&gt; &lt;li&gt;Some package is gone (libreoffice-bin, for example). &lt;/li&gt; &lt;/ul&gt;&lt;p&gt; Here is command to manually install package: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 sudo ebuild /usr/portage/www-client/firefox-bin/firefox-bin-23.0.ebuild unpack compile install qmerge clean

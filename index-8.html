@@ -63,26 +63,23 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             </div>
             <div class="body">
                 <div>
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-01&gt;</span></span>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2013-05-01</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-13 Fri&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-13 Fri</span></span>
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-As a freelancer, I need reply agent's email frequently.
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
 
+<p>As a freelancer, I need reply agent's email frequently.
+</p>
 <p>
 So I have several issues to resolve:
 </p>
-<ul class="org-ul">
+<ul>
 <li>Avoid writing multiple mails with similar content
 </li>
 <li>Avoid attaching same resume again and again
@@ -94,31 +91,29 @@ So I have several issues to resolve:
 
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Solution</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-<a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a> is the best solution for email templates because you can embed Lisp code in the template.
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Solution</h4>
+<div class="outline-text-3" id="text-2">
+
+<p><a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a> is the best solution for email templates because you can embed Lisp code in the template.
 </p>
 </div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">
-<span class="section-number-3">2.1</span> Templates</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">github</a>. But email templates are my private stuff. So I place them in different location.
-</p>
 
+<div id="outline-container-2-1" class="outline-4">
+<h5 id="sec-2-1">Templates</h5>
+<div class="outline-text-4" id="text-2-1">
+
+<p>I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">github</a>. But email templates are my private stuff. So I place them in different location.
+</p>
 <p>
 That's why I place templates at ~/my-yasnippets/message-mode/.
 </p>
-
 <p>
 Here is a sample template to reply my agents (jobok.yasnippet):
 </p>
-<pre class="example">
-# -*- mode: snippet -*-
+
+
+<pre class="example"># -*- mode: snippet -*-
 # name: email for OK job
 # key: jobok
 # --
@@ -140,14 +135,14 @@ $0
 &lt;#/part&gt;
 </pre>
 
+
 <p>
 `(my-yas-get-first-name-from-to-field)` is a Lisp function embedded in the snippet.
 </p>
-
 <p>
 It will automatically fetch the first name of agent,
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-lisp">(defun my-yas-get-first-name-from-to-field ()
@@ -162,19 +157,20 @@ It will automatically fetch the first name of agent,
     rlt))
 </code></pre>
 
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">
-<span class="section-number-3">2.2</span> Emacs setup</h4>
-<div class="outline-text-3" id="text-2-2">
-<p>
-Add following code into .emacs to make yasnippet load the emacs templates:
+
+<div id="outline-container-2-2" class="outline-4">
+<h5 id="sec-2-2">Emacs setup</h5>
+<div class="outline-text-4" id="text-2-2">
+
+<p>Add following code into .emacs to make yasnippet load the emacs templates:
 </p>
-<div class="org-src-container">
+
+
+
 <pre><code class="lang-lisp">(require 'yasnippet)
 (setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
@@ -183,9 +179,10 @@ Add following code into .emacs to make yasnippet load the emacs templates:
 (yas-global-mode 1)
 </code></pre>
 
+
+</div>
+
 <p></p>
-</div>
-</div>
 </div>
 </div>
 </div>
@@ -249,8 +246,7 @@ Add following code into .emacs to make yasnippet load the emacs templates:
             </div>
             <div class="body">
                 <div>
-<p>
-This command converts selected region in Emacs into one string and put it into the kill ring.
+<p>This command converts selected region in Emacs into one string and put it into the kill ring.
 </p>
 
 <p>
@@ -264,8 +260,6 @@ In certain situation, this method actually makes code more readable.
 <p>
 Here is code you can paste into your .emacs:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun strip-convert-lines-into-one-big-string (beg end)
 "strip and convert selected lines into one big string which is copied into kill ring.
@@ -298,8 +292,6 @@ Current position is preserved."
   )
 (global-set-key (kbd "C-c C-y") 'strip-convert-lines-into-one-big-string)
 </code></pre>
-
-</div>
 </div>
             </div>
         </div>
@@ -406,22 +398,10 @@ Current position is preserved."
             </div>
             <div class="body">
                 <div>
-<div id="table-of-contents">
-<h3>Table of Contents</h3>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-1">1. Prepare directory</a></li>
-<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-2">2. Install</a></li>
-<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-3">3. Add cron task to start and stop rtorrent service</a></li>
-</ul>
-</div>
-</div>
-
-<p>
-`man rtorrent` for the keybindings:
+<p>`man rtorrent` for the keybindings:
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>`Enter` to input magnet from piratebay manually
 </li>
 <li>`C-s` to start download
@@ -433,61 +413,85 @@ Current position is preserved."
 For <a href="http://www.archlinux.org">ArchLinux</a> only:
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Prepare directory</h3>
-<div class="outline-text-2" id="text-1">
-<div class="org-src-container">
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-1">1 Prepare directory</a></li>
+<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-2">2 Install</a></li>
+<li><a href="posts/use-screenrtorrentcronie-to-manage-torrent-client.html#sec-3">3 Add cron task to start and stop rtorrent service</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Prepare directory</h4>
+<div class="outline-text-3" id="text-1">
+
+
+
+
 
 <pre><code class="lang-bash">mkdir -p ~/bt/{session,finished,torrent}
 </code></pre>
 
+
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Install</h3>
-<div class="outline-text-2" id="text-2">
-<div class="org-src-container">
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Install</h4>
+<div class="outline-text-3" id="text-2">
+
+
+
+
 
 <pre><code class="lang-sh">sudo pacman -S cronie
 sudo systemctl enable cronie
 sudo systemctl start cronie
 </code></pre>
 
+
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Add cron task to start and stop rtorrent service</h3>
-<div class="outline-text-2" id="text-3">
-<div class="org-src-container">
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Add cron task to start and stop rtorrent service</h4>
+<div class="outline-text-3" id="text-3">
+
+
+
+
 
 <pre><code class="lang-sh">crontab -e #add cron task as current user
-##+END_SRC
+</code></pre>
 
+
+
+<p>
 The default editor will be open, input below content:
-#+BEGIN_SRC conf
-#start rtorrent sesssion at 1am
+</p>
+
+
+
+<pre><code class="lang-conf">#start rtorrent sesssion at 1am
 0 1 * * * /usr/bin/screen -fa -d -m -S torrent /usr/bin/rtorrent
 # kill it at  9am
 0 10 * * * /usr/bin/screen -S torrent -X quit
 </code></pre>
 
-</div>
+
 
 <p>
 Done!
 </p>
-
-<p></p>
 </div>
+
 </div>
 </div>
             </div>
@@ -700,15 +704,14 @@ pacman -Ql emacs <span style="color: #5F7F5F;"># </span><span style="color: #7F9
             </div>
             <div class="body">
                 <div>
-<p>
-Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
+<p>Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
 </p>
 
 <p>
 Here is my summary of that article:
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
 </li>
 <li>
@@ -723,18 +726,16 @@ I love switch-windows.el. It's only three key strikes to select a window.
 I also use other packages which is more efficient.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> window-numbering.el</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>the best</b>. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">window-numbering.el</h4>
+<div class="outline-text-3" id="text-1">
 
+<p><a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>the best</b>. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
+</p>
 <p>
 Here is my configuration of window-numbering.el:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-lisp">(require 'window-numbering)
@@ -743,33 +744,32 @@ Here is my configuration of window-numbering.el:
 (window-numbering-mode 1)
 </code></pre>
 
+
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> evil-mode</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-<a href="http://emacswiki.org/emacs/Evil">evil-mode</a> is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">evil-mode</h4>
+<div class="outline-text-3" id="text-2">
+
+<p><a href="http://emacswiki.org/emacs/Evil">evil-mode</a> is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> buffer-move.el</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-<a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
-</p>
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">buffer-move.el</h4>
+<div class="outline-text-3" id="text-3">
 
+<p><a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
+</p>
 <p>
 Here is my configuration:
 </p>
-<div class="org-src-container">
+
 
 
 <pre><code class="lang-lisp">(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
@@ -778,35 +778,31 @@ Here is my configuration:
 (global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
 </code></pre>
 
+
 </div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> updated</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">updated</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
 </p>
 <p>
 According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
 </p>
-
 <p>
 So it's necessary to optimize window-numbering.el further. By default, window-numbering.el uses "M-num" key to select window which is already efficient. But as a geek, I have a tendency to push the efficiency to the extreme end.
 </p>
-
 <p>
 Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1", "2", and "3".
 </p>
-
 <p>
 Here is the code:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(define-key evil-normal-state-map ",1" 'select-window-1)
 (define-key evil-normal-state-map ",2" 'select-window-2)
@@ -814,14 +810,13 @@ Here is the code:
 (define-key evil-normal-state-map ",4" 'select-window-4)
 </code></pre>
 
-</div>
+
 
 <p>
 Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
 </p>
-
-<p></p>
 </div>
+
 </div>
 </div>
             </div>

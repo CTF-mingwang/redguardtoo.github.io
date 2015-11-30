@@ -83,8 +83,7 @@ I will talk some advanced se">
         </div>
         <div class="body">
             <div>
-<p>
-<a href="https://github.com/punchagan/org2blog">org2blog</a> is a beautiful plugin to post to wordpress blog.
+<p><a href="https://github.com/punchagan/org2blog">org2blog</a> is a beautiful plugin to post to wordpress blog.
 </p>
 
 <p>
@@ -107,8 +106,6 @@ If you grep org2blog's code, you will find a variable "org2blog/wp-sourcecode-la
 So all you need to do is insert below code into ~/.emacs:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(setq org2blog/wp-sourcecode-langs
       '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
         "erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
@@ -117,8 +114,6 @@ So all you need to do is insert below code into ~/.emacs:
         "sh" "elisp" "lisp" "lua"))
 </code></pre>
 
-</div>
-
 <p>
 Then you need install the wordpress plugin <a href="http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/">SyntaxHighlighter Evolved</a> to do the syntax highlight thing. Well, you will find the languages like elisp is not supported by this plugin.
 </p>
@@ -126,8 +121,6 @@ Then you need install the wordpress plugin <a href="http://www.viper007bond.com/
 <p>
 That's easy to fix. Please log into your blog, modify that plugin online:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index 53b4815..808b14b 100644
@@ -144,8 +137,6 @@ index 53b4815..808b14b 100644
 +           'lua'           =&gt; 'ruby',
         ) );
 </code></pre>
-
-</div>
 
 <p>
 As you can see, I use clojure syntax to highlight elisp and use ruby syntax to highlight lua.
