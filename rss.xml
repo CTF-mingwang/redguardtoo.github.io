@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 01 Dec 2015 11:41:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-That's easy if you use &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 03 Dec 2015 02:36:42 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;That's easy if you use &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 Say if you want to complete words ONLY in org-mode,
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'company)
 
@@ -16,7 +13,9 @@ Say if you want to complete words ONLY in org-mode,
 ;; Don't enable company-mode in below major modes, OPTIONAL
 (setq company-global-modes '(not eshell-mode comint-mode erc-mode rcirc-mode))
 
-(defun org-mode-hook-setup ()
+;; "text-mode" is a major mode for editing files of text in a human language"
+;; most major modes for non-programmers inherit from text-mode
+(defun text-mode-hook-setup ()
   ;; make `company-backends' local is critcal
   ;; or else, you will have completion in every major mode, that's very annoying!
   (make-local-variable 'company-backends)
@@ -28,10 +27,22 @@ Say if you want to complete words ONLY in org-mode,
   ;;  but I prefer hard code the dictionary path. That's more portable.
   (setq company-ispell-dictionary (file-truename "~/.emacs.d/misc/english-words.txt")))
 
-(add-hook 'org-mode-hook 'org-mode-hook-setup)
+(add-hook 'text-mode-hook 'text-mode-hook-setup)
+
+(defun toggle-company-ispell ()
+  (interactive)
+  (cond
+   ((memq 'company-ispell company-backends)
+    (setq company-backends (delete 'company-ispell company-backends))
+    (message "company-ispell disabled"))
+   (t
+    (add-to-list 'company-backends 'company-ispell)
+    (message "company-ispell enabled!"))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+&lt;p&gt;
+`M-x toggle-company-ispell` to toggle company-ispell in &lt;b&gt;any major mode&lt;/b&gt;.
+&lt;/p&gt;
 
 &lt;p&gt;
 "english-words.txt" is just a plain text file where lines sorted alphabetically. Every line is a word.
@@ -39,8 +50,7 @@ Say if you want to complete words ONLY in org-mode,
 
 &lt;p&gt;
 You can download my &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Now &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt; is popular in Emacs user. It supports code completion out of box.
+&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Now &lt;a href="https://github.com/company-mode/company-mode"&gt;company-mode&lt;/a&gt; is very popular in Emacs user. It supports code completion out of box.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -55,23 +65,15 @@ Setup is easy.
 Step 1, create TAGS:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 Step 2, add below code into "~/.emacs.d/init.el":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 That's OK for most programming languages.
@@ -89,14 +91,10 @@ First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mo
 Second, you need add below code into your "~/.emacs.d/init.el",
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -110,15 +108,12 @@ Tested on Emacs23.4 and Emacs24.4.
 Screenshot of my setup:
 &lt;/p&gt;
 
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
-&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-29&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-22 Sun&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -137,8 +132,6 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;{
   key1: {
     subkey1: {
@@ -147,8 +140,6 @@ For example, given the JSON response like:
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 The developer need figure out the full path of "key3" which is "&lt;code&gt;key1.subkey1.arr1[0].key3&lt;/code&gt;".
@@ -161,8 +152,6 @@ My solution is to take advantage of AST created by &lt;a href="https://github.co
 &lt;p&gt;
 &lt;b&gt;Step 1&lt;/b&gt;, insert below code into ~/.emacs,
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ print json path, will be removed when latest STABLE js2-mode released
 (defun js2-get-element-index-from-array-node (elem array-node &amp;amp;optional hardcoded-array-index)
@@ -225,26 +214,22 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 &lt;b&gt;Step 2&lt;/b&gt;, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
 &lt;/p&gt;
 
 &lt;p&gt;
-My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766056f10e6ac89ddc487b4"&gt;merged into js2-mode&lt;/a&gt;. You need only install latest js2-mode.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-08 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
+My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766056f10e6ac89ddc487b4"&gt;merged into js2-mode&lt;/a&gt;. You need only install latest js2-mode.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-08-08 Sat&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-24 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-08-24 Mon&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
@@ -373,18 +358,15 @@ Insert below code into ~/.emacs:
 (define-key evil-inner-text-objects-map "f" 'evil-filepath-inner-text-object)
 (define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
 ;; }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>柬埔寨名汤(Sgow Chrouk Soup)</title><link>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-视频教程:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>柬埔寨名汤(Sgow Chrouk Soup)</title><link>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;视频教程:
 &lt;a href="https://www.youtube.com/watch?v=Aclyh2c_BEs"&gt;https://www.youtube.com/watch?v=Aclyh2c_BEs&lt;/a&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 备料&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;两人份冷水
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;备料&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;ul&gt;&lt;li&gt;两人份冷水
 &lt;/li&gt;
 &lt;li&gt;米少许(半茶勺)
 &lt;/li&gt;
@@ -404,21 +386,17 @@ Insert below code into ~/.emacs:
 &lt;/li&gt;
 &lt;li&gt;鲜红辣椒两到三根
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-prepare.jpg" alt="Sgow-Chrouk-Soup-prepare.jpg"&gt;
-&lt;/p&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-prepare.jpg" alt="Sgow-Chrouk-Soup-prepare.jpg"&gt;&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 步骤&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;鸡胸脯肉切成小块,盐过一下三四分钟,洗净刀和板
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;步骤&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;鸡胸脯肉切成小块,盐过一下三四分钟,洗净刀和板
 &lt;/li&gt;
 &lt;li&gt;烧开水
 &lt;/li&gt;
@@ -436,41 +414,33 @@ Insert below code into ~/.emacs:
 &lt;/li&gt;
 &lt;li&gt;关火,撒入少量辣椒末,薄荷,葱
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; 上菜&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;准备大碗,放入薄荷,葱,适量柠檬汁,倒汤
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;上菜&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;ul&gt;&lt;li&gt;准备大碗,放入薄荷,葱,适量柠檬汁,倒汤
 &lt;/li&gt;
 &lt;li&gt;柬埔寨神秘香菜(可选)
 &lt;/li&gt;
 &lt;li&gt;可加少量鱼露调咸味
 &lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ul&gt;&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-done.jpg" alt="Sgow-Chrouk-Soup-done.jpg"&gt;&lt;/p&gt;&lt;/div&gt;
 
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-done.jpg" alt="Sgow-Chrouk-Soup-done.jpg"&gt;
-&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>soup</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</guid><pubDate>Sun, 07 Jun 2015 01:58:51 GMT</pubDate></item><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
+&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>soup</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</guid><pubDate>Sun, 07 Jun 2015 01:58:51 GMT</pubDate></item><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
 &lt;/p&gt;
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;autoload packages
+&lt;ul&gt;&lt;li&gt;autoload packages
 &lt;/li&gt;
 &lt;li&gt;idle-load packages 
 &lt;/li&gt;
 &lt;li&gt;compiling *.el to  *.elc
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 After some research, I found I could make my Emacs 1000% fast &lt;b&gt;in 1 minute&lt;/b&gt;.
 &lt;/p&gt;
 
@@ -490,18 +460,12 @@ Since I'm a Linux guy and my computer got enough (24G) memory. I can place my se
 &lt;b&gt;Step 1&lt;/b&gt;, insert below line into /etc/fstab and restart computer:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-conf"&gt;tmpfs       /tmp        tmpfs       nodev,nosuid,size=8G    0   0
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 &lt;b&gt;Step 2&lt;/b&gt;, run the script "emacs2ram":
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;#!/bin/sh
 
@@ -555,8 +519,6 @@ else
 fi
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 That's all! Please enjoy Emacs as usual.
 &lt;/p&gt;
@@ -571,8 +533,8 @@ BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using simil
 
 &lt;p&gt;
 UPDATE:
-I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
+I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. 
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -591,8 +553,6 @@ I consulted the issue with Frank Fischer.
 The solution is simple. Insert below code into ~/.emacs:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
 (eval-after-load 'git-timemachine
   '(progn
@@ -601,99 +561,9 @@ The solution is simple. Insert below code into ~/.emacs:
      (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
-I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-
-&lt;colgroup&gt;
-&lt;col class="right"&gt;
-
-&lt;col class="left"&gt;
-
-&lt;col class="left"&gt;
-&lt;/colgroup&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td class="right"&gt;7:00&lt;/td&gt;
-&lt;td class="left"&gt;起床时刻&lt;/td&gt;
-&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;
-&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;
-&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;
-&lt;td class="left"&gt;避免运动&lt;/td&gt;
-&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;
-&lt;td class="left"&gt;困难工作&lt;/td&gt;
-&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;10:30&lt;/td&gt;
-&lt;td class="left"&gt;眼睛休息&lt;/td&gt;
-&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;11:00&lt;/td&gt;
-&lt;td class="left"&gt;吃点水果&lt;/td&gt;
-&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;
-&lt;td class="left"&gt;多吃豆类&lt;/td&gt;
-&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;
-&lt;td class="left"&gt;小睡一会&lt;/td&gt;
-&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;16:00&lt;/td&gt;
-&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;
-&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;19:00&lt;/td&gt;
-&lt;td class="left"&gt;锻炼时间&lt;/td&gt;
-&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;20:00&lt;/td&gt;
-&lt;td class="left"&gt;电视或书&lt;/td&gt;
-&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;22:00&lt;/td&gt;
-&lt;td class="left"&gt;洗热水澡&lt;/td&gt;
-&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="right"&gt;22:30&lt;/td&gt;
-&lt;td class="left"&gt;上床睡觉&lt;/td&gt;
-&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
+I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;7:00&lt;/td&gt;&lt;td class="left"&gt;起床时刻&lt;/td&gt;&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;&lt;td class="left"&gt;避免运动&lt;/td&gt;&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;&lt;td class="left"&gt;困难工作&lt;/td&gt;&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;10:30&lt;/td&gt;&lt;td class="left"&gt;眼睛休息&lt;/td&gt;&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;11:00&lt;/td&gt;&lt;td class="left"&gt;吃点水果&lt;/td&gt;&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;&lt;td class="left"&gt;多吃豆类&lt;/td&gt;&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;&lt;td class="left"&gt;小睡一会&lt;/td&gt;&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16:00&lt;/td&gt;&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19:00&lt;/td&gt;&lt;td class="left"&gt;锻炼时间&lt;/td&gt;&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20:00&lt;/td&gt;&lt;td class="left"&gt;电视或书&lt;/td&gt;&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:00&lt;/td&gt;&lt;td class="left"&gt;洗热水澡&lt;/td&gt;&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:30&lt;/td&gt;&lt;td class="left"&gt;上床睡觉&lt;/td&gt;&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -719,8 +589,6 @@ Step 1, install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and &l
 &lt;p&gt;
 Step 2, insert below code into ~/.emacs:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun w3m-get-url-from-search-engine-alist (k l)
   (let (rlt)
@@ -771,24 +639,23 @@ Step 2, insert below code into ~/.emacs:
     (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
+Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-A typical file in conflict is like:
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;A typical file in conflict is like:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;hello world
 hello world
@@ -801,62 +668,57 @@ bye world
 bye world
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
-Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "&lt;code&gt;=====&lt;/code&gt;" conflict markers.
+Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "=======" conflict markers.
 &lt;/p&gt;
-
 &lt;p&gt;
 Resolving conflicts is the operation of picking up &lt;b&gt;either or both&lt;/b&gt; of the sections between markers.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;Basic knowledge of Vim&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Basic knowledge of Vim&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
 &lt;/li&gt;
 &lt;li&gt;"dd" delete current line
 &lt;/li&gt;
 &lt;li&gt;"d]n" delete from current line to the next marker (next marker exclusive)
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Our workflow is actually simple:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Step 1, find the next marker by pressing "]n"
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Our workflow is actually simple:
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Step 1, find the next marker by pressing "]n"
 &lt;/li&gt;
 &lt;li&gt;Step 2, "]nd]n[ndd[ndd" to pick up the section 1
 &lt;/li&gt;
 &lt;li&gt;Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 This workflow is compatible with any version control software.
 &lt;/p&gt;
-
 &lt;p&gt;
 &lt;b&gt;Optionally&lt;/b&gt; you can set the shortcut for step 2 and step 3:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-vimrc"&gt;map &amp;lt;leader&amp;gt;dg1 ]nd]n[ndd[ndd
 map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item></channel></rss>

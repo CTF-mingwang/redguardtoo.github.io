@@ -34,13 +34,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 Say if you want to complete words ONLY in org-mode,
 
 
-
-
 (require 'company)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Don't enable company-mode in be">
+;; Don't enable company-mode in belo">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-12-01T11:41:34Z">
 <meta property="article:tag" content="completion">
@@ -88,15 +86,12 @@ Say if you want to complete words ONLY in org-mode,
         </div>
         <div class="body">
             <div>
-<p>
-That's easy if you use <a href="https://github.com/company-mode/company-mode">company-mode</a>.
+<p>That's easy if you use <a href="https://github.com/company-mode/company-mode">company-mode</a>.
 </p>
 
 <p>
 Say if you want to complete words ONLY in org-mode,
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'company)
 
@@ -105,7 +100,9 @@ Say if you want to complete words ONLY in org-mode,
 ;; Don't enable company-mode in below major modes, OPTIONAL
 (setq company-global-modes '(not eshell-mode comint-mode erc-mode rcirc-mode))
 
-(defun org-mode-hook-setup ()
+;; "text-mode" is a major mode for editing files of text in a human language"
+;; most major modes for non-programmers inherit from text-mode
+(defun text-mode-hook-setup ()
   ;; make `company-backends' local is critcal
   ;; or else, you will have completion in every major mode, that's very annoying!
   (make-local-variable 'company-backends)
@@ -117,10 +114,22 @@ Say if you want to complete words ONLY in org-mode,
   ;;  but I prefer hard code the dictionary path. That's more portable.
   (setq company-ispell-dictionary (file-truename "~/.emacs.d/misc/english-words.txt")))
 
-(add-hook 'org-mode-hook 'org-mode-hook-setup)
+(add-hook 'text-mode-hook 'text-mode-hook-setup)
+
+(defun toggle-company-ispell ()
+  (interactive)
+  (cond
+   ((memq 'company-ispell company-backends)
+    (setq company-backends (delete 'company-ispell company-backends))
+    (message "company-ispell disabled"))
+   (t
+    (add-to-list 'company-backends 'company-ispell)
+    (message "company-ispell enabled!"))))
 </code></pre>
 
-</div>
+<p>
+`M-x toggle-company-ispell` to toggle company-ispell in <b>any major mode</b>.
+</p>
 
 <p>
 "english-words.txt" is just a plain text file where lines sorted alphabetically. Every line is a word.
