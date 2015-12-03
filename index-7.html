@@ -363,7 +363,7 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-26 Tue
 </p>
 
 <p>
-<a href="http://getpopfile.org">POPFile</a> automatically sorts my email messages.
+<a href="http://getpopfile.org">POPFile</a> automatically sorts my emails.
 </p>
 
 <div id="outline-container-1" class="outline-3">
@@ -380,7 +380,7 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-26 Tue
 <h4 id="sec-2">Install third party packages</h4>
 <div class="outline-text-3" id="text-2">
 
-<p>Run below command in shell:
+<p>Run:
 </p>
 
 
@@ -391,7 +391,7 @@ UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-05-26 Tue
 
 
 <p>
-BTW, don't let cpan detect the mirror site automatically because it takes too much time. Choose the site manually!
+BTW, don't let cpan detect the mirror site because it takes too much time. Choose the site manually!
 </p>
 <p>
 First question: Would you like automatic setup? Yes!
@@ -483,7 +483,7 @@ __END__
 
 
 <p>
-After packages installed, double check them locally:
+Double check installed packages:
 </p>
 
 
@@ -514,7 +514,7 @@ sudo cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template I
 <h4 id="sec-3">Setup</h4>
 <div class="outline-text-3" id="text-3">
 
-<p>I only use IMAP. The purpose of setting up POP3 port is to make the program executable without root permission.
+<p>I only use IMAP. The purpose of tweak POP3 port is only to make the program executable without root permission.
 </p>
 <p>
 See <a href="http://getpopfile.org/docs/howtos:mayneedroot">http://getpopfile.org/docs/howtos:mayneedroot</a> for details.
@@ -531,7 +531,16 @@ Run the below command to fix the root issue.
 
 
 <p>
-Here is my popfile setup for davmail server (please note ssl is disabled),
+Here is my popfile setup for <a href="http://davmail.sourceforge.net/">Davmail</a>.
+</p>
+<p>
+Davmail is a gateway to convert Outlook/Exchange service to IMAP/POP3). It's required if and only if you use Microsoft's Exchange/Outlook.
+</p>
+<p>
+For other email service, you DON'T need Davmail
+</p>
+<p>
+Please note in my current setup, ssl is disabled because I'm running Davmail Server on my own computer. Or else, you need enable ssl service.
 </p>
 
 
@@ -637,7 +646,7 @@ xmlrpc_port 8081
 
 
 <p>
-The only issue is user name. If your user name contains "\", you should replace it with "\\" when inputting in Popfile!
+The only remaining issue is user name. If it contains "\", you should replace it with "\\" when inputting in Popfile!
 </p>
 </div>
 
@@ -741,7 +750,7 @@ See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/doc
 </li>
 <li>No root privilege needed
 </li>
-<li>No X windows needed. I can finish manage the mails in remote shell
+<li>No X windows needed. I can manage mails in remote shell
 </li>
 </ul>
 </div>
