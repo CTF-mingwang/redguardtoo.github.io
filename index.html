@@ -156,7 +156,7 @@ You can download my <a href="https://github.com/redguardtoo/emacs.d/raw/master/m
             </div>
             <div class="body">
                 <div>
-<p>Now <a href="https://github.com/company-mode/company-mode">company-mode</a> is very popular in Emacs user. It supports code completion out of box.
+<p>Now <a href="https://github.com/company-mode/company-mode">company-mode</a> is popular in Emacs user. It supports code completion out of box.
 </p>
 
 <p>
@@ -205,6 +205,20 @@ Second, you need add below code into your "~/.emacs.d/init.el",
 <p>
 You need above setup because web-mode <b>conditionally</b> inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for <a href="https://github.com/dgutov">Dmitry Gutov</a> pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
 </p>
+
+<p>
+Another issue is company-etags.el by default disable code completion in string and comment. We need disable this feature in web-mode temporarily,
+</p>
+
+<pre><code class="lang-lisp">(eval-after-load 'company
+  '(progn
+     ;; @see https://github.com/redguardtoo/emacs.d/commit/2ff305c1ddd7faff6dc9fa0869e39f1e9ed1182d
+     (defadvice company-in-string-or-comment (around company-in-string-or-comment-hack activate)
+       ;; you can use (ad-get-arg 0) and (ad-set-arg 0) to tweak the arguments
+       (if (memq major-mode '(php-mode html-mode web-mode nxml-mode))
+           (setq ad-return-value nil)
+         ad-do-it))))
+</code></pre>
 
 <p>
 Tested on Emacs23.4 and Emacs24.4.
