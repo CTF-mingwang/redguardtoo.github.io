@@ -145,7 +145,7 @@ You need above setup because web-mode <b>conditionally</b> inherit from prog-mod
 </p>
 
 <p>
-Another issue is company-etags.el by default disable code completion in string and comment. We need disable this feature in web-mode temporarily,
+Another issue is company-etags.el disables code completion in string and comment by default. We need remove this feature in web-mode <b>temporarily</b>,
 </p>
 
 <pre><code class="lang-lisp">(eval-after-load 'company
