@@ -38,6 +38,120 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-plain-vim-to-merge-conflicts.html">Use plain Vim to merge conflicts</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-04-07T07:19:37+00:00">2015-04-07 07:19</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-plain-vim-to-merge-conflicts.html#disqus_thread" data-disqus-identifier="cache/posts/use-plain-vim-to-merge-conflicts.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/vim.html" rel="tag">vim</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is <a href="https://github.com/tpope/vim-unimpaired">vim-unimpaired</a>.
+</p>
+
+<p>
+The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
+</p>
+
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
+
+<p>A typical file in conflict is like:
+</p>
+
+
+
+<pre><code class="lang-diff">hello world
+hello world
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; .mine
+This is fun stuff!
+=======
+This is a documentation file
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; .r6
+bye world
+bye world
+</code></pre>
+
+
+
+<p>
+Let's call lines like "&gt;&gt;&gt;&gt;&gt;&gt;&gt;", "&lt;&lt;&lt;&lt;&lt;&lt;&lt;" and "=======" conflict markers.
+</p>
+<p>
+Resolving conflicts is the operation of picking up <b>either or both</b> of the sections between markers.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Basic knowledge of Vim</h4>
+<div class="outline-text-3" id="text-2">
+
+<ul>
+<li>"]n" move the focus to the next marker and "[n" to the previous marker.
+</li>
+<li>"dd" delete current line
+</li>
+<li>"d]n" delete from current line to the next marker (next marker exclusive)
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Solution</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>Our workflow is actually simple:
+</p>
+<ul>
+<li>Step 1, find the next marker by pressing "]n"
+</li>
+<li>Step 2, "]nd]n[ndd[ndd" to pick up the section 1
+</li>
+<li>Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
+</li>
+</ul>
+<p>
+This workflow is compatible with any version control software.
+</p>
+<p>
+<b>Optionally</b> you can set the shortcut for step 2 and step 3:
+</p>
+
+
+
+<pre><code class="lang-vimrc">map &lt;leader&gt;dg1 ]nd]n[ndd[ndd
+map &lt;leader&gt;dg2 d]ndd]ndd
+</code></pre>
+
+
+</div>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/easy-indentation-setup-in-emacs-for-web-development.html">Easy indentation setup in Emacs for web development</a></h1>
             <div class="meta">
                 <div class="authordate">

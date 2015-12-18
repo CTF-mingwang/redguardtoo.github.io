@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Use js2-mode to print json path | Chen's blog</title>
+<title>Hello Ivy-mode, bye Helm | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,31 +25,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Use js2-mode to print json path">
-<meta property="og:url" content="http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html">
-<meta property="og:description" content="CREATED:  2015-10-29
+<meta property="og:title" content="Hello Ivy-mode, bye Helm">
+<meta property="og:url" content="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html">
+<meta property="og:description" content="I love Ivy-mode/Swiper because it's quick and easy to extend. I replaces my Helm setup to ivy-mode setup.
 
 
 
-UPDATED:  2015-11-22 Sun
+I will demostrate how I use ivy-mode at first. Then I will give the full code.
 
 
 
-These days most web applications are based on RESTful.
-
-
-
-So javascript developers have to deal with JSON frequently.
-
-
-
-When working on JSON, the m">
+Please no">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2015-10-29T14:18:10Z">
-<meta property="article:tag" content="emacs">
-<meta property="article:tag" content="en">
-<meta property="article:tag" content="javascript">
-<meta property="article:tag" content="js2">
+<meta property="article:published_time" content="2015-12-18T02:41:04Z">
 </head>
 <body>
     <section class="social"><ul>
@@ -65,165 +53,266 @@ When working on JSON, the m">
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Use js2-mode to print json path</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Hello Ivy-mode, bye Helm</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2015-10-29T14:18:10+00:00">2015-10-29 14:18</time>
+                <time class="timeago" datetime="2015-12-18T02:41:04+00:00">2015-12-18 02:41</time>
             
 
             
           |  
-        <a href="use-js2-mode-to-print-json-path.wp" id="sourcelink">Source</a>
+        <a href="hello-ivy-mode-bye-helm.wp" id="sourcelink">Source</a>
 
             </div>
             
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/javascript.html" rel="tag">javascript</a></li>
-           <li><a class="tag p-category" href="../categories/js2.html" rel="tag">js2</a></li>
-        </ul>
-</div>
 
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-10-29</span></span>
+<p>I love <a href="https://github.com/abo-abo/swiper">Ivy-mode/Swiper</a> because it's quick and easy to extend. I replaces my <a href="https://github.com/emacs-helm/helm">Helm</a> setup to ivy-mode setup.
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-22 Sun</span></span>
+I will demostrate how I use ivy-mode at first. Then I will give the full code.
 </p>
 
 <p>
-These days most web applications are based on RESTful.
+Please note I <b>only use the API `ivy-read`</b> from ivy-mode.
 </p>
 
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Demo</h4>
+<div class="outline-text-3" id="text-1">
+
+</div>
+
+<div id="outline-container-1-1" class="outline-4">
+<h5 id="sec-1-1">M-x counsel-git-grep-yank-line</h5>
+<div class="outline-text-4" id="text-1-1">
+
+<p>Use <a href="https://git-scm.com/docs/git-grep">git-grep</a> to grep the lines. Then copy the line into kill right without opening new file.
+</p>
 <p>
-So javascript developers have to deal with JSON frequently.
-</p>
+<img src="../wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"></p>
+</div>
 
+</div>
+
+<div id="outline-container-1-2" class="outline-4">
+<h5 id="sec-1-2">M-x counsel-git-find-my-file</h5>
+<div class="outline-text-4" id="text-1-2">
+
+<p>Find my file under git version control in recent N weeks.
+</p>
 <p>
-When working on JSON, the most boring and error prone task is to get the full path of specific field.
-</p>
+<img src="../wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"></p>
+</div>
 
+</div>
+
+<div id="outline-container-1-3" class="outline-4">
+<h5 id="sec-1-3">M-x ivy-imenu-goto</h5>
+<div class="outline-text-4" id="text-1-3">
+
+<p>Imenu. It's quick.
+</p>
 <p>
-For example, given the JSON response like:
+<img src="../wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"></p>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-4">
+<h5 id="sec-1-4">M-x ivy-bookmark-goto</h5>
+<div class="outline-text-4" id="text-1-4">
+
+<p>Quick and customizable.
 </p>
-
-<pre><code class="lang-javascript">{
-  key1: {
-    subkey1: {
-      arr1: [{ key3: 'hello'}]
-    }
-  }
-}
-</code></pre>
-
 <p>
-The developer need figure out the full path of "key3" which is "<code>key1.subkey1.arr1[0].key3</code>".
+<img src="../wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"></p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Code</h4>
+<div class="outline-text-3" id="text-2">
+
+<p>Swiper 7.0+ required.
 </p>
 
-<p>
-My solution is to take advantage of AST created by <a href="https://github.com/mooz/js2-mode">js2-mode</a>.
-</p>
 
-<p>
-<b>Step 1</b>, insert below code into ~/.emacs,
-</p>
 
-<pre><code class="lang-lisp">;; {{ print json path, will be removed when latest STABLE js2-mode released
-(defun js2-get-element-index-from-array-node (elem array-node &amp;optional hardcoded-array-index)
-  "Get index of ELEM from ARRAY-NODE or 0 and return it as string."
-  (let ((idx 0) elems (rlt hardcoded-array-index))
-    (setq elems (js2-array-node-elems array-node))
-    (if (and elem (not hardcoded-array-index))
-        (setq rlt (catch 'nth-elt
-                    (dolist (x elems)
-                      ;; We know the ELEM does belong to ARRAY-NODE,
-                      (if (eq elem x) (throw 'nth-elt idx))
-                      (setq idx (1+ idx)))
-                    0)))
-    (format "[%s]" rlt)))
+<pre><code class="lang-lisp">;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
+(defun counsel-git-grep-or-find-api (fn git-cmd hint open-another-window)
+  "Apply FN on the output lines of GIT-CMD.  HINT is hint when user input.
+IF OPEN-ANOTHER-WINDOW is true, open the file in another window."
+  (let ((default-directory (locate-dominating-file
+                            default-directory ".git"))
+        (keyword (if (region-active-p)
+                     (buffer-substring-no-properties (region-beginning) (region-end))
+                   (read-string (concat "Enter " hint " pattern:" ))))
+        collection val lst)
 
-(defun js2-print-json-path (&amp;optional hardcoded-array-index)
-  "Print the path to the JSON value under point, and save it in the kill ring.
-If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it."
+    (setq collection (split-string (shell-command-to-string (format git-cmd keyword))
+                                   "\n"
+                                   t))
+
+    (when (and collection (&gt; (length collection) 0))
+      (setq val (if (= 1 (length collection)) (car collection)
+                    (ivy-read (format " matching \"%s\":" keyword) collection)))
+      (funcall fn open-another-window val))))
+
+(defun counsel-git-grep (&amp;optional open-another-window)
+  "Grep in the current git repository.
+If OPEN-ANOTHER-WINDOW is not nil, results are displayed in new window."
   (interactive "P")
-  (let (previous-node current-node
-        key-name
-        rlt)
+  (let (fn)
+    (setq fn (lambda (open-another-window val)
+               (let ((lst (split-string val ":")))
+                 (funcall (if open-another-window 'find-file-other-window 'find-file)
+                          (car lst))
+                 (let ((linenum (string-to-number (cadr lst))))
+                   (when (and linenum (&gt; linenum 0))
+                     (goto-char (point-min))
+                     (forward-line (1- linenum)))))))
 
-    ;; The `js2-node-at-point' starts scanning from AST root node.
-    ;; So there is no way to optimize it.
-    (setq current-node (js2-node-at-point))
+    (counsel-git-grep-or-find-api fn
+                                  "git --no-pager grep --full-name -n --no-color -i -e \"%s\""
+                                  "grep"
+                                  open-another-window)))
 
-    (while (not (js2-ast-root-p current-node))
-      (cond
-       ;; JSON property node
-       ((js2-object-prop-node-p current-node)
-        (setq key-name (js2-prop-node-name (js2-object-prop-node-left current-node)))
-        (if rlt (setq rlt (concat "." key-name rlt))
-          (setq rlt (concat "." key-name))))
+(defun counsel-git-find-file (&amp;optional open-another-window)
+  "Find file in the current git repository.
+If OPEN-ANOTHER-WINDOW is not nil, results are displayed in new window."
+  (interactive "P")
+  (let (fn)
+    (setq fn (lambda (open-another-window val)
+               (funcall (if open-another-window 'find-file-other-window 'find-file) val)))
+    (counsel-git-grep-or-find-api fn
+                                  "git ls-tree -r HEAD --name-status | grep \"%s\""
+                                  "file"
+                                  open-another-window)))
 
-       ;; Array node
-       ((or (js2-array-node-p current-node))
-        (setq rlt (concat (js2-get-element-index-from-array-node previous-node
-                                                                 current-node
-                                                                 hardcoded-array-index)
-                          rlt)))
+(defun counsel-git-grep-yank-line (&amp;optional insert-line)
+  "Grep in the current git repository and yank the line.
+If INSERT-LINE is not nil, insert the line grepped"
+  (interactive "P")
+  (let (fn)
+    (setq fn (lambda (unused-param val)
+               (let ((lst (split-string val ":")) text-line)
+                 ;; the actual text line could contain ":"
+                 (setq text-line (replace-regexp-in-string (format "^%s:%s:" (car lst) (nth 1 lst)) "" val))
+                 ;; trim the text line
+                 (setq text-line (replace-regexp-in-string (rx (* (any " \t\n")) eos) "" text-line))
+                 (kill-new text-line)
+                 (if insert-line (insert text-line))
+                 (message "line from %s:%s =&gt; kill-ring" (car lst) (nth 1 lst)))))
 
-       ;; Other nodes are ignored
-       (t))
+    (counsel-git-grep-or-find-api fn
+                                  "git --no-pager grep --full-name -n --no-color -i -e \"%s\""
+                                  "grep"
+                                  nil)))
 
-      ;; current node is archived
-      (setq previous-node current-node)
-      ;; Get parent node and continue the loop
-      (setq current-node (js2-node-parent current-node)))
+(defvar counsel-my-name-regex ""
+  "My name used by `counsel-git-find-my-file', support regex like '[Tt]om [Cc]hen'.")
 
-    (cond
-     (rlt
-      ;; Clean the final result
-      (setq rlt (replace-regexp-in-string "^\\." "" rlt))
-      (kill-new rlt)
-      (message "%s =&gt; kill-ring" rlt))
-     (t
-      (message "No JSON path found!")))
+(defun counsel-git-find-my-file (&amp;optional num)
+  "Find my files in the current git repository.
+If NUM is not nil, find files since NUM weeks ago.
+Or else, find files since 24 weeks (6 months) ago."
+  (interactive "P")
+  (let (fn cmd)
+    (setq fn (lambda (open-another-window val)
+               (find-file val)))
+    (unless (and num (&gt; num 0))
+      (setq num 24))
+    (setq cmd (concat "git log --pretty=format: --name-only --since=\""
+                                          (number-to-string num)
+                                          " weeks ago\" --author=\""
+                                          counsel-my-name-regex
+                                          "\" | grep \"%s\" | sort | uniq"))
+    ;; (message "cmd=%s" cmd)
+    (counsel-git-grep-or-find-api fn cmd "file" nil)))
+;; }}
 
-    rlt))
+(defun ivy-imenu-get-candidates-from (alist  &amp;optional prefix)
+  (cl-loop for elm in alist
+           nconc (if (imenu--subalist-p elm)
+                       (ivy-imenu-get-candidates-from
+                        (cl-loop for (e . v) in (cdr elm) collect
+                                 (cons e (if (integerp v) (copy-marker v) v)))
+                        (concat prefix (if prefix ".") (car elm)))
+                   (and (cdr elm) ; bug in imenu, should not be needed.
+                        (setcdr elm (copy-marker (cdr elm))) ; Same as [1].
+                        (list (cons (concat prefix (if prefix ".") (car elm))
+                                    (copy-marker (cdr elm))))))))
+
+(defun ivy-imenu-goto ()
+  "Go to buffer position"
+  (interactive)
+  (let ((imenu-auto-rescan t) items)
+    (unless (featurep 'imenu)
+      (require 'imenu nil t))
+    (setq items (imenu--make-index-alist t))
+    (ivy-read "imenu items:"
+              (ivy-imenu-get-candidates-from (delete (assoc "*Rescan*" items) items))
+              :action (lambda (k) (goto-char k)))))
+
+(defun ivy-bookmark-goto ()
+  "Open ANY bookmark"
+  (interactive)
+  (let (bookmarks filename)
+    ;; load bookmarks
+    (unless (featurep 'bookmark)
+      (require 'bookmark))
+    (bookmark-maybe-load-default-file)
+    (setq bookmarks (and (boundp 'bookmark-alist) bookmark-alist))
+
+    ;; do the real thing
+    (ivy-read "bookmarks:"
+              (delq nil (mapcar (lambda (bookmark)
+                                  (let (key)
+                                    ;; build key which will be displayed
+                                    (cond
+                                     ((and (assoc 'filename bookmark) (cdr (assoc 'filename bookmark)))
+                                      (setq key (format "%s (%s)" (car bookmark) (cdr (assoc 'filename bookmark)))))
+                                     ((and (assoc 'location bookmark) (cdr (assoc 'location bookmark)))
+                                      ;; bmkp-jump-w3m is from bookmark+
+                                      (unless (featurep 'bookmark+)
+                                        (require 'bookmark+))
+                                      (setq key (format "%s (%s)" (car bookmark) (cdr (assoc 'location bookmark)))))
+                                     (t
+                                      (setq key (car bookmark))))
+                                    ;; re-shape the data so full bookmark be passed to ivy-read:action
+                                    (cons key bookmark)))
+                                bookmarks))
+              :action (lambda (bookmark)
+                        (bookmark-jump bookmark)))
+    ))
 </code></pre>
 
-<p>
-<b>Step 2</b>, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
-</p>
 
-<p>
-My code is <a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766056f10e6ac89ddc487b4">merged into js2-mode</a>. You need only install latest js2-mode.
-</p>
+</div>
 
-<p>
-(apply #'derived-mode-p '(org-mode web-mode))
-</p>
+</div>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="evil-text-object-to-select-nearby-file-path.html" rel="prev" title="Evil text object to select nearby file path">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="code-completion-for-htmljscss-in-emacs.html" rel="next" title="Code completion for HTML/JS/CSS in Emacs">Next post</a>
+                <a href="emacs-auto-completion-for-non-programmers.html" rel="prev" title="Emacs auto-completion for non-programmers">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html",
-        disqus_title="Use js2-mode to print json path",
-        disqus_identifier="cache/posts/use-js2-mode-to-print-json-path.html",
+            disqus_url="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html",
+        disqus_title="Hello Ivy-mode, bye Helm",
+        disqus_identifier="cache/posts/hello-ivy-mode-bye-helm.html",
         disqus_config = function () {
             this.language = "en";
         };

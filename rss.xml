@@ -1,5 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 08 Dec 2015 22:58:18 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-01&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 18 Dec 2015 02:41:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. I replaces my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup to ivy-mode setup.
+&lt;/p&gt;
+
+&lt;p&gt;
+I will demostrate how I use ivy-mode at first. Then I will give the full code.
+&lt;/p&gt;
+
+&lt;p&gt;
+Please note I &lt;b&gt;only use the API `ivy-read`&lt;/b&gt; from ivy-mode.
+&lt;/p&gt;
+
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Demo&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-1-1" class="outline-4"&gt;
+&lt;h5 id="sec-1-1"&gt;M-x counsel-git-grep-yank-line&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-1-1"&gt;
+
+&lt;p&gt;Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep the lines. Then copy the line into kill right without opening new file.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-1-2" class="outline-4"&gt;
+&lt;h5 id="sec-1-2"&gt;M-x counsel-git-find-my-file&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-1-2"&gt;
+
+&lt;p&gt;Find my file under git version control in recent N weeks.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-1-3" class="outline-4"&gt;
+&lt;h5 id="sec-1-3"&gt;M-x ivy-imenu-goto&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-1-3"&gt;
+
+&lt;p&gt;Imenu. It's quick.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-1-4" class="outline-4"&gt;
+&lt;h5 id="sec-1-4"&gt;M-x ivy-bookmark-goto&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-1-4"&gt;
+
+&lt;p&gt;Quick and customizable.
+&lt;/p&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Code&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;Swiper 7.0+ required.
+&lt;/p&gt;
+
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
+(defun counsel-git-grep-or-find-api (fn git-cmd hint open-another-window)
+  "Apply FN on the output lines of GIT-CMD.  HINT is hint when user input.
+IF OPEN-ANOTHER-WINDOW is true, open the file in another window."
+  (let ((default-directory (locate-dominating-file
+                            default-directory ".git"))
+        (keyword (if (region-active-p)
+                     (buffer-substring-no-properties (region-beginning) (region-end))
+                   (read-string (concat "Enter " hint " pattern:" ))))
+        collection val lst)
+
+    (setq collection (split-string (shell-command-to-string (format git-cmd keyword))
+                                   "\n"
+                                   t))
+
+    (when (and collection (&amp;gt; (length collection) 0))
+      (setq val (if (= 1 (length collection)) (car collection)
+                    (ivy-read (format " matching \"%s\":" keyword) collection)))
+      (funcall fn open-another-window val))))
+
+(defun counsel-git-grep (&amp;amp;optional open-another-window)
+  "Grep in the current git repository.
+If OPEN-ANOTHER-WINDOW is not nil, results are displayed in new window."
+  (interactive "P")
+  (let (fn)
+    (setq fn (lambda (open-another-window val)
+               (let ((lst (split-string val ":")))
+                 (funcall (if open-another-window 'find-file-other-window 'find-file)
+                          (car lst))
+                 (let ((linenum (string-to-number (cadr lst))))
+                   (when (and linenum (&amp;gt; linenum 0))
+                     (goto-char (point-min))
+                     (forward-line (1- linenum)))))))
+
+    (counsel-git-grep-or-find-api fn
+                                  "git --no-pager grep --full-name -n --no-color -i -e \"%s\""
+                                  "grep"
+                                  open-another-window)))
+
+(defun counsel-git-find-file (&amp;amp;optional open-another-window)
+  "Find file in the current git repository.
+If OPEN-ANOTHER-WINDOW is not nil, results are displayed in new window."
+  (interactive "P")
+  (let (fn)
+    (setq fn (lambda (open-another-window val)
+               (funcall (if open-another-window 'find-file-other-window 'find-file) val)))
+    (counsel-git-grep-or-find-api fn
+                                  "git ls-tree -r HEAD --name-status | grep \"%s\""
+                                  "file"
+                                  open-another-window)))
+
+(defun counsel-git-grep-yank-line (&amp;amp;optional insert-line)
+  "Grep in the current git repository and yank the line.
+If INSERT-LINE is not nil, insert the line grepped"
+  (interactive "P")
+  (let (fn)
+    (setq fn (lambda (unused-param val)
+               (let ((lst (split-string val ":")) text-line)
+                 ;; the actual text line could contain ":"
+                 (setq text-line (replace-regexp-in-string (format "^%s:%s:" (car lst) (nth 1 lst)) "" val))
+                 ;; trim the text line
+                 (setq text-line (replace-regexp-in-string (rx (* (any " \t\n")) eos) "" text-line))
+                 (kill-new text-line)
+                 (if insert-line (insert text-line))
+                 (message "line from %s:%s =&amp;gt; kill-ring" (car lst) (nth 1 lst)))))
+
+    (counsel-git-grep-or-find-api fn
+                                  "git --no-pager grep --full-name -n --no-color -i -e \"%s\""
+                                  "grep"
+                                  nil)))
+
+(defvar counsel-my-name-regex ""
+  "My name used by `counsel-git-find-my-file', support regex like '[Tt]om [Cc]hen'.")
+
+(defun counsel-git-find-my-file (&amp;amp;optional num)
+  "Find my files in the current git repository.
+If NUM is not nil, find files since NUM weeks ago.
+Or else, find files since 24 weeks (6 months) ago."
+  (interactive "P")
+  (let (fn cmd)
+    (setq fn (lambda (open-another-window val)
+               (find-file val)))
+    (unless (and num (&amp;gt; num 0))
+      (setq num 24))
+    (setq cmd (concat "git log --pretty=format: --name-only --since=\""
+                                          (number-to-string num)
+                                          " weeks ago\" --author=\""
+                                          counsel-my-name-regex
+                                          "\" | grep \"%s\" | sort | uniq"))
+    ;; (message "cmd=%s" cmd)
+    (counsel-git-grep-or-find-api fn cmd "file" nil)))
+;; }}
+
+(defun ivy-imenu-get-candidates-from (alist  &amp;amp;optional prefix)
+  (cl-loop for elm in alist
+           nconc (if (imenu--subalist-p elm)
+                       (ivy-imenu-get-candidates-from
+                        (cl-loop for (e . v) in (cdr elm) collect
+                                 (cons e (if (integerp v) (copy-marker v) v)))
+                        (concat prefix (if prefix ".") (car elm)))
+                   (and (cdr elm) ; bug in imenu, should not be needed.
+                        (setcdr elm (copy-marker (cdr elm))) ; Same as [1].
+                        (list (cons (concat prefix (if prefix ".") (car elm))
+                                    (copy-marker (cdr elm))))))))
+
+(defun ivy-imenu-goto ()
+  "Go to buffer position"
+  (interactive)
+  (let ((imenu-auto-rescan t) items)
+    (unless (featurep 'imenu)
+      (require 'imenu nil t))
+    (setq items (imenu--make-index-alist t))
+    (ivy-read "imenu items:"
+              (ivy-imenu-get-candidates-from (delete (assoc "*Rescan*" items) items))
+              :action (lambda (k) (goto-char k)))))
+
+(defun ivy-bookmark-goto ()
+  "Open ANY bookmark"
+  (interactive)
+  (let (bookmarks filename)
+    ;; load bookmarks
+    (unless (featurep 'bookmark)
+      (require 'bookmark))
+    (bookmark-maybe-load-default-file)
+    (setq bookmarks (and (boundp 'bookmark-alist) bookmark-alist))
+
+    ;; do the real thing
+    (ivy-read "bookmarks:"
+              (delq nil (mapcar (lambda (bookmark)
+                                  (let (key)
+                                    ;; build key which will be displayed
+                                    (cond
+                                     ((and (assoc 'filename bookmark) (cdr (assoc 'filename bookmark)))
+                                      (setq key (format "%s (%s)" (car bookmark) (cdr (assoc 'filename bookmark)))))
+                                     ((and (assoc 'location bookmark) (cdr (assoc 'location bookmark)))
+                                      ;; bmkp-jump-w3m is from bookmark+
+                                      (unless (featurep 'bookmark+)
+                                        (require 'bookmark+))
+                                      (setq key (format "%s (%s)" (car bookmark) (cdr (assoc 'location bookmark)))))
+                                     (t
+                                      (setq key (car bookmark))))
+                                    ;; re-shape the data so full bookmark be passed to ivy-read:action
+                                    (cons key bookmark)))
+                                bookmarks))
+              :action (lambda (bookmark)
+                        (bookmark-jump bookmark)))
+    ))
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-01&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -257,6 +481,10 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
 
 &lt;p&gt;
 My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766056f10e6ac89ddc487b4"&gt;merged into js2-mode&lt;/a&gt;. You need only install latest js2-mode.
+&lt;/p&gt;
+
+&lt;p&gt;
+(apply #'derived-mode-p '(org-mode web-mode))
 &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-08-08 Sat&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -678,84 +906,4 @@ Step 2, insert below code into ~/.emacs:
 
 &lt;p&gt;
 Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
-&lt;/p&gt;
-
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;A typical file in conflict is like:
-&lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-diff"&gt;hello world
-hello world
-&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; .mine
-This is fun stuff!
-=======
-This is a documentation file
-&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; .r6
-bye world
-bye world
-&lt;/code&gt;&lt;/pre&gt;
-
-
-
-&lt;p&gt;
-Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "=======" conflict markers.
-&lt;/p&gt;
-&lt;p&gt;
-Resolving conflicts is the operation of picking up &lt;b&gt;either or both&lt;/b&gt; of the sections between markers.
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Basic knowledge of Vim&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
-&lt;/li&gt;
-&lt;li&gt;"dd" delete current line
-&lt;/li&gt;
-&lt;li&gt;"d]n" delete from current line to the next marker (next marker exclusive)
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;Our workflow is actually simple:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Step 1, find the next marker by pressing "]n"
-&lt;/li&gt;
-&lt;li&gt;Step 2, "]nd]n[ndd[ndd" to pick up the section 1
-&lt;/li&gt;
-&lt;li&gt;Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-This workflow is compatible with any version control software.
-&lt;/p&gt;
-&lt;p&gt;
-&lt;b&gt;Optionally&lt;/b&gt; you can set the shortcut for step 2 and step 3:
-&lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-vimrc"&gt;map &amp;lt;leader&amp;gt;dg1 ]nd]n[ndd[ndd
-map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
-&lt;/code&gt;&lt;/pre&gt;
-
-
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item></channel></rss>
