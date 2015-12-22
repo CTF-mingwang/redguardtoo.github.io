@@ -38,6 +38,79 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-ivy-mode-to-tweak-workgroups2.html">Use Ivy-mode to tweak workgroups2</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-12-22T04:42:03+00:00">2015-12-22 04:42</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-ivy-mode-to-tweak-workgroups2.html#disqus_thread" data-disqus-identifier="cache/posts/use-ivy-mode-to-tweak-workgroups2.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
+           <li><a class="tag p-category" href="categories/workgroups.html" rel="tag">workgroups</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p><a href="https://github.com/pashinin/workgroups2">Workgroups2</a> will load previous windows layout by default. That's handy for most developers.
+</p>
+
+<p>
+But as a freelancer I am always assigned the low spec machine which takes too much time to load the old layout.
+</p>
+
+<p>
+So I use <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> to create a light weight command `my-wg-switch-workgroup`. 
+</p>
+
+<p>
+Here is code:
+</p>
+
+<pre><code class="lang-lisp">(require 'ivy)
+
+(defun my-wg-switch-workgroup ()
+  (interactive)
+  (let (group-names selected-group)
+    (unless (featurep 'workgroups2)
+      (require 'workgroups2))
+    (setq group-names
+          (mapcar (lambda (group)
+                    ;; re-shape list for the ivy-read
+                    (cons (wg-workgroup-name group) group))
+                  (wg-session-workgroup-list (read (f-read-text (file-truename wg-session-file))))))
+    (ivy-read "work groups" group-names
+              :action (lambda (group)
+                        (wg-find-session-file wg-default-session-file)
+                        (wg-switch-to-workgroup group)))))
+
+(eval-after-load 'workgroups2
+  '(progn
+     ;; save the session file in real time
+     (defadvice wg-create-workgroup (after wg-create-workgroup-hack activate)
+       (wg-save-session t))
+     (defadvice wg-reset (after wg-reset-hack activate)
+       (wg-save-session t))
+     ;; I'm fine to to override the original workgroup
+     (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
+       (setq ad-return-value t))))
+</code></pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/hello-ivy-mode-bye-helm.html">Hello Ivy-mode, bye Helm</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1224,114 +1297,6 @@ I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-
 </tbody>
 </table>
 </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/code-search-in-emacs.html">Code search in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-04-08T13:09:40+00:00">2015-04-08 13:09</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/code-search-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/code-search-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/search.html" rel="tag">search</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>After shutdown of <a href="http://en.wikipedia.org/wiki/Google_Code_Search">Google Code Search</a>, I turned to plain google search instead.
-</p>
-
-<p>
-For example, if I want to search Emacs Lisp code. I google "keyword filetype:el".
-</p>
-
-<p>
-"el" is the file extension of Emacs Lisp file.
-</p>
-
-<p>
-Since I use Emacs for everything, it's natural to search code in Emacs.
-</p>
-
-<p>
-So here is my solution.
-</p>
-
-<p>
-Step 1, install <a href="http://w3m.sourceforge.net/">w3m</a> and <a href="http://melpa.org/#/w3m">its Emacs wrapper</a>.
-</p>
-
-<p>
-Step 2, insert below code into ~/.emacs:
-</p>
-
-<pre><code class="lang-lisp">(defun w3m-get-url-from-search-engine-alist (k l)
-  (let (rlt)
-    (if (listp l)
-      (if (string= k (caar l))
-          (setq rlt (nth 1 (car l)))
-        (setq rlt (w3m-get-url-from-search-engine-alist k (cdr l)))))
-    rlt))
-
-(defun w3m-set-url-from-search-engine-alist (k l url)
-    (if (listp l)
-      (if (string= k (caar l))
-          (setcdr (car l) (list url))
-        (w3m-set-url-from-search-engine-alist k (cdr l) url))))
-
-;; C-u S g RET &lt;search term&gt; RET in w3m
-(setq w3m-search-engine-alist
-      '(("g" "http://www.google.com.au/search?q=%s" utf-8)
-        ;; stackoverflow search
-        ("q" "http://www.google.com.au/search?q=%s+site:stackoverflow.com" utf-8)
-        ;; elisp code search
-        ("s" "http://www.google.com.au/search?q=%s+filetype:el"  utf-8)
-        ;; wikipedia
-        ("w" "http://en.wikipedia.org/wiki/Special:Search?search=%s" utf-8)
-        ;; online dictionary
-        ("d" "http://dictionary.reference.com/search?q=%s" utf-8)
-        ;; javascript search on mozilla.org
-        ("j" "http://www.google.com.au/search?q=%s+site:developer.mozilla.org" utf-8)))
-
-(defun w3m-google-by-filetype ()
-  (interactive)
-  (unless (featurep 'w3m)
-    (require 'w3m))
-  (let ((thing (if (region-active-p)
-                   (buffer-substring-no-properties (region-beginning) (region-end))
-                 (thing-at-point 'symbol)))
-        (old-url (w3m-get-url-from-search-engine-alist "s" w3m-search-engine-alist))
-        new-url)
-    (when buffer-file-name
-      (setq new-url (replace-regexp-in-string
-                     "filetype:.*"
-                     (concat "filetype:" (file-name-extension buffer-file-name))
-                     old-url))
-      (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist new-url))
-    ;; change the url to search current file type
-    (w3m-search "s" thing)
-    ;; restore the default url
-    (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
-</code></pre>
-
-<p>
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
-</p>
-</div>
-            </div>
         </div>
     
         <nav class="postindexpager"><ul class="pager">

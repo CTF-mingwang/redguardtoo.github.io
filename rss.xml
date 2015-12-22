@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 18 Dec 2015 03:26:21 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 22 Dec 2015 04:42:08 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
+&lt;/p&gt;
+
+&lt;p&gt;
+But as a freelancer I am always assigned the low spec machine which takes too much time to load the old layout.
+&lt;/p&gt;
+
+&lt;p&gt;
+So I use &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; to create a light weight command `my-wg-switch-workgroup`. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is code:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
+
+(defun my-wg-switch-workgroup ()
+  (interactive)
+  (let (group-names selected-group)
+    (unless (featurep 'workgroups2)
+      (require 'workgroups2))
+    (setq group-names
+          (mapcar (lambda (group)
+                    ;; re-shape list for the ivy-read
+                    (cons (wg-workgroup-name group) group))
+                  (wg-session-workgroup-list (read (f-read-text (file-truename wg-session-file))))))
+    (ivy-read "work groups" group-names
+              :action (lambda (group)
+                        (wg-find-session-file wg-default-session-file)
+                        (wg-switch-to-workgroup group)))))
+
+(eval-after-load 'workgroups2
+  '(progn
+     ;; save the session file in real time
+     (defadvice wg-create-workgroup (after wg-create-workgroup-hack activate)
+       (wg-save-session t))
+     (defadvice wg-reset (after wg-reset-hack activate)
+       (wg-save-session t))
+     ;; I'm fine to to override the original workgroup
+     (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
+       (setq ad-return-value t))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -828,82 +870,4 @@ The solution is simple. Insert below code into ~/.emacs:
 
 &lt;p&gt;
 I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;7:00&lt;/td&gt;&lt;td class="left"&gt;起床时刻&lt;/td&gt;&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;&lt;td class="left"&gt;避免运动&lt;/td&gt;&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;&lt;td class="left"&gt;困难工作&lt;/td&gt;&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;10:30&lt;/td&gt;&lt;td class="left"&gt;眼睛休息&lt;/td&gt;&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;11:00&lt;/td&gt;&lt;td class="left"&gt;吃点水果&lt;/td&gt;&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;&lt;td class="left"&gt;多吃豆类&lt;/td&gt;&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;&lt;td class="left"&gt;小睡一会&lt;/td&gt;&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16:00&lt;/td&gt;&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19:00&lt;/td&gt;&lt;td class="left"&gt;锻炼时间&lt;/td&gt;&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20:00&lt;/td&gt;&lt;td class="left"&gt;电视或书&lt;/td&gt;&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:00&lt;/td&gt;&lt;td class="left"&gt;洗热水澡&lt;/td&gt;&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:30&lt;/td&gt;&lt;td class="left"&gt;上床睡觉&lt;/td&gt;&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item><item><title>Code search in Emacs</title><link>http://blog.binchen.org/posts/code-search-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;After shutdown of &lt;a href="http://en.wikipedia.org/wiki/Google_Code_Search"&gt;Google Code Search&lt;/a&gt;, I turned to plain google search instead.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, if I want to search Emacs Lisp code. I google "keyword filetype:el".
-&lt;/p&gt;
-
-&lt;p&gt;
-"el" is the file extension of Emacs Lisp file.
-&lt;/p&gt;
-
-&lt;p&gt;
-Since I use Emacs for everything, it's natural to search code in Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-So here is my solution.
-&lt;/p&gt;
-
-&lt;p&gt;
-Step 1, install &lt;a href="http://w3m.sourceforge.net/"&gt;w3m&lt;/a&gt; and &lt;a href="http://melpa.org/#/w3m"&gt;its Emacs wrapper&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Step 2, insert below code into ~/.emacs:
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun w3m-get-url-from-search-engine-alist (k l)
-  (let (rlt)
-    (if (listp l)
-      (if (string= k (caar l))
-          (setq rlt (nth 1 (car l)))
-        (setq rlt (w3m-get-url-from-search-engine-alist k (cdr l)))))
-    rlt))
-
-(defun w3m-set-url-from-search-engine-alist (k l url)
-    (if (listp l)
-      (if (string= k (caar l))
-          (setcdr (car l) (list url))
-        (w3m-set-url-from-search-engine-alist k (cdr l) url))))
-
-;; C-u S g RET &amp;lt;search term&amp;gt; RET in w3m
-(setq w3m-search-engine-alist
-      '(("g" "http://www.google.com.au/search?q=%s" utf-8)
-        ;; stackoverflow search
-        ("q" "http://www.google.com.au/search?q=%s+site:stackoverflow.com" utf-8)
-        ;; elisp code search
-        ("s" "http://www.google.com.au/search?q=%s+filetype:el"  utf-8)
-        ;; wikipedia
-        ("w" "http://en.wikipedia.org/wiki/Special:Search?search=%s" utf-8)
-        ;; online dictionary
-        ("d" "http://dictionary.reference.com/search?q=%s" utf-8)
-        ;; javascript search on mozilla.org
-        ("j" "http://www.google.com.au/search?q=%s+site:developer.mozilla.org" utf-8)))
-
-(defun w3m-google-by-filetype ()
-  (interactive)
-  (unless (featurep 'w3m)
-    (require 'w3m))
-  (let ((thing (if (region-active-p)
-                   (buffer-substring-no-properties (region-beginning) (region-end))
-                 (thing-at-point 'symbol)))
-        (old-url (w3m-get-url-from-search-engine-alist "s" w3m-search-engine-alist))
-        new-url)
-    (when buffer-file-name
-      (setq new-url (replace-regexp-in-string
-                     "filetype:.*"
-                     (concat "filetype:" (file-name-extension buffer-file-name))
-                     old-url))
-      (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist new-url))
-    ;; change the url to search current file type
-    (w3m-search "s" thing)
-    ;; restore the default url
-    (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;7:00&lt;/td&gt;&lt;td class="left"&gt;起床时刻&lt;/td&gt;&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;&lt;td class="left"&gt;避免运动&lt;/td&gt;&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;&lt;td class="left"&gt;困难工作&lt;/td&gt;&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;10:30&lt;/td&gt;&lt;td class="left"&gt;眼睛休息&lt;/td&gt;&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;11:00&lt;/td&gt;&lt;td class="left"&gt;吃点水果&lt;/td&gt;&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;&lt;td class="left"&gt;多吃豆类&lt;/td&gt;&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;&lt;td class="left"&gt;小睡一会&lt;/td&gt;&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16:00&lt;/td&gt;&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19:00&lt;/td&gt;&lt;td class="left"&gt;锻炼时间&lt;/td&gt;&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20:00&lt;/td&gt;&lt;td class="left"&gt;电视或书&lt;/td&gt;&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:00&lt;/td&gt;&lt;td class="left"&gt;洗热水澡&lt;/td&gt;&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:30&lt;/td&gt;&lt;td class="left"&gt;上床睡觉&lt;/td&gt;&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item></channel></rss>

@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 18 Dec 2015 03:26:22 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 22 Dec 2015 04:42:08 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
+&lt;/p&gt;
+
+&lt;p&gt;
+But as a freelancer I am always assigned the low spec machine which takes too much time to load the old layout.
+&lt;/p&gt;
+
+&lt;p&gt;
+So I use &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; to create a light weight command `my-wg-switch-workgroup`. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is code:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
+
+(defun my-wg-switch-workgroup ()
+  (interactive)
+  (let (group-names selected-group)
+    (unless (featurep 'workgroups2)
+      (require 'workgroups2))
+    (setq group-names
+          (mapcar (lambda (group)
+                    ;; re-shape list for the ivy-read
+                    (cons (wg-workgroup-name group) group))
+                  (wg-session-workgroup-list (read (f-read-text (file-truename wg-session-file))))))
+    (ivy-read "work groups" group-names
+              :action (lambda (group)
+                        (wg-find-session-file wg-default-session-file)
+                        (wg-switch-to-workgroup group)))))
+
+(eval-after-load 'workgroups2
+  '(progn
+     ;; save the session file in real time
+     (defadvice wg-create-workgroup (after wg-create-workgroup-hack activate)
+       (wg-save-session t))
+     (defadvice wg-reset (after wg-reset-hack activate)
+       (wg-save-session t))
+     ;; I'm fine to to override the original workgroup
+     (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
+       (setq ad-return-value t))))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -913,117 +955,4 @@ map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
 
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-04-02&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-UPPDATE: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-05&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-This question has been asked so many times, so I answered it here once for all.
-&lt;/p&gt;
-
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Insert below code into ~/.emacs:
-&lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-indent (n)
-  ;; java/c/c++
-  (setq c-basic-offset n)
-  ;; web development
-  (setq coffee-tab-width n) ; coffeescript
-  (setq javascript-indent-level n) ; javascript-mode
-  (setq js-indent-level n) ; js-mode
-  (setq js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
-  (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
-  (setq web-mode-css-indent-offset n) ; web-mode, css in html file
-  (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
-  (setq css-indent-offset n) ; css-mode
-  )
-
-(defun my-office-code-style ()
-  (interactive)
-  (message "Office code style!")
-  (setq indent-tabs-mode t) ; use tab instead of space
-  (my-setup-indent 4) ; indent 4 spaces width
-  )
-
-(defun my-personal-code-style ()
-  (interactive)
-  (message "My personal code style!")
-  (setq indent-tabs-mode nil) ; use space instead of tab
-  (my-setup-indent 2) ; indent 2 spaces width
-  )
-
-(defun my-setup-develop-environment ()
-  (interactive)
-  (let ((proj-dir (file-name-directory (buffer-file-name))))
-    ;; if hobby project path contains string "hobby-proj1"
-    (if (string-match-p "hobby-proj1" proj-dir)
-        (my-personal-code-style))
-
-    ;; if commericial project path contains string "commerical-proj"
-    (if (string-match-p "commerical-proj" proj-dir)
-        (my-office-code-style))))
-
-;; prog-mode-hook requires emacs24+
-(add-hook 'prog-mode-hook 'my-setup-develop-environment)
-&lt;/code&gt;&lt;/pre&gt;
-
-
-
-&lt;p&gt;
-As you can see, you can use `prog-mode-hook` and `buffer-file-name` to do the per project setup easily.
-&lt;/p&gt;
-&lt;p&gt;
-For &lt;b&gt;any new programming language&lt;/b&gt; not covered in this post, there are two steps:
-&lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Know your major-mode by pressing `Alt-X major-mode ENTER`. Say you got "org-mode".
-
-&lt;/li&gt;
-&lt;li&gt;Google "Emacs org-mode indent offset"
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Tips (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;Please note the first paramter of `string-match-p` is actually &lt;b&gt;regular expression&lt;/b&gt;. So you can write regular expression like "\\(/proj1\\|work.org\\)"
-
-&lt;/li&gt;
-&lt;li&gt;Emacs gives you full freedom to setup project. If you prefer per computer setup instead of per project setup, you only need re-write `my-setup-develop-environment',
-&lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-develop-environment ()
-  (interactive)
-  (let ((hostname (with-temp-buffer
-                    (shell-command "hostname" t)
-                    (goto-char (point-max))
-                    (delete-char -1)
-                    (buffer-string))))
-
-  (if (string-match-p "home-pc" hostname)
-      (my-personal-code-style))
-
-  (if (string-match-p "office-pc" hostname)
-      (my-office-code-style))))
-&lt;/code&gt;&lt;/pre&gt;
-
-
-
-&lt;ul&gt;&lt;li&gt;Instead of press TAB manually to indent code line by line, you can select a region and press `Alt-x indent-region ENTER`
-
-&lt;/li&gt;
-&lt;li&gt;Because I use &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;, indenting the whole file is as simple as pressing `gg=G`
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item></channel></rss>
