@@ -27,15 +27,15 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use gcalcli for google calendar">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html">
-<meta property="og:description" content="I use cli `pip install –user gcalcli parsedatetime` to install gcalcli it in my home.
+<meta property="og:description" content="I use cli `pip install –user gcalcli parsedatetime` to install gcalcli into HOME folder.
 
 
 
-Usag is simple `gcalcli calw` is enough.
+Usage is simple. `gcalcli calw` is enough.
 
 
 
-For multiple accounts, `mkdir -p ~/.config/gcacli-work; gcalcli –co">
+For multiple accounts, `mkdir -p ~/.config/gcacli-work; gcalcl">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-01-05T02:37:20Z">
 <meta property="article:tag" content="calendar">
@@ -81,26 +81,26 @@ For multiple accounts, `mkdir -p ~/.config/gcacli-work; gcalcli –co">
         </div>
         <div class="body">
             <div>
-<p>I use cli `pip install –user gcalcli parsedatetime` to install <a href="https://github.com/insanum/gcalcli">gcalcli</a> it in my home.
+<p>I use cli `pip install –user gcalcli parsedatetime` to install <a href="https://github.com/insanum/gcalcli">gcalcli</a> into HOME folder.
 </p>
 
 <p>
-Usag is simple `gcalcli calw` is enough.
+Usage is simple. `gcalcli calw` is enough.
 </p>
 
 <p>
-For <a href="https://github.com/insanum/gcalcli/issues/167">multiple accounts</a>, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
+For <a href="https://github.com/insanum/gcalcli/issues/167">multiple accounts</a>, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`.
 </p>
 
 <p>
-You can use <a href="https://en.wikipedia.org/wiki/Paste_(Unix)">paste (Unix)</a> to join two calendars in bash,
+Use <a href="https://en.wikipedia.org/wiki/Paste_(Unix)">paste (Unix)</a> to join two calendars in bash,
 </p>
 
 <pre><code class="lang-bash">paste &lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &lt;(gcalcli calw) 
 </code></pre>
 
 <p>
-Edit crontab to remind us the calendar events,
+Edit crontab to remind me about the calendar events,
 </p>
 
 <pre><code class="lang-crontab">*/10 * * * * $HOME/.local/bin/gcalcli remind 
