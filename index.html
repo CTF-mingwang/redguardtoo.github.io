@@ -78,14 +78,14 @@ For <a href="https://github.com/insanum/gcalcli/issues/167">multiple accounts</a
 Use <a href="https://en.wikipedia.org/wiki/Paste_(Unix)">paste (Unix)</a> to join two calendars in bash,
 </p>
 
-<pre><code class="lang-bash">paste &lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &lt;(gcalcli calw) 
+<pre><code class="lang-bash">paste &lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &lt;(gcalcli calw)
 </code></pre>
 
 <p>
 Edit crontab to remind me about the calendar events,
 </p>
 
-<pre><code class="lang-crontab">*/10 * * * * $HOME/.local/bin/gcalcli remind 
+<pre><code class="lang-crontab">*/10 * * * * $HOME/.local/bin/gcalcli remind
 */10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
 </code></pre>
 </div>

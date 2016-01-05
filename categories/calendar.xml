@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (calendar)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/calendar.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:44:40 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use gcalcli for google calendar</title><link>http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install &lt;a href="https://github.com/insanum/gcalcli"&gt;gcalcli&lt;/a&gt; into HOME folder.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (calendar)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/calendar.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:46:25 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use gcalcli for google calendar</title><link>http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install &lt;a href="https://github.com/insanum/gcalcli"&gt;gcalcli&lt;/a&gt; into HOME folder.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -14,13 +14,13 @@ For &lt;a href="https://github.com/insanum/gcalcli/issues/167"&gt;multiple accou
 Use &lt;a href="https://en.wikipedia.org/wiki/Paste_(Unix)"&gt;paste (Unix)&lt;/a&gt; to join two calendars in bash,
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-bash"&gt;paste &amp;lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &amp;lt;(gcalcli calw) 
+&lt;pre&gt;&lt;code class="lang-bash"&gt;paste &amp;lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &amp;lt;(gcalcli calw)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;
 Edit crontab to remind me about the calendar events,
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class="lang-crontab"&gt;*/10 * * * * $HOME/.local/bin/gcalcli remind 
+&lt;pre&gt;&lt;code class="lang-crontab"&gt;*/10 * * * * $HOME/.local/bin/gcalcli remind
 */10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>calendar</category><category>en</category><category>google</category><guid>http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html</guid><pubDate>Tue, 05 Jan 2016 02:37:20 GMT</pubDate></item></channel></rss>
