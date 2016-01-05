@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 22 Dec 2015 04:42:08 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:37:31 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use [[https://github.com/insanum/gcalcli][gcalcli]] for google calendar</title><link>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install it in my home.
+&lt;/p&gt;
+
+&lt;p&gt;
+Usag is simple `gcalcli calw` is enough.
+&lt;/p&gt;
+
+&lt;p&gt;
+For &lt;a href="https://github.com/insanum/gcalcli/issues/167"&gt;multiple accounts&lt;/a&gt;, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
+&lt;/p&gt;
+
+&lt;p&gt;
+You can use &lt;a href="https://en.wikipedia.org/wiki/Paste_(Unix)"&gt;paste (Unix)&lt;/a&gt; to join two calendars in bash,
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;paste &amp;lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &amp;lt;(gcalcli calw) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+Edit crontab to remind us the calendar events,
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-crontab"&gt;*/10 * * * * $HOME/.local/bin/gcalcli remind 
+*/10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>calendar</category><category>en</category><category>google</category><guid>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</guid><pubDate>Tue, 05 Jan 2016 02:37:20 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -870,4 +894,4 @@ The solution is simple. Insert below code into ~/.emacs:
 
 &lt;p&gt;
 I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>最佳作息时间表</title><link>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;7:00&lt;/td&gt;&lt;td class="left"&gt;起床时刻&lt;/td&gt;&lt;td class="left"&gt;需要一杯温开水&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;7:20-8:00&lt;/td&gt;&lt;td class="left"&gt;丰盛早餐&lt;/td&gt;&lt;td class="left"&gt;补充血糖要丰盛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;8:30-9:00&lt;/td&gt;&lt;td class="left"&gt;避免运动&lt;/td&gt;&lt;td class="left"&gt;非运动最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;9:00-10:30&lt;/td&gt;&lt;td class="left"&gt;困难工作&lt;/td&gt;&lt;td class="left"&gt;是工作最佳时间&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;10:30&lt;/td&gt;&lt;td class="left"&gt;眼睛休息&lt;/td&gt;&lt;td class="left"&gt;看窗外眼睛累了&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;11:00&lt;/td&gt;&lt;td class="left"&gt;吃点水果&lt;/td&gt;&lt;td class="left"&gt;血糖可能有下降&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;12:00-12:30&lt;/td&gt;&lt;td class="left"&gt;多吃豆类&lt;/td&gt;&lt;td class="left"&gt;豆类是很棒食物&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;13:00-14:00&lt;/td&gt;&lt;td class="left"&gt;小睡一会&lt;/td&gt;&lt;td class="left"&gt;会让你精力充沛&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16:00&lt;/td&gt;&lt;td class="left"&gt;一杯酸奶&lt;/td&gt;&lt;td class="left"&gt;酸奶零负担零食&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19:00&lt;/td&gt;&lt;td class="left"&gt;锻炼时间&lt;/td&gt;&lt;td class="left"&gt;快步走慢跑游泳&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20:00&lt;/td&gt;&lt;td class="left"&gt;电视或书&lt;/td&gt;&lt;td class="left"&gt;工作太辛苦放松&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:00&lt;/td&gt;&lt;td class="left"&gt;洗热水澡&lt;/td&gt;&lt;td class="left"&gt;降温清洁利睡眠&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22:30&lt;/td&gt;&lt;td class="left"&gt;上床睡觉&lt;/td&gt;&lt;td class="left"&gt;保证充足的睡眠&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><category>health</category><category>zh</category><guid>http://blog.binchen.org/posts/zui-jia-zuo-xi-shi-jian-biao.html</guid><pubDate>Thu, 09 Apr 2015 05:43:23 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item></channel></rss>

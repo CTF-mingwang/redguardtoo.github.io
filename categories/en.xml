@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 22 Dec 2015 04:42:08 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:37:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use [[https://github.com/insanum/gcalcli][gcalcli]] for google calendar</title><link>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install it in my home.
+&lt;/p&gt;
+
+&lt;p&gt;
+Usag is simple `gcalcli calw` is enough.
+&lt;/p&gt;
+
+&lt;p&gt;
+For &lt;a href="https://github.com/insanum/gcalcli/issues/167"&gt;multiple accounts&lt;/a&gt;, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
+&lt;/p&gt;
+
+&lt;p&gt;
+You can use &lt;a href="https://en.wikipedia.org/wiki/Paste_(Unix)"&gt;paste (Unix)&lt;/a&gt; to join two calendars in bash,
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;paste &amp;lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &amp;lt;(gcalcli calw) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+Edit crontab to remind us the calendar events,
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-crontab"&gt;*/10 * * * * $HOME/.local/bin/gcalcli remind 
+*/10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>calendar</category><category>en</category><category>google</category><guid>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</guid><pubDate>Tue, 05 Jan 2016 02:37:20 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -875,84 +899,4 @@ Step 2, insert below code into ~/.emacs:
 
 &lt;p&gt;
 Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
-&lt;/p&gt;
-
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;A typical file in conflict is like:
-&lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-diff"&gt;hello world
-hello world
-&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt; .mine
-This is fun stuff!
-=======
-This is a documentation file
-&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt; .r6
-bye world
-bye world
-&lt;/code&gt;&lt;/pre&gt;
-
-
-
-&lt;p&gt;
-Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "=======" conflict markers.
-&lt;/p&gt;
-&lt;p&gt;
-Resolving conflicts is the operation of picking up &lt;b&gt;either or both&lt;/b&gt; of the sections between markers.
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Basic knowledge of Vim&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
-&lt;/li&gt;
-&lt;li&gt;"dd" delete current line
-&lt;/li&gt;
-&lt;li&gt;"d]n" delete from current line to the next marker (next marker exclusive)
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;Our workflow is actually simple:
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Step 1, find the next marker by pressing "]n"
-&lt;/li&gt;
-&lt;li&gt;Step 2, "]nd]n[ndd[ndd" to pick up the section 1
-&lt;/li&gt;
-&lt;li&gt;Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-This workflow is compatible with any version control software.
-&lt;/p&gt;
-&lt;p&gt;
-&lt;b&gt;Optionally&lt;/b&gt; you can set the shortcut for step 2 and step 3:
-&lt;/p&gt;
-
-
-
-&lt;pre&gt;&lt;code class="lang-vimrc"&gt;map &amp;lt;leader&amp;gt;dg1 ]nd]n[ndd[ndd
-map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
-&lt;/code&gt;&lt;/pre&gt;
-
-
-&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>search</category><guid>http://blog.binchen.org/posts/code-search-in-emacs.html</guid><pubDate>Wed, 08 Apr 2015 13:09:40 GMT</pubDate></item></channel></rss>

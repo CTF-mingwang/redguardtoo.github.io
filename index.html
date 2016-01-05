@@ -38,6 +38,60 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html">Use [[https://github.com/insanum/gcalcli][gcalcli]] for google calendar</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-01-05T02:37:20+00:00">2016-01-05 02:37</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html#disqus_thread" data-disqus-identifier="cache/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/calendar.html" rel="tag">calendar</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/google.html" rel="tag">google</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>I use cli `pip install –user gcalcli parsedatetime` to install it in my home.
+</p>
+
+<p>
+Usag is simple `gcalcli calw` is enough.
+</p>
+
+<p>
+For <a href="https://github.com/insanum/gcalcli/issues/167">multiple accounts</a>, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
+</p>
+
+<p>
+You can use <a href="https://en.wikipedia.org/wiki/Paste_(Unix)">paste (Unix)</a> to join two calendars in bash,
+</p>
+
+<pre><code class="lang-bash">paste &lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &lt;(gcalcli calw) 
+</code></pre>
+
+<p>
+Edit crontab to remind us the calendar events,
+</p>
+
+<pre><code class="lang-crontab">*/10 * * * * $HOME/.local/bin/gcalcli remind 
+*/10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
+</code></pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-ivy-mode-to-tweak-workgroups2.html">Use Ivy-mode to tweak workgroups2</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1198,112 +1252,12 @@ I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-
 </div>
             </div>
         </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/zui-jia-zuo-xi-shi-jian-biao.html">最佳作息时间表</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-04-09T05:43:23+00:00">2015-04-09 05:43</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/zui-jia-zuo-xi-shi-jian-biao.html#disqus_thread" data-disqus-identifier="cache/posts/zui-jia-zuo-xi-shi-jian-biao.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/health.html" rel="tag">health</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup>
-<col class="right">
-<col class="left">
-<col class="left">
-</colgroup>
-<tbody>
-<tr>
-<td class="right">7:00</td>
-<td class="left">起床时刻</td>
-<td class="left">需要一杯温开水</td>
-</tr>
-<tr>
-<td class="right">7:20-8:00</td>
-<td class="left">丰盛早餐</td>
-<td class="left">补充血糖要丰盛</td>
-</tr>
-<tr>
-<td class="right">8:30-9:00</td>
-<td class="left">避免运动</td>
-<td class="left">非运动最佳时间</td>
-</tr>
-<tr>
-<td class="right">9:00-10:30</td>
-<td class="left">困难工作</td>
-<td class="left">是工作最佳时间</td>
-</tr>
-<tr>
-<td class="right">10:30</td>
-<td class="left">眼睛休息</td>
-<td class="left">看窗外眼睛累了</td>
-</tr>
-<tr>
-<td class="right">11:00</td>
-<td class="left">吃点水果</td>
-<td class="left">血糖可能有下降</td>
-</tr>
-<tr>
-<td class="right">12:00-12:30</td>
-<td class="left">多吃豆类</td>
-<td class="left">豆类是很棒食物</td>
-</tr>
-<tr>
-<td class="right">13:00-14:00</td>
-<td class="left">小睡一会</td>
-<td class="left">会让你精力充沛</td>
-</tr>
-<tr>
-<td class="right">16:00</td>
-<td class="left">一杯酸奶</td>
-<td class="left">酸奶零负担零食</td>
-</tr>
-<tr>
-<td class="right">19:00</td>
-<td class="left">锻炼时间</td>
-<td class="left">快步走慢跑游泳</td>
-</tr>
-<tr>
-<td class="right">20:00</td>
-<td class="left">电视或书</td>
-<td class="left">工作太辛苦放松</td>
-</tr>
-<tr>
-<td class="right">22:00</td>
-<td class="left">洗热水澡</td>
-<td class="left">降温清洁利睡眠</td>
-</tr>
-<tr>
-<td class="right">22:30</td>
-<td class="left">上床睡觉</td>
-<td class="left">保证充足的睡眠</td>
-</tr>
-</tbody>
-</table>
-</div>
-        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="next">
                 <a href="index-20.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2015         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
