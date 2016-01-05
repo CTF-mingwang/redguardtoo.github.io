@@ -1,29 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:39:40 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use gcalcli for google calendar</title><link>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install &lt;a href="https://github.com/insanum/gcalcli"&gt;gcalcli&lt;/a&gt; it in my home.
-&lt;/p&gt;
-
-&lt;p&gt;
-Usag is simple `gcalcli calw` is enough.
-&lt;/p&gt;
-
-&lt;p&gt;
-For &lt;a href="https://github.com/insanum/gcalcli/issues/167"&gt;multiple accounts&lt;/a&gt;, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
-&lt;/p&gt;
-
-&lt;p&gt;
-You can use &lt;a href="https://en.wikipedia.org/wiki/Paste_(Unix)"&gt;paste (Unix)&lt;/a&gt; to join two calendars in bash,
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-bash"&gt;paste &amp;lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &amp;lt;(gcalcli calw) 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-Edit crontab to remind us the calendar events,
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-crontab"&gt;*/10 * * * * $HOME/.local/bin/gcalcli remind 
-*/10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>calendar</category><category>en</category><category>google</category><guid>http://blog.binchen.org/posts/use-httpsgithub-cominsanumgcalcligcalcli-for-google-calendar.html</guid><pubDate>Tue, 05 Jan 2016 02:37:20 GMT</pubDate></item><item><title>Use gcalcli for google calendar</title><link>http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install &lt;a href="https://github.com/insanum/gcalcli"&gt;gcalcli&lt;/a&gt; it in my home.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Jan 2016 02:41:33 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use gcalcli for google calendar</title><link>http://blog.binchen.org/posts/use-gcalcli-for-google-calendar.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use cli `pip install –user gcalcli parsedatetime` to install &lt;a href="https://github.com/insanum/gcalcli"&gt;gcalcli&lt;/a&gt; it in my home.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -889,4 +865,33 @@ BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using simil
 &lt;p&gt;
 UPDATE:
 I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. 
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
+&lt;/p&gt;
+
+&lt;p&gt;
+After "M-x git-timemachine", a new read-only buffer is created and I need only use six key bindings: "n", "q", "p", "w", "W", "g".
+&lt;/p&gt;
+
+&lt;p&gt;
+The problem is I'm using &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;. How to make git-timemachine's key bindings override Evil's?
+&lt;/p&gt;
+
+&lt;p&gt;
+I consulted the issue with Frank Fischer.
+&lt;/p&gt;
+
+&lt;p&gt;
+The solution is simple. Insert below code into ~/.emacs:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
+(eval-after-load 'git-timemachine
+  '(progn
+     (evil-make-overriding-map git-timemachine-mode-map 'normal)
+     ;; force update evil keymaps after git-timemachine-mode loaded
+     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item></channel></rss>
