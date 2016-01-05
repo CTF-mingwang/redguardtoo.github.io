@@ -92,6 +92,60 @@ Edit crontab to remind us the calendar events,
             </div>
         </div>
         <div class="post">
+            <h1 class="title"><a href="posts/use-gcalcli-for-google-calendar.html">Use gcalcli for google calendar</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-01-05T02:37:20+00:00">2016-01-05 02:37</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-gcalcli-for-google-calendar.html#disqus_thread" data-disqus-identifier="cache/posts/use-gcalcli-for-google-calendar.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/calendar.html" rel="tag">calendar</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/google.html" rel="tag">google</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>I use cli `pip install –user gcalcli parsedatetime` to install <a href="https://github.com/insanum/gcalcli">gcalcli</a> it in my home.
+</p>
+
+<p>
+Usag is simple `gcalcli calw` is enough.
+</p>
+
+<p>
+For <a href="https://github.com/insanum/gcalcli/issues/167">multiple accounts</a>, `mkdir -p ~/.config/gcacli-work; gcalcli –configFolder ~/.config/gcacli-work calw`
+</p>
+
+<p>
+You can use <a href="https://en.wikipedia.org/wiki/Paste_(Unix)">paste (Unix)</a> to join two calendars in bash,
+</p>
+
+<pre><code class="lang-bash">paste &lt;(gcalcli --configFolder ~/.config/gcacli-work calw) &lt;(gcalcli calw) 
+</code></pre>
+
+<p>
+Edit crontab to remind us the calendar events,
+</p>
+
+<pre><code class="lang-crontab">*/10 * * * * $HOME/.local/bin/gcalcli remind 
+*/10 * * * * $HOME/.local/bin/gcalcli --configFolder $HOME/.config/gcacli-work remind
+</code></pre>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-ivy-mode-to-tweak-workgroups2.html">Use Ivy-mode to tweak workgroups2</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1189,65 +1243,6 @@ BTW, I've also moved <b>all my projects into memory</b>, using similar scripts.
 <p>
 UPDATE:
 I also publicize my project-managing script at <a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram">gist</a>. It's almost same as emacs2ram. 
-</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-git-timemachine-with-evil.html">Use git-timemachine with Evil</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-04-09T23:47:41+00:00">2015-04-09 23:47</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-git-timemachine-with-evil.html#disqus_thread" data-disqus-identifier="cache/posts/use-git-timemachine-with-evil.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p><a href="https://github.com/pidu/git-timemachine">git-timemachine</a> is simple.
-</p>
-
-<p>
-After "M-x git-timemachine", a new read-only buffer is created and I need only use six key bindings: "n", "q", "p", "w", "W", "g".
-</p>
-
-<p>
-The problem is I'm using <a href="http://www.emacswiki.org/emacs/Evil">Evil</a>. How to make git-timemachine's key bindings override Evil's?
-</p>
-
-<p>
-I consulted the issue with Frank Fischer.
-</p>
-
-<p>
-The solution is simple. Insert below code into ~/.emacs:
-</p>
-
-<pre><code class="lang-lisp">;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-(eval-after-load 'git-timemachine
-  '(progn
-     (evil-make-overriding-map git-timemachine-mode-map 'normal)
-     ;; force update evil keymaps after git-timemachine-mode loaded
-     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
-</code></pre>
-
-<p>
-I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings">his in-depth discussion</a> on <b>general handling of keybindings conflict</b> between evil and other minor modes.
 </p>
 </div>
             </div>
