@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (web)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/web.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 08 Dec 2015 22:58:18 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-27&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (web)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/web.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 08 Jan 2016 12:42:10 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -22,15 +23,23 @@ Setup is easy.
 Step 1, create TAGS:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Step 2, add below code into "~/.emacs.d/init.el":
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 That's OK for most programming languages.
@@ -48,10 +57,14 @@ First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mo
 Second, you need add below code into your "~/.emacs.d/init.el",
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -60,6 +73,8 @@ You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit f
 &lt;p&gt;
 Another issue is company-etags.el disables code completion in string and comment by default. We need &lt;b&gt;remove this feature in web-mode temporarily&lt;/b&gt;,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company
   '(progn
@@ -70,42 +85,50 @@ Another issue is company-etags.el disables code completion in string and comment
          ad-do-it))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Tested on Emacs23.4 and Emacs24.4.
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATE at &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;:
+UPDATE at &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;:
 &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; has &lt;a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618"&gt;fixed&lt;/a&gt; the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Screenshot of my setup:
 &lt;/p&gt;
 
-&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-04-02&lt;/span&gt;&lt;/span&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Easy indentation setup in Emacs for web development</title><link>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-04-02&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPPDATE: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-05&lt;/span&gt;&lt;/span&gt;
+UPPDATE: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 This question has been asked so many times, so I answered it here once for all.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Solution&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Insert below code into ~/.emacs:
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Insert below code into ~/.emacs:
 &lt;/p&gt;
-
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-indent (n)
   ;; java/c/c++
@@ -150,33 +173,40 @@ This question has been asked so many times, so I answered it here once for all.
 (add-hook 'prog-mode-hook 'my-setup-develop-environment)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 As you can see, you can use `prog-mode-hook` and `buffer-file-name` to do the per project setup easily.
 &lt;/p&gt;
+
 &lt;p&gt;
 For &lt;b&gt;any new programming language&lt;/b&gt; not covered in this post, there are two steps:
 &lt;/p&gt;
-&lt;ul&gt;&lt;li&gt;Know your major-mode by pressing `Alt-X major-mode ENTER`. Say you got "org-mode".
 
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Know your major-mode by pressing `Alt-X major-mode ENTER`. Say you got "org-mode".
 &lt;/li&gt;
+
 &lt;li&gt;Google "Emacs org-mode indent offset"
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Tips (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;Please note the first paramter of `string-match-p` is actually &lt;b&gt;regular expression&lt;/b&gt;. So you can write regular expression like "\\(/proj1\\|work.org\\)"
-
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;Tips (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Please note the first paramter of `string-match-p` is actually &lt;b&gt;regular expression&lt;/b&gt;. So you can write regular expression like "\\(/proj1\\|work.org\\)"
 &lt;/li&gt;
+
 &lt;li&gt;Emacs gives you full freedom to setup project. If you prefer per computer setup instead of per project setup, you only need re-write `my-setup-develop-environment',
 &lt;/li&gt;
-&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-develop-environment ()
+&lt;/ul&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-develop-environment ()
   (interactive)
   (let ((hostname (with-temp-buffer
                     (shell-command "hostname" t)
@@ -191,16 +221,18 @@ For &lt;b&gt;any new programming language&lt;/b&gt; not covered in this post, th
       (my-office-code-style))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
 
-
-&lt;ul&gt;&lt;li&gt;Instead of press TAB manually to indent code line by line, you can select a region and press `Alt-x indent-region ENTER`
-
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Instead of press TAB manually to indent code line by line, you can select a region and press `Alt-x indent-region ENTER`
 &lt;/li&gt;
+
 &lt;li&gt;Because I use &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;, indenting the whole file is as simple as pressing `gg=G`
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;/ul&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item><item><title>Why Emacs is better editor - a case study for javascript developer</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-01-15 Wed&lt;/span&gt;&lt;/span&gt; &lt;/p&gt; &lt;p&gt; Let's see an example in real life development. &lt;/p&gt; &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Note&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;For people who does not get the key points of this article, here are the points: &lt;/p&gt;&lt;ul&gt;&lt;li&gt;Emacs has an embedded &lt;b&gt;javascript interpreter&lt;/b&gt; which I extend a little bit. &lt;/li&gt; &lt;li&gt;Other editors just use external tools or regular expression to do the semantic analysis. &lt;/li&gt; &lt;li&gt;The difference of above two is bigger than the difference between machine gun and spear. &lt;/li&gt; &lt;/ul&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Problem&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;I'm maintaining a big javascript file with thousands of lines of legacy code. &lt;/p&gt; &lt;p&gt; My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. &lt;/p&gt; &lt;p&gt; The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. &lt;/p&gt; &lt;p&gt; To understand what "complex" means, let's check some code from real world application: &lt;/p&gt;   
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>indent</category><category>web</category><guid>http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 13:57:48 GMT</pubDate></item><item><title>Why Emacs is better editor - a case study for javascript developer</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-01-15 Wed&lt;/span&gt;&lt;/span&gt; &lt;/p&gt; &lt;p&gt; Let's see an example in real life development. &lt;/p&gt; &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Note&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;For people who does not get the key points of this article, here are the points: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Emacs has an embedded &lt;b&gt;javascript interpreter&lt;/b&gt; which I extend a little bit. &lt;/li&gt; &lt;li&gt;Other editors just use external tools or regular expression to do the semantic analysis. &lt;/li&gt; &lt;li&gt;The difference of above two is bigger than the difference between machine gun and spear. &lt;/li&gt; &lt;/ul&gt;   &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Problem&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;I'm maintaining a big javascript file with thousands of lines of legacy code. &lt;/p&gt; &lt;p&gt; My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. &lt;/p&gt; &lt;p&gt; The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. &lt;/p&gt; &lt;p&gt; To understand what "complex" means, let's check some code from real world application: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 $(el.completeRegistrationForm).validate({
@@ -231,15 +263,15 @@ $(el.completeRegistrationForm).validate({
 });
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"&gt;&lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;Emacs has a &lt;a href="http://www.emacswiki.org/emacs/Js2Mode"&gt;js2-mode&lt;/a&gt; which is basically a javascript interpreter written in lisp. It's created by &lt;a href="http://www.emacswiki.org/emacs/SteveYegge"&gt;Steve Yegge&lt;/a&gt; and now maintained by &lt;a href="https://github.com/mooz/js2-mode"&gt;mooz&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the &lt;a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"&gt;Abstract Syntax Tree (AST)&lt;/a&gt; defined in js2-mode. &lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"&gt; &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;Emacs has a &lt;a href="http://www.emacswiki.org/emacs/Js2Mode"&gt;js2-mode&lt;/a&gt; which is basically a javascript interpreter written in lisp. It's created by &lt;a href="http://www.emacswiki.org/emacs/SteveYegge"&gt;Steve Yegge&lt;/a&gt; and now maintained by &lt;a href="https://github.com/mooz/js2-mode"&gt;mooz&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the &lt;a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"&gt;Abstract Syntax Tree (AST)&lt;/a&gt; defined in js2-mode. &lt;/p&gt;
 &lt;p&gt; I already submitted the patch to mooz so everyone will enjoy this feature in the future. &lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen shot of emacs in old js2-mode, the UI is based on &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu Mode&lt;/a&gt; and &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"&gt;&lt;/p&gt; &lt;p&gt; The screen shot after we applying the above patch:  &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"&gt;&lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;Summary&lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;That's an example of beauty of Emacs. &lt;/p&gt; &lt;p&gt; It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-5" class="outline-3"&gt; &lt;h4 id="sec-5"&gt;Update&lt;/h4&gt; &lt;div class="outline-text-3" id="text-5"&gt;  &lt;p&gt;My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager. &lt;/p&gt; &lt;p&gt; After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature: &lt;/p&gt;   
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen shot of emacs in old js2-mode, the UI is based on &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu Mode&lt;/a&gt; and &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"&gt; &lt;/p&gt; &lt;p&gt; The screen shot after we applying the above patch:  &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"&gt; &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;Summary&lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;That's an example of beauty of Emacs. &lt;/p&gt; &lt;p&gt; It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-5" class="outline-3"&gt; &lt;h4 id="sec-5"&gt;Update&lt;/h4&gt; &lt;div class="outline-text-3" id="text-5"&gt;  &lt;p&gt;My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager. &lt;/p&gt; &lt;p&gt; After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 (js2-imenu-extras-mode)
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; The UI to display the candidate in this actile is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;. But there are many other UI front end for imenu instead of helm. &lt;/p&gt; &lt;p&gt; The helm version should be 20140125.1101 or higher, you can install helm from &lt;a href="http://melpa.milkbox.net/"&gt;melpa&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;: &lt;/p&gt; &lt;p&gt; &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</guid><pubDate>Sun, 15 Dec 2013 19:02:00 GMT</pubDate></item><item><title>The minimum packages to install for front end development on Linux</title><link>http://blog.binchen.org/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; The UI to display the candidate in this actile is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;. But there are many other UI front end for imenu instead of helm. &lt;/p&gt; &lt;p&gt; The helm version should be 20140125.1101 or higher, you can install helm from &lt;a href="http://melpa.milkbox.net/"&gt;melpa&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;: &lt;/p&gt; &lt;p&gt; &lt;img src="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"&gt; &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</guid><pubDate>Sun, 15 Dec 2013 19:02:00 GMT</pubDate></item><item><title>The minimum packages to install for front end development on Linux</title><link>http://blog.binchen.org/posts/the-minimum-packages-to-install-for-front-end-development-on-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
 
 &lt;p&gt;sudo apt-get install ack git emacs24-nox feh i3 xsel ctags vim scrot xbindkeys dunst unclutter parcellite gimp
 &lt;/p&gt;&lt;/pre&gt;

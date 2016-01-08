@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>How to validate HTML5 code with Flymake effectively | Chen's blog</title>
+<title>Git gutter tip | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/git-gutter-tip.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,32 +25,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="How to validate HTML5 code with Flymake effectively">
-<meta property="og:url" content="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html">
-<meta property="og:description" content="UPDATED: &lt;2014-12-11&gt; 
+<meta property="og:title" content="Git gutter tip">
+<meta property="og:url" content="http://blog.binchen.org/posts/git-gutter-tip.html">
+<meta property="og:description" content='I use git-gutter.el everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 
 
 
-CREATED: &lt;2014-12-05&gt;
-
-
-
-Here is the solution from EmacsWiki.
-
-
-
-I found it not effective because tidy is too strict to HTML5 and produces too much noise.
-
-
-
-I only need vali">
+But I usually need to know what line chang'>
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2014-12-05T13:00:31Z">
+<meta property="article:published_time" content="2016-01-08T12:41:59Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
-<meta property="article:tag" content="html">
-<meta property="article:tag" content="tidy">
-<meta property="article:tag" content="validation">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="gutter">
 </head>
 <body>
     <section class="social"><ul>
@@ -66,16 +53,16 @@ I only need vali">
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">How to validate HTML5 code with Flymake effectively</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Git gutter tip</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2014-12-05T13:00:31+00:00">2014-12-05 13:00</time>
+                <time class="timeago" datetime="2016-01-08T12:41:59+00:00">2016-01-08 12:41</time>
             
 
             
           |  
-        <a href="how-to-validate-html5-code-with-flymake-effectively.wp" id="sourcelink">Source</a>
+        <a href="git-gutter-tip.wp" id="sourcelink">Source</a>
 
             </div>
             
@@ -84,9 +71,8 @@ I only need vali">
         Tags : 
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/html.html" rel="tag">html</a></li>
-           <li><a class="tag p-category" href="../categories/tidy.html" rel="tag">tidy</a></li>
-           <li><a class="tag p-category" href="../categories/validation.html" rel="tag">validation</a></li>
+           <li><a class="tag p-category" href="../categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="../categories/gutter.html" rel="tag">gutter</a></li>
         </ul>
 </div>
 
@@ -94,86 +80,57 @@ I only need vali">
         <div class="body">
             <div>
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11&gt;</span></span> 
+I use <a href="https://github.com/syohex/emacs-git-gutter">git-gutter.el</a> everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05&gt;</span></span>
+But I usually need to know what line changed in <b>latest commit</b>.
 </p>
 
 <p>
-Here is the <a href="http://www.emacswiki.org/emacs/FlymakeHtml">solution from EmacsWiki</a>.
-</p>
-
-<p>
-I found it not effective because <a href="https://github.com/w3c/tidy-html5">tidy</a> is too strict to HTML5 and produces too much noise.
-</p>
-
-<p>
-I only need validation of missing open/closed html tag(s). Nothing more!
-</p>
-
-<p>
-So here is my complete solution:
+So I designed `M-x git-gutter-reset-to-head-parent`,
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defun flymake-html-init ()
-       (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                          'flymake-create-temp-inplace))
-              (local-file (file-relative-name
-                           temp-file
-                           (file-name-directory buffer-file-name))))
-         (list "tidy" (list local-file))))
-
-(defun flymake-html-load ()
+<pre><code class="lang-lisp">(defun git-gutter-reset-to-head-parent()
   (interactive)
-  (when (and (not (null buffer-file-name)) (file-writable-p buffer-file-name))
-    (set (make-local-variable 'flymake-allowed-file-name-masks)
-         '(("\\.html\\|\\.ctp\\|\\.ftl\\|\\.jsp\\|\\.php\\|\\.erb\\|\\.rhtml" flymake-html-init))
-         )
-    (set (make-local-variable 'flymake-err-line-patterns)
-         ;; only validate missing html tags
-         '(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-         )
-    (flymake-mode t)))
+  (let (parent (filename (buffer-file-name)))
+    (if (eq git-gutter:vcs-type 'svn)
+        (setq parent "PREV")
+      (setq parent (if filename (concat (shell-command-to-string (concat "git --no-pager log --oneline -n1 --pretty='format:%H' " filename)) "^") "HEAD^")))
+    (git-gutter:set-start-revision parent)
+    (message "git-gutter:set-start-revision HEAD^")))
 
-(add-hook 'web-mode-hook 'flymake-html-load)
-(add-hook 'html-mode-hook 'flymake-html-load)
-(add-hook 'nxml-mode-hook 'flymake-html-load)
-(add-hook 'php-mode-hook 'flymake-html-load)
+(defun git-gutter-reset-to-default ()
+  (interactive)
+  (git-gutter:set-start-revision nil)
+  (message "git-gutter reset"))
 </code></pre>
 
 </div>
 
 <p>
-The only difference from EmacsWiki is only one line:
+`M-x git-gutter-reset-to-default` compare you file under working directory with the latet version under VCS.
 </p>
 
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
-</code></pre>
-
-</div>
+<p>
+`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.
+</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="advanced-tip-on-using-mozrepl-to-automatically-refresh-browser.html" rel="prev" title="Advanced tip on using mozrepl to automatically refresh browser">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="demo-blog-1.html" rel="next" title="Demo blog post created by nikola&amp;org2nikola">Next post</a>
+                <a href="use-gcalcli-for-google-calendar.html" rel="prev" title="Use gcalcli for google calendar">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html",
-        disqus_title="How to validate HTML5 code with Flymake effectively",
-        disqus_identifier="cache/posts/how-to-validate-html5-code-with-flymake-effectively.html",
+            disqus_url="http://blog.binchen.org/posts/git-gutter-tip.html",
+        disqus_title="Git gutter tip",
+        disqus_identifier="cache/posts/git-gutter-tip.html",
         disqus_config = function () {
             this.language = "en";
         };

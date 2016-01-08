@@ -83,7 +83,8 @@ Before I press t'>
         </div>
         <div class="body">
             <div>
-<p>Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+<p>
+Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
 </p>
 
 <p>
@@ -110,7 +111,7 @@ It's hard to do this kind of thing in Gmail.
 Now let me show you how Emacs get the job done:
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
 </li>
 <li>Step 2, Mark the emails I want to forward with hot key "#"
@@ -127,6 +128,8 @@ Well, some people may argue that step 4 could be improved a little bit.
 <p>
 In Emacs, everyting could be optimized. Please copy below code into your ~/.emacs:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun message-select-forwarded-email-tags ()
   "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
@@ -154,14 +157,15 @@ In Emacs, everyting could be optimized. Please copy below code into your ~/.emac
     ))
 </code></pre>
 
+</div>
+
 <p>
 All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
 </p>
 
 <p>
 UPDATE:
-This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
-</p>
+This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.</p>
 </div>
         </div>
         

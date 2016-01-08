@@ -30,9 +30,10 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content="Please note:
 
 
+
 I use javascript as a use case. The solution is generic enough to be applied to any language. At the end of the article, Emacs Lisp is used as another example.
 
-I'm good at most debugge">
+I'm good at most debugg">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-11-23T12:45:18Z">
 <meta property="article:tag" content="emacs">
@@ -78,10 +79,11 @@ I'm good at most debugge">
         </div>
         <div class="body">
             <div>
-<p>Please note:
+<p>
+Please note:
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>I use javascript as a use case. The solution is <b>generic</b> enough to be applied to <b>any language</b>. At the end of the article, Emacs Lisp is used as another example.
 </li>
 <li>I'm good at most debuggers. The point of this article is to deal with <b>more difficult issues</b> the debugger can not handle.
@@ -89,15 +91,18 @@ I'm good at most debugge">
 <li>My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
 </li>
 </ul>
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Problem</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Problem</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 </p>
+
 <p>
 The only way to debug such application is to insert as many as possible logging code, watch the output, and think.
 </p>
+
 <p>
 So my problem is how to insert logging code as quickly as possible.
 </p>
@@ -105,50 +110,54 @@ So my problem is how to insert logging code as quickly as possible.
 
 </div>
 
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>My solution is <a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a>. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+My solution is <a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a>. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Logging simple JS variable</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>Given a variable name like "var1", I need insert javascript code as below:
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Logging simple JS variable</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+Given a variable name like "var1", I need insert javascript code as below:
 </p>
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-javascript">console.log("var1=", var1)
 </code></pre>
 
-
+</div>
 
 <p>
 Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet</a>
 </p>
+
 <p>
 This snippet need you input variable name once.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">Logging complex JS variable</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">
+<span class="section-number-2">4</span> Logging complex JS variable</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 </p>
+
 <p>
 So the solution is that I copy the JS variable into kill ring where my snippet will read the variable name.
 </p>
+
 <p>
 Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet</a>
@@ -157,48 +166,51 @@ Snippet:
 
 </div>
 
-<div id="outline-container-5" class="outline-3">
-<h4 id="sec-5">Logging JS function name when it's called</h4>
-<div class="outline-text-3" id="text-5">
-
-<p>In below example, I need insert  "console.log('hello is called');" in function "hello":
+<div id="outline-container-sec-5" class="outline-2">
+<h3 id="sec-5">
+<span class="section-number-2">5</span> Logging JS function name when it's called</h3>
+<div class="outline-text-2" id="text-5">
+<p>
+In below example, I need insert  "console.log('hello is called');" in function "hello":
 </p>
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-javascript">function hello() {
   console.log('hello is called');
 }
 </code></pre>
 
-
+</div>
 
 <p>
 Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet</a>
 </p>
+
 <p>
 This snippet use the Emacs command `which-function`. If you read the code of `which-function`, you will find that it's <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu-mode</a>
 who actually extracts the function name. But Imenu-mode requires you pre-define <b>enough regular expressions</b>. 
 </p>
+
 <p>
 Please check <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el</a>. I have defined many regular expressions for <a href="https://angularjs.org/">AngularJS</a> and JQuery.
 </p>
+
 <p>
 The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-6" class="outline-3">
-<h4 id="sec-6">Logging JS function name with its parameters</h4>
-<div class="outline-text-3" id="text-6">
-
-<p>JS example:
+<div id="outline-container-sec-6" class="outline-2">
+<h3 id="sec-6">
+<span class="section-number-2">6</span> Logging JS function name with its parameters</h3>
+<div class="outline-text-2" id="text-6">
+<p>
+JS example:
 </p>
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-javascript">function hello(v1, v2,
                v3, v4) {
@@ -206,32 +218,37 @@ The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 }
 </code></pre>
 
-
+</div>
 
 <p>
 I copy the parameter of JS function named "hello". It's just the content between "hello(" and ")", then Emacs Lisp code embedded in the snippet will parse and output the right content from kill ring.
 </p>
+
 <p>
 Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet</a>
 </p>
+
 <p>
 BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the parameter into kill-ring is as simple as pressing "yi(".
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-7" class="outline-3">
-<h4 id="sec-7">Insert JS debugger statement</h4>
-<div class="outline-text-3" id="text-7">
-
-<p>@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
+<div id="outline-container-sec-7" class="outline-2">
+<h3 id="sec-7">
+<span class="section-number-2">7</span> Insert JS debugger statement</h3>
+<div class="outline-text-2" id="text-7">
+<p>
+@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
 </p>
+
 <p>
 Snippets:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet</a>
 </p>
+
 <p>
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet</a>
 </p>
@@ -239,14 +256,13 @@ Snippets:
 
 </div>
 
-<div id="outline-container-8" class="outline-3">
-<h4 id="sec-8">Bonus</h4>
-<div class="outline-text-3" id="text-8">
-
-<p>Similar snippets for Emacs Lisp are defined <a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode">HERE</a>.
-</p>
+<div id="outline-container-sec-8" class="outline-2">
+<h3 id="sec-8">
+<span class="section-number-2">8</span> Bonus</h3>
+<div class="outline-text-2" id="text-8">
+<p>
+Similar snippets for Emacs Lisp are defined <a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode">HERE</a>.</p>
 </div>
-
 </div>
 </div>
         </div>

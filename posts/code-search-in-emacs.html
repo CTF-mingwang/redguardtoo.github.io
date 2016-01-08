@@ -81,7 +81,8 @@ For example, if I want to search Emacs Lisp code. I google "keyword filetype:el"
         </div>
         <div class="body">
             <div>
-<p>After shutdown of <a href="http://en.wikipedia.org/wiki/Google_Code_Search">Google Code Search</a>, I turned to plain google search instead.
+<p>
+After shutdown of <a href="http://en.wikipedia.org/wiki/Google_Code_Search">Google Code Search</a>, I turned to plain google search instead.
 </p>
 
 <p>
@@ -107,6 +108,8 @@ Step 1, install <a href="http://w3m.sourceforge.net/">w3m</a> and <a href="http:
 <p>
 Step 2, insert below code into ~/.emacs:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun w3m-get-url-from-search-engine-alist (k l)
   (let (rlt)
@@ -157,9 +160,10 @@ Step 2, insert below code into ~/.emacs:
     (w3m-set-url-from-search-engine-alist "s" w3m-search-engine-alist old-url)))
 </code></pre>
 
+</div>
+
 <p>
-Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.
-</p>
+Step 3, `M-x w3m-google-by-filetype`. Either the selected region or the symbol under cursor will be searched.</p>
 </div>
         </div>
         

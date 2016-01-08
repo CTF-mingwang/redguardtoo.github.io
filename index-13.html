@@ -372,7 +372,8 @@ Here is the setup:
             </div>
             <div class="body">
                 <div>
-<p><a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
+<p>
+<a href="https://github.com/magnars/expand-region.el">expand-region.el</a> is very useful. I use it to select a code segment and keep press its expand key until the the desired region is selected.
 </p>
 
 <p>
@@ -399,6 +400,8 @@ The solution is simple, press ",xx" to select the initial region. Keep press "x"
 Here is the setup:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'evil)
 (require 'evil-leader)
 (evil-mode 1) ;; enable evil-mode
@@ -406,6 +409,8 @@ Here is the setup:
 (eval-after-load "evil" '(setq expand-region-contract-fast-key "z"))
 (evil-leader/set-key "xx" 'er/expand-region)
 </code></pre>
+
+</div>
 </div>
             </div>
         </div>

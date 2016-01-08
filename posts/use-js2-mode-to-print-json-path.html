@@ -27,11 +27,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use js2-mode to print json path">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html">
-<meta property="og:description" content="CREATED:  2015-10-29
+<meta property="og:description" content="CREATED: &lt;2015-10-29&gt;
 
 
 
-UPDATED:  2015-11-22 Sun
+UPDATED: &lt;2015-11-22 Sun&gt;
 
 
 
@@ -43,7 +43,7 @@ So javascript developers have to deal with JSON frequently.
 
 
 
-When working on JSON, the m">
+When working on JSON, the">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-10-29T14:18:10Z">
 <meta property="article:tag" content="emacs">
@@ -91,11 +91,12 @@ When working on JSON, the m">
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-10-29</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-10-29&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-22 Sun</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-22 Sun&gt;</span></span>
 </p>
 
 <p>
@@ -114,6 +115,8 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-javascript">{
   key1: {
     subkey1: {
@@ -122,6 +125,8 @@ For example, given the JSON response like:
   }
 }
 </code></pre>
+
+</div>
 
 <p>
 The developer need figure out the full path of "key3" which is "<code>key1.subkey1.arr1[0].key3</code>".
@@ -134,6 +139,8 @@ My solution is to take advantage of AST created by <a href="https://github.com/m
 <p>
 <b>Step 1</b>, insert below code into ~/.emacs,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">;; {{ print json path, will be removed when latest STABLE js2-mode released
 (defun js2-get-element-index-from-array-node (elem array-node &amp;optional hardcoded-array-index)
@@ -195,6 +202,8 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
 
     rlt))
 </code></pre>
+
+</div>
 
 <p>
 <b>Step 2</b>, move the cursor over the key/value of the field and `M-x js2-print-json-path`.

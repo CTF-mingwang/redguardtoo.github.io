@@ -30,7 +30,10 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content="Below code will get error message if compiled by gcc 4.6+:
 
 
+
 &quot;const A&quot; as 'this' argument of &quot;void A::a()' discards qualifiers [-fpermissive]
+
+
 
 
 class A
@@ -39,7 +42,7 @@ class A
 }
 class B
 {
-   virtual void b() c">
+   virtual void b(">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-01-14T18:38:00Z">
 <meta property="article:tag" content="cmake">
@@ -87,11 +90,15 @@ class B
         </div>
         <div class="body">
             <div>
-<p>Below code will get error message if compiled by gcc 4.6+:
+<p>
+Below code will get error message if compiled by gcc 4.6+:
 </p>
 
-<pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+<pre class="example">
+"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
 </pre>
+
+<div class="org-src-container">
 
 <pre><code class="lang-c">class A
 {
@@ -111,16 +118,22 @@ class MyClass:public B
 }
 </code></pre>
 
+</div>
+
 <p>
 Since I cannot modify class A and B, I need add "-fpermission" to CXX_FLAG.
 Here is my <a href="http://www.cmake.org">cmake</a> code,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-cmake">if(CMAKE_COMPILER_IS_GNUCC)
   # needed for gcc 4.6+
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
 </code></pre>
+
+</div>
 </div>
         </div>
         
