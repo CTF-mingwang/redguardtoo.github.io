@@ -1,5 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 08 Jan 2016 12:42:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 10 Jan 2016 05:36:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;i&gt;Group Topics&lt;/i&gt; is used to manage Gnus groups.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, you can place mails from Gmail into "gmail" topi, mail from Outlook.com into "hotmail" topic, make "gmail" and "hotmail" belong to root topic named "Gnus".
+&lt;/p&gt;
+
+&lt;p&gt;
+Enable it is just one line,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Now comes the question how to delete/add/move the topics?
+&lt;/p&gt;
+
+&lt;p&gt;
+The official answer is to read &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Topic-Commands.html#Topic-Commands"&gt;its manual&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+But there is a simpler solution. All you need to do is insert below code into your ~/.emacs or ~/.gnus.el,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'gnus-topic
+  '(progn
+     (setq gnus-topic-topology '(("Gnus" visible)
+                                 (("hotmail" visible nil nil))
+                                 (("gmail" visible nil nil))))
+
+     (setq gnus-topic-alist '(("hotmail" ; the key of topic
+                               "nnimap+hotmail:Inbox"
+                               "nnimap+hotmail:Drafts"
+                               "nnimap+hotmail:Sent"
+                               "nnimap+hotmail:Junk"
+                               "nnimap+hotmail:Deleted")
+                              ("gmail" ; the key of topic
+                               "INBOX"
+                               "[Gmail]/Sent Mail"
+                               "[Gmail]/Trash"
+                               "Drafts")
+                              ("Gnus")))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Now the management of topics is as easy as editing above code.
+&lt;/p&gt;
+
+&lt;p&gt;
+My setup always works no matter ~/.newsrc.eld is loaded or not.
+&lt;/p&gt;
+
+&lt;p&gt;
+BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-select-method
+             '(nnimap "gmail" ; key
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "hotmail" ; key
+                      (nnimap-address "imap-mail.outlook.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 &lt;/p&gt;
 
@@ -866,118 +947,4 @@ Insert below code into ~/.emacs:
 &lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>soup</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</guid><pubDate>Sun, 07 Jun 2015 01:58:51 GMT</pubDate></item><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
-&lt;/p&gt;
-
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;autoload packages
-&lt;/li&gt;
-&lt;li&gt;idle-load packages 
-&lt;/li&gt;
-&lt;li&gt;compiling *.el to  *.elc
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
-After some research, I found I could make my Emacs 1000% fast &lt;b&gt;in 1 minute&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Please note I'm talking about the &lt;b&gt;general performance&lt;/b&gt; not just startup time.
-&lt;/p&gt;
-
-&lt;p&gt;
-The solution is really simple.
-&lt;/p&gt;
-
-&lt;p&gt;
-Since I'm a Linux guy and my computer got enough (24G) memory. I can place my setup on &lt;a href="http://en.wikipedia.org/wiki/Tmpfs"&gt;memory&lt;/a&gt; only.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Step 1&lt;/b&gt;, insert below line into /etc/fstab and restart computer:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-conf"&gt;tmpfs       /tmp        tmpfs       nodev,nosuid,size=8G    0   0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-&lt;b&gt;Step 2&lt;/b&gt;, run the script "emacs2ram":
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-bash"&gt;#!/bin/sh
-
-if [ -z "$1" ];then
-    echo "Usage:"
-    echo "  emacs2ram start"
-    echo "  emacs2ram restore"
-    exit 1
-fi
-
-if [ "$1" == "start" ];then
-    backup=emacs.d-backup
-    link=.emacs.d
-    volatile=/tmp/.emacs.d-$USER
-
-    IFS=
-    set -efu
-
-    cd ~/
-
-    if [ ! -r $volatile ]; then
-        mkdir -m0700 $volatile
-    fi
-
-    # link -&amp;gt; volatie does not exist
-    if [ "$(readlink $link)" != "$volatile" ]; then
-        # backup project at first
-        mv $link $backup
-        # create the link
-        ln -s $volatile $link
-    fi
-
-    if [ -e $link/.unpacked ]; then
-        echo "Sync .emacs.d from memory to backup ..."
-        rsync -avq --delete --exclude .unpacked ./$link/ ./$backup/
-        echo "DONE!"
-    else
-        echo "Sync .emacs.d from disk to memory ..."
-        rsync -avq ./$backup/ ./$link/
-        touch $link/.unpacked
-        echo "DONE!"
-    fi
-else
-    echo "Moving .emacs.d back to disk ..."
-    backup=$2-backup
-    link=$2
-    volatile=/tmp/$2-$USER
-    cd ~/projs
-    rm $link &amp;amp;&amp;amp; mv $backup $link &amp;amp;&amp;amp; rm -rf $volatile
-    echo "DONE!"
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-That's all! Please enjoy Emacs as usual.
-&lt;/p&gt;
-
-&lt;p&gt;
-The original script is from ArchLinux Wiki. I learned this technique eight years ago. I'm just wondering why I need eight years to apply it?
-&lt;/p&gt;
-
-&lt;p&gt;
-BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using similar scripts.
-&lt;/p&gt;
-
-&lt;p&gt;
-UPDATE:
-I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>soup</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</guid><pubDate>Sun, 07 Jun 2015 01:58:51 GMT</pubDate></item></channel></rss>
