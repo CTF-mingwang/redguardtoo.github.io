@@ -27,11 +27,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use Ivy-mode to tweak workgroups2">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html">
-<meta property="og:description" content="Workgroups2 will load previous windows layout by default. That's handy for most developers.
+<meta property="og:description" content="CREATED:  2015-12-22
 
 
 
-But as a freelancer I am always assigned the low spec machine which takes too much time to load the old l">
+UPDATED:  2016-01-12 Tue
+
+
+
+Workgroups2 will load previous windows layout by default. That's handy for most developers.
+
+
+
+But as a freelancer I am always assigned the low spec">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-12-22T04:42:03Z">
 <meta property="article:tag" content="emacs">
@@ -79,6 +87,13 @@ But as a freelancer I am always assigned the low spec machine which takes too mu
         </div>
         <div class="body">
             <div>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-12-22</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2016-01-12 Tue</span></span>
+</p>
+
 <p>
 <a href="https://github.com/pashinin/workgroups2">Workgroups2</a> will load previous windows layout by default. That's handy for most developers.
 </p>
@@ -95,9 +110,9 @@ So I use <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> to create a li
 Here is code:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(require 'ivy)
+
+(autoload 'wg-create-workgroup "workgroups2" nil t)
 
 (defun my-wg-switch-workgroup ()
   (interactive)
@@ -116,17 +131,25 @@ Here is code:
 
 (eval-after-load 'workgroups2
   '(progn
-     ;; save the session file in real time
-     (defadvice wg-create-workgroup (after wg-create-workgroup-hack activate)
+     ;; make sure wg-create-workgroup always success
+     (defadvice wg-create-workgroup (around wg-create-workgroup-hack activate)
+       (unless wg-current-session
+         ;; code extracted from `wg-open-session'.
+         ;; open session but do NOT load any workgroup.
+         (let ((session (read (f-read-text (file-truename wg-session-file)))))
+           (setf (wg-session-file-name session) wg-session-file)
+           (wg-reset-internal (wg-unpickel-session-parameters session))))
+       ad-do-it
+       ;; save the session file in real time
        (wg-save-session t))
+
      (defadvice wg-reset (after wg-reset-hack activate)
        (wg-save-session t))
+
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
 </code></pre>
-
-</div>
 </div>
         </div>
         

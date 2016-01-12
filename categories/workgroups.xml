@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (workgroups)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/workgroups.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 08 Jan 2016 12:42:10 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (workgroups)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/workgroups.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 12 Jan 2016 05:13:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-22&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-01-12 Tue&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
 &lt;a href="https://github.com/pashinin/workgroups2"&gt;Workgroups2&lt;/a&gt; will load previous windows layout by default. That's handy for most developers.
 &lt;/p&gt;
 
@@ -15,9 +22,9 @@ So I use &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; to
 Here is code:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
+
+(autoload 'wg-create-workgroup "workgroups2" nil t)
 
 (defun my-wg-switch-workgroup ()
   (interactive)
@@ -36,14 +43,22 @@ Here is code:
 
 (eval-after-load 'workgroups2
   '(progn
-     ;; save the session file in real time
-     (defadvice wg-create-workgroup (after wg-create-workgroup-hack activate)
+     ;; make sure wg-create-workgroup always success
+     (defadvice wg-create-workgroup (around wg-create-workgroup-hack activate)
+       (unless wg-current-session
+         ;; code extracted from `wg-open-session'.
+         ;; open session but do NOT load any workgroup.
+         (let ((session (read (f-read-text (file-truename wg-session-file)))))
+           (setf (wg-session-file-name session) wg-session-file)
+           (wg-reset-internal (wg-unpickel-session-parameters session))))
+       ad-do-it
+       ;; save the session file in real time
        (wg-save-session t))
+
      (defadvice wg-reset (after wg-reset-hack activate)
        (wg-save-session t))
+
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item></channel></rss>
