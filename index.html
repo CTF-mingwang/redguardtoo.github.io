@@ -38,6 +38,51 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-ivy-mode-to-search-bash-history.html">Use ivy-mode to search bash history</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-01-25T05:40:41+00:00">2016-01-25 05:40</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-ivy-mode-to-search-bash-history.html#disqus_thread" data-disqus-identifier="cache/posts/use-ivy-mode-to-search-bash-history.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
+  "Yank the bash history"
+  (interactive)
+  (let (hist-cmd collection val)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                           (buffer-string))
+                         "\n"
+                         t)))
+    (when (and collection (&gt; (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "Bash history:") collection))))
+        (kill-new val)
+        (message "%s =&gt; kill-ring" val))))
+</code></pre>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/how-to-use-gnus-group-topics-efficiently.html">How to use Gnus Group Topics efficiently</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1136,116 +1181,6 @@ Insert below code into ~/.emacs:
 (define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
 ;; }}
 </code></pre>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html">柬埔寨名汤(Sgow Chrouk Soup)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2015-06-07T01:58:51+00:00">2015-06-07 01:58</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html#disqus_thread" data-disqus-identifier="cache/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/soup.html" rel="tag">soup</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>视频教程:
-<a href="https://www.youtube.com/watch?v=Aclyh2c_BEs">https://www.youtube.com/watch?v=Aclyh2c_BEs</a>
-</p>
-
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">备料</h4>
-<div class="outline-text-3" id="text-1">
-
-<ul>
-<li>两人份冷水
-</li>
-<li>米少许(半茶勺)
-</li>
-<li>香茅一根
-</li>
-<li>南姜(Galangal)一小块
-</li>
-<li>洋葱一个
-</li>
-<li>大蒜二瓣
-</li>
-<li>鸡精二茶勺
-</li>
-<li>糖(最好棕榈糖,因为有香味)半茶勺
-</li>
-<li>九层塔(薄荷)一把
-</li>
-<li>鲜红辣椒两到三根
-</li>
-</ul>
-<p>
-<img src="wp-content/Sgow-Chrouk-Soup-prepare.jpg" alt="Sgow-Chrouk-Soup-prepare.jpg"></p>
-</div>
-
-</div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">步骤</h4>
-<div class="outline-text-3" id="text-2">
-
-<ul>
-<li>鸡胸脯肉切成小块,盐过一下三四分钟,洗净刀和板
-</li>
-<li>烧开水
-</li>
-<li>香茅洗净,折成多段.南姜先去皮再洗净切成薄片.米洗净,大蒜拍扁,洋葱切好
-</li>
-<li>待水滚放入香茅,南姜,米,大蒜,洋葱(增加甜味)
-</li>
-<li>在水再次滚前,摘薄荷叶,放入大碗淘洗多次再沥干,切成细丝(让香味挥发).辣椒洗净切碎.柠檬切成长条.前述三种料分门别类放入一盘中.
-</li>
-<li>选部份柠檬挤汁入一小碟子中
-</li>
-<li>这时水已滚,加鸡精调味至满意,放入鸡肉(海鲜也可以):
-</li>
-<li>一分钟水滚后,尝一下鸡肉是否熟了.汤的口味,加入糖(略有甜味即可),如果口味淡了,可最后加入鸡精
-</li>
-<li>关火,撒入少量辣椒末,薄荷,葱
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">上菜</h4>
-<div class="outline-text-3" id="text-3">
-
-<ul>
-<li>准备大碗,放入薄荷,葱,适量柠檬汁,倒汤
-</li>
-<li>柬埔寨神秘香菜(可选)
-</li>
-<li>可加少量鱼露调咸味
-</li>
-</ul>
-<p>
-<img src="wp-content/Sgow-Chrouk-Soup-done.jpg" alt="Sgow-Chrouk-Soup-done.jpg"></p>
-</div>
-
-</div>
 </div>
             </div>
         </div>

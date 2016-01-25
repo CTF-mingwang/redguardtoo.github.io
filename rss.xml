@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 12 Jan 2016 05:13:58 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 25 Jan 2016 05:40:47 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
+  "Yank the bash history"
+  (interactive)
+  (let (hist-cmd collection val)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                           (buffer-string))
+                         "\n"
+                         t)))
+    (when (and collection (&amp;gt; (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "Bash history:") collection))))
+        (kill-new val)
+        (message "%s =&amp;gt; kill-ring" val))))
+&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -815,77 +831,4 @@ Insert below code into ~/.emacs:
 (define-key evil-inner-text-objects-map "f" 'evil-filepath-inner-text-object)
 (define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
 ;; }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>柬埔寨名汤(Sgow Chrouk Soup)</title><link>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;视频教程:
-&lt;a href="https://www.youtube.com/watch?v=Aclyh2c_BEs"&gt;https://www.youtube.com/watch?v=Aclyh2c_BEs&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;备料&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;ul&gt;&lt;li&gt;两人份冷水
-&lt;/li&gt;
-&lt;li&gt;米少许(半茶勺)
-&lt;/li&gt;
-&lt;li&gt;香茅一根
-&lt;/li&gt;
-&lt;li&gt;南姜(Galangal)一小块
-&lt;/li&gt;
-&lt;li&gt;洋葱一个
-&lt;/li&gt;
-&lt;li&gt;大蒜二瓣
-&lt;/li&gt;
-&lt;li&gt;鸡精二茶勺
-&lt;/li&gt;
-&lt;li&gt;糖(最好棕榈糖,因为有香味)半茶勺
-&lt;/li&gt;
-&lt;li&gt;九层塔(薄荷)一把
-&lt;/li&gt;
-&lt;li&gt;鲜红辣椒两到三根
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-prepare.jpg" alt="Sgow-Chrouk-Soup-prepare.jpg"&gt;&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;步骤&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;ul&gt;&lt;li&gt;鸡胸脯肉切成小块,盐过一下三四分钟,洗净刀和板
-&lt;/li&gt;
-&lt;li&gt;烧开水
-&lt;/li&gt;
-&lt;li&gt;香茅洗净,折成多段.南姜先去皮再洗净切成薄片.米洗净,大蒜拍扁,洋葱切好
-&lt;/li&gt;
-&lt;li&gt;待水滚放入香茅,南姜,米,大蒜,洋葱(增加甜味)
-&lt;/li&gt;
-&lt;li&gt;在水再次滚前,摘薄荷叶,放入大碗淘洗多次再沥干,切成细丝(让香味挥发).辣椒洗净切碎.柠檬切成长条.前述三种料分门别类放入一盘中.
-&lt;/li&gt;
-&lt;li&gt;选部份柠檬挤汁入一小碟子中
-&lt;/li&gt;
-&lt;li&gt;这时水已滚,加鸡精调味至满意,放入鸡肉(海鲜也可以):
-&lt;/li&gt;
-&lt;li&gt;一分钟水滚后,尝一下鸡肉是否熟了.汤的口味,加入糖(略有甜味即可),如果口味淡了,可最后加入鸡精
-&lt;/li&gt;
-&lt;li&gt;关火,撒入少量辣椒末,薄荷,葱
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;上菜&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;ul&gt;&lt;li&gt;准备大碗,放入薄荷,葱,适量柠檬汁,倒汤
-&lt;/li&gt;
-&lt;li&gt;柬埔寨神秘香菜(可选)
-&lt;/li&gt;
-&lt;li&gt;可加少量鱼露调咸味
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/Sgow-Chrouk-Soup-done.jpg" alt="Sgow-Chrouk-Soup-done.jpg"&gt;&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>soup</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-bu-zhai-ming-tang-sgow-chrouk-soup.html</guid><pubDate>Sun, 07 Jun 2015 01:58:51 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item></channel></rss>

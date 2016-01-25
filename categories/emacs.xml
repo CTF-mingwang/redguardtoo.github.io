@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 12 Jan 2016 05:13:57 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 25 Jan 2016 05:40:47 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
+  "Yank the bash history"
+  (interactive)
+  (let (hist-cmd collection val)
+    (shell-command "history -r") ; reload history
+    (setq collection
+          (nreverse
+           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
+                                           (buffer-string))
+                         "\n"
+                         t)))
+    (when (and collection (&amp;gt; (length collection) 0)
+               (setq val (if (= 1 (length collection)) (car collection)
+                           (ivy-read (format "Bash history:") collection))))
+        (kill-new val)
+        (message "%s =&amp;gt; kill-ring" val))))
+&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -894,33 +910,4 @@ BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using simil
 &lt;p&gt;
 UPDATE:
 I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. 
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
-&lt;/p&gt;
-
-&lt;p&gt;
-After "M-x git-timemachine", a new read-only buffer is created and I need only use six key bindings: "n", "q", "p", "w", "W", "g".
-&lt;/p&gt;
-
-&lt;p&gt;
-The problem is I'm using &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt;. How to make git-timemachine's key bindings override Evil's?
-&lt;/p&gt;
-
-&lt;p&gt;
-I consulted the issue with Frank Fischer.
-&lt;/p&gt;
-
-&lt;p&gt;
-The solution is simple. Insert below code into ~/.emacs:
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
-(eval-after-load 'git-timemachine
-  '(progn
-     (evil-make-overriding-map git-timemachine-mode-map 'normal)
-     ;; force update evil keymaps after git-timemachine-mode loaded
-     (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item></channel></rss>
