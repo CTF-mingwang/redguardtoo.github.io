@@ -80,7 +80,9 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
         </div>
         <div class="body">
-            <pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
+            <div class="org-src-container">
+
+<pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
   "Yank the bash history"
   (interactive)
   (let (hist-cmd collection val)
@@ -97,11 +99,16 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         (kill-new val)
         (message "%s =&gt; kill-ring" val))))
 </code></pre>
+
+</div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
                 <a href="how-to-use-gnus-group-topics-efficiently.html" rel="prev" title="How to use Gnus Group Topics efficiently">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="diff-regions-in-emacs.html" rel="next" title="Diff regions in Emacs">Next post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>

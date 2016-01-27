@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 12 Jan 2016 05:13:57 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 27 Jan 2016 13:44:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -9,6 +10,8 @@ But I usually need to know what line changed in &lt;b&gt;latest commit&lt;/b&gt;
 &lt;p&gt;
 So I designed `M-x git-gutter-reset-to-head-parent`,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun git-gutter-reset-to-head-parent()
   (interactive)
@@ -25,13 +28,15 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
   (message "git-gutter reset"))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 `M-x git-gutter-reset-to-default` compare you file under working directory with the latet version under VCS.
 &lt;/p&gt;
 
 &lt;p&gt;
-`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
+`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use git-timemachine with Evil</title><link>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt; is simple.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -50,6 +55,8 @@ I consulted the issue with Frank Fischer.
 The solution is simple. Insert below code into ~/.emacs:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
 (eval-after-load 'git-timemachine
   '(progn
@@ -58,63 +65,70 @@ The solution is simple. Insert below code into ~/.emacs:
      (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
-I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>How to accept the github pull request efficiently</title><link>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use keyboard only in order to maximize my productivity.
+I also recommend reading &lt;a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings"&gt;his in-depth discussion&lt;/a&gt; on &lt;b&gt;general handling of keybindings conflict&lt;/b&gt; between evil and other minor modes.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-timemachine-with-evil.html</guid><pubDate>Thu, 09 Apr 2015 23:47:41 GMT</pubDate></item><item><title>How to accept the github pull request efficiently</title><link>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use keyboard only in order to maximize my productivity.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Preparation&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;Install Firefox addon &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keysnail&lt;/a&gt; and its plugin &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HOK&lt;/a&gt;. From now on, all the web browsing is done ONLY in keyboard.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Preparation&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Install Firefox addon &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keysnail&lt;/a&gt; and its plugin &lt;a href="https://github.com/mooz/keysnail/wiki/plugin"&gt;HOK&lt;/a&gt;. From now on, all the web browsing is done ONLY in keyboard.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Step 1&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Open pull request page at github.com, click the link "command line".
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Step 1&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Open pull request page at github.com, click the link "command line".
 &lt;/p&gt;
+
 &lt;p&gt;
 In a real world project, I rarely accept a pull request without some modification. So I usually avoid pressing the big green button "merge pull request" on that page.
 &lt;/p&gt;
+
 &lt;p&gt;
 In the "command line" page, github is kind enough to list the command lines to "check out a new branch and test the changes" from the pull request. The command lines are like:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;git checkout -b her-master master
 git pull git@github.com:her/myproject.git master
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
 
 &lt;p&gt;
 I have installed a Greasemonkey user script &lt;a href="https://github.com/redguardtoo/NinjaWebCoder"&gt;NinjaWebCoder&lt;/a&gt; in order to &lt;b&gt;use keyboard&lt;/b&gt; to copy those command lines from the browser into clipboard. Then I paste the command lines into terminal.
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Step 2&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;I open the code file with Emacs.
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Step 2&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+I open the code file with Emacs.
 &lt;/p&gt;
+
 &lt;p&gt;
 There is an Emacs addon called &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter&lt;/a&gt;. I use its command "git-gutter:next-hunk" to move the cursor to the next "diff hunk".
 &lt;/p&gt;
+
 &lt;p&gt;
 Let me explain what's the diff hunk. When you edit some code under git's control, you code has some difference with the HEAD version. Every difference corresponds to the pair of a file name and a line number. That file-name-line-number pair is defined as a "diff hunk".
 &lt;/p&gt;
+
 &lt;p&gt;
 Now comes &lt;b&gt;the most important part of this article&lt;/b&gt;. Since version 0.71, git-gutter added a new command "git-gutter:set-start-version". If I "git-gutter:set-start-revision" to the "HEAD^" version. I can jump to "diff hunk" of the difference between "HEAD" and "HEAD^".
 &lt;/p&gt;
+
 &lt;p&gt;
 In short, I can &lt;b&gt;review the latest commit and change the code in one step&lt;/b&gt;.
 &lt;/p&gt;
@@ -122,18 +136,20 @@ In short, I can &lt;b&gt;review the latest commit and change the code in one ste
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;Done&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Done&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
 &lt;/p&gt;
+
 &lt;p&gt;
 Every operation in previous steps is optimized with some shortcut. For example, in shell I use alias "g" instead of full command line "git status".
 &lt;/p&gt;
+
 &lt;p&gt;
-Please enlighten me if the work flow could be improved.
-&lt;/p&gt;&lt;/div&gt;
+Please enlighten me if the work flow could be improved.&lt;/p&gt;
+&lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/how-to-accept-the-github-pull-request-efficiently.html</guid><pubDate>Fri, 01 Aug 2014 13:52:18 GMT</pubDate></item><item><title>Git merge in command line</title><link>http://blog.binchen.org/posts/git-merge-in-command-line.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;List and filter all the files need resolve conflict, then apply certain git operation on them: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
@@ -215,7 +231,7 @@ ff line-from-clipboard
 # now I can paste the full path into firefox, outlook ...
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen cast: &lt;img src="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif" alt="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif"&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><guid>http://blog.binchen.org/posts/how-to-use-git-effectively.html</guid><pubDate>Fri, 11 Oct 2013 09:38:00 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Send the latest commit&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen cast: &lt;img src="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif" alt="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif"&gt; &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><guid>http://blog.binchen.org/posts/how-to-use-git-effectively.html</guid><pubDate>Fri, 11 Oct 2013 09:38:00 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Send the latest commit&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     
 &lt;pre class="prettyprint "&gt;
 
 # send one commit
@@ -238,11 +254,13 @@ git am ~/News/patch/hello.patch
       '( "^@@ -[0-9]+,[0-9]+ \\+[0-9]+,[0-9]+ @@" ))
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Fri, 06 Sep 2013 22:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;&lt;pre class="prettyprint "&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Fri, 06 Sep 2013 22:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
+&lt;pre class="prettyprint "&gt;
 &lt;p&gt;sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL&lt;/p&gt;
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt;</description><category>email</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</guid><pubDate>Thu, 15 Aug 2013 08:24:21 GMT</pubDate></item><item><title>The power of git command line interface</title><link>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Examples about how to use git CLI. NO gui front end needed. &lt;/p&gt; &lt;p&gt; You need install beautiful &lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; developed by mooz by run &lt;code&gt;pip installl percol&lt;/code&gt;. &lt;/p&gt; &lt;p&gt; percol "adds flavor of interactive filtering to the traditional pipe concept of UNIX shell". &lt;/p&gt; &lt;p&gt; Append below code into ~/.bashrc and run "source ~/.bashrc": &lt;/p&gt; &lt;br&gt;&lt;pre class="prettyprint "&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt;</description><category>email</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</guid><pubDate>Thu, 15 Aug 2013 08:24:21 GMT</pubDate></item><item><title>The power of git command line interface</title><link>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Examples about how to use git CLI. NO gui front end needed. &lt;/p&gt; &lt;p&gt; You need install beautiful &lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; developed by mooz by run &lt;code&gt;pip installl percol&lt;/code&gt;. &lt;/p&gt; &lt;p&gt; percol "adds flavor of interactive filtering to the traditional pipe concept of UNIX shell". &lt;/p&gt; &lt;p&gt; Append below code into ~/.bashrc and run "source ~/.bashrc": &lt;/p&gt; &lt;br&gt;
+&lt;pre class="prettyprint "&gt;
 &lt;p&gt;function gurl () {
     if [ -z "$1" ]; then
         echo "Usage: gurl commit-id"
@@ -268,7 +286,7 @@ git am ~/News/patch/hello.patch
 }&lt;/p&gt;
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Now you have three bash fuctions "gurl", "gcid", "gqurl". &lt;/p&gt; &lt;p&gt; Here is demo how to use "gcid": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif"&gt;&lt;/p&gt; &lt;p&gt; Here is demo of "gqurl": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif"&gt;&lt;/p&gt; &lt;p&gt; BTW, I use CLI clipboard tool like xsel. For example, "echo hello|xsel -ib" which insert string "hello" into system clipboard. &lt;/p&gt; &lt;p&gt; so I can "git show &lt;code&gt;gcid&lt;/code&gt;|xsel -ib" to copy/paste the code of specific commit between terminal and firefox. &lt;/p&gt; &lt;p&gt; In summary, the only limit of taking advantage of git's raw power is your imagination. &lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><category>percol</category><guid>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</guid><pubDate>Thu, 01 Aug 2013 13:17:00 GMT</pubDate></item><item><title>Poor man's github</title><link>http://blog.binchen.org/posts/poor-mans-github.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Key points of this article: &lt;/p&gt;&lt;ul&gt;&lt;li&gt;Build a github prototype written in Bash within 5 minutes &lt;/li&gt; &lt;li&gt;Highlight key elements in my usual git work flow &lt;/li&gt; &lt;li&gt;Git is scalabe. you can use any tool to extend it. &lt;/li&gt; &lt;/ul&gt;&lt;p&gt; As &lt;a href="https://plus.google.com/110090899194056392647"&gt;Yuri Albuquerque&lt;/a&gt; mentioned, there are more powerful tools like &lt;a href="https://github.com/sitaramc/gitolite"&gt;gitolite&lt;/a&gt;. But the key concept behind the system is similar. &lt;/p&gt; &lt;p&gt; Add following code into ~/.bashrc and run "source ~/.bashrc", then run "gih" to see help: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;gih&lt;/span&gt;() {
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Now you have three bash fuctions "gurl", "gcid", "gqurl". &lt;/p&gt; &lt;p&gt; Here is demo how to use "gcid": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-001.gif"&gt; &lt;/p&gt; &lt;p&gt; Here is demo of "gqurl": &lt;img src="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif" alt="https://dl.dropboxusercontent.com/u/858862/git-percol-002.gif"&gt; &lt;/p&gt; &lt;p&gt; BTW, I use CLI clipboard tool like xsel. For example, "echo hello|xsel -ib" which insert string "hello" into system clipboard. &lt;/p&gt; &lt;p&gt; so I can "git show &lt;code&gt;gcid&lt;/code&gt;|xsel -ib" to copy/paste the code of specific commit between terminal and firefox. &lt;/p&gt; &lt;p&gt; In summary, the only limit of taking advantage of git's raw power is your imagination. &lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><category>percol</category><guid>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</guid><pubDate>Thu, 01 Aug 2013 13:17:00 GMT</pubDate></item><item><title>Poor man's github</title><link>http://blog.binchen.org/posts/poor-mans-github.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Key points of this article: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Build a github prototype written in Bash within 5 minutes &lt;/li&gt; &lt;li&gt;Highlight key elements in my usual git work flow &lt;/li&gt; &lt;li&gt;Git is scalabe. you can use any tool to extend it. &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; As &lt;a href="https://plus.google.com/110090899194056392647"&gt;Yuri Albuquerque&lt;/a&gt; mentioned, there are more powerful tools like &lt;a href="https://github.com/sitaramc/gitolite"&gt;gitolite&lt;/a&gt;. But the key concept behind the system is similar. &lt;/p&gt; &lt;p&gt; Add following code into ~/.bashrc and run "source ~/.bashrc", then run "gih" to see help: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #b5bd68;"&gt;function&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;gih&lt;/span&gt;() {
     &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_USERNAME&lt;/span&gt;=git
     &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_SSH_URL&lt;/span&gt;=git@domain.name
     &lt;span style="color: #b294bb;"&gt;local&lt;/span&gt; &lt;span style="color: #f0c674;"&gt;MY_SSH_PORT&lt;/span&gt;=8888
@@ -598,4 +616,4 @@ function ggs()
 }
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; I do lots of git stuff  under shell, so I'm heavly dependent on some bash tools: &lt;/p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to change current directory quickly. &lt;/li&gt; &lt;li&gt;&lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; to filter the text from stdin interactively. &lt;/li&gt; &lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>github</category><guid>http://blog.binchen.org/posts/my-git-set-up.html</guid><pubDate>Sun, 07 Jul 2013 20:17:00 GMT</pubDate></item></channel></rss>
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; I do lots of git stuff  under shell, so I'm heavly dependent on some bash tools: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;&lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to change current directory quickly. &lt;/li&gt; &lt;li&gt;&lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; to filter the text from stdin interactively. &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>github</category><guid>http://blog.binchen.org/posts/my-git-set-up.html</guid><pubDate>Sun, 07 Jul 2013 20:17:00 GMT</pubDate></item></channel></rss>

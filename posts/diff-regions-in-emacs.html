@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>How to use Gnus Group Topics efficiently | Chen's blog</title>
+<title>Diff regions in Emacs | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/diff-regions-in-emacs.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,28 +25,27 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="How to use Gnus Group Topics efficiently">
-<meta property="og:url" content="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html">
-<meta property="og:description" content='Group Topics is used to manage Gnus groups.
+<meta property="og:title" content="Diff regions in Emacs">
+<meta property="og:url" content="http://blog.binchen.org/posts/diff-regions-in-emacs.html">
+<meta property="og:description" content="I know `M-x ediff-regions-line-wise`.
 
 
 
-For example, you can,
+But it's kind of too generic. I only want to view the diff of two regions as quickly as possible without merging.
 
 
 
-Place groups (mail folders)  from Gmail into "gmail" topic
+So here is my code,
 
-Place groups (mails folders) from Outlook.com into "hotmail" topic
 
-'>
+
+
+;; Diff two region">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-01-10T05:36:49Z">
+<meta property="article:published_time" content="2016-01-27T13:44:22Z">
+<meta property="article:tag" content="diff">
 <meta property="article:tag" content="emacs">
-<meta property="article:tag" content="email">
 <meta property="article:tag" content="en">
-<meta property="article:tag" content="gmail">
-<meta property="article:tag" content="gnus">
 </head>
 <body>
     <section class="social"><ul>
@@ -62,27 +61,25 @@ Place groups (mails folders) from Outlook.com into "hotmail" topic
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">How to use Gnus Group Topics efficiently</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Diff regions in Emacs</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2016-01-10T05:36:49+00:00">2016-01-10 05:36</time>
+                <time class="timeago" datetime="2016-01-27T13:44:22+00:00">2016-01-27 13:44</time>
             
 
             
           |  
-        <a href="how-to-use-gnus-group-topics-efficiently.wp" id="sourcelink">Source</a>
+        <a href="diff-regions-in-emacs.wp" id="sourcelink">Source</a>
 
             </div>
             
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
+           <li><a class="tag p-category" href="../categories/diff.html" rel="tag">diff</a></li>
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="../categories/email.html" rel="tag">email</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/gmail.html" rel="tag">gmail</a></li>
-           <li><a class="tag p-category" href="../categories/gnus.html" rel="tag">gnus</a></li>
         </ul>
 </div>
 
@@ -90,92 +87,99 @@ Place groups (mails folders) from Outlook.com into "hotmail" topic
         <div class="body">
             <div>
 <p>
-<i>Group Topics</i> is used to manage Gnus groups.
+I know `M-x ediff-regions-line-wise`.
 </p>
 
 <p>
-For example, you can,
+But it's kind of too generic. I only want to view the diff of two regions as quickly as possible without merging.
 </p>
 
-<ul class="org-ul">
-<li>Place groups (mail folders)  from Gmail into "gmail" topic
-</li>
-<li>Place groups (mails folders) from Outlook.com into "hotmail" topic
-</li>
-<li>Make "gmail" and "hotmail" belong to the root topic "Gnus"
-</li>
-</ul>
 <p>
-Enable it is just one line,
+So here is my code,
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
-</code></pre>
+<pre><code class="lang-lisp">;; Diff two regions
+;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
+;; Step 2: Select another region and `M-x diff-region-compare-with-b'
+(defun diff-region-format-region-boundary (b e)
+  "Make sure lines are selected and B is less than E"
+  (let (tmp rlt)
+    ;; swap b e, make sure b &lt; e
+    (when (&gt; b e)
+      (setq tmp b)
+      (setq b e)
+      (set e tmp))
 
-</div>
+    ;; select lines
+    (save-excursion
+      ;; Another workaround for evil-visual-line bug:
+      ;; In evil-mode, if we use hotkey V or `M-x evil-visual-line` to select line,
+      ;; the (line-beginning-position) of the line which is after the last selected
+      ;; line is always (region-end)! Don't know why.
+      (if (and (&gt; e b)
+               (save-excursion (goto-char e) (= e (line-beginning-position)))
+               (boundp 'evil-state) (eq evil-state 'visual))
+          (setq e (1- e)))
+      (goto-char b)
+      (setq b (line-beginning-position))
+      (goto-char e)
+      (setq e (line-end-position)))
+    (setq rlt (list b e))
+    rlt))
 
-<p>
-Now comes the question how to delete/add/move the topics?
-</p>
+(defun diff-region-tag-selected-as-a ()
+  "Select a region to compare"
+  (interactive)
+  (when (region-active-p)
+    (let (tmp buf)
+      ;; select lines
+      (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+      (setq buf (get-buffer-create "*Diff-regionA*"))
+      (save-current-buffer
+        (set-buffer buf)
+        (erase-buffer))
+      (append-to-buffer buf (car tmp) (cadr tmp))))
+  (message "Now select other region to compare and run `diff-region-compare-with-b`"))
 
-<p>
-The official answer is to read <a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Topic-Commands.html#Topic-Commands">its manual</a>.
-</p>
+(defun diff-region-compare-with-b ()
+  "Compare current region with region selected by `diff-region-tag-selected-as-a' "
+  (interactive)
+  (if (region-active-p)
+      (let (rlt-buf
+            diff-output
+            (fa (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory))))
+            (fb (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory)))))
+        (when fb
+          (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+          (write-region (car tmp) (cadr tmp) fb))
 
-<p>
-But there is a <b>simpler solution</b>. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
-</p>
+        (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
+        (when (and fa (file-exists-p fa) fb (file-exists-p fb))
+          (save-current-buffer
+            (set-buffer (get-buffer-create "*Diff-regionA*"))
+            (write-region (point-min) (point-max) fa))
+          (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
+          ;; show the diff output
+          (if (string= diff-output "")
+              (message "Two regions are SAME!")
+              (save-current-buffer
+                (switch-to-buffer-other-window rlt-buf)
+                (set-buffer rlt-buf)
+                (erase-buffer)
+                (insert diff-output)
+                (diff-mode))))
 
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(eval-after-load 'gnus-topic
-  '(progn
-     (setq gnus-topic-topology '(("Gnus" visible)
-                                 (("hotmail" visible nil nil))
-                                 (("gmail" visible nil nil))))
-
-     (setq gnus-topic-alist '(("hotmail" ; the key of topic
-                               "nnimap+hotmail:Inbox"
-                               "nnimap+hotmail:Drafts"
-                               "nnimap+hotmail:Sent"
-                               "nnimap+hotmail:Junk"
-                               "nnimap+hotmail:Deleted")
-                              ("gmail" ; the key of topic
-                               "INBOX"
-                               "[Gmail]/Sent Mail"
-                               "[Gmail]/Trash"
-                               "Drafts")
-                              ("Gnus")))))
-</code></pre>
-
-</div>
-
-<p>
-The <b>management of topics is as easy as editing above code</b>.
-</p>
-
-<p>
-My setup always works no matter ~/.newsrc.eld is loaded or not.
-</p>
-
-<p>
-BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(setq gnus-select-method
-             '(nnimap "gmail" ; key
-                      (nnimap-address "imap.gmail.com")
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl)))
-(add-to-list 'gnus-secondary-select-methods
-             '(nnimap "hotmail" ; key
-                      (nnimap-address "imap-mail.outlook.com")
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl)))
+        (if (and fa (file-exists-p fa))
+            (delete-file fa))
+        (if (and fb (file-exists-p fb))
+            (delete-file fb)))
+    (message "Please select region at first!")))
 </code></pre>
 
 </div>
@@ -184,18 +188,15 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="git-gutter-tip.html" rel="prev" title="Git gutter tip">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="use-ivy-mode-to-search-bash-history.html" rel="next" title="Use ivy-mode to search bash history">Next post</a>
+                <a href="use-ivy-mode-to-search-bash-history.html" rel="prev" title="Use ivy-mode to search bash history">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html",
-        disqus_title="How to use Gnus Group Topics efficiently",
-        disqus_identifier="cache/posts/how-to-use-gnus-group-topics-efficiently.html",
+            disqus_url="http://blog.binchen.org/posts/diff-regions-in-emacs.html",
+        disqus_title="Diff regions in Emacs",
+        disqus_identifier="cache/posts/diff-regions-in-emacs.html",
         disqus_config = function () {
             this.language = "en";
         };

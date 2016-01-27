@@ -1,5 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 25 Jan 2016 05:40:47 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 27 Jan 2016 13:44:30 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I know `M-x ediff-regions-line-wise`.
+&lt;/p&gt;
+
+&lt;p&gt;
+But it's kind of too generic. I only want to view the diff of two regions as quickly as possible without merging.
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my code,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Diff two regions
+;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
+;; Step 2: Select another region and `M-x diff-region-compare-with-b'
+(defun diff-region-format-region-boundary (b e)
+  "Make sure lines are selected and B is less than E"
+  (let (tmp rlt)
+    ;; swap b e, make sure b &amp;lt; e
+    (when (&amp;gt; b e)
+      (setq tmp b)
+      (setq b e)
+      (set e tmp))
+
+    ;; select lines
+    (save-excursion
+      ;; Another workaround for evil-visual-line bug:
+      ;; In evil-mode, if we use hotkey V or `M-x evil-visual-line` to select line,
+      ;; the (line-beginning-position) of the line which is after the last selected
+      ;; line is always (region-end)! Don't know why.
+      (if (and (&amp;gt; e b)
+               (save-excursion (goto-char e) (= e (line-beginning-position)))
+               (boundp 'evil-state) (eq evil-state 'visual))
+          (setq e (1- e)))
+      (goto-char b)
+      (setq b (line-beginning-position))
+      (goto-char e)
+      (setq e (line-end-position)))
+    (setq rlt (list b e))
+    rlt))
+
+(defun diff-region-tag-selected-as-a ()
+  "Select a region to compare"
+  (interactive)
+  (when (region-active-p)
+    (let (tmp buf)
+      ;; select lines
+      (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+      (setq buf (get-buffer-create "*Diff-regionA*"))
+      (save-current-buffer
+        (set-buffer buf)
+        (erase-buffer))
+      (append-to-buffer buf (car tmp) (cadr tmp))))
+  (message "Now select other region to compare and run `diff-region-compare-with-b`"))
+
+(defun diff-region-compare-with-b ()
+  "Compare current region with region selected by `diff-region-tag-selected-as-a' "
+  (interactive)
+  (if (region-active-p)
+      (let (rlt-buf
+            diff-output
+            (fa (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory))))
+            (fb (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory)))))
+        (when fb
+          (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+          (write-region (car tmp) (cadr tmp) fb))
+
+        (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
+        (when (and fa (file-exists-p fa) fb (file-exists-p fb))
+          (save-current-buffer
+            (set-buffer (get-buffer-create "*Diff-regionA*"))
+            (write-region (point-min) (point-max) fa))
+          (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
+          ;; show the diff output
+          (if (string= diff-output "")
+              (message "Two regions are SAME!")
+              (save-current-buffer
+                (switch-to-buffer-other-window rlt-buf)
+                (set-buffer rlt-buf)
+                (erase-buffer)
+                (insert diff-output)
+                (diff-mode))))
+
+        (if (and fa (file-exists-p fa))
+            (delete-file fa))
+        (if (and fb (file-exists-p fb))
+            (delete-file fb)))
+    (message "Please select region at first!")))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
   "Yank the bash history"
   (interactive)
   (let (hist-cmd collection val)
@@ -15,25 +113,35 @@
                            (ivy-read (format "Bash history:") collection))))
         (kill-new val)
         (message "%s =&amp;gt; kill-ring" val))))
-&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;i&gt;Group Topics&lt;/i&gt; is used to manage Gnus groups.
 &lt;/p&gt;
 
 &lt;p&gt;
 For example, you can,
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;Place groups (mail folders)  from Gmail into "gmail" topic
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Place groups (mail folders)  from Gmail into "gmail" topic
 &lt;/li&gt;
 &lt;li&gt;Place groups (mails folders) from Outlook.com into "hotmail" topic
 &lt;/li&gt;
 &lt;li&gt;Make "gmail" and "hotmail" belong to the root topic "Gnus"
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 Enable it is just one line,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Now comes the question how to delete/add/move the topics?
@@ -46,6 +154,8 @@ The official answer is to read &lt;a href="http://www.gnu.org/software/emacs/man
 &lt;p&gt;
 But there is a &lt;b&gt;simpler solution&lt;/b&gt;. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'gnus-topic
   '(progn
@@ -67,6 +177,8 @@ But there is a &lt;b&gt;simpler solution&lt;/b&gt;. All you need to do is insert
                               ("Gnus")))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 The &lt;b&gt;management of topics is as easy as editing above code&lt;/b&gt;.
 &lt;/p&gt;
@@ -79,6 +191,8 @@ My setup always works no matter ~/.newsrc.eld is loaded or not.
 BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-select-method
              '(nnimap "gmail" ; key
                       (nnimap-address "imap.gmail.com")
@@ -89,7 +203,10 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
                       (nnimap-address "imap-mail.outlook.com")
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -99,6 +216,8 @@ But I usually need to know what line changed in &lt;b&gt;latest commit&lt;/b&gt;
 &lt;p&gt;
 So I designed `M-x git-gutter-reset-to-head-parent`,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun git-gutter-reset-to-head-parent()
   (interactive)
@@ -115,17 +234,19 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
   (message "git-gutter reset"))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 `M-x git-gutter-reset-to-default` compare you file under working directory with the latet version under VCS.
 &lt;/p&gt;
 
 &lt;p&gt;
-`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-22&lt;/span&gt;&lt;/span&gt;
+`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-01-12 Tue&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-01-12 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -143,6 +264,8 @@ So I use &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; to
 &lt;p&gt;
 Here is code:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
 
@@ -183,7 +306,10 @@ Here is code:
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -194,67 +320,70 @@ I will demostrate how I use ivy-mode at first. Then the code.
 Please note I &lt;b&gt;only use one API `ivy-read`&lt;/b&gt; from ivy-mode.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Demo&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-1-1" class="outline-4"&gt;
-&lt;h5 id="sec-1-1"&gt;M-x counsel-git-grep-yank-line&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-1"&gt;
-
-&lt;p&gt;Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep the lines. Then copy the line into kill ring without opening new window.
-&lt;/p&gt;
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Demo&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h4 id="sec-1-1"&gt;&lt;span class="section-number-3"&gt;1.1&lt;/span&gt; M-x counsel-git-grep-yank-line&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep the lines. Then copy the line into kill ring without opening new window.
+&lt;/p&gt;
 
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-2" class="outline-4"&gt;
-&lt;h5 id="sec-1-2"&gt;M-x counsel-git-find-my-file&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-2"&gt;
-
-&lt;p&gt;Find my file under git version control in recent N weeks.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h4 id="sec-1-2"&gt;&lt;span class="section-number-3"&gt;1.2&lt;/span&gt; M-x counsel-git-find-my-file&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
+Find my file under git version control in recent N weeks.
+&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-3" class="outline-4"&gt;
-&lt;h5 id="sec-1-3"&gt;M-x ivy-imenu-goto&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-3"&gt;
-
-&lt;p&gt;Imenu. It's quick.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h4 id="sec-1-3"&gt;&lt;span class="section-number-3"&gt;1.3&lt;/span&gt; M-x ivy-imenu-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
+Imenu. It's quick.
+&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-4" class="outline-4"&gt;
-&lt;h5 id="sec-1-4"&gt;M-x ivy-bookmark-goto&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-4"&gt;
-
-&lt;p&gt;Quick and customizable.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-4" class="outline-3"&gt;
+&lt;h4 id="sec-1-4"&gt;&lt;span class="section-number-3"&gt;1.4&lt;/span&gt; M-x ivy-bookmark-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-4"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Code&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Swiper 7.0+ required.
+Quick and customizable.
 &lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
 
-
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Code&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Swiper 7.0+ required.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
 (defun counsel-git-grep-or-find-api (fn git-cmd hint open-another-window)
   "Apply FN on the output lines of GIT-CMD.  HINT is hint when user input.
@@ -404,14 +533,14 @@ Or else, find files since 24 weeks (6 months) ago."
     ))
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>helm</category><category>ivy</category><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-01&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>helm</category><category>ivy</category><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-01&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-03 Thu&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-03 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -421,6 +550,8 @@ That's easy if you use &lt;a href="https://github.com/company-mode/company-mode"
 &lt;p&gt;
 Say if you want to complete words ONLY in org-mode,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'company)
 
@@ -456,6 +587,8 @@ Say if you want to complete words ONLY in org-mode,
     (message "company-ispell enabled!"))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 `M-x toggle-company-ispell` to toggle company-ispell in &lt;b&gt;any major mode&lt;/b&gt;.
 &lt;/p&gt;
@@ -465,12 +598,12 @@ Say if you want to complete words ONLY in org-mode,
 &lt;/p&gt;
 
 &lt;p&gt;
-You can download my &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-27&lt;/span&gt;&lt;/span&gt;
+You can download my &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -489,15 +622,23 @@ Setup is easy.
 Step 1, create TAGS:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Step 2, add below code into "~/.emacs.d/init.el":
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 That's OK for most programming languages.
@@ -515,10 +656,14 @@ First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mo
 Second, you need add below code into your "~/.emacs.d/init.el",
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -527,6 +672,8 @@ You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit f
 &lt;p&gt;
 Another issue is company-etags.el disables code completion in string and comment by default. We need &lt;b&gt;remove this feature in web-mode temporarily&lt;/b&gt;,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company
   '(progn
@@ -537,28 +684,37 @@ Another issue is company-etags.el disables code completion in string and comment
          ad-do-it))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Tested on Emacs23.4 and Emacs24.4.
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATE at &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;:
+UPDATE at &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;:
 &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; has &lt;a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618"&gt;fixed&lt;/a&gt; the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Screenshot of my setup:
 &lt;/p&gt;
 
-&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-29&lt;/span&gt;&lt;/span&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-22 Sun&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -577,6 +733,8 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;{
   key1: {
     subkey1: {
@@ -585,6 +743,8 @@ For example, given the JSON response like:
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The developer need figure out the full path of "key3" which is "&lt;code&gt;key1.subkey1.arr1[0].key3&lt;/code&gt;".
@@ -597,6 +757,8 @@ My solution is to take advantage of AST created by &lt;a href="https://github.co
 &lt;p&gt;
 &lt;b&gt;Step 1&lt;/b&gt;, insert below code into ~/.emacs,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ print json path, will be removed when latest STABLE js2-mode released
 (defun js2-get-element-index-from-array-node (elem array-node &amp;amp;optional hardcoded-array-index)
@@ -659,6 +821,8 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 &lt;b&gt;Step 2&lt;/b&gt;, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
 &lt;/p&gt;
@@ -669,16 +833,19 @@ My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03
 
 &lt;p&gt;
 (apply #'derived-mode-p '(org-mode web-mode))
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-08-08 Sat&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-08 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-08-24 Mon&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-24 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
@@ -807,107 +974,6 @@ Insert below code into ~/.emacs:
 (define-key evil-inner-text-objects-map "f" 'evil-filepath-inner-text-object)
 (define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
 ;; }}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
-&lt;/p&gt;
-
-&lt;ul&gt;&lt;li&gt;autoload packages
-&lt;/li&gt;
-&lt;li&gt;idle-load packages 
-&lt;/li&gt;
-&lt;li&gt;compiling *.el to  *.elc
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-After some research, I found I could make my Emacs 1000% fast &lt;b&gt;in 1 minute&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Please note I'm talking about the &lt;b&gt;general performance&lt;/b&gt; not just startup time.
-&lt;/p&gt;
-
-&lt;p&gt;
-The solution is really simple.
-&lt;/p&gt;
-
-&lt;p&gt;
-Since I'm a Linux guy and my computer got enough (24G) memory. I can place my setup on &lt;a href="http://en.wikipedia.org/wiki/Tmpfs"&gt;memory&lt;/a&gt; only.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Step 1&lt;/b&gt;, insert below line into /etc/fstab and restart computer:
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-conf"&gt;tmpfs       /tmp        tmpfs       nodev,nosuid,size=8G    0   0
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;
-&lt;b&gt;Step 2&lt;/b&gt;, run the script "emacs2ram":
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-bash"&gt;#!/bin/sh
-
-if [ -z "$1" ];then
-    echo "Usage:"
-    echo "  emacs2ram start"
-    echo "  emacs2ram restore"
-    exit 1
-fi
-
-if [ "$1" == "start" ];then
-    backup=emacs.d-backup
-    link=.emacs.d
-    volatile=/tmp/.emacs.d-$USER
-
-    IFS=
-    set -efu
-
-    cd ~/
-
-    if [ ! -r $volatile ]; then
-        mkdir -m0700 $volatile
-    fi
-
-    # link -&amp;gt; volatie does not exist
-    if [ "$(readlink $link)" != "$volatile" ]; then
-        # backup project at first
-        mv $link $backup
-        # create the link
-        ln -s $volatile $link
-    fi
-
-    if [ -e $link/.unpacked ]; then
-        echo "Sync .emacs.d from memory to backup ..."
-        rsync -avq --delete --exclude .unpacked ./$link/ ./$backup/
-        echo "DONE!"
-    else
-        echo "Sync .emacs.d from disk to memory ..."
-        rsync -avq ./$backup/ ./$link/
-        touch $link/.unpacked
-        echo "DONE!"
-    fi
-else
-    echo "Moving .emacs.d back to disk ..."
-    backup=$2-backup
-    link=$2
-    volatile=/tmp/$2-$USER
-    cd ~/projs
-    rm $link &amp;amp;&amp;amp; mv $backup $link &amp;amp;&amp;amp; rm -rf $volatile
-    echo "DONE!"
-fi
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-That's all! Please enjoy Emacs as usual.
-&lt;/p&gt;
-
-&lt;p&gt;
-The original script is from ArchLinux Wiki. I learned this technique eight years ago. I'm just wondering why I need eight years to apply it?
-&lt;/p&gt;
-
-&lt;p&gt;
-BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using similar scripts.
-&lt;/p&gt;
-
-&lt;p&gt;
-UPDATE:
-I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. 
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item></channel></rss>

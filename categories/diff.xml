@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (diff)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/diff.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 27 Jan 2016 13:44:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I know `M-x ediff-regions-line-wise`.
+&lt;/p&gt;
+
+&lt;p&gt;
+But it's kind of too generic. I only want to view the diff of two regions as quickly as possible without merging.
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my code,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Diff two regions
+;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
+;; Step 2: Select another region and `M-x diff-region-compare-with-b'
+(defun diff-region-format-region-boundary (b e)
+  "Make sure lines are selected and B is less than E"
+  (let (tmp rlt)
+    ;; swap b e, make sure b &amp;lt; e
+    (when (&amp;gt; b e)
+      (setq tmp b)
+      (setq b e)
+      (set e tmp))
+
+    ;; select lines
+    (save-excursion
+      ;; Another workaround for evil-visual-line bug:
+      ;; In evil-mode, if we use hotkey V or `M-x evil-visual-line` to select line,
+      ;; the (line-beginning-position) of the line which is after the last selected
+      ;; line is always (region-end)! Don't know why.
+      (if (and (&amp;gt; e b)
+               (save-excursion (goto-char e) (= e (line-beginning-position)))
+               (boundp 'evil-state) (eq evil-state 'visual))
+          (setq e (1- e)))
+      (goto-char b)
+      (setq b (line-beginning-position))
+      (goto-char e)
+      (setq e (line-end-position)))
+    (setq rlt (list b e))
+    rlt))
+
+(defun diff-region-tag-selected-as-a ()
+  "Select a region to compare"
+  (interactive)
+  (when (region-active-p)
+    (let (tmp buf)
+      ;; select lines
+      (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+      (setq buf (get-buffer-create "*Diff-regionA*"))
+      (save-current-buffer
+        (set-buffer buf)
+        (erase-buffer))
+      (append-to-buffer buf (car tmp) (cadr tmp))))
+  (message "Now select other region to compare and run `diff-region-compare-with-b`"))
+
+(defun diff-region-compare-with-b ()
+  "Compare current region with region selected by `diff-region-tag-selected-as-a' "
+  (interactive)
+  (if (region-active-p)
+      (let (rlt-buf
+            diff-output
+            (fa (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory))))
+            (fb (make-temp-file (expand-file-name "scor"
+                                                  (or small-temporary-file-directory
+                                                      temporary-file-directory)))))
+        (when fb
+          (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
+          (write-region (car tmp) (cadr tmp) fb))
+
+        (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
+        (when (and fa (file-exists-p fa) fb (file-exists-p fb))
+          (save-current-buffer
+            (set-buffer (get-buffer-create "*Diff-regionA*"))
+            (write-region (point-min) (point-max) fa))
+          (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
+          ;; show the diff output
+          (if (string= diff-output "")
+              (message "Two regions are SAME!")
+              (save-current-buffer
+                (switch-to-buffer-other-window rlt-buf)
+                (set-buffer rlt-buf)
+                (erase-buffer)
+                (insert diff-output)
+                (diff-mode))))
+
+        (if (and fa (file-exists-p fa))
+            (delete-file fa))
+        (if (and fb (file-exists-p fb))
+            (delete-file fb)))
+    (message "Please select region at first!")))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item></channel></rss>
