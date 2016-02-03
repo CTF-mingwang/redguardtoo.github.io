@@ -77,8 +77,7 @@ Why I need this command? I'm doing some web developement now. I've got a  javasc
         </div>
         <div class="body">
             <div>
-<p>
-This command converts selected region in Emacs into one string and put it into the kill ring.
+<p>This command converts selected region in Emacs into one string and put it into the kill ring.
 </p>
 
 <p>
@@ -92,8 +91,6 @@ In certain situation, this method actually makes code more readable.
 <p>
 Here is code you can paste into your .emacs:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun strip-convert-lines-into-one-big-string (beg end)
 "strip and convert selected lines into one big string which is copied into kill ring.
@@ -126,8 +123,6 @@ Current position is preserved."
   )
 (global-set-key (kbd "C-c C-y") 'strip-convert-lines-into-one-big-string)
 </code></pre>
-
-</div>
 </div>
         </div>
         

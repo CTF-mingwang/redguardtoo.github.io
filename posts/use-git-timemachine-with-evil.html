@@ -81,8 +81,7 @@ The problem is I'm using Evil. How t">
         </div>
         <div class="body">
             <div>
-<p>
-<a href="https://github.com/pidu/git-timemachine">git-timemachine</a> is simple.
+<p><a href="https://github.com/pidu/git-timemachine">git-timemachine</a> is simple.
 </p>
 
 <p>
@@ -101,8 +100,6 @@ I consulted the issue with Frank Fischer.
 The solution is simple. Insert below code into ~/.emacs:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
 (eval-after-load 'git-timemachine
   '(progn
@@ -111,10 +108,9 @@ The solution is simple. Insert below code into ~/.emacs:
      (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 </code></pre>
 
-</div>
-
 <p>
-I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings">his in-depth discussion</a> on <b>general handling of keybindings conflict</b> between evil and other minor modes.</p>
+I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings">his in-depth discussion</a> on <b>general handling of keybindings conflict</b> between evil and other minor modes.
+</p>
 </div>
         </div>
         

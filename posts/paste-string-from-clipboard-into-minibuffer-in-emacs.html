@@ -77,8 +77,7 @@ Second, intergrating some command line clipboard too'>
         </div>
         <div class="body">
             <div>
-<p>
-First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
+<p>First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
 </p>
 
 <p>
@@ -88,8 +87,6 @@ Second, intergrating some command line clipboard tool into Emacs is better than 
 <p>
 Here is the code:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun paste-from-x-clipboard()
   (interactive)
@@ -108,8 +105,6 @@ Here is the code:
 
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
-
-</div>
 </div>
         </div>
         

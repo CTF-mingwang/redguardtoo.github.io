@@ -27,11 +27,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to do the file navigation efficiently">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-do-the-file-navigation-efficiently.html">
-<meta property="og:description" content="CREATED: &lt;2014-06-15&gt;
+<meta property="og:description" content="CREATED:  2014-06-15
 
 
 
-UPDATED: &lt;2015-02-21 Sat&gt;
+UPDATED:  2015-02-21 Sat
 
 
 
@@ -39,7 +39,7 @@ The solutin is based on the ideas of top geeks. I only did the implementation.
 
 
 
-Mendel Cooper provided the original design in Advanced Bash-Scri">
+Mendel Cooper provided the original design in Advanced Bash-Script">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-06-15T13:51:02Z">
 <meta property="article:tag" content="emacs">
@@ -83,12 +83,11 @@ Mendel Cooper provided the original design in Advanced Bash-Scri">
         </div>
         <div class="body">
             <div>
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-06-15&gt;</span></span>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-06-15</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-02-21 Sat&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-02-21 Sat</span></span>
 </p>
 
 <p>
@@ -99,14 +98,12 @@ The solutin is based on the ideas of top geeks. I only did the implementation.
 Mendel Cooper provided the original design in <a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting Guide</a>. Masafumi Oyamada (AKA mooz) added the missing piece by creating <a href="https://github.com/mooz/percol">percol</a>.
 </p>
 
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-How to find full path of a file by fuzz search?
-</p>
+<div id="outline-container-1" class="outline-3">
+<h4 id="sec-1">Problem</h4>
+<div class="outline-text-3" id="text-1">
 
+<p>How to find full path of a file by fuzz search?
+</p>
 <p>
 The path should be shared easily to other application like Emacs.
 </p>
@@ -114,29 +111,17 @@ The path should be shared easily to other application like Emacs.
 
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Installation</h3>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">
-<span class="section-number-3">2.1</span> Step 1, Install percol</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-<a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
-</p>
-</div>
-</div>
+<div id="outline-container-2" class="outline-3">
+<h4 id="sec-2">Installation</h4>
+<div class="outline-text-3" id="text-2">
 
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">
-<span class="section-number-3">2.2</span> Step 2, Insert below code into ~/.bashrc:</h4>
-<div class="outline-text-3" id="text-2-2">
-<div class="org-src-container">
+<ul>
+<li id="sec-2-1">Step 1, Install percol<br><a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
 
-
-<pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
+</li>
+</ul>
+<ul>
+<li id="sec-2-2">Step 2, Insert below code into ~/.bashrc:<br><pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -186,75 +171,67 @@ function cf()
 }
 </code></pre>
 
-</div>
+
 
 <p>
 `cf` is similar to `ff`. It will output Windows path under cygwin.
 </p>
+</li>
+</ul>
+</div>
 
-<p></p>
 </div>
-</div>
-</div>
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Usage</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
+
+<div id="outline-container-3" class="outline-3">
+<h4 id="sec-3">Usage</h4>
+<div class="outline-text-3" id="text-3">
+
+<p>Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
 </p>
 <p>
 The paritials-of-file-path could contain wildcard character.
 </p>
-
 <p>
 For example, <b>for "/home/cb/projs/web-portal/app/styles/bootstrap/main.css", you can type either of below command</b>:
 </p>
 
-<div class="org-src-container">
+
 
 <pre><code class="lang-bash">ff .../grunt-docs/*bootstrap*css
 ff web-port*ma*css
 ff styles
 </code></pre>
 
-</div>
+
 
 <p>
 Here is the screen shot when I type "ff el" in my ~/.emacs.d:
 <img src="../wp-content/use-ff-in-shell.png" alt="use-ff-in-shell.png"></p>
-
 <p>
 You will notice that I input the string "inflect" to filter the result.
 </p>
-
 <p>
 I can scroll up/down (press Ctrl-P or Ctrl-N) to select the exact file.
 </p>
-
 <p>
 In Emacs community, people try to embed a file explorer into Emacs (Sr speedbar, for example). This solution may make embedded file explorer unnecessary.
 </p>
+</div>
 
-<p></p>
 </div>
-</div>
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Advanced usage</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-More examples follow.
+
+<div id="outline-container-4" class="outline-3">
+<h4 id="sec-4">Advanced usage</h4>
+<div class="outline-text-3" id="text-4">
+
+<p>More examples follow.
 </p>
-</div>
-<div id="outline-container-sec-4-1" class="outline-3">
-<h4 id="sec-4-1">
-<span class="section-number-3">4.1</span> Search the bash history.</h4>
-<div class="outline-text-3" id="text-4-1">
-<p>
+<ul>
+<li id="sec-4-1">Search the bash history.<br>
 Code to insert ~/.bashrc:
-</p>
-<div class="org-src-container">
+
+
+
 
 <pre><code class="lang-sh">function h () {
     # reverse history, pick up one line, remove new line characters and put it into clipboard
@@ -266,27 +243,22 @@ Code to insert ~/.bashrc:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Though grep is quick enough for me, it can be replaced by <a href="https://github.com/ggreer/the_silver_searcher">Silver Searcher</a>.
 </p>
-
 <p>
 Screenshot:
 <img src="../wp-content/use-h-in-shell.png" alt="use-h-in-shell.png"></p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-sec-4-2" class="outline-3">
-<h4 id="sec-4-2">
-<span class="section-number-3">4.2</span> Select a file in git commit</h4>
-<div class="outline-text-3" id="text-4-2">
-<p>
+</li>
+</ul>
+<ul>
+<li id="sec-4-2">Select a file in git commit<br>
 Code to insert ~/.bashrc:
-</p>
-<div class="org-src-container">
+
+
+
 
 <pre><code class="lang-sh">function glsf () {
     local str=`git --no-pager log --oneline --stat $* |  ~/bin/percol.py`
@@ -297,24 +269,25 @@ Code to insert ~/.bashrc:
 }
 </code></pre>
 
-</div>
+
 
 <p>
 Screenshot:
 <img src="../wp-content/use-glsf-in-shell.png" alt="use-glsf-in-shell.png"></p>
+</li>
+</ul>
+</div>
 
-<p></p>
 </div>
-</div>
-</div>
-<div id="outline-container-sec-5" class="outline-2">
-<h3 id="sec-5">
-<span class="section-number-2">5</span> Summary</h3>
-<div class="outline-text-2" id="text-5">
-<p>
-The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
+
+<div id="outline-container-5" class="outline-3">
+<h4 id="sec-5">Summary</h4>
+<div class="outline-text-3" id="text-5">
+
+<p>The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
 </p>
 </div>
+
 </div>
 </div>
         </div>

@@ -27,11 +27,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Code completion for HTML/JS/CSS in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html">
-<meta property="og:description" content="CREATED: &lt;2015-11-27&gt;
+<meta property="og:description" content="CREATED:  2015-11-27
 
 
 
-UPDATED: &lt;2015-12-09 Wed&gt;
+UPDATED:  2015-12-09 Wed
 
 
 
@@ -40,6 +40,8 @@ Now company-mode is popular in Emacs users. It supports code completion out of b
 
 
 Its company-etags.el can use TAGS created by ctags/etags.
+
+
 
 ">
 <meta property="og:type" content="article">
@@ -93,12 +95,11 @@ Its company-etags.el can use TAGS created by ctags/etags.
         </div>
         <div class="body">
             <div>
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-27&gt;</span></span>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-27</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-12-09 Wed</span></span>
 </p>
 
 <p>
@@ -117,23 +118,15 @@ Setup is easy.
 Step 1, create TAGS:
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-bash">cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 </code></pre>
-
-</div>
 
 <p>
 Step 2, add below code into "~/.emacs.d/init.el":
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 </code></pre>
-
-</div>
 
 <p>
 That's OK for most programming languages.
@@ -151,14 +144,10 @@ First, you need upgrade web-mode to <a href="https://github.com/fxbois/web-mode/
 Second, you need add below code into your "~/.emacs.d/init.el",
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 </code></pre>
-
-</div>
 
 <p>
 You need above setup because web-mode <b>conditionally</b> inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for <a href="https://github.com/dgutov">Dmitry Gutov</a> pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -167,8 +156,6 @@ You need above setup because web-mode <b>conditionally</b> inherit from prog-mod
 <p>
 Another issue is company-etags.el disables code completion in string and comment by default. We need <b>remove this feature in web-mode temporarily</b>,
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(eval-after-load 'company
   '(progn
@@ -179,31 +166,24 @@ Another issue is company-etags.el disables code completion in string and comment
          ad-do-it))))
 </code></pre>
 
-</div>
-
 <p>
 Tested on Emacs23.4 and Emacs24.4.
 </p>
 
 <p>
-UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>:
+UPDATE at <span class="timestamp-wrapper"> <span class="timestamp">2015-12-09 Wed</span></span>:
 <a href="https://github.com/dgutov">Dmitry Gutov</a> has <a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618">fixed</a> the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 </code></pre>
-
-</div>
 
 <p>
 Screenshot of my setup:
 </p>
 
-<div class="figure">
-<p><img src="../wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
-</div>
+<p>
+<img src="../wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
 </div>
         </div>
         

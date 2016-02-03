@@ -34,12 +34,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 For example, you can,
 
 
-
 Place groups (mail folders)  from Gmail into "gmail" topic
 
 Place groups (mails folders) from Outlook.com into "hotmail" topic
 
-'>
+M'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-01-10T05:36:49Z">
 <meta property="article:tag" content="emacs">
@@ -89,15 +88,14 @@ Place groups (mails folders) from Outlook.com into "hotmail" topic
         </div>
         <div class="body">
             <div>
-<p>
-<i>Group Topics</i> is used to manage Gnus groups.
+<p><a href="how-to-use-gnus-group-topics-efficiently.html#Group-Topics">Group Topics</a> is used to manage Gnus groups.
 </p>
 
 <p>
 For example, you can,
 </p>
 
-<ul class="org-ul">
+<ul>
 <li>Place groups (mail folders)  from Gmail into "gmail" topic
 </li>
 <li>Place groups (mails folders) from Outlook.com into "hotmail" topic
@@ -109,12 +107,8 @@ For example, you can,
 Enable it is just one line,
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 </code></pre>
-
-</div>
 
 <p>
 Now comes the question how to delete/add/move the topics?
@@ -127,8 +121,6 @@ The official answer is to read <a href="http://www.gnu.org/software/emacs/manual
 <p>
 But there is a <b>simpler solution</b>. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(eval-after-load 'gnus-topic
   '(progn
@@ -150,8 +142,6 @@ But there is a <b>simpler solution</b>. All you need to do is insert below code 
                               ("Gnus")))))
 </code></pre>
 
-</div>
-
 <p>
 The <b>management of topics is as easy as editing above code</b>.
 </p>
@@ -164,8 +154,6 @@ My setup always works no matter ~/.newsrc.eld is loaded or not.
 BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
 </p>
 
-<div class="org-src-container">
-
 <pre><code class="lang-lisp">(setq gnus-select-method
              '(nnimap "gmail" ; key
                       (nnimap-address "imap.gmail.com")
@@ -177,8 +165,6 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)))
 </code></pre>
-
-</div>
 </div>
         </div>
         

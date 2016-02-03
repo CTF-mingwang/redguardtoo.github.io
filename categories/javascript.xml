@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 08 Jan 2016 12:42:10 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 03 Feb 2016 11:36:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-27&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -23,23 +22,15 @@ Setup is easy.
 Step 1, create TAGS:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 Step 2, add below code into "~/.emacs.d/init.el":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 That's OK for most programming languages.
@@ -57,14 +48,10 @@ First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mo
 Second, you need add below code into your "~/.emacs.d/init.el",
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -73,8 +60,6 @@ You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit f
 &lt;p&gt;
 Another issue is company-etags.el disables code completion in string and comment by default. We need &lt;b&gt;remove this feature in web-mode temporarily&lt;/b&gt;,
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company
   '(progn
@@ -85,37 +70,28 @@ Another issue is company-etags.el disables code completion in string and comment
          ad-do-it))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 Tested on Emacs23.4 and Emacs24.4.
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATE at &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;:
+UPDATE at &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;:
 &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; has &lt;a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618"&gt;fixed&lt;/a&gt; the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 Screenshot of my setup:
 &lt;/p&gt;
 
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
-&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-29&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-22 Sun&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -134,8 +110,6 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;{
   key1: {
     subkey1: {
@@ -144,8 +118,6 @@ For example, given the JSON response like:
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 The developer need figure out the full path of "key3" which is "&lt;code&gt;key1.subkey1.arr1[0].key3&lt;/code&gt;".
@@ -158,8 +130,6 @@ My solution is to take advantage of AST created by &lt;a href="https://github.co
 &lt;p&gt;
 &lt;b&gt;Step 1&lt;/b&gt;, insert below code into ~/.emacs,
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ print json path, will be removed when latest STABLE js2-mode released
 (defun js2-get-element-index-from-array-node (elem array-node &amp;amp;optional hardcoded-array-index)
@@ -222,8 +192,6 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 &lt;b&gt;Step 2&lt;/b&gt;, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
 &lt;/p&gt;
@@ -234,21 +202,19 @@ My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03
 
 &lt;p&gt;
 (apply #'derived-mode-p '(org-mode web-mode))
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-In Angular application, a function is defined in a javascript file and called in a html file.
-&lt;/p&gt;
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
+&lt;p&gt;In Angular application, a function is defined in a javascript file and called in a html file.
+&lt;/p&gt;
 &lt;p&gt;
 javascript file:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-html"&gt;&amp;lt;div ng-controller="MyController" ng-init="init()"&amp;gt;
@@ -256,13 +222,13 @@ javascript file:
 &amp;lt;/div&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 html file:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;angular.module['myapp'].controller('MyController', function ($scope, $http) {
 
@@ -274,41 +240,39 @@ html file:
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
-&lt;/p&gt;
 
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
+&lt;/p&gt;
 &lt;p&gt;
 I use CTags instead of IDEs because:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;New web frameworks keep popping up. I don't want to waste time&amp;amp;money on upgrading IDE frequently
 &lt;/li&gt;
 &lt;li&gt;As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
 &lt;/li&gt;
 &lt;li&gt;Setup of ctags and text editors is easy. Once the first project is set up, others are just five minutes of copy&amp;amp;paste jobs.
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
 
-&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;CTags setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-1"&gt;
-&lt;p&gt;
-Create a file named ".ctags":
+&lt;div id="outline-container-2-1" class="outline-4"&gt;
+&lt;h5 id="sec-2-1"&gt;CTags setup&lt;/h5&gt;
+&lt;div class="outline-text-4" id="text-2-1"&gt;
+
+&lt;p&gt;Create a file named ".ctags":
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;--langdef=html
 --langmap=html:.htm.html.erb
@@ -351,86 +315,86 @@ Create a file named ".ctags":
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 The key point of this setup is the regular expression for HTML should be &lt;b&gt;as simple as possible&lt;/b&gt;!
 &lt;/p&gt;
-
 &lt;p&gt;
 On Mac, location of ".ctags":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/Users/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 On Linux, location of ".ctags":
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/home/yourname/.ctags
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;Run CTags at least once:
 &lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;p&gt;
-Run CTags at least once:
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;ctags -e -R -f /app/path/TAGS
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Then insert below code into your ~/.emacs:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list '("/app/path/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Open Emacs and `M-x find-tag` to start code navigation. That's all.
 &lt;/p&gt;
-
 &lt;p&gt;
 If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; UI, install it and `M-x helm-etags-select` instead.
 &lt;/p&gt;
-
 &lt;p&gt;
-Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.&lt;/p&gt;
+Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
+&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
+&lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://ctags.sourceforge.net/"&gt;Ctags&lt;/a&gt; is critical to my web projects. I use it for code navigation by `M-x find-tag` and code auto-completion by using company-etags from &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -441,12 +405,8 @@ The first tip is to use global variable `tags-table-list` instead of `tags-file-
 Here is the value of `tags-table-list` for one project:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;("/Users/cb/projs/their-project/test/cdn/test/assets/test/js/TAGS" "/Users/cb/projs/their-project/test/app/TAGS")
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 The purpose to use multiple tag files in sub-folders instead of one tag file in root folder is to scan &lt;b&gt;less&lt;/b&gt; code files.
@@ -460,12 +420,8 @@ The second tip is we can avoid feeding big js files to ctags. Currently one of m
 Change the ctags command line underhood will solve the problem. Here is the actual liner to create a tag file:
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
-
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find proj-dir -type f -not -iwholename '*TAGS' -not -size +16k | ctags -f ~/proj/output/TAGS -e -L -
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 The point is the option `-not -size +16k`. It means only handle files less thank 16k.
@@ -474,8 +430,6 @@ The point is the option `-not -size +16k`. It means only handle files less thank
 &lt;p&gt;
 Here is the Emacs lisp function to wrap above shell command:
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-create-tags-if-needed (SRC-DIR CTAGS-OPTS &amp;amp;optional FORCE)
   "return the full path of tags file"
@@ -490,8 +444,6 @@ Here is the Emacs lisp function to wrap above shell command:
     file))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a276e9b#file-ctags"&gt;~/.ctags&lt;/a&gt;.
 &lt;/p&gt;
@@ -500,47 +452,37 @@ BTW, here is my &lt;a href="https://gist.github.com/redguardtoo/b12ddae3b8010a27
 In summary, &lt;b&gt;there are ONLY two points&lt;/b&gt;:
 &lt;/p&gt;
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;What's the `tags-table-list`
+&lt;ul&gt;&lt;li&gt;What's the `tags-table-list`
 &lt;/li&gt;
 &lt;li&gt;How the tags file are created by ctags
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 UPDATE:
 &lt;/p&gt;
 
-&lt;ol class="org-ol"&gt;
-&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
-&lt;/li&gt;
+&lt;ol&gt;&lt;li&gt;My tags file management strategy is described at &lt;a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html"&gt;How to use ctags in Emacs effectively&lt;/a&gt;. It's effective to me. But it may be not generic enough to apply to others' use cases.
 
+&lt;/li&gt;
 &lt;li&gt;I do use &lt;a href="http://www.gnu.org/software/global/"&gt;Gnu Global&lt;/a&gt; for &lt;b&gt;C/C++/Java&lt;/b&gt; code. I use it exactly in the &lt;b&gt;same way&lt;/b&gt; as ctags. Please `man global` for the details. Hint, all you need care is the environment variable &lt;b&gt;GTAGSLIBPATH&lt;/b&gt;.
 &lt;/li&gt;
-&lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Please note:
+&lt;/ol&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</guid><pubDate>Fri, 28 Nov 2014 05:13:11 GMT</pubDate></item><item><title>Debug efficiently in Emacs</title><link>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Please note:
 &lt;/p&gt;
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
+&lt;ul&gt;&lt;li&gt;I use javascript as a use case. The solution is &lt;b&gt;generic&lt;/b&gt; enough to be applied to &lt;b&gt;any language&lt;/b&gt;. At the end of the article, Emacs Lisp is used as another example.
 &lt;/li&gt;
 &lt;li&gt;I'm good at most debuggers. The point of this article is to deal with &lt;b&gt;more difficult issues&lt;/b&gt; the debugger can not handle.
 &lt;/li&gt;
 &lt;li&gt;My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
 &lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ul&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
+&lt;p&gt;As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 &lt;/p&gt;
-
 &lt;p&gt;
 The only way to debug such application is to insert as many as possible logging code, watch the output, and think.
 &lt;/p&gt;
-
 &lt;p&gt;
 So my problem is how to insert logging code as quickly as possible.
 &lt;/p&gt;
@@ -548,50 +490,50 @@ So my problem is how to insert logging code as quickly as possible.
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 &lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Logging simple JS variable&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Given a variable name like "var1", I need insert javascript code as below:
+&lt;/div&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Logging simple JS variable&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;console.log("var1=", var1)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/logobject.yasnippet&lt;/a&gt;
 &lt;/p&gt;
-
 &lt;p&gt;
 This snippet need you input variable name once.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Logging complex JS variable&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;p&gt;
-In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
-&lt;/p&gt;
 
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;Logging complex JS variable&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
+&lt;/p&gt;
 &lt;p&gt;
 So the solution is that I copy the JS variable into kill ring where my snippet will read the variable name.
 &lt;/p&gt;
-
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet&lt;/a&gt;
@@ -600,48 +542,48 @@ Snippet:
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-5" class="outline-2"&gt;
-&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Logging JS function name when it's called&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-5"&gt;
-&lt;p&gt;
-In below example, I need insert  "console.log('hello is called');" in function "hello":
+&lt;div id="outline-container-5" class="outline-3"&gt;
+&lt;h4 id="sec-5"&gt;Logging JS function name when it's called&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-5"&gt;
+
+&lt;p&gt;In below example, I need insert  "console.log('hello is called');" in function "hello":
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello() {
   console.log('hello is called');
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function.yasnippet&lt;/a&gt;
 &lt;/p&gt;
-
 &lt;p&gt;
 This snippet use the Emacs command `which-function`. If you read the code of `which-function`, you will find that it's &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu-mode&lt;/a&gt;
 who actually extracts the function name. But Imenu-mode requires you pre-define &lt;b&gt;enough regular expressions&lt;/b&gt;. 
 &lt;/p&gt;
-
 &lt;p&gt;
 Please check &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-javascript.el&lt;/a&gt;. I have defined many regular expressions for &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; and JQuery.
 &lt;/p&gt;
-
 &lt;p&gt;
 The regular expressions could be used in &lt;b&gt;both&lt;/b&gt; js-mode and js2-mode.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-6" class="outline-2"&gt;
-&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Logging JS function name with its parameters&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-6"&gt;
-&lt;p&gt;
-JS example:
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-6" class="outline-3"&gt;
+&lt;h4 id="sec-6"&gt;Logging JS function name with its parameters&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-6"&gt;
+
+&lt;p&gt;JS example:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;function hello(v1, v2,
                v3, v4) {
@@ -649,35 +591,32 @@ JS example:
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 I copy the parameter of JS function named "hello". It's just the content between "hello(" and ")", then Emacs Lisp code embedded in the snippet will parse and output the right content from kill ring.
 &lt;/p&gt;
-
 &lt;p&gt;
 Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-which-function-with-para.yasnippet&lt;/a&gt;
 &lt;/p&gt;
-
 &lt;p&gt;
 BTW, since I use &lt;a href="http://www.emacswiki.org/Evil"&gt;Evil&lt;/a&gt;, copy the parameter into kill-ring is as simple as pressing "yi(".
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-7" class="outline-2"&gt;
-&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Insert JS debugger statement&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-7"&gt;
-&lt;p&gt;
-@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
-&lt;/p&gt;
 
+&lt;/div&gt;
+
+&lt;div id="outline-container-7" class="outline-3"&gt;
+&lt;h4 id="sec-7"&gt;Insert JS debugger statement&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-7"&gt;
+
+&lt;p&gt;@cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
+&lt;/p&gt;
 &lt;p&gt;
 Snippets:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger.yasnippet&lt;/a&gt;
 &lt;/p&gt;
-
 &lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet&lt;/a&gt;
 &lt;/p&gt;
@@ -685,53 +624,47 @@ Snippets:
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-8" class="outline-2"&gt;
-&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Bonus&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-8"&gt;
-&lt;p&gt;
-Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</guid><pubDate>Sun, 23 Nov 2014 12:45:18 GMT</pubDate></item><item><title>Use bootstrap+font-awesome+jquery for IE7 web application</title><link>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Live demo:
+&lt;div id="outline-container-8" class="outline-3"&gt;
+&lt;h4 id="sec-8"&gt;Bonus&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-8"&gt;
+
+&lt;p&gt;Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/debug-efficiently-in-emacs.html</guid><pubDate>Sun, 23 Nov 2014 12:45:18 GMT</pubDate></item><item><title>Use bootstrap+font-awesome+jquery for IE7 web application</title><link>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Live demo:
 &lt;a href="http://binchen.org/schools/"&gt;http://binchen.org/schools/&lt;/a&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
 Screenshot:
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;
-&lt;/p&gt;
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;&lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Environment&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Bootstrap 2.3.2
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Environment&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;ul&gt;&lt;li&gt;Bootstrap 2.3.2
 &lt;/li&gt;
 &lt;li&gt;font-awesome 3.2.1
 &lt;/li&gt;
 &lt;li&gt;JQuery 1.8.2
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Notes&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Notes&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
 &lt;/li&gt;
 &lt;li&gt;IE7 does not support inline-block properly, I need below css code hack:
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-css"&gt;.myclass {
+&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-css"&gt;.myclass {
   display: inline-block;
   /* ie7*/
   *display: inline;
@@ -739,57 +672,46 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
 
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
+&lt;ul&gt;&lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
 &lt;/li&gt;
 &lt;li&gt;add below code into javascript so that I can hack IE7-only css code:
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
+&lt;/ul&gt;&lt;pre&gt;&lt;code class="lang-javascript"&gt;if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
 }
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Why Emacs is a better editor, part two</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.emacs. That's all you need to do!
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Why Emacs is a better editor, part two</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.emacs. That's all you need to do!
 &lt;/p&gt;
 
 &lt;p&gt;
 No extra setup needed! Then keep using your js2-mode happily, as if nothing happened. ;) 
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-In my previous article &lt;a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html"&gt;Why Emacs is better editor - a case study for javascript developer&lt;/a&gt;, I proved that Emacs is better than &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;.
-&lt;/p&gt;
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
+&lt;p&gt;In my previous article &lt;a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html"&gt;Why Emacs is better editor - a case study for javascript developer&lt;/a&gt;, I proved that Emacs is better than &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;.
+&lt;/p&gt;
 &lt;p&gt;
 So for this so-called "Goto Symbol" feature, Emacs wins.
 &lt;/p&gt;
-
 &lt;p&gt;
 It's because we use a plugin &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt;. It's actually a javascript parser which creates the symbols from AST.
 &lt;/p&gt;
-
 &lt;p&gt;
 But in real world, regular expression is better, sometimes.
 &lt;/p&gt;
-
 &lt;p&gt;
 In modern MVC javascript frameworks (&lt;a href="https://angularjs.org/"&gt;Angular&lt;/a&gt;, for example), you will meet below code,
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;app.controller('MyController', function ($scope, $http) {
@@ -797,33 +719,31 @@ In modern MVC javascript frameworks (&lt;a href="https://angularjs.org/"&gt;Angu
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 As you can see, using regular expression to extract the string "MyController" is more versatile and simpler.
-&lt;/p&gt;
+&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-My latest &lt;a href="https://github.com/mooz/js2-mode/pull/169"&gt;contribution to js2-mode&lt;/a&gt; solves this problem perfectly. It &lt;b&gt;combines the powers of AST and regular expression&lt;/b&gt;.
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;My latest &lt;a href="https://github.com/mooz/js2-mode/pull/169"&gt;contribution to js2-mode&lt;/a&gt; solves this problem perfectly. It &lt;b&gt;combines the powers of AST and regular expression&lt;/b&gt;.
 &lt;/p&gt;
 &lt;p&gt;
 The js2-mode will integrate this feature soon. I will notify you when next version is ready.
 &lt;/p&gt;
-
 &lt;p&gt;
 Let's cut off the boring technical details and see the demo,
 &lt;/p&gt;
-
 &lt;p&gt;
 For a simple &lt;a href="https://gist.github.com/redguardtoo/558ea0133daa72010b73#file-hello-js"&gt;hello.js&lt;/a&gt; with below content,
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;function helloworld() {
   console.log('hello called');
@@ -856,60 +776,50 @@ app.controller('MyController', function ($scope, $http) {
 });
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 &lt;b&gt;Emacs:&lt;/b&gt;
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"&gt;
-&lt;/p&gt;
-
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png" alt="https://cloud.githubusercontent.com/assets/184553/4871228/3ebe6588-61a5-11e4-9e9f-e6eb8218e2ee.png"&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;b&gt;Sublime3 (build 3047):&lt;/b&gt; 
-&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="c33b8fee-61ae-11e4-8072-671935b68d6b.png"&gt;
-&lt;/p&gt;
-
+&lt;img src="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png" alt="https://cloud.githubusercontent.com/assets/184553/4871347/c33b8fee-61ae-11e4-8072-671935b68d6b.png"&gt;&lt;/p&gt;
 &lt;p&gt;
 Please note Emacs displays &lt;b&gt;two functions with the same name "test" correctly&lt;/b&gt;!
 &lt;/p&gt;
-
 &lt;p&gt;
 BTW, my previous "Why Emacs is better" article got many feedbacks from Sublime users.
 &lt;/p&gt;
-
 &lt;p&gt;
 One feedback is that my comparison is not fair because I'm &lt;b&gt;comparing Emacs plugin with naked Sublime&lt;/b&gt;. Though I did some research before writing the article,
 I could be wrong. Please enlighten me if you know such Sublime plugins.
 &lt;/p&gt;
-
 &lt;p&gt;
 Another valuable feedback is that native Sublime provides better experience &lt;b&gt;out of the box&lt;/b&gt; for junior developers. I admit that's a good point. But Emacs provides many awesome choices &lt;b&gt;out of the box&lt;/b&gt; if junior guys start from &lt;a href="https://github.com/purcell"&gt;setups of the masters (like Steven Purcell)&lt;/a&gt;.
 &lt;/p&gt;
-
 &lt;p&gt;
 Sublime users also argue that Sublime3 uses &lt;a href="https://www.python.org/"&gt;Python&lt;/a&gt;. Python is a &lt;b&gt;better programming language&lt;/b&gt;. I'm qualified to answer this question because I wrote some large commercial Python application when I worked in Kodak R&amp;amp;D. First version I used was v2.2. So I've got about &lt;b&gt;10 years experience&lt;/b&gt; in Python. And I write lots of &lt;a href="https://github.com/redguardtoo/"&gt;Emacs Lisp code&lt;/a&gt; these days. My opinion is that both languages are good enough as DSL for text editors. In Python, you can use OO. In Emacs Lisp, you can treat function as object and there are &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Macros.html"&gt;Macros&lt;/a&gt; and &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;Advising&lt;/a&gt;. Both languages have enough widgets to shoot yourself in the foot. Python is surely newbie-friendly. But &lt;b&gt;number of newbies&lt;/b&gt; doesn't matter in high-end rival.
-&lt;/p&gt;
+&lt;/p&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Quick Start&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Quick Start&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
 &lt;/p&gt;
 &lt;p&gt;
 Dmitry Gutov updated the algorithm to parse the imenu items by walking the AST instead. It's better than my REGEX hacking because AST could show the context of the function.
 &lt;/p&gt;
-
 &lt;p&gt;
 But my patch is still useful for extract strings from modern JS framework, as I've shown you in Angular example. I'm just updating my pull request to be compatible with the new AST walk algorithm.
 &lt;/p&gt;
-
 &lt;p&gt;
 In the meantime, you can paste below code into your ~/.emacs before the patch is officially merged.
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; below regex list could be used in both js-mode and js2-mode
 (setq javascript-common-imenu-regex-list
@@ -1061,18 +971,17 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
 ;; }}
 &lt;/code&gt;&lt;/pre&gt;
 
+
+
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</guid><pubDate>Sat, 01 Nov 2014 11:06:17 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</guid><pubDate>Sat, 01 Nov 2014 11:06:17 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 I added below code into bottom of functions.php (Appearance =&amp;gt; Editor):
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-php"&gt;add_action('wp_enqueue_scripts', 'CDNJS_scripts');
 function CDNJS_scripts() 
@@ -1080,16 +989,12 @@ function CDNJS_scripts()
     wp_deregister_script('jquery');
     wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
     wp_enqueue_script('jquery');
-}
+} 
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
 
 &lt;p&gt;
 For js from SyntaxHighlighter Evolved (Plugins =&amp;gt; Installed Plugins =&amp;gt; Edit):
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
 index db8c668..e41ec12 100644
@@ -1150,82 +1055,60 @@ index db8c668..e41ec12 100644
 
         // Register some popular third-party brushes
         wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>javascript</category><category>php</category><category>wordpress</category><guid>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</guid><pubDate>Fri, 07 Mar 2014 00:58:00 GMT</pubDate></item><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-I love the REPL (Read–eval–print loop). Watch live update of web UI when typing code is cool.
+&lt;p&gt;I love the REPL (Read–eval–print loop). Watch live update of web UI when typing code is cool.
 &lt;/p&gt;
-
 &lt;p&gt;
 But most solutions around the internet are not practical for me.
 &lt;/p&gt;
-
 &lt;p&gt;
 In my world, I never has a chance to develop fancy 2D/3D games written in HTML5 canvas.
 &lt;/p&gt;
-
 &lt;p&gt;
 Intead, I was &lt;b&gt;ALWAYS&lt;/b&gt; assigned to maintain some enterprise CMS with complex business logic. For example, after refreshing the web page I need click lots of buttons before doing the job. Avoiding press "refresh page button" does not help much.
 &lt;/p&gt;
-
 &lt;p&gt;
 Besides, I can't use the embedded server those solutions boasted because our web application has many dependencies. It needs a whole environment support team to set it up. There is no way I can persuade the team to use a different web server
 &lt;/p&gt;
-
 &lt;p&gt;
 So for me, a practical solution must be:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;easy to set up
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;easy to set up
 &lt;/li&gt;
 &lt;li&gt;powerful. I can read/write any part of the web page in my text editor
 &lt;/li&gt;
 &lt;li&gt;no learning curve. I don't want to learn any domain specific language or API. For example, if my web application uses jquery, I want &lt;b&gt;use and only use jquery API&lt;/b&gt; to manuipulate web page in my text editor. If it use backbone, then I use backbone. No more, no less.
 &lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-The best solution is firefox addon &lt;a href="https://github.com/bard/mozrepl/wiki"&gt;MozRepl&lt;/a&gt;. You can install it &lt;a href="https://addons.mozilla.org"&gt;https://addons.mozilla.org&lt;/a&gt;. Click firefox menu "Tools =&amp;gt; MozRepl =&amp;gt; Start" to run it.
-&lt;img src="http://blog.binchen.org/wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"&gt;
-&lt;/p&gt;
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;p&gt;The best solution is firefox addon &lt;a href="https://github.com/bard/mozrepl/wiki"&gt;MozRepl&lt;/a&gt;. You can install it &lt;a href="https://addons.mozilla.org"&gt;https://addons.mozilla.org&lt;/a&gt;. Click firefox menu "Tools =&amp;gt; MozRepl =&amp;gt; Start" to run it.
+&lt;img src="http://blog.binchen.org/wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"&gt;&lt;/p&gt;
 &lt;p&gt;
 So what is MozRepl, as its web site says, "MozRepl lets you program Firefox and other Mozilla-based applications &lt;b&gt;from the inside&lt;/b&gt;." Basically it convert firefox into a socket server. Your text editor could talk to firefox and let firefox do anything you want. Since it only interact with the firefox, I don't need mess with the web server.
 &lt;/p&gt;
-
 &lt;p&gt;
 Well, I hope I can end this article by claiming "after reading its &lt;a href="https://github.com/bard/mozrepl/wiki/Tutorial"&gt;official tutorial&lt;/a&gt;,I live happily with MozRepl ever after".
 &lt;/p&gt;
-
 &lt;p&gt;
 The ugly truth is, MozRepl has some rough edges. That's the reason why I write this article. I will explain how to use MozRepl in next two sections.
 &lt;/p&gt;
-
 &lt;p&gt;
 Section 1 is about how to use MozRepl, whatever text editor you use, you should read this section.
 &lt;/p&gt;
-
 &lt;p&gt;
 Section 2 is on how to set up my text editor Emacs to interact with MozRepl. It's optional.
 &lt;/p&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Section 1, use MozRepl&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-1"&gt;
-&lt;p&gt;
+&lt;ul&gt;&lt;li id="sec-2-1"&gt;Section 1, use MozRepl&lt;br&gt;
 Here are key points:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;You need read above official tutorial at least once
+&lt;ul&gt;&lt;li&gt;You need read above official tutorial at least once
 &lt;/li&gt;
 &lt;li&gt;There is video demo on youtube. I suggest watching from &lt;a href="http://www.youtube.com/watch?v=5RSnHN6S52c#t=137"&gt;2:18&lt;/a&gt; because you possibily are more interested in manipulating web page than toy with firefox internals.
 &lt;/li&gt;
@@ -1239,12 +1122,10 @@ Here are key points:
 &lt;/li&gt;
 &lt;li&gt;For code running in MozRepl, if one line will trigger some AJAX request, all the code just after that line &lt;b&gt;will not&lt;/b&gt; be executed. Use javascript API "setTimeout' to work around this issue.
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 Here is a complete example (note how I use setTimeout) written in javascript,
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;$('#serviceId').val('0451235550');
@@ -1269,33 +1150,25 @@ setTimeout(function(){
 $('#confirmServiceBtn').click();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 As you can see from above, I can use jQuery API loaded in that web page without any problem. Of course, you can always use vanilla javascript instead.
 &lt;/p&gt;
-
 &lt;p&gt;
 Please note the code is not part of my web application! It will be run only in MozRepl. You can telnet to the MozRepl socket server (127.0.0.1 with port 4424) and copy paste above code line by line.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Section 2, set up text editor (Emacs)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2-2"&gt;
-&lt;p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;ul&gt;&lt;li id="sec-2-2"&gt;Section 2, set up text editor (Emacs)&lt;br&gt;
 My text editor is Emacs, so I use Emacs as an example.
-&lt;/p&gt;
 
 &lt;p&gt;
 Step 1, install moz.el according to &lt;a href="https://github.com/bard/mozrepl/wiki/Emacs-integration"&gt;official manual&lt;/a&gt;.
 &lt;/p&gt;
-
 &lt;p&gt;
 Step 2, Please insert below code into your ~/.emacs:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-goto-content-and-run-cmd (cmd)
@@ -1330,33 +1203,30 @@ Step 2, Please insert below code into your ~/.emacs:
     ))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js file you need MozRepl to run.
-&lt;/p&gt;
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Tips&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
-&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Tip 1&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-1"&gt;
-&lt;p&gt;
+
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Tips&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;ul&gt;&lt;li id="sec-3-1"&gt;Tip 1&lt;br&gt;
 Well, this is a simple tip. Maybe you are already aware of this.
-&lt;/p&gt;
+
 &lt;p&gt;
 You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separate logic for different project.
 &lt;/p&gt;
-
 &lt;p&gt;
 Here is javascript code,
 &lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
@@ -1366,22 +1236,17 @@ if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
 }
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
 Since javascript is good at analyzing URL, you can also tweak the URL parameters. Anyway, the full power of javascript is at your hand.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
-&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Tip 2&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3-2"&gt;
-&lt;p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;&lt;ul&gt;&lt;li id="sec-3-2"&gt;Tip 2&lt;br&gt;
 Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-reload-browser" to refresh the page. If page is not refreshed, restart Firefox. Luckily this does not happen too often.
-&lt;/p&gt;
 
-&lt;div class="org-src-container"&gt;
+
+
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun moz-reload-browser ()
@@ -1390,27 +1255,24 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
                       "setTimeout(function(){content.document.location.reload(true);}, '500');"))
 &lt;/code&gt;&lt;/pre&gt;
 
+
+
+&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Demo&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-4"&gt;
-&lt;p&gt;
-Here is a demo how I use it in a real world web application development.
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;Demo&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;p&gt;Here is a demo how I use it in a real world web application development.
 &lt;/p&gt;
-
 &lt;p&gt;
 The script to drive the firefox is written in simple javascript/jquery code, which I already show you.
 &lt;/p&gt;
-
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/mozrepl-in-action.gif" alt="mozrepl-in-action.gif"&gt;
-&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;
+&lt;img src="http://blog.binchen.org/wp-content/mozrepl-in-action.gif" alt="mozrepl-in-action.gif"&gt;&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>frontend</category><category>html</category><category>javascript</category><category>repl</category><guid>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</guid><pubDate>Mon, 10 Feb 2014 21:56:00 GMT</pubDate></item><item><title>Notes on Google Chrome's dev tool</title><link>http://blog.binchen.org/posts/notes-on-google-chromes-dev-tool.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;C-[ or C-] to switch panel &lt;/li&gt; &lt;li&gt;C-S-J to toggle dev tools and focus &lt;b&gt;Console panel&lt;/b&gt;, see &lt;a href="https://developers.google.com/chrome-developer-tools/docs/commandline-api"&gt;command line reference&lt;/a&gt; &lt;/li&gt; &lt;li&gt;C-S-I to toggle dev tools, then C-o to switch to &lt;b&gt;Sources panel&lt;/b&gt; if needed &lt;/li&gt; &lt;li&gt;C-S-C to &lt;b&gt;open&lt;/b&gt; dev tools and focus on &lt;b&gt;Elements panel&lt;/b&gt; &lt;/li&gt; &lt;li&gt;See &lt;a href="https://developers.google.com/chrome-developer-tools/docs/shortcuts"&gt;https://developers.google.com/chrome-developer-tools/docs/shortcuts&lt;/a&gt; for all hot keys &lt;/li&gt; &lt;li&gt;See &lt;a href="https://developers.google.com/chrome-developer-tools/docs/javascript-debugging"&gt;https://developers.google.com/chrome-developer-tools/docs/javascript-debugging&lt;/a&gt; &lt;/li&gt; &lt;li&gt;Click &lt;a href="http://javascript-library.googlecode.com/svn/trunk/javascript/goog/demos/hovercard.html"&gt;here&lt;/a&gt; for test &lt;/li&gt; &lt;/ul&gt;   &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt; &lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt;&lt;th scope="col" class="left"&gt;command in source panel&lt;/th&gt;&lt;th scope="col" class="left"&gt;hotkey&lt;/th&gt;&lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class="left"&gt;Continue&lt;/td&gt;&lt;td class="left"&gt;C-\&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Toggle break point&lt;/td&gt;&lt;td class="left"&gt;C-B&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Step over&lt;/td&gt;&lt;td class="left"&gt;C-'&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Step into&lt;/td&gt;&lt;td class="left"&gt;C-;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Step out&lt;/td&gt;&lt;td class="left"&gt;S-C-;&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Up call stack&lt;/td&gt;&lt;td class="left"&gt;C-,&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Down call stack&lt;/td&gt;&lt;td class="left"&gt;C-.&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Toggle console view&lt;/td&gt;&lt;td class="left"&gt;ESC&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Goto line&lt;/td&gt;&lt;td class="left"&gt;C-G&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Goto file&lt;/td&gt;&lt;td class="left"&gt;C-P&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;Jump to method&lt;/td&gt;&lt;td class="left"&gt;S-C-O&lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;  &lt;ul&gt; &lt;li&gt;I don't use hotkey F1~F12 because my windows manager is different from most developers &lt;/li&gt; &lt;li&gt;live editing does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. Anyway, I don't need this functionality &lt;/li&gt; &lt;li&gt;hotkeys of "Continue" button in &lt;b&gt;Sources panel&lt;/b&gt; does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. &lt;/li&gt; &lt;li&gt;"Break on" inspected element is extremely useful &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>chrome</category><category>debug</category><category>en</category><category>google</category><category>javascript</category><guid>http://blog.binchen.org/posts/notes-on-google-chromes-dev-tool.html</guid><pubDate>Mon, 13 Jan 2014 12:32:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>frontend</category><category>html</category><category>javascript</category><category>repl</category><guid>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</guid><pubDate>Mon, 10 Feb 2014 21:56:00 GMT</pubDate></item><item><title>Notes on Google Chrome's dev tool</title><link>http://blog.binchen.org/posts/notes-on-google-chromes-dev-tool.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;C-[ or C-] to switch panel &lt;/li&gt; &lt;li&gt;C-S-J to toggle dev tools and focus &lt;b&gt;Console panel&lt;/b&gt;, see &lt;a href="https://developers.google.com/chrome-developer-tools/docs/commandline-api"&gt;command line reference&lt;/a&gt; &lt;/li&gt; &lt;li&gt;C-S-I to toggle dev tools, then C-o to switch to &lt;b&gt;Sources panel&lt;/b&gt; if needed &lt;/li&gt; &lt;li&gt;C-S-C to &lt;b&gt;open&lt;/b&gt; dev tools and focus on &lt;b&gt;Elements panel&lt;/b&gt; &lt;/li&gt; &lt;li&gt;See &lt;a href="https://developers.google.com/chrome-developer-tools/docs/shortcuts"&gt;https://developers.google.com/chrome-developer-tools/docs/shortcuts&lt;/a&gt; for all hot keys &lt;/li&gt; &lt;li&gt;See &lt;a href="https://developers.google.com/chrome-developer-tools/docs/javascript-debugging"&gt;https://developers.google.com/chrome-developer-tools/docs/javascript-debugging&lt;/a&gt; &lt;/li&gt; &lt;li&gt;Click &lt;a href="http://javascript-library.googlecode.com/svn/trunk/javascript/goog/demos/hovercard.html"&gt;here&lt;/a&gt; for test &lt;/li&gt; &lt;/ul&gt;&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="left"&gt;command in source panel&lt;/th&gt;&lt;th scope="col" class="left"&gt;hotkey&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="left"&gt;Continue&lt;/td&gt;&lt;td class="left"&gt;C-\&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Toggle break point&lt;/td&gt;&lt;td class="left"&gt;C-B&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Step over&lt;/td&gt;&lt;td class="left"&gt;C-'&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Step into&lt;/td&gt;&lt;td class="left"&gt;C-;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Step out&lt;/td&gt;&lt;td class="left"&gt;S-C-;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Up call stack&lt;/td&gt;&lt;td class="left"&gt;C-,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Down call stack&lt;/td&gt;&lt;td class="left"&gt;C-.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Toggle console view&lt;/td&gt;&lt;td class="left"&gt;ESC&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Goto line&lt;/td&gt;&lt;td class="left"&gt;C-G&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Goto file&lt;/td&gt;&lt;td class="left"&gt;C-P&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;Jump to method&lt;/td&gt;&lt;td class="left"&gt;S-C-O&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;ul&gt;&lt;li&gt;I don't use hotkey F1~F12 because my windows manager is different from most developers &lt;/li&gt; &lt;li&gt;live editing does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. Anyway, I don't need this functionality &lt;/li&gt; &lt;li&gt;hotkeys of "Continue" button in &lt;b&gt;Sources panel&lt;/b&gt; does not work on Chromium 30.0.1599.114 Built on Ubuntu 13.04. &lt;/li&gt; &lt;li&gt;"Break on" inspected element is extremely useful &lt;/li&gt; &lt;/ul&gt;&lt;/div&gt;</description><category>chrome</category><category>debug</category><category>en</category><category>google</category><category>javascript</category><guid>http://blog.binchen.org/posts/notes-on-google-chromes-dev-tool.html</guid><pubDate>Mon, 13 Jan 2014 12:32:00 GMT</pubDate></item></channel></rss>

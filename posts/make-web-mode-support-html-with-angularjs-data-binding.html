@@ -34,12 +34,10 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 Insert below code into ~/.emacs:
 
 
-
-
 (eval-after-load 'web-mode
   '(progn
      ;; angular imenu
-  ">
+    ">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-11-21T11:45:24Z">
 <meta property="article:tag" content="angular">
@@ -87,15 +85,12 @@ Insert below code into ~/.emacs:
         </div>
         <div class="body">
             <div>
-<p>
-I find it very useful to use `M-x imenu` to jump to the  <a href="http://angularjs.org">AngularJS</a> binding point of one HTML file.
+<p>I find it very useful to use `M-x imenu` to jump to the  <a href="http://angularjs.org">AngularJS</a> binding point of one HTML file.
 </p>
 
 <p>
 Insert below code into ~/.emacs:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(eval-after-load 'web-mode
   '(progn
@@ -103,8 +98,6 @@ Insert below code into ~/.emacs:
      (add-to-list 'web-mode-imenu-regexp-list
                   '(" \\(ng-[a-z]*\\)=\"\\([a-zA-Z0-9]*\\)" 1 2 "="))))
 </code></pre>
-
-</div>
 </div>
         </div>
         
