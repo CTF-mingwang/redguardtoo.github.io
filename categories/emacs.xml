@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 26 Feb 2016 14:02:13 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to be extremely efficient in Emacs</title><link>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;All you need to do is using &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to &lt;b&gt;measure&lt;/b&gt; how many time you execute commands at first.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 28 Feb 2016 05:01:08 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to be extremely efficient in Emacs</title><link>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+All you need to do is using &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to &lt;b&gt;measure&lt;/b&gt; how many time you execute commands.
 &lt;/p&gt;
 
 &lt;p&gt;
-The most frequently used commands should be optimized by being assigned key bindings easiest to press.
+The frequently used commands should be assigned efficient key bindings.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -11,141 +12,1438 @@ But you need &lt;b&gt;exclude already optimized commands or commands which canno
 &lt;/p&gt;
 
 &lt;p&gt;
-For example, commands to move forward/backward could be excluded by tweaking variable &lt;code&gt;keyfreq-excluded-commands&lt;/code&gt;.
+For example, commands like &lt;code&gt;next-line/previous-line/forward-char/backward-char&lt;/code&gt; could be excluded by tweaking variable &lt;code&gt;keyfreq-excluded-commands&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 The minimum keyfreq setup,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'keyfreq)
 (setq keyfreq-excluded-commands
       '(self-insert-command
         abort-recursive-edit
+        forward-char
+        backward-char
         previous-line
         next-line))
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyfreq.el"&gt;actual keyfreq setup&lt;/a&gt; is more complicated.
 &lt;/p&gt;
 
 &lt;p&gt;
-Below is the eight month keyfreq data of my office computer, 
+Below is the eight month keyfreq data of my office computer,
 &lt;/p&gt;
 
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="right"&gt;Times&lt;/th&gt;&lt;th scope="col" class="right"&gt;Percentage&lt;/th&gt;&lt;th scope="col" class="left"&gt;Command&lt;/th&gt;&lt;th scope="col" class="left"&gt;Key&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;4967&lt;/td&gt;&lt;td class="right"&gt;12.00%&lt;/td&gt;&lt;td class="left"&gt;evilmi-jump-items&lt;/td&gt;&lt;td class="left"&gt;%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;2892&lt;/td&gt;&lt;td class="right"&gt;6.99%&lt;/td&gt;&lt;td class="left"&gt;compile&lt;/td&gt;&lt;td class="left"&gt;, o o&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;2178&lt;/td&gt;&lt;td class="right"&gt;5.26%&lt;/td&gt;&lt;td class="left"&gt;find-file-in-project-by-selected&lt;/td&gt;&lt;td class="left"&gt;, k k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1953&lt;/td&gt;&lt;td class="right"&gt;4.72%&lt;/td&gt;&lt;td class="left"&gt;copy-to-x-clipboard&lt;/td&gt;&lt;td class="left"&gt;, a a&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1566&lt;/td&gt;&lt;td class="right"&gt;3.78%&lt;/td&gt;&lt;td class="left"&gt;paste-from-x-clipboard&lt;/td&gt;&lt;td class="left"&gt;, z z&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1227&lt;/td&gt;&lt;td class="right"&gt;2.96%&lt;/td&gt;&lt;td class="left"&gt;er/expand-region&lt;/td&gt;&lt;td class="left"&gt;, x x&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;897&lt;/td&gt;&lt;td class="right"&gt;2.17%&lt;/td&gt;&lt;td class="left"&gt;evil-repeat&lt;/td&gt;&lt;td class="left"&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;866&lt;/td&gt;&lt;td class="right"&gt;2.09%&lt;/td&gt;&lt;td class="left"&gt;ido-find-file&lt;/td&gt;&lt;td class="left"&gt;, x f, C-x C-f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;819&lt;/td&gt;&lt;td class="right"&gt;1.98%&lt;/td&gt;&lt;td class="left"&gt;toggle-full-window&lt;/td&gt;&lt;td class="left"&gt;, f f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;815&lt;/td&gt;&lt;td class="right"&gt;1.97%&lt;/td&gt;&lt;td class="left"&gt;etags-select-find-tag-at-point&lt;/td&gt;&lt;td class="left"&gt;C-], , h t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;721&lt;/td&gt;&lt;td class="right"&gt;1.74%&lt;/td&gt;&lt;td class="left"&gt;back-to-previous-buffer&lt;/td&gt;&lt;td class="left"&gt;, b b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;682&lt;/td&gt;&lt;td class="right"&gt;1.65%&lt;/td&gt;&lt;td class="left"&gt;split-window-vertically&lt;/td&gt;&lt;td class="left"&gt;, x 2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;539&lt;/td&gt;&lt;td class="right"&gt;1.30%&lt;/td&gt;&lt;td class="left"&gt;find-function&lt;/td&gt;&lt;td class="left"&gt;, h f, C-h C-f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;494&lt;/td&gt;&lt;td class="right"&gt;1.19%&lt;/td&gt;&lt;td class="left"&gt;counsel-recentf-goto&lt;/td&gt;&lt;td class="left"&gt;, r r&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;397&lt;/td&gt;&lt;td class="right"&gt;0.96%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-grep&lt;/td&gt;&lt;td class="left"&gt;, g g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;376&lt;/td&gt;&lt;td class="right"&gt;0.91%&lt;/td&gt;&lt;td class="left"&gt;delete-other-windows&lt;/td&gt;&lt;td class="left"&gt;, x 1, C-x 1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;372&lt;/td&gt;&lt;td class="right"&gt;0.90%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-or-uncomment-lines&lt;/td&gt;&lt;td class="left"&gt;, c i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;351&lt;/td&gt;&lt;td class="right"&gt;0.85%&lt;/td&gt;&lt;td class="left"&gt;eval-expression&lt;/td&gt;&lt;td class="left"&gt;, e e, M-:&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;326&lt;/td&gt;&lt;td class="right"&gt;0.79%&lt;/td&gt;&lt;td class="left"&gt;evilmi-select-items&lt;/td&gt;&lt;td class="left"&gt;, s i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;320&lt;/td&gt;&lt;td class="right"&gt;0.77%&lt;/td&gt;&lt;td class="left"&gt;paredit-doublequote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;307&lt;/td&gt;&lt;td class="right"&gt;0.74%&lt;/td&gt;&lt;td class="left"&gt;evil-filepath-outer-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;300&lt;/td&gt;&lt;td class="right"&gt;0.72%&lt;/td&gt;&lt;td class="left"&gt;steve-ido-choose-from-recentf&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;295&lt;/td&gt;&lt;td class="right"&gt;0.71%&lt;/td&gt;&lt;td class="left"&gt;split-window-horizontally&lt;/td&gt;&lt;td class="left"&gt;, x 3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;283&lt;/td&gt;&lt;td class="right"&gt;0.68%&lt;/td&gt;&lt;td class="left"&gt;git-add-current-file&lt;/td&gt;&lt;td class="left"&gt;, x v a&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;279&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;winner-undo&lt;/td&gt;&lt;td class="left"&gt;, x u, , s u, C-x 4 u&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;278&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;describe-function&lt;/td&gt;&lt;td class="left"&gt;, h d, C-h f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;278&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-mark-line&lt;/td&gt;&lt;td class="left"&gt;'&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;269&lt;/td&gt;&lt;td class="right"&gt;0.65%&lt;/td&gt;&lt;td class="left"&gt;ido-kill-buffer&lt;/td&gt;&lt;td class="left"&gt;, x k, C-x k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;254&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-definition&lt;/td&gt;&lt;td class="left"&gt;g d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;253&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;pop-tag-mark&lt;/td&gt;&lt;td class="left"&gt;M-*&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;251&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;git-messenger:popup-message&lt;/td&gt;&lt;td class="left"&gt;, x v b, C-x v p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;246&lt;/td&gt;&lt;td class="right"&gt;0.59%&lt;/td&gt;&lt;td class="left"&gt;my-goto-next-hunk&lt;/td&gt;&lt;td class="left"&gt;, n n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;237&lt;/td&gt;&lt;td class="right"&gt;0.57%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-operator&lt;/td&gt;&lt;td class="left"&gt;, ,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;235&lt;/td&gt;&lt;td class="right"&gt;0.57%&lt;/td&gt;&lt;td class="left"&gt;flyspell-goto-next-error&lt;/td&gt;&lt;td class="left"&gt;, f e, C-,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;214&lt;/td&gt;&lt;td class="right"&gt;0.52%&lt;/td&gt;&lt;td class="left"&gt;evil-exit-emacs-state&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;212&lt;/td&gt;&lt;td class="right"&gt;0.51%&lt;/td&gt;&lt;td class="left"&gt;browse-kill-ring-forward&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;210&lt;/td&gt;&lt;td class="right"&gt;0.51%&lt;/td&gt;&lt;td class="left"&gt;flyspell-buffer&lt;/td&gt;&lt;td class="left"&gt;, f b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;203&lt;/td&gt;&lt;td class="right"&gt;0.49%&lt;/td&gt;&lt;td class="left"&gt;evil-ex-completion&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;195&lt;/td&gt;&lt;td class="right"&gt;0.47%&lt;/td&gt;&lt;td class="left"&gt;narrow-or-widen-dwim&lt;/td&gt;&lt;td class="left"&gt;, x n n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;173&lt;/td&gt;&lt;td class="right"&gt;0.42%&lt;/td&gt;&lt;td class="left"&gt;comint-send-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;173&lt;/td&gt;&lt;td class="right"&gt;0.42%&lt;/td&gt;&lt;td class="left"&gt;beginning-of-defun&lt;/td&gt;&lt;td class="left"&gt;, b f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;170&lt;/td&gt;&lt;td class="right"&gt;0.41%&lt;/td&gt;&lt;td class="left"&gt;evil-surround-region&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;visual-state&amp;gt; S&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;161&lt;/td&gt;&lt;td class="right"&gt;0.39%&lt;/td&gt;&lt;td class="left"&gt;hippie-expand&lt;/td&gt;&lt;td class="left"&gt;M-/&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;151&lt;/td&gt;&lt;td class="right"&gt;0.36%&lt;/td&gt;&lt;td class="left"&gt;describe-key&lt;/td&gt;&lt;td class="left"&gt;, h k, C-h k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;149&lt;/td&gt;&lt;td class="right"&gt;0.36%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-next-visual-line&lt;/td&gt;&lt;td class="left"&gt;SPC&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;139&lt;/td&gt;&lt;td class="right"&gt;0.34%&lt;/td&gt;&lt;td class="left"&gt;gnus-topic-select-group&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;138&lt;/td&gt;&lt;td class="right"&gt;0.33%&lt;/td&gt;&lt;td class="left"&gt;js2-print-json-path&lt;/td&gt;&lt;td class="left"&gt;, j p p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;132&lt;/td&gt;&lt;td class="right"&gt;0.32%&lt;/td&gt;&lt;td class="left"&gt;goto-line&lt;/td&gt;&lt;td class="left"&gt;M-g g, M-g M-g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;132&lt;/td&gt;&lt;td class="right"&gt;0.32%&lt;/td&gt;&lt;td class="left"&gt;evil-avy-goto-subword-1&lt;/td&gt;&lt;td class="left"&gt;;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;127&lt;/td&gt;&lt;td class="right"&gt;0.31%&lt;/td&gt;&lt;td class="left"&gt;ibuffer-mark-for-delete&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;127&lt;/td&gt;&lt;td class="right"&gt;0.31%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-single-quote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;126&lt;/td&gt;&lt;td class="right"&gt;0.30%&lt;/td&gt;&lt;td class="left"&gt;isearch-other-meta-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;124&lt;/td&gt;&lt;td class="right"&gt;0.30%&lt;/td&gt;&lt;td class="left"&gt;term-send-up&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;118&lt;/td&gt;&lt;td class="right"&gt;0.29%&lt;/td&gt;&lt;td class="left"&gt;isearch-other-control-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;116&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;evil-set-marker&lt;/td&gt;&lt;td class="left"&gt;m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;115&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;browse-kill-ring&lt;/td&gt;&lt;td class="left"&gt;M-y, , y y&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;114&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-grep-yank-line&lt;/td&gt;&lt;td class="left"&gt;, g l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;114&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;evil-window-down&lt;/td&gt;&lt;td class="left"&gt;C-w j&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;112&lt;/td&gt;&lt;td class="right"&gt;0.27%&lt;/td&gt;&lt;td class="left"&gt;evil-jump-backward&lt;/td&gt;&lt;td class="left"&gt;C-o&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;108&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;evil-visual-block&lt;/td&gt;&lt;td class="left"&gt;C-v&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;108&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-previous-visual-line&lt;/td&gt;&lt;td class="left"&gt;S-SPC&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;107&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;comint-previous-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;evil-search-word-backward&lt;/td&gt;&lt;td class="left"&gt;#&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;forward-button&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;96&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-pop-next&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;95&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;ediff-next-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;95&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;ido-imenu&lt;/td&gt;&lt;td class="left"&gt;, i i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;92&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;my-wg-switch-workgroup&lt;/td&gt;&lt;td class="left"&gt;, w g g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;90&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-find-file&lt;/td&gt;&lt;td class="left"&gt;, g f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;90&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;evilmi-delete-items&lt;/td&gt;&lt;td class="left"&gt;, d i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;87&lt;/td&gt;&lt;td class="right"&gt;0.21%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-extract-mail-address&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;87&lt;/td&gt;&lt;td class="right"&gt;0.21%&lt;/td&gt;&lt;td class="left"&gt;cliphist-paste-item&lt;/td&gt;&lt;td class="left"&gt;, h h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;84&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;subword-backward-kill&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;C-backspace&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;84&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;paredit-backslash&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;83&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;my-yas-reload-all&lt;/td&gt;&lt;td class="left"&gt;, y c r&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;81&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;pwd&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;80&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;previous-complete-history-element&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;80&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;wg-create-workgroup&lt;/td&gt;&lt;td class="left"&gt;, w g t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;78&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;evil-forward-WORD-end&lt;/td&gt;&lt;td class="left"&gt;E&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;77&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-scroll-up&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;76&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-extract-cc-and-to&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;75&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;compile-goto-error&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;73&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;evil-find-char-to&lt;/td&gt;&lt;td class="left"&gt;t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;72&lt;/td&gt;&lt;td class="right"&gt;0.17%&lt;/td&gt;&lt;td class="left"&gt;evil-repeat-find-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;69&lt;/td&gt;&lt;td class="right"&gt;0.17%&lt;/td&gt;&lt;td class="left"&gt;evil-window-up&lt;/td&gt;&lt;td class="left"&gt;C-w k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;67&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;eval-last-sexp&lt;/td&gt;&lt;td class="left"&gt;, x e, C-x C-e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;66&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;evil-complete-next-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;66&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;exchange-point-and-mark&lt;/td&gt;&lt;td class="left"&gt;C-x C-x&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;63&lt;/td&gt;&lt;td class="right"&gt;0.15%&lt;/td&gt;&lt;td class="left"&gt;direx:previous-item&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;61&lt;/td&gt;&lt;td class="right"&gt;0.15%&lt;/td&gt;&lt;td class="left"&gt;ediff-jump-to-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;60&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;diredp-next-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;58&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;evilmr-replace-in-buffer&lt;/td&gt;&lt;td class="left"&gt;, r b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;58&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;counsel-imenu-goto&lt;/td&gt;&lt;td class="left"&gt;, i m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;56&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-mark&lt;/td&gt;&lt;td class="left"&gt;`&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;gnus-group-unsubscribe-current-group&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;ivy-bookmark-goto&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;evil-filepath-inner-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;describe-mode&lt;/td&gt;&lt;td class="left"&gt;C-h m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;recenter-top-bottom&lt;/td&gt;&lt;td class="left"&gt;C-l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;list-packages&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;52&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;gnus-topic-mark-topic&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;52&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;kill-line&lt;/td&gt;&lt;td class="left"&gt;C-k, &amp;lt;deleteline&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;51&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;find-and-ctags-update-all-tags-force&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;50&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-before&lt;/td&gt;&lt;td class="left"&gt;P&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;execute-extended-command&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;execute&amp;gt;, C-x RET&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;etags-select-quit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-WORD&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;48&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;find-tag&lt;/td&gt;&lt;td class="left"&gt;g C-]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;47&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;diredp-previous-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;46&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;paredit-close-square&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;44&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;paredit-open-square&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;44&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-last-insertion&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;42&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-double-quote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;42&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;ivy-imenu-goto&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;40&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-find-my-file&lt;/td&gt;&lt;td class="left"&gt;, g m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;cp-filename-of-current-buffer&lt;/td&gt;&lt;td class="left"&gt;, f n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;gnus-article-read-summary-keys&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;isearch-nonincremental-exit-minibuffer&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;sh-assignment&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;mark-whole-buffer&lt;/td&gt;&lt;td class="left"&gt;, x h, C-x h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evilmi-inner-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;36&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-or-uncomment-paragraphs&lt;/td&gt;&lt;td class="left"&gt;, c p, C-c p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;36&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evil-toggle-input-method&lt;/td&gt;&lt;td class="left"&gt;C-\&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;35&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;org2nikola-export-subtree&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;35&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;subword-forward&lt;/td&gt;&lt;td class="left"&gt;M-f, ESC &amp;lt;right&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;34&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-open-above&lt;/td&gt;&lt;td class="left"&gt;O&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;34&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;compose-mail&lt;/td&gt;&lt;td class="left"&gt;C-x m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-paren&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;term-send-raw-meta&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-invert-char&lt;/td&gt;&lt;td class="left"&gt;~&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-repeat-find-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;httpd-restart-at-default-directory&lt;/td&gt;&lt;td class="left"&gt;, w r d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;cp-fullpath-of-current-buffer&lt;/td&gt;&lt;td class="left"&gt;, f p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;31&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evil-forward-WORD-begin&lt;/td&gt;&lt;td class="left"&gt;W&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;sort-lines&lt;/td&gt;&lt;td class="left"&gt;, s l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;bmkp-w3m-jump&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evilnc-copy-and-comment-lines&lt;/td&gt;&lt;td class="left"&gt;, c c, C-c c&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;29&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;toggle-company-ispell&lt;/td&gt;&lt;td class="left"&gt;, t c i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;29&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;top-level&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;28&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;package-menu-mark-upgrades&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evil-numbers/dec-at-pt&lt;/td&gt;&lt;td class="left"&gt;-&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;end-of-defun&lt;/td&gt;&lt;td class="left"&gt;, e f, C-M-e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;my-setup-develop-environment&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;26&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-pop&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;ediff-previous-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-backward-WORD-begin&lt;/td&gt;&lt;td class="left"&gt;B&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;goto-char&lt;/td&gt;&lt;td class="left"&gt;g o, M-g c&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;w3m-close-window&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;org-mime-htmlize&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;gnus-group-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;24&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;git-gutter:toggle&lt;/td&gt;&lt;td class="left"&gt;C-x C-g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;my-gnus-group-list-subscribed-groups&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;find-directory-in-project-by-selected&lt;/td&gt;&lt;td class="left"&gt;, f d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-curly&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;org-edit-src-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;string-edit-at-point&lt;/td&gt;&lt;td class="left"&gt;, s e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;package-menu-mark-delete&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;ido-magic-forward-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;run-js&lt;/td&gt;&lt;td class="left"&gt;, r j s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;git-gutter-reset-to-head-parent&lt;/td&gt;&lt;td class="left"&gt;, g s h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;counsel-read-history&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;rcirc-send-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;gnus-undo&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;subword-backward&lt;/td&gt;&lt;td class="left"&gt;M-b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;company-select-next&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;what-cursor-position&lt;/td&gt;&lt;td class="left"&gt;g a, g 8, C-x =&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;my-grep&lt;/td&gt;&lt;td class="left"&gt;, q q&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;hydra-gnus-summary/body&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;ansi-term&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;evil-window-right&lt;/td&gt;&lt;td class="left"&gt;C-w l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;debugger-jump&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;wg-switch-to-workgroup&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;yas-abort-snippet&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;tags-loop-continue&lt;/td&gt;&lt;td class="left"&gt;M-,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;swiper-the-thing&lt;/td&gt;&lt;td class="left"&gt;, s s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;18&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-wg-swich-to-workgroup&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;18&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;org-edit-special&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;lisp-complete-symbol&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-wg-switch-to-workgroup-at-index&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;test&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;ediff-scroll-vertically&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;w3m-view-previous-page&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;evil-window-left&lt;/td&gt;&lt;td class="left"&gt;C-w h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;isearch-yank-kill&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-goto-previous-hunk&lt;/td&gt;&lt;td class="left"&gt;, p p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;js-beautify&lt;/td&gt;&lt;td class="left"&gt;, j b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;hydra-launcher/body&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;read-only-mode&lt;/td&gt;&lt;td class="left"&gt;C-x C-q&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;message-send-and-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;etags-select-goto-tag&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;evil-next-match&lt;/td&gt;&lt;td class="left"&gt;g n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;js2r-kill&lt;/td&gt;&lt;td class="left"&gt;, j j k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;string-edit-conclude&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;delete-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;14&lt;/td&gt;&lt;td class="right"&gt;0.03%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-limit-to-author&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;14&lt;/td&gt;&lt;td class="right"&gt;0.03%&lt;/td&gt;&lt;td class="left"&gt;ediff-swap-buffers&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</guid><pubDate>Fri, 26 Feb 2016 13:51:27 GMT</pubDate></item><item><title>Grab email address in Gnus</title><link>http://blog.binchen.org/posts/grab-email-address-in-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;That's easy in Gnus.
-&lt;/p&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
-&lt;p&gt;
-I just re-use the mail sent from PM because she is good at the things.
-&lt;/p&gt;
+&lt;colgroup&gt;
+&lt;col class="right"&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Usage&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
+&lt;col class="right"&gt;
 
-&lt;ul&gt;&lt;li&gt;Go to the Summary Buffer (press Enter on a mail folder). 
-&lt;/li&gt;
-&lt;li&gt;Press &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/gnus/Limiting.html"&gt;`/ a PM-name Enter`&lt;/a&gt; 
-&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;M-x gnus-summary-extract-mail-address&lt;/code&gt;, extracted mail addresses is inserted to kill ring
-&lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
+&lt;col class="left"&gt;
 
-&lt;/div&gt;
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="right"&gt;Times&lt;/th&gt;
+&lt;th scope="col" class="right"&gt;Percentage&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Command&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Key&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;4967&lt;/td&gt;
+&lt;td class="right"&gt;12.00%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-jump-items&lt;/td&gt;
+&lt;td class="left"&gt;%&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Code&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;2892&lt;/td&gt;
+&lt;td class="right"&gt;6.99%&lt;/td&gt;
+&lt;td class="left"&gt;compile&lt;/td&gt;
+&lt;td class="left"&gt;, o o&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;p&gt;Insert below code into ~/.emacs,
-&lt;/p&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;2178&lt;/td&gt;
+&lt;td class="right"&gt;5.26%&lt;/td&gt;
+&lt;td class="left"&gt;find-file-in-project-by-selected&lt;/td&gt;
+&lt;td class="left"&gt;, k k&lt;/td&gt;
+&lt;/tr&gt;
 
+&lt;tr&gt;
+&lt;td class="right"&gt;1953&lt;/td&gt;
+&lt;td class="right"&gt;4.72%&lt;/td&gt;
+&lt;td class="left"&gt;copy-to-x-clipboard&lt;/td&gt;
+&lt;td class="left"&gt;, a a&lt;/td&gt;
+&lt;/tr&gt;
 
+&lt;tr&gt;
+&lt;td class="right"&gt;1566&lt;/td&gt;
+&lt;td class="right"&gt;3.78%&lt;/td&gt;
+&lt;td class="left"&gt;paste-from-x-clipboard&lt;/td&gt;
+&lt;td class="left"&gt;, z z&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun gnus-summary-extract-mail-address(regexp)
-  "Extract TO/CC/FROM fields from mails in current Gnus Summary Buffer.
-REGEXP is pattern to exclude extracted address.  For example, 'Tom|gmail' excludes Tom or gmail.
-Final result is inserted into kill-ring and returned."
-  (interactive
-   (let* ((regexp (read-regexp "Regex to exclude mail address (OPTIONAL):")))
-     (list regexp)))
+&lt;tr&gt;
+&lt;td class="right"&gt;1227&lt;/td&gt;
+&lt;td class="right"&gt;2.96%&lt;/td&gt;
+&lt;td class="left"&gt;er/expand-region&lt;/td&gt;
+&lt;td class="left"&gt;, x x&lt;/td&gt;
+&lt;/tr&gt;
 
-  (unless (featurep 'cl)
-    (require 'cl))
+&lt;tr&gt;
+&lt;td class="right"&gt;897&lt;/td&gt;
+&lt;td class="right"&gt;2.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-repeat&lt;/td&gt;
+&lt;td class="left"&gt;.&lt;/td&gt;
+&lt;/tr&gt;
 
-  (let ((rlt "") (i 0))
-    (dolist (d gnus-newsgroup-data)
-      (let ((header (gnus-data-header d)) cc-to)
-        (setq i (+ 1 i))
-        (if (= (mod i 100) 0) (message "%s mails scanned ..." i))
-        (when (vectorp header)
-          (if (setq cc-to (mail-header-extra header))
-              ;; (message "cc-to=%s cc=%s" cc-to (assoc 'Cc cc-to))
-              (setq rlt (concat rlt
-                                (cdr (assoc 'To cc-to))
-                                ", "
-                                (cdr (assoc 'Cc cc-to))
-                                ", ")))
-          (setq rlt (concat rlt (if (string= "" rlt) "" ", ") (mail-header-from header) ", "))
-          )))
-    ;; trim trailing ", "
-    (setq rlt (split-string (replace-regexp-in-string (rx (* (any ", ")) eos)
-                                                      ""
-                                                      rlt) ", *"))
+&lt;tr&gt;
+&lt;td class="right"&gt;866&lt;/td&gt;
+&lt;td class="right"&gt;2.09%&lt;/td&gt;
+&lt;td class="left"&gt;ido-find-file&lt;/td&gt;
+&lt;td class="left"&gt;, x f, C-x C-f&lt;/td&gt;
+&lt;/tr&gt;
 
-    ;; remove empty strings
-    (setq rlt (delq nil (remove-if (lambda (s) (or (not s) (string= "" s)))
-                               rlt)))
-    ;; remove actually duplicated mails
-    (setq rlt (delq nil (remove-duplicates rlt
-                                 :test (lambda (x y)
-                                         (let (x1 y1)
-                                           ;; Tom W &amp;lt;tom.w@gmail.com&amp;gt; | tom.w@gmail.com (Tom W)
-                                           (if (string-match "^[^&amp;lt;]*&amp;lt;\\([^ ]*\\)&amp;gt; *$" x)
-                                               (setq x1 (match-string 1 x))
-                                             (setq x1 (replace-regexp-in-string " *([^()]*) *" "" (if x x ""))))
-                                           (if (string-match "^[^&amp;lt;]*&amp;lt;\\([^ ]*\\)&amp;gt; *$" y)
-                                               (setq y1 (match-string 1 y))
-                                             (setq y1 (replace-regexp-in-string " *([^ ]*) *" "" (if y y ""))))
-                                           (string= x1 y1)))
-                                 :from-end t)))
-    ;; exclude mails
-    (if (and regexp (not (string= regexp "")))
-        (setq rlt (delq nil (remove-if (lambda (s)
-                                         (string-match (concat "\\(" (replace-regexp-in-string "|" "\\\\|" regexp) "\\)") s))
-                                       rlt))))
-    (kill-new (mapconcat 'identity rlt ", "))
-    (message "Mail addresses =&amp;gt; kill-ring")
-    rlt))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;819&lt;/td&gt;
+&lt;td class="right"&gt;1.98%&lt;/td&gt;
+&lt;td class="left"&gt;toggle-full-window&lt;/td&gt;
+&lt;td class="left"&gt;, f f&lt;/td&gt;
+&lt;/tr&gt;
 
+&lt;tr&gt;
+&lt;td class="right"&gt;815&lt;/td&gt;
+&lt;td class="right"&gt;1.97%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-find-tag-at-point&lt;/td&gt;
+&lt;td class="left"&gt;C-], , h t&lt;/td&gt;
+&lt;/tr&gt;
 
+&lt;tr&gt;
+&lt;td class="right"&gt;721&lt;/td&gt;
+&lt;td class="right"&gt;1.74%&lt;/td&gt;
+&lt;td class="left"&gt;back-to-previous-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, b b&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;p&gt;
-I tested on my office mail inbox. 8K+ mails is scanned in less than one minute.
-&lt;/p&gt;
-&lt;/div&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;682&lt;/td&gt;
+&lt;td class="right"&gt;1.65%&lt;/td&gt;
+&lt;td class="left"&gt;split-window-vertically&lt;/td&gt;
+&lt;td class="left"&gt;, x 2&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;/div&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;539&lt;/td&gt;
+&lt;td class="right"&gt;1.30%&lt;/td&gt;
+&lt;td class="left"&gt;find-function&lt;/td&gt;
+&lt;td class="left"&gt;, h f, C-h C-f&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;Technical details&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;494&lt;/td&gt;
+&lt;td class="right"&gt;1.19%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-recentf-goto&lt;/td&gt;
+&lt;td class="left"&gt;, r r&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;p&gt;Global variable &lt;code&gt;gnus-newsgroup-data&lt;/code&gt; contains the information of displayed mails in current folder. It's updated dynamically. 
-&lt;/p&gt;
-&lt;p&gt;
-&lt;code&gt;gnus-summary-extract-mail-address&lt;/code&gt; could also be used as an API. It return the list of mail addresses.
-&lt;/p&gt;
-&lt;p&gt;
-If you want to use it to update the &lt;a href="https://www.emacswiki.org/emacs/CategoryBbdb"&gt;BBDB&lt;/a&gt; database, study code from my project &lt;a href="https://github.com/redguardtoo/gmail2bbdb"&gt;gmail2bbdb&lt;/a&gt; which use plain Lisp to insert Name and Mail Address into "~/.bbdb".
-&lt;/p&gt;&lt;/div&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;397&lt;/td&gt;
+&lt;td class="right"&gt;0.96%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-grep&lt;/td&gt;
+&lt;td class="left"&gt;, g g&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/grab-email-address-in-gnus.html</guid><pubDate>Wed, 03 Feb 2016 11:35:57 GMT</pubDate></item><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I know &lt;code&gt;M-x ediff-regions-linewise&lt;/code&gt;.
+&lt;tr&gt;
+&lt;td class="right"&gt;376&lt;/td&gt;
+&lt;td class="right"&gt;0.91%&lt;/td&gt;
+&lt;td class="left"&gt;delete-other-windows&lt;/td&gt;
+&lt;td class="left"&gt;, x 1, C-x 1&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;372&lt;/td&gt;
+&lt;td class="right"&gt;0.90%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-or-uncomment-lines&lt;/td&gt;
+&lt;td class="left"&gt;, c i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;351&lt;/td&gt;
+&lt;td class="right"&gt;0.85%&lt;/td&gt;
+&lt;td class="left"&gt;eval-expression&lt;/td&gt;
+&lt;td class="left"&gt;, e e, M-:&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;326&lt;/td&gt;
+&lt;td class="right"&gt;0.79%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-select-items&lt;/td&gt;
+&lt;td class="left"&gt;, s i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;320&lt;/td&gt;
+&lt;td class="right"&gt;0.77%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-doublequote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;307&lt;/td&gt;
+&lt;td class="right"&gt;0.74%&lt;/td&gt;
+&lt;td class="left"&gt;evil-filepath-outer-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;300&lt;/td&gt;
+&lt;td class="right"&gt;0.72%&lt;/td&gt;
+&lt;td class="left"&gt;steve-ido-choose-from-recentf&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;295&lt;/td&gt;
+&lt;td class="right"&gt;0.71%&lt;/td&gt;
+&lt;td class="left"&gt;split-window-horizontally&lt;/td&gt;
+&lt;td class="left"&gt;, x 3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;283&lt;/td&gt;
+&lt;td class="right"&gt;0.68%&lt;/td&gt;
+&lt;td class="left"&gt;git-add-current-file&lt;/td&gt;
+&lt;td class="left"&gt;, x v a&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;279&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;winner-undo&lt;/td&gt;
+&lt;td class="left"&gt;, x u, , s u, C-x 4 u&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;278&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;describe-function&lt;/td&gt;
+&lt;td class="left"&gt;, h d, C-h f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;278&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-mark-line&lt;/td&gt;
+&lt;td class="left"&gt;'&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;269&lt;/td&gt;
+&lt;td class="right"&gt;0.65%&lt;/td&gt;
+&lt;td class="left"&gt;ido-kill-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, x k, C-x k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;254&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-definition&lt;/td&gt;
+&lt;td class="left"&gt;g d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;253&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;pop-tag-mark&lt;/td&gt;
+&lt;td class="left"&gt;M-*&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;251&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;git-messenger:popup-message&lt;/td&gt;
+&lt;td class="left"&gt;, x v b, C-x v p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;246&lt;/td&gt;
+&lt;td class="right"&gt;0.59%&lt;/td&gt;
+&lt;td class="left"&gt;my-goto-next-hunk&lt;/td&gt;
+&lt;td class="left"&gt;, n n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;237&lt;/td&gt;
+&lt;td class="right"&gt;0.57%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-operator&lt;/td&gt;
+&lt;td class="left"&gt;, ,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;235&lt;/td&gt;
+&lt;td class="right"&gt;0.57%&lt;/td&gt;
+&lt;td class="left"&gt;flyspell-goto-next-error&lt;/td&gt;
+&lt;td class="left"&gt;, f e, C-,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;214&lt;/td&gt;
+&lt;td class="right"&gt;0.52%&lt;/td&gt;
+&lt;td class="left"&gt;evil-exit-emacs-state&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;212&lt;/td&gt;
+&lt;td class="right"&gt;0.51%&lt;/td&gt;
+&lt;td class="left"&gt;browse-kill-ring-forward&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;210&lt;/td&gt;
+&lt;td class="right"&gt;0.51%&lt;/td&gt;
+&lt;td class="left"&gt;flyspell-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;203&lt;/td&gt;
+&lt;td class="right"&gt;0.49%&lt;/td&gt;
+&lt;td class="left"&gt;evil-ex-completion&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;195&lt;/td&gt;
+&lt;td class="right"&gt;0.47%&lt;/td&gt;
+&lt;td class="left"&gt;narrow-or-widen-dwim&lt;/td&gt;
+&lt;td class="left"&gt;, x n n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;173&lt;/td&gt;
+&lt;td class="right"&gt;0.42%&lt;/td&gt;
+&lt;td class="left"&gt;comint-send-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;173&lt;/td&gt;
+&lt;td class="right"&gt;0.42%&lt;/td&gt;
+&lt;td class="left"&gt;beginning-of-defun&lt;/td&gt;
+&lt;td class="left"&gt;, b f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;170&lt;/td&gt;
+&lt;td class="right"&gt;0.41%&lt;/td&gt;
+&lt;td class="left"&gt;evil-surround-region&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;visual-state&amp;gt; S&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;161&lt;/td&gt;
+&lt;td class="right"&gt;0.39%&lt;/td&gt;
+&lt;td class="left"&gt;hippie-expand&lt;/td&gt;
+&lt;td class="left"&gt;M-/&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;151&lt;/td&gt;
+&lt;td class="right"&gt;0.36%&lt;/td&gt;
+&lt;td class="left"&gt;describe-key&lt;/td&gt;
+&lt;td class="left"&gt;, h k, C-h k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;149&lt;/td&gt;
+&lt;td class="right"&gt;0.36%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-next-visual-line&lt;/td&gt;
+&lt;td class="left"&gt;SPC&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;139&lt;/td&gt;
+&lt;td class="right"&gt;0.34%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-topic-select-group&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;138&lt;/td&gt;
+&lt;td class="right"&gt;0.33%&lt;/td&gt;
+&lt;td class="left"&gt;js2-print-json-path&lt;/td&gt;
+&lt;td class="left"&gt;, j p p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;132&lt;/td&gt;
+&lt;td class="right"&gt;0.32%&lt;/td&gt;
+&lt;td class="left"&gt;goto-line&lt;/td&gt;
+&lt;td class="left"&gt;M-g g, M-g M-g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;132&lt;/td&gt;
+&lt;td class="right"&gt;0.32%&lt;/td&gt;
+&lt;td class="left"&gt;evil-avy-goto-subword-1&lt;/td&gt;
+&lt;td class="left"&gt;;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;127&lt;/td&gt;
+&lt;td class="right"&gt;0.31%&lt;/td&gt;
+&lt;td class="left"&gt;ibuffer-mark-for-delete&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;127&lt;/td&gt;
+&lt;td class="right"&gt;0.31%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-single-quote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;126&lt;/td&gt;
+&lt;td class="right"&gt;0.30%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-other-meta-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;124&lt;/td&gt;
+&lt;td class="right"&gt;0.30%&lt;/td&gt;
+&lt;td class="left"&gt;term-send-up&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;118&lt;/td&gt;
+&lt;td class="right"&gt;0.29%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-other-control-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;116&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;evil-set-marker&lt;/td&gt;
+&lt;td class="left"&gt;m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;115&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;browse-kill-ring&lt;/td&gt;
+&lt;td class="left"&gt;M-y, , y y&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;114&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-grep-yank-line&lt;/td&gt;
+&lt;td class="left"&gt;, g l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;114&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-down&lt;/td&gt;
+&lt;td class="left"&gt;C-w j&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;112&lt;/td&gt;
+&lt;td class="right"&gt;0.27%&lt;/td&gt;
+&lt;td class="left"&gt;evil-jump-backward&lt;/td&gt;
+&lt;td class="left"&gt;C-o&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;108&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;evil-visual-block&lt;/td&gt;
+&lt;td class="left"&gt;C-v&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;108&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-previous-visual-line&lt;/td&gt;
+&lt;td class="left"&gt;S-SPC&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;107&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;comint-previous-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;evil-search-word-backward&lt;/td&gt;
+&lt;td class="left"&gt;#&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;forward-button&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;96&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-pop-next&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;95&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-next-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;95&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;ido-imenu&lt;/td&gt;
+&lt;td class="left"&gt;, i i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;92&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-switch-workgroup&lt;/td&gt;
+&lt;td class="left"&gt;, w g g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;90&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-find-file&lt;/td&gt;
+&lt;td class="left"&gt;, g f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;90&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-delete-items&lt;/td&gt;
+&lt;td class="left"&gt;, d i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;87&lt;/td&gt;
+&lt;td class="right"&gt;0.21%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-extract-mail-address&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;87&lt;/td&gt;
+&lt;td class="right"&gt;0.21%&lt;/td&gt;
+&lt;td class="left"&gt;cliphist-paste-item&lt;/td&gt;
+&lt;td class="left"&gt;, h h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;84&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;subword-backward-kill&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;C-backspace&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;84&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-backslash&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;83&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;my-yas-reload-all&lt;/td&gt;
+&lt;td class="left"&gt;, y c r&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;81&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;pwd&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;80&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;previous-complete-history-element&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;80&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;wg-create-workgroup&lt;/td&gt;
+&lt;td class="left"&gt;, w g t&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;78&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;evil-forward-WORD-end&lt;/td&gt;
+&lt;td class="left"&gt;E&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;77&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-scroll-up&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;76&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-extract-cc-and-to&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;75&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;compile-goto-error&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;73&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;evil-find-char-to&lt;/td&gt;
+&lt;td class="left"&gt;t&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;72&lt;/td&gt;
+&lt;td class="right"&gt;0.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-repeat-find-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;69&lt;/td&gt;
+&lt;td class="right"&gt;0.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-up&lt;/td&gt;
+&lt;td class="left"&gt;C-w k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;67&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;eval-last-sexp&lt;/td&gt;
+&lt;td class="left"&gt;, x e, C-x C-e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;66&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;evil-complete-next-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;66&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;exchange-point-and-mark&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;63&lt;/td&gt;
+&lt;td class="right"&gt;0.15%&lt;/td&gt;
+&lt;td class="left"&gt;direx:previous-item&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;61&lt;/td&gt;
+&lt;td class="right"&gt;0.15%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-jump-to-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;60&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;diredp-next-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;58&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;evilmr-replace-in-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, r b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;58&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-imenu-goto&lt;/td&gt;
+&lt;td class="left"&gt;, i m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;56&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-mark&lt;/td&gt;
+&lt;td class="left"&gt;`&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-group-unsubscribe-current-group&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;ivy-bookmark-goto&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;evil-filepath-inner-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;describe-mode&lt;/td&gt;
+&lt;td class="left"&gt;C-h m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;recenter-top-bottom&lt;/td&gt;
+&lt;td class="left"&gt;C-l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;list-packages&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;52&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-topic-mark-topic&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;52&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;kill-line&lt;/td&gt;
+&lt;td class="left"&gt;C-k, &amp;lt;deleteline&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;51&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;find-and-ctags-update-all-tags-force&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;50&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-before&lt;/td&gt;
+&lt;td class="left"&gt;P&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;execute-extended-command&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;execute&amp;gt;, C-x RET&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-quit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-WORD&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;48&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;find-tag&lt;/td&gt;
+&lt;td class="left"&gt;g C-]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;47&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;diredp-previous-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;46&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-close-square&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;44&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-open-square&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;44&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-last-insertion&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;42&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-double-quote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;42&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;ivy-imenu-goto&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;40&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-find-my-file&lt;/td&gt;
+&lt;td class="left"&gt;, g m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;cp-filename-of-current-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-article-read-summary-keys&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-nonincremental-exit-minibuffer&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;sh-assignment&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;mark-whole-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, x h, C-x h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-inner-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;36&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-or-uncomment-paragraphs&lt;/td&gt;
+&lt;td class="left"&gt;, c p, C-c p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;36&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evil-toggle-input-method&lt;/td&gt;
+&lt;td class="left"&gt;C-\&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;35&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;org2nikola-export-subtree&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;35&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;subword-forward&lt;/td&gt;
+&lt;td class="left"&gt;M-f, ESC &amp;lt;right&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;34&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-open-above&lt;/td&gt;
+&lt;td class="left"&gt;O&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;34&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;compose-mail&lt;/td&gt;
+&lt;td class="left"&gt;C-x m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-paren&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;term-send-raw-meta&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-invert-char&lt;/td&gt;
+&lt;td class="left"&gt;~&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-repeat-find-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;httpd-restart-at-default-directory&lt;/td&gt;
+&lt;td class="left"&gt;, w r d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;cp-fullpath-of-current-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;31&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evil-forward-WORD-begin&lt;/td&gt;
+&lt;td class="left"&gt;W&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;sort-lines&lt;/td&gt;
+&lt;td class="left"&gt;, s l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;bmkp-w3m-jump&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-copy-and-comment-lines&lt;/td&gt;
+&lt;td class="left"&gt;, c c, C-c c&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;29&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;toggle-company-ispell&lt;/td&gt;
+&lt;td class="left"&gt;, t c i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;29&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;top-level&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;28&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;package-menu-mark-upgrades&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evil-numbers/dec-at-pt&lt;/td&gt;
+&lt;td class="left"&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;end-of-defun&lt;/td&gt;
+&lt;td class="left"&gt;, e f, C-M-e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;my-setup-develop-environment&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;26&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-pop&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-previous-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-backward-WORD-begin&lt;/td&gt;
+&lt;td class="left"&gt;B&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;goto-char&lt;/td&gt;
+&lt;td class="left"&gt;g o, M-g c&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;w3m-close-window&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;org-mime-htmlize&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-group-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;24&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;git-gutter:toggle&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;my-gnus-group-list-subscribed-groups&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;find-directory-in-project-by-selected&lt;/td&gt;
+&lt;td class="left"&gt;, f d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-curly&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;org-edit-src-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;string-edit-at-point&lt;/td&gt;
+&lt;td class="left"&gt;, s e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;package-menu-mark-delete&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;ido-magic-forward-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;run-js&lt;/td&gt;
+&lt;td class="left"&gt;, r j s&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;git-gutter-reset-to-head-parent&lt;/td&gt;
+&lt;td class="left"&gt;, g s h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-read-history&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;rcirc-send-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-undo&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;subword-backward&lt;/td&gt;
+&lt;td class="left"&gt;M-b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;company-select-next&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;what-cursor-position&lt;/td&gt;
+&lt;td class="left"&gt;g a, g 8, C-x =&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;my-grep&lt;/td&gt;
+&lt;td class="left"&gt;, q q&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;hydra-gnus-summary/body&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;ansi-term&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-right&lt;/td&gt;
+&lt;td class="left"&gt;C-w l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;debugger-jump&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;wg-switch-to-workgroup&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;yas-abort-snippet&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;tags-loop-continue&lt;/td&gt;
+&lt;td class="left"&gt;M-,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;swiper-the-thing&lt;/td&gt;
+&lt;td class="left"&gt;, s s&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;18&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-swich-to-workgroup&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;18&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;org-edit-special&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;lisp-complete-symbol&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-switch-to-workgroup-at-index&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;test&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-scroll-vertically&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;w3m-view-previous-page&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-left&lt;/td&gt;
+&lt;td class="left"&gt;C-w h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-yank-kill&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-goto-previous-hunk&lt;/td&gt;
+&lt;td class="left"&gt;, p p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;js-beautify&lt;/td&gt;
+&lt;td class="left"&gt;, j b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;hydra-launcher/body&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;read-only-mode&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-q&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;message-send-and-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-goto-tag&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;evil-next-match&lt;/td&gt;
+&lt;td class="left"&gt;g n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;js2r-kill&lt;/td&gt;
+&lt;td class="left"&gt;, j j k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;string-edit-conclude&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;delete-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;14&lt;/td&gt;
+&lt;td class="right"&gt;0.03%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-limit-to-author&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;14&lt;/td&gt;
+&lt;td class="right"&gt;0.03%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-swap-buffers&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</guid><pubDate>Fri, 26 Feb 2016 13:51:27 GMT</pubDate></item><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I know &lt;code&gt;M-x ediff-regions-linewise&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -155,6 +1453,8 @@ But it's kind of too generic. I only want to &lt;b&gt;view the different lines o
 &lt;p&gt;
 So here is my code,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Diff two regions
 ;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
@@ -236,7 +1536,11 @@ So here is my code,
         (if (and fb (file-exists-p fb))
             (delete-file fb)))
     (message "Please select region at first!")))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
   "Yank the bash history"
   (interactive)
   (let (hist-cmd collection val)
@@ -252,25 +1556,35 @@ So here is my code,
                            (ivy-read (format "Bash history:") collection))))
         (kill-new val)
         (message "%s =&amp;gt; kill-ring" val))))
-&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;i&gt;Group Topics&lt;/i&gt; is used to manage Gnus groups.
 &lt;/p&gt;
 
 &lt;p&gt;
 For example, you can,
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;Place groups (mail folders)  from Gmail into "gmail" topic
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Place groups (mail folders)  from Gmail into "gmail" topic
 &lt;/li&gt;
 &lt;li&gt;Place groups (mails folders) from Outlook.com into "hotmail" topic
 &lt;/li&gt;
 &lt;li&gt;Make "gmail" and "hotmail" belong to the root topic "Gnus"
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 Enable it is just one line,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Now comes the question how to delete/add/move the topics?
@@ -283,6 +1597,8 @@ The official answer is to read &lt;a href="http://www.gnu.org/software/emacs/man
 &lt;p&gt;
 But there is a &lt;b&gt;simpler solution&lt;/b&gt;. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'gnus-topic
   '(progn
@@ -304,6 +1620,8 @@ But there is a &lt;b&gt;simpler solution&lt;/b&gt;. All you need to do is insert
                               ("Gnus")))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 The &lt;b&gt;management of topics is as easy as editing above code&lt;/b&gt;.
 &lt;/p&gt;
@@ -316,6 +1634,8 @@ My setup always works no matter ~/.newsrc.eld is loaded or not.
 BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-select-method
              '(nnimap "gmail" ; key
                       (nnimap-address "imap.gmail.com")
@@ -326,7 +1646,10 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
                       (nnimap-address "imap-mail.outlook.com")
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item><item><title>Git gutter tip</title><link>http://blog.binchen.org/posts/git-gutter-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;git-gutter.el&lt;/a&gt; everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -336,6 +1659,8 @@ But I usually need to know what line changed in &lt;b&gt;latest commit&lt;/b&gt;
 &lt;p&gt;
 So I designed `M-x git-gutter-reset-to-head-parent`,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun git-gutter-reset-to-head-parent()
   (interactive)
@@ -352,17 +1677,19 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
   (message "git-gutter reset"))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 `M-x git-gutter-reset-to-default` compare you file under working directory with the latet version under VCS.
 &lt;/p&gt;
 
 &lt;p&gt;
-`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-22&lt;/span&gt;&lt;/span&gt;
+`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><guid>http://blog.binchen.org/posts/git-gutter-tip.html</guid><pubDate>Fri, 08 Jan 2016 12:41:59 GMT</pubDate></item><item><title>Use Ivy-mode to tweak workgroups2</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-01-12 Tue&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-01-12 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -380,6 +1707,8 @@ So I use &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; to
 &lt;p&gt;
 Here is code:
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
 
@@ -420,7 +1749,10 @@ Here is code:
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><category>workgroups</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html</guid><pubDate>Tue, 22 Dec 2015 04:42:03 GMT</pubDate></item><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I love &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode/Swiper&lt;/a&gt; because it's quick and easy to extend. So my &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; setup is replaced by ivy-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -431,67 +1763,70 @@ I will demostrate how I use ivy-mode at first. Then the code.
 Please note I &lt;b&gt;only use one API `ivy-read`&lt;/b&gt; from ivy-mode.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Demo&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-1-1" class="outline-4"&gt;
-&lt;h5 id="sec-1-1"&gt;M-x counsel-git-grep-yank-line&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-1"&gt;
-
-&lt;p&gt;Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep the lines. Then copy the line into kill ring without opening new window.
-&lt;/p&gt;
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Demo&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;/div&gt;&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h4 id="sec-1-1"&gt;&lt;span class="section-number-3"&gt;1.1&lt;/span&gt; M-x counsel-git-grep-yank-line&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
+Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep the lines. Then copy the line into kill ring without opening new window.
+&lt;/p&gt;
 
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-git-grep-yank-line-nq8.png" alt="ivy-git-grep-yank-line-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-2" class="outline-4"&gt;
-&lt;h5 id="sec-1-2"&gt;M-x counsel-git-find-my-file&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-2"&gt;
-
-&lt;p&gt;Find my file under git version control in recent N weeks.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h4 id="sec-1-2"&gt;&lt;span class="section-number-3"&gt;1.2&lt;/span&gt; M-x counsel-git-find-my-file&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
+Find my file under git version control in recent N weeks.
+&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-3" class="outline-4"&gt;
-&lt;h5 id="sec-1-3"&gt;M-x ivy-imenu-goto&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-3"&gt;
-
-&lt;p&gt;Imenu. It's quick.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h4 id="sec-1-3"&gt;&lt;span class="section-number-3"&gt;1.3&lt;/span&gt; M-x ivy-imenu-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
+Imenu. It's quick.
+&lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;
+&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-1-4" class="outline-4"&gt;
-&lt;h5 id="sec-1-4"&gt;M-x ivy-bookmark-goto&lt;/h5&gt;
-&lt;div class="outline-text-4" id="text-1-4"&gt;
-
-&lt;p&gt;Quick and customizable.
-&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-4" class="outline-3"&gt;
+&lt;h4 id="sec-1-4"&gt;&lt;span class="section-number-3"&gt;1.4&lt;/span&gt; M-x ivy-bookmark-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-4"&gt;
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Code&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;Swiper 7.0+ required.
+Quick and customizable.
 &lt;/p&gt;
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
 
-
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Code&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Swiper 7.0+ required.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
 (defun counsel-git-grep-or-find-api (fn git-cmd hint open-another-window)
   "Apply FN on the output lines of GIT-CMD.  HINT is hint when user input.
@@ -641,14 +1976,14 @@ Or else, find files since 24 weeks (6 months) ago."
     ))
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>helm</category><category>ivy</category><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-01&lt;/span&gt;&lt;/span&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>helm</category><category>ivy</category><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-01&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-03 Thu&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-03 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -658,6 +1993,8 @@ That's easy if you use &lt;a href="https://github.com/company-mode/company-mode"
 &lt;p&gt;
 Say if you want to complete words ONLY in org-mode,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'company)
 
@@ -693,6 +2030,8 @@ Say if you want to complete words ONLY in org-mode,
     (message "company-ispell enabled!"))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 `M-x toggle-company-ispell` to toggle company-ispell in &lt;b&gt;any major mode&lt;/b&gt;.
 &lt;/p&gt;
@@ -702,12 +2041,12 @@ Say if you want to complete words ONLY in org-mode,
 &lt;/p&gt;
 
 &lt;p&gt;
-You can download my &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-27&lt;/span&gt;&lt;/span&gt;
+You can download my &lt;a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt"&gt;english-words.txt&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>completion</category><category>emacs</category><category>en</category><category>word</category><guid>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</guid><pubDate>Tue, 01 Dec 2015 11:41:34 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -726,15 +2065,23 @@ Setup is easy.
 Step 1, create TAGS:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Step 2, add below code into "~/.emacs.d/init.el":
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 That's OK for most programming languages.
@@ -752,10 +2099,14 @@ First, you need upgrade web-mode to &lt;a href="https://github.com/fxbois/web-mo
 Second, you need add below code into your "~/.emacs.d/init.el",
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company-etags
   '(progn
      (add-to-list 'company-etags-modes 'web-mode)))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit from prog-mode. You can `M-x eval-expression (derived-mode-p 'prog-mode)` to test whether current mode inherits from prog-mode. Thanks for &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; pointing out that js2-mode actually inherits from prog-mode because it inherits from js-mode which inheris from prog-mode.
@@ -764,6 +2115,8 @@ You need above setup because web-mode &lt;b&gt;conditionally&lt;/b&gt; inherit f
 &lt;p&gt;
 Another issue is company-etags.el disables code completion in string and comment by default. We need &lt;b&gt;remove this feature in web-mode temporarily&lt;/b&gt;,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'company
   '(progn
@@ -774,21 +2127,153 @@ Another issue is company-etags.el disables code completion in string and comment
          ad-do-it))))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Tested on Emacs23.4 and Emacs24.4.
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATE at &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-12-09 Wed&lt;/span&gt;&lt;/span&gt;:
+UPDATE at &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-09 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;:
 &lt;a href="https://github.com/dgutov"&gt;Dmitry Gutov&lt;/a&gt; has &lt;a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618"&gt;fixed&lt;/a&gt; the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 Screenshot of my setup:
 &lt;/p&gt;
 
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
 &lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>css</category><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>web</category><guid>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</guid><pubDate>Fri, 27 Nov 2015 11:43:59 GMT</pubDate></item></channel></rss>
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+These days most web applications are based on RESTful.
+&lt;/p&gt;
+
+&lt;p&gt;
+So javascript developers have to deal with JSON frequently.
+&lt;/p&gt;
+
+&lt;p&gt;
+When working on JSON, the most boring and error prone task is to get the full path of specific field.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, given the JSON response like:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;{
+  key1: {
+    subkey1: {
+      arr1: [{ key3: 'hello'}]
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The developer need figure out the full path of "key3" which is "&lt;code&gt;key1.subkey1.arr1[0].key3&lt;/code&gt;".
+&lt;/p&gt;
+
+&lt;p&gt;
+My solution is to take advantage of AST created by &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;b&gt;Step 1&lt;/b&gt;, insert below code into ~/.emacs,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ print json path, will be removed when latest STABLE js2-mode released
+(defun js2-get-element-index-from-array-node (elem array-node &amp;amp;optional hardcoded-array-index)
+  "Get index of ELEM from ARRAY-NODE or 0 and return it as string."
+  (let ((idx 0) elems (rlt hardcoded-array-index))
+    (setq elems (js2-array-node-elems array-node))
+    (if (and elem (not hardcoded-array-index))
+        (setq rlt (catch 'nth-elt
+                    (dolist (x elems)
+                      ;; We know the ELEM does belong to ARRAY-NODE,
+                      (if (eq elem x) (throw 'nth-elt idx))
+                      (setq idx (1+ idx)))
+                    0)))
+    (format "[%s]" rlt)))
+
+(defun js2-print-json-path (&amp;amp;optional hardcoded-array-index)
+  "Print the path to the JSON value under point, and save it in the kill ring.
+If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it."
+  (interactive "P")
+  (let (previous-node current-node
+        key-name
+        rlt)
+
+    ;; The `js2-node-at-point' starts scanning from AST root node.
+    ;; So there is no way to optimize it.
+    (setq current-node (js2-node-at-point))
+
+    (while (not (js2-ast-root-p current-node))
+      (cond
+       ;; JSON property node
+       ((js2-object-prop-node-p current-node)
+        (setq key-name (js2-prop-node-name (js2-object-prop-node-left current-node)))
+        (if rlt (setq rlt (concat "." key-name rlt))
+          (setq rlt (concat "." key-name))))
+
+       ;; Array node
+       ((or (js2-array-node-p current-node))
+        (setq rlt (concat (js2-get-element-index-from-array-node previous-node
+                                                                 current-node
+                                                                 hardcoded-array-index)
+                          rlt)))
+
+       ;; Other nodes are ignored
+       (t))
+
+      ;; current node is archived
+      (setq previous-node current-node)
+      ;; Get parent node and continue the loop
+      (setq current-node (js2-node-parent current-node)))
+
+    (cond
+     (rlt
+      ;; Clean the final result
+      (setq rlt (replace-regexp-in-string "^\\." "" rlt))
+      (kill-new rlt)
+      (message "%s =&amp;gt; kill-ring" rlt))
+     (t
+      (message "No JSON path found!")))
+
+    rlt))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+&lt;b&gt;Step 2&lt;/b&gt;, move the cursor over the key/value of the field and `M-x js2-print-json-path`.
+&lt;/p&gt;
+
+&lt;p&gt;
+My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766056f10e6ac89ddc487b4"&gt;merged into js2-mode&lt;/a&gt;. You need only install latest js2-mode.
+&lt;/p&gt;
+
+&lt;p&gt;
+(apply #'derived-mode-p '(org-mode web-mode))
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item></channel></rss>
