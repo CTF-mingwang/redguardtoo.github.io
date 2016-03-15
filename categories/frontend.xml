@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Nov 2015 11:27:25 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 15 Mar 2016 23:18:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-1" class="outline-3"&gt;
 &lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1"&gt;
 
-&lt;p&gt;I love the REPL (Read–eval–print loop). Watch live update of web UI when typing code is cool.
+&lt;p&gt;I love the REPL (Read–eval–print loop). Watch live update of web page when typing code is cool.
 &lt;/p&gt;
 &lt;p&gt;
 But most solutions around the internet are not practical for me.
@@ -12,18 +12,18 @@ But most solutions around the internet are not practical for me.
 In my world, I never has a chance to develop fancy 2D/3D games written in HTML5 canvas.
 &lt;/p&gt;
 &lt;p&gt;
-Intead, I was &lt;b&gt;ALWAYS&lt;/b&gt; assigned to maintain some enterprise CMS with complex business logic. For example, after refreshing the web page I need click lots of buttons before doing the job. Avoiding press "refresh page button" does not help much.
+Instead, I was &lt;b&gt;ALWAYS&lt;/b&gt; assigned to maintain some enterprise CMS with complex business logic. For example, after refreshing the web page I need click lots of buttons before doing the job. Avoiding press "refresh page button" does not help much.
 &lt;/p&gt;
 &lt;p&gt;
 Besides, I can't use the embedded server those solutions boasted because our web application has many dependencies. It needs a whole environment support team to set it up. There is no way I can persuade the team to use a different web server
 &lt;/p&gt;
 &lt;p&gt;
-So for me, a practical solution must be:
+For me, a practical solution must be:
 &lt;/p&gt;&lt;ul&gt;&lt;li&gt;easy to set up
 &lt;/li&gt;
 &lt;li&gt;powerful. I can read/write any part of the web page in my text editor
 &lt;/li&gt;
-&lt;li&gt;no learning curve. I don't want to learn any domain specific language or API. For example, if my web application uses jquery, I want &lt;b&gt;use and only use jquery API&lt;/b&gt; to manuipulate web page in my text editor. If it use backbone, then I use backbone. No more, no less.
+&lt;li&gt;no learning curve. I don't want to learn any domain specific language or API. For example, if my web application uses jquery, I want &lt;b&gt;use and only use jquery API&lt;/b&gt; to manipulate web page in my text editor. If it use backbone, then I use backbone. No more, no less.
 &lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;
 
