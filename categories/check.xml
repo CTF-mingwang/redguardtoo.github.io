@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (check)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/check.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 15 Mar 2016 04:49:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-03-14 Mon&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (check)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/check.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 22 Mar 2016 00:46:12 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-03-22 Tue&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -39,9 +39,12 @@ If you want to force Emacs use the dictionary "en_US", insert below code into yo
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; find aspell and hunspell automatically
 (cond
+ ;; try aspell at first
  ((executable-find "aspell")
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
+
+ ;; if aspell does NOT exist, use hunspell
  ((executable-find "hunspell")
   (setq ispell-program-name "hunspell")
   (setq ispell-extra-args '("-d en_US")))
@@ -53,6 +56,18 @@ If you want to force Emacs use the dictionary "en_US", insert below code into yo
 &lt;p&gt;
 That's it!
 &lt;/p&gt;
+&lt;p&gt;
+Some people prefer hunspell to aspell because &lt;b&gt;hunspell gives better suggestions for typo fix&lt;/b&gt;. We can run both in shell to demonstrate that,
+&lt;/p&gt;
+
+
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;echo htink | aspell -a --sug-mode=ultra --lang=en_US
+echo htink | hunspell -a
+&lt;/code&gt;&lt;/pre&gt;
+
+
+
 &lt;p&gt;
 Please run command "man aspell" or "man hunspell" in shell if you have more questions. I've nothing more to say.
 &lt;/p&gt;
@@ -85,22 +100,25 @@ Please insert below code into your ~/.emacs:
   (let (args)
     (cond
      ((string-match  "aspell$" ispell-program-name)
-      ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+      ;; Force the English dictionary for aspell
+      ;; Support Camel Case spelling check (tested with aspell 0.6)
       (setq args (list "--sug-mode=ultra" "--lang=en_US"))
       (if run-together
           (setq args (append args '("--run-together" "--run-together-limit=5" "--run-together-min=2")))))
      ((string-match "hunspell$" ispell-program-name)
-      (setq args nil)))
-    args
-    ))
+      ;; Force the English dictionary for hunspell
+      (setq args "-d en_US")))
+    args))
 
 (cond
  ((executable-find "aspell")
+  ;; you may also need `ispell-extra-args'
   (setq ispell-program-name "aspell"))
  ((executable-find "hunspell")
   (setq ispell-program-name "hunspell")
-  ;; just reset dictionary to the safe one "en_US" for hunspell.
-  ;; if we need use different dictionary, we specify it in command line arguments
+
+  ;; Only purpose is to RESET dictionary into the safe "en_US" for hunspell.
+  ;; if we use different dictionary, specify it through `ispell-extra-args'
   (setq ispell-local-dictionary "en_US")
   (setq ispell-local-dictionary-alist
         '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
@@ -137,10 +155,6 @@ Please insert below code into your ~/.emacs:
 &lt;/code&gt;&lt;/pre&gt;
 
 
-
-&lt;p&gt;
-That's it.
-&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;/div&gt;
@@ -168,10 +182,10 @@ The better solution is before running "M-x ispell-word", we'd better restart a a
 Here is the screen shot after we applying this fix:
 &lt;img src="http://blog.binchen.org/wp-content/aspell-normal-suggest-nq8.png" alt="aspell-normal-suggest-nq8.png"&gt;&lt;/p&gt;
 &lt;p&gt;
-As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the only variable you need care about.
+As I mentioned, the global variable "ispell-extra-args" contains arguments Emacs will always append to a spell checker process (aspell or hunspell). That's the &lt;b&gt;only variable you need care about&lt;/b&gt;.
 &lt;/p&gt;
 &lt;p&gt;
-There is another variable named "ispell-cmd-args". It is actually some &lt;b&gt;extra&lt;/b&gt; arguments Emacs could send to an &lt;b&gt;existing&lt;/b&gt; spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are confusing. "ispell-extra-args" is actually command line arguments the spell checker will &lt;b&gt;always&lt;/b&gt; use. The "ispell-cmd-args" are actually the extra arguments will &lt;b&gt;optionally&lt;/b&gt; be used.
+There is another variable named "ispell-cmd-args". It is actually some &lt;b&gt;extra&lt;/b&gt; arguments Emacs could send to an &lt;b&gt;existing&lt;/b&gt; spell checker process when you "M-x ispell-word". In my opinion, it's useless. I mention it because the naming are confusing. "ispell-extra-args" is actually command line arguments the spell checker will &lt;b&gt;always&lt;/b&gt; use. The "ispell-cmd-args" are the extra arguments &lt;b&gt;optionally&lt;/b&gt; be used.
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;ul&gt;&lt;li id="sec-3-2"&gt;Hunspell&lt;br&gt;
 I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
@@ -186,18 +200,45 @@ Specify the ispell-extra-args &lt;b&gt;won't stop hunspell to search for the def
 For example, I am a Chinese and my locale is "zh_CN.utf-8". So hunspell will always search the dictionary zh_CN. Even I'm only interested in English spell checking.
 &lt;/p&gt;
 &lt;p&gt;
-To specify the dictionary explicitly, I need hack the Emacs code which is kind of mess. Finally, I figure out. It's just several lines of elisp code:
+To specify the dictionary explicitly, I need hack the Emacs code which is kind of mess.
+&lt;/p&gt;
+&lt;p&gt;
+Finally, I figure out,
 &lt;/p&gt;
 
 
 
-
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq ispell-program-name "hunspell")
-(setq ispell-local-dictionary "en_US")
+;; below two lines reset the the hunspell to it STOPS querying locale!
+(setq ispell-local-dictionary "en_US") ; "en_US" is key to lookup in `ispell-local-dictionary-alist`
 (setq ispell-local-dictionary-alist
       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
+;; Below line specify the ACTUAL dictionary we use
+(setq ispell-extra-args '("-d en_US"))
 &lt;/code&gt;&lt;/pre&gt;
 
+
+
+&lt;p&gt;
+BTW, you can pass the extra arguments to the hunspell by tweak &lt;code&gt;ispell-local-dictionary-alist&lt;/code&gt;. But I prefer using &lt;code&gt;ispell-extra-args&lt;/code&gt;.
+&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-4" class="outline-3"&gt;
+&lt;h4 id="sec-4"&gt;FAQ&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-4"&gt;
+
+&lt;ul&gt;&lt;li id="sec-4-1"&gt;How to setup Hunspell&lt;br&gt;
+The easiest way is to set up environment variable &lt;code&gt;DICPATH&lt;/code&gt;,
+
+
+
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;export DICPATH=/Applications/LibreOffice.app/Contents/Resources/extensions/dict-en:/Applications/LibreOffice.app/Contents/Resources/extensions/dict-es
+hunspell -D # list available/loaded dictionaries
+&lt;/code&gt;&lt;/pre&gt;
 
 
 &lt;/li&gt;
