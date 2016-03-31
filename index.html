@@ -79,6 +79,7 @@ Here is my setup,
 
 <pre><code class="lang-lisp">(require 'cl)
 (require 'ivy) ; swiper 7.0+ should be installed
+
 (defun counsel-goto-recent-directory ()
   "Recent directories"
   (interactive)
@@ -91,8 +92,7 @@ Here is my setup,
                    :from-end t)
                   ;; fasd history
                   (if (executable-find "fasd")
-                      (mapcar (lambda (v) (replace-regexp-in-string "^[.0-9]+ +" "" v))
-                              (split-string (shell-command-to-string "fasd -d") "\n" t)))))
+                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))
     (ivy-read "directories:" collection :action 'dired)))
 </code></pre>
 
