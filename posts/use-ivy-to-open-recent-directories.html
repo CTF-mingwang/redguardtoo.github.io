@@ -91,7 +91,7 @@ Here is my setup,
 <pre><code class="lang-lisp">(require 'ivy) ; swiper 7.0+ should be installed
 
 (defun counsel-goto-recent-directory ()
-  "Recent directories"
+  "Open recent directory with dired"
   (interactive)
   (unless recentf-mode (recentf-mode 1))
   (let ((collection
@@ -101,8 +101,7 @@ Here is my setup,
                   (if (executable-find "fasd")
                       (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
     (ivy-read "directories:" collection
-              :action 'dired
-              :caller 'counsel-goto-recent-directory)))
+              :action 'dired)))
 </code></pre>
 
 <p>
@@ -116,7 +115,7 @@ Screenshot:
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="how-to-be-extremely-efficient-in-emacs.html" rel="prev" title="How to be extremely efficient in Emacs">Previous post</a>
+                <a href="emacs-vs-sublime-text-on-salesforce-development.html" rel="prev" title="Emacs vs Sublime Text on Salesforce development">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
