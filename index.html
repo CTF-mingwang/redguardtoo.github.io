@@ -86,8 +86,7 @@ Here is my setup,
                   ;; fasd history
                   (if (executable-find "fasd")
                       (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-    (ivy-read "directories:" collection
-              :action 'dired)))
+    (ivy-read "directories:" collection :action 'dired)))
 </code></pre>
 
 <p>
