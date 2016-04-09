@@ -77,7 +77,8 @@ I used fasd to get the list of directories in shell. Fasd "offers quick acces'>
         </div>
         <div class="body">
             <div>
-<p>The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
+<p>
+The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
 </p>
 
 <p>
@@ -87,6 +88,8 @@ I used <a href="https://github.com/clvv/fasd">fasd</a> to get the list of direct
 <p>
 Here is my setup,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'ivy) ; swiper 7.0+ should be installed
 
@@ -103,18 +106,24 @@ Here is my setup,
     (ivy-read "directories:" collection :action 'dired)))
 </code></pre>
 
+</div>
+
 <p>
 Screenshot:
 </p>
 
-<p>
-<img src="../wp-content/ivy-recent-directory-nq8.png" alt="ivy-recent-directory-nq8.png"></p>
+<div class="figure">
+<p><img src="../wp-content/ivy-recent-directory-nq8.png" alt="ivy-recent-directory-nq8.png"></p>
+</div>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
                 <a href="emacs-vs-sublime-text-on-salesforce-development.html" rel="prev" title="Emacs vs Sublime Text on Salesforce development">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="use-general-el-to-provide-multiple-leader-key-in-evil-mode.html" rel="next" title="Use general.el to provide multiple leader key in evil-mode">Next post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>

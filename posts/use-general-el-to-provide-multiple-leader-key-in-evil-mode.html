@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Posts about vim | Chen's blog</title>
+<title>Use general.el to provide multiple leader key in evil-mode | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/categories/vim.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -23,13 +23,27 @@ td {
 tr:nth-child(even) td { background: #F1F1F1; }
 tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
-<link rel="alternate" type="application/rss+xml" title="RSS for tag vim" href="vim.xml">
+<meta name="author" content="Chen Bin">
+<meta property="og:site_name" content="Chen's blog">
+<meta property="og:title" content="Use general.el to provide multiple leader key in evil-mode">
+<meta property="og:url" content="http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html">
+<meta property="og:description" content='General.el "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
+
+
+
+I have been using it for more than one month without any issue. I prefer general.el to evil-leade'>
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-04-09T04:35:54Z">
+<meta property="article:tag" content="emacs">
+<meta property="article:tag" content="en">
+<meta property="article:tag" content="evil">
+<meta property="article:tag" content="vim">
 </head>
 <body>
     <section class="social"><ul>
 <li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
             <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
             <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
             <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
             <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
@@ -37,21 +51,101 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
         </ul></section><section class="page-content"><div class="content" rel="main">
             
-<article class="tagpage"><header><h1>Posts about vim</h1>
-        <div class="metadata">
-                <p class="feedlink"><a href="vim.xml" type="application/rss+xml">RSS feed</a></p>
+    <div class="post">
+    
+    <h1 class="p-name entry-title" itemprop="headline name">Use general.el to provide multiple leader key in evil-mode</h1>
+
+        <div class="meta">
+            <div class="authordate">
+                <time class="timeago" datetime="2016-04-09T04:35:54+00:00">2016-04-09 04:35</time>
+            
+
+            
+          |  
+        <a href="use-general-el-to-provide-multiple-leader-key-in-evil-mode.wp" id="sourcelink">Source</a>
+
+            </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/evil.html" rel="tag">evil</a></li>
+           <li><a class="tag p-category" href="../categories/vim.html" rel="tag">vim</a></li>
+        </ul>
+</div>
+
         </div>
-    </header><ul class="postlist">
-<li>
-<time class="listdate" datetime="2016-04-09T04:35:54Z" title="2016-04-09 04:35">2016-04-09 04:35</time><a href="../posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html" class="listtitle">Use general.el to provide multiple leader key in evil-mode</a><a></a>
-</li>
-        <li>
-<time class="listdate" datetime="2015-04-07T07:19:37Z" title="2015-04-07 07:19">2015-04-07 07:19</time><a href="../posts/use-plain-vim-to-merge-conflicts.html" class="listtitle">Use plain Vim to merge conflicts</a><a></a>
-</li>
-        <li>
-<time class="listdate" datetime="2013-06-10T19:08:00Z" title="2013-06-10 19:08">2013-06-10 19:08</time><a href="../posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html" class="listtitle">Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</a><a></a>
-</li>
-    </ul></article><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        <div class="body">
+            <div>
+<p>
+<a href="https://github.com/noctuid/general.el">General.el</a> "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
+</p>
+
+<p>
+I have been using it for more than one month without any issue. I prefer general.el to <a href="https://github.com/cofi/evil-leader">evil-leader</a> because I need both comma and space key as <a href="http://vimdoc.sourceforge.net/htmldoc/map.html#&lt;Leader&gt;">leader key</a>.
+</p>
+
+<p>
+Minimum setup is simple,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(require 'general)
+(general-evil-setup t)
+(nvmap :prefix ","
+       "bb" 'back-to-previous-buffer
+       "ww" 'save-buffer
+       "oo" 'compile)
+
+;; all keywords arguments are still supported
+(nvmap :prefix "SPC"
+       ; save windows layout
+       "ss" 'wg-create-workgroup
+       ;; load windows layout
+       "ll" 'my-wg-switch-workgroup)
+</code></pre>
+
+</div>
+
+<p>
+My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el">real world setup</a> is more complicated.
+</p>
+</div>
+        </div>
+        
+        <ul class="pager hidden-print">
+<li class="previous">
+                <a href="use-ivy-to-open-recent-directories.html" rel="prev" title="Use ivy to open recent directories">Previous post</a>
+            </li>
+        </ul>
+<div id="disqus_thread"></div>
+        <script>
+        var disqus_shortname ="chenbin0",
+            disqus_url="http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html",
+        disqus_title="Use general.el to provide multiple leader key in evil-mode",
+        disqus_identifier="cache/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html",
+        disqus_config = function () {
+            this.language = "en";
+        };
+        (function() {
+            var dsq = document.createElement('script'); dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+</noscript>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+        
+
+    </div>
+
+        
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
