@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 09 Apr 2016 04:36:02 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 09 Apr 2016 09:08:39 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 &lt;/p&gt;
 
@@ -1608,6 +1608,14 @@ Below is the eight month keyfreq data of my office computer,
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</guid><pubDate>Fri, 26 Feb 2016 13:51:27 GMT</pubDate></item><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-01-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-04-09 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
 I know &lt;code&gt;M-x ediff-regions-linewise&lt;/code&gt;.
 &lt;/p&gt;
 
@@ -1624,6 +1632,7 @@ So here is my code,
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Diff two regions
 ;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
 ;; Step 2: Select another region and `M-x diff-region-compare-with-b'
+;; Press "q" in evil-mode or "C-c C-c" to exit the diff output buffer
 (defun diff-region-format-region-boundary (b e)
   "Make sure lines are selected and B is less than E"
   (let (tmp rlt)
@@ -1649,6 +1658,11 @@ So here is my code,
       (setq e (line-end-position)))
     (setq rlt (list b e))
     rlt))
+
+(defun diff-region-exit ()
+  (interactive)
+  (bury-buffer "*Diff-region-output*")
+  (winner-undo))
 
 (defun diff-region-tag-selected-as-a ()
   "Select a region to compare"
@@ -1676,26 +1690,36 @@ So here is my code,
             (fb (make-temp-file (expand-file-name "scor"
                                                   (or small-temporary-file-directory
                                                       temporary-file-directory)))))
+        ;;  save current content as file B
         (when fb
           (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
           (write-region (car tmp) (cadr tmp) fb))
 
         (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
         (when (and fa (file-exists-p fa) fb (file-exists-p fb))
+          ;; save region A as file A
           (save-current-buffer
             (set-buffer (get-buffer-create "*Diff-regionA*"))
             (write-region (point-min) (point-max) fa))
+          ;; diff NOW!
           (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
           ;; show the diff output
           (if (string= diff-output "")
+              ;; two regions are same
               (message "Two regions are SAME!")
-              (save-current-buffer
-                (switch-to-buffer-other-window rlt-buf)
-                (set-buffer rlt-buf)
-                (erase-buffer)
-                (insert diff-output)
-                (diff-mode))))
+            ;; show the diff
+            (save-current-buffer
+              (switch-to-buffer-other-window rlt-buf)
+              (set-buffer rlt-buf)
+              (erase-buffer)
+              (insert diff-output)
+              (diff-mode)
+              (if (fboundp 'evil-local-set-key)
+                           (evil-local-set-key 'normal "q" 'diff-region-exit))
+              (local-set-key (kbd "C-c C-c") 'diff-region-exit)
+              )))
 
+        ;; clean the temporary files
         (if (and fa (file-exists-p fa))
             (delete-file fa))
         (if (and fb (file-exists-p fb))

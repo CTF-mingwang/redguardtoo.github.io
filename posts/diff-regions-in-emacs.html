@@ -27,19 +27,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Diff regions in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/diff-regions-in-emacs.html">
-<meta property="og:description" content="I know M-x ediff-regions-linewise.
+<meta property="og:description" content="CREATED: &lt;2016-01-27&gt;
 
 
 
-But it's kind of too generic. I only want to view the different lines of two regions as quickly as possible.
+UPDATED: &lt;2016-04-09 Sat&gt;
 
 
 
-So here is my code,
+I know M-x ediff-regions-linewise.
 
 
-;; Diff two regions
-;; Step ">
+
+But it's kind of too generic. I only want to view the different lines of two regions as quickly as possible.">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-01-27T13:44:22Z">
 <meta property="article:tag" content="diff">
@@ -85,7 +85,16 @@ So here is my code,
         </div>
         <div class="body">
             <div>
-<p>I know <code>M-x ediff-regions-linewise</code>.
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-27&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-04-09 Sat&gt;</span></span>
+</p>
+
+<p>
+I know <code>M-x ediff-regions-linewise</code>.
 </p>
 
 <p>
@@ -96,9 +105,12 @@ But it's kind of too generic. I only want to <b>view the different lines of two 
 So here is my code,
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">;; Diff two regions
 ;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
 ;; Step 2: Select another region and `M-x diff-region-compare-with-b'
+;; Press "q" in evil-mode or "C-c C-c" to exit the diff output buffer
 (defun diff-region-format-region-boundary (b e)
   "Make sure lines are selected and B is less than E"
   (let (tmp rlt)
@@ -124,6 +136,11 @@ So here is my code,
       (setq e (line-end-position)))
     (setq rlt (list b e))
     rlt))
+
+(defun diff-region-exit ()
+  (interactive)
+  (bury-buffer "*Diff-region-output*")
+  (winner-undo))
 
 (defun diff-region-tag-selected-as-a ()
   "Select a region to compare"
@@ -151,32 +168,44 @@ So here is my code,
             (fb (make-temp-file (expand-file-name "scor"
                                                   (or small-temporary-file-directory
                                                       temporary-file-directory)))))
+        ;;  save current content as file B
         (when fb
           (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
           (write-region (car tmp) (cadr tmp) fb))
 
         (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
         (when (and fa (file-exists-p fa) fb (file-exists-p fb))
+          ;; save region A as file A
           (save-current-buffer
             (set-buffer (get-buffer-create "*Diff-regionA*"))
             (write-region (point-min) (point-max) fa))
+          ;; diff NOW!
           (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
           ;; show the diff output
           (if (string= diff-output "")
+              ;; two regions are same
               (message "Two regions are SAME!")
-              (save-current-buffer
-                (switch-to-buffer-other-window rlt-buf)
-                (set-buffer rlt-buf)
-                (erase-buffer)
-                (insert diff-output)
-                (diff-mode))))
+            ;; show the diff
+            (save-current-buffer
+              (switch-to-buffer-other-window rlt-buf)
+              (set-buffer rlt-buf)
+              (erase-buffer)
+              (insert diff-output)
+              (diff-mode)
+              (if (fboundp 'evil-local-set-key)
+                           (evil-local-set-key 'normal "q" 'diff-region-exit))
+              (local-set-key (kbd "C-c C-c") 'diff-region-exit)
+              )))
 
+        ;; clean the temporary files
         (if (and fa (file-exists-p fa))
             (delete-file fa))
         (if (and fb (file-exists-p fb))
             (delete-file fb)))
     (message "Please select region at first!")))
 </code></pre>
+
+</div>
 </div>
         </div>
         
