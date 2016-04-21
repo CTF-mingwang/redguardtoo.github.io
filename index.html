@@ -2050,7 +2050,7 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-22&
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-12 Tue&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-04-21 Thu&gt;</span></span>
 </p>
 
 <p>
@@ -2058,7 +2058,7 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-12 
 </p>
 
 <p>
-But as a freelancer I am always assigned the low spec machine which takes too much time to load the old layout.
+But as a freelancer I am assigned a low spec computer. It takes too long to load the old windows layout.
 </p>
 
 <p>
@@ -2071,8 +2071,14 @@ Here is code:
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(require 'ivy)
+<pre><code class="lang-lisp">(setq wg-use-default-session-file nil)
+;; don't open last workgroup automatically in `wg-open-session',
+;; I only want to check available workgroups! Nothing more.
+(setq wg-load-last-workgroup nil)
+(setq wg-open-this-wg nil)
 
+;(workgroups-mode 1) ; put this one at the bottom of .emacs
+;; by default, the sessions are saved in "~/.emacs_workgroups"
 (autoload 'wg-create-workgroup "workgroups2" nil t)
 
 (defun my-wg-switch-workgroup ()
@@ -2094,6 +2100,10 @@ Here is code:
   '(progn
      ;; make sure wg-create-workgroup always success
      (defadvice wg-create-workgroup (around wg-create-workgroup-hack activate)
+       (unless (file-exists-p (wg-get-session-file))
+         (wg-reset t)
+         (wg-save-session t))
+
        (unless wg-current-session
          ;; code extracted from `wg-open-session'.
          ;; open session but do NOT load any workgroup.
@@ -2109,7 +2119,6 @@ Here is code:
 
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
-       (setq ad-return-value t))))
 </code></pre>
 
 </div>
