@@ -2119,6 +2119,7 @@ Here is code:
 
      ;; I'm fine to to override the original workgroup
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
+       (setq ad-return-value t))))
 </code></pre>
 
 </div>
