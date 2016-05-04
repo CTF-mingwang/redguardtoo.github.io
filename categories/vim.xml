@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (vim)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/vim.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 09 Apr 2016 04:36:02 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (vim)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/vim.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 04 May 2016 08:15:33 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -10,8 +9,6 @@ I have been using it for more than one month without any issue. I prefer general
 &lt;p&gt;
 Minimum setup is simple,
 &lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'general)
 (general-evil-setup t)
@@ -28,25 +25,23 @@ Minimum setup is simple,
        "ll" 'my-wg-switch-workgroup)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
 &lt;p&gt;
 My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el"&gt;real world setup&lt;/a&gt; is more complicated.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item><item><title>Use plain Vim to merge conflicts</title><link>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;I will explain how to resolve code merge conflicts with plain vim. The only third party plugin required is &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
 The reason to use vim is that I can't use vimdiff as a merge tool for certain VCS (CVS, Subversion, Perforce, …).
 &lt;/p&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-A typical file in conflict is like:
+&lt;div id="outline-container-1" class="outline-3"&gt;
+&lt;h4 id="sec-1"&gt;Problem&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1"&gt;
+
+&lt;p&gt;A typical file in conflict is like:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
+
 
 &lt;pre&gt;&lt;code class="lang-diff"&gt;hello world
 hello world
@@ -59,65 +54,60 @@ bye world
 bye world
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
+
 
 &lt;p&gt;
-Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "&lt;code&gt;=====&lt;/code&gt;" conflict markers.
+Let's call lines like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;", "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" and "=======" conflict markers.
 &lt;/p&gt;
-
 &lt;p&gt;
 Resolving conflicts is the operation of picking up &lt;b&gt;either or both&lt;/b&gt; of the sections between markers.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;Basic knowledge of Vim&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
+
+&lt;/div&gt;
+
+&lt;div id="outline-container-2" class="outline-3"&gt;
+&lt;h4 id="sec-2"&gt;Basic knowledge of Vim&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2"&gt;
+
+&lt;ul&gt;&lt;li&gt;"]n" move the focus to the next marker and "[n" to the previous marker.
 &lt;/li&gt;
 &lt;li&gt;"dd" delete current line
 &lt;/li&gt;
 &lt;li&gt;"d]n" delete from current line to the next marker (next marker exclusive)
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
+&lt;/ul&gt;&lt;/div&gt;
+
 &lt;/div&gt;
 
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-Our workflow is actually simple:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;Step 1, find the next marker by pressing "]n"
+&lt;div id="outline-container-3" class="outline-3"&gt;
+&lt;h4 id="sec-3"&gt;Solution&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-3"&gt;
+
+&lt;p&gt;Our workflow is actually simple:
+&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Step 1, find the next marker by pressing "]n"
 &lt;/li&gt;
 &lt;li&gt;Step 2, "]nd]n[ndd[ndd" to pick up the section 1
 &lt;/li&gt;
 &lt;li&gt;Step 3, "d]ndd]ndd" to pick up  the section 2, go to step 1
 &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
+&lt;/ul&gt;&lt;p&gt;
 This workflow is compatible with any version control software.
 &lt;/p&gt;
-
 &lt;p&gt;
 &lt;b&gt;Optionally&lt;/b&gt; you can set the shortcut for step 2 and step 3:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
+
 
 
 &lt;pre&gt;&lt;code class="lang-vimrc"&gt;map &amp;lt;leader&amp;gt;dg1 ]nd]n[ndd[ndd
 map &amp;lt;leader&amp;gt;dg2 d]ndd]ndd
 &lt;/code&gt;&lt;/pre&gt;
 
+
 &lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item><item><title>Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</title><link>http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;If you are already a vim master and you are impatient, please jump to the &lt;a href="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#sec-7"&gt;Quick start&lt;/a&gt; section at the end of this article. &lt;/p&gt; &lt;p&gt; In this post, I use git as an example of version control software. But you can use any other version control softwares instead. &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;The reasons to use vimdiff to do the merge?&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;ul&gt; &lt;li&gt;vimdiff is free (vim) &lt;/li&gt; &lt;li&gt;vimdiff works on any OS  &lt;/li&gt; &lt;li&gt;vimdiff works on non-GUI environment &lt;/li&gt; &lt;li&gt;Efficient, all the operations are finished by keyboard &lt;/li&gt; &lt;li&gt;light weight &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Set up vimdiff&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code. &lt;/p&gt; &lt;p&gt; First, add following code into your ~/.vimrc, &lt;/p&gt;   
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>vim</category><guid>http://blog.binchen.org/posts/use-plain-vim-to-merge-conflicts.html</guid><pubDate>Tue, 07 Apr 2015 07:19:37 GMT</pubDate></item><item><title>Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</title><link>http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;If you are already a vim master and you are impatient, please jump to the &lt;a href="http://blog.binchen.org/posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#sec-7"&gt;Quick start&lt;/a&gt; section at the end of this article. &lt;/p&gt; &lt;p&gt; In this post, I use git as an example of version control software. But you can use any other version control softwares instead. &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;The reasons to use vimdiff to do the merge?&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;ul&gt;&lt;li&gt;vimdiff is free (vim) &lt;/li&gt; &lt;li&gt;vimdiff works on any OS  &lt;/li&gt; &lt;li&gt;vimdiff works on non-GUI environment &lt;/li&gt; &lt;li&gt;Efficient, all the operations are finished by keyboard &lt;/li&gt; &lt;li&gt;light weight &lt;/li&gt; &lt;/ul&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Set up vimdiff&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code. &lt;/p&gt; &lt;p&gt; First, add following code into your ~/.vimrc, &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 set laststatus=2 "show the status line
@@ -173,8 +163,7 @@ git merge chen # now some conflicts created because Bob has already edited and m
 git mergetool
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; Git will invoke vimdiff with the following window layout. There are four buffers in this layout: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png"&gt; &lt;/p&gt; &lt;p&gt; Here is the explanation of each buffer: &lt;/p&gt;&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt; &lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="right"&gt; &lt;/colgroup&gt; &lt;thead&gt; &lt;tr&gt;&lt;th scope="col" class="left"&gt;Buffer&lt;/th&gt;&lt;th scope="col" class="left"&gt;Explanation&lt;/th&gt;&lt;th scope="col" class="right"&gt;Buffer Number&lt;/th&gt;&lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; &lt;tr&gt;&lt;td class="left"&gt;THEIRS (LOCAL)&lt;/td&gt;&lt;td class="left"&gt;contents of the file on the current branch&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;BASE&lt;/td&gt;&lt;td class="left"&gt;common base for the merge&lt;/td&gt;&lt;td class="right"&gt;3&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;YOURS (REMOTE)&lt;/td&gt;&lt;td class="left"&gt;contents of the file to be merged.&lt;/td&gt;&lt;td class="right"&gt;4&lt;/td&gt;&lt;/tr&gt; &lt;tr&gt;&lt;td class="left"&gt;MERGED&lt;/td&gt;&lt;td class="left"&gt;The file containing the conflict markers. You need edit and commit this file.&lt;/td&gt;&lt;td class="right"&gt;1&lt;/td&gt;&lt;/tr&gt; &lt;/tbody&gt; &lt;/table&gt;   &lt;p&gt; Some people name THEIRS and YOURS buffer to LOCAL and REMOTE buffer. That's totally fine because names are just names. The point is that the top middle buffer is the BASE one which contains the original code before Bob and Chen committing any code. And the bottom buffer is the mess which contains resolved/unresolved conflicts where you actual editing work happens. &lt;/p&gt; &lt;p&gt; You could press hot key ",2" (comma + two), Then you pick the content from THEIRS buffer (the top left buffer). It means you will use the Bob's code and discard Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",3" (comma + three), Then you pick the content from BASE buffer (the top middle buffer). It means you will discard either Bob's code or Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",4" (comma + four), Then you pick the content from YOURS buffer (the top right buffer). It means you will use Chen's code and discard Bob code in MERGED buffer. &lt;/p&gt; &lt;p&gt; Or you can edit the content directly in MERGED buffer. Anyway, git only care about the file binding to MERGED buffer. Any other buffer will be ignored by git. &lt;/p&gt; &lt;p&gt; You can use hot key "[c language=" and "][/c]c" to navigate to previous/next conflict (including the conflict resolved by git automatically) in current file which is binding to MERGED buffer. &lt;/p&gt; &lt;p&gt; After finishing editing of the conflicting file in MERGED buffer, you can use hot key ":xa" to exit vimdiff. Git will open next conflicting file with vimdiff automatically. &lt;/p&gt; &lt;p&gt; When you have resolved all the conflicts, follow the hint of git to commit your changes. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-6" class="outline-3"&gt; &lt;h4 id="sec-6"&gt;Tips&lt;/h4&gt; &lt;div class="outline-text-3" id="text-6"&gt;  &lt;ul&gt; &lt;li&gt;A vim plugin called fugitive.vim (&lt;a href="https://github.com/tpope/vim-fugitive"&gt;https://github.com/tpope/vim-fugitive&lt;/a&gt;) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code. &lt;/li&gt; &lt;li&gt;You can use Emacs to do the similar job (&lt;a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool"&gt;http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool&lt;/a&gt;). For me, Emacs start up time is too much for this task. Some people use emacsclient which has other overhead which I don't like. &lt;/li&gt; &lt;li&gt;If you prefer merge tool with GUI, you can use command line &lt;code&gt;git mergetool -t gvimdiff&lt;/code&gt; instead. &lt;/li&gt; &lt;li&gt;The ":diffget" command is valid if and only if there are &lt;b&gt;MARKED&lt;/b&gt; conflicts in merged buffer. If there are &lt;b&gt;NOT&lt;/b&gt; any marked string like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;" or "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" around current change (you can jump to previous/next change by press "[c language=" or "][/c]c"), it means the git have automatically resolved potential conflict for you. Review this kind of change is still wise because git is not as smart as human. &lt;/li&gt; &lt;li&gt;If you prefer navigating between the unresolved conflicts &lt;b&gt;only&lt;/b&gt;, you can install Tim Pope's &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt; and use hot key "[n" and "]n" to do the navigation. &lt;/li&gt; &lt;li&gt;I map "[n" and "]n" to more handy hot keys: &lt;/li&gt; &lt;/ul&gt;     
-&lt;pre class="prettyprint "&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; Git will invoke vimdiff with the following window layout. There are four buffers in this layout: &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png"&gt;&lt;/p&gt; &lt;p&gt; Here is the explanation of each buffer: &lt;/p&gt;&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;caption&gt;&lt;/caption&gt; &lt;colgroup&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;col class="right"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="left"&gt;Buffer&lt;/th&gt;&lt;th scope="col" class="left"&gt;Explanation&lt;/th&gt;&lt;th scope="col" class="right"&gt;Buffer Number&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="left"&gt;THEIRS (LOCAL)&lt;/td&gt;&lt;td class="left"&gt;contents of the file on the current branch&lt;/td&gt;&lt;td class="right"&gt;2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;BASE&lt;/td&gt;&lt;td class="left"&gt;common base for the merge&lt;/td&gt;&lt;td class="right"&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;YOURS (REMOTE)&lt;/td&gt;&lt;td class="left"&gt;contents of the file to be merged.&lt;/td&gt;&lt;td class="right"&gt;4&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="left"&gt;MERGED&lt;/td&gt;&lt;td class="left"&gt;The file containing the conflict markers. You need edit and commit this file.&lt;/td&gt;&lt;td class="right"&gt;1&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;p&gt; Some people name THEIRS and YOURS buffer to LOCAL and REMOTE buffer. That's totally fine because names are just names. The point is that the top middle buffer is the BASE one which contains the original code before Bob and Chen committing any code. And the bottom buffer is the mess which contains resolved/unresolved conflicts where you actual editing work happens. &lt;/p&gt; &lt;p&gt; You could press hot key ",2" (comma + two), Then you pick the content from THEIRS buffer (the top left buffer). It means you will use the Bob's code and discard Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",3" (comma + three), Then you pick the content from BASE buffer (the top middle buffer). It means you will discard either Bob's code or Chen's code in MERGED buffer. &lt;/p&gt; &lt;p&gt; You could press hot key ",4" (comma + four), Then you pick the content from YOURS buffer (the top right buffer). It means you will use Chen's code and discard Bob code in MERGED buffer. &lt;/p&gt; &lt;p&gt; Or you can edit the content directly in MERGED buffer. Anyway, git only care about the file binding to MERGED buffer. Any other buffer will be ignored by git. &lt;/p&gt; &lt;p&gt; You can use hot key "[c language=" and "][/c]c" to navigate to previous/next conflict (including the conflict resolved by git automatically) in current file which is binding to MERGED buffer. &lt;/p&gt; &lt;p&gt; After finishing editing of the conflicting file in MERGED buffer, you can use hot key ":xa" to exit vimdiff. Git will open next conflicting file with vimdiff automatically. &lt;/p&gt; &lt;p&gt; When you have resolved all the conflicts, follow the hint of git to commit your changes. &lt;/p&gt; &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-6" class="outline-3"&gt; &lt;h4 id="sec-6"&gt;Tips&lt;/h4&gt; &lt;div class="outline-text-3" id="text-6"&gt;  &lt;ul&gt;&lt;li&gt;A vim plugin called fugitive.vim (&lt;a href="https://github.com/tpope/vim-fugitive"&gt;https://github.com/tpope/vim-fugitive&lt;/a&gt;) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code. &lt;/li&gt; &lt;li&gt;You can use Emacs to do the similar job (&lt;a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool"&gt;http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool&lt;/a&gt;). For me, Emacs start up time is too much for this task. Some people use emacsclient which has other overhead which I don't like. &lt;/li&gt; &lt;li&gt;If you prefer merge tool with GUI, you can use command line &lt;code&gt;git mergetool -t gvimdiff&lt;/code&gt; instead. &lt;/li&gt; &lt;li&gt;The ":diffget" command is valid if and only if there are &lt;b&gt;MARKED&lt;/b&gt; conflicts in merged buffer. If there are &lt;b&gt;NOT&lt;/b&gt; any marked string like "&amp;gt;&amp;gt;&amp;gt;&amp;gt;" or "&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;" around current change (you can jump to previous/next change by press "[c language=" or "][/c]c"), it means the git have automatically resolved potential conflict for you. Review this kind of change is still wise because git is not as smart as human. &lt;/li&gt; &lt;li&gt;If you prefer navigating between the unresolved conflicts &lt;b&gt;only&lt;/b&gt;, you can install Tim Pope's &lt;a href="https://github.com/tpope/vim-unimpaired"&gt;vim-unimpaired&lt;/a&gt; and use hot key "[n" and "]n" to do the navigation. &lt;/li&gt; &lt;li&gt;I map "[n" and "]n" to more handy hot keys: &lt;/li&gt; &lt;/ul&gt;&lt;pre class="prettyprint "&gt;
 
 map ]] ]n
 

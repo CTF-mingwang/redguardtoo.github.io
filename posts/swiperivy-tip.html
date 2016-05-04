@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Use ivy to open recent directories | Chen's blog</title>
+<title>Swiper/Ivy tip | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/swiperivy-tip.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,18 +25,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Use ivy to open recent directories">
-<meta property="og:url" content="http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html">
-<meta property="og:description" content='The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
+<meta property="og:title" content="Swiper/Ivy tip">
+<meta property="og:url" content="http://blog.binchen.org/posts/swiperivy-tip.html">
+<meta property="og:description" content="Please install evil-escape at first.
 
 
 
-I used fasd to get the list of directories in shell. Fasd "offers quick acces'>
+When Swiper/Ivy candidate window pops up. You can press fd as quickly as possible close the window. 
+
+
+
+fd is the default key binding from evil-escape. I change">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-03-30T11:13:23Z">
-<meta property="article:tag" content="emacs">
-<meta property="article:tag" content="en">
-<meta property="article:tag" content="ivy">
+<meta property="article:published_time" content="2016-05-04T08:15:27Z">
 </head>
 <body>
     <section class="social"><ul>
@@ -52,80 +53,51 @@ I used fasd to get the list of directories in shell. Fasd "offers quick acces'>
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Use ivy to open recent directories</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Swiper/Ivy tip</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2016-03-30T11:13:23+00:00">2016-03-30 11:13</time>
+                <time class="timeago" datetime="2016-05-04T08:15:27+00:00">2016-05-04 08:15</time>
             
 
             
           |  
-        <a href="use-ivy-to-open-recent-directories.wp" id="sourcelink">Source</a>
+        <a href="swiperivy-tip.wp" id="sourcelink">Source</a>
 
             </div>
             
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
 
         </div>
         <div class="body">
             <div>
-<p>The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
+<p>Please install <a href="https://github.com/syl20bnr/evil-escape">evil-escape</a> at first.
 </p>
 
 <p>
-I used <a href="https://github.com/clvv/fasd">fasd</a> to get the list of directories in shell. Fasd "offers quick access to files and directories for POSIX shells".
+When <a href="https://github.com/abo-abo/swiper">Swiper/Ivy</a> candidate window pops up. You can press <code>fd</code> as quickly as possible close the window. 
 </p>
 
 <p>
-Here is my setup,
-</p>
-
-<pre><code class="lang-lisp">(require 'ivy) ; swiper 7.0+ should be installed
-
-(defun counsel-goto-recent-directory ()
-  "Open recent directory with dired"
-  (interactive)
-  (unless recentf-mode (recentf-mode 1))
-  (let ((collection
-         (delete-dups
-          (append (mapcar 'file-name-directory recentf-list)
-                  ;; fasd history
-                  (if (executable-find "fasd")
-                      (split-string (shell-command-to-string "fasd -ld") "\n" t))))))
-    (ivy-read "directories:" collection :action 'dired)))
-</code></pre>
-
-<p>
-Screenshot:
+<code>fd</code> is the default key binding from evil-escape. I changed it to <code>kj</code> instead.
 </p>
 
 <p>
-<img src="../wp-content/ivy-recent-directory-nq8.png" alt="ivy-recent-directory-nq8.png"></p>
+For example, I assign hotkey =,ii= to <code>M-x counsel-imenu</code>, and I can press <code>kj</code> to quit imenu popup.
+</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="emacs-vs-sublime-text-on-salesforce-development.html" rel="prev" title="Emacs vs Sublime Text on Salesforce development">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="use-general-el-to-provide-multiple-leader-key-in-evil-mode.html" rel="next" title="Use general.el to provide multiple leader key in evil-mode">Next post</a>
+                <a href="use-general-el-to-provide-multiple-leader-key-in-evil-mode.html" rel="prev" title="Use general.el to provide multiple leader key in evil-mode">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html",
-        disqus_title="Use ivy to open recent directories",
-        disqus_identifier="cache/posts/use-ivy-to-open-recent-directories.html",
+            disqus_url="http://blog.binchen.org/posts/swiperivy-tip.html",
+        disqus_title="Swiper/Ivy tip",
+        disqus_identifier="cache/posts/swiperivy-tip.html",
         disqus_config = function () {
             this.language = "en";
         };

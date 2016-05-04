@@ -27,11 +27,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use Ivy-mode to tweak workgroups2">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html">
-<meta property="og:description" content="CREATED: &lt;2015-12-22&gt;
+<meta property="og:description" content="CREATED:  2015-12-22
 
 
 
-UPDATED: &lt;2016-04-21 Thu&gt;
+UPDATED:  2016-04-21 Thu
 
 
 
@@ -39,7 +39,7 @@ Workgroups2 will load previous windows layout by default. That's handy for most 
 
 
 
-But as a freelancer I am assigned a low spec comput">
+But as a freelancer I am assigned a low spec computer">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-12-22T04:42:03Z">
 <meta property="article:tag" content="emacs">
@@ -87,12 +87,11 @@ But as a freelancer I am assigned a low spec comput">
         </div>
         <div class="body">
             <div>
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-22&gt;</span></span>
+<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-12-22</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-04-21 Thu&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2016-04-21 Thu</span></span>
 </p>
 
 <p>
@@ -110,8 +109,6 @@ So I use <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> to create a li
 <p>
 Here is code:
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(setq wg-use-default-session-file nil)
 ;; don't open last workgroup automatically in `wg-open-session',
@@ -163,8 +160,6 @@ Here is code:
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
 </code></pre>
-
-</div>
 </div>
         </div>
         
