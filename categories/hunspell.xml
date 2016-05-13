@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (hunspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/hunspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 04 May 2016 08:15:33 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-03-22 Tue&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (hunspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/hunspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 May 2016 03:03:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-05-13 Fri&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -11,7 +11,7 @@ I will show you the minimum spell check setup for programmers and non programmer
 &lt;/p&gt;
 
 &lt;p&gt;
-Then I will explain why it is better.
+Then I will explain why.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -39,16 +39,21 @@ If you want to force Emacs use the dictionary "en_US", insert below code into yo
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; find aspell and hunspell automatically
 (cond
- ;; try aspell at first
- ((executable-find "aspell")
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US")))
-
- ;; if aspell does NOT exist, use hunspell
+ ;; try hunspell at first
+  ;; if hunspell does NOT exist, use aspell
  ((executable-find "hunspell")
   (setq ispell-program-name "hunspell")
-  (setq ispell-extra-args '("-d en_US")))
- )
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        ;; Please note the list `("-d" "en_US")` contains ACTUAL parameters passed to hunspell
+        ;; You could use `("-d" "en_US,en_US-med")` to check with multiple dictionaries
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)
+          )))
+
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  ;; Please note ispell-extra-args contains ACTUAL parameters passed to aspell
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_US"))))
 &lt;/code&gt;&lt;/pre&gt;
 
 
@@ -63,7 +68,7 @@ Some people prefer hunspell to aspell because &lt;b&gt;hunspell gives better sug
 
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;echo htink | aspell -a --sug-mode=ultra --lang=en_US
-echo htink | hunspell -a
+echo htink | hunspell -a -d en_US
 &lt;/code&gt;&lt;/pre&gt;
 
 
@@ -117,15 +122,18 @@ Please insert below code into your ~/.emacs:
  ((executable-find "hunspell")
   (setq ispell-program-name "hunspell")
 
-  ;; Only purpose is to RESET dictionary into the safe "en_US" for hunspell.
-  ;; if we use different dictionary, specify it through `ispell-extra-args'
+  ;; Please note that `ispell-local-dictionary` itself will be passed to hunspell cli with "-d"
+  ;; it's also used as the key to lookup ispell-local-dictionary-alist
+  ;; if we use different dictionary
   (setq ispell-local-dictionary "en_US")
   (setq ispell-local-dictionary-alist
-        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8))))
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8))))
  (t (setq ispell-program-name nil)))
 
 ;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
 ;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
+;; Please note when you use hunspell, ispell-extra-args will NOT be used.
+;; Hack ispell-local-dictionary-alist instead.
 (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
 ;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
 (defadvice ispell-word (around my-ispell-word activate)
@@ -194,7 +202,7 @@ I cannot find hunspell option to check camel case words. Please enlighten me if 
 Hunspell has some design flaw. It will always check the environment variable LC_ALL, LC_MESSAGES and LANG &lt;b&gt;at first&lt;/b&gt; to find the default dictionary unless you specify the dictionary in the command line. If it cannot find the default dictionary, the spell checker process won't start. Aspell does not have this issue, if it cannot find the zh_CN dictionary, it will fall back into English.
 &lt;/p&gt;
 &lt;p&gt;
-Specify the ispell-extra-args &lt;b&gt;won't stop hunspell to search for the default dictionary&lt;/b&gt; at the beginning.
+Specify the ispell-extra-args &lt;b&gt;won't stop hunspell to search for the default dictionary&lt;/b&gt; at the beginning because ispell-extra-args is NOT used.
 &lt;/p&gt;
 &lt;p&gt;
 For example, I am a Chinese and my locale is "zh_CN.utf-8". So hunspell will always search the dictionary zh_CN. Even I'm only interested in English spell checking.
@@ -212,15 +220,13 @@ Finally, I figure out,
 ;; below two lines reset the the hunspell to it STOPS querying locale!
 (setq ispell-local-dictionary "en_US") ; "en_US" is key to lookup in `ispell-local-dictionary-alist`
 (setq ispell-local-dictionary-alist
-      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil nil nil utf-8)))
-;; Below line specify the ACTUAL dictionary we use
-(setq ispell-extra-args '("-d en_US"))
+      '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
 &lt;/code&gt;&lt;/pre&gt;
 
 
 
 &lt;p&gt;
-BTW, you can pass the extra arguments to the hunspell by tweak &lt;code&gt;ispell-local-dictionary-alist&lt;/code&gt;. But I prefer using &lt;code&gt;ispell-extra-args&lt;/code&gt;.
+As you can see, you can pass the extra arguments to the hunspell by tweak &lt;code&gt;ispell-local-dictionary-alist&lt;/code&gt;.
 &lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;
 
@@ -241,7 +247,10 @@ hunspell -D # list available/loaded dictionaries
 &lt;/code&gt;&lt;/pre&gt;
 
 
-&lt;/li&gt;
+
+&lt;p&gt;
+You can also run &lt;code&gt;hunspell -D&lt;/code&gt; in shell to figure out where hunspell searches dictionaries.
+&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/div&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>aspell</category><category>check</category><category>emacs</category><category>en</category><category>hunspell</category><category>ispell</category><category>spell</category><guid>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</guid><pubDate>Mon, 21 Apr 2014 08:25:20 GMT</pubDate></item></channel></rss>
