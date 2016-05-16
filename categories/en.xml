@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 16 May 2016 13:34:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 16 May 2016 13:36:54 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 You can &lt;code&gt;M-x toggle-input-method&lt;/code&gt; or &lt;code&gt;C-\&lt;/code&gt; to input Non-English characters.
 &lt;/p&gt;
 
@@ -8,16 +8,16 @@ Let's do some analysis at first about evil-mode,
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;You only input Non-English characters in evil-insert-state. So need go into evil-insert-state at first before toggle on input method
+&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method
 &lt;/li&gt;
-&lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while staying in evil-insert state
+&lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while &lt;b&gt;staying in evil-insert state&lt;/b&gt;
 &lt;/li&gt;
-&lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;UI feedback&lt;/b&gt; about input method status
+&lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;notification of input method status&lt;/b&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-Here is the complete setup,
+Here is the setup,
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -63,7 +63,7 @@ Chinese version:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;输入中文前须进入evil-insert-state
+&lt;li&gt;输中文前须进入evil-insert-state
 &lt;/li&gt;
 &lt;li&gt;在evil-insert-state中可能会切换输入法
 &lt;/li&gt;
