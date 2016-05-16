@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Swiper/Ivy tip | Chen's blog</title>
+<title>How to input Non-English character in evil-mode efficiently | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/swiperivy-tip.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,23 +25,22 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Swiper/Ivy tip">
-<meta property="og:url" content="http://blog.binchen.org/posts/swiperivy-tip.html">
-<meta property="og:description" content="Please install evil-escape at first.
+<meta property="og:title" content="How to input Non-English character in evil-mode efficiently">
+<meta property="og:url" content="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html">
+<meta property="og:description" content="You can M-x toggle-input-method or C-\ to input Non-English charaters.
 
 
 
-When Swiper/Ivy candidate window pops up. You can press fd quickly to close the window. 
+Let's do some analyis at first about evil-mode,
 
 
 
-fd is the default key binding from evil-escape. I changed it to kj i">
+You only input Non-English charaters in evil-insert-state. So need go into ">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-05-04T08:15:27Z">
+<meta property="article:published_time" content="2016-05-16T13:33:25Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
 <meta property="article:tag" content="evil">
-<meta property="article:tag" content="ivy">
 </head>
 <body>
     <section class="social"><ul>
@@ -57,16 +56,16 @@ fd is the default key binding from evil-escape. I changed it to kj i">
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Swiper/Ivy tip</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">How to input Non-English character in evil-mode efficiently</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2016-05-04T08:15:27+00:00">2016-05-04 08:15</time>
+                <time class="timeago" datetime="2016-05-16T13:33:25+00:00">2016-05-16 13:33</time>
             
 
             
           |  
-        <a href="swiperivy-tip.wp" id="sourcelink">Source</a>
+        <a href="how-to-input-non-english-character-in-evil-mode-efficiently.wp" id="sourcelink">Source</a>
 
             </div>
             
@@ -76,7 +75,6 @@ fd is the default key binding from evil-escape. I changed it to kj i">
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="../categories/evil.html" rel="tag">evil</a></li>
-           <li><a class="tag p-category" href="../categories/ivy.html" rel="tag">ivy</a></li>
         </ul>
 </div>
 
@@ -84,33 +82,91 @@ fd is the default key binding from evil-escape. I changed it to kj i">
         <div class="body">
             <div>
 <p>
-Please install <a href="https://github.com/syl20bnr/evil-escape">evil-escape</a> at first.
+You can <code>M-x toggle-input-method</code> or <code>C-\</code> to input Non-English charaters.
 </p>
 
 <p>
-When <a href="https://github.com/abo-abo/swiper">Swiper/Ivy</a> candidate window pops up. You can press <code>fd</code> quickly to close the window. 
+Let's do some analyis at first about evil-mode,
 </p>
 
+<ul class="org-ul">
+<li>You only input Non-English charaters in evil-insert-state. So need go into evil-insert-state at first before toggle on input method
+</li>
+<li>In evil-insert-state, you can toggle off input method to input English characters while staying in evil-insert state
+</li>
+<li>When press <code>ESC</code>, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need <b>UI feedback</b> about input method status
+</li>
+</ul>
 <p>
-<code>fd</code> is the default key binding from evil-escape. I changed it to <code>kj</code> instead.
+Here is the complete setup,
 </p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">;; {{ make IME compatible with evil-mode
+(defun evil-toggle-input-method ()
+  "when toggle on input method, goto evil-insert-state. "
+  (interactive)
+
+  ;; load IME when needed, less memory footprint
+  ;; (unless (featurep 'chinese-pyim)
+  ;;   (require 'chinese-pyim))
+
+  (cond
+   ((and (boundp 'evil-mode) evil-mode)
+    ;; evil-mode
+    (cond
+     ((eq evil-state 'insert)
+      (toggle-input-method))
+     (t
+      (evil-insert-state)
+      (unless current-input-method
+        (toggle-input-method))
+      ))
+    (if current-input-method (message "IME on!")))
+   (t
+    ;; NOT evil-mode, some guy don't use evil-mode at all
+    (toggle-input-method))))
+
+(defadvice evil-insert-state (around evil-insert-state-hack activate)
+  ad-do-it
+  (if current-input-method (message "IME on!")))
+
+(global-set-key (kbd "C-\\") 'evil-toggle-input-method)
+;; }}
+</code></pre>
+
+</div>
+
+<p>
+Chinese version:
+在evil-mode中切换输入法有以下要点,
+</p>
+
+<ul class="org-ul">
+<li>输入中文前须进入evil-insert-state
+</li>
+<li>在evil-insert-state中可能会切换输入法
+</li>
+<li>按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态
+</li>
+</ul>
+<p>
+代码见上.</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="use-general-el-to-provide-multiple-leader-key-in-evil-mode.html" rel="prev" title="Use general.el to provide multiple leader key in evil-mode">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="how-to-input-non-english-character-in-evil-mode-efficiently.html" rel="next" title="How to input Non-English character in evil-mode efficiently">Next post</a>
+                <a href="swiperivy-tip.html" rel="prev" title="Swiper/Ivy tip">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/swiperivy-tip.html",
-        disqus_title="Swiper/Ivy tip",
-        disqus_identifier="cache/posts/swiperivy-tip.html",
+            disqus_url="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html",
+        disqus_title="How to input Non-English character in evil-mode efficiently",
+        disqus_identifier="cache/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html",
         disqus_config = function () {
             this.language = "en";
         };
