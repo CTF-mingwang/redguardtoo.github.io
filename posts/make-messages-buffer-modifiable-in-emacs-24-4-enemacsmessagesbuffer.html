@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>How to input Non-English character in evil-mode efficiently | Chen's blog</title>
+<title>Make Messages Buffer modifiable in Emacs 24.4+ :en:emacs:messages:buffer | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
 <style type="text/css">
 td, th {
@@ -25,21 +25,15 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 </style>
 <meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="How to input Non-English character in evil-mode efficiently">
-<meta property="og:url" content="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html">
-<meta property="og:description" content="You can M-x toggle-input-method or C-\ to input Non-English characters.
+<meta property="og:title" content="Make Messages Buffer modifiable in Emacs 24.4+                        ">
+<meta property="og:url" content="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html">
+<meta property="og:description" content="Insert below code into the beginning of ~/.emacs because any part of .emacs may create Messages Buffer instance.
 
 
-
-Analysis about evil-mode,
-
-
-You only input Non-English characters in evil-insert-state. So you need go into evil-insert-state">
+(when (boundp 'messages-buffer-mode-hook)
+  (defun messages-buffer-mode-hook-setup ()">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-05-16T13:33:25Z">
-<meta property="article:tag" content="emacs">
-<meta property="article:tag" content="en">
-<meta property="article:tag" content="evil">
+<meta property="article:published_time" content="2016-05-18T00:42:32Z">
 </head>
 <body>
     <section class="social"><ul>
@@ -55,119 +49,45 @@ You only input Non-English characters in evil-insert-state. So you need go into 
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">How to input Non-English character in evil-mode efficiently</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Make Messages Buffer modifiable in Emacs 24.4+                                :en:emacs:messages:buffer</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2016-05-16T13:33:25+00:00">2016-05-16 13:33</time>
+                <time class="timeago" datetime="2016-05-18T00:42:32+00:00">2016-05-18 00:42</time>
             
 
             
           |  
-        <a href="how-to-input-non-english-character-in-evil-mode-efficiently.wp" id="sourcelink">Source</a>
+        <a href="make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.wp" id="sourcelink">Source</a>
 
             </div>
             
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/evil.html" rel="tag">evil</a></li>
-        </ul>
-</div>
 
         </div>
         <div class="body">
             <div>
-<p>You can <code>M-x toggle-input-method</code> or <code>C-\</code> to input Non-English characters.
+<p>Insert below code into the <b>beginning of ~/.emacs</b> because any part of .emacs may create Messages Buffer instance.
 </p>
 
-<p>
-Analysis about evil-mode,
-</p>
-
-<ul>
-<li>You only input Non-English characters in evil-insert-state. So you need <b>go into evil-insert-state at first</b> before toggle on input method
-</li>
-<li>In evil-insert-state, you can toggle off input method to input English characters while <b>staying in evil-insert state</b>
-</li>
-<li>When press <code>ESC</code>, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need <b>notification of input method status</b>
-</li>
-</ul>
-<p>
-Here is the setup,
-</p>
-
-<pre><code class="lang-lisp">;; {{ make IME compatible with evil-mode
-(defun evil-toggle-input-method ()
-  "when toggle on input method, goto evil-insert-state. "
-  (interactive)
-
-  ;; load IME when needed, less memory footprint
-  ;; (unless (featurep 'chinese-pyim)
-  ;;   (require 'chinese-pyim))
-
-  (cond
-   ((and (boundp 'evil-mode) evil-mode)
-    ;; evil-mode
-    (cond
-     ((eq evil-state 'insert)
-      (toggle-input-method))
-     (t
-      (evil-insert-state)
-      (unless current-input-method
-        (toggle-input-method))
-      ))
-    (if current-input-method (message "IME on!")))
-   (t
-    ;; NOT evil-mode, some guy don't use evil-mode at all
-    (toggle-input-method))))
-
-(defadvice evil-insert-state (around evil-insert-state-hack activate)
-  ad-do-it
-  (if current-input-method (message "IME on!")))
-
-(global-set-key (kbd "C-\\") 'evil-toggle-input-method)
-;; }}
+<pre><code class="lang-lisp">(when (boundp 'messages-buffer-mode-hook)
+  (defun messages-buffer-mode-hook-setup ()
+    (read-only-mode -1))
+  (add-hook 'messages-buffer-mode-hook 'messages-buffer-mode-hook-setup))
 </code></pre>
-
-<p>
-Chinese version:
-</p>
-
-<p>
-在evil-mode中切换输入法有以下要点,
-</p>
-
-<ul>
-<li>输中文前须进入evil-insert-state
-</li>
-<li>在evil-insert-state中可能会切换输入法
-</li>
-<li>按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态
-</li>
-</ul>
-<p>
-代码见上.
-</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="swiperivy-tip.html" rel="prev" title="Swiper/Ivy tip">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html" rel="next" title="Make Messages Buffer modifiable in Emacs 24.4+                                :en:emacs:messages:buffer">Next post</a>
+                <a href="how-to-input-non-english-character-in-evil-mode-efficiently.html" rel="prev" title="How to input Non-English character in evil-mode efficiently">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html",
-        disqus_title="How to input Non-English character in evil-mode efficiently",
-        disqus_identifier="cache/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html",
+            disqus_url="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html",
+        disqus_title="Make Messages Buffer modifiable in Emacs 24.4+                                :en:emacs:messages:buffer",
+        disqus_identifier="cache/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html",
         disqus_config = function () {
             this.language = "en";
         };
