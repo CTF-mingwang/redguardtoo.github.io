@@ -1,5 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 18 May 2016 02:13:52 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Insert below code into the &lt;b&gt;beginning of ~/.emacs&lt;/b&gt; because any part of .emacs may create Messages Buffer instance.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 May 2016 01:41:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Complete current line by &lt;code&gt;git grep&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-escape (keyword)
+  (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
+  (replace-regexp-in-string "\"" "\\\\\"" keyword))
+
+(defun counsel-replace-current-line (leading-spaces content)
+  (beginning-of-line)
+  (kill-line)
+  (insert (concat leading-spaces content))
+  (end-of-line))
+
+(defun counsel-git-grep-complete-line ()
+  (interactive)
+  (let* (cmd
+        (cur-line (buffer-substring-no-properties (line-beginning-position)
+                                                  (line-end-position)))
+        (default-directory (locate-dominating-file
+                            default-directory ".git"))
+        keyword
+        (leading-spaces "")
+        collection)
+    (setq keyword (counsel-escape (if (region-active-p)
+                                      (buffer-substring-no-properties (region-beginning)
+                                                                      (region-end))
+                                    (replace-regexp-in-string "^[ \t]*" "" cur-line))))
+    ;; grep lines without leading/trailing spaces
+    (setq cmd (format "git --no-pager grep -I -h --no-color -i -e \"^[ \\t]*%s\" | sed s\"\/^[ \\t]*\/\/\" | sed s\"\/[ \\t]*$\/\/\" | sort | uniq" keyword))
+    (when (setq collection (split-string (shell-command-to-string cmd) "\n" t))
+      (if (string-match "^\\([ \t]*\\)" cur-line)
+          (setq leading-spaces (match-string 1 cur-line)))
+      (cond
+       ((= 1 (length collection))
+        (counsel-replace-current-line leading-spaces (car collection)))
+       ((&amp;gt; (length collection) 1)
+        (ivy-read "lines:"
+                  collection
+                  :action (lambda (l)
+                            (counsel-replace-current-line leading-spaces l))))))
+    ))
+(global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;
+I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Insert below code into the &lt;b&gt;beginning of ~/.emacs&lt;/b&gt; because any part of .emacs may create Messages Buffer instance.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(when (boundp 'messages-buffer-mode-hook)
@@ -399,78 +445,4 @@ So here is my code,
                            (ivy-read (format "Bash history:") collection))))
         (kill-new val)
         (message "%s =&amp;gt; kill-ring" val))))
-&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html#Group-Topics"&gt;Group Topics&lt;/a&gt; is used to manage Gnus groups.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, you can,
-&lt;/p&gt;
-
-&lt;ul&gt;&lt;li&gt;Place groups (mail folders)  from Gmail into "gmail" topic
-&lt;/li&gt;
-&lt;li&gt;Place groups (mails folders) from Outlook.com into "hotmail" topic
-&lt;/li&gt;
-&lt;li&gt;Make "gmail" and "hotmail" belong to the root topic "Gnus"
-&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-Enable it is just one line,
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-Now comes the question how to delete/add/move the topics?
-&lt;/p&gt;
-
-&lt;p&gt;
-The official answer is to read &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Topic-Commands.html#Topic-Commands"&gt;its manual&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-But there is a &lt;b&gt;simpler solution&lt;/b&gt;. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(eval-after-load 'gnus-topic
-  '(progn
-     (setq gnus-topic-topology '(("Gnus" visible)
-                                 (("hotmail" visible nil nil))
-                                 (("gmail" visible nil nil))))
-
-     (setq gnus-topic-alist '(("hotmail" ; the key of topic
-                               "nnimap+hotmail:Inbox"
-                               "nnimap+hotmail:Drafts"
-                               "nnimap+hotmail:Sent"
-                               "nnimap+hotmail:Junk"
-                               "nnimap+hotmail:Deleted")
-                              ("gmail" ; the key of topic
-                               "INBOX"
-                               "[Gmail]/Sent Mail"
-                               "[Gmail]/Trash"
-                               "Drafts")
-                              ("Gnus")))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-The &lt;b&gt;management of topics is as easy as editing above code&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-My setup always works no matter ~/.newsrc.eld is loaded or not.
-&lt;/p&gt;
-
-&lt;p&gt;
-BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq gnus-select-method
-             '(nnimap "gmail" ; key
-                      (nnimap-address "imap.gmail.com")
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl)))
-(add-to-list 'gnus-secondary-select-methods
-             '(nnimap "hotmail" ; key
-                      (nnimap-address "imap-mail.outlook.com")
-                      (nnimap-server-port 993)
-                      (nnimap-stream ssl)))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gmail</category><category>gnus</category><guid>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</guid><pubDate>Sun, 10 Jan 2016 05:36:49 GMT</pubDate></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item></channel></rss>
