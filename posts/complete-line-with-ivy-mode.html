@@ -27,14 +27,12 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Complete line with ivy-mode">
 <meta property="og:url" content="http://blog.binchen.org/posts/complete-line-with-ivy-mode.html">
-<meta property="og:description" content='Complete current line by git grep.
+<meta property="og:description" content='Complete current line by git grep and ivy-mode.
 
 
 (defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword))
-
-(defun coun'>
+  (replace-regexp-in-string "\"" "\\\\\"" keyword))'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-05-23T01:41:14Z">
 <meta property="article:tag" content="emacs">
@@ -82,7 +80,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </div>
         <div class="body">
             <div>
-<p>Complete current line by <code>git grep</code>.
+<p>Complete current line by <code>git grep</code> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
 </p>
 
 <pre><code class="lang-lisp">(defun counsel-escape (keyword)
