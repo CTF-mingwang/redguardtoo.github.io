@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (buffer)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/buffer.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 18 May 2016 02:13:52 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Insert below code into the &lt;b&gt;beginning of ~/.emacs&lt;/b&gt; because any part of .emacs may create Messages Buffer instance.
-&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (buffer)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/buffer.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 28 May 2016 09:40:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(when (boundp 'messages-buffer-mode-hook)
-  (defun messages-buffer-mode-hook-setup ()
-    (read-only-mode -1))
-  (add-hook 'messages-buffer-mode-hook 'messages-buffer-mode-hook-setup))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item><item><title>Moving focus and buffer between Emacs window</title><link>http://blog.binchen.org/posts/moving-focus-and-buffer-between-emacs-window.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Please read the excellent article &lt;a href="http://irreal.org/blog/?p=1562"&gt;Moving between Emacs windows&lt;/a&gt; for basic setup.
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+  (if (string= "*Messages*" (buffer-name))
+      (read-only-mode -1)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item><item><title>Moving focus and buffer between Emacs window</title><link>http://blog.binchen.org/posts/moving-focus-and-buffer-between-emacs-window.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Please read the excellent article &lt;a href="http://irreal.org/blog/?p=1562"&gt;Moving between Emacs windows&lt;/a&gt; for basic setup.
 &lt;/p&gt;
 
 &lt;p&gt;
 Here is my summary of that article:
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
 &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/dimitri/switch-window"&gt;switch-window.el&lt;/a&gt; is great. The default hot key is "C-x o".
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 I love switch-windows.el. It's only three key strikes to select a window.
 &lt;/p&gt;
 
@@ -25,16 +29,17 @@ I love switch-windows.el. It's only three key strikes to select a window.
 I also use other packages which is more efficient.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;window-numbering.el&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/nschum/window-numbering.el"&gt;window-numbering.el&lt;/a&gt; is &lt;b&gt;the best&lt;/b&gt;. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only &lt;b&gt;one&lt;/b&gt; key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; window-numbering.el&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+&lt;a href="https://github.com/nschum/window-numbering.el"&gt;window-numbering.el&lt;/a&gt; is &lt;b&gt;the best&lt;/b&gt;. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only &lt;b&gt;one&lt;/b&gt; key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is my configuration of window-numbering.el:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'window-numbering)
@@ -43,31 +48,30 @@ Here is my configuration of window-numbering.el:
 (window-numbering-mode 1)
 &lt;/code&gt;&lt;/pre&gt;
 
-
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;evil-mode&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;&lt;a href="http://emacswiki.org/emacs/Evil"&gt;evil-mode&lt;/a&gt; is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
-&lt;/p&gt;&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div id="outline-container-3" class="outline-3"&gt;
-&lt;h4 id="sec-3"&gt;buffer-move.el&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-3"&gt;
-
-&lt;p&gt;&lt;a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el"&gt;buffer-move.el&lt;/a&gt; moves the buffer instead of focus between windows. It can be installed through &lt;a href="http://melpa.milkbox.net/"&gt;MELPA&lt;/a&gt;.
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; evil-mode&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+&lt;a href="http://emacswiki.org/emacs/Evil"&gt;evil-mode&lt;/a&gt; is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; buffer-move.el&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+&lt;a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el"&gt;buffer-move.el&lt;/a&gt; moves the buffer instead of focus between windows. It can be installed through &lt;a href="http://melpa.milkbox.net/"&gt;MELPA&lt;/a&gt;.
+&lt;/p&gt;
+
 &lt;p&gt;
 Here is my configuration:
 &lt;/p&gt;
-
+&lt;div class="org-src-container"&gt;
 
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
@@ -76,31 +80,33 @@ Here is my configuration:
 (global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-4" class="outline-3"&gt;
-&lt;h4 id="sec-4"&gt;updated&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-4"&gt;
-
-&lt;p&gt;I use &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to record all my key pressing for &lt;b&gt;more than six months&lt;/b&gt;.
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; updated&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+I use &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to record all my key pressing for &lt;b&gt;more than six months&lt;/b&gt;.
 &lt;/p&gt;
 &lt;p&gt;
 According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through &lt;b&gt;window-numbering.el&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 So it's necessary to optimize window-numbering.el further. By default, window-numbering.el uses "M-num" key to select window which is already efficient. But as a geek, I have a tendency to push the efficiency to the extreme end.
 &lt;/p&gt;
+
 &lt;p&gt;
 Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1", "2", and "3".
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is the code:
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(define-key evil-normal-state-map ",1" 'select-window-1)
 (define-key evil-normal-state-map ",2" 'select-window-2)
@@ -108,11 +114,11 @@ Here is the code:
 (define-key evil-normal-state-map ",4" 'select-window-4)
 &lt;/code&gt;&lt;/pre&gt;
 
-
+&lt;/div&gt;
 
 &lt;p&gt;
 Check &lt;a href="https://github.com/redguardtoo/emacs.d/commit/8a51696"&gt;my setup at github&lt;/a&gt;.
 &lt;/p&gt;
-&lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>move</category><category>window</category><guid>http://blog.binchen.org/posts/moving-focus-and-buffer-between-emacs-window.html</guid><pubDate>Sun, 03 Feb 2013 14:19:00 GMT</pubDate></item></channel></rss>

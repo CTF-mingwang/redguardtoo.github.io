@@ -27,11 +27,9 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Make Messages Buffer modifiable in Emacs 24.4">
 <meta property="og:url" content="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html">
-<meta property="og:description" content="Insert below code into the beginning of ~/.emacs because any part of .emacs may create Messages Buffer instance.
-
-
-(when (boundp 'messages-buffer-mode-hook)
-  (defun messages-buffer-mode-hook-setup ()">
+<meta property="og:description" content='(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+  (if (string= "*Messages*" (buffer-name))
+      (read-only-mode -1)))'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-05-18T00:42:32Z">
 <meta property="article:tag" content="buffer">
@@ -78,15 +76,13 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
         </div>
         <div class="body">
-            <div>
-<p>Insert below code into the <b>beginning of ~/.emacs</b> because any part of .emacs may create Messages Buffer instance.
-</p>
+            <div class="org-src-container">
 
-<pre><code class="lang-lisp">(when (boundp 'messages-buffer-mode-hook)
-  (defun messages-buffer-mode-hook-setup ()
-    (read-only-mode -1))
-  (add-hook 'messages-buffer-mode-hook 'messages-buffer-mode-hook-setup))
+<pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+  (if (string= "*Messages*" (buffer-name))
+      (read-only-mode -1)))
 </code></pre>
+
 </div>
         </div>
         
