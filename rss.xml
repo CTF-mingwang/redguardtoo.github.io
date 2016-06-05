@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 28 May 2016 09:40:19 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 05 Jun 2016 14:33:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+When I use &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is my code based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-git-timemachine-show-selected-revision ()
+  "Show last (current) revision of file."
+  (interactive)
+  (let (collection)
+    (setq collection
+          (mapcar (lambda (rev)
+                    ;; re-shape list for the ivy-read
+                    (cons (concat (substring (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                  (git-timemachine--revisions)))
+    (ivy-read "commits:"
+              collection
+              :action (lambda (rev)
+                        (git-timemachine-show-revision rev)))))
+
+(defun my-git-timemachine ()
+  "Open git snapshot with the selected version.  Based on ivy-mode."
+  (interactive)
+  (unless (featurep 'git-timemachine)
+    (require 'git-timemachine))
+  (git-timemachine--start #'my-git-timemachine-show-selected-revision))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Screenshot after &lt;code&gt;M-x my-git-timemachine&lt;/code&gt;,
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git grep&lt;/a&gt; and &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -1871,24 +1912,4 @@ So here is my code,
     (message "Please select region at first!")))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
-  "Yank the bash history"
-  (interactive)
-  (let (hist-cmd collection val)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                           (buffer-string))
-                         "\n"
-                         t)))
-    (when (and collection (&amp;gt; (length collection) 0)
-               (setq val (if (= 1 (length collection)) (car collection)
-                           (ivy-read (format "Bash history:") collection))))
-        (kill-new val)
-        (message "%s =&amp;gt; kill-ring" val))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item></channel></rss>
