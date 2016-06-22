@@ -76,14 +76,10 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
         </div>
         <div class="body">
-            <div class="org-src-container">
-
-<pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+            <pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
   (if (string= "*Messages*" (buffer-name))
       (read-only-mode -1)))
 </code></pre>
-
-</div>
         </div>
         
         <ul class="pager hidden-print">

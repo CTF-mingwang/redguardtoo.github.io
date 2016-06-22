@@ -30,11 +30,9 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content='Complete current line by git grep and ivy-mode.
 
 
-
-
 (defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword'>
+  (replace-regexp-in-string "\"" "\\\\\"" keyword))'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-05-23T01:41:14Z">
 <meta property="article:tag" content="emacs">
@@ -82,11 +80,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </div>
         <div class="body">
             <div>
-<p>
-Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
+<p>Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
 </p>
-
-<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
@@ -128,8 +123,6 @@ Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a
     ))
 (global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
 </code></pre>
-
-</div>
 
 <p>
 I also tried <code>grep</code> which is too slow for my project.
