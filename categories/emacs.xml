@@ -1,10 +1,396 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 22 Jun 2016 07:05:12 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;When I use &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 30 Jun 2016 11:09:50 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage Emacs packages effectively</title><link>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I developed a few package managing techniques after reading &lt;a href="https://github.com/purcell"&gt;Steve Purcell&lt;/a&gt;'s Emacs setup.
+&lt;/p&gt;
+
+&lt;p&gt;
+Those techniques are compatible with other plugin (&lt;a href="https://github.com/jwiegley/use-package"&gt;use-package&lt;/a&gt;, for example) based on package.el.
+&lt;/p&gt;
+
+&lt;p&gt;
+Emacs Lisp knowledge is required to read this article.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Technique 1, Do NOT use package.el for certain packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Create directory &lt;code&gt;site-lisp&lt;/code&gt; at &lt;code&gt;~/.emacs.d&lt;/code&gt;, then insert below code into &lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(if (fboundp 'normal-top-level-add-to-load-path)
+    (let* ((my-lisp-dir "~/.emacs.d/site-lisp/")
+           (default-directory my-lisp-dir))
+      (progn
+        (setq load-path
+              (append
+               (loop for dir in (directory-files my-lisp-dir)
+                     unless (string-match "^\\." dir)
+                     collecting (expand-file-name dir))
+               load-path)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You can create a sub-directory under &lt;code&gt;~/.emacs.d/site-lisp/&lt;/code&gt; and place your package's source code inside that sub-directory.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technique 2, Create your own repository&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Step 1, Create two files "archive-contents" and "hello-1.0.0.el" and place them in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
+&lt;/p&gt;
+&lt;p&gt;
+archive-contents:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(1
+ (hello . [(1 0 0) nil "Say hello" single])
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+hello-1.0.0.el:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;;;###autoload
+(defun hello-say ()
+  (interactive)
+  (message "Hi, hello!"))
+
+(provide 'hello)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 2, insert below code into ~/.emacs,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'package-archives '("localelpa" . "~/.emacs.d/localelpa"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 3, restart Emacs and press &lt;code&gt;M-x list-packages&lt;/code&gt;. As you can see, you can install package hello from repository &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I'm using rainbow-mode from &lt;a href="https://elpa.gnu.org/"&gt;https://elpa.gnu.org/&lt;/a&gt; which shuts down sometimes. With above technique, my setup is never dependent on the reliability of GNU's website.
+&lt;/p&gt;
+
+&lt;p&gt;
+I also create a Emacs plugin &lt;a href="https://github.com/redguardtoo/elpa-mirror"&gt;elpa-mirror&lt;/a&gt; which create a local repository from all the installed packages. It makes my setup NOT dependent on any remote repositories.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Technique 3, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;advice&lt;/a&gt; &lt;code&gt;package--add-to-archive-contents&lt;/code&gt; to filter packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Insert below code into ~/.emacs,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; List of VISIBLE packages from melpa-unstable (http://melpa.org)
+;; Feel free to add more packages!
+(defvar melpa-include-packages
+  '(bbdb
+    color-theme
+    company-c-headers)
+  "Don't install any mELPA packages except these packages")
+
+(defvar package-filter-function nil
+  "Optional predicate function used to internally filter packages used by package.el.
+
+The function is called with the arguments PACKAGE VERSION ARCHIVE, where
+PACKAGE is a symbol, VERSION is a vector as produced by `version-to-list', and
+ARCHIVE is the string name of the package archive.")
+
+;; Don't take MELPA versions of certain packages
+(setq package-filter-function
+      (lambda (package version archive)
+        (or (not (string-equal archive "melpa"))
+            ;; install package in whitelist
+            (memq package melpa-include-packages)
+            ;; use all color themes
+            (string-match (format "%s" package) "-theme"))))
+
+(defadvice package--add-to-archive-contents
+  (around filter-packages (package archive) activate)
+  "Add filtering of available packages using `package-filter-function', if non-nil."
+  (when (or (null package-filter-function)
+      (funcall package-filter-function
+         (car package)
+         (funcall (if (fboundp 'package-desc-version)
+          'package--ac-desc-version
+        'package-desc-vers)
+            (cdr package))
+         archive))
+    ad-do-it))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Above code hide the packages which don't meet our criteria.
+&lt;/p&gt;
+
+&lt;p&gt;
+The criteria is just a simple boolean expression defined in package-filter-function.
+&lt;/p&gt;
+
+&lt;p&gt;
+We install packages if it's NOT from &lt;a href="https://melpa.org"&gt;melpa-unstable&lt;/a&gt; OR it's listed in &lt;code&gt;melpa-include-packages&lt;/code&gt; OR its name contains "-theme" (it's color theme package).
+&lt;/p&gt;
+
+&lt;p&gt;
+Feel free to use any boolean expression to filter packages.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+You can combine the my techniques to &lt;b&gt;solve any package problem&lt;/b&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+For example, package A is dependent on package B. Both A and B have two versions, 1.0 and 2.0:
+w to manage Emacs packages effectively                                      :en:emacs:package:
+I developed a few package managing techniques after reading &lt;a href="https://github.com/purcell"&gt;Steve Purcell&lt;/a&gt;'s Emacs setup.
+&lt;/p&gt;
+
+&lt;p&gt;
+Those techniques are compatible with other plugin (&lt;a href="https://github.com/jwiegley/use-package"&gt;use-package&lt;/a&gt;, for example) based on package.el.
+&lt;/p&gt;
+
+&lt;p&gt;
+Emacs Lisp knowledge is required to read this article.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Technique 1, Do NOT use package.el for certain packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+Create directory &lt;code&gt;site-lisp&lt;/code&gt; at &lt;code&gt;~/.emacs.d&lt;/code&gt;, then insert below code into &lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(if (fboundp 'normal-top-level-add-to-load-path)
+    (let* ((my-lisp-dir "~/.emacs.d/site-lisp/")
+           (default-directory my-lisp-dir))
+      (progn
+        (setq load-path
+              (append
+               (loop for dir in (directory-files my-lisp-dir)
+                     unless (string-match "^\\." dir)
+                     collecting (expand-file-name dir))
+               load-path)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You can create a sub-directory under &lt;code&gt;~/.emacs.d/site-lisp/&lt;/code&gt; and place your package's source code inside that sub-directory.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Technique 2, Create your own repository&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+Step 1, Create two files "archive-contents" and "hello-1.0.0.el" and place them in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
+&lt;/p&gt;
+&lt;p&gt;
+archive-contents:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(1
+ (hello . [(1 0 0) nil "Say hello" single])
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+hello-1.0.0.el:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;;;###autoload
+(defun hello-say ()
+  (interactive)
+  (message "Hi, hello!"))
+
+(provide 'hello)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 2, insert below code into ~/.emacs,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'package-archives '("localelpa" . "~/.emacs.d/localelpa"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 3, restart Emacs and press &lt;code&gt;M-x list-packages&lt;/code&gt;. As you can see, you can install package hello from repository &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I'm using rainbow-mode from &lt;a href="https://elpa.gnu.org/"&gt;https://elpa.gnu.org/&lt;/a&gt; which shuts down sometimes. With above technique, my setup is never dependent on the reliability of GNU's website.
+&lt;/p&gt;
+
+&lt;p&gt;
+I also create a Emacs plugin &lt;a href="https://github.com/redguardtoo/elpa-mirror"&gt;elpa-mirror&lt;/a&gt; which create a local repository from all the installed packages. It makes my setup NOT dependent on any remote repositories.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Technique 3, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;advice&lt;/a&gt; &lt;code&gt;package--add-to-archive-contents&lt;/code&gt; to filter packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
+&lt;p&gt;
+Insert below code into ~/.emacs,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; List of VISIBLE packages from melpa-unstable (http://melpa.org)
+;; Feel free to add more packages!
+(defvar melpa-include-packages
+  '(bbdb
+    color-theme
+    company-c-headers)
+  "Don't install any mELPA packages except these packages")
+
+(defvar package-filter-function nil
+  "Optional predicate function used to internally filter packages used by package.el.
+
+The function is called with the arguments PACKAGE VERSION ARCHIVE, where
+PACKAGE is a symbol, VERSION is a vector as produced by `version-to-list', and
+ARCHIVE is the string name of the package archive.")
+
+;; Don't take MELPA versions of certain packages
+(setq package-filter-function
+      (lambda (package version archive)
+        (or (not (string-equal archive "melpa"))
+            ;; install package in whitelist
+            (memq package melpa-include-packages)
+            ;; use all color themes
+            (string-match (format "%s" package) "-theme"))))
+
+(defadvice package--add-to-archive-contents
+  (around filter-packages (package archive) activate)
+  "Add filtering of available packages using `package-filter-function', if non-nil."
+  (when (or (null package-filter-function)
+      (funcall package-filter-function
+         (car package)
+         (funcall (if (fboundp 'package-desc-version)
+          'package--ac-desc-version
+        'package-desc-vers)
+            (cdr package))
+         archive))
+    ad-do-it))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Above code hide the packages which don't meet our criteria.
+&lt;/p&gt;
+
+&lt;p&gt;
+The criteria is just a simple boolean expression defined in package-filter-function.
+&lt;/p&gt;
+
+&lt;p&gt;
+We install packages if it's NOT from &lt;a href="https://melpa.org"&gt;melpa-unstable&lt;/a&gt; OR it's listed in &lt;code&gt;melpa-include-packages&lt;/code&gt; OR its name contains "-theme" (it's color theme package).
+&lt;/p&gt;
+
+&lt;p&gt;
+Feel free to use any boolean expression to filter packages.
+&lt;/p&gt;
+
+&lt;p&gt;
+The initial version of above code was copied Steve Purcell's setup years ago.
+&lt;/p&gt;
+
+&lt;p&gt;
+I developed my own strategy based on his code. The first thing I did is reverse his logic. In his code melpa-unstable take &lt;b&gt;the highest priority&lt;/b&gt; while in my code melpa-unstable takes &lt;b&gt;the lowest&lt;/b&gt; priority.
+&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-8" class="outline-2"&gt;
+&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-8"&gt;
+&lt;p&gt;
+You can combine the my techniques to &lt;b&gt;solve any package problem&lt;/b&gt;.
+&lt;/p&gt;
+&lt;p&gt;
+For example, package A is dependent on package B. Both A and B have two versions, 1.0 and 2.0:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;A 2.0 can use B 1.0 and B 2.0, but A 1.0 can ONLY use B 1.0
+&lt;/li&gt;
+&lt;li&gt;A 2.0 can ONLY use B 2.0, and A 1.0 can only use B 1.0
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+The solution is simple. We create a local repository to host B 1.0 and A 1.0 (Technique 2), then in &lt;code&gt;package-filter-function&lt;/code&gt; (Technique 3), we will decide which version of to use the with information collected from B. As I said, &lt;code&gt;package-filter-function&lt;/code&gt; only returns a boolean expression. So you can design any strategy.
+&lt;/p&gt;
+
+&lt;p&gt;
+I know somebody believed &lt;b&gt;Emacs is worse than IDE because its package manager&lt;/b&gt; after "studying" it for seven years.
+&lt;/p&gt;
+
+&lt;p&gt;
+It took me fifteen minutes to reach the opposite conclusion when I was still absolute Emacs dummy.
+&lt;/p&gt;
+
+&lt;p&gt;
+It's possibly I learned the Emacs by cloning and reading code. You can read my guide "&lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide"&gt;Master Emacs In One Year&lt;/a&gt;" for more details.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</guid><pubDate>Thu, 30 Jun 2016 11:09:42 GMT</pubDate></item><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+When I use &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
 &lt;/p&gt;
 
 &lt;p&gt;
 Here is my code based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-git-timemachine-show-selected-revision ()
   "Show last (current) revision of file."
@@ -28,13 +414,19 @@ Here is my code based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-m
   (git-timemachine--start #'my-git-timemachine-show-selected-revision))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Screenshot after &lt;code&gt;M-x my-git-timemachine&lt;/code&gt;,
 &lt;/p&gt;
 
-&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git grep&lt;/a&gt; and &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;.
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git grep&lt;/a&gt; and &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;.
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
@@ -77,27 +469,39 @@ Screenshot after &lt;code&gt;M-x my-git-timemachine&lt;/code&gt;,
 (global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
   (if (string= "*Messages*" (buffer-name))
       (read-only-mode -1)))
-&lt;/code&gt;&lt;/pre&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;You can &lt;code&gt;M-x toggle-input-method&lt;/code&gt; or &lt;code&gt;C-\&lt;/code&gt; to input Non-English characters.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+You can &lt;code&gt;M-x toggle-input-method&lt;/code&gt; or &lt;code&gt;C-\&lt;/code&gt; to input Non-English characters.
 &lt;/p&gt;
 
 &lt;p&gt;
 Analysis about evil-mode,
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method
 &lt;/li&gt;
 &lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while &lt;b&gt;staying in evil-insert state&lt;/b&gt;
 &lt;/li&gt;
 &lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;notification of input method status&lt;/b&gt;
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
 Here is the setup,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ make IME compatible with evil-mode
 (defun evil-toggle-input-method ()
@@ -132,6 +536,8 @@ Here is the setup,
 ;; }}
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Chinese version:
 &lt;/p&gt;
@@ -140,15 +546,18 @@ Chinese version:
 在evil-mode中切换输入法有以下要点,
 &lt;/p&gt;
 
-&lt;ul&gt;&lt;li&gt;输中文前须进入evil-insert-state
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;输中文前须进入evil-insert-state
 &lt;/li&gt;
 &lt;li&gt;在evil-insert-state中可能会切换输入法
 &lt;/li&gt;
 &lt;li&gt;按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态
 &lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;
-代码见上.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item><item><title>Swiper/Ivy tip</title><link>http://blog.binchen.org/posts/swiperivy-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Please install &lt;a href="https://github.com/syl20bnr/evil-escape"&gt;evil-escape&lt;/a&gt; at first.
+&lt;/ul&gt;
+
+&lt;p&gt;
+代码见上.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item><item><title>Swiper/Ivy tip</title><link>http://blog.binchen.org/posts/swiperivy-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Please install &lt;a href="https://github.com/syl20bnr/evil-escape"&gt;evil-escape&lt;/a&gt; at first.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -157,7 +566,8 @@ When &lt;a href="https://github.com/abo-abo/swiper"&gt;Swiper/Ivy&lt;/a&gt; cand
 
 &lt;p&gt;
 &lt;code&gt;fd&lt;/code&gt; is the default key binding from evil-escape. I changed it to &lt;code&gt;kj&lt;/code&gt; instead.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -167,6 +577,8 @@ I have been using it for more than one month without any issue. I prefer general
 &lt;p&gt;
 Minimum setup is simple,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'general)
 (general-evil-setup t)
@@ -183,9 +595,12 @@ Minimum setup is simple,
        "ll" 'my-wg-switch-workgroup)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el"&gt;real world setup&lt;/a&gt; is more complicated.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item><item><title>Use ivy to open recent directories</title><link>http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item><item><title>Use ivy to open recent directories</title><link>http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -195,6 +610,8 @@ I used &lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to get the li
 &lt;p&gt;
 Here is my setup,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy) ; swiper 7.0+ should be installed
 
@@ -211,12 +628,16 @@ Here is my setup,
     (ivy-read "directories:" collection :action 'dired)))
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 Screenshot:
 &lt;/p&gt;
 
-&lt;p&gt;
-&lt;img src="http://blog.binchen.org/wp-content/ivy-recent-directory-nq8.png" alt="ivy-recent-directory-nq8.png"&gt;&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html</guid><pubDate>Wed, 30 Mar 2016 11:13:23 GMT</pubDate></item><item><title>Emacs vs Sublime Text on Salesforce development</title><link>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Our client decided to move their legacy system to a cloud platform called salesforce.com. So I got a chance to investigate how to &lt;b&gt;deploy code&lt;/b&gt; to the salesforce server inside Emacs and Sublime Text.
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-recent-directory-nq8.png" alt="ivy-recent-directory-nq8.png"&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-to-open-recent-directories.html</guid><pubDate>Wed, 30 Mar 2016 11:13:23 GMT</pubDate></item><item><title>Emacs vs Sublime Text on Salesforce development</title><link>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Our client decided to move their legacy system to a cloud platform called salesforce.com. So I got a chance to investigate how to &lt;b&gt;deploy code&lt;/b&gt; to the salesforce server inside Emacs and Sublime Text.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -227,41 +648,46 @@ Salesforce provides &lt;a href="https://developer.salesforce.com/docs/atlas.en-u
 Luckily, there is &lt;a href="https://force-cli.heroku.com/"&gt;Force.com CLI&lt;/a&gt; which can upload single file in a few seconds. Both Sublime Text and Emacs use this tool.
 &lt;/p&gt;
 
-&lt;div id="outline-container-1" class="outline-3"&gt;
-&lt;h4 id="sec-1"&gt;Sublime Text&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1"&gt;
-
-&lt;p&gt;You need install sublime text plugin &lt;a href="http://mavensmate.com/Getting_Started/Users"&gt;mavensmate&lt;/a&gt;. After installation, you need click &lt;code&gt;Login&lt;/code&gt; menu at least once. Then when you save the code file, it's automatically deployed to the server.
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Sublime Text&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+You need install sublime text plugin &lt;a href="http://mavensmate.com/Getting_Started/Users"&gt;mavensmate&lt;/a&gt;. After installation, you need click &lt;code&gt;Login&lt;/code&gt; menu at least once. Then when you save the code file, it's automatically deployed to the server.
 &lt;/p&gt;
+
 &lt;p&gt;
 For some reason, the logged in session will timeout after a couple minutes. So you need re-login. Sometimes deployment will fail, you could click the &lt;code&gt;Fetch&lt;/code&gt; menu and fill in the component name into the popup window to confirm the fetch. Fetching will re-activate upload ability.
 &lt;/p&gt;
+
 &lt;p&gt;
 Mavensmate is actually just GUI wrapper of Force.com CLI,
-&lt;/p&gt;&lt;ul&gt;&lt;li&gt;When you click login, the command &lt;code&gt;force login&lt;/code&gt; is executed
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;When you click login, the command &lt;code&gt;force login&lt;/code&gt; is executed
 &lt;/li&gt;
 &lt;li&gt;When saving file, &lt;code&gt;force aura push&lt;/code&gt; or &lt;code&gt;force push&lt;/code&gt; is executed
 &lt;/li&gt;
 &lt;li&gt;When fetching, &lt;code&gt;force fetch&lt;/code&gt; is executed
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;
-
+&lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-2" class="outline-3"&gt;
-&lt;h4 id="sec-2"&gt;Emacs&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-2"&gt;
-
-&lt;p&gt;In Sublime Text I have to re-login and fetch from time to time. That get me distracted. I prefer executing only one commmand to upload the file in editing. That command should be always successful.
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Emacs&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+In Sublime Text I have to re-login and fetch from time to time. That get me distracted. I prefer executing only one commmand to upload the file in editing. That command should be always successful.
 &lt;/p&gt;
 &lt;p&gt;
 My solution is to combine "login/fetch/push" commnands into one liner which is stored in a file local variable &lt;code&gt;compile-command&lt;/code&gt;. So when I execute &lt;code&gt;M-x compile&lt;/code&gt;, the commands "login/fetch/push" in &lt;code&gt;compile-command&lt;/code&gt; will all be executed sequentially. So I don't need care about login and fetch things any more.
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is my setup,
 &lt;/p&gt;
 
-
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-develop-environment ()
   (interactive)
@@ -302,10 +728,11 @@ Here is my setup,
 (add-hook 'js2-mode-hook 'my-setup-develop-environment)
 &lt;/code&gt;&lt;/pre&gt;
 
-
 &lt;/div&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>salesforce</category><category>sublime</category><guid>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</guid><pubDate>Mon, 14 Mar 2016 10:42:31 GMT</pubDate></item><item><title>How to be extremely efficient in Emacs</title><link>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;All you need to do is using &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to &lt;b&gt;measure&lt;/b&gt; how many time you execute commands.
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>salesforce</category><category>sublime</category><guid>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</guid><pubDate>Mon, 14 Mar 2016 10:42:31 GMT</pubDate></item><item><title>How to be extremely efficient in Emacs</title><link>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+All you need to do is using &lt;a href="https://github.com/dacap/keyfreq"&gt;keyfreq&lt;/a&gt; to &lt;b&gt;measure&lt;/b&gt; how many time you execute commands.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -324,6 +751,8 @@ For example, commands like &lt;code&gt;next-line/previous-line/forward-char/back
 The minimum keyfreq setup,
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'keyfreq)
 (setq keyfreq-excluded-commands
       '(self-insert-command
@@ -336,6 +765,8 @@ The minimum keyfreq setup,
 (keyfreq-autosave-mode 1)
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+
 &lt;p&gt;
 My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyfreq.el"&gt;actual keyfreq setup&lt;/a&gt; is more complicated.
 &lt;/p&gt;
@@ -344,119 +775,1403 @@ My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyf
 Below is the eight month keyfreq data of my office computer,
 &lt;/p&gt;
 
-&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;&lt;colgroup&gt;&lt;col class="right"&gt;&lt;col class="right"&gt;&lt;col class="left"&gt;&lt;col class="left"&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th scope="col" class="right"&gt;Times&lt;/th&gt;&lt;th scope="col" class="right"&gt;Percentage&lt;/th&gt;&lt;th scope="col" class="left"&gt;Command&lt;/th&gt;&lt;th scope="col" class="left"&gt;Key&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="right"&gt;4967&lt;/td&gt;&lt;td class="right"&gt;12.00%&lt;/td&gt;&lt;td class="left"&gt;evilmi-jump-items&lt;/td&gt;&lt;td class="left"&gt;%&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;2892&lt;/td&gt;&lt;td class="right"&gt;6.99%&lt;/td&gt;&lt;td class="left"&gt;compile&lt;/td&gt;&lt;td class="left"&gt;, o o&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;2178&lt;/td&gt;&lt;td class="right"&gt;5.26%&lt;/td&gt;&lt;td class="left"&gt;find-file-in-project-by-selected&lt;/td&gt;&lt;td class="left"&gt;, k k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1953&lt;/td&gt;&lt;td class="right"&gt;4.72%&lt;/td&gt;&lt;td class="left"&gt;copy-to-x-clipboard&lt;/td&gt;&lt;td class="left"&gt;, a a&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1566&lt;/td&gt;&lt;td class="right"&gt;3.78%&lt;/td&gt;&lt;td class="left"&gt;paste-from-x-clipboard&lt;/td&gt;&lt;td class="left"&gt;, z z&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;1227&lt;/td&gt;&lt;td class="right"&gt;2.96%&lt;/td&gt;&lt;td class="left"&gt;er/expand-region&lt;/td&gt;&lt;td class="left"&gt;, x x&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;897&lt;/td&gt;&lt;td class="right"&gt;2.17%&lt;/td&gt;&lt;td class="left"&gt;evil-repeat&lt;/td&gt;&lt;td class="left"&gt;.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;866&lt;/td&gt;&lt;td class="right"&gt;2.09%&lt;/td&gt;&lt;td class="left"&gt;ido-find-file&lt;/td&gt;&lt;td class="left"&gt;, x f, C-x C-f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;819&lt;/td&gt;&lt;td class="right"&gt;1.98%&lt;/td&gt;&lt;td class="left"&gt;toggle-full-window&lt;/td&gt;&lt;td class="left"&gt;, f f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;815&lt;/td&gt;&lt;td class="right"&gt;1.97%&lt;/td&gt;&lt;td class="left"&gt;etags-select-find-tag-at-point&lt;/td&gt;&lt;td class="left"&gt;C-], , h t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;721&lt;/td&gt;&lt;td class="right"&gt;1.74%&lt;/td&gt;&lt;td class="left"&gt;back-to-previous-buffer&lt;/td&gt;&lt;td class="left"&gt;, b b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;682&lt;/td&gt;&lt;td class="right"&gt;1.65%&lt;/td&gt;&lt;td class="left"&gt;split-window-vertically&lt;/td&gt;&lt;td class="left"&gt;, x 2&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;539&lt;/td&gt;&lt;td class="right"&gt;1.30%&lt;/td&gt;&lt;td class="left"&gt;find-function&lt;/td&gt;&lt;td class="left"&gt;, h f, C-h C-f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;494&lt;/td&gt;&lt;td class="right"&gt;1.19%&lt;/td&gt;&lt;td class="left"&gt;counsel-recentf-goto&lt;/td&gt;&lt;td class="left"&gt;, r r&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;397&lt;/td&gt;&lt;td class="right"&gt;0.96%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-grep&lt;/td&gt;&lt;td class="left"&gt;, g g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;376&lt;/td&gt;&lt;td class="right"&gt;0.91%&lt;/td&gt;&lt;td class="left"&gt;delete-other-windows&lt;/td&gt;&lt;td class="left"&gt;, x 1, C-x 1&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;372&lt;/td&gt;&lt;td class="right"&gt;0.90%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-or-uncomment-lines&lt;/td&gt;&lt;td class="left"&gt;, c i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;351&lt;/td&gt;&lt;td class="right"&gt;0.85%&lt;/td&gt;&lt;td class="left"&gt;eval-expression&lt;/td&gt;&lt;td class="left"&gt;, e e, M-:&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;326&lt;/td&gt;&lt;td class="right"&gt;0.79%&lt;/td&gt;&lt;td class="left"&gt;evilmi-select-items&lt;/td&gt;&lt;td class="left"&gt;, s i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;320&lt;/td&gt;&lt;td class="right"&gt;0.77%&lt;/td&gt;&lt;td class="left"&gt;paredit-doublequote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;307&lt;/td&gt;&lt;td class="right"&gt;0.74%&lt;/td&gt;&lt;td class="left"&gt;evil-filepath-outer-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;300&lt;/td&gt;&lt;td class="right"&gt;0.72%&lt;/td&gt;&lt;td class="left"&gt;steve-ido-choose-from-recentf&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;295&lt;/td&gt;&lt;td class="right"&gt;0.71%&lt;/td&gt;&lt;td class="left"&gt;split-window-horizontally&lt;/td&gt;&lt;td class="left"&gt;, x 3&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;283&lt;/td&gt;&lt;td class="right"&gt;0.68%&lt;/td&gt;&lt;td class="left"&gt;git-add-current-file&lt;/td&gt;&lt;td class="left"&gt;, x v a&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;279&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;winner-undo&lt;/td&gt;&lt;td class="left"&gt;, x u, , s u, C-x 4 u&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;278&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;describe-function&lt;/td&gt;&lt;td class="left"&gt;, h d, C-h f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;278&lt;/td&gt;&lt;td class="right"&gt;0.67%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-mark-line&lt;/td&gt;&lt;td class="left"&gt;'&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;269&lt;/td&gt;&lt;td class="right"&gt;0.65%&lt;/td&gt;&lt;td class="left"&gt;ido-kill-buffer&lt;/td&gt;&lt;td class="left"&gt;, x k, C-x k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;254&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-definition&lt;/td&gt;&lt;td class="left"&gt;g d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;253&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;pop-tag-mark&lt;/td&gt;&lt;td class="left"&gt;M-*&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;251&lt;/td&gt;&lt;td class="right"&gt;0.61%&lt;/td&gt;&lt;td class="left"&gt;git-messenger:popup-message&lt;/td&gt;&lt;td class="left"&gt;, x v b, C-x v p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;246&lt;/td&gt;&lt;td class="right"&gt;0.59%&lt;/td&gt;&lt;td class="left"&gt;my-goto-next-hunk&lt;/td&gt;&lt;td class="left"&gt;, n n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;237&lt;/td&gt;&lt;td class="right"&gt;0.57%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-operator&lt;/td&gt;&lt;td class="left"&gt;, ,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;235&lt;/td&gt;&lt;td class="right"&gt;0.57%&lt;/td&gt;&lt;td class="left"&gt;flyspell-goto-next-error&lt;/td&gt;&lt;td class="left"&gt;, f e, C-,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;214&lt;/td&gt;&lt;td class="right"&gt;0.52%&lt;/td&gt;&lt;td class="left"&gt;evil-exit-emacs-state&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;212&lt;/td&gt;&lt;td class="right"&gt;0.51%&lt;/td&gt;&lt;td class="left"&gt;browse-kill-ring-forward&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;210&lt;/td&gt;&lt;td class="right"&gt;0.51%&lt;/td&gt;&lt;td class="left"&gt;flyspell-buffer&lt;/td&gt;&lt;td class="left"&gt;, f b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;203&lt;/td&gt;&lt;td class="right"&gt;0.49%&lt;/td&gt;&lt;td class="left"&gt;evil-ex-completion&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;195&lt;/td&gt;&lt;td class="right"&gt;0.47%&lt;/td&gt;&lt;td class="left"&gt;narrow-or-widen-dwim&lt;/td&gt;&lt;td class="left"&gt;, x n n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;173&lt;/td&gt;&lt;td class="right"&gt;0.42%&lt;/td&gt;&lt;td class="left"&gt;comint-send-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;173&lt;/td&gt;&lt;td class="right"&gt;0.42%&lt;/td&gt;&lt;td class="left"&gt;beginning-of-defun&lt;/td&gt;&lt;td class="left"&gt;, b f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;170&lt;/td&gt;&lt;td class="right"&gt;0.41%&lt;/td&gt;&lt;td class="left"&gt;evil-surround-region&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;visual-state&amp;gt; S&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;161&lt;/td&gt;&lt;td class="right"&gt;0.39%&lt;/td&gt;&lt;td class="left"&gt;hippie-expand&lt;/td&gt;&lt;td class="left"&gt;M-/&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;151&lt;/td&gt;&lt;td class="right"&gt;0.36%&lt;/td&gt;&lt;td class="left"&gt;describe-key&lt;/td&gt;&lt;td class="left"&gt;, h k, C-h k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;149&lt;/td&gt;&lt;td class="right"&gt;0.36%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-next-visual-line&lt;/td&gt;&lt;td class="left"&gt;SPC&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;139&lt;/td&gt;&lt;td class="right"&gt;0.34%&lt;/td&gt;&lt;td class="left"&gt;gnus-topic-select-group&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;138&lt;/td&gt;&lt;td class="right"&gt;0.33%&lt;/td&gt;&lt;td class="left"&gt;js2-print-json-path&lt;/td&gt;&lt;td class="left"&gt;, j p p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;132&lt;/td&gt;&lt;td class="right"&gt;0.32%&lt;/td&gt;&lt;td class="left"&gt;goto-line&lt;/td&gt;&lt;td class="left"&gt;M-g g, M-g M-g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;132&lt;/td&gt;&lt;td class="right"&gt;0.32%&lt;/td&gt;&lt;td class="left"&gt;evil-avy-goto-subword-1&lt;/td&gt;&lt;td class="left"&gt;;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;127&lt;/td&gt;&lt;td class="right"&gt;0.31%&lt;/td&gt;&lt;td class="left"&gt;ibuffer-mark-for-delete&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;127&lt;/td&gt;&lt;td class="right"&gt;0.31%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-single-quote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;126&lt;/td&gt;&lt;td class="right"&gt;0.30%&lt;/td&gt;&lt;td class="left"&gt;isearch-other-meta-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;124&lt;/td&gt;&lt;td class="right"&gt;0.30%&lt;/td&gt;&lt;td class="left"&gt;term-send-up&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;118&lt;/td&gt;&lt;td class="right"&gt;0.29%&lt;/td&gt;&lt;td class="left"&gt;isearch-other-control-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;116&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;evil-set-marker&lt;/td&gt;&lt;td class="left"&gt;m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;115&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;browse-kill-ring&lt;/td&gt;&lt;td class="left"&gt;M-y, , y y&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;114&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-grep-yank-line&lt;/td&gt;&lt;td class="left"&gt;, g l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;114&lt;/td&gt;&lt;td class="right"&gt;0.28%&lt;/td&gt;&lt;td class="left"&gt;evil-window-down&lt;/td&gt;&lt;td class="left"&gt;C-w j&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;112&lt;/td&gt;&lt;td class="right"&gt;0.27%&lt;/td&gt;&lt;td class="left"&gt;evil-jump-backward&lt;/td&gt;&lt;td class="left"&gt;C-o&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;108&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;evil-visual-block&lt;/td&gt;&lt;td class="left"&gt;C-v&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;108&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-previous-visual-line&lt;/td&gt;&lt;td class="left"&gt;S-SPC&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;107&lt;/td&gt;&lt;td class="right"&gt;0.26%&lt;/td&gt;&lt;td class="left"&gt;comint-previous-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;evil-search-word-backward&lt;/td&gt;&lt;td class="left"&gt;#&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;98&lt;/td&gt;&lt;td class="right"&gt;0.24%&lt;/td&gt;&lt;td class="left"&gt;forward-button&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;96&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-pop-next&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;95&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;ediff-next-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;95&lt;/td&gt;&lt;td class="right"&gt;0.23%&lt;/td&gt;&lt;td class="left"&gt;ido-imenu&lt;/td&gt;&lt;td class="left"&gt;, i i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;92&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;my-wg-switch-workgroup&lt;/td&gt;&lt;td class="left"&gt;, w g g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;90&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-find-file&lt;/td&gt;&lt;td class="left"&gt;, g f&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;90&lt;/td&gt;&lt;td class="right"&gt;0.22%&lt;/td&gt;&lt;td class="left"&gt;evilmi-delete-items&lt;/td&gt;&lt;td class="left"&gt;, d i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;87&lt;/td&gt;&lt;td class="right"&gt;0.21%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-extract-mail-address&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;87&lt;/td&gt;&lt;td class="right"&gt;0.21%&lt;/td&gt;&lt;td class="left"&gt;cliphist-paste-item&lt;/td&gt;&lt;td class="left"&gt;, h h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;84&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;subword-backward-kill&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;C-backspace&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;84&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;paredit-backslash&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;83&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;my-yas-reload-all&lt;/td&gt;&lt;td class="left"&gt;, y c r&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;81&lt;/td&gt;&lt;td class="right"&gt;0.20%&lt;/td&gt;&lt;td class="left"&gt;pwd&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;80&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;previous-complete-history-element&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;80&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;wg-create-workgroup&lt;/td&gt;&lt;td class="left"&gt;, w g t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;78&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;evil-forward-WORD-end&lt;/td&gt;&lt;td class="left"&gt;E&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;77&lt;/td&gt;&lt;td class="right"&gt;0.19%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-scroll-up&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;76&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-extract-cc-and-to&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;75&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;compile-goto-error&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;73&lt;/td&gt;&lt;td class="right"&gt;0.18%&lt;/td&gt;&lt;td class="left"&gt;evil-find-char-to&lt;/td&gt;&lt;td class="left"&gt;t&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;72&lt;/td&gt;&lt;td class="right"&gt;0.17%&lt;/td&gt;&lt;td class="left"&gt;evil-repeat-find-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;69&lt;/td&gt;&lt;td class="right"&gt;0.17%&lt;/td&gt;&lt;td class="left"&gt;evil-window-up&lt;/td&gt;&lt;td class="left"&gt;C-w k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;67&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;eval-last-sexp&lt;/td&gt;&lt;td class="left"&gt;, x e, C-x C-e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;66&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;evil-complete-next-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;66&lt;/td&gt;&lt;td class="right"&gt;0.16%&lt;/td&gt;&lt;td class="left"&gt;exchange-point-and-mark&lt;/td&gt;&lt;td class="left"&gt;C-x C-x&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;63&lt;/td&gt;&lt;td class="right"&gt;0.15%&lt;/td&gt;&lt;td class="left"&gt;direx:previous-item&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;61&lt;/td&gt;&lt;td class="right"&gt;0.15%&lt;/td&gt;&lt;td class="left"&gt;ediff-jump-to-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;60&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;diredp-next-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;58&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;evilmr-replace-in-buffer&lt;/td&gt;&lt;td class="left"&gt;, r b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;58&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;counsel-imenu-goto&lt;/td&gt;&lt;td class="left"&gt;, i m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;56&lt;/td&gt;&lt;td class="right"&gt;0.14%&lt;/td&gt;&lt;td class="left"&gt;evil-goto-mark&lt;/td&gt;&lt;td class="left"&gt;`&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;gnus-group-unsubscribe-current-group&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;ivy-bookmark-goto&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;55&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;evil-filepath-inner-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;describe-mode&lt;/td&gt;&lt;td class="left"&gt;C-h m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;recenter-top-bottom&lt;/td&gt;&lt;td class="left"&gt;C-l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;54&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;list-packages&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;52&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;gnus-topic-mark-topic&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;52&lt;/td&gt;&lt;td class="right"&gt;0.13%&lt;/td&gt;&lt;td class="left"&gt;kill-line&lt;/td&gt;&lt;td class="left"&gt;C-k, &amp;lt;deleteline&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;51&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;find-and-ctags-update-all-tags-force&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;50&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-before&lt;/td&gt;&lt;td class="left"&gt;P&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;execute-extended-command&lt;/td&gt;&lt;td class="left"&gt;&amp;lt;execute&amp;gt;, C-x RET&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;etags-select-quit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;49&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-WORD&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;48&lt;/td&gt;&lt;td class="right"&gt;0.12%&lt;/td&gt;&lt;td class="left"&gt;find-tag&lt;/td&gt;&lt;td class="left"&gt;g C-]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;47&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;diredp-previous-line&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;46&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;paredit-close-square&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;44&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;paredit-open-square&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;44&lt;/td&gt;&lt;td class="right"&gt;0.11%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-last-insertion&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;42&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-double-quote&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;42&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;ivy-imenu-goto&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;40&lt;/td&gt;&lt;td class="right"&gt;0.10%&lt;/td&gt;&lt;td class="left"&gt;counsel-git-find-my-file&lt;/td&gt;&lt;td class="left"&gt;, g m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;cp-filename-of-current-buffer&lt;/td&gt;&lt;td class="left"&gt;, f n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;gnus-article-read-summary-keys&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;39&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;isearch-nonincremental-exit-minibuffer&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;sh-assignment&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;mark-whole-buffer&lt;/td&gt;&lt;td class="left"&gt;, x h, C-x h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;38&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evilmi-inner-text-object&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;36&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evilnc-comment-or-uncomment-paragraphs&lt;/td&gt;&lt;td class="left"&gt;, c p, C-c p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;36&lt;/td&gt;&lt;td class="right"&gt;0.09%&lt;/td&gt;&lt;td class="left"&gt;evil-toggle-input-method&lt;/td&gt;&lt;td class="left"&gt;C-\&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;35&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;org2nikola-export-subtree&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;35&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;subword-forward&lt;/td&gt;&lt;td class="left"&gt;M-f, ESC &amp;lt;right&amp;gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;34&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-open-above&lt;/td&gt;&lt;td class="left"&gt;O&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;34&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;compose-mail&lt;/td&gt;&lt;td class="left"&gt;C-x m&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-paren&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;term-send-raw-meta&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;33&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-invert-char&lt;/td&gt;&lt;td class="left"&gt;~&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;evil-space–evil-repeat-find-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;httpd-restart-at-default-directory&lt;/td&gt;&lt;td class="left"&gt;, w r d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;32&lt;/td&gt;&lt;td class="right"&gt;0.08%&lt;/td&gt;&lt;td class="left"&gt;cp-fullpath-of-current-buffer&lt;/td&gt;&lt;td class="left"&gt;, f p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;31&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evil-forward-WORD-begin&lt;/td&gt;&lt;td class="left"&gt;W&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;sort-lines&lt;/td&gt;&lt;td class="left"&gt;, s l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;bmkp-w3m-jump&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;30&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evilnc-copy-and-comment-lines&lt;/td&gt;&lt;td class="left"&gt;, c c, C-c c&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;29&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;toggle-company-ispell&lt;/td&gt;&lt;td class="left"&gt;, t c i&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;29&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;top-level&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;28&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;package-menu-mark-upgrades&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;evil-numbers/dec-at-pt&lt;/td&gt;&lt;td class="left"&gt;-&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;end-of-defun&lt;/td&gt;&lt;td class="left"&gt;, e f, C-M-e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;27&lt;/td&gt;&lt;td class="right"&gt;0.07%&lt;/td&gt;&lt;td class="left"&gt;my-setup-develop-environment&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;26&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-paste-pop&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;ediff-previous-difference&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-backward-WORD-begin&lt;/td&gt;&lt;td class="left"&gt;B&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;goto-char&lt;/td&gt;&lt;td class="left"&gt;g o, M-g c&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;w3m-close-window&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;org-mime-htmlize&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;25&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;gnus-group-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;24&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;git-gutter:toggle&lt;/td&gt;&lt;td class="left"&gt;C-x C-g&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;my-gnus-group-list-subscribed-groups&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;find-directory-in-project-by-selected&lt;/td&gt;&lt;td class="left"&gt;, f d&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;23&lt;/td&gt;&lt;td class="right"&gt;0.06%&lt;/td&gt;&lt;td class="left"&gt;evil-inner-curly&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;org-edit-src-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;string-edit-at-point&lt;/td&gt;&lt;td class="left"&gt;, s e&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;package-menu-mark-delete&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;ido-magic-forward-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;run-js&lt;/td&gt;&lt;td class="left"&gt;, r j s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;22&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;git-gutter-reset-to-head-parent&lt;/td&gt;&lt;td class="left"&gt;, g s h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;counsel-read-history&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;rcirc-send-input&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;gnus-undo&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;21&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;subword-backward&lt;/td&gt;&lt;td class="left"&gt;M-b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;company-select-next&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;what-cursor-position&lt;/td&gt;&lt;td class="left"&gt;g a, g 8, C-x =&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;my-grep&lt;/td&gt;&lt;td class="left"&gt;, q q&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;20&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;hydra-gnus-summary/body&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;ansi-term&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;evil-window-right&lt;/td&gt;&lt;td class="left"&gt;C-w l&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;debugger-jump&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;wg-switch-to-workgroup&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;yas-abort-snippet&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;tags-loop-continue&lt;/td&gt;&lt;td class="left"&gt;M-,&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;19&lt;/td&gt;&lt;td class="right"&gt;0.05%&lt;/td&gt;&lt;td class="left"&gt;swiper-the-thing&lt;/td&gt;&lt;td class="left"&gt;, s s&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;18&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-wg-swich-to-workgroup&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;18&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;org-edit-special&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;lisp-complete-symbol&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-wg-switch-to-workgroup-at-index&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;test&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;17&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;ediff-scroll-vertically&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;w3m-view-previous-page&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;evil-window-left&lt;/td&gt;&lt;td class="left"&gt;C-w h&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;isearch-yank-kill&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;my-goto-previous-hunk&lt;/td&gt;&lt;td class="left"&gt;, p p&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;js-beautify&lt;/td&gt;&lt;td class="left"&gt;, j b&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;hydra-launcher/body&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;read-only-mode&lt;/td&gt;&lt;td class="left"&gt;C-x C-q&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;message-send-and-exit&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;16&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;etags-select-goto-tag&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;evil-next-match&lt;/td&gt;&lt;td class="left"&gt;g n&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;js2r-kill&lt;/td&gt;&lt;td class="left"&gt;, j j k&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;string-edit-conclude&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;15&lt;/td&gt;&lt;td class="right"&gt;0.04%&lt;/td&gt;&lt;td class="left"&gt;delete-char&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;14&lt;/td&gt;&lt;td class="right"&gt;0.03%&lt;/td&gt;&lt;td class="left"&gt;gnus-summary-limit-to-author&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class="right"&gt;14&lt;/td&gt;&lt;td class="right"&gt;0.03%&lt;/td&gt;&lt;td class="left"&gt;ediff-swap-buffers&lt;/td&gt;&lt;td class="left"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</guid><pubDate>Fri, 26 Feb 2016 13:51:27 GMT</pubDate></item><item><title>Diff regions in Emacs</title><link>http://blog.binchen.org/posts/diff-regions-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-01-27&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
+&lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
-&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2016-04-09 Sat&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
+&lt;colgroup&gt;
+&lt;col class="right"&gt;
 
-&lt;p&gt;
-I know &lt;code&gt;M-x ediff-regions-linewise&lt;/code&gt;.
-&lt;/p&gt;
+&lt;col class="right"&gt;
 
-&lt;p&gt;
-But it's kind of too generic. I only want to &lt;b&gt;view the different lines of two regions&lt;/b&gt; as quickly as possible.
-&lt;/p&gt;
+&lt;col class="left"&gt;
 
-&lt;p&gt;
-So here is my code,
-&lt;/p&gt;
+&lt;col class="left"&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th scope="col" class="right"&gt;Times&lt;/th&gt;
+&lt;th scope="col" class="right"&gt;Percentage&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Command&lt;/th&gt;
+&lt;th scope="col" class="left"&gt;Key&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td class="right"&gt;4967&lt;/td&gt;
+&lt;td class="right"&gt;12.00%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-jump-items&lt;/td&gt;
+&lt;td class="left"&gt;%&lt;/td&gt;
+&lt;/tr&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Diff two regions
-;; Step 1: Select a region and `M-x diff-region-tag-selected-as-a'
-;; Step 2: Select another region and `M-x diff-region-compare-with-b'
-;; Press "q" in evil-mode or "C-c C-c" to exit the diff output buffer
-(defun diff-region-format-region-boundary (b e)
-  "Make sure lines are selected and B is less than E"
-  (let (tmp rlt)
-    ;; swap b e, make sure b &amp;lt; e
-    (when (&amp;gt; b e)
-      (setq tmp b)
-      (setq b e)
-      (set e tmp))
+&lt;tr&gt;
+&lt;td class="right"&gt;2892&lt;/td&gt;
+&lt;td class="right"&gt;6.99%&lt;/td&gt;
+&lt;td class="left"&gt;compile&lt;/td&gt;
+&lt;td class="left"&gt;, o o&lt;/td&gt;
+&lt;/tr&gt;
 
-    ;; select lines
-    (save-excursion
-      ;; Another workaround for evil-visual-line bug:
-      ;; In evil-mode, if we use hotkey V or `M-x evil-visual-line` to select line,
-      ;; the (line-beginning-position) of the line which is after the last selected
-      ;; line is always (region-end)! Don't know why.
-      (if (and (&amp;gt; e b)
-               (save-excursion (goto-char e) (= e (line-beginning-position)))
-               (boundp 'evil-state) (eq evil-state 'visual))
-          (setq e (1- e)))
-      (goto-char b)
-      (setq b (line-beginning-position))
-      (goto-char e)
-      (setq e (line-end-position)))
-    (setq rlt (list b e))
-    rlt))
+&lt;tr&gt;
+&lt;td class="right"&gt;2178&lt;/td&gt;
+&lt;td class="right"&gt;5.26%&lt;/td&gt;
+&lt;td class="left"&gt;find-file-in-project-by-selected&lt;/td&gt;
+&lt;td class="left"&gt;, k k&lt;/td&gt;
+&lt;/tr&gt;
 
-(defun diff-region-exit ()
-  (interactive)
-  (bury-buffer "*Diff-region-output*")
-  (winner-undo))
+&lt;tr&gt;
+&lt;td class="right"&gt;1953&lt;/td&gt;
+&lt;td class="right"&gt;4.72%&lt;/td&gt;
+&lt;td class="left"&gt;copy-to-x-clipboard&lt;/td&gt;
+&lt;td class="left"&gt;, a a&lt;/td&gt;
+&lt;/tr&gt;
 
-(defun diff-region-tag-selected-as-a ()
-  "Select a region to compare"
-  (interactive)
-  (when (region-active-p)
-    (let (tmp buf)
-      ;; select lines
-      (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
-      (setq buf (get-buffer-create "*Diff-regionA*"))
-      (save-current-buffer
-        (set-buffer buf)
-        (erase-buffer))
-      (append-to-buffer buf (car tmp) (cadr tmp))))
-  (message "Now select other region to compare and run `diff-region-compare-with-b`"))
+&lt;tr&gt;
+&lt;td class="right"&gt;1566&lt;/td&gt;
+&lt;td class="right"&gt;3.78%&lt;/td&gt;
+&lt;td class="left"&gt;paste-from-x-clipboard&lt;/td&gt;
+&lt;td class="left"&gt;, z z&lt;/td&gt;
+&lt;/tr&gt;
 
-(defun diff-region-compare-with-b ()
-  "Compare current region with region selected by `diff-region-tag-selected-as-a' "
-  (interactive)
-  (if (region-active-p)
-      (let (rlt-buf
-            diff-output
-            (fa (make-temp-file (expand-file-name "scor"
-                                                  (or small-temporary-file-directory
-                                                      temporary-file-directory))))
-            (fb (make-temp-file (expand-file-name "scor"
-                                                  (or small-temporary-file-directory
-                                                      temporary-file-directory)))))
-        ;;  save current content as file B
-        (when fb
-          (setq tmp (diff-region-format-region-boundary (region-beginning) (region-end)))
-          (write-region (car tmp) (cadr tmp) fb))
+&lt;tr&gt;
+&lt;td class="right"&gt;1227&lt;/td&gt;
+&lt;td class="right"&gt;2.96%&lt;/td&gt;
+&lt;td class="left"&gt;er/expand-region&lt;/td&gt;
+&lt;td class="left"&gt;, x x&lt;/td&gt;
+&lt;/tr&gt;
 
-        (setq rlt-buf (get-buffer-create "*Diff-region-output*"))
-        (when (and fa (file-exists-p fa) fb (file-exists-p fb))
-          ;; save region A as file A
-          (save-current-buffer
-            (set-buffer (get-buffer-create "*Diff-regionA*"))
-            (write-region (point-min) (point-max) fa))
-          ;; diff NOW!
-          (setq diff-output (shell-command-to-string (format "diff -Nabur %s %s" fa fb)))
-          ;; show the diff output
-          (if (string= diff-output "")
-              ;; two regions are same
-              (message "Two regions are SAME!")
-            ;; show the diff
-            (save-current-buffer
-              (switch-to-buffer-other-window rlt-buf)
-              (set-buffer rlt-buf)
-              (erase-buffer)
-              (insert diff-output)
-              (diff-mode)
-              (if (fboundp 'evil-local-set-key)
-                           (evil-local-set-key 'normal "q" 'diff-region-exit))
-              (local-set-key (kbd "C-c C-c") 'diff-region-exit)
-              )))
+&lt;tr&gt;
+&lt;td class="right"&gt;897&lt;/td&gt;
+&lt;td class="right"&gt;2.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-repeat&lt;/td&gt;
+&lt;td class="left"&gt;.&lt;/td&gt;
+&lt;/tr&gt;
 
-        ;; clean the temporary files
-        (if (and fa (file-exists-p fa))
-            (delete-file fa))
-        (if (and fb (file-exists-p fb))
-            (delete-file fb)))
-    (message "Please select region at first!")))
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/diff-regions-in-emacs.html</guid><pubDate>Wed, 27 Jan 2016 13:44:22 GMT</pubDate></item></channel></rss>
+&lt;tr&gt;
+&lt;td class="right"&gt;866&lt;/td&gt;
+&lt;td class="right"&gt;2.09%&lt;/td&gt;
+&lt;td class="left"&gt;ido-find-file&lt;/td&gt;
+&lt;td class="left"&gt;, x f, C-x C-f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;819&lt;/td&gt;
+&lt;td class="right"&gt;1.98%&lt;/td&gt;
+&lt;td class="left"&gt;toggle-full-window&lt;/td&gt;
+&lt;td class="left"&gt;, f f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;815&lt;/td&gt;
+&lt;td class="right"&gt;1.97%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-find-tag-at-point&lt;/td&gt;
+&lt;td class="left"&gt;C-], , h t&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;721&lt;/td&gt;
+&lt;td class="right"&gt;1.74%&lt;/td&gt;
+&lt;td class="left"&gt;back-to-previous-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, b b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;682&lt;/td&gt;
+&lt;td class="right"&gt;1.65%&lt;/td&gt;
+&lt;td class="left"&gt;split-window-vertically&lt;/td&gt;
+&lt;td class="left"&gt;, x 2&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;539&lt;/td&gt;
+&lt;td class="right"&gt;1.30%&lt;/td&gt;
+&lt;td class="left"&gt;find-function&lt;/td&gt;
+&lt;td class="left"&gt;, h f, C-h C-f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;494&lt;/td&gt;
+&lt;td class="right"&gt;1.19%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-recentf-goto&lt;/td&gt;
+&lt;td class="left"&gt;, r r&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;397&lt;/td&gt;
+&lt;td class="right"&gt;0.96%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-grep&lt;/td&gt;
+&lt;td class="left"&gt;, g g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;376&lt;/td&gt;
+&lt;td class="right"&gt;0.91%&lt;/td&gt;
+&lt;td class="left"&gt;delete-other-windows&lt;/td&gt;
+&lt;td class="left"&gt;, x 1, C-x 1&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;372&lt;/td&gt;
+&lt;td class="right"&gt;0.90%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-or-uncomment-lines&lt;/td&gt;
+&lt;td class="left"&gt;, c i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;351&lt;/td&gt;
+&lt;td class="right"&gt;0.85%&lt;/td&gt;
+&lt;td class="left"&gt;eval-expression&lt;/td&gt;
+&lt;td class="left"&gt;, e e, M-:&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;326&lt;/td&gt;
+&lt;td class="right"&gt;0.79%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-select-items&lt;/td&gt;
+&lt;td class="left"&gt;, s i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;320&lt;/td&gt;
+&lt;td class="right"&gt;0.77%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-doublequote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;307&lt;/td&gt;
+&lt;td class="right"&gt;0.74%&lt;/td&gt;
+&lt;td class="left"&gt;evil-filepath-outer-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;300&lt;/td&gt;
+&lt;td class="right"&gt;0.72%&lt;/td&gt;
+&lt;td class="left"&gt;steve-ido-choose-from-recentf&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;295&lt;/td&gt;
+&lt;td class="right"&gt;0.71%&lt;/td&gt;
+&lt;td class="left"&gt;split-window-horizontally&lt;/td&gt;
+&lt;td class="left"&gt;, x 3&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;283&lt;/td&gt;
+&lt;td class="right"&gt;0.68%&lt;/td&gt;
+&lt;td class="left"&gt;git-add-current-file&lt;/td&gt;
+&lt;td class="left"&gt;, x v a&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;279&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;winner-undo&lt;/td&gt;
+&lt;td class="left"&gt;, x u, , s u, C-x 4 u&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;278&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;describe-function&lt;/td&gt;
+&lt;td class="left"&gt;, h d, C-h f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;278&lt;/td&gt;
+&lt;td class="right"&gt;0.67%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-mark-line&lt;/td&gt;
+&lt;td class="left"&gt;'&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;269&lt;/td&gt;
+&lt;td class="right"&gt;0.65%&lt;/td&gt;
+&lt;td class="left"&gt;ido-kill-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, x k, C-x k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;254&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-definition&lt;/td&gt;
+&lt;td class="left"&gt;g d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;253&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;pop-tag-mark&lt;/td&gt;
+&lt;td class="left"&gt;M-*&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;251&lt;/td&gt;
+&lt;td class="right"&gt;0.61%&lt;/td&gt;
+&lt;td class="left"&gt;git-messenger:popup-message&lt;/td&gt;
+&lt;td class="left"&gt;, x v b, C-x v p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;246&lt;/td&gt;
+&lt;td class="right"&gt;0.59%&lt;/td&gt;
+&lt;td class="left"&gt;my-goto-next-hunk&lt;/td&gt;
+&lt;td class="left"&gt;, n n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;237&lt;/td&gt;
+&lt;td class="right"&gt;0.57%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-operator&lt;/td&gt;
+&lt;td class="left"&gt;, ,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;235&lt;/td&gt;
+&lt;td class="right"&gt;0.57%&lt;/td&gt;
+&lt;td class="left"&gt;flyspell-goto-next-error&lt;/td&gt;
+&lt;td class="left"&gt;, f e, C-,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;214&lt;/td&gt;
+&lt;td class="right"&gt;0.52%&lt;/td&gt;
+&lt;td class="left"&gt;evil-exit-emacs-state&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;212&lt;/td&gt;
+&lt;td class="right"&gt;0.51%&lt;/td&gt;
+&lt;td class="left"&gt;browse-kill-ring-forward&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;210&lt;/td&gt;
+&lt;td class="right"&gt;0.51%&lt;/td&gt;
+&lt;td class="left"&gt;flyspell-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;203&lt;/td&gt;
+&lt;td class="right"&gt;0.49%&lt;/td&gt;
+&lt;td class="left"&gt;evil-ex-completion&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;195&lt;/td&gt;
+&lt;td class="right"&gt;0.47%&lt;/td&gt;
+&lt;td class="left"&gt;narrow-or-widen-dwim&lt;/td&gt;
+&lt;td class="left"&gt;, x n n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;173&lt;/td&gt;
+&lt;td class="right"&gt;0.42%&lt;/td&gt;
+&lt;td class="left"&gt;comint-send-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;173&lt;/td&gt;
+&lt;td class="right"&gt;0.42%&lt;/td&gt;
+&lt;td class="left"&gt;beginning-of-defun&lt;/td&gt;
+&lt;td class="left"&gt;, b f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;170&lt;/td&gt;
+&lt;td class="right"&gt;0.41%&lt;/td&gt;
+&lt;td class="left"&gt;evil-surround-region&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;visual-state&amp;gt; S&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;161&lt;/td&gt;
+&lt;td class="right"&gt;0.39%&lt;/td&gt;
+&lt;td class="left"&gt;hippie-expand&lt;/td&gt;
+&lt;td class="left"&gt;M-/&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;151&lt;/td&gt;
+&lt;td class="right"&gt;0.36%&lt;/td&gt;
+&lt;td class="left"&gt;describe-key&lt;/td&gt;
+&lt;td class="left"&gt;, h k, C-h k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;149&lt;/td&gt;
+&lt;td class="right"&gt;0.36%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-next-visual-line&lt;/td&gt;
+&lt;td class="left"&gt;SPC&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;139&lt;/td&gt;
+&lt;td class="right"&gt;0.34%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-topic-select-group&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;138&lt;/td&gt;
+&lt;td class="right"&gt;0.33%&lt;/td&gt;
+&lt;td class="left"&gt;js2-print-json-path&lt;/td&gt;
+&lt;td class="left"&gt;, j p p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;132&lt;/td&gt;
+&lt;td class="right"&gt;0.32%&lt;/td&gt;
+&lt;td class="left"&gt;goto-line&lt;/td&gt;
+&lt;td class="left"&gt;M-g g, M-g M-g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;132&lt;/td&gt;
+&lt;td class="right"&gt;0.32%&lt;/td&gt;
+&lt;td class="left"&gt;evil-avy-goto-subword-1&lt;/td&gt;
+&lt;td class="left"&gt;;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;127&lt;/td&gt;
+&lt;td class="right"&gt;0.31%&lt;/td&gt;
+&lt;td class="left"&gt;ibuffer-mark-for-delete&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;127&lt;/td&gt;
+&lt;td class="right"&gt;0.31%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-single-quote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;126&lt;/td&gt;
+&lt;td class="right"&gt;0.30%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-other-meta-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;124&lt;/td&gt;
+&lt;td class="right"&gt;0.30%&lt;/td&gt;
+&lt;td class="left"&gt;term-send-up&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;118&lt;/td&gt;
+&lt;td class="right"&gt;0.29%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-other-control-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;116&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;evil-set-marker&lt;/td&gt;
+&lt;td class="left"&gt;m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;115&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;browse-kill-ring&lt;/td&gt;
+&lt;td class="left"&gt;M-y, , y y&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;114&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-grep-yank-line&lt;/td&gt;
+&lt;td class="left"&gt;, g l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;114&lt;/td&gt;
+&lt;td class="right"&gt;0.28%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-down&lt;/td&gt;
+&lt;td class="left"&gt;C-w j&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;112&lt;/td&gt;
+&lt;td class="right"&gt;0.27%&lt;/td&gt;
+&lt;td class="left"&gt;evil-jump-backward&lt;/td&gt;
+&lt;td class="left"&gt;C-o&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;108&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;evil-visual-block&lt;/td&gt;
+&lt;td class="left"&gt;C-v&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;108&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-previous-visual-line&lt;/td&gt;
+&lt;td class="left"&gt;S-SPC&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;107&lt;/td&gt;
+&lt;td class="right"&gt;0.26%&lt;/td&gt;
+&lt;td class="left"&gt;comint-previous-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;evil-search-word-backward&lt;/td&gt;
+&lt;td class="left"&gt;#&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;98&lt;/td&gt;
+&lt;td class="right"&gt;0.24%&lt;/td&gt;
+&lt;td class="left"&gt;forward-button&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;96&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-pop-next&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;95&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-next-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;95&lt;/td&gt;
+&lt;td class="right"&gt;0.23%&lt;/td&gt;
+&lt;td class="left"&gt;ido-imenu&lt;/td&gt;
+&lt;td class="left"&gt;, i i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;92&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-switch-workgroup&lt;/td&gt;
+&lt;td class="left"&gt;, w g g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;90&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-find-file&lt;/td&gt;
+&lt;td class="left"&gt;, g f&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;90&lt;/td&gt;
+&lt;td class="right"&gt;0.22%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-delete-items&lt;/td&gt;
+&lt;td class="left"&gt;, d i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;87&lt;/td&gt;
+&lt;td class="right"&gt;0.21%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-extract-mail-address&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;87&lt;/td&gt;
+&lt;td class="right"&gt;0.21%&lt;/td&gt;
+&lt;td class="left"&gt;cliphist-paste-item&lt;/td&gt;
+&lt;td class="left"&gt;, h h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;84&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;subword-backward-kill&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;C-backspace&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;84&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-backslash&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;83&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;my-yas-reload-all&lt;/td&gt;
+&lt;td class="left"&gt;, y c r&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;81&lt;/td&gt;
+&lt;td class="right"&gt;0.20%&lt;/td&gt;
+&lt;td class="left"&gt;pwd&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;80&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;previous-complete-history-element&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;80&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;wg-create-workgroup&lt;/td&gt;
+&lt;td class="left"&gt;, w g t&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;78&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;evil-forward-WORD-end&lt;/td&gt;
+&lt;td class="left"&gt;E&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;77&lt;/td&gt;
+&lt;td class="right"&gt;0.19%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-scroll-up&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;76&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-extract-cc-and-to&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;75&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;compile-goto-error&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;73&lt;/td&gt;
+&lt;td class="right"&gt;0.18%&lt;/td&gt;
+&lt;td class="left"&gt;evil-find-char-to&lt;/td&gt;
+&lt;td class="left"&gt;t&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;72&lt;/td&gt;
+&lt;td class="right"&gt;0.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-repeat-find-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;69&lt;/td&gt;
+&lt;td class="right"&gt;0.17%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-up&lt;/td&gt;
+&lt;td class="left"&gt;C-w k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;67&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;eval-last-sexp&lt;/td&gt;
+&lt;td class="left"&gt;, x e, C-x C-e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;66&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;evil-complete-next-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;66&lt;/td&gt;
+&lt;td class="right"&gt;0.16%&lt;/td&gt;
+&lt;td class="left"&gt;exchange-point-and-mark&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-x&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;63&lt;/td&gt;
+&lt;td class="right"&gt;0.15%&lt;/td&gt;
+&lt;td class="left"&gt;direx:previous-item&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;61&lt;/td&gt;
+&lt;td class="right"&gt;0.15%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-jump-to-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;60&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;diredp-next-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;58&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;evilmr-replace-in-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, r b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;58&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-imenu-goto&lt;/td&gt;
+&lt;td class="left"&gt;, i m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;56&lt;/td&gt;
+&lt;td class="right"&gt;0.14%&lt;/td&gt;
+&lt;td class="left"&gt;evil-goto-mark&lt;/td&gt;
+&lt;td class="left"&gt;`&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-group-unsubscribe-current-group&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;ivy-bookmark-goto&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;55&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;evil-filepath-inner-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;describe-mode&lt;/td&gt;
+&lt;td class="left"&gt;C-h m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;recenter-top-bottom&lt;/td&gt;
+&lt;td class="left"&gt;C-l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;54&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;list-packages&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;52&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-topic-mark-topic&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;52&lt;/td&gt;
+&lt;td class="right"&gt;0.13%&lt;/td&gt;
+&lt;td class="left"&gt;kill-line&lt;/td&gt;
+&lt;td class="left"&gt;C-k, &amp;lt;deleteline&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;51&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;find-and-ctags-update-all-tags-force&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;50&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-before&lt;/td&gt;
+&lt;td class="left"&gt;P&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;execute-extended-command&lt;/td&gt;
+&lt;td class="left"&gt;&amp;lt;execute&amp;gt;, C-x RET&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-quit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;49&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-WORD&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;48&lt;/td&gt;
+&lt;td class="right"&gt;0.12%&lt;/td&gt;
+&lt;td class="left"&gt;find-tag&lt;/td&gt;
+&lt;td class="left"&gt;g C-]&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;47&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;diredp-previous-line&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;46&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-close-square&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;44&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;paredit-open-square&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;44&lt;/td&gt;
+&lt;td class="right"&gt;0.11%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-last-insertion&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;42&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-double-quote&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;42&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;ivy-imenu-goto&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;40&lt;/td&gt;
+&lt;td class="right"&gt;0.10%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-git-find-my-file&lt;/td&gt;
+&lt;td class="left"&gt;, g m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;cp-filename-of-current-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-article-read-summary-keys&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;39&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-nonincremental-exit-minibuffer&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;sh-assignment&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;mark-whole-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, x h, C-x h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;38&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evilmi-inner-text-object&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;36&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-comment-or-uncomment-paragraphs&lt;/td&gt;
+&lt;td class="left"&gt;, c p, C-c p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;36&lt;/td&gt;
+&lt;td class="right"&gt;0.09%&lt;/td&gt;
+&lt;td class="left"&gt;evil-toggle-input-method&lt;/td&gt;
+&lt;td class="left"&gt;C-\&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;35&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;org2nikola-export-subtree&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;35&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;subword-forward&lt;/td&gt;
+&lt;td class="left"&gt;M-f, ESC &amp;lt;right&amp;gt;&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;34&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-open-above&lt;/td&gt;
+&lt;td class="left"&gt;O&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;34&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;compose-mail&lt;/td&gt;
+&lt;td class="left"&gt;C-x m&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-paren&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;term-send-raw-meta&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;33&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-invert-char&lt;/td&gt;
+&lt;td class="left"&gt;~&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;evil-space–evil-repeat-find-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;httpd-restart-at-default-directory&lt;/td&gt;
+&lt;td class="left"&gt;, w r d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;32&lt;/td&gt;
+&lt;td class="right"&gt;0.08%&lt;/td&gt;
+&lt;td class="left"&gt;cp-fullpath-of-current-buffer&lt;/td&gt;
+&lt;td class="left"&gt;, f p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;31&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evil-forward-WORD-begin&lt;/td&gt;
+&lt;td class="left"&gt;W&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;sort-lines&lt;/td&gt;
+&lt;td class="left"&gt;, s l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;bmkp-w3m-jump&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;30&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evilnc-copy-and-comment-lines&lt;/td&gt;
+&lt;td class="left"&gt;, c c, C-c c&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;29&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;toggle-company-ispell&lt;/td&gt;
+&lt;td class="left"&gt;, t c i&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;29&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;top-level&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;28&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;package-menu-mark-upgrades&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;evil-numbers/dec-at-pt&lt;/td&gt;
+&lt;td class="left"&gt;-&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;end-of-defun&lt;/td&gt;
+&lt;td class="left"&gt;, e f, C-M-e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;27&lt;/td&gt;
+&lt;td class="right"&gt;0.07%&lt;/td&gt;
+&lt;td class="left"&gt;my-setup-develop-environment&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;26&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-paste-pop&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-previous-difference&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-backward-WORD-begin&lt;/td&gt;
+&lt;td class="left"&gt;B&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;goto-char&lt;/td&gt;
+&lt;td class="left"&gt;g o, M-g c&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;w3m-close-window&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;org-mime-htmlize&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;25&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-group-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;24&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;git-gutter:toggle&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-g&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;my-gnus-group-list-subscribed-groups&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;find-directory-in-project-by-selected&lt;/td&gt;
+&lt;td class="left"&gt;, f d&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;23&lt;/td&gt;
+&lt;td class="right"&gt;0.06%&lt;/td&gt;
+&lt;td class="left"&gt;evil-inner-curly&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;org-edit-src-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;string-edit-at-point&lt;/td&gt;
+&lt;td class="left"&gt;, s e&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;package-menu-mark-delete&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;ido-magic-forward-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;run-js&lt;/td&gt;
+&lt;td class="left"&gt;, r j s&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;22&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;git-gutter-reset-to-head-parent&lt;/td&gt;
+&lt;td class="left"&gt;, g s h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;counsel-read-history&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;rcirc-send-input&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-undo&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;21&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;subword-backward&lt;/td&gt;
+&lt;td class="left"&gt;M-b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;company-select-next&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;what-cursor-position&lt;/td&gt;
+&lt;td class="left"&gt;g a, g 8, C-x =&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;my-grep&lt;/td&gt;
+&lt;td class="left"&gt;, q q&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;20&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;hydra-gnus-summary/body&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;ansi-term&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-right&lt;/td&gt;
+&lt;td class="left"&gt;C-w l&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;debugger-jump&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;wg-switch-to-workgroup&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;yas-abort-snippet&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;tags-loop-continue&lt;/td&gt;
+&lt;td class="left"&gt;M-,&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;19&lt;/td&gt;
+&lt;td class="right"&gt;0.05%&lt;/td&gt;
+&lt;td class="left"&gt;swiper-the-thing&lt;/td&gt;
+&lt;td class="left"&gt;, s s&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;18&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-swich-to-workgroup&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;18&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;org-edit-special&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;lisp-complete-symbol&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-wg-switch-to-workgroup-at-index&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;test&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;17&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-scroll-vertically&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;w3m-view-previous-page&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;evil-window-left&lt;/td&gt;
+&lt;td class="left"&gt;C-w h&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;isearch-yank-kill&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;my-goto-previous-hunk&lt;/td&gt;
+&lt;td class="left"&gt;, p p&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;js-beautify&lt;/td&gt;
+&lt;td class="left"&gt;, j b&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;hydra-launcher/body&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;read-only-mode&lt;/td&gt;
+&lt;td class="left"&gt;C-x C-q&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;message-send-and-exit&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;16&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;etags-select-goto-tag&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;evil-next-match&lt;/td&gt;
+&lt;td class="left"&gt;g n&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;js2r-kill&lt;/td&gt;
+&lt;td class="left"&gt;, j j k&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;string-edit-conclude&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;15&lt;/td&gt;
+&lt;td class="right"&gt;0.04%&lt;/td&gt;
+&lt;td class="left"&gt;delete-char&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;14&lt;/td&gt;
+&lt;td class="right"&gt;0.03%&lt;/td&gt;
+&lt;td class="left"&gt;gnus-summary-limit-to-author&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="right"&gt;14&lt;/td&gt;
+&lt;td class="right"&gt;0.03%&lt;/td&gt;
+&lt;td class="left"&gt;ediff-swap-buffers&lt;/td&gt;
+&lt;td class="left"&gt; &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html</guid><pubDate>Fri, 26 Feb 2016 13:51:27 GMT</pubDate></item></channel></rss>
