@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 30 Jun 2016 12:51:22 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage Emacs packages effectively</title><link>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 30 Jun 2016 13:14:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage Emacs packages effectively</title><link>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I developed a few package managing techniques after reading &lt;a href="https://github.com/purcell"&gt;Steve Purcell&lt;/a&gt;'s Emacs setup.
 &lt;/p&gt;
 
@@ -43,10 +43,10 @@ You can create a sub-directory under &lt;code&gt;~/.emacs.d/site-lisp/&lt;/code&
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technique 2, Create your own package repository&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-Step 1, Create two files "archive-contents" and "hello-1.0.0.el" and place them in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
+Step 1, Place two files "archive-contents" and "hello-1.0.0.el" in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
 &lt;/p&gt;
 &lt;p&gt;
-archive-contents:
+Content of &lt;code&gt;archive-contents&lt;/code&gt;:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -59,7 +59,7 @@ archive-contents:
 &lt;/div&gt;
 
 &lt;p&gt;
-hello-1.0.0.el:
+Content of &lt;code&gt;hello-1.0.0.el&lt;/code&gt;:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
