@@ -98,6 +98,22 @@ But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk<
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'ivy)
+
+(defun my-reshape-git-gutter (gutter)
+  "Re-shape gutter for `ivy-read'."
+  (let* ((lineno (aref gutter 3))
+         line)
+    (save-excursion
+      (goto-line lineno)
+      (setq line (buffer-substring (line-beginning-position)
+                                   (line-end-position))))
+    ;; build (key . lineno)
+    (cons (format "%s %d: %s"
+                  (if (eq 'deleted (aref gutter 1)) "-" "+")
+                  lineno
+                  (replace-regexp-in-string "^[ \t]*" "" line))
+          lineno)))
+
 (defun my-goto-git-gutter ()
   (interactive)
   (if git-gutter:diffinfos
