@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (mode)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/mode.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 15 Jul 2016 11:40:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (mode)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/mode.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 15 Jul 2016 11:44:18 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-15 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
 &lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;emacs-git-gutter&lt;/a&gt; show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
 &lt;/p&gt;
 
@@ -18,18 +26,30 @@ But if there are too many hunks in one file, &lt;code&gt;M-x git-gutter:previous
 
 (defun my-reshape-git-gutter (gutter)
   "Re-shape gutter for `ivy-read'."
-  (let* ((lineno (aref gutter 3))
-         line)
+  (let* ((linenum-start (aref gutter 3))
+         (linenum-end (aref gutter 4))
+         (target-line "")
+         (target-linenum 1)
+         (tmp-line "")
+         (max-line-length 0))
     (save-excursion
-      (goto-line lineno)
-      (setq line (buffer-substring (line-beginning-position)
-                                   (line-end-position))))
-    ;; build (key . lineno)
+      ;; find out the longest stripped line in the gutter
+      (while (&amp;lt;= linenum-start linenum-end)
+        (goto-line linenum-start)
+        (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
+                                                 (buffer-substring (line-beginning-position)
+                                                                   (line-end-position))))
+        (when (&amp;gt; (length tmp-line) max-line-length)
+          (setq target-linenum linenum-start)
+          (setq target-line tmp-line)
+          (setq max-line-length (length tmp-line)))
+
+        (setq linenum-start (1+ linenum-start))))
+    ;; build (key . linenum-start)
     (cons (format "%s %d: %s"
                   (if (eq 'deleted (aref gutter 1)) "-" "+")
-                  lineno
-                  (replace-regexp-in-string "^[ \t]*" "" line))
-          lineno)))
+                  target-linenum target-line)
+          target-linenum)))
 
 (defun my-goto-git-gutter ()
   (interactive)
@@ -38,8 +58,8 @@ But if there are too many hunks in one file, &lt;code&gt;M-x git-gutter:previous
                                  git-gutter:diffinfos)))
         (ivy-read "git-gutters:"
                   collection
-                  :action (lambda (lineno)
-                            (goto-line lineno))))
+                  :action (lambda (linenum)
+                            (goto-line linenum))))
     (message "NO git-gutters!")))
 &lt;/code&gt;&lt;/pre&gt;
 

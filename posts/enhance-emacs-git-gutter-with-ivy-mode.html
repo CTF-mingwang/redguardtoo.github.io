@@ -27,11 +27,19 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Enhance emacs-git-gutter with ivy-mode">
 <meta property="og:url" content="http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html">
-<meta property="og:description" content="emacs-git-gutter show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
+<meta property="og:description" content="CREATED: &lt;2016-07-14 Thu&gt;
 
 
 
-I usually use M-x git-gutter:previous-hunk or M-x git-gutter:next-hunk to">
+UPDATED: &lt;2016-07-15 Fri&gt;
+
+
+
+emacs-git-gutter show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
+
+
+
+I usually use M">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-14T13:35:32Z">
 <meta property="article:tag" content="emacs">
@@ -84,6 +92,14 @@ I usually use M-x git-gutter:previous-hunk or M-x git-gutter:next-hunk to">
         <div class="body">
             <div>
 <p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-14 Thu&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-15 Fri&gt;</span></span>
+</p>
+
+<p>
 <a href="https://github.com/syohex/emacs-git-gutter">emacs-git-gutter</a> show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
 </p>
 
@@ -102,18 +118,30 @@ But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk<
 
 (defun my-reshape-git-gutter (gutter)
   "Re-shape gutter for `ivy-read'."
-  (let* ((lineno (aref gutter 3))
-         line)
+  (let* ((linenum-start (aref gutter 3))
+         (linenum-end (aref gutter 4))
+         (target-line "")
+         (target-linenum 1)
+         (tmp-line "")
+         (max-line-length 0))
     (save-excursion
-      (goto-line lineno)
-      (setq line (buffer-substring (line-beginning-position)
-                                   (line-end-position))))
-    ;; build (key . lineno)
+      ;; find out the longest stripped line in the gutter
+      (while (&lt;= linenum-start linenum-end)
+        (goto-line linenum-start)
+        (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
+                                                 (buffer-substring (line-beginning-position)
+                                                                   (line-end-position))))
+        (when (&gt; (length tmp-line) max-line-length)
+          (setq target-linenum linenum-start)
+          (setq target-line tmp-line)
+          (setq max-line-length (length tmp-line)))
+
+        (setq linenum-start (1+ linenum-start))))
+    ;; build (key . linenum-start)
     (cons (format "%s %d: %s"
                   (if (eq 'deleted (aref gutter 1)) "-" "+")
-                  lineno
-                  (replace-regexp-in-string "^[ \t]*" "" line))
-          lineno)))
+                  target-linenum target-line)
+          target-linenum)))
 
 (defun my-goto-git-gutter ()
   (interactive)
@@ -122,8 +150,8 @@ But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk<
                                  git-gutter:diffinfos)))
         (ivy-read "git-gutters:"
                   collection
-                  :action (lambda (lineno)
-                            (goto-line lineno))))
+                  :action (lambda (linenum)
+                            (goto-line linenum))))
     (message "NO git-gutters!")))
 </code></pre>
 
