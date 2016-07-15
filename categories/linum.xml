@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linum)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linum.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 14 Jul 2016 13:21:10 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Turn off linum-mode when file is too big</title><link>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linum)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linum.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 15 Jul 2016 11:39:31 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Turn off linum-mode when file is too big</title><link>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 It's well known that linum-mode slows Emacs when opening file contains thousands of lines.
 &lt;/p&gt;
 
@@ -15,8 +15,8 @@ Here is the fix, using &lt;a href="https://en.wikipedia.org/wiki/Wc_(Unix)"&gt;w
             ;; use `wc -c file' for performance reason
             (if (and (executable-find "wc")
                      (&amp;gt; (string-to-number (shell-command-to-string (format "wc -c %s" (buffer-file-name))))
-                        (* 5000 80))
-                     (linum-mode -1)))))
+                        (* 5000 80)))
+                     (linum-mode -1))))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linum</category><category>mode</category><category>wc</category><guid>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</guid><pubDate>Thu, 14 Jul 2016 13:21:02 GMT</pubDate></item></channel></rss>
