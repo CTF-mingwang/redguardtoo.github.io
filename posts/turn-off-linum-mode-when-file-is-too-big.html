@@ -116,7 +116,6 @@ Here is the fix,
 <pre><code class="lang-lisp">(add-hook 'prog-mode-hook
           (lambda ()
             ;; turn off `linum-mode' when there are more than 5000 lines
-            ;; use `wc -c file' for performance reason
             (if (and (&gt; (buffer-size)
                         (* 5000 80)))
                      (linum-mode -1))))
