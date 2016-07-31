@@ -38,6 +38,70 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html">Use general.el to provide multiple leader key in evil-mode</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-04-09T04:35:54+00:00">2016-04-09 04:35</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html#disqus_thread" data-disqus-identifier="cache/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/evil.html" rel="tag">evil</a></li>
+           <li><a class="tag p-category" href="categories/vim.html" rel="tag">vim</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+<a href="https://github.com/noctuid/general.el">General.el</a> "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
+</p>
+
+<p>
+I have been using it for more than one month without any issue. I prefer general.el to <a href="https://github.com/cofi/evil-leader">evil-leader</a> because I need both comma and space key as <a href="http://vimdoc.sourceforge.net/htmldoc/map.html#&lt;Leader&gt;">leader key</a>.
+</p>
+
+<p>
+Minimum setup is simple,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(require 'general)
+(general-evil-setup t)
+(nvmap :prefix ","
+       "bb" 'back-to-previous-buffer
+       "ww" 'save-buffer
+       "oo" 'compile)
+
+;; all keywords arguments are still supported
+(nvmap :prefix "SPC"
+       ; save windows layout
+       "ss" 'wg-create-workgroup
+       ;; load windows layout
+       "ll" 'my-wg-switch-workgroup)
+</code></pre>
+
+</div>
+
+<p>
+My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el">real world setup</a> is more complicated.
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-ivy-to-open-recent-directories.html">Use ivy to open recent directories</a></h1>
             <div class="meta">
                 <div class="authordate">
