@@ -44,8 +44,8 @@ Here is the fix,
 
 
 
-(add-hook 'prog-mode-hook
-         ">
+(defun buffer-too-big-p ()
+  (or (&gt;">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-14T13:21:02Z">
 <meta property="article:tag" content="emacs">
@@ -113,12 +113,14 @@ Here is the fix,
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(add-hook 'prog-mode-hook
+<pre><code class="lang-lisp">(defun buffer-too-big-p ()
+  (or (&gt; (buffer-size) (* 5000 80))
+      (&gt; (line-number-at-pos (point-max)) 5000)))
+(add-hook 'prog-mode-hook
           (lambda ()
             ;; turn off `linum-mode' when there are more than 5000 lines
-            (if (and (&gt; (buffer-size)
-                        (* 5000 80)))
-                     (linum-mode -1))))
+            (if (buffer-too-big-p)
+                (linum-mode -1))))
 </code></pre>
 
 </div>

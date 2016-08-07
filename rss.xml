@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 31 Jul 2016 05:24:07 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 07 Aug 2016 13:10:23 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Most people use &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt; as a major mode for javascript only. For JSON file, they prefer &lt;a href="https://github.com/joshwnj/json-mode"&gt;json-mode&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -131,7 +131,8 @@ As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
 
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/potato.jpg" alt="potato.jpg"&gt;
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>potato</category><category>zh</category><guid>http://blog.binchen.org/posts/yan-tai-dun-tu-dou-si.html</guid><pubDate>Sun, 31 Jul 2016 03:16:35 GMT</pubDate></item><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>potato</category><category>zh</category><guid>http://blog.binchen.org/posts/yan-tai-dun-tu-dou-si.html</guid><pubDate>Sun, 31 Jul 2016 03:16:35 GMT</pubDate></item><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -221,12 +222,14 @@ Here is the fix,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'prog-mode-hook
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun buffer-too-big-p ()
+  (or (&amp;gt; (buffer-size) (* 5000 80))
+      (&amp;gt; (line-number-at-pos (point-max)) 5000)))
+(add-hook 'prog-mode-hook
           (lambda ()
             ;; turn off `linum-mode' when there are more than 5000 lines
-            (if (and (&amp;gt; (buffer-size)
-                        (* 5000 80)))
-                     (linum-mode -1))))
+            (if (buffer-too-big-p)
+                (linum-mode -1))))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linum</category><category>mode</category><category>wc</category><guid>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</guid><pubDate>Thu, 14 Jul 2016 13:21:02 GMT</pubDate></item><item><title>How to manage Emacs packages effectively</title><link>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
