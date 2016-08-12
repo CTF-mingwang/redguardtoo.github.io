@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -27,11 +26,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use Ivy-mode to tweak workgroups2">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-ivy-mode-to-tweak-workgroups2.html">
-<meta property="og:description" content="CREATED:  2015-12-22
+<meta property="og:description" content="CREATED: &lt;2015-12-22&gt;
 
 
 
-UPDATED:  2016-04-21 Thu
+UPDATED: &lt;2016-04-21 Thu&gt;
 
 
 
@@ -39,7 +38,7 @@ Workgroups2 will load previous windows layout by default. That's handy for most 
 
 
 
-But as a freelancer I am assigned a low spec computer">
+But as a freelancer I am assigned a low spec comput">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-12-22T04:42:03Z">
 <meta property="article:tag" content="emacs">
@@ -87,11 +86,12 @@ But as a freelancer I am assigned a low spec computer">
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-12-22</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-22&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2016-04-21 Thu</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-04-21 Thu&gt;</span></span>
 </p>
 
 <p>
@@ -109,6 +109,8 @@ So I use <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> to create a li
 <p>
 Here is code:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(setq wg-use-default-session-file nil)
 ;; don't open last workgroup automatically in `wg-open-session',
@@ -160,6 +162,8 @@ Here is code:
      (defadvice wg-unique-workgroup-name-p (around wg-unique-workgroup-name-p-hack activate)
        (setq ad-return-value t))))
 </code></pre>
+
+</div>
 </div>
         </div>
         
@@ -182,12 +186,12 @@ Here is code:
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -195,7 +199,7 @@ Here is code:
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

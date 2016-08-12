@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -79,7 +78,8 @@ But you need exclude already optimized ">
         </div>
         <div class="body">
             <div>
-<p>All you need to do is using <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>measure</b> how many time you execute commands.
+<p>
+All you need to do is using <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>measure</b> how many time you execute commands.
 </p>
 
 <p>
@@ -98,6 +98,8 @@ For example, commands like <code>next-line/previous-line/forward-char/backward-c
 The minimum keyfreq setup,
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'keyfreq)
 (setq keyfreq-excluded-commands
       '(self-insert-command
@@ -109,6 +111,8 @@ The minimum keyfreq setup,
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 </code></pre>
+
+</div>
 
 <p>
 My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyfreq.el">actual keyfreq setup</a> is more complicated.
@@ -250,19 +254,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">320</td>
 <td class="right">0.77%</td>
 <td class="left">paredit-doublequote</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">307</td>
 <td class="right">0.74%</td>
 <td class="left">evil-filepath-outer-text-object</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">300</td>
 <td class="right">0.72%</td>
 <td class="left">steve-ido-choose-from-recentf</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">295</td>
@@ -340,13 +344,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">214</td>
 <td class="right">0.52%</td>
 <td class="left">evil-exit-emacs-state</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">212</td>
 <td class="right">0.51%</td>
 <td class="left">browse-kill-ring-forward</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">210</td>
@@ -358,7 +362,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">203</td>
 <td class="right">0.49%</td>
 <td class="left">evil-ex-completion</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">195</td>
@@ -370,7 +374,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">173</td>
 <td class="right">0.42%</td>
 <td class="left">comint-send-input</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">173</td>
@@ -406,7 +410,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">139</td>
 <td class="right">0.34%</td>
 <td class="left">gnus-topic-select-group</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">138</td>
@@ -430,31 +434,31 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">127</td>
 <td class="right">0.31%</td>
 <td class="left">ibuffer-mark-for-delete</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">127</td>
 <td class="right">0.31%</td>
 <td class="left">evil-inner-single-quote</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">126</td>
 <td class="right">0.30%</td>
 <td class="left">isearch-other-meta-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">124</td>
 <td class="right">0.30%</td>
 <td class="left">term-send-up</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">118</td>
 <td class="right">0.29%</td>
 <td class="left">isearch-other-control-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">116</td>
@@ -502,13 +506,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">107</td>
 <td class="right">0.26%</td>
 <td class="left">comint-previous-input</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">98</td>
 <td class="right">0.24%</td>
 <td class="left">gnus-summary-exit</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">98</td>
@@ -520,19 +524,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">98</td>
 <td class="right">0.24%</td>
 <td class="left">forward-button</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">96</td>
 <td class="right">0.23%</td>
 <td class="left">evil-paste-pop-next</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">95</td>
 <td class="right">0.23%</td>
 <td class="left">ediff-next-difference</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">95</td>
@@ -562,7 +566,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">87</td>
 <td class="right">0.21%</td>
 <td class="left">gnus-summary-extract-mail-address</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">87</td>
@@ -580,7 +584,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">84</td>
 <td class="right">0.20%</td>
 <td class="left">paredit-backslash</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">83</td>
@@ -592,13 +596,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">81</td>
 <td class="right">0.20%</td>
 <td class="left">pwd</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">80</td>
 <td class="right">0.19%</td>
 <td class="left">previous-complete-history-element</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">80</td>
@@ -616,19 +620,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">77</td>
 <td class="right">0.19%</td>
 <td class="left">gnus-summary-scroll-up</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">76</td>
 <td class="right">0.18%</td>
 <td class="left">gnus-summary-extract-cc-and-to</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">75</td>
 <td class="right">0.18%</td>
 <td class="left">compile-goto-error</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">73</td>
@@ -640,7 +644,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">72</td>
 <td class="right">0.17%</td>
 <td class="left">evil-repeat-find-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">69</td>
@@ -658,7 +662,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">66</td>
 <td class="right">0.16%</td>
 <td class="left">evil-complete-next-line</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">66</td>
@@ -670,19 +674,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">63</td>
 <td class="right">0.15%</td>
 <td class="left">direx:previous-item</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">61</td>
 <td class="right">0.15%</td>
 <td class="left">ediff-jump-to-difference</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">60</td>
 <td class="right">0.14%</td>
 <td class="left">diredp-next-line</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">58</td>
@@ -706,19 +710,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">55</td>
 <td class="right">0.13%</td>
 <td class="left">gnus-group-unsubscribe-current-group</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">55</td>
 <td class="right">0.13%</td>
 <td class="left">ivy-bookmark-goto</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">55</td>
 <td class="right">0.13%</td>
 <td class="left">evil-filepath-inner-text-object</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">54</td>
@@ -736,13 +740,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">54</td>
 <td class="right">0.13%</td>
 <td class="left">list-packages</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">52</td>
 <td class="right">0.13%</td>
 <td class="left">gnus-topic-mark-topic</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">52</td>
@@ -754,7 +758,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">51</td>
 <td class="right">0.12%</td>
 <td class="left">find-and-ctags-update-all-tags-force</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">50</td>
@@ -772,13 +776,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">49</td>
 <td class="right">0.12%</td>
 <td class="left">etags-select-quit</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">49</td>
 <td class="right">0.12%</td>
 <td class="left">evil-inner-WORD</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">48</td>
@@ -790,37 +794,37 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">47</td>
 <td class="right">0.11%</td>
 <td class="left">diredp-previous-line</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">46</td>
 <td class="right">0.11%</td>
 <td class="left">paredit-close-square</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">44</td>
 <td class="right">0.11%</td>
 <td class="left">paredit-open-square</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">44</td>
 <td class="right">0.11%</td>
 <td class="left">evil-paste-last-insertion</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">42</td>
 <td class="right">0.10%</td>
 <td class="left">evil-inner-double-quote</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">42</td>
 <td class="right">0.10%</td>
 <td class="left">ivy-imenu-goto</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">40</td>
@@ -838,19 +842,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">39</td>
 <td class="right">0.09%</td>
 <td class="left">gnus-article-read-summary-keys</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">39</td>
 <td class="right">0.09%</td>
 <td class="left">isearch-nonincremental-exit-minibuffer</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">38</td>
 <td class="right">0.09%</td>
 <td class="left">sh-assignment</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">38</td>
@@ -862,7 +866,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">38</td>
 <td class="right">0.09%</td>
 <td class="left">evilmi-inner-text-object</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">36</td>
@@ -880,7 +884,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">35</td>
 <td class="right">0.08%</td>
 <td class="left">org2nikola-export-subtree</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">35</td>
@@ -904,13 +908,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">33</td>
 <td class="right">0.08%</td>
 <td class="left">evil-inner-paren</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">33</td>
 <td class="right">0.08%</td>
 <td class="left">term-send-raw-meta</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">33</td>
@@ -922,7 +926,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">32</td>
 <td class="right">0.08%</td>
 <td class="left">evil-space–evil-repeat-find-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">32</td>
@@ -952,7 +956,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">30</td>
 <td class="right">0.07%</td>
 <td class="left">bmkp-w3m-jump</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">30</td>
@@ -970,13 +974,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">29</td>
 <td class="right">0.07%</td>
 <td class="left">top-level</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">28</td>
 <td class="right">0.07%</td>
 <td class="left">package-menu-mark-upgrades</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">27</td>
@@ -994,19 +998,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">27</td>
 <td class="right">0.07%</td>
 <td class="left">my-setup-develop-environment</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">26</td>
 <td class="right">0.06%</td>
 <td class="left">evil-paste-pop</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">25</td>
 <td class="right">0.06%</td>
 <td class="left">ediff-previous-difference</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">25</td>
@@ -1024,19 +1028,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">25</td>
 <td class="right">0.06%</td>
 <td class="left">w3m-close-window</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">25</td>
 <td class="right">0.06%</td>
 <td class="left">org-mime-htmlize</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">25</td>
 <td class="right">0.06%</td>
 <td class="left">gnus-group-exit</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">24</td>
@@ -1048,7 +1052,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">23</td>
 <td class="right">0.06%</td>
 <td class="left">my-gnus-group-list-subscribed-groups</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">23</td>
@@ -1060,13 +1064,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">23</td>
 <td class="right">0.06%</td>
 <td class="left">evil-inner-curly</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">22</td>
 <td class="right">0.05%</td>
 <td class="left">org-edit-src-exit</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">22</td>
@@ -1078,13 +1082,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">22</td>
 <td class="right">0.05%</td>
 <td class="left">package-menu-mark-delete</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">22</td>
 <td class="right">0.05%</td>
 <td class="left">ido-magic-forward-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">22</td>
@@ -1102,19 +1106,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">21</td>
 <td class="right">0.05%</td>
 <td class="left">counsel-read-history</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">21</td>
 <td class="right">0.05%</td>
 <td class="left">rcirc-send-input</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">21</td>
 <td class="right">0.05%</td>
 <td class="left">gnus-undo</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">21</td>
@@ -1126,7 +1130,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">20</td>
 <td class="right">0.05%</td>
 <td class="left">company-select-next</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">20</td>
@@ -1144,13 +1148,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">20</td>
 <td class="right">0.05%</td>
 <td class="left">hydra-gnus-summary/body</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">19</td>
 <td class="right">0.05%</td>
 <td class="left">ansi-term</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">19</td>
@@ -1162,19 +1166,19 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">19</td>
 <td class="right">0.05%</td>
 <td class="left">debugger-jump</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">19</td>
 <td class="right">0.05%</td>
 <td class="left">wg-switch-to-workgroup</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">19</td>
 <td class="right">0.05%</td>
 <td class="left">yas-abort-snippet</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">19</td>
@@ -1192,43 +1196,43 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">18</td>
 <td class="right">0.04%</td>
 <td class="left">my-wg-swich-to-workgroup</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">18</td>
 <td class="right">0.04%</td>
 <td class="left">org-edit-special</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">17</td>
 <td class="right">0.04%</td>
 <td class="left">lisp-complete-symbol</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">17</td>
 <td class="right">0.04%</td>
 <td class="left">my-wg-switch-to-workgroup-at-index</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">17</td>
 <td class="right">0.04%</td>
 <td class="left">test</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">17</td>
 <td class="right">0.04%</td>
 <td class="left">ediff-scroll-vertically</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">16</td>
 <td class="right">0.04%</td>
 <td class="left">w3m-view-previous-page</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">16</td>
@@ -1240,7 +1244,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">16</td>
 <td class="right">0.04%</td>
 <td class="left">isearch-yank-kill</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">16</td>
@@ -1258,7 +1262,7 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">16</td>
 <td class="right">0.04%</td>
 <td class="left">hydra-launcher/body</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">16</td>
@@ -1270,13 +1274,13 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">16</td>
 <td class="right">0.04%</td>
 <td class="left">message-send-and-exit</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">16</td>
 <td class="right">0.04%</td>
 <td class="left">etags-select-goto-tag</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">15</td>
@@ -1294,25 +1298,25 @@ Below is the eight month keyfreq data of my office computer,
 <td class="right">15</td>
 <td class="right">0.04%</td>
 <td class="left">string-edit-conclude</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">15</td>
 <td class="right">0.04%</td>
 <td class="left">delete-char</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">14</td>
 <td class="right">0.03%</td>
 <td class="left">gnus-summary-limit-to-author</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 <tr>
 <td class="right">14</td>
 <td class="right">0.03%</td>
 <td class="left">ediff-swap-buffers</td>
-<td class="left"></td>
+<td class="left"> </td>
 </tr>
 </tbody>
 </table>
@@ -1321,7 +1325,7 @@ Below is the eight month keyfreq data of my office computer,
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="grab-email-address-in-gnus.html" rel="prev" title="Grab email address in Gnus">Previous post</a>
+                <a href="diff-regions-in-emacs.html" rel="prev" title="Diff regions in Emacs">Previous post</a>
             </li>
             <li class="next">
                 <a href="emacs-vs-sublime-text-on-salesforce-development.html" rel="next" title="Emacs vs Sublime Text on Salesforce development">Next post</a>
@@ -1338,12 +1342,12 @@ Below is the eight month keyfreq data of my office computer,
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -1351,7 +1355,7 @@ Below is the eight month keyfreq data of my office computer,
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -34,7 +33,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 Reasons:
 
 
-If file B refer to file A with &quot;../A&quot;. Then B's position in the project *CANNOT be changed. Or else its reference to A will be">
+
+If file B refer to file A with &quot;../A&quot;. Then B's position in the project *CANNOT be changed. Or else its reference to A will b">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-05-29T01:31:35Z">
 <meta property="article:tag" content="bash">
@@ -82,14 +82,15 @@ If file B refer to file A with &quot;../A&quot;. Then B's position in the projec
         </div>
         <div class="body">
             <div>
-<p>It's not good practice to use relative path in big project.
+<p>
+It's not good practice to use relative path in big project.
 </p>
 
 <p>
 Reasons:
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>If file B refer to file A with "../A". Then B's position in the project *CANNOT be changed. Or else its reference to A will be wrong.
 </li>
 <li>Relative path is not intuitive when debugging.
@@ -117,8 +118,12 @@ For example, we can replace absolute path "/home/cb/projects/app1/src/test.c" wi
 Insert below code into ~/.bashrc so TTAGROOT value is set when you logged into bash:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-sh">export TTAGROOT="/home/cb/projects/app1"
 </code></pre>
+
+</div>
 
 <p>
 In you script to do the real job, you could make TTAGROOT optional and still use your full path happily. It's just one bash liner.
@@ -128,10 +133,14 @@ In you script to do the real job, you could make TTAGROOT optional and still use
 Here is a sample file named test.sh:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-sh">#!/bin/bash
 [ -z "$TTAGROOT" ] &amp;&amp; TTAGROOT="hard-coded-full-path"
 echo "TTAGROOT = $TTAGROOT"
 </code></pre>
+
+</div>
 
 <p>
 You could use test.sh without $TTAGROOT. Or you can set up default value of $TTAGROOT in ~/.bashrc as I already mentioned.
@@ -141,12 +150,15 @@ You could use test.sh without $TTAGROOT. Or you can set up default value of $TTA
 Or you can override the TTAGROOT value when you executing "test.sh":
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-sh">TTAGROOT="hello" ./test.sh
 </code></pre>
 
+</div>
+
 <p>
-BTW, don't abuse this technique. Set <b>one environment variable</b> for the root directory of project is enough.
-</p>
+BTW, don't abuse this technique. Set <b>one environment variable</b> for the root directory of project is enough.</p>
 </div>
         </div>
         
@@ -169,12 +181,12 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -182,7 +194,7 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

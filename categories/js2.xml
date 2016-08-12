@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 03 Feb 2016 11:36:07 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;CREATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-10-29&lt;/span&gt;&lt;/span&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 12 Aug 2016 06:14:02 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode to print json path</title><link>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-10-29&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2015-11-22 Sun&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -22,6 +23,8 @@ When working on JSON, the most boring and error prone task is to get the full pa
 For example, given the JSON response like:
 &lt;/p&gt;
 
+&lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;{
   key1: {
     subkey1: {
@@ -30,6 +33,8 @@ For example, given the JSON response like:
   }
 }
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 The developer need figure out the full path of "key3" which is "&lt;code&gt;key1.subkey1.arr1[0].key3&lt;/code&gt;".
@@ -42,6 +47,8 @@ My solution is to take advantage of AST created by &lt;a href="https://github.co
 &lt;p&gt;
 &lt;b&gt;Step 1&lt;/b&gt;, insert below code into ~/.emacs,
 &lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ print json path, will be removed when latest STABLE js2-mode released
 (defun js2-get-element-index-from-array-node (elem array-node &amp;amp;optional hardcoded-array-index)
@@ -103,6 +110,8 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
 
     rlt))
 &lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 &lt;b&gt;Step 2&lt;/b&gt;, move the cursor over the key/value of the field and `M-x js2-print-json-path`.

@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/complete-line-with-ivy-mode.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -30,9 +29,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content='Complete current line by git grep and ivy-mode.
 
 
+
+
 (defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword))'>
+  (replace-regexp-in-string "\"" "\\\\\"" keyword'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-05-23T01:41:14Z">
 <meta property="article:tag" content="emacs">
@@ -80,8 +81,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         </div>
         <div class="body">
             <div>
-<p>Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
+<p>
+Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun counsel-escape (keyword)
   (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
@@ -124,6 +128,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 (global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
 </code></pre>
 
+</div>
+
 <p>
 I also tried <code>grep</code> which is too slow for my project.
 </p>
@@ -149,12 +155,12 @@ I also tried <code>grep</code> which is too slow for my project.
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -162,7 +168,7 @@ I also tried <code>grep</code> which is too slow for my project.
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

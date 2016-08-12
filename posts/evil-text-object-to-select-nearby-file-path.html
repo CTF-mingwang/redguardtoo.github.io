@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -27,20 +26,22 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Evil text object to select nearby file path">
 <meta property="og:url" content="http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html">
-<meta property="og:description" content='CREATED:  2015-08-08 Sat
+<meta property="og:description" content='CREATED: &lt;2015-08-08 Sat&gt;
 
 
 
-UPDATED:  2015-08-24 Mon
+UPDATED: &lt;2015-08-24 Mon&gt;
 
 
 
 Insert below code into ~/.emacs:
 
 
+
+
 ;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
-;;      - "vaf" to select the '>
+;;      - "vaf" to select '>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-08-08T13:16:39Z">
 <meta property="article:tag" content="emacs">
@@ -86,16 +87,19 @@ Insert below code into ~/.emacs:
         </div>
         <div class="body">
             <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-08-08 Sat</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-08 Sat&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-08-24 Mon</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-24 Mon&gt;</span></span>
 </p>
 
 <p>
 Insert below code into ~/.emacs:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">;; {{ nearby file path as text object,
 ;;      - "vif" to select only basename
@@ -225,12 +229,14 @@ Insert below code into ~/.emacs:
 (define-key evil-outer-text-objects-map "f" 'evil-filepath-outer-text-object)
 ;; }}
 </code></pre>
+
+</div>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="jian-bu-zhai-ming-tang-sgow-chrouk-soup.html" rel="prev" title="柬埔寨名汤(Sgow Chrouk Soup)">Previous post</a>
+                <a href="use-which-func-mode-with-js2-mode.html" rel="prev" title="Use which-func-mode with js2-mode">Previous post</a>
             </li>
             <li class="next">
                 <a href="use-js2-mode-to-print-json-path.html" rel="next" title="Use js2-mode to print json path">Next post</a>
@@ -247,12 +253,12 @@ Insert below code into ~/.emacs:
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -260,7 +266,7 @@ Insert below code into ~/.emacs:
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

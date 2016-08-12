@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -37,7 +36,8 @@ Problem
 In Angular application, a function is defined in a javascript file and called in a html file.
 
 
-javascript fi">
+
+javascript f">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-04-02T12:51:21Z">
 <meta property="article:tag" content="ctags">
@@ -85,19 +85,21 @@ javascript fi">
         </div>
         <div class="body">
             <div>
-<p>I use <a href="https://angularjs.org/">AngularJS</a> as an example. The technique applies to other web frameworks.
+<p>
+I use <a href="https://angularjs.org/">AngularJS</a> as an example. The technique applies to other web frameworks.
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Problem</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>In Angular application, a function is defined in a javascript file and called in a html file.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">Problem</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+In Angular application, a function is defined in a javascript file and called in a html file.
 </p>
+
 <p>
 javascript file:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-html">&lt;div ng-controller="MyController" ng-init="init()"&gt;
@@ -105,13 +107,13 @@ javascript file:
 &lt;/div&gt;
 </code></pre>
 
-
+</div>
 
 <p>
 html file:
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-javascript">angular.module['myapp'].controller('MyController', function ($scope, $http) {
 
@@ -123,25 +125,26 @@ html file:
 });
 </code></pre>
 
-
+</div>
 
 <p>
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is <b>regular expression</b>.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Solution</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>CTags is good at parsing files with <b>regular expression</b>.
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+CTags is good at parsing files with <b>regular expression</b>.
 </p>
+
 <p>
 I use CTags instead of IDEs because:
 </p>
-<ul>
+<ul class="org-ul">
 <li>New web frameworks keep popping up. I don't want to waste time&amp;money on upgrading IDE frequently
 </li>
 <li>As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of
@@ -151,14 +154,13 @@ I use CTags instead of IDEs because:
 </ul>
 </div>
 
-<div id="outline-container-2-1" class="outline-4">
-<h5 id="sec-2-1">CTags setup</h5>
-<div class="outline-text-4" id="text-2-1">
-
-<p>Create a file named ".ctags":
+<div id="outline-container-sec-2-1" class="outline-3">
+<h4 id="sec-2-1">CTags setup</h4>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Create a file named ".ctags":
 </p>
-
-
+<div class="org-src-container">
 
 <pre><code class="lang-conf">--langdef=html
 --langmap=html:.htm.html.erb
@@ -201,88 +203,86 @@ I use CTags instead of IDEs because:
 --regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
 </code></pre>
 
-
+</div>
 
 <p>
 The key point of this setup is the regular expression for HTML should be <b>as simple as possible</b>!
 </p>
+
 <p>
 On Mac, location of ".ctags":
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-bash">/Users/yourname/.ctags
 </code></pre>
 
-
+</div>
 
 <p>
 On Linux, location of ".ctags":
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-bash">/home/yourname/.ctags
 </code></pre>
 
-
+</div>
 
 <p>
 On Windows, place ".ctags" anywhere. Then <a href="http://support.microsoft.com/en-us/kb/310519">create an environment variable</a> named "HOME" whose value is the parent directory of ".ctags".
 </p>
+
+<p></p>
 </div>
-
 </div>
-
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3"><a href="http://www.sublimetext.com/">Sublime Text</a></h4>
-<div class="outline-text-3" id="text-3">
-
-<p>Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and follow its instruction.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3"><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
+<div class="outline-text-2" id="text-3">
+<p>
+Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and follow its instruction.
 </p>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h4>
-<div class="outline-text-3" id="text-4">
-
-<p>Run CTags at least once:
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h3>
+<div class="outline-text-2" id="text-4">
+<p>
+Run CTags at least once:
 </p>
-
-
-
+<div class="org-src-container">
 <pre><code class="lang-bash">ctags -e -R -f /app/path/TAGS
 </code></pre>
 
-
+</div>
 
 <p>
 Then insert below code into your ~/.emacs:
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(setq tags-table-list '("/app/path/TAGS"))
 </code></pre>
 
-
+</div>
 
 <p>
 Open Emacs and `M-x find-tag` to start code navigation. That's all.
 </p>
+
 <p>
 If you prefer <a href="https://github.com/emacs-helm/helm">Helm</a> UI, install it and `M-x helm-etags-select` instead.
 </p>
-<p>
-Please install the latest helm because I <a href="https://github.com/emacs-helm/helm/pull/965">enhanced helm-etags-select</a> for this problem.
-</p>
-</div>
 
+<p>
+Please install the latest helm because I <a href="https://github.com/emacs-helm/helm/pull/965">enhanced helm-etags-select</a> for this problem.</p>
+
+<p></p>
+</div>
 </div>
 </div>
         </div>
@@ -306,12 +306,12 @@ Please install the latest helm because I <a href="https://github.com/emacs-helm/
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -319,7 +319,7 @@ Please install the latest helm because I <a href="https://github.com/emacs-helm/
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

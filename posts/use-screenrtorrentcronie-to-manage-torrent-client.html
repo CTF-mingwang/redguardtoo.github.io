@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -27,24 +26,24 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use screen/rtorrent/cronie to manage torrent client">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html">
-<meta property="og:description" content="`man rtorrent` for the keybindings:
+<meta property="og:description" content="Table of Contents
+
+
+1. Prepare directory
+2. Install
+3. Add cron task to start and stop rtorrent service
+
+
+
+
+
+`man rtorrent` for the keybindings:
+
 
 
 `Enter` to input magnet from piratebay manually
 
-`C-s` to start download
-
-`C-d` to delete
-
-
-For ArchLinux only:
-
-
-
-Table of Contents
-
-1 Prepare directory
-2 Instal">
+`C-">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-03-09T15:08:00Z">
 <meta property="article:tag" content="archlinux">
@@ -90,10 +89,22 @@ Table of Contents
         </div>
         <div class="body">
             <div>
-<p>`man rtorrent` for the keybindings:
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-1">1. Prepare directory</a></li>
+<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-2">2. Install</a></li>
+<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-3">3. Add cron task to start and stop rtorrent service</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+`man rtorrent` for the keybindings:
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>`Enter` to input magnet from piratebay manually
 </li>
 <li>`C-s` to start download
@@ -105,71 +116,52 @@ Table of Contents
 For <a href="http://www.archlinux.org">ArchLinux</a> only:
 </p>
 
-<div id="table-of-contents">
-<h3>Table of Contents</h3>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-1">1 Prepare directory</a></li>
-<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-2">2 Install</a></li>
-<li><a href="use-screenrtorrentcronie-to-manage-torrent-client.html#sec-3">3 Add cron task to start and stop rtorrent service</a></li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Prepare directory</h4>
-<div class="outline-text-3" id="text-1">
-
-
-
-
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Prepare directory</h3>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
 
 <pre><code class="lang-bash">mkdir -p ~/bt/{session,finished,torrent}
 </code></pre>
 
-
-
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Install</h4>
-<div class="outline-text-3" id="text-2">
-
-
-
-
+</div>
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Install</h3>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
 
 <pre><code class="lang-sh">sudo pacman -S cronie
 sudo systemctl enable cronie
 sudo systemctl start cronie
 </code></pre>
 
-
-
 </div>
 
+<p></p>
 </div>
-
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Add cron task to start and stop rtorrent service</h4>
-<div class="outline-text-3" id="text-3">
-
-
-
-
+</div>
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Add cron task to start and stop rtorrent service</h3>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
 
 <pre><code class="lang-sh">crontab -e #add cron task as current user
 </code></pre>
 
-
+</div>
 
 <p>
 The default editor will be open, input below content:
 </p>
 
-
+<div class="org-src-container">
 
 <pre><code class="lang-conf">#start rtorrent sesssion at 1am
 0 1 * * * /usr/bin/screen -fa -d -m -S torrent /usr/bin/rtorrent
@@ -177,13 +169,14 @@ The default editor will be open, input below content:
 0 10 * * * /usr/bin/screen -S torrent -X quit
 </code></pre>
 
-
+</div>
 
 <p>
 Done!
 </p>
-</div>
 
+<p></p>
+</div>
 </div>
 </div>
         </div>
@@ -207,12 +200,12 @@ Done!
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -220,7 +213,7 @@ Done!
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -27,11 +26,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to validate HTML5 code with Flymake effectively">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-validate-html5-code-with-flymake-effectively.html">
-<meta property="og:description" content="UPDATED:  2014-12-11 
+<meta property="og:description" content="UPDATED: &lt;2014-12-11&gt; 
 
 
 
-CREATED:  2014-12-05
+CREATED: &lt;2014-12-05&gt;
 
 
 
@@ -43,7 +42,7 @@ I found it not effective because tidy is too strict to HTML5 and produces too mu
 
 
 
-I only need valida">
+I only need vali">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-12-05T13:00:31Z">
 <meta property="article:tag" content="emacs">
@@ -93,11 +92,12 @@ I only need valida">
         </div>
         <div class="body">
             <div>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-12-11</span></span> 
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11&gt;</span></span> 
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-12-05</span></span>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05&gt;</span></span>
 </p>
 
 <p>
@@ -115,6 +115,8 @@ I only need validation of missing open/closed html tag(s). Nothing more!
 <p>
 So here is my complete solution:
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun flymake-html-init ()
        (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -142,12 +144,18 @@ So here is my complete solution:
 (add-hook 'php-mode-hook 'flymake-html-load)
 </code></pre>
 
+</div>
+
 <p>
 The only difference from EmacsWiki is only one line:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">'(("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(missing &lt;\/[a-z0-9A-Z]+&gt;.*\\|discarding unexpected.*\\)" nil 1 2 4))
 </code></pre>
+
+</div>
 </div>
         </div>
         
@@ -170,12 +178,12 @@ The only difference from EmacsWiki is only one line:
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -183,7 +191,7 @@ The only difference from EmacsWiki is only one line:
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

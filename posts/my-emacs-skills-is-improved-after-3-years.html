@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/my-emacs-skills-is-improved-after-3-years.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -81,7 +80,8 @@ Basically I use fewer but more powerful plugins. I write Emacs lisp i">
         </div>
         <div class="body">
             <div>
-<p>This is <a href="http://blog.binchen.org/posts/you-yong-de-emacs-kuai-jie-jian.html">my note on useful commands/keybindings to memorize</a> three years ago.
+<p>
+This is <a href="http://blog.binchen.org/posts/you-yong-de-emacs-kuai-jie-jian.html">my note on useful commands/keybindings to memorize</a> three years ago.
 </p>
 
 <p>
@@ -92,110 +92,120 @@ Most are obsolete because I'm more skillful now.
 Basically I use <b>fewer</b> but more powerful plugins. I write Emacs lisp if there is no suitable plugin.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, column edit,
 </li>
 </ul>
-<pre class="example">C-x r t yourstring RET (See "How to do select column then do editing in GNU Emacs ?"")
+<pre class="example">
+C-x r t yourstring RET (See "How to do select column then do editing in GNU Emacs ?"")
 </pre>
 
 <p>
 Now I use <a href="http://www.emacswiki.org/emacs/Evil">Evil</a>
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, save current position to register and jump to the position,
 </li>
 </ul>
-<pre class="example">C-r SPC to save, C-j to jump (better-registers.el required) 
+<pre class="example">
+C-r SPC to save, C-j to jump (better-registers.el required)
 </pre>
 
 <p>
 Now Evil.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, save frame configuration to register,
 </li>
 </ul>
-<pre class="example">C-r f (better-registers.el required) 
+<pre class="example">
+C-r f (better-registers.el required)
 </pre>
 
 <p>
 Now <a href="https://github.com/pashinin/workgroups2">workgroups2.</a>
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three year ago, (un)comment line,
 </li>
 </ul>
-<pre class="example">M-; (qiang-comment-dwim-line required)
+<pre class="example">
+M-; (qiang-comment-dwim-line required)
 </pre>
 
 <p>
 Now <a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter.</a>
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago for visiting the next/previous error message after compiling,
 </li>
 </ul>
-<pre class="example">"M-g M-n" or "M-g M-p"
+<pre class="example">
+"M-g M-n" or "M-g M-p"
 </pre>
 
 <p>
 I'm still using it.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, find-tag/pop-tag-mark
 </li>
 </ul>
-<pre class="example">"M-." and "M-*"
+<pre class="example">
+"M-." and "M-*"
 </pre>
 
 <p>
 Now Evil
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, grep current work directory only or all sub-directories
 </li>
 </ul>
-<pre class="example">M-x lgrep/rgrep
+<pre class="example">
+M-x lgrep/rgrep
 </pre>
 
 <p>
 Now grep in shell plus <a href="https://github.com/mooz/percol">percol</a>
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, visit multiple tags table 
 </li>
 </ul>
-<pre class="example">M-x visit-tags-table
+<pre class="example">
+M-x visit-tags-table
 </pre>
 
 <p>
 <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">hack tags-table-list directly</a> might be simpler.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, set countdown timer
 </li>
 </ul>
-<pre class="example">M-x org-timer-set-timer, C-c C-x ;
+<pre class="example">
+M-x org-timer-set-timer, C-c C-x ;
 </pre>
 
 <p>
 Now I don't push myself with the timer thing.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>Three years ago, mark subtree in org-mode
 </li>
 </ul>
-<pre class="example">M-x org-mark-subtree
+<pre class="example">
+M-x org-mark-subtree
 </pre>
 
 <p>
@@ -203,8 +213,7 @@ It was used to select the text to post to my blog.
 </p>
 
 <p>
-Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. The org-mark-subtree is hardcoded into org2nikola.
-</p>
+Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. The org-mark-subtree is hardcoded into org2nikola.</p>
 </div>
         </div>
         
@@ -227,12 +236,12 @@ Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. Th
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -240,7 +249,7 @@ Now I use <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a>. Th
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

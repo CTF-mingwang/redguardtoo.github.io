@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/always-turn-on-fpermissive-for-gcc-4-6.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -30,7 +29,10 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:description" content="Below code will get error message if compiled by gcc 4.6+:
 
 
+
 &quot;const A&quot; as 'this' argument of &quot;void A::a()' discards qualifiers [-fpermissive]
+
+
 
 
 class A
@@ -39,7 +41,7 @@ class A
 }
 class B
 {
-   virtual void b() c">
+   virtual void b(">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-01-14T18:38:00Z">
 <meta property="article:tag" content="cmake">
@@ -87,11 +89,15 @@ class B
         </div>
         <div class="body">
             <div>
-<p>Below code will get error message if compiled by gcc 4.6+:
+<p>
+Below code will get error message if compiled by gcc 4.6+:
 </p>
 
-<pre class="example">"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
+<pre class="example">
+"const A" as 'this' argument of "void A::a()' discards qualifiers [-fpermissive]
 </pre>
+
+<div class="org-src-container">
 
 <pre><code class="lang-c">class A
 {
@@ -111,16 +117,22 @@ class MyClass:public B
 }
 </code></pre>
 
+</div>
+
 <p>
 Since I cannot modify class A and B, I need add "-fpermission" to CXX_FLAG.
 Here is my <a href="http://www.cmake.org">cmake</a> code,
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-cmake">if(CMAKE_COMPILER_IS_GNUCC)
   # needed for gcc 4.6+
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
 endif()
 </code></pre>
+
+</div>
 </div>
         </div>
         
@@ -143,12 +155,12 @@ endif()
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -156,7 +168,7 @@ endif()
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

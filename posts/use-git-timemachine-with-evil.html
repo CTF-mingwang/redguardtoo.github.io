@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/use-git-timemachine-with-evil.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -81,7 +80,8 @@ The problem is I'm using Evil. How t">
         </div>
         <div class="body">
             <div>
-<p><a href="https://github.com/pidu/git-timemachine">git-timemachine</a> is simple.
+<p>
+<a href="https://github.com/pidu/git-timemachine">git-timemachine</a> is simple.
 </p>
 
 <p>
@@ -100,6 +100,8 @@ I consulted the issue with Frank Fischer.
 The solution is simple. Insert below code into ~/.emacs:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">;; @see https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings
 (eval-after-load 'git-timemachine
   '(progn
@@ -108,9 +110,10 @@ The solution is simple. Insert below code into ~/.emacs:
      (add-hook 'git-timemachine-mode-hook #'evil-normalize-keymaps)))
 </code></pre>
 
+</div>
+
 <p>
-I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings">his in-depth discussion</a> on <b>general handling of keybindings conflict</b> between evil and other minor modes.
-</p>
+I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-certain-minor-modes-key-bindings">his in-depth discussion</a> on <b>general handling of keybindings conflict</b> between evil and other minor modes.</p>
 </div>
         </div>
         
@@ -133,12 +136,12 @@ I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -146,7 +149,7 @@ I also recommend reading <a href="https://bitbucket.org/lyro/evil/issue/511/let-
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/clean-up-emacs-mode-line-for-tiny-netbook.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -81,7 +80,8 @@ For example, org-mod">
         </div>
         <div class="body">
             <div>
-<p>Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
+<p>
+Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
 </p>
 
 <p>
@@ -104,16 +104,20 @@ But there is one problem. The variable "global-mode-string" is missing in mode-l
 Here is my fixed version.
 </p>
 
-<ul>
+<ul class="org-ul">
 <li>screenshot
 </li>
 </ul>
+<div class="figure">
 <p><img src="../wp-content/2012-01-14-034733-800x480.png" alt="2012-01-14-034733-800x480.png"></p>
+</div>
 
-<ul>
+<ul class="org-ul">
 <li>Elisp code
 </li>
 </ul>
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
 ;; But I need global-mode-string,
 ;; @see http://www.delorie.com/gnu/docs/elisp-manual-21/elisp_360.html
@@ -173,6 +177,12 @@ Here is my fixed version.
     "%-" ;; fill with '-'
     ))
 </code></pre>
+
+</div>
+
+<p>
+#+./image/2012-01-14-034733-800x480.png <img src="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png" alt="wpid-2012-01-14-034733-800x4802.png">*
+</p>
 </div>
         </div>
         
@@ -195,12 +205,12 @@ Here is my fixed version.
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -208,7 +218,7 @@ Here is my fixed version.
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -7,8 +7,7 @@
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="../assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -27,11 +26,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use firefox in Emacs way">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html">
-<meta property="og:description" content="UPDATED:  2014-05-20 Tue
+<meta property="og:description" content="UPDATED: &lt;2014-05-20 Tue&gt;
 
 
 
-CREATED:  2014-03-23 Sun
+CREATED: &lt;2014-03-23 Sun&gt;
 
 
 
@@ -43,7 +42,7 @@ I install keysnail's own plugins &quot;HoK&quot; and &quot;Tanything&quot;.
 
 
 
-Here are the u">
+Here are the">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-03-23T20:03:00Z">
 <meta property="article:tag" content="emacs">
@@ -91,11 +90,12 @@ Here are the u">
         </div>
         <div class="body">
             <div>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-05-20 Tue</span></span>
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-05-20 Tue&gt;</span></span>
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-03-23 Sun</span></span>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-03-23 Sun&gt;</span></span>
 </p>
 
 <p>
@@ -110,16 +110,18 @@ I install keysnail's own plugins "HoK" and "Tanything".
 Here are the use cases of keysnail.
 </p>
 
-<div id="outline-container-1" class="outline-3">
-<h4 id="sec-1">Click &amp; Copy the links</h4>
-<div class="outline-text-3" id="text-1">
-
-<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Click &amp; Copy the links</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
 </p>
+
 <p>
 Insert below code into ~/.keysnail.js:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">hook.setHook("PluginLoaded", function () {
@@ -154,37 +156,41 @@ key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
 key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
         ext.exec("hok-start-continuous-mode", aArg);
 }, "Start continuous HaH", true);
-
 </code></pre>
 
-
+</div>
 
 <p>
 Now I can press "Ctrl-C Ctrl-F" to select the links to click.
 </p>
+
 <p>
 The links will be highlighted as below screen shot:
 <img src="../wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png"></p>
+
 <p>
 I can press the highlighted hint to click the link.
 </p>
+
 <p>
 Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-2" class="outline-3">
-<h4 id="sec-2">Copy the text of link</h4>
-<div class="outline-text-3" id="text-2">
-
-<p>This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> Copy the text of link</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
 </p>
+
 <p>
 That's error prone because:
 </p>
-<ol>
+<ol class="org-ol">
 <li>The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
 </li>
 <li>The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, <a href="https://www.atlassian.com/software/jira">JIRA</a> will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
@@ -197,16 +203,18 @@ If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
 
 </div>
 
-<div id="outline-container-3" class="outline-3">
-<h4 id="sec-3">Switch tab</h4>
-<div class="outline-text-3" id="text-3">
-
-<p>Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> Switch tab</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
 </p>
+
 <p>
 Insert below code into ~/.keysnail.js:
 </p>
-
+<div class="org-src-container">
 
 
 <pre><code class="lang-lisp">key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
@@ -214,24 +222,30 @@ Insert below code into ~/.keysnail.js:
 }, "view all tabs", true);
 </code></pre>
 
-
+</div>
 
 <p>
 Press "Ctrl-C Ctrl-A", you got below UI:
 <img src="../wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"></p>
+
 <p>
 Tanything will locate the tab by finding match in web page's title or URL.
 </p>
+
+<p></p>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-3">
-<h4 id="sec-4">My keysnail set up</h4>
-<div class="outline-text-3" id="text-4">
-
-<p>You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">
+<span class="section-number-2">4</span> My keysnail set up</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
 </p>
+
+<p>
+#+image/keysnail-hok-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/wpid-keysnail-hok-nq8.png" alt="wpid-keysnail-hok-nq8.png">
+#+image/keysnail-tanything-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"></p>
 </div>
 
 </div>
@@ -257,12 +271,12 @@ Tanything will locate the tab by finding match in web page's title or URL.
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -270,7 +284,7 @@ Tanything will locate the tab by finding match in web page's title or URL.
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

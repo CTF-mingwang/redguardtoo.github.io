@@ -8,8 +8,7 @@
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/index-6.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -63,8 +62,11 @@ tr:nth-child(odd) td { background: #FEFEFE; }
             </div>
             <div class="body">
                 <div>
-<p>custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
+<p>
+custom.el is my personal emacs configuration. I use it with my publicized <a href="https://github.com/redguardtoo/emacs.d">Emacs configuration</a>.
 </p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">;; I'm in Australia now
 ;; I'm in Australia now
@@ -283,6 +285,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 ;; @see http://www.scottmcpeak.com/gnus.html
 ;; }}
 </code></pre>
+
+</div>
 </div>
             </div>
         </div>
@@ -596,8 +600,8 @@ tr:nth-child(odd) td { background: #FEFEFE; }
 
             </div>
             <div class="body">
-                <p>This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org">Github</a>
-</p>
+                <p>
+This article is moved to <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org">Github</a></p>
             </div>
         </div>
         <div class="post">
@@ -743,7 +747,7 @@ tr:nth-child(odd) td { background: #FEFEFE; }
         cmd=<span style="color: #87005f;">"mysqldump -h %s -u %s -p%s --compact %s|gzip -9 &gt; %s"</span> % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,fname)
     <span style="color: #af00ff;">else</span>:
         cmd=<span style="color: #87005f;">"mysqldump -u %s -p%s --compact %s|gzip -9 &gt; %s"</span> % (DB_USER,DB_PASSWORD,DB_NAME,fname)</p>
-<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN [ %s ]"<span class="nt">&lt;/span&gt;</span> % (cmd)
+<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==WILL RUN [ %s ]"<span class="nt">&lt;/span&gt;</span> % (cmd)
 os.system(cmd)
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>print<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>"==DONE"<span class="nt">&lt;/span&gt;</span>
 </pre>
@@ -826,7 +830,7 @@ os.system(cmd)
 <p><span style="color: #87005f;">    Create Directory? [n]|y: y</span></p>
 <p><span style="color: #87005f;">    True</span></p>
 <p><span style="color: #87005f;">    """</span></p>
-<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> prompt <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>is<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #008787;"</span><span class="nt">&gt;</span>None<span class="nt">&lt;/span&gt;</span>:
+<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> prompt <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>is<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #008787;"</span><span class="nt">&gt;</span>None<span class="nt">&lt;/span&gt;</span>:
     prompt = <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #87005f;"</span><span class="nt">&gt;</span>'WARNING: DONOT run me twice and migration CANNOT be rolled back, GO?'<span class="nt">&lt;/span&gt;</span>
 
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> resp:
@@ -858,7 +862,7 @@ os.system(cmd)
         <span style="color: #af00ff;">print</span> str(err) <span style="color: #af0000;"># will print something like "option -a not recognized"</span>
         usage()
         <span style="color: #5f5f87;">exit</span>(2)</p>
-<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>len<span class="nt">&lt;/span&gt;</span>(opts)==0:
+<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #af00ff;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>len<span class="nt">&lt;/span&gt;</span>(opts)==0:
     usage()
     <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #5f5f87;"</span><span class="nt">&gt;</span>exit<span class="nt">&lt;/span&gt;</span>(2)
 
@@ -1175,7 +1179,7 @@ os.system(cmd)
             <li class="next">
                 <a href="index-5.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

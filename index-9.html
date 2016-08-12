@@ -8,8 +8,7 @@
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/index-9.html">
-<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
-<style type="text/css">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><style type="text/css">
 td, th {
  border: 1px solid #CCC;
 }
@@ -301,11 +300,12 @@ map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt; :diffupdate&lt;CR&gt;
             </div>
             <div class="body">
                 <div>
-<p>CREATED: <span class="timestamp-wrapper"> <span class="timestamp">2013-05-31</span></span>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-31&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2015-11-20 Fri</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-20 Fri&gt;</span></span>
 </p>
 
 <p>
@@ -328,6 +328,8 @@ I only use its APIs `simpleclip-get-contents` and `simpleclip-set-contents`.
 Here is my setup:
 </p>
 
+<div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'simpleclip)
 (defun copy-to-x-clipboard ()
   (interactive)
@@ -347,6 +349,8 @@ Here is my setup:
   (local-set-key (kbd "M-y") 'paste-from-x-clipboard))
 (add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
 </code></pre>
+
+</div>
 </div>
             </div>
         </div>
@@ -607,10 +611,10 @@ sudo emerge cuetools
 <p><span style="color: #e7c547;">artist</span>=<span style="color: #c397d8;"><code>grep -m 1 PERFORMER *.cue | cut -d\" -f2</code></span></p>
 <p><span style="color: #b9ca4a;">for</span> file<span style="color: #b9ca4a;"> in</span> [0-9]*.wav; <span style="color: #b9ca4a;">do</span>
     <span style="color: #c397d8;">echo</span> <span style="color: #70c0b1;">"Encoding $file"</span></p>
-<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> [[ <span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="cp">}</span> == 0 ]] ; <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>then<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>tracknr<span class="nt">&lt;/span&gt;</span>=<span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="cp">}</span>
+<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>if<span class="nt">&lt;/span&gt;</span> [[ <span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="cp">}</span> == 0 ]] ; <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>then<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>tracknr<span class="nt">&lt;/span&gt;</span>=<span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="cp">}</span>
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>else<span class="nt">&lt;/span&gt;</span>
-    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>tracknr<span class="nt">&lt;/span&gt;</span>=<span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="cp">}</span>
+    <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>tracknr<span class="nt">&lt;/span&gt;</span>=<span class="cp">${</span><span class="o">&lt;</span><span class="n">span</span> <span class="n">style</span><span class="o">=</span><span class="s2">"color: #e7c547;"</span><span class="o">&gt;</span><span class="nb">file</span><span class="o">&lt;/</span><span class="n">span</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="cp">}</span>
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>fi<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>title<span class="nt">&lt;/span&gt;</span>=<span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #c397d8;"</span><span class="nt">&gt;</span>`echo <span class="cp">${</span><span class="nb">file</span><span class="p">:</span><span class="mi">2</span><span class="cp">}</span> | sed -e "s/.wav$//"`<span class="nt">&lt;/span&gt;</span>
 
@@ -781,7 +785,7 @@ key.setViewKey(<span style="color: #70c0b1;">'e'</span>, <span style="color: #b9
             <li class="next">
                 <a href="index-8.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
