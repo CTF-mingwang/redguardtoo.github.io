@@ -1,125 +1,9 @@
-<!DOCTYPE html>
-<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Make Messages Buffer modifiable in Emacs 24.4+ :en:emacs:messages:buffer | Chen's blog</title>
-<link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html">
-<style type="text/css">
-td, th {
- border: 1px solid #CCC;
-}
-th {
- background: #DFDFDF;
- font-weight: bold;
-}
-td {
- background: #FAFAFA;
- text-align: center;
-}
-tr:nth-child(even) td { background: #F1F1F1; }
-tr:nth-child(odd) td { background: #FEFEFE; }
-</style>
-<meta name="author" content="Chen Bin">
-<meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Make Messages Buffer modifiable in Emacs 24.4+                        ">
-<meta property="og:url" content="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html">
-<meta property="og:description" content="Insert below code into the beginning of ~/.emacs because any part of .emacs may create Messages Buffer instance.
-
-
-(when (boundp 'messages-buffer-mode-hook)
-  (defun messages-buffer-mode-hook-setup ()">
-<meta property="og:type" content="article">
-<meta property="article:published_time" content="2016-05-18T00:42:32Z">
-</head>
-<body>
-    <section class="social"><ul>
-<li><a href="../index.html" title="Home"><i class="icon-home"></i></a></li>
-            <li><a href="../archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
-            <li><a href="../categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
-            <li><a href="../rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
-            <li><a href="../stories/about.html" title="About me"><i class="icon-user"></i></a></li>
-            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
-            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
-
-        </ul></section><section class="page-content"><div class="content" rel="main">
-            
-    <div class="post">
-    
-    <h1 class="p-name entry-title" itemprop="headline name">Make Messages Buffer modifiable in Emacs 24.4+                                :en:emacs:messages:buffer</h1>
-
-        <div class="meta">
-            <div class="authordate">
-                <time class="timeago" datetime="2016-05-18T00:42:32+00:00">2016-05-18 00:42</time>
-            
-
-            
-          |  
-        <a href="make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.wp" id="sourcelink">Source</a>
-
-            </div>
-            
-
-        </div>
-        <div class="body">
-            <div>
-<p>Insert below code into the <b>beginning of ~/.emacs</b> because any part of .emacs may create Messages Buffer instance.
-</p>
-
-<pre><code class="lang-lisp">(when (boundp 'messages-buffer-mode-hook)
-  (defun messages-buffer-mode-hook-setup ()
-    (read-only-mode -1))
-  (add-hook 'messages-buffer-mode-hook 'messages-buffer-mode-hook-setup))
-</code></pre>
-</div>
-        </div>
-        
-        <ul class="pager hidden-print">
-<li class="previous">
-                <a href="how-to-input-non-english-character-in-evil-mode-efficiently.html" rel="prev" title="How to input Non-English character in evil-mode efficiently">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="make-messages-buffer-modifiable-in-emacs-24-4.html" rel="next" title="Make Messages Buffer modifiable in Emacs 24.4">Next post</a>
-            </li>
-        </ul>
-<div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html",
-        disqus_title="Make Messages Buffer modifiable in Emacs 24.4+                                :en:emacs:messages:buffer",
-        disqus_identifier="cache/posts/make-messages-buffer-modifiable-in-emacs-24-4-enemacsmessagesbuffer.html",
-        disqus_config = function () {
-            this.language = "en";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-        
-
-    </div>
-
-        
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
-            
-        </footer>
-</div>
-    </section><script type="text/javascript">
 function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
-    var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
     return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
 var urlMap={
 695:'/posts/australia-food-brands.html',
 694:'/posts/hua-shen-jiang-len-mian-zuo-fa.html',
@@ -299,25 +183,14 @@ var postId=parseInt(getParameterByName('p'),10);
 if(postId>0 && urlMap[postId]) {
     window.location=urlMap[postId];
 }
-</script><script type="text/javascript" src="../assets/js/highlight.pack.js"></script><script type="text/javascript">
 hljs.initHighlightingOnLoad();
 // google analytics setup
 var _gaq = _gaq || [];
-
 _gaq.push(['_setAccount', 'UA-29850823-2']);
 _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
 _gaq.push(['_trackPageview']);
-
 (function() {
   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
-
-</script><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
-        </script>
-</body>
-</html>
