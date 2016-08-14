@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 14 Aug 2016 07:31:13 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 14 Aug 2016 12:52:30 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/elpaclone &amp;amp;&amp;amp; cd ~/elpaclone &amp;amp;&amp;amp; curl -L https://elpa.gnu.org/packages/archive-contents | sed 's/^(1//g' | sed ':a;N;$!ba;s/\n/ /g' | sed 's/\])/])\n/g' | sed 's/^ *(\([a-z0-9A-Z-]*\).*\[(\([0-9 ]*\).*\(single\|tar\).*/\1-\2.\3/g' | sed 's/ /./g' | sed 's/single/el/g' | tr --delete ')' | xargs -i{} curl -L  -O https://elpa.gnu.org/packages/{} &amp;amp;&amp;amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The &lt;a href="https://elpa.gnu.org/packages/archive-contents"&gt;https://elpa.gnu.org/packages/archive-contents&lt;/a&gt; is contains all the information of packages. I re-organize it content to make sure every line contains one package's information. Then I use &lt;a href="https://en.wikipedia.org/wiki/CURL"&gt;curl&lt;/a&gt; to download everything.
+&lt;/p&gt;
+
+&lt;p&gt;
+Usage is simple.
+&lt;/p&gt;
+
+&lt;p&gt;
+Insert below line at the beginning of ~/.emacs when &lt;b&gt;elpa.gnu.org is down&lt;/b&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq package-archives '(("elpaclone" . "~/elpaclone")))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+This solution also works for &lt;a href="https://melpa.org/"&gt;MELPA&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>elpa</category><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</guid><pubDate>Sun, 14 Aug 2016 12:52:27 GMT</pubDate></item><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Most people use &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt; as a major mode for javascript. For JSON file, they prefer &lt;a href="https://github.com/joshwnj/json-mode"&gt;json-mode&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -619,37 +650,4 @@ When &lt;a href="https://github.com/abo-abo/swiper"&gt;Swiper/Ivy&lt;/a&gt; cand
 
 &lt;p&gt;
 &lt;code&gt;fd&lt;/code&gt; is the default key binding from evil-escape. I changed it to &lt;code&gt;kj&lt;/code&gt; instead.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
-&lt;/p&gt;
-
-&lt;p&gt;
-I have been using it for more than one month without any issue. I prefer general.el to &lt;a href="https://github.com/cofi/evil-leader"&gt;evil-leader&lt;/a&gt; because I need both comma and space key as &lt;a href="http://vimdoc.sourceforge.net/htmldoc/map.html#&amp;lt;Leader&amp;gt;"&gt;leader key&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Minimum setup is simple,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'general)
-(general-evil-setup t)
-(nvmap :prefix ","
-       "bb" 'back-to-previous-buffer
-       "ww" 'save-buffer
-       "oo" 'compile)
-
-;; all keywords arguments are still supported
-(nvmap :prefix "SPC"
-       ; save windows layout
-       "ss" 'wg-create-workgroup
-       ;; load windows layout
-       "ll" 'my-wg-switch-workgroup)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el"&gt;real world setup&lt;/a&gt; is more complicated.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item></channel></rss>

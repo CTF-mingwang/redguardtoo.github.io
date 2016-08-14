@@ -23,6 +23,68 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/no-worries-when-elpa-is-down.html">No worries when elpa is down</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-08-14T12:52:27+00:00">2016-08-14 12:52</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/no-worries-when-elpa-is-down.html#disqus_thread" data-disqus-identifier="cache/posts/no-worries-when-elpa-is-down.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/elpa.html" rel="tag">elpa</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/package.html" rel="tag">package</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | sed 's/^(1//g' | sed ':a;N;$!ba;s/\n/ /g' | sed 's/\])/])\n/g' | sed 's/^ *(\([a-z0-9A-Z-]*\).*\[(\([0-9 ]*\).*\(single\|tar\).*/\1-\2.\3/g' | sed 's/ /./g' | sed 's/single/el/g' | tr --delete ')' | xargs -i{} curl -L  -O https://elpa.gnu.org/packages/{} &amp;&amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
+</code></pre>
+
+</div>
+
+<p>
+The <a href="https://elpa.gnu.org/packages/archive-contents">https://elpa.gnu.org/packages/archive-contents</a> is contains all the information of packages. I re-organize it content to make sure every line contains one package's information. Then I use <a href="https://en.wikipedia.org/wiki/CURL">curl</a> to download everything.
+</p>
+
+<p>
+Usage is simple.
+</p>
+
+<p>
+Insert below line at the beginning of ~/.emacs when <b>elpa.gnu.org is down</b>:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq package-archives '(("elpaclone" . "~/elpaclone")))
+</code></pre>
+
+</div>
+
+<p>
+This solution also works for <a href="https://melpa.org/">MELPA</a>.</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-js2-mode-as-minor-mode-to-process-json.html">Use js2-mode as minor mode to process JSON</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -929,47 +991,6 @@ Chinese version:
 </ul>
 <p>
 代码见上.</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/swiperivy-tip.html">Swiper/Ivy tip</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-05-04T08:15:27+00:00">2016-05-04 08:15</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/swiperivy-tip.html#disqus_thread" data-disqus-identifier="cache/posts/swiperivy-tip.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/evil.html" rel="tag">evil</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-Please install <a href="https://github.com/syl20bnr/evil-escape">evil-escape</a> at first.
-</p>
-
-<p>
-When <a href="https://github.com/abo-abo/swiper">Swiper/Ivy</a> candidate window pops up. You can press <code>fd</code> quickly to close the window. 
-</p>
-
-<p>
-<code>fd</code> is the default key binding from evil-escape. I changed it to <code>kj</code> instead.
-</p>
 </div>
             </div>
         </div>
