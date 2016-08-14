@@ -11,15 +11,16 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use js2-mode as minor mode to process JSON">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html">
-<meta property="og:description" content='Most people use js2-mode as a major mode for javascript only. For JSON file, they prefer json-mode.
+<meta property="og:description" content='Most people use js2-mode as a major mode for javascript. For JSON file, they prefer json-mode.
 
 
 
-But if you truly understand the meaning of software freedom, you will realize "major-mode" and "m'>
+But if you truly understand the meaning of Software Freedom, you will realize "major-mode" and "minor-'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-31T05:24:04Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
+<meta property="article:tag" content="js2">
 <meta property="article:tag" content="json">
 </head>
 <body>
@@ -54,6 +55,7 @@ But if you truly understand the meaning of software freedom, you will realize "m
         Tags : 
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/js2.html" rel="tag">js2</a></li>
            <li><a class="tag p-category" href="../categories/json.html" rel="tag">json</a></li>
         </ul>
 </div>
@@ -62,11 +64,11 @@ But if you truly understand the meaning of software freedom, you will realize "m
         <div class="body">
             <div>
 <p>
-Most people use <a href="https://github.com/mooz/js2-mode">js2-mode</a> as a major mode for javascript only. For JSON file, they prefer <a href="https://github.com/joshwnj/json-mode">json-mode</a>.
+Most people use <a href="https://github.com/mooz/js2-mode">js2-mode</a> as a major mode for javascript. For JSON file, they prefer <a href="https://github.com/joshwnj/json-mode">json-mode</a>.
 </p>
 
 <p>
-But if you <b>truly</b> understand the meaning of <a href="https://www.gnu.org/philosophy/free-sw.en.html">software freedom</a>, you will realize "<a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Major-Modes.html">major-mode</a>" and "<a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Minor-Modes.html">minor-mode</a>" are just man-made concepts. They actually have no difference.
+But if you <b>truly</b> understand the meaning of <a href="https://www.gnu.org/philosophy/free-sw.en.html">Software Freedom</a>, you will realize "<a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Major-Modes.html">major-mode</a>" and "<a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Minor-Modes.html">minor-mode</a>" are man-made concepts which actually have no difference.
 </p>
 
 <p>
@@ -205,12 +207,12 @@ As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -218,7 +220,7 @@ As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

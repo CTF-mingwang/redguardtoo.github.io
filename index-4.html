@@ -54,7 +54,7 @@
 <p><span style="color: #b9ca4a;">enum</span> <span style="color: #e78c45;">Lisp_Type</span>
   {
     <span style="color: #e7c547;">Lisp_Int</span> = 0,</p>
-<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Symbol.  XSYMBOL (object) points to a struct Lisp_Symbol.  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/span&gt;</span>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Symbol.  XSYMBOL (object) points to a struct Lisp_Symbol.  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>Lisp_Symbol<span class="nt">&lt;/span&gt;</span> = 2,
 
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Miscellaneous.  XMISC (object) points to a union Lisp_Misc,<span class="nt">&lt;/span&gt;</span>
@@ -63,13 +63,13 @@
 
 <p><span style="color: #969896; font-style: italic;">       whose first member indicates the subtype.  </span><span style="color: #969896; font-style: italic;">*/</span>
     <span style="color: #e7c547;">Lisp_Misc</span> = 3,</p>
-<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>String.  XSTRING (object) points to a struct Lisp_String.<span class="nt">&lt;/span&gt;</span>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>String.  XSTRING (object) points to a struct Lisp_String.<span class="nt">&lt;/span&gt;</span>
 </pre>
 
 
 <p><span style="color: #969896; font-style: italic;">       The length of the string, and its contents, are stored therein.  </span><span style="color: #969896; font-style: italic;">*/</span>
     <span style="color: #e7c547;">Lisp_String</span> = LISP_STRING_TAG,</p>
-<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Vector of Lisp objects, or something resembling it.<span class="nt">&lt;/span&gt;</span>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Vector of Lisp objects, or something resembling it.<span class="nt">&lt;/span&gt;</span>
 </pre>
 
 
@@ -77,7 +77,7 @@
 <p><span style="color: #969896; font-style: italic;">       the size and contents.  The size field also contains the type</span></p>
 <p><span style="color: #969896; font-style: italic;">       information, if it's not a real vector object.  </span><span style="color: #969896; font-style: italic;">*/</span>
     <span style="color: #e7c547;">Lisp_Vectorlike</span> = 5,</p>
-<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Cons.  XCONS (object) points to a struct Lisp_Cons.  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/span&gt;</span>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>/* <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>Cons.  XCONS (object) points to a struct Lisp_Cons.  <span class="nt">&lt;/span&gt;&lt;span</span> <span class="na">style=</span><span class="s">"color: #969896; font-style: italic;"</span><span class="nt">&gt;</span>*/<span class="nt">&lt;/span&gt;</span>
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>Lisp_Cons<span class="nt">&lt;/span&gt;</span> = 6,
 
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>Lisp_Float<span class="nt">&lt;/span&gt;</span> = 7,
@@ -90,7 +90,7 @@
     <span style="color: #969896; font-style: italic;">/<em> </em></span><span style="color: #969896; font-style: italic;">Used for comparing two Lisp_Objects;</span>
 <span style="color: #969896; font-style: italic;">       also, positive integers can be accessed fast this way.  </span><span style="color: #969896; font-style: italic;">/</span>
     <span style="color: #e78c45;">EMACS_UINT</span> <span style="color: #e7c547;">i</span>;</p>
-<pre class="code literal-block"><span></span><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>struct<span class="nt">&lt;/span&gt;</span>
+<pre class="code literal-block"><span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>struct<span class="nt">&lt;/span&gt;</span>
   {
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e78c45;"</span><span class="nt">&gt;</span>EMACS_INT<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>val<span class="nt">&lt;/span&gt;</span>  : VALBITS;
 <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #b9ca4a;"</span><span class="nt">&gt;</span>enum<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e78c45;"</span><span class="nt">&gt;</span>Lisp_Type<span class="nt">&lt;/span&gt;</span> <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"color: #e7c547;"</span><span class="nt">&gt;</span>type<span class="nt">&lt;/span&gt;</span> : GCTYPEBITS;
@@ -566,7 +566,7 @@
             <li class="next">
                 <a href="index-3.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
