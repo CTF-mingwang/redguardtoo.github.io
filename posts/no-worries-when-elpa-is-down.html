@@ -16,7 +16,7 @@
 
 
 
-mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | sed 's/^(1//g' | sed ':">
+mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | perl -pe 's/(^\(1|\n)//">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-08-14T12:52:27Z">
 <meta property="article:tag" content="elpa">
@@ -70,7 +70,7 @@ I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
 
 <div class="org-src-container">
 
-<pre><code class="lang-bash">mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | sed 's/^(1//g' | sed ':a;N;$!ba;s/\n/ /g' | sed 's/\])/])\n/g' | sed 's/^ *(\([a-z0-9A-Z-]*\).*\[(\([0-9 ]*\).*\(single\|tar\).*/\1-\2.\3/g' | sed 's/ /./g' | sed 's/single/el/g' | tr --delete ')' | xargs -i{} curl -L  -O https://elpa.gnu.org/packages/{} &amp;&amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
+<pre><code class="lang-bash">mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | perl -pe 's/(^\(1|\n)//g' | perl -pe 's/\]\)/])\n/g' | perl -pe 's/^ *\(([a-z0-9A-Z-]*).*\[\(([0-9 ]*).*(single|tar).*/\1-\2.\3/g' | perl -pe 's/ /./g' | perl -pe 's/single/el/g' | perl -pe 's/\)//g' | xargs -I {} curl -L  -O https://elpa.gnu.org/packages/{} &amp;&amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
 </code></pre>
 
 </div>
