@@ -530,9 +530,17 @@ ff line-from-clipboard
         </footer>
 </div>
     </section><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
+         document.addEventListener('DOMContentLoaded', function() {
+           var items = document.getElementsByClassName('timeago'), item, postDate;
+           for (var i = 0; i < items.length; i++) {
+             item = items[i];
+             postDate = new Date(item.getAttribute('datetime'));
+             item.innerHTML = moment(postDate).fromNow();
+             item.setAttribute('title', moment(postDate).format('LLLL'));
+           }
+
+           /* $('.timeago').timeago();*/
+         });
         </script>
 </body>
 </html>
