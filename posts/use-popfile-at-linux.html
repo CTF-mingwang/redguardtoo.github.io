@@ -15,7 +15,7 @@
 
 
 
-UPDATED: &lt;2015-12-03 Thu&gt;
+UPDATED: &lt;2016-08-21 Sun&gt;
 
 
 
@@ -89,7 +89,7 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2012-12-28&
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-03 Thu&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-21 Sun&gt;</span></span>
 </p>
 
 <p>
@@ -129,7 +129,7 @@ First question: Would you like automatic setup? Yes!
 </p>
 
 <p>
-Second quesiton: Set up mirror site for you? No!
+Second question: Set up mirror site for you? No!
 </p>
 
 <p>
@@ -276,11 +276,15 @@ Davmail is a gateway to convert Outlook/Exchange service to IMAP/POP3). It's req
 </p>
 
 <p>
-For other email service, you DON'T need Davmail
+For other email service, you DON'T need Davmail.
 </p>
 
 <p>
-Please note in my current setup, ssl is disabled because I'm running Davmail Server on my own computer. Or else, you need enable ssl service.
+If you don't use Davmail and fetch mails directly, you'd better set =imap_expunge 1 to fix <a href="http://getpopfile.org/discussion/1/550/2144">Microsoft Office 365 has some issue</a>.
+</p>
+
+<p>
+Please note ssl is disabled in my setup because I'm running local Davmail Server. Or else, you need enable ssl.
 </p>
 
 <div class="org-src-container">
@@ -335,7 +339,7 @@ html_test_language 0
 html_wordtable_format 
 imap_bucket_folder_mappings job--&gt;job--&gt;geek--&gt;geek--&gt;business--&gt;business--&gt;ad--&gt;ad--&gt;unclassified--&gt;INBOX--&gt;work--&gt;work--&gt;
 imap_enabled 1
-imap_expunge 0
+imap_expunge 1
 imap_hostname localhost
 imap_login binc1
 imap_password password1
