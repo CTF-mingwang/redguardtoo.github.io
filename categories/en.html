@@ -27,6 +27,9 @@
         </div>
     </header><ul class="postlist">
 <li>
+<time class="listdate" datetime="2016-08-25T14:20:28Z" title="2016-08-25 14:20">2016-08-25 14:20</time><a href="../posts/emacs-as-c-ide-easy-way.html" class="listtitle">Emacs as C++ IDE, easy way</a><a></a>
+</li>
+        <li>
 <time class="listdate" datetime="2016-08-14T12:52:27Z" title="2016-08-14 12:52">2016-08-14 12:52</time><a href="../posts/no-worries-when-elpa-is-down.html" class="listtitle">No worries when elpa is down</a><a></a>
 </li>
         <li>
@@ -551,15 +554,13 @@
 </div>
     </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
          document.addEventListener('DOMContentLoaded', function() {
-           var items = document.getElementsByClassName('timeago'), item, postDate;
+           var items = document.getElementsByClassName('timeago'), e, pd;
            for (var i = 0; i < items.length; i++) {
-             item = items[i];
-             postDate = new Date(item.getAttribute('datetime'));
-             item.innerHTML = moment(postDate).fromNow();
-             item.setAttribute('title', moment(postDate).format('LLLL'));
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
            }
-
-           /* $('.timeago').timeago();*/
          });
         </script>
 </body>

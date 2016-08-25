@@ -103,6 +103,9 @@ This solution also works for <a href="https://melpa.org/">MELPA</a>.</p>
 <li class="previous">
                 <a href="use-js2-mode-as-minor-mode-to-process-json.html" rel="prev" title="Use js2-mode as minor mode to process JSON">Previous post</a>
             </li>
+            <li class="next">
+                <a href="emacs-as-c-ide-easy-way.html" rel="next" title="Emacs as C++ IDE, easy way">Next post</a>
+            </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
@@ -134,15 +137,13 @@ This solution also works for <a href="https://melpa.org/">MELPA</a>.</p>
 </div>
     </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
          document.addEventListener('DOMContentLoaded', function() {
-           var items = document.getElementsByClassName('timeago'), item, postDate;
+           var items = document.getElementsByClassName('timeago'), e, pd;
            for (var i = 0; i < items.length; i++) {
-             item = items[i];
-             postDate = new Date(item.getAttribute('datetime'));
-             item.innerHTML = moment(postDate).fromNow();
-             item.setAttribute('title', moment(postDate).format('LLLL'));
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
            }
-
-           /* $('.timeago').timeago();*/
          });
         </script>
 </body>

@@ -1,5 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 15 Aug 2016 12:12:21 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 25 Aug 2016 14:20:40 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I'm asked the question on how to convert Emacs to C++ IDE too many times.
+&lt;/p&gt;
+
+&lt;p&gt;
+So I design a solution which is quick enough and &lt;b&gt;newbie friendly&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+It works at Linux/OSX/Cygwin (should work at Windows, but I don't develop at Windows).
+&lt;/p&gt;
+
+&lt;p&gt;
+Setup is minimum. You need install GNU Global and two Emacs plugins:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;a href="https://github.com/company-mode/company-mode"&gt;company&lt;/a&gt; for code completion
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/syohex/emacs-helm-gtags"&gt;emacs-helm-gtags&lt;/a&gt; &lt;b&gt;or&lt;/b&gt; &lt;a href="https://github.com/syohex/emacs-counsel-gtags"&gt;emacs-counsel-gtags&lt;/a&gt; for code navigation. I use emacs-counsel-gtags.
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Here is the step to step guide.
+&lt;/p&gt;
+
+&lt;p&gt;
+Say I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;. Both projects will use third party library C++ header files from &lt;b&gt;read-only&lt;/b&gt; directory &lt;code&gt;/usr/include&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+I will create a new directory &lt;code&gt;~/obj&lt;/code&gt; which stores the index files create by scanning &lt;code&gt;/usr/include&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Step 1, create sample projects for experiment,&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/{proj1,proj2,obj}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The content of &lt;code&gt;~/proj2/lib.cpp&lt;/code&gt;,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-c"&gt;void proj2_hello(int a2, char* b2) {
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The content of &lt;code&gt;~/proj1/main.cpp&lt;/code&gt;,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-c"&gt;void proj1_hello(int a1, char* b1) {
+}
+
+int main(int argc, char *argv[]) {
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Run below command in shell to scan code,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre&gt;&lt;code class="lang-bash"&gt;cd /usr/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags -O &amp;amp;&amp;amp; cd ~/proj1 &amp;amp;&amp;amp; gtags &amp;amp;&amp;amp; cd ~/proj2 &amp;amp;&amp;amp; gtags
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+After setting up the corresponding Emacs plugins (minimum setup copied fromo their website is enough), insert below code into ~/.emacs,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Please note (file-truename) must be used
+(setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               (file-truename "~/proj2")
+                               ":"
+                               (file-truename "~/proj1")))
+(setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
+(setq company-backends '((company-dabbrev-code company-gtags)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Usage&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+Use the Emacs plugins as usual.
+&lt;/p&gt;
+&lt;p&gt;
+But you need install latest company build on 8th August 25, 2016 because I &lt;a href="https://github.com/company-mode/company-mode/issues/570"&gt;fixed a company issue&lt;/a&gt; yesterday.
+&lt;/p&gt;
+
+&lt;p&gt;
+Screenshot,
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/cpp-gtags-demo-nq8.png" alt="cpp-gtags-demo-nq8.png"&gt;
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>emacs</category><category>en</category><category>global</category><category>gtags</category><category>ide</category><guid>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</guid><pubDate>Thu, 25 Aug 2016 14:20:28 GMT</pubDate></item><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
 &lt;/p&gt;
 
@@ -640,14 +766,4 @@ Chinese version:
 &lt;/ul&gt;
 
 &lt;p&gt;
-代码见上.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item><item><title>Swiper/Ivy tip</title><link>http://blog.binchen.org/posts/swiperivy-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Please install &lt;a href="https://github.com/syl20bnr/evil-escape"&gt;evil-escape&lt;/a&gt; at first.
-&lt;/p&gt;
-
-&lt;p&gt;
-When &lt;a href="https://github.com/abo-abo/swiper"&gt;Swiper/Ivy&lt;/a&gt; candidate window pops up. You can press &lt;code&gt;fd&lt;/code&gt; quickly to close the window. 
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;code&gt;fd&lt;/code&gt; is the default key binding from evil-escape. I changed it to &lt;code&gt;kj&lt;/code&gt; instead.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item></channel></rss>
+代码见上.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item></channel></rss>

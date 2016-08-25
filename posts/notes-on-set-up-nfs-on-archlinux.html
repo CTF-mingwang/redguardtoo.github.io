@@ -146,15 +146,13 @@ sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodi
 </div>
     </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
          document.addEventListener('DOMContentLoaded', function() {
-           var items = document.getElementsByClassName('timeago'), item, postDate;
+           var items = document.getElementsByClassName('timeago'), e, pd;
            for (var i = 0; i < items.length; i++) {
-             item = items[i];
-             postDate = new Date(item.getAttribute('datetime'));
-             item.innerHTML = moment(postDate).fromNow();
-             item.setAttribute('title', moment(postDate).format('LLLL'));
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
            }
-
-           /* $('.timeago').timeago();*/
          });
         </script>
 </body>

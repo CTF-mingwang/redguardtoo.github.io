@@ -103,12 +103,14 @@
                 <li><a class="reference listtitle" href="git.html">git</a></li>
                 <li><a class="reference listtitle" href="github.html">github</a></li>
                 <li><a class="reference listtitle" href="gitorious.html">gitorious</a></li>
+                <li><a class="reference listtitle" href="global.html">global</a></li>
                 <li><a class="reference listtitle" href="gmail.html">gmail</a></li>
                 <li><a class="reference listtitle" href="gnus.html">gnus</a></li>
                 <li><a class="reference listtitle" href="google.html">google</a></li>
                 <li><a class="reference listtitle" href="graphic.html">graphic</a></li>
                 <li><a class="reference listtitle" href="grep.html">grep</a></li>
                 <li><a class="reference listtitle" href="grub.html">grub</a></li>
+                <li><a class="reference listtitle" href="gtags.html">gtags</a></li>
                 <li><a class="reference listtitle" href="gtd.html">gtd</a></li>
                 <li><a class="reference listtitle" href="gtk.html">gtk</a></li>
                 <li><a class="reference listtitle" href="gutter.html">gutter</a></li>
@@ -119,6 +121,7 @@
                 <li><a class="reference listtitle" href="html.html">html</a></li>
                 <li><a class="reference listtitle" href="http.html">http</a></li>
                 <li><a class="reference listtitle" href="hunspell.html">hunspell</a></li>
+                <li><a class="reference listtitle" href="ide.html">ide</a></li>
                 <li><a class="reference listtitle" href="ie.html">ie</a></li>
                 <li><a class="reference listtitle" href="imap.html">imap</a></li>
                 <li><a class="reference listtitle" href="indent.html">indent</a></li>
@@ -253,15 +256,13 @@
 </div>
     </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
          document.addEventListener('DOMContentLoaded', function() {
-           var items = document.getElementsByClassName('timeago'), item, postDate;
+           var items = document.getElementsByClassName('timeago'), e, pd;
            for (var i = 0; i < items.length; i++) {
-             item = items[i];
-             postDate = new Date(item.getAttribute('datetime'));
-             item.innerHTML = moment(postDate).fromNow();
-             item.setAttribute('title', moment(postDate).format('LLLL'));
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
            }
-
-           /* $('.timeago').timeago();*/
          });
         </script>
 </body>
