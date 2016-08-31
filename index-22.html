@@ -23,6 +23,42 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/make-messages-buffer-modifiable-in-emacs-24-4.html">Make Messages Buffer modifiable in Emacs 24.4</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-05-18T00:42:32+00:00">2016-05-18 00:42</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/make-messages-buffer-modifiable-in-emacs-24-4.html#disqus_thread" data-disqus-identifier="cache/posts/make-messages-buffer-modifiable-in-emacs-24-4.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/buffer.html" rel="tag">buffer</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/messages.html" rel="tag">messages</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div class="org-src-container">
+
+<pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
+  (if (string= "*Messages*" (buffer-name))
+      (read-only-mode -1)))
+</code></pre>
+
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/how-to-input-non-english-character-in-evil-mode-efficiently.html">How to input Non-English character in evil-mode efficiently</a></h1>
             <div class="meta">
                 <div class="authordate">

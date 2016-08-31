@@ -1,5 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 31 Aug 2016 10:02:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 31 Aug 2016 10:03:50 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>湖南菜攸县香干</title><link>http://blog.binchen.org/posts/hu-nan-cai-you-xian-xiang-gan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+用料:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;豆豉8粒
+&lt;/li&gt;
+&lt;li&gt;蒜瓣4片
+&lt;/li&gt;
+&lt;li&gt;生姜一片
+&lt;/li&gt;
+&lt;li&gt;辣椒4根
+&lt;/li&gt;
+&lt;li&gt;豆腐干6块
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+步骤:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;姜蒜切好,姜切沫,蒜切片
+&lt;/li&gt;
+&lt;li&gt;蒜苗切斜段,青红椒各切圈
+&lt;/li&gt;
+&lt;li&gt;香干切片,斜着下刀更好看
+&lt;/li&gt;
+&lt;li&gt;锅中烧开水,水开后将香干片倒进去煮一分钟捞起控干水分备用
+&lt;/li&gt;
+&lt;li&gt;锅里放油,立刻放适量豆豉(dou chi)姜蒜炒香,蒜蓉微红色即可进入下一步
+&lt;/li&gt;
+&lt;li&gt;加入辣椒炒一下
+&lt;/li&gt;
+&lt;li&gt;倒入香干,加生抽适量,老抽几滴上色,白糖少许提鲜,盐适量,耗油适量,最后放入蒜苗就起锅了
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+小结:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;3分钟可以炒完
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/you-xian-xiang-gan.jpg" alt="you-xian-xiang-gan.jpg"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>zh</category><guid>http://blog.binchen.org/posts/hu-nan-cai-you-xian-xiang-gan.html</guid><pubDate>Wed, 31 Aug 2016 10:02:27 GMT</pubDate></item><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I design a quick and &lt;b&gt;newbie friendly&lt;/b&gt; solution.
 &lt;/p&gt;
 
@@ -702,11 +752,4 @@ Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git g
 
 &lt;p&gt;
 I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
-  (if (string= "*Messages*" (buffer-name))
-      (read-only-mode -1)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item></channel></rss>
