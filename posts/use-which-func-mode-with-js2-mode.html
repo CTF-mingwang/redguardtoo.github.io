@@ -137,9 +137,15 @@ console.log('${1:`(my-which-function)`} called');
         </footer>
 </div>
     </section><script src="../assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
-            $(function(){
-                $('.timeago').timeago();
-            });
+         document.addEventListener('DOMContentLoaded', function() {
+           var items = document.getElementsByClassName('timeago'), e, pd;
+           for (var i = 0; i < items.length; i++) {
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
+           }
+         });
         </script>
 </body>
 </html>
