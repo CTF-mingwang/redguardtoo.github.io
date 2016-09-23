@@ -15,15 +15,15 @@
 
 
 
-UPDATED: &lt;2016-07-15 Fri&gt;
+UPDATED: &lt;2016-09-23 Fri&gt;
 
 
 
-emacs-git-gutter show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
+emacs-git-gutter shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
 
 
 
-I usually use M">
+I us">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-07-14T13:35:32Z">
 <meta property="article:tag" content="emacs">
@@ -80,11 +80,11 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-14 
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-15 Fri&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-23 Fri&gt;</span></span>
 </p>
 
 <p>
-<a href="https://github.com/syohex/emacs-git-gutter">emacs-git-gutter</a> show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
+<a href="https://github.com/syohex/emacs-git-gutter">emacs-git-gutter</a> shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
 </p>
 
 <p>
@@ -92,7 +92,7 @@ I usually use <code>M-x git-gutter:previous-hunk</code> or <code>M-x git-gutter:
 </p>
 
 <p>
-But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk</code> based on <a href="https://github.com/abo-abo/swiper">ivy-mode</a> is more useful:
+But if there are too many hunks in one file, <a href="https://github.com/abo-abo/swiper">ivy-mode</a> is more efficient:
 </p>
 
 <div class="org-src-container">
@@ -109,7 +109,6 @@ But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk<
          (tmp-line "")
          (max-line-length 0))
     (save-excursion
-      ;; find out the longest stripped line in the gutter
       (while (&lt;= linenum-start linenum-end)
         (goto-line linenum-start)
         (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
@@ -130,12 +129,14 @@ But if there are too many hunks in one file, <code>M-x git-gutter:previous-hunk<
 (defun my-goto-git-gutter ()
   (interactive)
   (if git-gutter:diffinfos
-      (let* ((collection (mapcar 'my-reshape-git-gutter
-                                 git-gutter:diffinfos)))
-        (ivy-read "git-gutters:"
-                  collection
-                  :action (lambda (linenum)
-                            (goto-line linenum))))
+      (ivy-read "git-gutters:"
+                (mapcar 'my-reshape-git-gutter git-gutter:diffinfos)
+                :action (lambda (e)
+                          ;; ivy9+ keep `(car e)'
+                          ;; ivy8- strip the `(car e)'
+                          ;; we handle both data structure
+                          (unless (numberp e) (setq e (cdr e)))
+                          (goto-line e)))
     (message "NO git-gutters!")))
 </code></pre>
 

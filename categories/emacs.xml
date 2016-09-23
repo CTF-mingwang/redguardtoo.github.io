@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 31 Aug 2016 10:02:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 23 Sep 2016 02:20:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I design a quick and &lt;b&gt;newbie friendly&lt;/b&gt; solution.
 &lt;/p&gt;
 
@@ -285,11 +285,11 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-15 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;emacs-git-gutter&lt;/a&gt; show an icon in the gutter area indicating whether a line has been inserted, modified or deleted in Emacs.
+&lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;emacs-git-gutter&lt;/a&gt; shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -297,7 +297,7 @@ I usually use &lt;code&gt;M-x git-gutter:previous-hunk&lt;/code&gt; or &lt;code&
 &lt;/p&gt;
 
 &lt;p&gt;
-But if there are too many hunks in one file, &lt;code&gt;M-x git-gutter:previous-hunk&lt;/code&gt; based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt; is more useful:
+But if there are too many hunks in one file, &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt; is more efficient:
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -314,7 +314,6 @@ But if there are too many hunks in one file, &lt;code&gt;M-x git-gutter:previous
          (tmp-line "")
          (max-line-length 0))
     (save-excursion
-      ;; find out the longest stripped line in the gutter
       (while (&amp;lt;= linenum-start linenum-end)
         (goto-line linenum-start)
         (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
@@ -335,12 +334,14 @@ But if there are too many hunks in one file, &lt;code&gt;M-x git-gutter:previous
 (defun my-goto-git-gutter ()
   (interactive)
   (if git-gutter:diffinfos
-      (let* ((collection (mapcar 'my-reshape-git-gutter
-                                 git-gutter:diffinfos)))
-        (ivy-read "git-gutters:"
-                  collection
-                  :action (lambda (linenum)
-                            (goto-line linenum))))
+      (ivy-read "git-gutters:"
+                (mapcar 'my-reshape-git-gutter git-gutter:diffinfos)
+                :action (lambda (e)
+                          ;; ivy9+ keep `(car e)'
+                          ;; ivy8- strip the `(car e)'
+                          ;; we handle both data structure
+                          (unless (numberp e) (setq e (cdr e)))
+                          (goto-line e)))
     (message "NO git-gutters!")))
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -352,7 +353,8 @@ Screenshot:
 
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/git-gutter-and-ivy-nq8.png" alt="git-gutter-and-ivy-nq8.png"&gt;
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><category>ivy</category><category>mode</category><guid>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</guid><pubDate>Thu, 14 Jul 2016 13:35:32 GMT</pubDate></item><item><title>Turn off linum-mode when file is too big</title><link>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><category>ivy</category><category>mode</category><guid>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</guid><pubDate>Thu, 14 Jul 2016 13:35:32 GMT</pubDate></item><item><title>Turn off linum-mode when file is too big</title><link>http://blog.binchen.org/posts/turn-off-linum-mode-when-file-is-too-big.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
