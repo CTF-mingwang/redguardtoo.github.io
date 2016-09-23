@@ -11,7 +11,15 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="New git-timemachine UI based on ivy-mode">
 <meta property="og:url" content="http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html">
-<meta property="og:description" content='When I use git-timemachine, I prefer start from my selected revision instead of HEAD.
+<meta property="og:description" content="UPDATED: &lt;2016-09-23 Fri&gt;
+
+
+
+CREATED: &lt;2016-06-05&gt; 
+
+
+
+When using git-timemachine, I prefer start from my selected revision instead of HEAD.
 
 
 
@@ -20,8 +28,7 @@ Here is my code based on ivy-mode,
 
 
 
-(defun my-git-timemachine-show-selected-revision ()
-  "Show last (curren'>
+(defun my-git-tim">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-06-05T14:32:39Z">
 <meta property="article:tag" content="emacs">
@@ -72,7 +79,15 @@ Here is my code based on ivy-mode,
         <div class="body">
             <div>
 <p>
-When I use <a href="https://github.com/pidu/git-timemachine">git-timemachine</a>, I prefer start from my selected revision instead of HEAD.
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-23 Fri&gt;</span></span>
+</p>
+
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-05&gt;</span></span> 
+</p>
+
+<p>
+When using <a href="https://github.com/pidu/git-timemachine">git-timemachine</a>, I prefer start from my selected revision instead of HEAD.
 </p>
 
 <p>
@@ -84,15 +99,16 @@ Here is my code based on <a href="https://github.com/abo-abo/swiper">ivy-mode</a
 <pre><code class="lang-lisp">(defun my-git-timemachine-show-selected-revision ()
   "Show last (current) revision of file."
   (interactive)
-  (let (collection)
-    (setq collection
-          (mapcar (lambda (rev)
+  (let* ((collection (mapcar (lambda (rev)
                     ;; re-shape list for the ivy-read
-                    (cons (concat (substring (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
-                  (git-timemachine--revisions)))
+                    (cons (concat (substring-no-properties (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                  (git-timemachine--revisions))))
     (ivy-read "commits:"
               collection
               :action (lambda (rev)
+                        ;; compatible with ivy 9+ and ivy 8
+                        (unless (string-match-p "^[a-z0-9]*$" (car rev))
+                          (setq rev (cdr rev)))
                         (git-timemachine-show-revision rev)))))
 
 (defun my-git-timemachine ()

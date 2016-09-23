@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 23 Sep 2016 02:20:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 23 Sep 2016 02:23:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -74,7 +74,15 @@ Screenshot:
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/git-gutter-and-ivy-nq8.png" alt="git-gutter-and-ivy-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><category>ivy</category><category>mode</category><guid>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</guid><pubDate>Thu, 14 Jul 2016 13:35:32 GMT</pubDate></item><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-When I use &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-06-05&amp;gt;&lt;/span&gt;&lt;/span&gt; 
+&lt;/p&gt;
+
+&lt;p&gt;
+When using &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -86,15 +94,16 @@ Here is my code based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-m
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-git-timemachine-show-selected-revision ()
   "Show last (current) revision of file."
   (interactive)
-  (let (collection)
-    (setq collection
-          (mapcar (lambda (rev)
+  (let* ((collection (mapcar (lambda (rev)
                     ;; re-shape list for the ivy-read
-                    (cons (concat (substring (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
-                  (git-timemachine--revisions)))
+                    (cons (concat (substring-no-properties (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                  (git-timemachine--revisions))))
     (ivy-read "commits:"
               collection
               :action (lambda (rev)
+                        ;; compatible with ivy 9+ and ivy 8
+                        (unless (string-match-p "^[a-z0-9]*$" (car rev))
+                          (setq rev (cdr rev)))
                         (git-timemachine-show-revision rev)))))
 
 (defun my-git-timemachine ()
