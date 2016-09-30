@@ -23,88 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/complete-line-with-ivy-mode.html">Complete line with ivy-mode</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-05-23T01:41:14+00:00">2016-05-23 01:41</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/complete-line-with-ivy-mode.html#disqus_thread" data-disqus-identifier="cache/posts/complete-line-with-ivy-mode.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/grep.html" rel="tag">grep</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun counsel-escape (keyword)
-  (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword))
-
-(defun counsel-replace-current-line (leading-spaces content)
-  (beginning-of-line)
-  (kill-line)
-  (insert (concat leading-spaces content))
-  (end-of-line))
-
-(defun counsel-git-grep-complete-line ()
-  (interactive)
-  (let* (cmd
-        (cur-line (buffer-substring-no-properties (line-beginning-position)
-                                                  (line-end-position)))
-        (default-directory (locate-dominating-file
-                            default-directory ".git"))
-        keyword
-        (leading-spaces "")
-        collection)
-    (setq keyword (counsel-escape (if (region-active-p)
-                                      (buffer-substring-no-properties (region-beginning)
-                                                                      (region-end))
-                                    (replace-regexp-in-string "^[ \t]*" "" cur-line))))
-    ;; grep lines without leading/trailing spaces
-    (setq cmd (format "git --no-pager grep -I -h --no-color -i -e \"^[ \\t]*%s\" | sed s\"\/^[ \\t]*\/\/\" | sed s\"\/[ \\t]*$\/\/\" | sort | uniq" keyword))
-    (when (setq collection (split-string (shell-command-to-string cmd) "\n" t))
-      (if (string-match "^\\([ \t]*\\)" cur-line)
-          (setq leading-spaces (match-string 1 cur-line)))
-      (cond
-       ((= 1 (length collection))
-        (counsel-replace-current-line leading-spaces (car collection)))
-       ((&gt; (length collection) 1)
-        (ivy-read "lines:"
-                  collection
-                  :action (lambda (l)
-                            (counsel-replace-current-line leading-spaces l))))))
-    ))
-(global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
-</code></pre>
-
-</div>
-
-<p>
-I also tried <code>grep</code> which is too slow for my project.
-</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/make-messages-buffer-modifiable-in-emacs-24-4.html">Make Messages Buffer modifiable in Emacs 24.4</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -2015,10 +1933,131 @@ So here is my code,
 </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-gnus-group-topics-efficiently.html">How to use Gnus Group Topics efficiently</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-01-10T05:36:49+00:00">2016-01-10 05:36</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-gnus-group-topics-efficiently.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-gnus-group-topics-efficiently.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gmail.html" rel="tag">gmail</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+<i>Group Topics</i> is used to manage Gnus groups.
+</p>
+
+<p>
+For example, you can,
+</p>
+
+<ul class="org-ul">
+<li>Place groups (mail folders)  from Gmail into "gmail" topic
+</li>
+<li>Place groups (mails folders) from Outlook.com into "hotmail" topic
+</li>
+<li>Make "gmail" and "hotmail" belong to the root topic "Gnus"
+</li>
+</ul>
+<p>
+Enable it is just one line,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(add-hook 'gnus-group-mode-hook 'gnus-topic-mode)
+</code></pre>
+
+</div>
+
+<p>
+Now comes the question how to delete/add/move the topics?
+</p>
+
+<p>
+The official answer is to read <a href="http://www.gnu.org/software/emacs/manual/html_node/gnus/Topic-Commands.html#Topic-Commands">its manual</a>.
+</p>
+
+<p>
+But there is a <b>simpler solution</b>. All you need to do is insert below code into ~/.emacs or ~/.gnus.el,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(eval-after-load 'gnus-topic
+  '(progn
+     (setq gnus-topic-topology '(("Gnus" visible)
+                                 (("hotmail" visible nil nil))
+                                 (("gmail" visible nil nil))))
+
+     (setq gnus-topic-alist '(("hotmail" ; the key of topic
+                               "nnimap+hotmail:Inbox"
+                               "nnimap+hotmail:Drafts"
+                               "nnimap+hotmail:Sent"
+                               "nnimap+hotmail:Junk"
+                               "nnimap+hotmail:Deleted")
+                              ("gmail" ; the key of topic
+                               "INBOX"
+                               "[Gmail]/Sent Mail"
+                               "[Gmail]/Trash"
+                               "Drafts")
+                              ("Gnus")))))
+</code></pre>
+
+</div>
+
+<p>
+The <b>management of topics is as easy as editing above code</b>.
+</p>
+
+<p>
+My setup always works no matter ~/.newsrc.eld is loaded or not.
+</p>
+
+<p>
+BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq gnus-select-method
+             '(nnimap "gmail" ; key
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "hotmail" ; key
+                      (nnimap-address "imap-mail.outlook.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)))
+</code></pre>
+
+</div>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
-                <a href="index.html" rel="prev">Newer posts</a>
+                <a href="index-23.html" rel="prev">Newer posts</a>
             </li>
             <li class="next">
                 <a href="index-21.html" rel="next">Older posts</a>
