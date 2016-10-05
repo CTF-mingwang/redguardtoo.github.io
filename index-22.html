@@ -1966,55 +1966,6 @@ So here is my code,
 </div>
             </div>
         </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-ivy-mode-to-search-bash-history.html">Use ivy-mode to search bash history</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-01-25T05:40:41+00:00">2016-01-25 05:40</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-ivy-mode-to-search-bash-history.html#disqus_thread" data-disqus-identifier="cache/posts/use-ivy-mode-to-search-bash-history.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
-  "Yank the bash history"
-  (interactive)
-  (let (hist-cmd collection val)
-    (shell-command "history -r") ; reload history
-    (setq collection
-          (nreverse
-           (split-string (with-temp-buffer (insert-file-contents (file-truename "~/.bash_history"))
-                                           (buffer-string))
-                         "\n"
-                         t)))
-    (when (and collection (&gt; (length collection) 0)
-               (setq val (if (= 1 (length collection)) (car collection)
-                           (ivy-read (format "Bash history:") collection))))
-        (kill-new val)
-        (message "%s =&gt; kill-ring" val))))
-</code></pre>
-
-</div>
-            </div>
-        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
