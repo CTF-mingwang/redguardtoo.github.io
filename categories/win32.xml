@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (win32)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/win32.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 12 Aug 2016 07:03:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Start wxWdigets programming on Windows</title><link>http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;Download &lt;a href="http://wwww.wxwdigets.org"&gt;wxWidgets&lt;/a&gt; &lt;/li&gt; &lt;li&gt;Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. &lt;/li&gt; &lt;li&gt;Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" &lt;/li&gt; &lt;li&gt;Install Visual Studio (Express version is fine if you installed WIN32 SDK too) &lt;/li&gt; &lt;li&gt;Compile wxWidgets library by running the dos batch file: &lt;/li&gt; &lt;/ul&gt;     &lt;pre class="src src-sh"&gt;@echo off
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (win32)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/win32.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Oct 2016 10:23:20 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Start wxWdigets programming on Windows</title><link>http://blog.binchen.org/posts/start-wxwdigets-programming-on-windows.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;ul&gt; &lt;li&gt;Download &lt;a href="http://wwww.wxwdigets.org"&gt;wxWidgets&lt;/a&gt; &lt;/li&gt; &lt;li&gt;Extracted it somewhere. "c:\wxWidgets-2.8.12", for example. &lt;/li&gt; &lt;li&gt;Create environment variable WXWIN with value "c:\wxWidgets-2.8.12" &lt;/li&gt; &lt;li&gt;Install Visual Studio (Express version is fine if you installed WIN32 SDK too) &lt;/li&gt; &lt;li&gt;Compile wxWidgets library by running the dos batch file: &lt;/li&gt; &lt;/ul&gt;     &lt;pre class="src src-sh"&gt;@echo off
 call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"&lt;/span&gt;
 &lt;p&gt;nmake -f %WXWIN%\build\msw\makefile.vc &lt;span style="color: #e7c547;"&gt;UNICODE&lt;/span&gt;=1  &lt;span style="color: #e7c547;"&gt;BUILD&lt;/span&gt;=debug&lt;/p&gt;
 &lt;p&gt;nmake -f %WXWIN%\build\msw\makefile.vc &lt;span style="color: #e7c547;"&gt;UNICODE&lt;/span&gt;=1  &lt;span style="color: #e7c547;"&gt;BUILD&lt;/span&gt;=release&lt;/p&gt;
@@ -72,7 +72,7 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;/p&gt;
 
 &lt;p&gt;
-更新时间: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-20 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
+更新时间: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-10-09 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -146,13 +146,6 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="left"&gt;utorrent&lt;/td&gt;
-&lt;td class="left"&gt;BT下载&lt;/td&gt;
-&lt;td class="left"&gt;中&lt;/td&gt;
-&lt;td class="left"&gt;免费&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
 &lt;td class="left"&gt;CDBurnerXP&lt;/td&gt;
 &lt;td class="left"&gt;刻录&lt;/td&gt;
 &lt;td class="left"&gt;中&lt;/td&gt;
@@ -160,7 +153,7 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="left"&gt;CDex_170b2&lt;/td&gt;
+&lt;td class="left"&gt;CDex&lt;/td&gt;
 &lt;td class="left"&gt;cd转mp3,自动生成文件名&lt;/td&gt;
 &lt;td class="left"&gt;中&lt;/td&gt;
 &lt;td class="left"&gt;开源&lt;/td&gt;
@@ -178,13 +171,6 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;td class="left"&gt;跨平台build工具,相见恨晚&lt;/td&gt;
 &lt;td class="left"&gt;中&lt;/td&gt;
 &lt;td class="left"&gt;开源&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;ColorPic 4.1&lt;/td&gt;
-&lt;td class="left"&gt;取色&lt;/td&gt;
-&lt;td class="left"&gt;高&lt;/td&gt;
-&lt;td class="left"&gt;免费&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -251,7 +237,7 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="left"&gt;ImageMagick-6.3.5&lt;/td&gt;
+&lt;td class="left"&gt;ImageMagick&lt;/td&gt;
 &lt;td class="left"&gt;命令行图像处理&lt;/td&gt;
 &lt;td class="left"&gt;高&lt;/td&gt;
 &lt;td class="left"&gt;开源&lt;/td&gt;
@@ -325,27 +311,6 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;td class="left"&gt;恢复误删除的文件&lt;/td&gt;
 &lt;td class="left"&gt;低&lt;/td&gt;
 &lt;td class="left"&gt;免费&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;password-recovery&lt;/td&gt;
-&lt;td class="left"&gt;密码恢复&lt;/td&gt;
-&lt;td class="left"&gt;低&lt;/td&gt;
-&lt;td class="left"&gt;免费&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;PPLive&lt;/td&gt;
-&lt;td class="left"&gt;在线电视&lt;/td&gt;
-&lt;td class="left"&gt;低&lt;/td&gt;
-&lt;td class="left"&gt;免费&lt;/td&gt;
-&lt;/tr&gt;
-
-&lt;tr&gt;
-&lt;td class="left"&gt;StarDict&lt;/td&gt;
-&lt;td class="left"&gt;辞典&lt;/td&gt;
-&lt;td class="left"&gt;中&lt;/td&gt;
-&lt;td class="left"&gt;开源&lt;/td&gt;
 &lt;/tr&gt;
 
 &lt;tr&gt;
@@ -447,7 +412,7 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="left"&gt;wxWidgets 2.9&lt;/td&gt;
+&lt;td class="left"&gt;wxWidgets 3.0&lt;/td&gt;
 &lt;td class="left"&gt;跨平台c++ GUI库&lt;/td&gt;
 &lt;td class="left"&gt;高&lt;/td&gt;
 &lt;td class="left"&gt;开源&lt;/td&gt;
@@ -656,12 +621,8 @@ call &lt;span style="color: #70c0b1;"&gt;"C:\Program Files (x86)\Microsoft Visua
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Mac软件清单&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
+使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;/p&gt;
-&lt;p&gt;
-之前被一些Fan忽悠,期望很高,用后大失所望.唯一亮点是Unix环境,Linux下的命令行软件都能用.
-&lt;/p&gt;
-
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
 &lt;colgroup&gt;
@@ -762,6 +723,12 @@ OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;td class="left"&gt;局域网内通信传文件&lt;/td&gt;
 &lt;td class="left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;Adium&lt;/td&gt;
+&lt;td class="left"&gt;即时通信&lt;/td&gt;
+&lt;td class="left"&gt;低&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -792,12 +759,6 @@ OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;td class="left"&gt;过滤广告,支持正则表达式&lt;/td&gt;
 &lt;td class="left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
-&lt;tr&gt;
-&lt;td class="left"&gt;Firebug&lt;/td&gt;
-&lt;td class="left"&gt;最好的web开发工具&lt;/td&gt;
-&lt;td class="left"&gt;高&lt;/td&gt;
-&lt;/tr&gt;
-
 &lt;tr&gt;
 &lt;td class="left"&gt;KeySnail&lt;/td&gt;
 &lt;td class="left"&gt;安装了HoK脚本&lt;/td&gt;
@@ -865,7 +826,7 @@ OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;/tr&gt;
 
 &lt;tr&gt;
-&lt;td class="left"&gt;Tile Tab&lt;/td&gt;
+&lt;td class="left"&gt;Tile Tabs&lt;/td&gt;
 &lt;td class="left"&gt;子窗口&lt;/td&gt;
 &lt;td class="left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
@@ -879,6 +840,12 @@ OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;tr&gt;
 &lt;td class="left"&gt;Fireinput&lt;/td&gt;
 &lt;td class="left"&gt;拼音输入法&lt;/td&gt;
+&lt;td class="left"&gt;低&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td class="left"&gt;Nimbus Screen Capture&lt;/td&gt;
+&lt;td class="left"&gt;网页截屏&lt;/td&gt;
 &lt;td class="left"&gt;低&lt;/td&gt;
 &lt;/tr&gt;
 
@@ -931,7 +898,7 @@ OS X (10.7.3),使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;h4 id="sec-4-3"&gt;&lt;span class="section-number-3"&gt;4.3&lt;/span&gt; Greasemonkey&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-4-3"&gt;
 &lt;p&gt;
-需要刷新网页使script生效
+需刷新网页使script生效
 &lt;/p&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 &lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
