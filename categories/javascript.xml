@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 12 Aug 2016 07:03:51 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Oct 2016 12:16:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+"Smart" &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt; always recommends the stories I hate to see.
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my way to toggle the stories display on Chrome and Firefox.
+&lt;/p&gt;
+
+&lt;p&gt;
+Step 1, create a new book mark with below link,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;javascript:a=Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));a.forEach(function(e){e.style.display=a[a.length-1].style.display==='none'?'block':'none';});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 2, DONE! You only need click the bookmark to hide or show the stories when visiting &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the original vanilla javascript,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;var a = Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));
+a.forEach(function (e) {
+    // check 'display' of the last item in story feed before toggling
+    e.style.display = a[a.length - 1].style.display === 'none' ? 'block' : 'none';
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Screenshot:
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/purify-quora-nq8.png" alt="purify-quora-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>javascript</category><category>quora</category><guid>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</guid><pubDate>Sun, 09 Oct 2016 12:15:14 GMT</pubDate></item><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -234,46 +279,7 @@ My code is &lt;a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03
 
 &lt;p&gt;
 (apply #'derived-mode-p '(org-mode web-mode))
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Use which-func-mode with js2-mode</title><link>http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;Two years ago in my article "&lt;a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html"&gt;Why Emacs is better editor - a case study for javascript developer&lt;/a&gt;" I proved that Emacs is a better javascript editor because its &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt; can parse the tags ) in opened file more intelligently.
-&lt;/p&gt;
-
-&lt;p&gt;
-Since then, the js2-mode keeps improving and becomes better every day. I'm absolutely satisfied with it except one minor issue.
-&lt;/p&gt;
-
-&lt;p&gt;
-For performance reason, js2-mode place the &lt;a href="http://emacswiki.org/emacs/ImenuMode"&gt;imenu&lt;/a&gt; results into a cache which is updated by a timer.
-&lt;/p&gt;
-
-&lt;p&gt;
-`(which-function)` from &lt;a href="http://www.emacswiki.org/emacs/WhichFuncMode"&gt;which-func-mode&lt;/a&gt; takes advantage of the imenu results. So the result of `(which-function)` may be incorrect if the cache is not updated by timer.
-&lt;/p&gt;
-
-&lt;p&gt;
-The solution is to re-define a `my-which-function`:
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-which-function ()
-  ;; clean the imenu cache
-  ;; @see http://stackoverflow.com/questions/13426564/how-to-force-a-rescan-in-imenu-by-a-function
-  (setq imenu--index-alist nil)
-  (which-function))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;
-The new API is very useful when I use &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;yasnippet&lt;/a&gt; to insert logging code in javascript file.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is a sample (log-which-func.yasnippet):
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class="lang-snippet"&gt;# -*- coding: utf-8; mode: snippet -*-
-# name: console.log which function called
-# key: lwf
-# --
-console.log('${1:`(my-which-function)`} called');
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-which-func-mode-with-js2-mode.html</guid><pubDate>Mon, 03 Aug 2015 12:08:29 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><category>js2</category><guid>http://blog.binchen.org/posts/use-js2-mode-to-print-json-path.html</guid><pubDate>Thu, 29 Oct 2015 14:18:10 GMT</pubDate></item><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 

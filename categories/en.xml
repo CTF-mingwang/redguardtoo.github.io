@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Oct 2016 10:23:20 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Oct 2016 12:16:26 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+"Smart" &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt; always recommends the stories I hate to see.
+&lt;/p&gt;
+
+&lt;p&gt;
+So here is my way to toggle the stories display on Chrome and Firefox.
+&lt;/p&gt;
+
+&lt;p&gt;
+Step 1, create a new book mark with below link,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;javascript:a=Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));a.forEach(function(e){e.style.display=a[a.length-1].style.display==='none'?'block':'none';});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Step 2, DONE! You only need click the bookmark to hide or show the stories when visiting &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the original vanilla javascript,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;var a = Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));
+a.forEach(function (e) {
+    // check 'display' of the last item in story feed before toggling
+    e.style.display = a[a.length - 1].style.display === 'none' ? 'block' : 'none';
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Screenshot:
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/purify-quora-nq8.png" alt="purify-quora-nq8.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>javascript</category><category>quora</category><guid>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</guid><pubDate>Sun, 09 Oct 2016 12:15:14 GMT</pubDate></item><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I design a quick and &lt;b&gt;newbie friendly&lt;/b&gt; solution.
 &lt;/p&gt;
 
@@ -706,80 +751,4 @@ I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
       (read-only-mode -1)))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-You can &lt;code&gt;M-x toggle-input-method&lt;/code&gt; or &lt;code&gt;C-\&lt;/code&gt; to input Non-English characters.
-&lt;/p&gt;
-
-&lt;p&gt;
-Analysis about evil-mode,
-&lt;/p&gt;
-
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method
-&lt;/li&gt;
-&lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while &lt;b&gt;staying in evil-insert state&lt;/b&gt;
-&lt;/li&gt;
-&lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;notification of input method status&lt;/b&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
-Here is the setup,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ make IME compatible with evil-mode
-(defun evil-toggle-input-method ()
-  "when toggle on input method, goto evil-insert-state. "
-  (interactive)
-
-  ;; load IME when needed, less memory footprint
-  ;; (unless (featurep 'chinese-pyim)
-  ;;   (require 'chinese-pyim))
-
-  (cond
-   ((and (boundp 'evil-mode) evil-mode)
-    ;; evil-mode
-    (cond
-     ((eq evil-state 'insert)
-      (toggle-input-method))
-     (t
-      (evil-insert-state)
-      (unless current-input-method
-        (toggle-input-method))
-      ))
-    (if current-input-method (message "IME on!")))
-   (t
-    ;; NOT evil-mode, some guy don't use evil-mode at all
-    (toggle-input-method))))
-
-(defadvice evil-insert-state (around evil-insert-state-hack activate)
-  ad-do-it
-  (if current-input-method (message "IME on!")))
-
-(global-set-key (kbd "C-\\") 'evil-toggle-input-method)
-;; }}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Chinese version:
-&lt;/p&gt;
-
-&lt;p&gt;
-在evil-mode中切换输入法有以下要点,
-&lt;/p&gt;
-
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;输中文前须进入evil-insert-state
-&lt;/li&gt;
-&lt;li&gt;在evil-insert-state中可能会切换输入法
-&lt;/li&gt;
-&lt;li&gt;按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态
-&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
-代码见上.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item></channel></rss>

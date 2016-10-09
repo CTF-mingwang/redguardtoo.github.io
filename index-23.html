@@ -23,15 +23,15 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/complete-line-with-ivy-mode.html">Complete line with ivy-mode</a></h1>
+            <h1 class="title"><a href="posts/new-git-timemachine-ui-based-on-ivy-mode.html">New git-timemachine UI based on ivy-mode</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2016-05-23T01:41:14+00:00">2016-05-23 01:41</time>
+                    <time class="timeago" datetime="2016-06-05T14:32:39+00:00">2016-06-05 14:32</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/complete-line-with-ivy-mode.html#disqus_thread" data-disqus-identifier="cache/posts/complete-line-with-ivy-mode.html">Comments</a>
+    <a href="posts/new-git-timemachine-ui-based-on-ivy-mode.html#disqus_thread" data-disqus-identifier="cache/posts/new-git-timemachine-ui-based-on-ivy-mode.html">Comments</a>
 
 
                 </div>
@@ -41,8 +41,9 @@
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/grep.html" rel="tag">grep</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
            <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
+           <li><a class="tag p-category" href="categories/timemachine.html" rel="tag">timemachine</a></li>
         </ul>
 </div>
 
@@ -50,57 +51,55 @@
             <div class="body">
                 <div>
 <p>
-Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-23 Fri&gt;</span></span>
+</p>
+
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-05&gt;</span></span>
+</p>
+
+<p>
+When using <a href="https://github.com/pidu/git-timemachine">git-timemachine</a>, I prefer start from my selected revision instead of HEAD.
+</p>
+
+<p>
+Here is my code based on <a href="https://github.com/abo-abo/swiper">ivy-mode</a>,
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defun counsel-escape (keyword)
-  (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword))
-
-(defun counsel-replace-current-line (leading-spaces content)
-  (beginning-of-line)
-  (kill-line)
-  (insert (concat leading-spaces content))
-  (end-of-line))
-
-(defun counsel-git-grep-complete-line ()
+<pre><code class="lang-lisp">(defun my-git-timemachine-show-selected-revision ()
+  "Show last (current) revision of file."
   (interactive)
-  (let* (cmd
-        (cur-line (buffer-substring-no-properties (line-beginning-position)
-                                                  (line-end-position)))
-        (default-directory (locate-dominating-file
-                            default-directory ".git"))
-        keyword
-        (leading-spaces "")
-        collection)
-    (setq keyword (counsel-escape (if (region-active-p)
-                                      (buffer-substring-no-properties (region-beginning)
-                                                                      (region-end))
-                                    (replace-regexp-in-string "^[ \t]*" "" cur-line))))
-    ;; grep lines without leading/trailing spaces
-    (setq cmd (format "git --no-pager grep -I -h --no-color -i -e \"^[ \\t]*%s\" | sed s\"\/^[ \\t]*\/\/\" | sed s\"\/[ \\t]*$\/\/\" | sort | uniq" keyword))
-    (when (setq collection (split-string (shell-command-to-string cmd) "\n" t))
-      (if (string-match "^\\([ \t]*\\)" cur-line)
-          (setq leading-spaces (match-string 1 cur-line)))
-      (cond
-       ((= 1 (length collection))
-        (counsel-replace-current-line leading-spaces (car collection)))
-       ((&gt; (length collection) 1)
-        (ivy-read "lines:"
-                  collection
-                  :action (lambda (l)
-                            (counsel-replace-current-line leading-spaces l))))))
-    ))
-(global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
+  (let* ((collection (mapcar (lambda (rev)
+                    ;; re-shape list for the ivy-read
+                    (cons (concat (substring-no-properties (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
+                  (git-timemachine--revisions))))
+    (ivy-read "commits:"
+              collection
+              :action (lambda (rev)
+                        ;; compatible with ivy 9+ and ivy 8
+                        (unless (string-match-p "^[a-z0-9]*$" (car rev))
+                          (setq rev (cdr rev)))
+                        (git-timemachine-show-revision rev)))))
+
+(defun my-git-timemachine ()
+  "Open git snapshot with the selected version.  Based on ivy-mode."
+  (interactive)
+  (unless (featurep 'git-timemachine)
+    (require 'git-timemachine))
+  (git-timemachine--start #'my-git-timemachine-show-selected-revision))
 </code></pre>
 
 </div>
 
 <p>
-I also tried <code>grep</code> which is too slow for my project.
+Screenshot after <code>M-x my-git-timemachine</code>,
 </p>
+
+<div class="figure">
+<p><img src="wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"></p>
+</div>
 </div>
             </div>
         </div>
