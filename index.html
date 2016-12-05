@@ -79,7 +79,7 @@ Its workflow,
 <code>p4 add files</code> to add new files. <code>p4 revert</code> to revert edited file to it original status and lose the local changes
 </li>
 <li>
-<code>p4 change</code> to create a pending change. The <code>p4 submit -c #changelist</code> to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
+<code>p4 change</code> to create a pending change. Then <code>p4 submit -c #changelist</code> to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
 </li>
 <li>Or <code>p4 submit -d"description" file</code> to submit a single file directly
 </li>
@@ -152,7 +152,7 @@ If FILE-OPENED, current file is still opened."
 </div>
 
 <p>
-As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a>, you can add below code to <code>prog-mode-hook</code> to view any perforce change inside Emacs,
+As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a>, insert below code into <code>prog-mode-hook</code> to view any perforce change inside Emacs,
 </p>
 
 <div class="org-src-container">

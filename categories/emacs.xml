@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 12:10:27 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 12:11:37 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Perforce is proprietary VCS.
 &lt;/p&gt;
 
@@ -20,7 +20,7 @@ Its workflow,
 &lt;/li&gt;
 &lt;li&gt;&lt;code&gt;p4 add files&lt;/code&gt; to add new files. &lt;code&gt;p4 revert&lt;/code&gt; to revert edited file to it original status and lose the local changes
 &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;p4 change&lt;/code&gt; to create a pending change. The &lt;code&gt;p4 submit -c #changelist&lt;/code&gt; to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
+&lt;li&gt;&lt;code&gt;p4 change&lt;/code&gt; to create a pending change. Then &lt;code&gt;p4 submit -c #changelist&lt;/code&gt; to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
 &lt;/li&gt;
 &lt;li&gt;Or &lt;code&gt;p4 submit -d"description" file&lt;/code&gt; to submit a single file directly
 &lt;/li&gt;
@@ -94,7 +94,7 @@ If FILE-OPENED, current file is still opened."
 &lt;/div&gt;
 
 &lt;p&gt;
-As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;find-file-in-project&lt;/a&gt;, you can add below code to &lt;code&gt;prog-mode-hook&lt;/code&gt; to view any perforce change inside Emacs,
+As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;find-file-in-project&lt;/a&gt;, insert below code into &lt;code&gt;prog-mode-hook&lt;/code&gt; to view any perforce change inside Emacs,
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
