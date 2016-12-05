@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 12:14:01 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 12:18:39 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Perforce is proprietary VCS.
 &lt;/p&gt;
 
-&lt;p&gt;
-Its workflow,
-&lt;/p&gt;
-
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Perforce workflow&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;p4 set&lt;/code&gt; to &lt;a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html"&gt;set up&lt;/a&gt;
 &lt;/li&gt;
@@ -25,7 +24,12 @@ Its workflow,
 &lt;li&gt;Or &lt;code&gt;p4 submit -d"description" file&lt;/code&gt; to submit a single file directly
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; My solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 Perforce cygwin portable is so bad that it's waste of my time to explain why it's bad.
 &lt;/p&gt;
@@ -39,9 +43,16 @@ Perforce server has a URL for every physical file on the disk. If I only feed &l
 &lt;/p&gt;
 
 &lt;p&gt;
-I provides &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, and &lt;code&gt;p4submit&lt;/code&gt; to &lt;code&gt;edit/revert/submit&lt;/code&gt; current file inside Emacs,
+BTW, I'm confident that my solution is better.
 &lt;/p&gt;
+&lt;/div&gt;
 
+&lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
+&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Emacs&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;p&gt;
+I provides &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, and &lt;code&gt;p4submit&lt;/code&gt; to &lt;code&gt;edit/revert/submit&lt;/code&gt; current file,
+&lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ perforce utilities
@@ -112,10 +123,14 @@ As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-
 
 &lt;/div&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
+&lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Bash Shell&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-2-2"&gt;
 &lt;p&gt;
 Other operations are finished in Bash Shell,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# {{ Perforce, I hope I will never use it
@@ -243,9 +258,9 @@ function p4ml(){
 
 &lt;/div&gt;
 
-&lt;p&gt;
-BTW, I'm confident that my solution is better.
-&lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>shell</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>shell</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 "Smart" &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt; always recommends the stories I hate to see.
 &lt;/p&gt;
 
