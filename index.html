@@ -134,17 +134,8 @@ If FILE-OPENED, current file is still opened."
   (shell-command (p4-generate-cmd "revert"))
   (read-only-mode 1))
 ;; }}
-</code></pre>
 
-</div>
-
-<p>
-Usage:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun prog-mode-hook-setup ()
+(defun prog-mode-hook-setup ()
   (when (string-match-p "DIR/PROJ1/"
                         (if buffer-file-name buffer-file-name ""))
     (setq-local p4-file-to-url '("^.*DIR/PROJ1"
