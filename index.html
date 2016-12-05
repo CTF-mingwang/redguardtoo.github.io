@@ -146,7 +146,26 @@ If FILE-OPENED, current file is still opened."
 </div>
 
 <p>
-Most time I use <code>p4</code> in Bash Shell. Here is my Bash setup,
+As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a>, you can add below code to <code>prog-mode-hook</code> to view any perforce change inside Emacs,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq-local ffip-diff-backends
+            '((ivy-read "p4 change to show:"
+                        (split-string (shell-command-to-string "p4 changes //depot/development/DIR/PROJ1/...")
+                                      "\n")
+                        :action (lambda (i)
+                                  (if (string-match "^ Change \\([0-9]*\\)" i)
+                                      (shell-command-to-string (format "p4 describe -du -db %s"
+                                                                       (match-string 1 i))))))
+              "p4 diff -du -db //depot/development/DIR/PROJ1/..."))
+</code></pre>
+
+</div>
+
+<p>
+Other operations are finished in Bash Shell,
 </p>
 
 <div class="org-src-container">
