@@ -1,5 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 09 Oct 2016 12:19:47 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 11:54:31 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Perforce is proprietary VCS.
+&lt;/p&gt;
+
+&lt;p&gt;
+Its workflow,
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;code&gt;p4 login&lt;/code&gt; at first
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p4 client&lt;/code&gt; create a new work space to tell server which files to check out or to ignore
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p4 sync ...&lt;/code&gt; to download files
+&lt;/li&gt;
+&lt;li&gt;Files are read-only by default. You need &lt;code&gt;p4 edit file&lt;/code&gt; to make files writable before editing
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p4 add files&lt;/code&gt; to add new files. &lt;code&gt;p4 revert&lt;/code&gt; to revert edited file to it original status and lose the local changes
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;p4 change&lt;/code&gt; to create a pending change. The &lt;code&gt;p4 submit -c #changelist&lt;/code&gt; to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
+&lt;/li&gt;
+&lt;li&gt;Or &lt;code&gt;p4 submit -d"description" file&lt;/code&gt; to submit a single file directly
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Perforce cygwin portable is so bad that it's waste of my time to explain why it's bad.
+&lt;/p&gt;
+
+&lt;p&gt;
+So I use p4's windows native executable on both Cygwin and Windows.
+&lt;/p&gt;
+
+&lt;p&gt;
+Perforce server has a URL for every physical file on the disk. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
+&lt;/p&gt;
+
+&lt;p&gt;
+I provides &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, and &lt;code&gt;p4submit&lt;/code&gt; to operate on current file,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ perforce utilities
+(defvar p4-file-to-url '("" "")
+  "(car p4-file-to-url) is the original file prefix
+(cadr p4-file-to-url) is the url prefix")
+
+(defun p4-generate-cmd (opts)
+  (format "p4 %s %s"
+          opts
+          (replace-regexp-in-string (car p4-file-to-url)
+                                    (cadr p4-file-to-url)
+                                    buffer-file-name)))
+(defun p4edit ()
+  "p4 edit current file."
+  (interactive)
+  (shell-command (p4-generate-cmd "edit"))
+  (read-only-mode -1))
+
+(defun p4submit (&amp;amp;optional file-opened)
+  "p4 submit current file.
+If FILE-OPENED, current file is still opened."
+  (interactive "P")
+  (let* ((msg (read-string "Say (ENTER to abort):"))
+         (open-opts (if file-opened "-f leaveunchanged+reopen -r" ""))
+         (full-opts (format "submit -d '%s' %s" msg open-opts)))
+    ;; (message "(p4-generate-cmd full-opts)=%s" (p4-generate-cmd full-opts))
+    (if (string= "" msg)
+        (message "Abort submit.")
+      (shell-command (p4-generate-cmd full-opts))
+      (unless file-opened (read-only-mode 1))
+      (message (format "%s submitted."
+                       (file-name-nondirectory buffer-file-name))))))
+
+(defun p4revert ()
+  "p4 revert current file."
+  (interactive)
+  (shell-command (p4-generate-cmd "revert"))
+  (read-only-mode 1))
+;; }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Usage:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun prog-mode-hook-setup ()
+  (when (string-match-p "DIR/PROJ1/"
+                        (if buffer-file-name buffer-file-name ""))
+    (setq-local p4-file-to-url '("^.*DIR/PROJ1"
+                                 "//depot/development/DIR/PROJ1"))))
+(add-hook 'prog-mode-hook prog-mode-hook-setup)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Most time I use &lt;code&gt;p4&lt;/code&gt; in Bash Shell. Here is my Bash setup,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;# {{ Perforce, I hope I will never use it
+if [ "$OS_NAME" = "CYGWIN" ]; then
+    function p4() {
+        export PWD=`cygpath -wa .`
+        /cygdrive/c/Program\ Files/Perforce/p4.exe $@
+    }
+fi
+
+# p4 workflow:
+#
+#   # basic setup
+#   p4 set P4CLIENT=clientname  # set your default client
+#   p4 set P4PORT=SERVER:1666
+#   p4 set P4USER=username
+#   p4 client # create/edit client, client views selected files
+#
+#   # checkout code
+#   p4 sync [-f] //depot/project-name/path/...
+#   p4 edit file[s]
+#   ... do some editing ...
+#
+#   # submit code
+#   either `p4 submit -d"say hi" file` or `p4 change`
+#
+#   I recommend `p4 change` because you can edit files list before submit happens.
+#   After `p4 change`,  `p4 submit -c changelist#` to actually submit change.
+#
+alias p4clr='p4 diff -sr | p4 -x - revert' # like `git reset HEAD`
+alias p4blame='p4 annotate -c -db ' # could add -a see deleted lines
+alias p4cr='p4 submit -f leaveunchanged+reopen -r'
+alias reviewcl='ccollab addchangelist new'
+alias p4pending='p4 changes -s pending' # add ... for current directory
+alias p4untrack='find . -type f| p4 -x - fstat &amp;gt;/dev/null'
+alias p4v='p4 resolve' # after `p4 sync ...`, maybe resolve
+alias p4r='p4 revert' # discard changes
+alias p4e='p4 edit'
+alias p4s='p4 submit'
+alias p4sr='p4 submit -f submitunchanged+reopen' #submit&amp;amp;reopen
+alias p4up='p4 sync ...' # synchronize from current directory
+alias p4o='p4 opened' # list opened files
+alias p4c='p4 changes' # create a new pending change
+alias p4chg='p4 change' # create a pending change
+alias p4d='p4 diff -du -db'
+alias p4ds='p4 diff -du -db | lsdiff' # diff summary, patchutils required
+alias p4i='p4 integrate'
+alias p4unsh='p4 unshelve -s' # Usage: p4unsh changelist#, like `git stash apply`
+alias p4h='p4 changes -m 1 ...' # show the head change
+
+function p4mypending {
+    local P4USERNAME="`p4 user -o | grep '^User:\s' | sed 's/User:\s\([a-bA-B0-9]*\)/\1/g'`"
+    p4 changes -s pending -u $P4USERNAME
+}
+
+function p4shelved {
+    local P4USERNAME="`p4 user -o | grep '^User:\s' | sed 's/User:\s\([a-bA-B0-9]*\)/\1/g'`"
+    p4 changes -s shelved -u $P4USERNAME # add ... for current directory
+}
+
+function p4cmp {
+    if [ -z "$1" ]; then
+        echo "Usage: p4cmp changelist-number changelist-number"
+    else
+        p4 diff2 -dub -q -u ...@$1 ...@$2
+    fi
+}
+
+function p4dl {
+    # git diff
+    p4 diff -du -db $@ | vim -c "set syntax=diff" -R -
+}
+function p4sh(){
+    # show specific change or the latest change
+    if [ -z "$1" ]; then
+        p4 changes | python ~/bin/percol.py | awk '{print $2}' | xargs -i p4 describe -du {} | vim -c "set syntax=diff" -R -
+    else
+        p4 describe -du -db $@ | vim -c "set syntax=diff" -R -
+    fi
+}
+
+function p4lp {
+    #like `git log -p`
+    p4 changes $@ | awk '{print $2}' | xargs -i p4 describe -du {} | less -F
+}
+
+function p4mlp {
+    #like `git log -p`
+    p4 changes -u $P4USERNAME $@ | awk '{print $2}' | xargs -i p4 describe -du {} | less -F
+}
+
+function p4adddir(){
+    if [ -z "$1" ]; then
+        echo "Usage: p4adddir directory"
+    else
+        find $1 -type f -print | p4 -x - add
+    fi
+}
+
+# p4's suggestion,http://kb.perforce.com/article/27/creating-release-notes
+# @google "assing variable from bash to perl in a bash script"
+function p4l(){
+    # p4 log
+    if [ -z "$1" ]; then
+        # show the full log
+        p4 changes -l ... | less
+    else
+        # p4log since-changelist-number
+        p4 changes -l ...@$1,#head|perl -pe "if(\$_=~/$1/){ last;};"
+    fi
+}
+
+function p4ml(){
+    # my p4 log
+    if [ -z "$1" ]; then
+        # show the full log
+        p4 changes -l -u $P4USERNAME ... | less
+    else
+        # p4log since-changelist-number
+        p4 changes -l -u $P4USERNAME ...@$1,#head|perl -pe "if(\$_=~/$1/){ last;};"
+    fi
+}
+# }}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 "Smart" &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt; always recommends the stories I hate to see.
 &lt;/p&gt;
 
@@ -744,11 +974,4 @@ Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git g
 
 &lt;p&gt;
 I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
-  (if (string= "*Messages*" (buffer-name))
-      (read-only-mode -1)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item></channel></rss>
