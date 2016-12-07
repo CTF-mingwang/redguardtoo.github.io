@@ -23,13 +23,7 @@ I use Flyspell in web-mode. But the solution works in other major modes.
 
 
 
-1 Spell check in HTML
-
-
-I will check,
-
-
-Text between html tag like `&lt;l">
+I assume you already turn on flyspell for all the programming language">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-01-21T12:00:00Z">
 <meta property="article:tag" content="emacs">
@@ -89,6 +83,17 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-12-07 
 I use <a href="http://www.emacswiki.org/emacs/FlySpell">Flyspell</a> in web-mode. But the solution works in other major modes.
 </p>
 
+<p>
+I assume you already turn on <code>flyspell</code> for all the programming languages by inserting below code into <code>.emacs</code>,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+</code></pre>
+
+</div>
+
 <div id="outline-container-sec-1" class="outline-2">
 <h3 id="sec-1">
 <span class="section-number-2">1</span> Spell check in HTML</h3>
@@ -97,11 +102,11 @@ I use <a href="http://www.emacswiki.org/emacs/FlySpell">Flyspell</a> in web-mode
 I will check,
 </p>
 <ul class="org-ul">
-<li>Text between html tag like `&lt;label&gt;Please input email&lt;/label&gt;`
+<li>Text between html tag like <code>&lt;label&gt;Please input email&lt;/label&gt;</code>
 </li>
-<li>Value of html input control like `&lt;input type="text" value="Please input your name"&gt;`
+<li>Value of html input control like <code>&lt;input type</code>"text" value="Please input your name"&gt;=
 </li>
-<li>CSS class name like `&lt;div class="btn btn-default" /&gt;`
+<li>CSS class name like <code>&lt;div class</code>"btn btn-default" /&gt;=
 </li>
 </ul>
 <p>
@@ -150,7 +155,7 @@ My setup:
 </div>
 
 <p>
-I use <a href="http://web-mode.org/">web-mode</a> for HTML files. The technique applies on other modes (php-mode, html-mode ….) 
+I use <a href="http://web-mode.org/">web-mode</a> for HTML files. The technique applies on other modes (php-mode, html-mode ….) .
 </p>
 
 <p></p>
@@ -192,10 +197,10 @@ So we need stop displaying doublon as error in HTML,
 </div>
 <div id="outline-container-sec-3" class="outline-2">
 <h3 id="sec-3">
-<span class="section-number-2">3</span> Spell check the camel case strings</h3>
+<span class="section-number-2">3</span> Spell check camel case strings</h3>
 <div class="outline-text-2" id="text-3">
 <p>
-We can check camel cased string/variable/function if <a href="http://aspell.net/">aspell</a> is used.
+We can check camel cased string/variable/function if and only if <a href="http://aspell.net/">aspell</a> is used.
 </p>
 
 <p>
@@ -219,7 +224,7 @@ Insert below code into <code>.emacs</code>,
 </div>
 
 <p>
-Please note the option "–run-together-min=2" means the minimum length of <b>each word</b> extracted from camel case string is two. Please run `man aspell` in shell for details.
+Please note the option <code>--run-together-min=2</code> means the <b>minimum length of each sub-word extracted from camel case string is two</b>. Please run <code>man aspell</code> in shell for details.
 </p>
 
 <p></p>
@@ -230,11 +235,11 @@ Please note the option "–run-together-min=2" means the minimum length of <b>ea
 <span class="section-number-2">4</span> Summary</h3>
 <div class="outline-text-2" id="text-4">
 <p>
-<a href="http://www.emacswiki.org/emacs/FlySpell">EmacsWiki</a> suggests `(flyspell-prog-mode)` which only checks typo in comments.
+<a href="http://www.emacswiki.org/emacs/FlySpell">EmacsWiki</a> suggests <code>(flyspell-prog-mode)</code> which only checks typo in comments.
 </p>
 
 <p>
-But as I have proved, Emacs gives you full freedom to design a <b>different</b> solution.
+But as I proved, Emacs gives you full freedom to design a <b>different</b> solution.
 </p>
 
 <p>
@@ -254,9 +259,14 @@ Screen shot (typos are underscored):
 <span class="section-number-2">5</span> Javascript and ReactJS setup (OPTIONAL)</h3>
 <div class="outline-text-2" id="text-5">
 <p>
+If you fully understand my previous sections, you don't need read this section.
+</p>
+
+<p>
 Insert below code into <code>.emacs</code>, 
 </p>
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(defun js-flyspell-verify ()
   (let* ((f (get-text-property (- (point) 1) 'face)))

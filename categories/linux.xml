@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 07 Dec 2016 12:10:57 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 07 Dec 2016 12:17:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
 &lt;/p&gt;
 
@@ -240,6 +240,17 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 I use &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;Flyspell&lt;/a&gt; in web-mode. But the solution works in other major modes.
 &lt;/p&gt;
 
+&lt;p&gt;
+I assume you already turn on &lt;code&gt;flyspell&lt;/code&gt; for all the programming languages by inserting below code into &lt;code&gt;.emacs&lt;/code&gt;,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'prog-mode-hook 'flyspell-prog-mode)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
 &lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Spell check in HTML&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
@@ -247,11 +258,11 @@ I use &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;Flyspell&lt;/a&gt;
 I will check,
 &lt;/p&gt;
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;Text between html tag like `&amp;lt;label&amp;gt;Please input email&amp;lt;/label&amp;gt;`
+&lt;li&gt;Text between html tag like &lt;code&gt;&amp;lt;label&amp;gt;Please input email&amp;lt;/label&amp;gt;&lt;/code&gt;
 &lt;/li&gt;
-&lt;li&gt;Value of html input control like `&amp;lt;input type="text" value="Please input your name"&amp;gt;`
+&lt;li&gt;Value of html input control like &lt;code&gt;&amp;lt;input type&lt;/code&gt;"text" value="Please input your name"&amp;gt;=
 &lt;/li&gt;
-&lt;li&gt;CSS class name like `&amp;lt;div class="btn btn-default" /&amp;gt;`
+&lt;li&gt;CSS class name like &lt;code&gt;&amp;lt;div class&lt;/code&gt;"btn btn-default" /&amp;gt;=
 &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -301,7 +312,7 @@ My setup:
 &lt;/div&gt;
 
 &lt;p&gt;
-I use &lt;a href="http://web-mode.org/"&gt;web-mode&lt;/a&gt; for HTML files. The technique applies on other modes (php-mode, html-mode ….) 
+I use &lt;a href="http://web-mode.org/"&gt;web-mode&lt;/a&gt; for HTML files. The technique applies on other modes (php-mode, html-mode ….) .
 &lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
@@ -339,10 +350,10 @@ So we need stop displaying doublon as error in HTML,
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Spell check the camel case strings&lt;/h3&gt;
+&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Spell check camel case strings&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-We can check camel cased string/variable/function if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
+We can check camel cased string/variable/function if and only if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -366,7 +377,7 @@ Insert below code into &lt;code&gt;.emacs&lt;/code&gt;,
 &lt;/div&gt;
 
 &lt;p&gt;
-Please note the option "–run-together-min=2" means the minimum length of &lt;b&gt;each word&lt;/b&gt; extracted from camel case string is two. Please run `man aspell` in shell for details.
+Please note the option &lt;code&gt;--run-together-min=2&lt;/code&gt; means the &lt;b&gt;minimum length of each sub-word extracted from camel case string is two&lt;/b&gt;. Please run &lt;code&gt;man aspell&lt;/code&gt; in shell for details.
 &lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;
@@ -375,11 +386,11 @@ Please note the option "–run-together-min=2" means the minimum length of &lt;b
 &lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
-&lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests `(flyspell-prog-mode)` which only checks typo in comments.
+&lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests &lt;code&gt;(flyspell-prog-mode)&lt;/code&gt; which only checks typo in comments.
 &lt;/p&gt;
 
 &lt;p&gt;
-But as I have proved, Emacs gives you full freedom to design a &lt;b&gt;different&lt;/b&gt; solution.
+But as I proved, Emacs gives you full freedom to design a &lt;b&gt;different&lt;/b&gt; solution.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -399,9 +410,14 @@ Screen shot (typos are underscored):
 &lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
+If you fully understand my previous sections, you don't need read this section.
+&lt;/p&gt;
+
+&lt;p&gt;
 Insert below code into &lt;code&gt;.emacs&lt;/code&gt;, 
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
   (let* ((f (get-text-property (- (point) 1) 'face)))
