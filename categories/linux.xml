@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 11:51:56 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 07 Dec 2016 12:10:16 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
 &lt;/p&gt;
 
@@ -237,14 +237,14 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-I use &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;Flyspell&lt;/a&gt; in HTML as an example. But my solution works on other programming languages.
+I use &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;Flyspell&lt;/a&gt; in web-mode. But the solution works in other major modes.
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Smart spell check in HTML&lt;/h3&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Spell check in HTML&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-As a web developer, I prefering checking HTML code instead of typo in comments,
+I will check,
 &lt;/p&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Text between html tag like `&amp;lt;label&amp;gt;Please input email&amp;lt;/label&amp;gt;`
@@ -261,11 +261,13 @@ My setup:
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun web-mode-flyspell-verify ()
-  (let ((f (get-text-property (- (point) 1) 'face))
-        thing
-        rlt)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ flyspell setup for web-mode
+(defun web-mode-flyspell-verify ()
+  (let* ((f (get-text-property (- (point) 1) 'face))
+         rlt)
     (cond
+     ;; Check the words with these font faces, possibly.
+     ;; this *blacklist* will be tweaked in next condition
      ((not (memq f '(web-mode-html-attr-value-face
                      web-mode-html-tag-face
                      web-mode-html-attr-name-face
@@ -279,20 +281,21 @@ My setup:
                      web-mode-css-selector-face
                      web-mode-css-color-face
                      web-mode-type-face
-                     web-mode-block-control-face)
-                 ))
+                     web-mode-block-control-face)))
       (setq rlt t))
+     ;; check attribute value under certain conditions
      ((memq f '(web-mode-html-attr-value-face))
       (save-excursion
         (search-backward-regexp "=['\"]" (line-beginning-position) t)
         (backward-char)
-        (setq thing (thing-at-point 'symbol))
-        (setq rlt (string-match "^\\(value\\|class\\|ng[A-Za-z0-9-]*\\)$" thing))
-        rlt))
-     (t t))
+        (setq rlt (string-match "^\\(value\\|class\\|ng[A-Za-z0-9-]*\\)$"
+                                (thing-at-point 'symbol)))))
+     ;; finalize the blacklist
+     (t
+      (setq rlt nil)))
     rlt))
-
 (put 'web-mode 'flyspell-mode-predicate 'web-mode-flyspell-verify)
+;; }}
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -307,7 +310,7 @@ I use &lt;a href="http://web-mode.org/"&gt;web-mode&lt;/a&gt; for HTML files. Th
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Don't display doublon (double word) as error&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-Modern CSS frameworks like &lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; make doublons unavoidable. For example, CSS class name "btn btn-default" contains double word "btn".
+Modern CSS frameworks like &lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; make doublon unavoidable. For example, CSS class name &lt;code&gt;btn btn-default&lt;/code&gt; contains double word &lt;code&gt;btn&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -339,11 +342,11 @@ So we need stop displaying doublon as error in HTML,
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Spell check the camel case strings&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
-We can also spell check camel cased string/variable/function if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
+We can check camel cased string/variable/function if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
 &lt;/p&gt;
 
 &lt;p&gt;
-Insert below code into ~/.emacs,
+Insert below code into &lt;code&gt;.emacs&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -372,11 +375,11 @@ Please note the option "–run-together-min=2" means the minimum length of &lt;b
 &lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
-&lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests `(flyspell-prog-mode)` which only check typo in comments.
+&lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests `(flyspell-prog-mode)` which only checks typo in comments.
 &lt;/p&gt;
 
 &lt;p&gt;
-But as I have proved in above examples, a little critcal thinking plus some manual reading could make flyspell much more useful.
+But as I have proved, Emacs gives you full freedom to design a &lt;b&gt;different&lt;/b&gt; solution.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -390,6 +393,33 @@ Screen shot (typos are underscored):
 &lt;/div&gt;
 &lt;/div&gt;
 
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+Insert below code into &lt;code&gt;.emacs&lt;/code&gt;, 
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
+  (let* ((f (get-text-property (- (point) 1) 'face)))
+    ;; *whitelist*
+    ;; only words with following font face will be checked
+    (memq f '(js2-function-call
+              js2-function-param
+              js2-object-property
+              font-lock-variable-name-face
+              font-lock-string-face
+              font-lock-function-name-face))))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+(put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><category>spell</category><guid>http://blog.binchen.org/posts/effective-spell-check-in-emacs.html</guid><pubDate>Tue, 21 Jan 2014 12:00:00 GMT</pubDate></item><item><title>How to execute user program for System V init script</title><link>http://blog.binchen.org/posts/how-to-execute-user-program-for-system-v-init-script.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Memo for my self. &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
