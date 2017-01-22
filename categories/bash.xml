@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 05 Dec 2016 12:23:35 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Jan 2017 01:14:43 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Perforce is a proprietary VCS.
 &lt;/p&gt;
 
@@ -92,6 +92,28 @@ If FILE-OPENED, current file is still opened."
   (interactive)
   (shell-command (p4-generate-cmd "revert"))
   (read-only-mode 1))
+
+(defun p4history ()
+  "Show history of current file with patches displayed, like `git log -p'."
+  (interactive)
+  (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
+         rlt-buf
+         (content (mapconcat (lambda (line)
+                               (let* ((chg (nth 1 (split-string line "[\t ]+"))))
+                                 (if chg (shell-command-to-string (format "p4 describe -du %s" chg)))))
+                             changes
+                             "\n\n")))
+    (if (get-buffer "*p4log*")
+        (kill-buffer "*p4log*"))
+    (setq rlt-buf (get-buffer-create "*p4log*"))
+    (save-current-buffer
+      (switch-to-buffer-other-window rlt-buf)
+      (set-buffer rlt-buf)
+      (erase-buffer)
+      (insert content)
+      (diff-mode)
+      (goto-char (point-min))
+      (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t))))))
 ;; }}
 
 (defun prog-mode-hook-setup ()

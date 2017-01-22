@@ -154,6 +154,28 @@ If FILE-OPENED, current file is still opened."
   (interactive)
   (shell-command (p4-generate-cmd "revert"))
   (read-only-mode 1))
+
+(defun p4history ()
+  "Show history of current file with patches displayed, like `git log -p'."
+  (interactive)
+  (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
+         rlt-buf
+         (content (mapconcat (lambda (line)
+                               (let* ((chg (nth 1 (split-string line "[\t ]+"))))
+                                 (if chg (shell-command-to-string (format "p4 describe -du %s" chg)))))
+                             changes
+                             "\n\n")))
+    (if (get-buffer "*p4log*")
+        (kill-buffer "*p4log*"))
+    (setq rlt-buf (get-buffer-create "*p4log*"))
+    (save-current-buffer
+      (switch-to-buffer-other-window rlt-buf)
+      (set-buffer rlt-buf)
+      (erase-buffer)
+      (insert content)
+      (diff-mode)
+      (goto-char (point-min))
+      (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t))))))
 ;; }}
 
 (defun prog-mode-hook-setup ()
@@ -1175,7 +1197,7 @@ You can check <a href="https://github.com/syohex/emacs-git-gutter/issues/124">th
 <li class="next">
                 <a href="index-23.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2016         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
