@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (perforce)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/perforce.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 22 Jan 2017 01:16:27 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (perforce)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/perforce.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jan 2017 11:22:49 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-01-22 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-01-23 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -49,17 +49,13 @@ I suggest using p4's windows native executable on both Cygwin and Windows.
 &lt;p&gt;
 Perforce server has one unique URL for every physical file on the disk. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
 &lt;/p&gt;
-
-&lt;p&gt;
-BTW, I'm confident that my solution is better.
-&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
 &lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Emacs&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-1"&gt;
 &lt;p&gt;
-I provides &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, and &lt;code&gt;p4submit&lt;/code&gt; to &lt;code&gt;edit/revert/submit&lt;/code&gt; current file,
+I provide &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, &lt;code&gt;p4submit&lt;/code&gt;, and &lt;code&gt;p4history&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
