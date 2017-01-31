@@ -663,15 +663,19 @@ Screenshot:
             <div class="body">
                 <div>
 <p>
-I design a quick and <b>newbie friendly</b> solution.
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-25&gt;</span></span>
 </p>
 
 <p>
-It works at Linux/OSX/Cygwin (should work at Windows, but I don't develop at Windows).
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-01-31 Tue&gt;</span></span>
 </p>
 
 <p>
-Setup is minimum. You only need install GNU Global and two Emacs plugins:
+This is a <b>newbie friendly</b> solution which works at Linux/OSX/Cygwin (should work at Windows, but I don't develop at Windows).
+</p>
+
+<p>
+Setup is minimum. Only GNU Global and two Emacs plugins are required:
 </p>
 
 <ul class="org-ul">
@@ -745,7 +749,7 @@ int main(int argc, char *argv[]) {
 Run below command in shell to scan code,
 </p>
 <div class="org-src-container">
-<pre><code class="lang-bash">cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags -O &amp;&amp; cd ~/proj1 &amp;&amp; gtags &amp;&amp; cd ~/proj2 &amp;&amp; gtags
+<pre><code class="lang-bash">cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags &amp;&amp; cd ~/proj1 &amp;&amp; gtags &amp;&amp; cd ~/proj2 &amp;&amp; gtags
 </code></pre>
 
 </div>
