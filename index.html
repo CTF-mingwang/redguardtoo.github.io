@@ -57,11 +57,15 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-12-05&
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-01-23 Mon&gt;</span></span> 
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-01-31 Tue&gt;</span></span>
 </p>
 
 <p>
-Perforce is a proprietary VCS.
+Perforce is a proprietary VCS which is not as powerful as <a href="https://git-scm.com/">Git</a> so it takes extra effort to use it with Emacs.
+</p>
+
+<p>
+For example, git can display the detailed history of a single file using <code>git lop -p file-path</code>. There is no way you can do this in perforce. Combination of perforce cli like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> displays all the files of related changes. You have to turn to Emacs Lisp to clean the output of <code>p4</code>.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -104,7 +108,7 @@ Perforce cygwin portable is not recommended.
 </p>
 
 <p>
-I suggest using p4's windows native executable on both Cygwin and Windows.
+I suggest using executable from Perforce Windows native version which works on both Cygwin and Windows.
 </p>
 
 <p>
@@ -126,12 +130,14 @@ I provide <code>p4edit</code>, <code>p4revert</code>, <code>p4submit</code>, and
   "(car p4-file-to-url) is the original file prefix
 (cadr p4-file-to-url) is the url prefix")
 
+(defun p4-current-file-url ()
+  (replace-regexp-in-string (car p4-file-to-url)
+                            (cadr p4-file-to-url)
+                            buffer-file-name))
+
 (defun p4-generate-cmd (opts)
-  (format "p4 %s %s"
-          opts
-          (replace-regexp-in-string (car p4-file-to-url)
-                                    (cadr p4-file-to-url)
-                                    buffer-file-name)))
+  (format "p4 %s %s" opts (p4-current-file-url)))
+
 (defun p4edit ()
   "p4 edit current file."
   (interactive)
@@ -159,14 +165,48 @@ If FILE-OPENED, current file is still opened."
   (shell-command (p4-generate-cmd "revert"))
   (read-only-mode 1))
 
+(defun p4-show-changelist-patch (line)
+  (let* ((chg (nth 1 (split-string line "[\t ]+")))
+         (url (p4-current-file-url))
+         (pattern "^==== //.*====$")
+         sep
+         seps
+         (start 0)
+         (original (if chg (shell-command-to-string (format "p4 describe -du %s" chg)) ""))
+         rlt)
+
+    (while (setq sep (string-match pattern original start))
+      (let* ((str (match-string 0 original)))
+        (setq start (+ sep (length str)))
+        (add-to-list 'seps (list sep str) t)))
+    (setq rlt (substring original 0 (car (nth 0 seps))))
+    (let* ((i 0) found)
+      (while (and (not found)
+                  (&lt; i (length seps)))
+        (when (string-match url (cadr (nth i seps)))
+          (setq rlt (concat rlt (substring original
+                                           (car (nth i seps))
+                                           (if (= i (- (length seps) 1))
+                                               (length original)
+                                             (car (nth (+ 1 i) seps))))))
+          ;; out of loop now since current file patch found
+          (setq found t))
+        (setq i (+ 1 i))))
+
+    ;; remove p4 verbose bullshit
+    (setq rlt (replace-regexp-in-string "^Affected files \.\.\.[\r\n]+\\(\.\.\. .*[\r\n]+\\)+Differences \.\.\.[\r\n]+"
+                                        ""
+                                        rlt))
+    ;; one line short description of change list
+    (setq rlt (replace-regexp-in-string "Change \\([0-9]+\\) by \\([^ @]+\\)@[^ @]+ on \\([^ \r\n]*\\).*[\r\n \t]+\\([^ \t].*\\)" "\\1 by \\2@\\3 \\4" rlt))
+    rlt))
+
 (defun p4history ()
-  "Show history of current file with patches displayed, like `git log -p'."
+  "Show history of current file like `git log -p'."
   (interactive)
   (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
          rlt-buf
-         (content (mapconcat (lambda (line)
-                               (let* ((chg (nth 1 (split-string line "[\t ]+"))))
-                                 (if chg (shell-command-to-string (format "p4 describe -du %s" chg)))))
+         (content (mapconcat 'p4-show-changelist-patch
                              changes
                              "\n\n")))
     (if (get-buffer "*p4log*")
@@ -179,15 +219,14 @@ If FILE-OPENED, current file is still opened."
       (insert content)
       (diff-mode)
       (goto-char (point-min))
+      ;; nice imenu output
+      (setq imenu-create-index-function
+            (lambda ()
+              (save-excursion
+                (imenu--generic-function '((nil "^[0-9]+ by .*" 0))))))
+      ;; quit easily in evil-mode
       (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t))))))
 ;; }}
-
-(defun prog-mode-hook-setup ()
-  (when (string-match-p "DIR/PROJ1/"
-                        (if buffer-file-name buffer-file-name ""))
-    (setq-local p4-file-to-url '("^.*DIR/PROJ1"
-                                 "//depot/development/DIR/PROJ1"))))
-(add-hook 'prog-mode-hook prog-mode-hook-setup)
 </code></pre>
 
 </div>
