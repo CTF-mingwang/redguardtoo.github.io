@@ -65,7 +65,7 @@ Perforce is a proprietary VCS which is not as powerful as <a href="https://git-s
 </p>
 
 <p>
-For example, git can display the detailed history of a single file using <code>git lop -p file-path</code>. There is no way you can do this in perforce. Combination of perforce cli like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> displays all the files of related changes. You have to turn to Emacs Lisp to clean the output of <code>p4</code>.
+For example, git can display the detailed history of a single file using <code>git log -p file-path</code>. There is no way you can do this in perforce. Combination of perforce cli like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> displays all the files of related changes. You have to turn to Emacs Lisp to clean the output of <code>p4</code>.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
@@ -80,10 +80,10 @@ For example, git can display the detailed history of a single file using <code>g
 <code>p4 login</code> to login
 </li>
 <li>
-<code>p4 client</code> creates a new work space to tell server which files to check out or to ignore
+<code>p4 client</code> creates a new work space to tell server the directories/files to check out or to ignore
 </li>
 <li>
-<code>p4 sync ...</code> to download files
+<code>p4 sync //depot/url/...</code> to actually checkout
 </li>
 <li>Files are read-only by default. You need <code>p4 edit file</code> to make files writable before editing
 </li>
@@ -121,7 +121,7 @@ Perforce server has one unique URL for every physical file on the disk. If I onl
 <span class="section-number-3">2.1</span> Emacs</h4>
 <div class="outline-text-3" id="text-2-1">
 <p>
-I provide <code>p4edit</code>, <code>p4revert</code>, <code>p4submit</code>, and <code>p4history</code>,
+I provide <code>p4edit</code>, <code>p4revert</code>, <code>p4submit</code>, <code>p4diff</code>, and <code>p4history</code>,
 </p>
 <div class="org-src-container">
 
@@ -201,17 +201,11 @@ If FILE-OPENED, current file is still opened."
     (setq rlt (replace-regexp-in-string "Change \\([0-9]+\\) by \\([^ @]+\\)@[^ @]+ on \\([^ \r\n]*\\).*[\r\n \t]+\\([^ \t].*\\)" "\\1 by \\2@\\3 \\4" rlt))
     rlt))
 
-(defun p4history ()
-  "Show history of current file like `git log -p'."
-  (interactive)
-  (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
-         rlt-buf
-         (content (mapconcat 'p4-show-changelist-patch
-                             changes
-                             "\n\n")))
-    (if (get-buffer "*p4log*")
-        (kill-buffer "*p4log*"))
-    (setq rlt-buf (get-buffer-create "*p4log*"))
+(defun p4--create-buffer (buf-name content &amp;optional enable-imenu)
+  (let* (rlt-buf)
+    (if (get-buffer buf-name)
+        (kill-buffer buf-name))
+    (setq rlt-buf (get-buffer-create buf-name))
     (save-current-buffer
       (switch-to-buffer-other-window rlt-buf)
       (set-buffer rlt-buf)
@@ -220,12 +214,28 @@ If FILE-OPENED, current file is still opened."
       (diff-mode)
       (goto-char (point-min))
       ;; nice imenu output
-      (setq imenu-create-index-function
-            (lambda ()
-              (save-excursion
-                (imenu--generic-function '((nil "^[0-9]+ by .*" 0))))))
-      ;; quit easily in evil-mode
-      (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t))))))
+      (if enable-imenu
+          (setq imenu-create-index-function
+                (lambda ()
+                  (save-excursion
+                    (imenu--generic-function '((nil "^[0-9]+ by .*" 0))))))
+        ;; quit easily in evil-mode
+        (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t)))))))
+
+(defun p4diff ()
+  "Show diff of current file like `git diff'."
+  (interactive)
+  (let* ((content (shell-command-to-string (p4-generate-cmd "diff -du -db"))))
+    (p4--create-buffer "*p4diff*" content)))
+
+(defun p4history ()
+  "Show history of current file like `git log -p'."
+  (interactive)
+  (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
+         (content (mapconcat 'p4-show-changelist-patch
+                             changes
+                             "\n\n")))
+    (p4--create-buffer "*p4log*" content t)))
 ;; }}
 </code></pre>
 
