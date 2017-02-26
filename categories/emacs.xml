@@ -1,5 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 08 Feb 2017 10:30:09 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 26 Feb 2017 04:31:55 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the implementation (&lt;a href="https://github.com/abo-abo/swiper"&gt;ivy&lt;/a&gt; and &lt;a href="https://github.com/cute-jumper/pinyinlib.el"&gt;pinyinlib required&lt;/a&gt;):
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun ivy-switch-buffer-matcher-pinyin (regexp candidates)
+  (unless (featurep 'pinyinlib) (require 'pinyinlib))
+  (let* ((pys (split-string regexp "[ \t]+"))
+         (regexp (format ".*%s.*"
+                         (mapconcat 'pinyinlib-build-regexp-string pys ".*"))))
+    (ivy--switch-buffer-matcher regexp candidates)))
+
+(defun ivy-switch-buffer-by-pinyin ()
+  "Switch to another buffer."
+  (interactive)
+  (unless (featurep 'ivy) (require 'ivy))
+  (let ((this-command 'ivy-switch-buffer))
+    (ivy-read "Switch to buffer: " 'internal-complete-buffer
+              :matcher #'ivy-switch-buffer-matcher-pinyin
+              :preselect (buffer-name (other-buffer (current-buffer)))
+              :action #'ivy--switch-buffer-action
+              :keymap ivy-switch-buffer-map
+              :caller 'ivy-switch-buffer)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You can &lt;code&gt;M-x ivy-switch-buffer-by-pinyin&lt;/code&gt; to switch buffer.
+&lt;/p&gt;
+
+&lt;p&gt;
+The algorithm of pinyinlib is actually pretty simple. We build a big lookup table to convert the string users input into a regular expression containing possible Chinese characters.
+&lt;/p&gt;
+
+&lt;p&gt;
+You can apply the &lt;b&gt;same algorithm to other non-English languages&lt;/b&gt;.
+&lt;/p&gt;&lt;/div&gt;</description><category>chinese</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</guid><pubDate>Sun, 26 Feb 2017 04:27:42 GMT</pubDate></item><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -1040,11 +1082,4 @@ Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git g
 
 &lt;p&gt;
 I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item><item><title>Make Messages Buffer modifiable in Emacs 24.4</title><link>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
-  (if (string= "*Messages*" (buffer-name))
-      (read-only-mode -1)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;</description><category>buffer</category><category>emacs</category><category>en</category><category>messages</category><guid>http://blog.binchen.org/posts/make-messages-buffer-modifiable-in-emacs-24-4.html</guid><pubDate>Wed, 18 May 2016 00:42:32 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item></channel></rss>
