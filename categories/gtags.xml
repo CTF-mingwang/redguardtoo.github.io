@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gtags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gtags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Feb 2017 11:14:34 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gtags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gtags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Feb 2017 11:16:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-08-25&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-01-31 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-02-28 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -30,19 +30,19 @@ Here is the step to step guide.
 &lt;h3 id="sec-1"&gt;Step 1, create sample projects for experiment&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-Say I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;.
+I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-Both projects will use files from &lt;b&gt;read only&lt;/b&gt; directories &lt;code&gt;/usr/include&lt;/code&gt; and &lt;code&gt;/usr/src/linux/include&lt;/code&gt;.
+Both projects use files from &lt;b&gt;read only&lt;/b&gt; directories &lt;code&gt;/usr/include&lt;/code&gt; and &lt;code&gt;/usr/src/linux/include&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-We create a new directory &lt;code&gt;~/obj&lt;/code&gt; to store index files from third party libraries whose directories are &lt;b&gt;read only&lt;/b&gt;.
+We create a new directory &lt;code&gt;~/obj&lt;/code&gt; to store index files created by GNU Global because directories of third party libraries are &lt;b&gt;read only&lt;/b&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-Create directories,
+Let's create directories,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
