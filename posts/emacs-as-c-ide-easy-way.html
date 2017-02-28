@@ -108,13 +108,20 @@ Here is the step to step guide.
 <span class="section-number-2">1</span> Step 1, create sample projects for experiment</h3>
 <div class="outline-text-2" id="text-1">
 <p>
-Say I have two projects <code>~/proj1</code> and <code>~/proj2</code>. Both projects will use third party library C++ header files from <b>read-only</b> directory <code>/usr/include</code>.
+Say I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
 
 <p>
-A new directory <code>~/obj</code> to store the index files of third party libraries.
+Both projects will use third party library C++ header files from <b>read only</b> directories <code>/usr/include</code> and =/usr/src/linux/include.
 </p>
 
+<p>
+We create a new directory <code>~/obj</code> to store the index files of <b>all</b> third party libraries whose directories are <b>read only</b> where GNU Global can't create index files.
+</p>
+
+<p>
+Create directories,
+</p>
 <div class="org-src-container">
 
 
@@ -162,19 +169,28 @@ int main(int argc, char *argv[]) {
 Run below command in shell to scan code,
 </p>
 <div class="org-src-container">
-<pre><code class="lang-bash">cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags &amp;&amp; cd ~/proj1 &amp;&amp; gtags &amp;&amp; cd ~/proj2 &amp;&amp; gtags
+<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
+cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
+cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
+... 
+# dump index files inside the projects
+cd ~/proj1 &amp;&amp; gtags 
+cd ~/proj2 &amp;&amp; gtags
+...
 </code></pre>
 
 </div>
 
 <p>
-After setting up the corresponding Emacs plugins (minimum setup copied from their website is enough), insert below code into ~/.emacs,
+After installing Emacs plugins (minimum setup from their website is enough), insert below code into ~/.emacs,
 </p>
 
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; Please note `file-truename' must be used!
 (setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               "/usr/src/linux/include"
                                ":"
                                (file-truename "~/proj2")
                                ":"

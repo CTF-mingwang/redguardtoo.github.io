@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 26 Feb 2017 04:36:25 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Feb 2017 11:09:13 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -563,13 +563,20 @@ Here is the step to step guide.
 &lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Step 1, create sample projects for experiment&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
-Say I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;. Both projects will use third party library C++ header files from &lt;b&gt;read-only&lt;/b&gt; directory &lt;code&gt;/usr/include&lt;/code&gt;.
+Say I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-A new directory &lt;code&gt;~/obj&lt;/code&gt; to store the index files of third party libraries.
+Both projects will use third party library C++ header files from &lt;b&gt;read only&lt;/b&gt; directories &lt;code&gt;/usr/include&lt;/code&gt; and =/usr/src/linux/include.
 &lt;/p&gt;
 
+&lt;p&gt;
+We create a new directory &lt;code&gt;~/obj&lt;/code&gt; to store the index files of &lt;b&gt;all&lt;/b&gt; third party libraries whose directories are &lt;b&gt;read only&lt;/b&gt; where GNU Global can't create index files.
+&lt;/p&gt;
+
+&lt;p&gt;
+Create directories,
+&lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
 
@@ -615,19 +622,28 @@ int main(int argc, char *argv[]) {
 Run below command in shell to scan code,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-&lt;pre&gt;&lt;code class="lang-bash"&gt;cd /usr/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags &amp;amp;&amp;amp; cd ~/proj1 &amp;amp;&amp;amp; gtags &amp;amp;&amp;amp; cd ~/proj2 &amp;amp;&amp;amp; gtags
+&lt;pre&gt;&lt;code class="lang-bash"&gt;# dump index files to ~/obj if the project/library directories are read only
+cd /usr/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
+cd /usr/linux/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
+... 
+# dump index files inside the projects
+cd ~/proj1 &amp;amp;&amp;amp; gtags 
+cd ~/proj2 &amp;amp;&amp;amp; gtags
+...
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-After setting up the corresponding Emacs plugins (minimum setup copied from their website is enough), insert below code into ~/.emacs,
+After installing Emacs plugins (minimum setup from their website is enough), insert below code into ~/.emacs,
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Please note `file-truename' must be used!
 (setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               "/usr/src/linux/include"
                                ":"
                                (file-truename "~/proj2")
                                ":"
