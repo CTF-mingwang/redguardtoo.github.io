@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 12 Aug 2016 07:03:54 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about html)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/html.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Code completion for HTML/JS/CSS in Emacs</title><link>http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-27&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -221,8 +221,8 @@ It means the hooks of the major modes will be executed. Since I put lots of heav
 My hooks are also dependent on third party tools. So if anyone else uses my setup without those tools, his/her exporting will &lt;a href="https://github.com/redguardtoo/emacs.d/issues/316"&gt;fail&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -232,11 +232,13 @@ My hooks are also dependent on third party tools. So if anyone else uses my setu
 &lt;p&gt;
 In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
 &lt;/p&gt;
+
 &lt;p&gt;
 The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar load-user-customized-major-mode-hook t)
 (defvar cached-normal-file-full-path nil)
@@ -268,8 +270,7 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
 &lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Usage&lt;/h4&gt;
@@ -278,6 +279,8 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 I use python-mode-hook setup as an example:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'python-mode-hook
           '(lambda ()
              (unless (is-buffer-file-temp)
@@ -289,10 +292,11 @@ I use python-mode-hook setup as an example:
                )))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Tips&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -300,7 +304,7 @@ I use python-mode-hook setup as an example:
 &lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Export shell code&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-1"&gt;
 &lt;p&gt;
-Exporting shell code will fail if &lt;code&gt;sh-mode&lt;/code&gt; is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
+Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -316,13 +320,14 @@ To avoid loading yasnippets when exporting, I have to &lt;a href="https://github
 &lt;h4 id="sec-3-3"&gt;&lt;span class="section-number-3"&gt;3.3&lt;/span&gt; Manually turn off the major-mode hook&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-3"&gt;
 &lt;p&gt;
-It's controlled by global flag &lt;code&gt;load-user-customized-major-mode-hook&lt;/code&gt;, as you can see from the "Setup" section.
+It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
 &lt;/p&gt;
+
 &lt;p&gt;
 Say I want to turn off the major mode hooks when `M-x org-publish`, here is the setup:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice org-publish (around org-publish-advice activate)
   "Stop running major-mode hook when org-publish"
@@ -333,14 +338,13 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-3-4" class="outline-3"&gt;
 &lt;h4 id="sec-3-4"&gt;&lt;span class="section-number-3"&gt;3.4&lt;/span&gt; after-save-hook&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-4"&gt;
 &lt;p&gt;
-&lt;code&gt;after-save-hook&lt;/code&gt; is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files&lt;/p&gt;
+`after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>export</category><category>html</category><category>org</category><guid>http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html</guid><pubDate>Thu, 20 Nov 2014 12:22:17 GMT</pubDate></item><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-sec-1" class="outline-2"&gt;
@@ -378,8 +382,8 @@ For me, a practical solution must be:
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -387,6 +391,7 @@ For me, a practical solution must be:
 The best solution is firefox addon &lt;a href="https://github.com/bard/mozrepl/wiki"&gt;MozRepl&lt;/a&gt;. You can install it &lt;a href="https://addons.mozilla.org"&gt;https://addons.mozilla.org&lt;/a&gt;. Click firefox menu "Tools =&amp;gt; MozRepl =&amp;gt; Start" to run it.
 &lt;img src="http://blog.binchen.org/wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 So what is MozRepl, as its web site says, "MozRepl lets you program Firefox and other Mozilla-based applications &lt;b&gt;from the inside&lt;/b&gt;." Basically it convert firefox into a socket server. Your text editor could talk to firefox and let firefox do anything you want. Since it only interact with the firefox, I don't need mess with the web server.
 &lt;/p&gt;
@@ -406,7 +411,6 @@ Section 1 is about how to use MozRepl, whatever text editor you use, you should 
 &lt;p&gt;
 Section 2 is on how to set up my text editor Emacs to interact with MozRepl. It's optional.
 &lt;/p&gt;
-
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
@@ -470,9 +474,9 @@ As you can see from above, I can use jQuery API loaded in that web page without 
 &lt;p&gt;
 Please note the code is not part of my web application! It will be run only in MozRepl. You can telnet to the MozRepl socket server (127.0.0.1 with port 4424) and copy paste above code line by line.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
 &lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Section 2, set up text editor (Emacs)&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-2"&gt;
@@ -527,10 +531,10 @@ Step 2, Please insert below code into your ~/.emacs:
 &lt;p&gt;
 From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js file you need MozRepl to run.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Tips&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -540,6 +544,7 @@ From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js 
 &lt;p&gt;
 Well, this is a simple tip. Maybe you are already aware of this.
 &lt;/p&gt;
+
 &lt;p&gt;
 You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separate logic for different project.
 &lt;/p&gt;
@@ -547,8 +552,8 @@ You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separa
 &lt;p&gt;
 Here is javascript code,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
 if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
@@ -563,9 +568,9 @@ if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
 &lt;p&gt;
 Since javascript is good at analyzing URL, you can also tweak the URL parameters. Anyway, the full power of javascript is at your hand.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
 &lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Tip 2&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-2"&gt;
@@ -583,10 +588,10 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
 &lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Demo&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
@@ -604,7 +609,6 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>frontend</category><category>html</category><category>javascript</category><category>repl</category><guid>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</guid><pubDate>Mon, 10 Feb 2014 21:56:00 GMT</pubDate></item><item><title>Why Emacs is better editor - a case study for javascript developer</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;UPDATED: &lt;span class="timestamp-wrapper"&gt; &lt;span class="timestamp"&gt;2014-01-15 Wed&lt;/span&gt;&lt;/span&gt; &lt;/p&gt; &lt;p&gt; Let's see an example in real life development. &lt;/p&gt; &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Note&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;For people who does not get the key points of this article, here are the points: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Emacs has an embedded &lt;b&gt;javascript interpreter&lt;/b&gt; which I extend a little bit. &lt;/li&gt; &lt;li&gt;Other editors just use external tools or regular expression to do the semantic analysis. &lt;/li&gt; &lt;li&gt;The difference of above two is bigger than the difference between machine gun and spear. &lt;/li&gt; &lt;/ul&gt;   &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Problem&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;I'm maintaining a big javascript file with thousands of lines of legacy code. &lt;/p&gt; &lt;p&gt; My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. &lt;/p&gt; &lt;p&gt; The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. &lt;/p&gt; &lt;p&gt; To understand what "complex" means, let's check some code from real world application: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 

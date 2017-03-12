@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (salesforce)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/salesforce.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 12 Aug 2016 07:03:51 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs vs Sublime Text on Salesforce development</title><link>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about salesforce)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/salesforce.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs vs Sublime Text on Salesforce development</title><link>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Our client decided to move their legacy system to a cloud platform called salesforce.com. So I got a chance to investigate how to &lt;b&gt;deploy code&lt;/b&gt; to the salesforce server inside Emacs and Sublime Text.
 &lt;/p&gt;
 
@@ -34,14 +34,15 @@ Mavensmate is actually just GUI wrapper of Force.com CLI,
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Emacs&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 In Sublime Text I have to re-login and fetch from time to time. That get me distracted. I prefer executing only one commmand to upload the file in editing. That command should be always successful.
 &lt;/p&gt;
+
 &lt;p&gt;
 My solution is to combine "login/fetch/push" commnands into one liner which is stored in a file local variable &lt;code&gt;compile-command&lt;/code&gt;. So when I execute &lt;code&gt;M-x compile&lt;/code&gt;, the commands "login/fetch/push" in &lt;code&gt;compile-command&lt;/code&gt; will all be executed sequentially. So I don't need care about login and fetch things any more.
 &lt;/p&gt;
@@ -49,8 +50,8 @@ My solution is to combine "login/fetch/push" commnands into one liner which is s
 &lt;p&gt;
 Here is my setup,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-setup-develop-environment ()
   (interactive)
@@ -92,6 +93,5 @@ Here is my setup,
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>salesforce</category><category>sublime</category><guid>http://blog.binchen.org/posts/emacs-vs-sublime-text-on-salesforce-development.html</guid><pubDate>Mon, 14 Mar 2016 10:42:31 GMT</pubDate></item></channel></rss>

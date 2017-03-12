@@ -23,7 +23,7 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/demo-blog-1.html">Demo blog post created by nikola&amp;org2nikola</a></h1>
+            <h1 class="title"><a href="posts/demo-blog-post-created-by-nikolaorg2nikola.html">Demo blog post created by nikola&amp;org2nikola</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2015-01-25T10:11:19+00:00">2015-01-25 10:11</time>
@@ -31,11 +31,21 @@
                 <div class="stats">
                     
         
-    <a href="posts/demo-blog-1.html#disqus_thread" data-disqus-identifier="cache/posts/demo-blog-1.html">Comments</a>
+    <a href="posts/demo-blog-post-created-by-nikolaorg2nikola.html#disqus_thread" data-disqus-identifier="cache/posts/demo-blog-post-created-by-nikolaorg2nikola.html">Comments</a>
 
 
                 </div>
             
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/nikola.html" rel="tag">nikola</a></li>
+           <li><a class="tag p-category" href="categories/org2nikola.html" rel="tag">org2nikola</a></li>
+        </ul>
+</div>
 
             </div>
             <div class="body">
@@ -46,8 +56,7 @@ python code:
 
 <div class="org-src-container">
 
-<pre><code class="lang-python">
-import getopt, sys
+<pre><code class="lang-python">import getopt, sys
 if __name__ == '__main__':
     opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
     for o, a in opts:
@@ -466,7 +475,6 @@ The only way to debug such application is to insert as many as possible logging 
 So my problem is how to insert logging code as quickly as possible.
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
@@ -501,10 +509,9 @@ Snippet:
 <p>
 This snippet need you input variable name once.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-4" class="outline-2">
 <h3 id="sec-4">
 <span class="section-number-2">4</span> Logging complex JS variable</h3>
@@ -522,7 +529,6 @@ Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet</a>
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
@@ -558,10 +564,9 @@ Please check <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/in
 <p>
 The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-6" class="outline-2">
 <h3 id="sec-6">
 <span class="section-number-2">6</span> Logging JS function name with its parameters</h3>
@@ -591,10 +596,9 @@ Snippet:
 <p>
 BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the parameter into kill-ring is as simple as pressing "yi(".
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-7" class="outline-2">
 <h3 id="sec-7">
 <span class="section-number-2">7</span> Insert JS debugger statement</h3>
@@ -612,7 +616,6 @@ Snippets:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet</a>
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-8" class="outline-2">
@@ -678,7 +681,6 @@ Screenshot:
 I only use the grid layout from bootstrap and minimum API from jQuery.
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
@@ -702,7 +704,6 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </code></pre>
 
 </div>
-
 <ul class="org-ul">
 <li>bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
 </li>
@@ -711,6 +712,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </ul>
 <div class="org-src-container">
 
+
 <pre><code class="lang-javascript">if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
   that.ie7 = true;
   $('body').addClass('ie7');
@@ -718,8 +720,6 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -833,9 +833,8 @@ It means the hooks of the major modes will be executed. Since I put lots of heav
 My hooks are also dependent on third party tools. So if anyone else uses my setup without those tools, his/her exporting will <a href="https://github.com/redguardtoo/emacs.d/issues/316">fail</a>.
 </p>
 </div>
-
-<p></p>
 </div>
+
 <div id="outline-container-sec-2" class="outline-2">
 <h3 id="sec-2">
 <span class="section-number-2">2</span> Solution</h3>
@@ -848,11 +847,13 @@ My hooks are also dependent on third party tools. So if anyone else uses my setu
 <p>
 In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
 </p>
+
 <p>
 The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
 </p>
 
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(defvar load-user-customized-major-mode-hook t)
 (defvar cached-normal-file-full-path nil)
@@ -884,8 +885,6 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 <div id="outline-container-sec-2-2" class="outline-3">
@@ -896,6 +895,8 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 I use python-mode-hook setup as an example:
 </p>
 <div class="org-src-container">
+
+
 <pre><code class="lang-lisp">(add-hook 'python-mode-hook
           '(lambda ()
              (unless (is-buffer-file-temp)
@@ -907,11 +908,11 @@ I use python-mode-hook setup as an example:
                )))
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
 </div>
+
 <div id="outline-container-sec-3" class="outline-2">
 <h3 id="sec-3">
 <span class="section-number-2">3</span> Tips</h3>
@@ -922,7 +923,7 @@ I use python-mode-hook setup as an example:
 <span class="section-number-3">3.1</span> Export shell code</h4>
 <div class="outline-text-3" id="text-3-1">
 <p>
-Exporting shell code will fail if <code>sh-mode</code> is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
+Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 </p>
 </div>
 </div>
@@ -940,13 +941,14 @@ To avoid loading yasnippets when exporting, I have to <a href="https://github.co
 <span class="section-number-3">3.3</span> Manually turn off the major-mode hook</h4>
 <div class="outline-text-3" id="text-3-3">
 <p>
-It's controlled by global flag <code>load-user-customized-major-mode-hook</code>, as you can see from the "Setup" section.
+It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
 </p>
+
 <p>
 Say I want to turn off the major mode hooks when `M-x org-publish`, here is the setup:
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(defadvice org-publish (around org-publish-advice activate)
   "Stop running major-mode hook when org-publish"
@@ -957,8 +959,6 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 <div id="outline-container-sec-3-4" class="outline-3">
@@ -966,7 +966,7 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
 <span class="section-number-3">3.4</span> after-save-hook</h4>
 <div class="outline-text-3" id="text-3-4">
 <p>
-<code>after-save-hook</code> is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files</p>
+`after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files</p>
 </div>
 </div>
 </div>
@@ -1076,10 +1076,9 @@ Requirements:
 <p>
 You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-2" class="outline-2">
 <h3 id="sec-2">
 <span class="section-number-2">2</span> Why</h3>
@@ -1099,7 +1098,6 @@ I used <a href="https://wordpress.org">Wordpress</a> and <a href="https://github
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by <a href="https://github.com/punchagan">Puneeth Chaganti</a>'s excellent work on org2blog.
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
@@ -1196,10 +1194,9 @@ The code snippet inside "&lt;pre&gt;" tag could be rendered by 3rd party javascr
 <p>
 BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-3-2" class="outline-3">
 <h4 id="sec-3-2">
 <span class="section-number-3">3.2</span> Create blog posts</h4>
@@ -1240,7 +1237,6 @@ Scanning posts....done!
 Only the files in sub-folder "output" need be uploaded.
 </p>
 </div>
-
 </div>
 
 <div id="outline-container-sec-3-3" class="outline-3">
@@ -1265,8 +1261,6 @@ The final output contain lines like:
 <p>
 As you can see, each line is a ftp upload command we need execute in shell.
 </p>
-
-<p></p>
 </div>
 </div>
 <div id="outline-container-sec-3-4" class="outline-3">
@@ -1276,6 +1270,7 @@ As you can see, each line is a ftp upload command we need execute in shell.
 <p>
 Ncftp is my choice of FTP client. It's solid and efficient.
 </p>
+
 <p>
 Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is <b>extremely fast</b>.
 </p>
@@ -1287,11 +1282,10 @@ I use Emacs Lisp API `file-truename` to convert all relative path to absolute pa
 <p>
 BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
 <div id="outline-container-sec-4" class="outline-2">
 <h3 id="sec-4">
 <span class="section-number-2">4</span> Summary</h3>
@@ -1299,6 +1293,7 @@ BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
 <p>
 The workflow is simple.
 </p>
+
 <p>
 Emacs and third party JS libraries are responsible for the look and feel of my website.
 </p>
@@ -1309,8 +1304,6 @@ Blog generator like Nikola is just a thin layer to relay the HTML files created 
 
 <p>
 Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.</p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -1381,10 +1374,9 @@ Insert below code to ~/.emacs:
 <p>
 Now you can use `M-x rimenu-jump` to jump.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-2" class="outline-2">
 <h3 id="sec-2">
 <span class="section-number-2">2</span> Technical details</h3>
@@ -1392,6 +1384,7 @@ Now you can use `M-x rimenu-jump` to jump.
 <p>
 Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
 </p>
+
 <p>
 I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
 </p>
@@ -1399,8 +1392,6 @@ I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes
 <p>
 Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ">original discussion on G+</a>. Thanks to <a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts">Jorge A. Alfaro Murillo</a> for enlightening me on the solution.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -1414,7 +1405,7 @@ Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZ
             <li class="next">
                 <a href="index-18.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

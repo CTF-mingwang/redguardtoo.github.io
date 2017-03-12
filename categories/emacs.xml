@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Feb 2017 11:16:29 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -96,7 +96,6 @@ I suggest using executable from Perforce Windows native version which works on b
 Perforce server has one unique URL for every physical file on the disk. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
 &lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Emacs&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-1"&gt;
@@ -104,6 +103,7 @@ Perforce server has one unique URL for every physical file on the disk. If I onl
 I provide &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, &lt;code&gt;p4submit&lt;/code&gt;, &lt;code&gt;p4diff&lt;/code&gt;, and &lt;code&gt;p4history&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ perforce utilities
 (defvar p4-file-to-url '("" "")
@@ -225,8 +225,8 @@ If FILE-OPENED, current file is still opened."
 &lt;p&gt;
 As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;find-file-in-project&lt;/a&gt;, insert below code into &lt;code&gt;prog-mode-hook&lt;/code&gt; to view any perforce change inside Emacs,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq-local ffip-diff-backends
             '((ivy-read "p4 change to show:"
@@ -240,9 +240,9 @@ As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
 &lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Bash Shell&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-2"&gt;
@@ -250,6 +250,7 @@ As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-
 Other operations are finished in Bash Shell,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# {{ Perforce, I hope I will never use it
 if [ "$OS_NAME" = "CYGWIN" ]; then
@@ -375,8 +376,7 @@ function p4ml(){
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>shell</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-08-25&amp;gt;&lt;/span&gt;&lt;/span&gt;
@@ -434,8 +434,8 @@ Let's create directories,
 &lt;p&gt;
 The content of &lt;code&gt;~/proj2/lib.cpp&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;void proj2_hello(int a2, char* b2) {
 }
@@ -446,8 +446,8 @@ The content of &lt;code&gt;~/proj2/lib.cpp&lt;/code&gt;,
 &lt;p&gt;
 The content of &lt;code&gt;~/proj1/main.cpp&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;void proj1_hello(int a1, char* b1) {
 }
@@ -458,9 +458,9 @@ int main(int argc, char *argv[]) {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -468,6 +468,7 @@ int main(int argc, char *argv[]) {
 Run below command in shell to scan code,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# dump index files to ~/obj if the project/library directories are read only
 cd /usr/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
 cd /usr/linux/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
@@ -483,8 +484,8 @@ cd ~/proj2 &amp;amp;&amp;amp; gtags
 &lt;p&gt;
 After installing Emacs plugins (minimum setup from their website is enough), insert below code into ~/.emacs,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Please note `file-truename' must be used!
 (setenv "GTAGSLIBPATH" (concat "/usr/include"
@@ -499,15 +500,16 @@ After installing Emacs plugins (minimum setup from their website is enough), ins
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;Usage&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
 Use the Emacs plugins as usual.
 &lt;/p&gt;
+
 &lt;p&gt;
 But you need install latest company built on 25th August because I &lt;a href="https://github.com/company-mode/company-mode/issues/570"&gt;fixed a company issue&lt;/a&gt; yesterday.
 &lt;/p&gt;
@@ -516,13 +518,14 @@ But you need install latest company built on 25th August because I &lt;a href="h
 Screenshot,
 &lt;/p&gt;
 
+
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/cpp-gtags-demo-nq8.png" alt="cpp-gtags-demo-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
 &lt;h3 id="sec-4"&gt;Technical Details (Optional)&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
@@ -622,9 +625,9 @@ If NOT-JSON-P is not nil, validate as Javascript expression instead of JSON."
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Print JSON path&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
@@ -657,9 +660,9 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -824,20 +827,21 @@ Create directory &lt;code&gt;site-lisp&lt;/code&gt; at &lt;code&gt;~/.emacs.d&lt
 &lt;p&gt;
 You can create a sub-directory under &lt;code&gt;~/.emacs.d/site-lisp/&lt;/code&gt; and place your package's source code inside that sub-directory.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
 &lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Technique 2, Create your own package repository&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 Step 1, Place two files "archive-contents" and "hello-1.0.0.el" in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Content of &lt;code&gt;archive-contents&lt;/code&gt;:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(1
  (hello . [(1 0 0) nil "Say hello" single])
@@ -849,8 +853,8 @@ Content of &lt;code&gt;archive-contents&lt;/code&gt;:
 &lt;p&gt;
 Content of &lt;code&gt;hello-1.0.0.el&lt;/code&gt;:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;;;###autoload
 (defun hello-say ()
@@ -865,8 +869,8 @@ Content of &lt;code&gt;hello-1.0.0.el&lt;/code&gt;:
 &lt;p&gt;
 Step 2, insert below code into ~/.emacs,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'package-archives '("localelpa" . "~/.emacs.d/localelpa"))
 &lt;/code&gt;&lt;/pre&gt;
@@ -888,9 +892,9 @@ I also create plugin &lt;a href="https://github.com/redguardtoo/elpa-mirror"&gt;
 &lt;p&gt;
 It also &lt;b&gt;solve the issue of orphan package&lt;/b&gt;. In order to get a clean setup without orphan packages, you only need delete everything from &lt;code&gt;~/.emacs.d/elpa&lt;/code&gt; and set the repository to the local one build by elpa-mirror. It takes 30 seconds to install 300 packages.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
 &lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Technique 3, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;advice&lt;/a&gt; &lt;code&gt;package--add-to-archive-contents&lt;/code&gt; to filter packages&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
@@ -962,19 +966,19 @@ The initial version of above code was copied Steve Purcell's setup years ago.
 &lt;p&gt;
 I developed my own strategy based on his code. The first thing I did is reverse his logic. In his code melpa-unstable take &lt;b&gt;the highest priority&lt;/b&gt; while in my code melpa-unstable takes &lt;b&gt;the lowest&lt;/b&gt; priority.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
 &lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 You can combine my techniques to &lt;b&gt;solve any package problem&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 For example, package A is dependent on package B. Both A and B have two versions, 1.0 and 2.0:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;A 2.0 can use B 1.0 and B 2.0, but A 1.0 can ONLY use B 1.0
 &lt;/li&gt;
@@ -996,8 +1000,7 @@ It took me fifteen minutes to reach the opposite conclusion when I was still abs
 
 &lt;p&gt;
 It's possibly I learned the Emacs by cloning and reading code. You can read my guide "&lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide"&gt;Master Emacs In One Year&lt;/a&gt;" for more details.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</guid><pubDate>Thu, 30 Jun 2016 11:09:42 GMT</pubDate></item><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;

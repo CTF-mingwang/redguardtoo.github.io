@@ -76,7 +76,6 @@ So I have several issues to resolve:
 </li>
 </ul>
 </div>
-
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
@@ -148,8 +147,6 @@ It will automatically fetch the first name of agent,
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 <div id="outline-container-sec-2-2" class="outline-3">
@@ -160,6 +157,8 @@ It will automatically fetch the first name of agent,
 Add following code into .emacs to make yasnippet load the emacs templates:
 </p>
 <div class="org-src-container">
+
+
 <pre><code class="lang-lisp">(require 'yasnippet)
 (setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
@@ -168,7 +167,6 @@ Add following code into .emacs to make yasnippet load the emacs templates:
 (yas-global-mode 1)
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -428,10 +426,9 @@ For <a href="http://www.archlinux.org">ArchLinux</a> only:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-2" class="outline-2">
 <h3 id="sec-2">
 <span class="section-number-2">2</span> Install</h3>
@@ -444,10 +441,9 @@ sudo systemctl start cronie
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-3" class="outline-2">
 <h3 id="sec-3">
 <span class="section-number-2">3</span> Add cron task to start and stop rtorrent service</h3>
@@ -462,8 +458,8 @@ sudo systemctl start cronie
 <p>
 The default editor will be open, input below content:
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-conf">#start rtorrent sesssion at 1am
 0 1 * * * /usr/bin/screen -fa -d -m -S torrent /usr/bin/rtorrent
@@ -476,8 +472,6 @@ The default editor will be open, input below content:
 <p>
 Done!
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -735,10 +729,9 @@ Here is my configuration of window-numbering.el:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-2" class="outline-2">
 <h3 id="sec-2">
 <span class="section-number-2">2</span> evil-mode</h3>
@@ -770,10 +763,9 @@ Here is my configuration:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
 <div id="outline-container-sec-4" class="outline-2">
 <h3 id="sec-4">
 <span class="section-number-2">4</span> updated</h3>
@@ -781,6 +773,7 @@ Here is my configuration:
 <p>
 I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
 </p>
+
 <p>
 According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
 </p>
@@ -796,8 +789,8 @@ Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1",
 <p>
 Here is the code:
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(define-key evil-normal-state-map ",1" 'select-window-1)
 (define-key evil-normal-state-map ",2" 'select-window-2)
@@ -810,8 +803,6 @@ Here is the code:
 <p>
 Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -825,7 +816,7 @@ Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup a
             <li class="next">
                 <a href="index-7.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>
