@@ -80,6 +80,10 @@ sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 
 # one debian/ubuntu, you need: `apt-get install libxml2-dev libxslt1-dev python-dev libjpeg-dev` for lxml
 
+Best way to get latest pip,
+# see https://packaging.python.org/installing/#install-pip-setuptools-and-wheel
+python ~/bin/get-pip.py --user # ~/.local/bin/pip
+
 # install dependencies (requests is required by zen theme)
 # sudo pip install markdown webassets phpserialize nikola requests
 # "sudo pip install" could screw up my python setup on Gentoo Linux
