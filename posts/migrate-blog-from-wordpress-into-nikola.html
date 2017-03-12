@@ -80,6 +80,9 @@ sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
 
 # one debian/ubuntu, you need: `apt-get install libxml2-dev libxslt1-dev python-dev libjpeg-dev` for lxml
 
+# Not to mess up with root
+export PATH=$PATH:$HOME/.local/bin
+
 # Best way to get latest pip,
 # see https://packaging.python.org/installing/#install-pip-setuptools-and-wheel
 python ~/bin/get-pip.py --user # ~/.local/bin/pip
@@ -91,7 +94,6 @@ python ~/bin/get-pip.py --user # ~/.local/bin/pip
 # so install the python packages in my HOME directory might be better
 # @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
 pip install --user markdown webassets phpserialize nikola requests
-export PATH=$PATH:$HOME/.local/bin
 
 # create root directory of nikola
 mkdir -p ~/.config/nikola;cd ~/.config/nikola
