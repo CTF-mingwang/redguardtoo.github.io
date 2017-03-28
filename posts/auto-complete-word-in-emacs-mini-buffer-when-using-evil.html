@@ -3,29 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Indent JSX in Emacs | Chen's blog</title>
+<title>Auto-complete word in Emacs mini-buffer when using Evil | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/indent-jsx-in-emacs.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Indent JSX in Emacs">
-<meta property="og:url" content="http://blog.binchen.org/posts/indent-jsx-in-emacs.html">
-<meta property="og:description" content="I find rjsx-mode annoying when it indents closed html tag with extra spaces.
+<meta property="og:title" content="Auto-complete word in Emacs mini-buffer when using Evil">
+<meta property="og:url" content="http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">
+<meta property="og:description" content='When using Evil I often input %s/old-keyword/new-keyword/g in Minibuffer.
 
 
 
-It's based on js2-mode which is actually just calling Emacs v25 API js-jsx-indent-line.
+The problem is auto completions of new-keyword using hippie-expand always fail.
 
 
 
-So the solution is as simple ">
+It turns out that the character "/" is t'>
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2017-03-28T11:54:58Z">
+<meta property="article:published_time" content="2017-03-28T12:16:06Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
-<meta property="article:tag" content="jsx">
-<meta property="article:tag" content="react">
+<meta property="article:tag" content="evil">
+<meta property="article:tag" content="vim">
 </head>
 <body>
     <section class="social"><ul>
@@ -41,16 +41,16 @@ So the solution is as simple ">
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Indent JSX in Emacs</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Auto-complete word in Emacs mini-buffer when using Evil</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2017-03-28T11:54:58+00:00">2017-03-28 11:54</time>
+                <time class="timeago" datetime="2017-03-28T12:16:06+00:00">2017-03-28 12:16</time>
             
 
             
           |  
-        <a href="indent-jsx-in-emacs.wp" id="sourcelink">Source</a>
+        <a href="auto-complete-word-in-emacs-mini-buffer-when-using-evil.wp" id="sourcelink">Source</a>
 
             </div>
             
@@ -59,8 +59,8 @@ So the solution is as simple ">
         Tags : 
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/jsx.html" rel="tag">jsx</a></li>
-           <li><a class="tag p-category" href="../categories/react.html" rel="tag">react</a></li>
+           <li><a class="tag p-category" href="../categories/evil.html" rel="tag">evil</a></li>
+           <li><a class="tag p-category" href="../categories/vim.html" rel="tag">vim</a></li>
         </ul>
 </div>
 
@@ -68,30 +68,30 @@ So the solution is as simple ">
         <div class="body">
             <div>
 <p>
-I find <a href="https://github.com/felipeochoa/rjsx-mode">rjsx-mode</a> annoying when it indents closed html tag with extra spaces.
+When using <a href="https://www.emacswiki.org/emacs/Evil">Evil</a> I often input <code>%s/old-keyword/new-keyword/g</code> in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html">Minibuffer</a>.
 </p>
 
 <p>
-It's based on js2-mode which is actually just calling Emacs v25 API <code>js-jsx-indent-line</code>.
+The problem is auto completions of <code>new-keyword</code> using <a href="http://www.gnu.org/s/emacs/manual/html_node/autotype/Hippie-Expand.html">hippie-expand</a> always fail.
 </p>
 
 <p>
-So the solution is as simple as advice <code>js-jsx-indent-line</code>:
+It turns out that the character "/" is treated as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Word constituents</a> in minibuffer.
+</p>
+
+<p>
+The solution is to re-define "/" as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Punctuation characters</a>:
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
-  "Workaround sgml-mode and follow airbnb component style."
-  (let* ((cur-line (buffer-substring-no-properties
-                    (line-beginning-position)
-                    (line-end-position))))
-    (if (string-match "^\\( +\\)\/?&gt; *$" cur-line)
-      (let* ((empty-spaces (match-string 1 cur-line)))
-        (replace-regexp empty-spaces
-                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
-                        nil
-                        (line-beginning-position) (line-end-position))))))
+<pre><code class="lang-lisp">(defun minibuffer-inactive-mode-hook-setup ()
+  ;; make `try-expand-dabbrev' from `hippie-expand' work in mini-buffer
+  ;; @see `he-dabbrev-beg', so we need re-define syntax for '/'
+  (set-syntax-table (let* ((table (make-syntax-table)))
+                      (modify-syntax-entry ?/ "." table)
+                      table)))
+(add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
 </code></pre>
 
 </div>
@@ -100,18 +100,15 @@ So the solution is as simple as advice <code>js-jsx-indent-line</code>:
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="find-the-buffer-named-by-pinyin.html" rel="prev" title="Find the buffer with Chinese name">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="auto-complete-word-in-emacs-mini-buffer-when-using-evil.html" rel="next" title="Auto-complete word in Emacs mini-buffer when using Evil">Next post</a>
+                <a href="indent-jsx-in-emacs.html" rel="prev" title="Indent JSX in Emacs">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/indent-jsx-in-emacs.html",
-        disqus_title="Indent JSX in Emacs",
-        disqus_identifier="cache/posts/indent-jsx-in-emacs.html",
+            disqus_url="http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html",
+        disqus_title="Auto-complete word in Emacs mini-buffer when using Evil",
+        disqus_identifier="cache/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html",
         disqus_config = function () {
             this.language = "en";
         };
