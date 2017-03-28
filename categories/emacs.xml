@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:55:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:57:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Indent JSX in Emacs</title><link>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I find &lt;a href="https://github.com/felipeochoa/rjsx-mode"&gt;rjsx-mode&lt;/a&gt; annoying when it always indent closed html tag with extra spaces.
+&lt;/p&gt;
+
+&lt;p&gt;
+It's based on js2-mode which is actually just calling Emacs v25 API &lt;code&gt;js-jsx-indent-line&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+So the solution is as simple as advice &lt;code&gt;js-jsx-indent-line&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (let* ((cur-line (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (if (string-match "^\\( +\\)\/?&amp;gt; *$" cur-line)
+      (let* ((empty-spaces (match-string 1 cur-line)))
+        (replace-regexp empty-spaces
+                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
+                        nil
+                        (line-beginning-position) (line-end-position))))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -1050,55 +1077,4 @@ Screenshot after &lt;code&gt;M-x my-git-timemachine&lt;/code&gt;,
 
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"&gt;
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item><item><title>Complete line with ivy-mode</title><link>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Complete current line by &lt;a href="https://git-scm.com/docs/git-grep"&gt;git grep&lt;/a&gt; and &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-escape (keyword)
-  (setq keyword (replace-regexp-in-string "\\$" "\\\\\$" keyword))
-  (replace-regexp-in-string "\"" "\\\\\"" keyword))
-
-(defun counsel-replace-current-line (leading-spaces content)
-  (beginning-of-line)
-  (kill-line)
-  (insert (concat leading-spaces content))
-  (end-of-line))
-
-(defun counsel-git-grep-complete-line ()
-  (interactive)
-  (let* (cmd
-        (cur-line (buffer-substring-no-properties (line-beginning-position)
-                                                  (line-end-position)))
-        (default-directory (locate-dominating-file
-                            default-directory ".git"))
-        keyword
-        (leading-spaces "")
-        collection)
-    (setq keyword (counsel-escape (if (region-active-p)
-                                      (buffer-substring-no-properties (region-beginning)
-                                                                      (region-end))
-                                    (replace-regexp-in-string "^[ \t]*" "" cur-line))))
-    ;; grep lines without leading/trailing spaces
-    (setq cmd (format "git --no-pager grep -I -h --no-color -i -e \"^[ \\t]*%s\" | sed s\"\/^[ \\t]*\/\/\" | sed s\"\/[ \\t]*$\/\/\" | sort | uniq" keyword))
-    (when (setq collection (split-string (shell-command-to-string cmd) "\n" t))
-      (if (string-match "^\\([ \t]*\\)" cur-line)
-          (setq leading-spaces (match-string 1 cur-line)))
-      (cond
-       ((= 1 (length collection))
-        (counsel-replace-current-line leading-spaces (car collection)))
-       ((&amp;gt; (length collection) 1)
-        (ivy-read "lines:"
-                  collection
-                  :action (lambda (l)
-                            (counsel-replace-current-line leading-spaces l))))))
-    ))
-(global-set-key (kbd "C-x C-l") 'counsel-git-grep-complete-line)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-I also tried &lt;code&gt;grep&lt;/code&gt; which is too slow for my project.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>grep</category><category>ivy</category><guid>http://blog.binchen.org/posts/complete-line-with-ivy-mode.html</guid><pubDate>Mon, 23 May 2016 01:41:14 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item></channel></rss>

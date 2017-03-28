@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:55:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:57:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Indent JSX in Emacs</title><link>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I find &lt;a href="https://github.com/felipeochoa/rjsx-mode"&gt;rjsx-mode&lt;/a&gt; annoying when it always indent closed html tag with extra spaces.
+&lt;/p&gt;
+
+&lt;p&gt;
+It's based on js2-mode which is actually just calling Emacs v25 API &lt;code&gt;js-jsx-indent-line&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+So the solution is as simple as advice &lt;code&gt;js-jsx-indent-line&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (let* ((cur-line (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (if (string-match "^\\( +\\)\/?&amp;gt; *$" cur-line)
+      (let* ((empty-spaces (match-string 1 cur-line)))
+        (replace-regexp empty-spaces
+                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
+                        nil
+                        (line-beginning-position) (line-end-position))))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -849,78 +876,4 @@ As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/potato.jpg" alt="potato.jpg"&gt;
 &lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>potato</category><category>zh</category><guid>http://blog.binchen.org/posts/yan-tai-dun-tu-dou-si.html</guid><pubDate>Sun, 31 Jul 2016 03:16:35 GMT</pubDate></item><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;emacs-git-gutter&lt;/a&gt; shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-I usually use &lt;code&gt;M-x git-gutter:previous-hunk&lt;/code&gt; or &lt;code&gt;M-x git-gutter:next-hunk&lt;/code&gt; to navigate between the hunks.
-&lt;/p&gt;
-
-&lt;p&gt;
-But if there are too many hunks in one file, &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt; is more efficient:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
-(require 'git-gutter)
-
-(defun my-reshape-git-gutter (gutter)
-  "Re-shape gutter for `ivy-read'."
-  (let* ((linenum-start (aref gutter 3))
-         (linenum-end (aref gutter 4))
-         (target-line "")
-         (target-linenum 1)
-         (tmp-line "")
-         (max-line-length 0))
-    (save-excursion
-      (while (&amp;lt;= linenum-start linenum-end)
-        (goto-line linenum-start)
-        (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
-                                                 (buffer-substring (line-beginning-position)
-                                                                   (line-end-position))))
-        (when (&amp;gt; (length tmp-line) max-line-length)
-          (setq target-linenum linenum-start)
-          (setq target-line tmp-line)
-          (setq max-line-length (length tmp-line)))
-
-        (setq linenum-start (1+ linenum-start))))
-    ;; build (key . linenum-start)
-    (cons (format "%s %d: %s"
-                  (if (eq 'deleted (aref gutter 1)) "-" "+")
-                  target-linenum target-line)
-          target-linenum)))
-
-(defun my-goto-git-gutter ()
-  (interactive)
-  (if git-gutter:diffinfos
-      (ivy-read "git-gutters:"
-                (mapcar 'my-reshape-git-gutter git-gutter:diffinfos)
-                :action (lambda (e)
-                          ;; ivy9+ keep `(car e)'
-                          ;; ivy8- strip the `(car e)'
-                          ;; we handle both data structure
-                          (unless (numberp e) (setq e (cdr e)))
-                          (goto-line e)))
-    (message "NO git-gutters!")))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Screenshot:
-&lt;/p&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/git-gutter-and-ivy-nq8.png" alt="git-gutter-and-ivy-nq8.png"&gt;
-&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><category>ivy</category><category>mode</category><guid>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</guid><pubDate>Thu, 14 Jul 2016 13:35:32 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>cuisine</category><category>potato</category><category>zh</category><guid>http://blog.binchen.org/posts/yan-tai-dun-tu-dou-si.html</guid><pubDate>Sun, 31 Jul 2016 03:16:35 GMT</pubDate></item></channel></rss>

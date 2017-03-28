@@ -23,6 +23,112 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/enhance-emacs-git-gutter-with-ivy-mode.html">Enhance emacs-git-gutter with ivy-mode</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-07-14T13:35:32+00:00">2016-07-14 13:35</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/enhance-emacs-git-gutter-with-ivy-mode.html#disqus_thread" data-disqus-identifier="cache/posts/enhance-emacs-git-gutter-with-ivy-mode.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="categories/gutter.html" rel="tag">gutter</a></li>
+           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
+           <li><a class="tag p-category" href="categories/mode.html" rel="tag">mode</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-07-14 Thu&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-23 Fri&gt;</span></span>
+</p>
+
+<p>
+<a href="https://github.com/syohex/emacs-git-gutter">emacs-git-gutter</a> shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
+</p>
+
+<p>
+I usually use <code>M-x git-gutter:previous-hunk</code> or <code>M-x git-gutter:next-hunk</code> to navigate between the hunks.
+</p>
+
+<p>
+But if there are too many hunks in one file, <a href="https://github.com/abo-abo/swiper">ivy-mode</a> is more efficient:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(require 'ivy)
+(require 'git-gutter)
+
+(defun my-reshape-git-gutter (gutter)
+  "Re-shape gutter for `ivy-read'."
+  (let* ((linenum-start (aref gutter 3))
+         (linenum-end (aref gutter 4))
+         (target-line "")
+         (target-linenum 1)
+         (tmp-line "")
+         (max-line-length 0))
+    (save-excursion
+      (while (&lt;= linenum-start linenum-end)
+        (goto-line linenum-start)
+        (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
+                                                 (buffer-substring (line-beginning-position)
+                                                                   (line-end-position))))
+        (when (&gt; (length tmp-line) max-line-length)
+          (setq target-linenum linenum-start)
+          (setq target-line tmp-line)
+          (setq max-line-length (length tmp-line)))
+
+        (setq linenum-start (1+ linenum-start))))
+    ;; build (key . linenum-start)
+    (cons (format "%s %d: %s"
+                  (if (eq 'deleted (aref gutter 1)) "-" "+")
+                  target-linenum target-line)
+          target-linenum)))
+
+(defun my-goto-git-gutter ()
+  (interactive)
+  (if git-gutter:diffinfos
+      (ivy-read "git-gutters:"
+                (mapcar 'my-reshape-git-gutter git-gutter:diffinfos)
+                :action (lambda (e)
+                          ;; ivy9+ keep `(car e)'
+                          ;; ivy8- strip the `(car e)'
+                          ;; we handle both data structure
+                          (unless (numberp e) (setq e (cdr e)))
+                          (goto-line e)))
+    (message "NO git-gutters!")))
+</code></pre>
+
+</div>
+
+<p>
+Screenshot:
+</p>
+
+<div class="figure">
+<p><img src="wp-content/git-gutter-and-ivy-nq8.png" alt="git-gutter-and-ivy-nq8.png"></p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/turn-off-linum-mode-when-file-is-too-big.html">Turn off linum-mode when file is too big</a></h1>
             <div class="meta">
                 <div class="authordate">

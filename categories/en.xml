@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:55:08 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 11:57:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Indent JSX in Emacs</title><link>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I find &lt;a href="https://github.com/felipeochoa/rjsx-mode"&gt;rjsx-mode&lt;/a&gt; annoying when it always indent closed html tag with extra spaces.
+&lt;/p&gt;
+
+&lt;p&gt;
+It's based on js2-mode which is actually just calling Emacs v25 API &lt;code&gt;js-jsx-indent-line&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+So the solution is as simple as advice &lt;code&gt;js-jsx-indent-line&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (let* ((cur-line (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (if (string-match "^\\( +\\)\/?&amp;gt; *$" cur-line)
+      (let* ((empty-spaces (match-string 1 cur-line)))
+        (replace-regexp empty-spaces
+                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
+                        nil
+                        (line-beginning-position) (line-end-position))))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -1046,53 +1073,4 @@ It took me fifteen minutes to reach the opposite conclusion when I was still abs
 &lt;p&gt;
 It's possibly I learned the Emacs by cloning and reading code. You can read my guide "&lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide"&gt;Master Emacs In One Year&lt;/a&gt;" for more details.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</guid><pubDate>Thu, 30 Jun 2016 11:09:42 GMT</pubDate></item><item><title>New git-timemachine UI based on ivy-mode</title><link>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-06-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-When using &lt;a href="https://github.com/pidu/git-timemachine"&gt;git-timemachine&lt;/a&gt;, I prefer start from my selected revision instead of HEAD.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is my code based on &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt;,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-git-timemachine-show-selected-revision ()
-  "Show last (current) revision of file."
-  (interactive)
-  (let* ((collection (mapcar (lambda (rev)
-                    ;; re-shape list for the ivy-read
-                    (cons (concat (substring-no-properties (nth 0 rev) 0 7) "|" (nth 5 rev) "|" (nth 6 rev)) rev))
-                  (git-timemachine--revisions))))
-    (ivy-read "commits:"
-              collection
-              :action (lambda (rev)
-                        ;; compatible with ivy 9+ and ivy 8
-                        (unless (string-match-p "^[a-z0-9]*$" (car rev))
-                          (setq rev (cdr rev)))
-                        (git-timemachine-show-revision rev)))))
-
-(defun my-git-timemachine ()
-  "Open git snapshot with the selected version.  Based on ivy-mode."
-  (interactive)
-  (unless (featurep 'git-timemachine)
-    (require 'git-timemachine))
-  (git-timemachine--start #'my-git-timemachine-show-selected-revision))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Screenshot after &lt;code&gt;M-x my-git-timemachine&lt;/code&gt;,
-&lt;/p&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/my-git-timemachine-nq8.png" alt="my-git-timemachine-nq8.png"&gt;
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>ivy</category><category>timemachine</category><guid>http://blog.binchen.org/posts/new-git-timemachine-ui-based-on-ivy-mode.html</guid><pubDate>Sun, 05 Jun 2016 14:32:39 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</guid><pubDate>Thu, 30 Jun 2016 11:09:42 GMT</pubDate></item></channel></rss>

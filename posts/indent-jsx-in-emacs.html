@@ -3,29 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Find the buffer with Chinese name | Chen's blog</title>
+<title>Indent JSX in Emacs | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/indent-jsx-in-emacs.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Find the buffer with Chinese name">
-<meta property="og:url" content="http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html">
-<meta property="og:description" content="We can find the buffer with Chinese name efficiently by using the first character of pinyin.
+<meta property="og:title" content="Indent JSX in Emacs">
+<meta property="og:url" content="http://blog.binchen.org/posts/indent-jsx-in-emacs.html">
+<meta property="og:description" content="I find rjsx-mode annoying when it always indent closed html tag with extra spaces.
 
 
 
-Here is the code (ivy and pinyinlib is required):
+It's based on js2-mode which is actually just calling Emacs v25 API js-jsx-indent-line.
 
 
 
-
-(defun ivy-switch-buffer-matcher-pinyin (regexp ca">
+So the solution is as s">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2017-02-26T04:27:42Z">
-<meta property="article:tag" content="chinese">
+<meta property="article:published_time" content="2017-03-28T11:54:58Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
+<meta property="article:tag" content="jsx">
+<meta property="article:tag" content="react">
 </head>
 <body>
     <section class="social"><ul>
@@ -41,25 +41,26 @@ Here is the code (ivy and pinyinlib is required):
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Find the buffer with Chinese name</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Indent JSX in Emacs</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2017-02-26T04:27:42+00:00">2017-02-26 04:27</time>
+                <time class="timeago" datetime="2017-03-28T11:54:58+00:00">2017-03-28 11:54</time>
             
 
             
           |  
-        <a href="find-the-buffer-named-by-pinyin.wp" id="sourcelink">Source</a>
+        <a href="indent-jsx-in-emacs.wp" id="sourcelink">Source</a>
 
             </div>
             
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
-           <li><a class="tag p-category" href="../categories/chinese.html" rel="tag">chinese</a></li>
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="../categories/jsx.html" rel="tag">jsx</a></li>
+           <li><a class="tag p-category" href="../categories/react.html" rel="tag">react</a></li>
         </ul>
 </div>
 
@@ -67,65 +68,47 @@ Here is the code (ivy and pinyinlib is required):
         <div class="body">
             <div>
 <p>
-We can find the buffer with Chinese name efficiently by using the first character of <a href="https://en.wikipedia.org/wiki/Pinyin">pinyin</a>.
+I find <a href="https://github.com/felipeochoa/rjsx-mode">rjsx-mode</a> annoying when it always indent closed html tag with extra spaces.
 </p>
 
 <p>
-Here is the code (<a href="https://github.com/abo-abo/swiper">ivy</a> and <a href="https://github.com/cute-jumper/pinyinlib.el">pinyinlib</a> is required):
+It's based on js2-mode which is actually just calling Emacs v25 API <code>js-jsx-indent-line</code>.
+</p>
+
+<p>
+So the solution is as simple as advice <code>js-jsx-indent-line</code>:
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defun ivy-switch-buffer-matcher-pinyin (regexp candidates)
-  (unless (featurep 'pinyinlib) (require 'pinyinlib))
-  (let* ((pys (split-string regexp "[ \t]+"))
-         (regexp (format ".*%s.*"
-                         (mapconcat 'pinyinlib-build-regexp-string pys ".*"))))
-    (ivy--switch-buffer-matcher regexp candidates)))
-
-(defun ivy-switch-buffer-by-pinyin ()
-  "Switch to another buffer."
-  (interactive)
-  (unless (featurep 'ivy) (require 'ivy))
-  (let ((this-command 'ivy-switch-buffer))
-    (ivy-read "Switch to buffer: " 'internal-complete-buffer
-              :matcher #'ivy-switch-buffer-matcher-pinyin
-              :preselect (buffer-name (other-buffer (current-buffer)))
-              :action #'ivy--switch-buffer-action
-              :keymap ivy-switch-buffer-map
-              :caller 'ivy-switch-buffer)))
+<pre><code class="lang-lisp">(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (let* ((cur-line (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (if (string-match "^\\( +\\)\/?&gt; *$" cur-line)
+      (let* ((empty-spaces (match-string 1 cur-line)))
+        (replace-regexp empty-spaces
+                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
+                        nil
+                        (line-beginning-position) (line-end-position))))))
 </code></pre>
 
 </div>
-
-<p>
-You can <code>M-x ivy-switch-buffer-by-pinyin</code> to switch buffer.
-</p>
-
-<p>
-The algorithm of pinyinlib is simple. We build a big lookup table to convert the a plain English string into a regular expression containing Chinese characters.
-</p>
-
-<p>
-You can apply the <b>same algorithm to other non-English languages</b>.
-</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="use-perforce-inside-emacs.html" rel="prev" title="Use Perforce inside Emacs">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="indent-jsx-in-emacs.html" rel="next" title="Indent JSX in Emacs">Next post</a>
+                <a href="find-the-buffer-named-by-pinyin.html" rel="prev" title="Find the buffer with Chinese name">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html",
-        disqus_title="Find the buffer with Chinese name",
-        disqus_identifier="cache/posts/find-the-buffer-named-by-pinyin.html",
+            disqus_url="http://blog.binchen.org/posts/indent-jsx-in-emacs.html",
+        disqus_title="Indent JSX in Emacs",
+        disqus_identifier="cache/posts/indent-jsx-in-emacs.html",
         disqus_config = function () {
             this.language = "en";
         };
