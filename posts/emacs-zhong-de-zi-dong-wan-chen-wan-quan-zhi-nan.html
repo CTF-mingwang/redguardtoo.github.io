@@ -172,11 +172,11 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </p>
 
 <p>
-显然,这种l案只适用于=Clang=支持的语言.
+显然,这种l案只适用于 <code>Clang</code> 支持的语言.
 </p>
 
 <p>
-需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件=auto-complete=和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>.
+需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件 <code>auto-complete</code> 和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>.
 </p>
 
 <p>
@@ -208,7 +208,7 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </p>
 
 <p>
-其默认的一些特色功能(例如,完成词/文件名/行的功能,或在=minibuffer=中使用)可作为=company-mode=补充.
+其默认的一些特色功能(例如,完成词/文件名/行的功能,或在 <code>minibuffer</code> 中使用)可作为 <code>company-mode</code> 补充.
 </p>
 </div>
 </div>
@@ -222,11 +222,11 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-=hippie-expand=经过调教也可用ctags,且其默认的特色功能比=complete-symbol=多,所以我没兴趣配置第三个自动完成框架了.
+<code>hippie-expand</code> 经过调教也可用 <code>Ctags</code>,且默认特色功能比 <code>complete-symbol</code> 多,所以我没兴趣配置第三个自动完成框架了.
 </p>
 
 <p>
-通过阅读Emacs24的ChangeLog,我发现=complete-symbol=经过配置后可以用=semantic=作为语法解析后端(Emacs23.4也支持,不明白为什么把该特性放在Emacs24的ChangeLog介绍).
+通过阅读Emacs24的ChangeLog,我发现 <code>complete-symbol</code> 经过配置后可以用 <code>semantic</code> 作为语法解析后端(Emacs23.4也支持,不明白为什么把该特性放在Emacs24的ChangeLog介绍).
 </p>
 
 <p>
@@ -234,19 +234,19 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-我不喜欢这个语法解析器,过去在semantic尚是<a href="http://cedet.sourceforge.net">Cedet</a>的一个组件时,我折腾过=Cedet=,当时的感觉是速度慢,配置繁琐,不稳定.
+我不喜欢这个语法解析器,过去在 <code>Semantic</code> 尚是<a href="http://cedet.sourceforge.net">Cedet</a>的一个组件时,我折腾过 <code>Cedet</code>,当时感觉速度慢,配置繁琐,不稳定.
 </p>
 
 <p>
-=Semantic=支持多种语言,如C++/Java.
+<code>Semantic</code> 支持多种语言,如C++/Java.
 </p>
 
 <p>
-具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-semantic.el">init-semantic.el</a>(注意,我不用=semantic=,所以相应代码被注释了.你可取消注释).
+配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-semantic.el">init-semantic.el</a>(注意,我不用 <code>Semantic</code>,所以相应代码被注释了.你可取消注释).
 </p>
 
 <p>
-已被=company-mode=取代,不推荐.
+已被 <code>company-mode</code> 取代,不推荐.
 </p>
 </div>
 </div>
@@ -264,7 +264,7 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-无需配置,启动=evil-mode=即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
+无需配置,启动 <code>evil-mode</code> 即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
 </p>
 </div>
 </div>
@@ -305,27 +305,27 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-作为前端的用户界面,=company-mode=和=auto-complete=相当成熟.
+作为前端的用户界面, <code>company-mode</code> 和 <code>auto-complete</code> 相当成熟.
 </p>
 
 <p>
-后端=Clang=最优秀.
+后端 <code>Clang</code> 最优秀.
 </p>
 
 <p>
-=Ctags=谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.
+<code>Ctags</code> 谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.
 </p>
 
 <p>
-=Semantic=支持的语言比clang多一点,性能和稳定性比较差.
+<code>Semantic</code> 支持的语言比 <code>Clang</code> 多一点,性能和稳定性比较差.
 </p>
 
 <p>
-作为一个C++程序员,我过去用=auto-complete=加上clang,现在用=company-mode=加clang.
+作为一个C++程序员,我过去用 <code>auto-complete</code> 加上 <code>Clang</code>,现在用 <code>company-mode</code> 加 <code>Clang</code>.
 </p>
 
 <p>
-脚本语言(Ruby/Python/Javascript)我用=Ctags=加=company-mode=自带的=company-etags=.
+脚本语言(Ruby/Python/Javascript)用 <code>Ctags</code> 加 <code>company-mode</code> 自带的 <code>company-etags</code>.
 </p>
 
 <p>

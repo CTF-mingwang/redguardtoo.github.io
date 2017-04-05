@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about completion)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/completion.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Apr 2017 13:11:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about completion)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/completion.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Apr 2017 13:15:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-01&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -159,11 +159,11 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 &lt;/p&gt;
 
 &lt;p&gt;
-显然,这种l案只适用于=Clang=支持的语言.
+显然,这种l案只适用于 &lt;code&gt;Clang&lt;/code&gt; 支持的语言.
 &lt;/p&gt;
 
 &lt;p&gt;
-需要通过&lt;a href="http://emacswiki.org/wiki/ELPA"&gt;elpa(Emacs的AppStore)&lt;/a&gt;安装第三方插件=auto-complete=和&lt;a href="https://github.com/brianjcj/auto-complete-clang"&gt;auto-complete-clang&lt;/a&gt;.
+需要通过&lt;a href="http://emacswiki.org/wiki/ELPA"&gt;elpa(Emacs的AppStore)&lt;/a&gt;安装第三方插件 &lt;code&gt;auto-complete&lt;/code&gt; 和&lt;a href="https://github.com/brianjcj/auto-complete-clang"&gt;auto-complete-clang&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -193,7 +193,7 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 &lt;/p&gt;
 
 &lt;p&gt;
-其默认的一些特色功能(例如,完成词/文件名/行的功能,或在=minibuffer=中使用)可作为=company-mode=补充.
+其默认的一些特色功能(例如,完成词/文件名/行的功能,或在 &lt;code&gt;minibuffer&lt;/code&gt; 中使用)可作为 &lt;code&gt;company-mode&lt;/code&gt; 补充.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -206,11 +206,11 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-=hippie-expand=经过调教也可用ctags,且其默认的特色功能比=complete-symbol=多,所以我没兴趣配置第三个自动完成框架了.
+&lt;code&gt;hippie-expand&lt;/code&gt; 经过调教也可用 &lt;code&gt;Ctags&lt;/code&gt;,且默认特色功能比 &lt;code&gt;complete-symbol&lt;/code&gt; 多,所以我没兴趣配置第三个自动完成框架了.
 &lt;/p&gt;
 
 &lt;p&gt;
-通过阅读Emacs24的ChangeLog,我发现=complete-symbol=经过配置后可以用=semantic=作为语法解析后端(Emacs23.4也支持,不明白为什么把该特性放在Emacs24的ChangeLog介绍).
+通过阅读Emacs24的ChangeLog,我发现 &lt;code&gt;complete-symbol&lt;/code&gt; 经过配置后可以用 &lt;code&gt;semantic&lt;/code&gt; 作为语法解析后端(Emacs23.4也支持,不明白为什么把该特性放在Emacs24的ChangeLog介绍).
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -218,19 +218,19 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-我不喜欢这个语法解析器,过去在semantic尚是&lt;a href="http://cedet.sourceforge.net"&gt;Cedet&lt;/a&gt;的一个组件时,我折腾过=Cedet=,当时的感觉是速度慢,配置繁琐,不稳定.
+我不喜欢这个语法解析器,过去在 &lt;code&gt;Semantic&lt;/code&gt; 尚是&lt;a href="http://cedet.sourceforge.net"&gt;Cedet&lt;/a&gt;的一个组件时,我折腾过 &lt;code&gt;Cedet&lt;/code&gt;,当时感觉速度慢,配置繁琐,不稳定.
 &lt;/p&gt;
 
 &lt;p&gt;
-=Semantic=支持多种语言,如C++/Java.
+&lt;code&gt;Semantic&lt;/code&gt; 支持多种语言,如C++/Java.
 &lt;/p&gt;
 
 &lt;p&gt;
-具体配置请参考我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-semantic.el"&gt;init-semantic.el&lt;/a&gt;(注意,我不用=semantic=,所以相应代码被注释了.你可取消注释).
+配置请参考我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-semantic.el"&gt;init-semantic.el&lt;/a&gt;(注意,我不用 &lt;code&gt;Semantic&lt;/code&gt;,所以相应代码被注释了.你可取消注释).
 &lt;/p&gt;
 
 &lt;p&gt;
-已被=company-mode=取代,不推荐.
+已被 &lt;code&gt;company-mode&lt;/code&gt; 取代,不推荐.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -247,7 +247,7 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-无需配置,启动=evil-mode=即可,参见我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el"&gt;init-evil.el&lt;/a&gt;.
+无需配置,启动 &lt;code&gt;evil-mode&lt;/code&gt; 即可,参见我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el"&gt;init-evil.el&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -287,27 +287,27 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-作为前端的用户界面,=company-mode=和=auto-complete=相当成熟.
+作为前端的用户界面, &lt;code&gt;company-mode&lt;/code&gt; 和 &lt;code&gt;auto-complete&lt;/code&gt; 相当成熟.
 &lt;/p&gt;
 
 &lt;p&gt;
-后端=Clang=最优秀.
+后端 &lt;code&gt;Clang&lt;/code&gt; 最优秀.
 &lt;/p&gt;
 
 &lt;p&gt;
-=Ctags=谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.
+&lt;code&gt;Ctags&lt;/code&gt; 谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.
 &lt;/p&gt;
 
 &lt;p&gt;
-=Semantic=支持的语言比clang多一点,性能和稳定性比较差.
+&lt;code&gt;Semantic&lt;/code&gt; 支持的语言比 &lt;code&gt;Clang&lt;/code&gt; 多一点,性能和稳定性比较差.
 &lt;/p&gt;
 
 &lt;p&gt;
-作为一个C++程序员,我过去用=auto-complete=加上clang,现在用=company-mode=加clang.
+作为一个C++程序员,我过去用 &lt;code&gt;auto-complete&lt;/code&gt; 加上 &lt;code&gt;Clang&lt;/code&gt;,现在用 &lt;code&gt;company-mode&lt;/code&gt; 加 &lt;code&gt;Clang&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-脚本语言(Ruby/Python/Javascript)我用=Ctags=加=company-mode=自带的=company-etags=.
+脚本语言(Ruby/Python/Javascript)用 &lt;code&gt;Ctags&lt;/code&gt; 加 &lt;code&gt;company-mode&lt;/code&gt; 自带的 &lt;code&gt;company-etags&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
