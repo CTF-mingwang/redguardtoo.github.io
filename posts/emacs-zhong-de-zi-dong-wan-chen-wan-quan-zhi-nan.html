@@ -11,23 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Emacs中的自动完成(Auto Completion)完全指南">
 <meta property="og:url" content="http://blog.binchen.org/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html">
-<meta property="og:description" content="Table of Contents
-
-
-1. 概述
-2. auto-complete结合clang
-3. company-mode
-4. hippie-expand
-5. complete-symbol
-6. evil-mode
-7. 其他
-8. 小结
-
-
-
-
-
-作者: 陈斌(redguardtoo)
+<meta property="og:description" content="作者: 陈斌(redguardtoo)
 
 
 
@@ -35,7 +19,23 @@
 
 
 
-原创时间: &lt;2012-08-21 T">
+原创时间: &lt;2012-08-21 Tue&gt;
+
+
+
+Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者不带文件名后缀都可以).
+
+
+
+我不是来赞美Emacs的强大的,我是来吐槽的.自动完成框架太多,功能重叠,让人困扰.
+
+
+
+所以本文目的有两个:
+
+
+
+说明哪些框架流行">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-08-21T14:50:00Z">
 <meta property="article:tag" content="completion">
@@ -83,22 +83,6 @@
         </div>
         <div class="body">
             <div>
-<div id="table-of-contents">
-<h3>Table of Contents</h3>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-1">1. 概述</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-2">2. auto-complete结合clang</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-3">3. company-mode</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-4">4. hippie-expand</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-5">5. complete-symbol</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-6">6. evil-mode</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-7">7. 其他</a></li>
-<li><a href="emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-8">8. 小结</a></li>
-</ul>
-</div>
-</div>
-
 <p>
 作者: 陈斌(redguardtoo)
 </p>
@@ -112,7 +96,7 @@
 </p>
 
 <p>
-Emacs比普通IDE的Intellisense强大得多,例如可输入当前文件名(带或者不带文件名后缀都可以).
+Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者不带文件名后缀都可以).
 </p>
 
 <p>
@@ -124,9 +108,9 @@ Emacs比普通IDE的Intellisense强大得多,例如可输入当前文件名(带�
 </p>
 
 <ul class="org-ul">
-<li>说明哪些自动完成框架是主流的
+<li>说明哪些框架流行
 </li>
-<li>如何配置使用自动完成框架
+<li>如何使用框架
 </li>
 </ul>
 <div id="outline-container-sec-1" class="outline-2">
@@ -280,11 +264,11 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-值得推荐是因为我也是重度Vim用户,Vim的快捷键已经成为我的本能了.
+值得推荐是因为我也是重度Vim用户,Vim的快捷键已成为我本能了.
 </p>
 
 <p>
-没什么要配置的,启动=evil-mode=即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
+无需配置,启动=evil-mode=即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
 </p>
 </div>
 </div>
@@ -307,11 +291,11 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </li>
 </ul>
 <p>
-我的实现见<a href="https://github.com/redguardtoo/emacs.d/blob/24dd0d7/lisp/init-ivy.el">init-ivy</a>中的=counsel-complete-line-by-grep=.
+实现见<a href="https://github.com/redguardtoo/emacs.d/blob/24dd0d7/lisp/init-ivy.el">init-ivy</a>中的=counsel-complete-line-by-grep=.
 </p>
 
 <p>
-我试用好几个月了,非常好用.
+试用好几个月了,非常好用.
 </p>
 </div>
 </div>
