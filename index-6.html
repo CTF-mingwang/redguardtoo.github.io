@@ -23,79 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">How to use ctags with Emacs effectively</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-11-22T12:35:00+00:00">2012-11-22 12:35</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>  See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. </p> <p>   According wiki page, people usually use ctags to do two things, </p>
-<ol>
-<li>Code navigation </li> <li>Auto-complete/Intellisense  <p>   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like <a href="http://cscope.sourceforge.net/">cscope</a> or <a href="http://www.gnu.org/software/global">GNU Global</a>. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like <a href="http://www.gnu.org/software/global">GNU Global</a>. See the head up from <a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451">Nick Alcock</a>. His summary of the Pro/Con of GNU Global is great. </p> <p>   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. </p> <p>   I found one missing piece from Emacswiki is the tip on how to <b>manage tags file</b> easily when the TAGS is built from some code of third party libraries (<a href="http://http://en.wikipedia.org/wiki/Qt_(framework)">QT</a>, <a href="http://www.wxwidgets.org">wxWidgets</a>, <a href="http://www.gtk.org">GTK</a>, <a href="http://www.boost.org">Boost</a>, just name a few). </p> <p>   My typical work flow is: </p>
-</li> <li>Load the tags file for my own code. </li> <li>Load other tags files built from third party libraries related to my current task. </li> <li>Unload third party tags immediately if its not needed.  <p>   The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". </p> <p>   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. </p>
-</li> </ol>
-<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Produce tags files for all the environments</h4> <div class="outline-text-3" id="text-1">  <p>For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" </p>
-</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use git and github to manage the tags files</h4> <div class="outline-text-3" id="text-2">  <p>So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. </p> <p> Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. </p>
-</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Write emacs lisp code to load/unload these tags files</h4> <div class="outline-text-3" id="text-3">  <p>Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys. </p>   
-<pre class="prettyprint lang-lisp">
-; Set up tags built from third party libraries ===begin
-; define tags alias like "wx-tags" here
-(setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
-
-; @see &lt;Selecting a Tags Table&gt; in Emacs manual for details.
-; We only change the list "tags-table-list". It is documented officialy.
-(defun insert-into-tags-table-list(e)
-  (add-to-list 'tags-table-list e t)
-  )
-
-(defun delete-from-tags-table-list (e)
-  (setq tags-table-list (delete e tags-table-list))
-  )
-
-; This is a sample command, all you need is copy/paste this template
-; for other new commands
-(defun add-wx-tags (&amp;optional del)
-  "Add or delete(C-u) wxWidgets tags into tags-table-list"
-  (interactive "P")
-  (let (mytags)
-    ; here add your third party tags files
-    ; Usually you need load/unload tags files combination in one command
-    ; change below line to add them
-    (setq mytags (list wx-tags))
-    (if del (mapc 'delete-from-tags-table-list mytags)
-      (mapc 'insert-into-tags-table-list mytags)
-      )
-    )
-  )
-; === end
-</pre>
-
-<p></p>
-<p> This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. </p> <p> See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details. </p>
-</div> </div> </div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/my-personal-emacs-customization-custom-el.html">My personal emacs customization (custom.el)</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1042,6 +969,289 @@ os.system(cmd)
 
 <p><span style="color: #af0000;"># vim: set expandtab tabstop=4 shiftwidth=4:</span></p>
 <p></p></pre>  </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html">Emacs中的自动完成(Auto Completion)完全指南</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-08-21T14:50:00+00:00">2012-08-21 14:50</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/completion.html" rel="tag">completion</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/intellisense.html" rel="tag">intellisense</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<div id="table-of-contents">
+<h3>Table of Contents</h3>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-1">1. 概述</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-2">2. auto-complete结合clang</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-3">3. company-mode</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-4">4. hippie-expand</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-5">5. complete-symbol</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-6">6. evil-mode</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-7">7. 其他</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-8">8. 小结</a></li>
+</ul>
+</div>
+</div>
+
+<p>
+作者: 陈斌(redguardtoo)
+</p>
+
+<p>
+更新时间: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-04-05 Wed&gt;</span></span>
+</p>
+
+<p>
+原创时间: <span class="timestamp-wrapper"><span class="timestamp">&lt;2012-08-21 二&gt;</span></span>
+</p>
+
+<p>
+Emacs的比普通IDE的Intellisense强大得多,例如可输入当前文件名(带或者不带文件名后缀都可以).
+</p>
+
+<p>
+我不是来赞美Emacs的强大的,我是来吐槽的.Emacs自动完成框架太多了,框架的功能重叠,让人困扰.
+</p>
+
+<p>
+所以本文的目的有两个:
+</p>
+
+<ul class="org-ul">
+<li>说明哪些自动完成框架是主流的
+</li>
+<li>如何配置使用自动完成框架
+</li>
+</ul>
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> 概述</h3>
+<div class="outline-text-2" id="text-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col class="left">
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">函数/插件名</th>
+<th scope="col" class="left">快捷键</th>
+<th scope="col" class="left">使用频率</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left">company-mode (结合clang)</td>
+<td class="left">不需要 (也可启用TAB)</td>
+<td class="left">高</td>
+</tr>
+<tr>
+<td class="left">hippie-expand</td>
+<td class="left">M-/</td>
+<td class="left">高</td>
+</tr>
+<tr>
+<td class="left">evil-mode</td>
+<td class="left">C-n/C-p(完成词),C-x C-n/p(完成行)</td>
+<td class="left">高</td>
+</tr>
+<tr>
+<td class="left">auto-complete (结合clang)</td>
+<td class="left">TAB</td>
+<td class="left">低</td>
+</tr>
+<tr>
+<td class="left">complete-symbol</td>
+<td class="left">C-M-i</td>
+<td class="left">低</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">
+<span class="section-number-2">2</span> auto-complete结合clang</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+<a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟).
+</p>
+
+<p>
+而<a href="http://clang.llvm.org">clang</a>是苹果公司C/C++/Objective-C编译器,对C++语法的解析很好.
+</p>
+
+<p>
+显然,这种方案只适用于clang支持的语言.支持Mac/Linux/Cygwin平台,我不知道是否支持Windows平台.
+</p>
+
+<p>
+需要通过<a href="http://emacswiki.org/wiki/ELPA">elpa(Emacs的AppStore)</a>安装第三方插件=auto-complete=和<a href="https://github.com/brianjcj/auto-complete-clang">auto-complete-clang</a>.
+</p>
+
+<p>
+具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-auto-complete.el">init-auto-complete.el</a>.
+</p>
+
+<p>
+顺便说一下,关于elpa的配置,可能你需要参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-elpa.el">init-elpa.el</a>,因现在有多个AppStore,且直到Emacs24对elpa的支持才开始自带.
+</p>
+
+<p>
+已被company-mode取代,不推荐.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">
+<span class="section-number-2">3</span> company-mode</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="https://github.com/company-mode/company-mode">company-mode</a>和auto-complete功能类似，唯一的区别是clang以及其他语言支持已内置，所以不需要安装其他elisp插件或者额外配置.目前我已用company-mode代替了auto-complete.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">
+<span class="section-number-2">4</span> hippie-expand</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+<a href="http://emacswiki.org/emacs/HippieExpand">hippie-expand</a>是Emacs自带的自动完成框架.
+</p>
+
+<p>
+其默认的一些特色功能(例如,完成词/文件名/行的功能,或在=minibuffer=中使用)可作为=company-mode=补充.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h3 id="sec-5">
+<span class="section-number-2">5</span> complete-symbol</h3>
+<div class="outline-text-2" id="text-5">
+<p>
+Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,它默认仅仅调用了后台的ctags而已.
+</p>
+
+<p>
+=hippie-expand=经过调教也可用ctags,且其默认的特色功能比=complete-symbol=多,所以我没兴趣配置第三个自动完成框架了.
+</p>
+
+<p>
+通过阅读Emacs24的ChangeLog,我发现=complete-symbol=经过配置后可以用=semantic=作为语法解析后端(Emacs23.4也支持,不明白为什么把该特性放在Emacs24的ChangeLog介绍).
+</p>
+
+<p>
+<a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Semantic.html">semantic</a>是lisp写的语法解析器,Emacs自带,智能程度介于ctags和clang之间,解析速度比较慢,如果机器配置较差会很卡.
+</p>
+
+<p>
+我不喜欢这个语法解析器,过去在semantic尚是<a href="http://cedet.sourceforge.net">Cedet</a>的一个组件时,我折腾过=Cedet=,当时的感觉是速度慢,配置繁琐,不稳定.
+</p>
+
+<p>
+=Semantic=支持多种语言,如C++/Java.
+</p>
+
+<p>
+具体配置请参考我的<a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-semantic.el">init-semantic.el</a>(注意,我不用=semantic=,所以相应代码被注释了.你可取消注释).
+</p>
+
+<p>
+已被=company-mode=取代,不推荐.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h3 id="sec-6">
+<span class="section-number-2">6</span> evil-mode</h3>
+<div class="outline-text-2" id="text-6">
+<p>
+<a href="http://emacswiki.org/emacs/Evil">Evil-mode</a>把Emacs模拟成了Vim,是我最喜欢的第三方插件,其自动完成很简单,就是根据当前文件内容自动完成词或行.
+</p>
+
+<p>
+值得推荐是因为我也是重度Vim用户,Vim的快捷键已经成为我的本能了.
+</p>
+
+<p>
+没什么要配置的,启动=evil-mode=即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h3 id="sec-7">
+<span class="section-number-2">7</span> 其他</h3>
+<div class="outline-text-2" id="text-7">
+<p>
+我的一个想法. 类似于Evil的完成行.但是可以扫瞄指定目录中所有的文件,列出相似的行.
+</p>
+
+<p>
+优点在于:
+</p>
+<ul class="org-ul">
+<li>匹配可以更加宽容一点
+</li>
+<li>使用目前最快的grep工具如<a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>扫瞄文本
+</li>
+</ul>
+<p>
+我的实现见<a href="https://github.com/redguardtoo/emacs.d/blob/24dd0d7/lisp/init-ivy.el">init-ivy</a>中的=counsel-complete-line-by-grep=.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-8" class="outline-2">
+<h3 id="sec-8">
+<span class="section-number-2">8</span> 小结</h3>
+<div class="outline-text-2" id="text-8">
+<p>
+自动完成包括前端用户界面和后端语法解析引擎两个部分.
+</p>
+
+<p>
+作为前端的用户界面,=company-mode=和=auto-complete=相当成熟.
+</p>
+
+<p>
+后端clang最优秀.ctags谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.semantic支持的语言比clang多一点,性能和稳定性上比较差.
+</p>
+
+<p>
+作为一个C++程序员,我过去用=auto-complete=加上clang,现在用=company-mode=加clang.
+</p>
+
+<p>
+脚本语言(ruby/python/javascript)我用ctags加=company-mode=自带的=company-etags=.</p>
+</div>
+</div>
+</div>
             </div>
         </div>
         <div class="post">

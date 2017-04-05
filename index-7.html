@@ -23,157 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/moving-focus-and-buffer-between-emacs-window.html">Moving focus and buffer between Emacs window</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-02-03T14:19:00+00:00">2013-02-03 14:19</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/moving-focus-and-buffer-between-emacs-window.html#disqus_thread" data-disqus-identifier="cache/posts/moving-focus-and-buffer-between-emacs-window.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/buffer.html" rel="tag">buffer</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/move.html" rel="tag">move</a></li>
-           <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
-</p>
-
-<p>
-Here is my summary of that article:
-</p>
-
-<ul class="org-ul">
-<li>you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow.
-</li>
-<li>
-<a href="https://github.com/dimitri/switch-window">switch-window.el</a> is great. The default hot key is "C-x o".
-</li>
-</ul>
-<p>
-I love switch-windows.el. It's only three key strikes to select a window.
-</p>
-
-<p>
-I also use other packages which is more efficient.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> window-numbering.el</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>the best</b>. It uses hot key "M-NUM" to switch window (for example, "M-3" to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like "M-0" to jump to the minbuffer.
-</p>
-
-<p>
-Here is my configuration of window-numbering.el:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(require 'window-numbering)
-;; highlight the window number in pink color
-(custom-set-faces '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-(window-numbering-mode 1)
-</code></pre>
-
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> evil-mode</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-<a href="http://emacswiki.org/emacs/Evil">evil-mode</a> is a vim-emulation. It use vim's keybindings (C-w h/j/k/l) to move. Please note "C-w h" is more efficient than "C-x o". It's because "w" key is more close than "x" key and "h/j/k/l" is easy to press.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> buffer-move.el</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-<a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
-</p>
-
-<p>
-Here is my configuration:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(global-set-key (kbd "C-c C-b C-k") 'buf-move-up)
-(global-set-key (kbd "C-c C-b C-j") 'buf-move-down)
-(global-set-key (kbd "C-c C-b C-h") 'buf-move-left)
-(global-set-key (kbd "C-c C-b C-l") 'buf-move-right)
-</code></pre>
-
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> updated</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
-</p>
-
-<p>
-According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
-</p>
-
-<p>
-So it's necessary to optimize window-numbering.el further. By default, window-numbering.el uses "M-num" key to select window which is already efficient. But as a geek, I have a tendency to push the efficiency to the extreme end.
-</p>
-
-<p>
-Finally I use hotkey ",1", ",2", and ",3" to switch to the window numbering "1", "2", and "3".
-</p>
-
-<p>
-Here is the code:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(define-key evil-normal-state-map ",1" 'select-window-1)
-(define-key evil-normal-state-map ",2" 'select-window-2)
-(define-key evil-normal-state-map ",3" 'select-window-3)
-(define-key evil-normal-state-map ",4" 'select-window-4)
-</code></pre>
-
-</div>
-
-<p>
-Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
-</p>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/commentuncomment-line-is-easy-in-emacs.html">Comment/uncomment line(s) is easy in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -941,6 +790,79 @@ See <a href="http://getpopfile.org/docs/howtos:backup">http://getpopfile.org/doc
 </pre>   <p> 所有的语法都是这样的前缀表达式(<a href="http://zh.wikipedia.org/wiki/%E6%B3%A2%E5%85%B0%E8%A1%A8%E7%A4%BA%E6%B3%95">Polish Notation</a>),很多人不习惯这样的语法,但是它有一些突出优点: </p> <ol>
 <li>这样的语法做语法解析特别容易,所以第三方支持工具很容易开发. 在大规模系统开发时,这点很有用.例如,分析大型项目的源代码时,你能唯一依靠的grep和正则表达式,ELisp简单严格的语法使得正则表达式很好写.  </li> <li>实际编程时少打很多运算符号,这对于有实战经验的程序员是巨大的优点.如果你和我说什么重要的是思想和设计模式,打字速度不重要,那么菜鸟请走开.  </li> <li>最重要的优点是,这种语法相当于一种过滤机制,能够接受这种语法的人通常都是头脑比较开放思维敏捷的人.说到底产品开发的决定性因素是人,所以这个能过滤人的优点是决定性的. </li> </ol>
 </div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">函数可内嵌文档,且该文档可被Emacs帮助系统调用</h4> <div class="outline-text-3" id="text-6">  <p>现在能做到这点的系统也没几家.从细节我们可以看出Emacs和Elisp的完美之处. </p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">How to use ctags with Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-11-22T12:35:00+00:00">2012-11-22 12:35</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>  See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. </p> <p>   According wiki page, people usually use ctags to do two things, </p>
+<ol>
+<li>Code navigation </li> <li>Auto-complete/Intellisense  <p>   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like <a href="http://cscope.sourceforge.net/">cscope</a> or <a href="http://www.gnu.org/software/global">GNU Global</a>. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like <a href="http://www.gnu.org/software/global">GNU Global</a>. See the head up from <a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451">Nick Alcock</a>. His summary of the Pro/Con of GNU Global is great. </p> <p>   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. </p> <p>   I found one missing piece from Emacswiki is the tip on how to <b>manage tags file</b> easily when the TAGS is built from some code of third party libraries (<a href="http://http://en.wikipedia.org/wiki/Qt_(framework)">QT</a>, <a href="http://www.wxwidgets.org">wxWidgets</a>, <a href="http://www.gtk.org">GTK</a>, <a href="http://www.boost.org">Boost</a>, just name a few). </p> <p>   My typical work flow is: </p>
+</li> <li>Load the tags file for my own code. </li> <li>Load other tags files built from third party libraries related to my current task. </li> <li>Unload third party tags immediately if its not needed.  <p>   The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". </p> <p>   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. </p>
+</li> </ol>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Produce tags files for all the environments</h4> <div class="outline-text-3" id="text-1">  <p>For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" </p>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use git and github to manage the tags files</h4> <div class="outline-text-3" id="text-2">  <p>So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. </p> <p> Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. </p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Write emacs lisp code to load/unload these tags files</h4> <div class="outline-text-3" id="text-3">  <p>Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys. </p>   
+<pre class="prettyprint lang-lisp">
+; Set up tags built from third party libraries ===begin
+; define tags alias like "wx-tags" here
+(setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
+
+; @see &lt;Selecting a Tags Table&gt; in Emacs manual for details.
+; We only change the list "tags-table-list". It is documented officialy.
+(defun insert-into-tags-table-list(e)
+  (add-to-list 'tags-table-list e t)
+  )
+
+(defun delete-from-tags-table-list (e)
+  (setq tags-table-list (delete e tags-table-list))
+  )
+
+; This is a sample command, all you need is copy/paste this template
+; for other new commands
+(defun add-wx-tags (&amp;optional del)
+  "Add or delete(C-u) wxWidgets tags into tags-table-list"
+  (interactive "P")
+  (let (mytags)
+    ; here add your third party tags files
+    ; Usually you need load/unload tags files combination in one command
+    ; change below line to add them
+    (setq mytags (list wx-tags))
+    (if del (mapc 'delete-from-tags-table-list mytags)
+      (mapc 'insert-into-tags-table-list mytags)
+      )
+    )
+  )
+; === end
+</pre>
+
+<p></p>
+<p> This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. </p> <p> See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details. </p>
 </div> </div> </div>
             </div>
         </div>

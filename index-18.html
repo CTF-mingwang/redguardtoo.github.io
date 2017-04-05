@@ -23,94 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/jump-to-the-positions-before-and-after-m-x-imenu.html">Jump to the positions before and after `M-x imenu`</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-11-15T02:15:32+00:00">2014-11-15 02:15</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/jump-to-the-positions-before-and-after-m-x-imenu.html#disqus_thread" data-disqus-identifier="cache/posts/jump-to-the-positions-before-and-after-m-x-imenu.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-As a programmer, I use `M-x imenu` to jump to the callee when editing a code file. After a little code tweaking in the callee, I need jump back to caller as quickly as possible.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Solution</h3>
-<div class="outline-text-2" id="text-1">
-<p>
-Insert below code to ~/.emacs:
-</p>
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defvar rimenu-position-pair nil "positions before and after imenu jump")
-(add-hook 'imenu-after-jump-hook
-          (lambda ()
-            (let ((start-point (marker-position (car mark-ring)))
-                  (end-point (point)))
-              (setq rimenu-position-pair (list start-point end-point)))))
-
-(defun rimenu-jump ()
-  "jump to the closest before/after position of latest imenu jump"
-  (interactive)
-  (when rimenu-position-pair
-    (let ((p1 (car rimenu-position-pair))
-          (p2 (cadr rimenu-position-pair)))
-
-      ;; jump to the far way point of the rimenu-position-pair
-      (if (&lt; (abs (- (point) p1))
-             (abs (- (point) p2)))
-          (goto-char p2)
-          (goto-char p1))
-      )))
-</code></pre>
-
-</div>
-
-<p>
-Now you can use `M-x rimenu-jump` to jump.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Technical details</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Imenu will push the start point into mark-ring. After reaching the destination, it will call the imenu-after-jump-hook where I can store the end point. 
-</p>
-
-<p>
-I store the start/end point into rimenu-position-pair and `M-x rimenu-jump` goes to the farthest one from the pair.
-</p>
-
-<p>
-Here is the <a href="https://plus.google.com/110954683162859211810/posts/gcdj1ZZT2zQ">original discussion on G+</a>. Thanks to <a href="https://plus.google.com/+jorgeAAlfaroMurillo/posts">Jorge A. Alfaro Murillo</a> for enlightening me on the solution.
-</p>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/why-emacs-is-better-editor-part-two.html">Why Emacs is a better editor, part two</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1585,6 +1497,244 @@ All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags 
 <p>
 UPDATE:
 This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/migrate-blog-from-wordpress-into-nikola.html">Migrate blog from wordpress into nikola</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-22T09:09:21+00:00">2014-04-22 09:09</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/migrate-blog-from-wordpress-into-nikola.html#disqus_thread" data-disqus-identifier="cache/posts/migrate-blog-from-wordpress-into-nikola.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/migrate.html" rel="tag">migrate</a></li>
+           <li><a class="tag p-category" href="categories/nikola.html" rel="tag">nikola</a></li>
+           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-04-22&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-03-12 Sun&gt;</span></span>
+</p>
+
+<p>
+Here are the steps.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash"># you might need need `sudo apt-get install python-gdbm` on Debian
+# install python2 and make sure sqlite is supported
+sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# one debian/ubuntu, you need: `apt-get install libxml2-dev libxslt1-dev python-dev libjpeg-dev` for lxml
+
+# Not to mess up with root
+export PATH=$PATH:$HOME/.local/bin
+
+# Best way to get latest pip,
+# see https://packaging.python.org/installing/#install-pip-setuptools-and-wheel
+python ~/bin/get-pip.py --user # ~/.local/bin/pip
+
+# install dependencies (requests is required by zen theme)
+# sudo pip install markdown webassets phpserialize nikola requests
+# "sudo pip install" could screw up my python setup on Gentoo Linux
+# @see https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b
+# so install the python packages in my HOME directory might be better
+# @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
+pip install --user markdown webassets phpserialize nikola requests
+
+# create root directory of nikola
+mkdir -p ~/.config/nikola;cd ~/.config/nikola
+
+# import from wordpress dump
+nicola import_wordpress my_wordpress_dump.xml
+
+# since I use zen theme, I need install lessc
+# obviously NodeJS is required
+npm install -g less # use portable nodejs in $HOME is better
+
+# I use zen theme, before intalling new theme, clean the legacy theme at first
+rm -rf themes/zen/;nikola install_theme zen
+# or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
+
+# build the web site
+nikola build
+</code></pre>
+
+</div>
+
+<p>
+Use below command to fix embedded code in HTML files:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
+find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
+</code></pre>
+
+</div>
+
+<p>
+Manually fixed those articles with Chinese title in url_map.csv
+</p>
+
+<p>
+Use below script to fixed the xml dumped from wordpress:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-python">#!/usr/bin/python
+import getopt, sys, csv
+def usage():
+    print '''
+NAME
+    fix url mapping when migrate wordpress blog into nikola
+Usage
+    python fix-url-map.py [options]
+'''[1:-1]
+
+if __name__ == '__main__':
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf:x:", ["help", "file=","xml="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+
+    file=""
+    xml=""
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-f", "--file"):
+            file= a
+        elif o in ("-x", "--xml"):
+            xml=a
+        else:
+            assert False, "unhandled option"
+
+    with open(xml, 'r') as content_file:
+        content = content_file.read()
+
+    with open(file, 'rb') as csvfile:
+         spamreader = csv.reader(csvfile, delimiter=',')
+         for row in spamreader:
+             content=content.replace("&gt;"+row[0]+"&lt;","&gt;"+row[1]+"&lt;")
+
+    print content
+</code></pre>
+
+</div>
+
+<p>
+Import the xml into disqus.com.
+</p>
+
+<p>
+Install syntaxhighlighter and google analytics, insert below code into conf.py:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-python">BODY_END = """
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&gt;&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+function path()
+{
+  var args = arguments,
+      result = [];
+
+  for(var i = 0; i &lt; args.length; i++){
+    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
+  }
+
+  return result;
+};
+
+SyntaxHighlighter.autoloader.apply(null, path(
+  'applescript            @shBrushAppleScript.min.js',
+  'actionscript3 as3      @shBrushAS3.min.js',
+  'bash shell             @shBrushBash.min.js',
+  'coldfusion cf          @shBrushColdFusion.min.js',
+  'cpp c c++              @shBrushCpp.min.js',
+  'clojure                @shBrushScala.min.js',
+  'c# c-sharp csharp      @shBrushCSharp.min.js',
+  'css                    @shBrushCss.min.js',
+  'delphi pascal          @shBrushDelphi.min.js',
+  'diff patch pas         @shBrushDiff.min.js',
+  'erl erlang             @shBrushErlang.min.js',
+  'groovy                 @shBrushGroovy.min.js',
+  'java                   @shBrushJava.min.js',
+  'jfx javafx             @shBrushJavaFX.min.js',
+  'js jscript javascript  @shBrushJScript.min.js',
+  'perl pl                @shBrushPerl.min.js',
+  'php                    @shBrushPhp.min.js',
+  'text plain             @shBrushPlain.min.js',
+  'py python              @shBrushPython.min.js',
+  'ruby rails ror rb      @shBrushRuby.min.js',
+  'sass scss              @shBrushSass.min.js',
+  'scala                  @shBrushScala.min.js',
+  'sql                    @shBrushSql.min.js',
+  'vb vbnet               @shBrushVb.min.js',
+  'xml xhtml xslt html    @shBrushXml.min.js'
+));
+SyntaxHighlighter.all();
+&lt;/script&gt;
+&lt;script type='text/javascript'&gt;
+var _gaq = _gaq || [];
+
+_gaq.push(['_setAccount', 'UA-29850823-2']);
+_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+&lt;/script&gt;
+"""
+
+EXTRA_HEAD_DATA = """
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&gt;
+&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&gt;
+"""
+</code></pre>
+
+</div>
+
+<p>
+In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
+</p>
+
+<p>
+I use FileZilla to upload files to FTP. ncftp is a command line alternative.</p>
 </div>
             </div>
         </div>
