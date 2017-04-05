@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about intellisense)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/intellisense.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Apr 2017 13:08:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs中的自动完成(Auto Completion)完全指南</title><link>http://blog.binchen.org/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about intellisense)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/intellisense.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Apr 2017 13:11:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs中的自动完成(Auto Completion)完全指南</title><link>http://blog.binchen.org/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 作者: 陈斌(redguardtoo)
 &lt;/p&gt;
 
@@ -96,7 +96,7 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 &lt;/p&gt;
 
 &lt;p&gt;
-显然,这种方案只适用于clang支持的语言.支持Mac/Linux/Cygwin平台,我不知道是否支持Windows平台.
+显然,这种l案只适用于=Clang=支持的语言.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -105,10 +105,6 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 
 &lt;p&gt;
 具体配置请参考我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/903aeb10c316c0f43b35bc0dc6101eea3f729da7/init-auto-complete.el"&gt;init-auto-complete.el&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-顺便说一下,关于elpa的配置,可能你需要参考我的&lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/init-elpa.el"&gt;init-elpa.el&lt;/a&gt;,因现在有多个AppStore,且直到Emacs24对elpa的支持才开始自带.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -232,7 +228,15 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-后端clang最优秀.ctags谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.semantic支持的语言比clang多一点,性能和稳定性上比较差.
+后端=Clang=最优秀.
+&lt;/p&gt;
+
+&lt;p&gt;
+=Ctags=谈不上语法解析,只是正则表达式罢了,但是因此才能通吃所有语言.
+&lt;/p&gt;
+
+&lt;p&gt;
+=Semantic=支持的语言比clang多一点,性能和稳定性比较差.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -240,7 +244,7 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 &lt;/p&gt;
 
 &lt;p&gt;
-脚本语言(ruby/python/javascript)我用ctags加=company-mode=自带的=company-etags=.
+脚本语言(Ruby/Python/Javascript)我用=Ctags=加=company-mode=自带的=company-etags=.
 &lt;/p&gt;
 
 &lt;p&gt;
