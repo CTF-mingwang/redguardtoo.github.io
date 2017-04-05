@@ -972,7 +972,7 @@ os.system(cmd)
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html">Emacs中的自动完成(Auto Completion)完全指南</a></h1>
+            <h1 class="title"><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html">Emacs中的自动完成(Auto Completion)完全指南</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-08-21T14:50:00+00:00">2012-08-21 14:50</time>
@@ -980,7 +980,7 @@ os.system(cmd)
                 <div class="stats">
                     
         
-    <a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html">Comments</a>
+    <a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html">Comments</a>
 
 
                 </div>
@@ -1002,14 +1002,14 @@ os.system(cmd)
 <h3>Table of Contents</h3>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-1">1. 概述</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-2">2. auto-complete结合clang</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-3">3. company-mode</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-4">4. hippie-expand</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-5">5. complete-symbol</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-6">6. evil-mode</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-7">7. 其他</a></li>
-<li><a href="posts/emacs-zhong-de-zi-dong-wan-cheng-wan-quan-zhi-nan.html#sec-8">8. 小结</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-1">1. 概述</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-2">2. auto-complete结合clang</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-3">3. company-mode</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-4">4. hippie-expand</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-5">5. complete-symbol</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-6">6. evil-mode</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-7">7. 其他</a></li>
+<li><a href="posts/emacs-zhong-de-zi-dong-wan-chen-wan-quan-zhi-nan.html#sec-8">8. 小结</a></li>
 </ul>
 </div>
 </div>
@@ -1031,11 +1031,11 @@ Emacs比普通IDE的Intellisense强大得多,例如可输入当前文件名(带�
 </p>
 
 <p>
-我不是来赞美Emacs的强大的,我是来吐槽的.Emacs自动完成框架太多了,框架的功能重叠,让人困扰.
+我不是来赞美Emacs的强大的,我是来吐槽的.自动完成框架太多,功能重叠,让人困扰.
 </p>
 
 <p>
-所以本文的目的有两个:
+所以本文目的有两个:
 </p>
 
 <ul class="org-ul">
@@ -1224,6 +1224,10 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 <p>
 我的实现见<a href="https://github.com/redguardtoo/emacs.d/blob/24dd0d7/lisp/init-ivy.el">init-ivy</a>中的=counsel-complete-line-by-grep=.
 </p>
+
+<p>
+我试用好几个月了,非常好用.
+</p>
 </div>
 </div>
 
@@ -1248,7 +1252,11 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </p>
 
 <p>
-脚本语言(ruby/python/javascript)我用ctags加=company-mode=自带的=company-etags=.</p>
+脚本语言(ruby/python/javascript)我用ctags加=company-mode=自带的=company-etags=.
+</p>
+
+<p>
+基于框架自己发明新技术会更好用.</p>
 </div>
 </div>
 </div>
