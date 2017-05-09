@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 09 May 2017 13:53:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 09 May 2017 13:55:21 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
 &lt;/p&gt;
 
@@ -47,9 +47,9 @@ Inside &lt;code&gt;counsel-ag-occur&lt;/code&gt;:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unqouted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it.
+&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unquoted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it
 &lt;/li&gt;
-&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; run the &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters again.
+&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; runs &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters again in shell again
 &lt;/li&gt;
 &lt;li&gt;Then a wgrep-friendly buffer is created
 &lt;/li&gt;
