@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 09 May 2017 13:44:39 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 09 May 2017 13:46:56 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
 &lt;/p&gt;
 
@@ -112,7 +112,10 @@ Read code of &lt;code&gt;wgrep.el&lt;/code&gt; (v2.1.10),
 
 &lt;p&gt;
 You can replace the line &lt;code&gt;(message "File relative path=%s" fn)&lt;/code&gt; to &lt;code&gt;(shell-command (format "any-shell-cli %s" fn))&lt;/code&gt; if want to &lt;b&gt;do anything on the files&lt;/b&gt; in shell.
-&lt;/p&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+You can insert definition of &lt;code&gt;access-files-in-wgrep-buffer&lt;/code&gt; into your &lt;code&gt;.emacs&lt;/code&gt; and &lt;code&gt;M-x access-files-in-wgrep-buffer&lt;/code&gt; in wgrep buffer to have a test.&lt;/p&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 When using &lt;a href="https://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt; I often input &lt;code&gt;%s/old-keyword/new-keyword/g&lt;/code&gt; in &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html"&gt;Minibuffer&lt;/a&gt;.
 &lt;/p&gt;
 
