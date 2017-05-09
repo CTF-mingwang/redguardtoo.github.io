@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about counsel)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/counsel.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 09 May 2017 13:40:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, here is a useful tip on &lt;a href="https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/"&gt;using counsel-ag and wgrep to edit multiple files&lt;/a&gt; I recently learned.
+&lt;/p&gt;
+
+&lt;p&gt;
+To understand this "black magic", you only need know &lt;code&gt;counsel-ag-occur&lt;/code&gt; from &lt;code&gt;counsel.el&lt;/code&gt; (v0.9.1):
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-ag-occur ()
+  "Generate a custom occur buffer for `counsel-ag'."
+  (unless (eq major-mode 'ivy-occur-grep-mode)
+    (ivy-occur-grep-mode))
+  (setq default-directory counsel--git-grep-dir)
+  (let* ((regex (counsel-unquote-regex-parens
+                 (setq ivy--old-re
+                       (ivy--regex
+                        (progn (string-match "\"\\(.*\\)\"" (buffer-name))
+                               (match-string 1 (buffer-name)))))))
+         (cands (split-string
+                 (shell-command-to-string
+                  (format counsel-ag-base-command (shell-quote-argument regex)))
+                 "\n"
+                 t)))
+    ;; Need precise number of header lines for `wgrep' to work.
+    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
+                    default-directory))
+    (insert (format "%d candidates:\n" (length cands)))
+    (ivy--occur-insert-lines
+     (mapcar
+      (lambda (cand) (concat "./" cand))
+      cands))))
+(ivy-set-occur 'counsel-ag 'counsel-ag-occur)
+(ivy-set-display-transformer 'counsel-ag 'counsel-git-grep-transformer)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Inside &lt;code&gt;counsel-ag-occur&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unqouted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it.
+&lt;/li&gt;
+&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; run the &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters again.
+&lt;/li&gt;
+&lt;li&gt;Then a wgrep-friendly buffer is created
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+After spending 5 minutes to understand the internals, you can easily implement similar features.
+&lt;/p&gt;
+
+&lt;p&gt;
+Now let's see what we can do with that wgrep-friendly buffer.
+&lt;/p&gt;
+
+&lt;p&gt;
+My project uses Perforce as VCS. So I need check out files and make it writable before using wgrep.
+&lt;/p&gt;
+
+&lt;p&gt;
+Read code of &lt;code&gt;wgrep.el&lt;/code&gt; (v2.1.10),
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun wgrep-prepare-context ()
+  (save-restriction
+    (let ((start (wgrep-goto-first-found))
+          (end (wgrep-goto-end-of-found)))
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (funcall wgrep-results-parser))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+&lt;code&gt;wgrep-results-parser&lt;/code&gt; is actually alias of &lt;code&gt;wgrep-parse-command-results&lt;/code&gt;. By combining &lt;code&gt;wgrep-prepare-context&lt;/code&gt; and &lt;code&gt;wgrep-parse-command-results&lt;/code&gt; I got command &lt;code&gt;access-files-in-wgrep-buffer&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun access-files-in-wgrep-buffer()
+  (interactive)
+  (save-restriction
+    (let* ((start (wgrep-goto-first-found))
+           (end (wgrep-goto-end-of-found))
+           fn-accessed)
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (unless (featurep 'wgrep) (require 'featurep))
+      (while (not (eobp))
+        (if (looking-at wgrep-line-file-regexp)
+            (let* ((fn (match-string-no-properties 1)))
+              (unless (string= fn fn-accessed)
+                (setq fn-accessed fn)
+                (message "File relative path=%s" fn))))
+        (forward-line 1)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You can easily replace the line &lt;code&gt;(message "File relative path=%s" fn)&lt;/code&gt; to (shell-command (format "any-shell-cli %s" fn))=
+&lt;/p&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item></channel></rss>
