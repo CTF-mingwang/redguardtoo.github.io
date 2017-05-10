@@ -99,7 +99,7 @@ Inside <code>counsel-ag-occur</code>:
 <ul class="org-ul">
 <li>The variable <code>regex</code> is the regular expression built from the filter string you input. Please note that <code>regex</code> is unquoted by <code>counsel-unquote-regex-parens</code> so it can be used in shell. If you use <code>regex</code> in Emacs Lisp, you don't need unquote it
 </li>
-<li>The variable <code>cands</code> runs <code>ag</code> with <code>regex</code> as parameters again in shell again
+<li>The variable <code>cands</code> is the candidate lines created by running <code>ag</code> with <code>regex</code> as parameters in shell
 </li>
 <li>Then a wgrep-friendly buffer is created
 </li>
@@ -134,7 +134,11 @@ Read code of <code>wgrep.el</code> (v2.1.10),
 </div>
 
 <p>
-<code>wgrep-results-parser</code> is actually alias of <code>wgrep-parse-command-results</code>. By combining <code>wgrep-prepare-context</code> and <code>wgrep-parse-command-results</code> I got my own <code>access-files-in-wgrep-buffer</code>:
+<code>wgrep-results-parser</code> is actually alias of <code>wgrep-parse-command-results</code> whose code is too longer to paste here. You can <code>M-x find-function wgrep-parse-command-results</code> to read its code.
+</p>
+
+<p>
+By combining <code>wgrep-prepare-context</code> and <code>wgrep-parse-command-results</code> I got my own <code>access-files-in-wgrep-buffer</code>:
 </p>
 
 <div class="org-src-container">
