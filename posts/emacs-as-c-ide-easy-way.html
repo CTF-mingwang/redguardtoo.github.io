@@ -171,7 +171,7 @@ Run below command in shell to scan code,
 cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
 cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
 ... 
-# dump index files inside the projects
+# index files are placed inside the projects
 cd ~/proj1 &amp;&amp; gtags 
 cd ~/proj2 &amp;&amp; gtags
 ...
@@ -180,7 +180,24 @@ cd ~/proj2 &amp;&amp; gtags
 </div>
 
 <p>
-After installing Emacs plugins (minimum setup from their website is enough), insert below code into ~/.emacs,
+If you are using old Global (v5.7.1, for example), the command to create tags file in read only directory may fail. This is Global's bug. But there is workaround:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
+mkdir -p ~/obj/usr/include &amp;&amp; cd /usr/include &amp;&amp; gtags ~/obj/usr/include
+mkdir -p ~/obj/usr/linux/include &amp;&amp; cd /usr/linux/include &amp;&amp; gtags ~/obj/usr/linux/include
+</code></pre>
+
+</div>
+
+<p>
+Global supports environment variable <code>MAKEOBJDIRPREFIX</code> since version 1.53.
+</p>
+
+<p>
+After installing Emacs plugins and setup (minimum setup from their website is enough), insert below code into ~/.emacs,
 </p>
 <div class="org-src-container">
 
