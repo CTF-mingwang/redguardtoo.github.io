@@ -49,24 +49,24 @@
             <div class="body">
                 <div>
 <p>
-In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> so I can search/replace text in project root directory.
+In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> in order to search/replace text in project root directory.
 </p>
 
 <p>
-My wgrep-mode enabled buffer is always in evil-mode. I prefer pressing <code>dd</code> to remove lines in that buffer so wgrep could skip them.
+My wgrep-mode enabled buffer is in evil-mode. I prefer pressing vi key binding <code>dd</code> to remove lines in that buffer to tell wgrep skip them.
 </p>
 
 <p>
-It turned out we need <code>M-x C-c C-p</code> or <code>M-x wgrep-toggle-readonly-area</code> before removing lines.
+It turns out we need <code>M-x C-c C-p</code> or <code>M-x wgrep-toggle-readonly-area</code> before removing lines.
 </p>
 
 <p>
-I'm too lazy to remember extra key bindings. So here is my workaround:
+I'm too lazy to remember extra commands. So here is my workaround:
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">;; I can press `dd' to delete lines in `wgrep-mode' in evil
+<pre><code class="lang-lisp">;; Press `dd' to delete lines in `wgrep-mode' in evil directly
 (defadvice evil-delete (around evil-delete-hack activate)
   ;; make buffer writable
   (if wgrep-prepared (wgrep-toggle-readonly-area))
