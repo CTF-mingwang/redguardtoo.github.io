@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 17 May 2017 12:22:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 22 May 2017 13:15:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use wgrep and evil to replace text efficiently</title><link>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+In my previous article &lt;a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html"&gt;Emacs is easy if you read code&lt;/a&gt;, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define &lt;code&gt;my-grep&lt;/code&gt; and &lt;code&gt;my-grep-occur&lt;/code&gt; in &lt;a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el"&gt;init-ivy.el&lt;/a&gt; so I can search/replace text in project root directory.
+&lt;/p&gt;
+
+&lt;p&gt;
+My wgrep-mode enabled buffer is always in evil-mode. I prefer pressing &lt;code&gt;dd&lt;/code&gt; to remove lines in that buffer so wgrep could skip them.
+&lt;/p&gt;
+
+&lt;p&gt;
+It turned out we need &lt;code&gt;M-x C-c C-p&lt;/code&gt; or &lt;code&gt;M-x wgrep-toggle-readonly-area&lt;/code&gt; before removing lines.
+&lt;/p&gt;
+
+&lt;p&gt;
+I'm too lazy to remember extra key bindings. So here is my workaround:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; I can press `dd' to delete lines in `wgrep-mode' in evil
+(defadvice evil-delete (around evil-delete-hack activate)
+  ;; make buffer writable
+  (if wgrep-prepared (wgrep-toggle-readonly-area))
+  ad-do-it
+  ;; make buffer read-only
+  (if wgrep-prepared (wgrep-toggle-readonly-area)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>wgrep</category><guid>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</guid><pubDate>Mon, 22 May 2017 13:14:35 GMT</pubDate></item><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
 &lt;/p&gt;
 
@@ -876,35 +903,4 @@ Screenshot,
 &lt;p&gt;
 Check &lt;a href="https://www.gnu.org/software/global/manual/global.html"&gt;GNU Global manual&lt;/a&gt; to understand environment variables &lt;code&gt;GTAGSLIBPATH&lt;/code&gt; and &lt;code&gt;MAKEOBJDIRPREFIX&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>emacs</category><category>en</category><category>global</category><category>gtags</category><category>ide</category><guid>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</guid><pubDate>Thu, 25 Aug 2016 14:20:28 GMT</pubDate></item><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/elpaclone &amp;amp;&amp;amp; cd ~/elpaclone &amp;amp;&amp;amp; curl -L https://elpa.gnu.org/packages/archive-contents | perl -pe 's/(^\(1|\n)//g' | perl -pe 's/\]\)/])\n/g' | perl -pe 's/^ *\(([a-z0-9A-Z-]*).*\[\(([0-9 ]*).*(single|tar).*/\1-\2.\3/g' | perl -pe 's/ /./g' | perl -pe 's/single/el/g' | perl -pe 's/\)//g' | xargs -I {} curl -L  -O https://elpa.gnu.org/packages/{} &amp;amp;&amp;amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-The &lt;a href="https://elpa.gnu.org/packages/archive-contents"&gt;https://elpa.gnu.org/packages/archive-contents&lt;/a&gt; contains all the information of packages. I re-organize it to make sure each line corresponds to one package. Then I use &lt;a href="https://en.wikipedia.org/wiki/CURL"&gt;cURL&lt;/a&gt; to download everything.
-&lt;/p&gt;
-
-&lt;p&gt;
-Usage is simple.
-&lt;/p&gt;
-
-&lt;p&gt;
-Insert below line at the beginning of ~/.emacs when &lt;b&gt;elpa.gnu.org is down&lt;/b&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq package-archives '(("elpaclone" . "~/elpaclone")))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-This solution also works for &lt;a href="https://melpa.org/"&gt;MELPA&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>elpa</category><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</guid><pubDate>Sun, 14 Aug 2016 12:52:27 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>emacs</category><category>en</category><category>global</category><category>gtags</category><category>ide</category><guid>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</guid><pubDate>Thu, 25 Aug 2016 14:20:28 GMT</pubDate></item></channel></rss>
