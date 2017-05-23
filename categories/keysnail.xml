@@ -1,5 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about keysnail)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/keysnail.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 23 May 2017 12:32:12 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Firefox and Emacs</title><link>http://blog.binchen.org/posts/firefox-and-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
+&lt;/p&gt;
+
+&lt;p&gt;
+Three years ago, I wrote &lt;a href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html"&gt;Use firefox in Emacs way&lt;/a&gt; to convert Firefox into Emacs by its plugin &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keynsail.&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+A year ago I published &lt;a href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html"&gt;Hello Ivy-mode, bye Helm&lt;/a&gt; to prove how powerful &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; is if you learn its API &lt;code&gt;ivy-read&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Actually, Keysnail has similar javascript API &lt;code&gt;prompt.selector&lt;/code&gt; and it's as powerful as &lt;code&gt;ivy-read&lt;/code&gt; (if not more powerful).
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, you can insert below snippet into ~/.keysnail.js and press =,hh= or &lt;code&gt;C-c C-h&lt;/code&gt; to search browse history:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function searchHistory(evt, arg) {
+  function timeSince(now, date) {
+
+    var seconds = Math.floor((now - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval &amp;gt; 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval &amp;gt; 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval &amp;gt; 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval &amp;gt; 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval &amp;gt; 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
+  function searchWithKeyword(q) {
+    var collection = (function() {
+      //search option
+      var options = PlacesUtils.history.getNewQueryOptions();
+      options.maxResults = 4096;
+      options.queryType = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
+      //options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_FRECENCY_DESCENDING;
+      options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_DATE_DESCENDING;
+      options.includeHidden = true;
+
+      //search query
+      var query = PlacesUtils.history.getNewQuery();
+      // read keyworld
+      if(q &amp;amp;&amp;amp; q !== '') {
+        query.searchTerms  = q;
+      }
+
+      var result = PlacesUtils.history.executeQuery(query, options);
+      var root = result.root;
+
+      var collection = [];
+      var now = new Date().getTime();
+      var siteNode;
+      root.containerOpen = true;
+      for (var i = 0; i &amp;lt; root.childCount; i++) {
+        // siteNode =&amp;gt; nsINavHistoryResultNode
+        siteNode = root.getChild(i);
+        collection.push([siteNode.icon,siteNode.title,siteNode.uri, siteNode.time/1000]);
+      }
+      collection.sort(function(a, b) {
+        return b[3]-a[3];
+      });
+      // reformat the time
+      for (i = 0; i &amp;lt; collection.length; i++) {
+        collection[i][3] = timeSince(now, collection[i][3]) + ' ago';
+      }
+      root.containerOpen = false;
+      return collection;
+    })();
+
+    prompt.selector({
+      message    : "Search history"+ (q &amp;amp;&amp;amp; q !== ''? (' @'+q +':') : ':' ),
+      collection : collection,
+      flags      : [ICON | IGNORE, 0, 0, 0],
+      header     : ["Title", "Url", "Last visited"],
+      width      : [30, 60, 10],
+      callback: function (i) {
+        if (i &amp;gt;= 0) {
+          openUILinkIn(collection[i][2], "tab");
+        }
+      },
+      onFinish: function() {
+        gBrowser.focus();
+        _content.focus();
+      }
+    });
+  }
+
+  prompt.finish(true);
+  prompt.read('Keyword to search history?', searchWithKeyword, null, null, null, 0, "history_search");
+  // searchWithKeyword('test');
+
+}
+key.setViewKey([',', 'h', 'h'], searchHistory, "Search history");
+key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Here is my complete &lt;a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a"&gt;.keysnail.js&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>ivy</category><category>keysnail</category><guid>http://blog.binchen.org/posts/firefox-and-emacs.html</guid><pubDate>Tue, 23 May 2017 12:24:25 GMT</pubDate></item><item><title>Use firefox in Emacs way</title><link>http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-05-20 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 

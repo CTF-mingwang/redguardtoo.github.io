@@ -23,6 +23,210 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/emacs-as-c-ide-easy-way.html">Emacs as C++ IDE, easy way</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2016-08-25T14:20:28+00:00">2016-08-25 14:20</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-as-c-ide-easy-way.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-as-c-ide-easy-way.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/c.html" rel="tag">c</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/global.html" rel="tag">global</a></li>
+           <li><a class="tag p-category" href="categories/gtags.html" rel="tag">gtags</a></li>
+           <li><a class="tag p-category" href="categories/ide.html" rel="tag">ide</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-25&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-05-17 Wed&gt;</span></span>
+</p>
+
+<p>
+This is a <b>newbie friendly</b> solution which works at Linux/OSX/Cygwin (should work at Windows too, but I don't develop at Windows).
+</p>
+
+<p>
+Setup is minimum. Only GNU Global and two Emacs plugins are required:
+</p>
+
+<ul class="org-ul">
+<li>
+<a href="https://github.com/company-mode/company-mode">company</a> for code completion
+</li>
+<li>
+<a href="https://github.com/syohex/emacs-helm-gtags">emacs-helm-gtags</a> <b>or</b> <a href="https://github.com/syohex/emacs-counsel-gtags">emacs-counsel-gtags</a> for code navigation. I use emacs-counsel-gtags.
+</li>
+</ul>
+<p>
+Here is the step to step guide.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
+</p>
+
+<p>
+Both projects use files from <b>read only</b> directories <code>/usr/include</code> and <code>/usr/src/linux/include</code>.
+</p>
+
+<p>
+We create a new directory <code>~/obj</code> to store index files created by GNU Global because directories of third party libraries are <b>read only</b>.
+</p>
+
+<p>
+Let's create directories,
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash">mkdir -p ~/{proj1,proj2,obj}
+</code></pre>
+
+</div>
+
+<p>
+The content of <code>~/proj2/lib.cpp</code>,
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">void proj2_hello(int a2, char* b2) {
+}
+</code></pre>
+
+</div>
+
+<p>
+The content of <code>~/proj1/main.cpp</code>,
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">void proj1_hello(int a1, char* b1) {
+}
+
+int main(int argc, char *argv[]) {
+    return 0;
+}
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+Run below command in shell to scan code,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
+cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
+cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
+... 
+# index files are placed inside the projects
+cd ~/proj1 &amp;&amp; gtags 
+cd ~/proj2 &amp;&amp; gtags
+...
+</code></pre>
+
+</div>
+
+<p>
+If you are <b>using old Global</b> (v5.7.1, for example), the command to create tags file in read only directory may fail. This is Global's bug. But there is workaround:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
+mkdir -p ~/obj/usr/include &amp;&amp; cd /usr/include &amp;&amp; gtags ~/obj/usr/include
+mkdir -p ~/obj/usr/linux/include &amp;&amp; cd /usr/linux/include &amp;&amp; gtags ~/obj/usr/linux/include
+</code></pre>
+
+</div>
+
+<p>
+Global introduced <code>MAKEOBJDIRPREFIX</code> on 2008-03-23.
+</p>
+
+<p>
+After installing Emacs plugins and setup (minimum setup from their website is enough), insert below code into ~/.emacs,
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">;; Please note `file-truename' must be used!
+(setenv "GTAGSLIBPATH" (concat "/usr/include"
+                               ":"
+                               "/usr/src/linux/include"
+                               ":"
+                               (file-truename "~/proj2")
+                               ":"
+                               (file-truename "~/proj1")))
+(setenv "MAKEOBJDIRPREFIX" (file-truename "~/obj/"))
+(setq company-backends '((company-dabbrev-code company-gtags)))
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">Usage</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+Use the Emacs plugins as usual.
+</p>
+
+<p>
+But you need install latest company built on 25th August because I <a href="https://github.com/company-mode/company-mode/issues/570">fixed a company issue</a> yesterday.
+</p>
+
+<p>
+Screenshot,
+</p>
+
+
+<div class="figure">
+<p><img src="wp-content/cpp-gtags-demo-nq8.png" alt="cpp-gtags-demo-nq8.png"></p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.</p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/no-worries-when-elpa-is-down.html">No worries when elpa is down</a></h1>
             <div class="meta">
                 <div class="authordate">

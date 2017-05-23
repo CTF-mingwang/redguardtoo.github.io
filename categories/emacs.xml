@@ -1,5 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 22 May 2017 13:26:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use wgrep and evil to replace text efficiently</title><link>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 23 May 2017 12:32:12 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Firefox and Emacs</title><link>http://blog.binchen.org/posts/firefox-and-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
+&lt;/p&gt;
+
+&lt;p&gt;
+Three years ago, I wrote &lt;a href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html"&gt;Use firefox in Emacs way&lt;/a&gt; to convert Firefox into Emacs by its plugin &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keynsail.&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+A year ago I published &lt;a href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html"&gt;Hello Ivy-mode, bye Helm&lt;/a&gt; to prove how powerful &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; is if you learn its API &lt;code&gt;ivy-read&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Actually, Keysnail has similar javascript API &lt;code&gt;prompt.selector&lt;/code&gt; and it's as powerful as &lt;code&gt;ivy-read&lt;/code&gt; (if not more powerful).
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, you can insert below snippet into ~/.keysnail.js and press =,hh= or &lt;code&gt;C-c C-h&lt;/code&gt; to search browse history:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;function searchHistory(evt, arg) {
+  function timeSince(now, date) {
+
+    var seconds = Math.floor((now - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval &amp;gt; 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval &amp;gt; 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval &amp;gt; 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval &amp;gt; 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval &amp;gt; 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
+  function searchWithKeyword(q) {
+    var collection = (function() {
+      //search option
+      var options = PlacesUtils.history.getNewQueryOptions();
+      options.maxResults = 4096;
+      options.queryType = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
+      //options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_FRECENCY_DESCENDING;
+      options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_DATE_DESCENDING;
+      options.includeHidden = true;
+
+      //search query
+      var query = PlacesUtils.history.getNewQuery();
+      // read keyworld
+      if(q &amp;amp;&amp;amp; q !== '') {
+        query.searchTerms  = q;
+      }
+
+      var result = PlacesUtils.history.executeQuery(query, options);
+      var root = result.root;
+
+      var collection = [];
+      var now = new Date().getTime();
+      var siteNode;
+      root.containerOpen = true;
+      for (var i = 0; i &amp;lt; root.childCount; i++) {
+        // siteNode =&amp;gt; nsINavHistoryResultNode
+        siteNode = root.getChild(i);
+        collection.push([siteNode.icon,siteNode.title,siteNode.uri, siteNode.time/1000]);
+      }
+      collection.sort(function(a, b) {
+        return b[3]-a[3];
+      });
+      // reformat the time
+      for (i = 0; i &amp;lt; collection.length; i++) {
+        collection[i][3] = timeSince(now, collection[i][3]) + ' ago';
+      }
+      root.containerOpen = false;
+      return collection;
+    })();
+
+    prompt.selector({
+      message    : "Search history"+ (q &amp;amp;&amp;amp; q !== ''? (' @'+q +':') : ':' ),
+      collection : collection,
+      flags      : [ICON | IGNORE, 0, 0, 0],
+      header     : ["Title", "Url", "Last visited"],
+      width      : [30, 60, 10],
+      callback: function (i) {
+        if (i &amp;gt;= 0) {
+          openUILinkIn(collection[i][2], "tab");
+        }
+      },
+      onFinish: function() {
+        gBrowser.focus();
+        _content.focus();
+      }
+    });
+  }
+
+  prompt.finish(true);
+  prompt.read('Keyword to search history?', searchWithKeyword, null, null, null, 0, "history_search");
+  // searchWithKeyword('test');
+
+}
+key.setViewKey([',', 'h', 'h'], searchHistory, "Search history");
+key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Here is my complete &lt;a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a"&gt;.keysnail.js&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>ivy</category><category>keysnail</category><guid>http://blog.binchen.org/posts/firefox-and-emacs.html</guid><pubDate>Tue, 23 May 2017 12:24:25 GMT</pubDate></item><item><title>Use wgrep and evil to replace text efficiently</title><link>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 In my previous article &lt;a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html"&gt;Emacs is easy if you read code&lt;/a&gt;, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define &lt;code&gt;my-grep&lt;/code&gt; and &lt;code&gt;my-grep-occur&lt;/code&gt; in &lt;a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el"&gt;init-ivy.el&lt;/a&gt; in order to search/replace text in project root directory.
 &lt;/p&gt;
 
@@ -902,78 +1023,4 @@ As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>js2</category><category>json</category><guid>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</guid><pubDate>Sun, 31 Jul 2016 05:24:04 GMT</pubDate></item><item><title>Enhance emacs-git-gutter with ivy-mode</title><link>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-07-14 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-09-23 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;a href="https://github.com/syohex/emacs-git-gutter"&gt;emacs-git-gutter&lt;/a&gt; shows an icon in the gutter area. The icon indicating whether a line has been inserted, modified or deleted in Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-I usually use &lt;code&gt;M-x git-gutter:previous-hunk&lt;/code&gt; or &lt;code&gt;M-x git-gutter:next-hunk&lt;/code&gt; to navigate between the hunks.
-&lt;/p&gt;
-
-&lt;p&gt;
-But if there are too many hunks in one file, &lt;a href="https://github.com/abo-abo/swiper"&gt;ivy-mode&lt;/a&gt; is more efficient:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'ivy)
-(require 'git-gutter)
-
-(defun my-reshape-git-gutter (gutter)
-  "Re-shape gutter for `ivy-read'."
-  (let* ((linenum-start (aref gutter 3))
-         (linenum-end (aref gutter 4))
-         (target-line "")
-         (target-linenum 1)
-         (tmp-line "")
-         (max-line-length 0))
-    (save-excursion
-      (while (&amp;lt;= linenum-start linenum-end)
-        (goto-line linenum-start)
-        (setq tmp-line (replace-regexp-in-string "^[ \t]*" ""
-                                                 (buffer-substring (line-beginning-position)
-                                                                   (line-end-position))))
-        (when (&amp;gt; (length tmp-line) max-line-length)
-          (setq target-linenum linenum-start)
-          (setq target-line tmp-line)
-          (setq max-line-length (length tmp-line)))
-
-        (setq linenum-start (1+ linenum-start))))
-    ;; build (key . linenum-start)
-    (cons (format "%s %d: %s"
-                  (if (eq 'deleted (aref gutter 1)) "-" "+")
-                  target-linenum target-line)
-          target-linenum)))
-
-(defun my-goto-git-gutter ()
-  (interactive)
-  (if git-gutter:diffinfos
-      (ivy-read "git-gutters:"
-                (mapcar 'my-reshape-git-gutter git-gutter:diffinfos)
-                :action (lambda (e)
-                          ;; ivy9+ keep `(car e)'
-                          ;; ivy8- strip the `(car e)'
-                          ;; we handle both data structure
-                          (unless (numberp e) (setq e (cdr e)))
-                          (goto-line e)))
-    (message "NO git-gutters!")))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Screenshot:
-&lt;/p&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/git-gutter-and-ivy-nq8.png" alt="git-gutter-and-ivy-nq8.png"&gt;
-&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>gutter</category><category>ivy</category><category>mode</category><guid>http://blog.binchen.org/posts/enhance-emacs-git-gutter-with-ivy-mode.html</guid><pubDate>Thu, 14 Jul 2016 13:35:32 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>js2</category><category>json</category><guid>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</guid><pubDate>Sun, 31 Jul 2016 05:24:04 GMT</pubDate></item></channel></rss>
