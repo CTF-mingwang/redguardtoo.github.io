@@ -95,7 +95,7 @@ Here is the code
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defvar ffip-read-file-name-hijacked-p nil)
-(defun ffip-diff-apply-hunk-from-recentf (&amp;optional reverse)
+(defun ffip-diff-apply-hunk (&amp;optional reverse)
   (interactive "P")
   (unless recentf-mode (recentf-mode 1))
   (setq ffip-read-file-name-hijacked-p t)
@@ -117,11 +117,11 @@ Here is the code
 </div>
 
 <p>
-Please note <code>ffip-diff-apply-hunk-from-recentf</code> can replace <code>diff-from-hunk</code> because it provide extra functionality (search from recent files) and you can still fall back to original <code>diff-from-hunk</code> if you don't select any file from recent files.
+Please note <code>ffip-diff-apply-hunk</code> can replace <code>diff-from-hunk</code>.
 </p>
 
 <p>
-BTW, I can edit the patch on the spot when applying hunks. It's similar to the work flow of <code>git add --patch</code>.
+BTW, I can edit the patch on the spot when applying hunks. Similar to the work flow of <code>git add --patch</code>.
 </p>
 
 <p>
