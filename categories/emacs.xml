@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 29 May 2017 13:20:45 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Firefox and Emacs</title><link>http://blog.binchen.org/posts/firefox-and-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 30 May 2017 12:34:07 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance diff-mode with Ivy</title><link>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+My current job requires me to review freelancers' patches and apply them to our code branch under &lt;a href="https://www.perforce.com/"&gt;Perforce&lt;/a&gt; control. Due to my client's security policy, the freelancer can only work on isolated sandbox environment and can't access our code base directly.
+&lt;/p&gt;
+
+&lt;p&gt;
+I need two steps to finish the task:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;open the freelancers' patch in &lt;code&gt;diff-mode&lt;/code&gt;
+&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;diff-apply-hunk&lt;/code&gt; to apply the hunks interactively
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+The problem is &lt;code&gt;diff-mode&lt;/code&gt; always ask me to specify the file to be patched.
+&lt;/p&gt;
+
+&lt;p&gt;
+I read the code of &lt;code&gt;diff-apply-hunk&lt;/code&gt;. The logic of &lt;code&gt;diff-apply-hunk&lt;/code&gt; is simple. It tries different algorithms to guess the right file to patch. When the algorithms fail, it calls API &lt;code&gt;read-file-name&lt;/code&gt; to ask me to provide the file path manually. If right file is found, the algorithms will work again and &lt;code&gt;read-file-name&lt;/code&gt; will never be used for other hunks.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is my solution. I can find the file to patch in recent opened files because I store all of them by &lt;code&gt;(setq recentf-max-saved-items 2048)&lt;/code&gt;. I plan to use &lt;code&gt;ivy-read&lt;/code&gt; from &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy&lt;/a&gt; to locate the file at first. If this step fails , I can still fall back on original API &lt;code&gt;read-file-name&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the code, I use &lt;code&gt;ffip-diff-apply-hunk-from-recentf&lt;/code&gt; to replace &lt;code&gt;diff-from-hunk&lt;/code&gt;:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar ffip-read-file-name-hijacked-p nil)
+(defun ffip-diff-apply-hunk-from-recentf (&amp;amp;optional reverse)
+  (interactive "P")
+  (unless recentf-mode (recentf-mode 1))
+  (setq ffip-read-file-name-hijacked-p t)
+  (defadvice read-file-name (around ffip-read-file-name-hack activate)
+    (cond
+     (ffip-read-file-name-hijacked-p
+      (let* ((args (ad-get-args 0))
+             (file-name (file-name-nondirectory (nth 2 args)))
+             (cands (remove nil (mapcar (lambda (s) (if (string-match-p (format "%s$" file-name) s) s))
+                                        (mapcar #'substring-no-properties recentf-list))))
+             (rlt (ivy-read "Recentf: " cands)))
+        (if rlt (setq ad-return-value rlt) rlt ad-doit)))
+     (t
+      ad-do-it)))
+  (diff-apply-hunk reverse)
+  (setq ffip-read-file-name-hijacked-p nil))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+BTW, I can edit the patch on the spot when applying hunks. It's similar to the work flow of &lt;code&gt;git add --patch&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+The solution is added into &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;https://github.com/technomancy/find-file-in-project&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</guid><pubDate>Tue, 30 May 2017 12:29:12 GMT</pubDate></item><item><title>Firefox and Emacs</title><link>http://blog.binchen.org/posts/firefox-and-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
 &lt;/p&gt;
 
@@ -904,123 +964,4 @@ Insert below line at the beginning of ~/.emacs when &lt;b&gt;elpa.gnu.org is dow
 &lt;/div&gt;
 
 &lt;p&gt;
-This solution also works for &lt;a href="https://melpa.org/"&gt;MELPA&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>elpa</category><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</guid><pubDate>Sun, 14 Aug 2016 12:52:27 GMT</pubDate></item><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Most people use &lt;a href="https://github.com/mooz/js2-mode"&gt;js2-mode&lt;/a&gt; as a major mode for javascript. For JSON file, they prefer &lt;a href="https://github.com/joshwnj/json-mode"&gt;json-mode&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-But if you &lt;b&gt;truly&lt;/b&gt; understand the meaning of &lt;a href="https://www.gnu.org/philosophy/free-sw.en.html"&gt;Software Freedom&lt;/a&gt;, you will realize "&lt;a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Major-Modes.html"&gt;major-mode&lt;/a&gt;" and "&lt;a href="https://www.gnu.org/s/emacs/manual/html_node/emacs/Minor-Modes.html"&gt;minor-mode&lt;/a&gt;" are man-made concepts which actually have no difference.
-&lt;/p&gt;
-
-&lt;p&gt;
-In essence, a major mode is just a collection of APIs. We could use its APIs without enabling it, perfectly complying with "The freedom to run the program as you wish, for any purpose (freedom 0).".
-&lt;/p&gt;
-
-&lt;p&gt;
-Here are two examples.
-&lt;/p&gt;
-
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Validate JSON&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;p&gt;
-&lt;code&gt;M-x my-validate-json-or-js-expression&lt;/code&gt; to validate the buffer.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;code&gt;C-u my-validate-json-or-js-expression&lt;/code&gt; to validate selected region.
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-validate-json-or-js-expression (&amp;amp;optional not-json-p)
-  "Validate buffer or select region as JSON.
-If NOT-JSON-P is not nil, validate as Javascript expression instead of JSON."
-  (interactive "P")
-  (let* ((json-exp (if (region-active-p) (buffer-substring-no-properties (region-beginning) (region-end))
-                     (buffer-substring-no-properties (point-min) (point-max))))
-         (jsbuf-offet (if not-json-p 0 (length "var a=")))
-         errs
-         first-err
-         (first-err-pos (if (region-active-p) (region-beginning) 0)))
-    (unless not-json-p
-      (setq json-exp (format "var a=%s;"  json-exp)))
-    (with-temp-buffer
-      (insert json-exp)
-      (unless (featurep 'js2-mode)
-        (require 'js2-mode))
-      (js2-parse)
-      (setq errs (js2-errors))
-      (cond
-       ((not errs)
-        (message "NO error found. Good job!"))
-       (t
-        ;; yes, first error in buffer is the last element in errs
-        (setq first-err (car (last errs)))
-        (setq first-err-pos (+ first-err-pos (- (cadr first-err) jsbuf-offet)))
-        (message "%d error(s), first at buffer position %d: %s"
-                 (length errs)
-                 first-err-pos
-                 (js2-get-msg (caar first-err))))))
-    (if first-err (goto-char first-err-pos))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Print JSON path&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
-&lt;p&gt;
-For example, you got JSON string  &lt;code&gt;{"a": {"b": 3}}&lt;/code&gt;. If you place cursor over &lt;code&gt;3&lt;/code&gt; and &lt;code&gt;M-x my-print-json-path&lt;/code&gt;, you got output &lt;code&gt;a.b&lt;/code&gt;.
-&lt;/p&gt;
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-print-json-path (&amp;amp;optional hardcoded-array-index)
-  "Print the path to the JSON value under point, and save it in the kill ring.
-If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it."
-  (interactive "P")
-  (cond
-   ((memq major-mode '(js2-mode))
-    (js2-print-json-path hardcoded-array-index))
-   (t
-    (let* ((cur-pos (point))
-           (str (buffer-substring-no-properties (point-min) (point-max))))
-      (when (string= "json" (file-name-extension buffer-file-name))
-        (setq str (format "var a=%s;" str))
-        (setq cur-pos (+ cur-pos (length "var a="))))
-      (unless (featurep 'js2-mode)
-        (require 'js2-mode))
-      (with-temp-buffer
-        (insert str)
-        (js2-init-scanner)
-        (js2-do-parse)
-        (goto-char cur-pos)
-        (js2-print-json-path))))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-3"&gt;
-&lt;p&gt;
-As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
-&lt;/p&gt;
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;js2-errors
-&lt;/li&gt;
-&lt;li&gt;js2-get-msg
-&lt;/li&gt;
-&lt;li&gt;js2-print-json-path
-&lt;/li&gt;
-&lt;li&gt;js2-init-scanner
-&lt;/li&gt;
-&lt;li&gt;js2-do-parse
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>js2</category><category>json</category><guid>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</guid><pubDate>Sun, 31 Jul 2016 05:24:04 GMT</pubDate></item></channel></rss>
+This solution also works for &lt;a href="https://melpa.org/"&gt;MELPA&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>elpa</category><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</guid><pubDate>Sun, 14 Aug 2016 12:52:27 GMT</pubDate></item></channel></rss>
