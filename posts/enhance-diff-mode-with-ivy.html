@@ -86,8 +86,11 @@ Here is my solution. I can find the file to patch in recent opened files because
 </p>
 
 <p>
-Here is the code, I use <code>ffip-diff-apply-hunk-from-recentf</code> to replace <code>diff-from-hunk</code>:
+Here is the code
 </p>
+
+<pre class="example">
+</pre>
 
 <div class="org-src-container">
 
@@ -112,6 +115,10 @@ Here is the code, I use <code>ffip-diff-apply-hunk-from-recentf</code> to replac
 </code></pre>
 
 </div>
+
+<p>
+Please note <code>ffip-diff-apply-hunk-from-recentf</code> can replace <code>diff-from-hunk</code> because it provide extra functionality (search from recent open files) and you can still fall back to original <code>diff-from-hunk</code> if you don't select any file from recent open files.
+</p>
 
 <p>
 BTW, I can edit the patch on the spot when applying hunks. It's similar to the work flow of <code>git add --patch</code>.
