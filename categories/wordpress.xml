@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:13:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:22:19 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-03-12 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-06-28 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Here are the steps.
+If you are only interested in web page optimization, jump to the end of the article.
 &lt;/p&gt;
 
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Migrate from WordPress to Nikola&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# you might need need `sudo apt-get install python-gdbm` on Debian
@@ -57,8 +60,8 @@ nikola build
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
@@ -73,8 +76,8 @@ Manually fixed those articles with Chinese title in url_map.csv
 &lt;p&gt;
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
 import getopt, sys, csv
@@ -123,15 +126,24 @@ if __name__ == '__main__':
 &lt;/div&gt;
 
 &lt;p&gt;
-Import the xml into disqus.com.
+Import the xml into &lt;a href="http://disqus.com"&gt;http://disqus.com&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-I wrote a Emacs package &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert org subtree into nikola friendly html drafts.
+You can use javascript to re-direct the URL, so your old article links are still valid. Ask at &lt;a href="http://stackoverflow.com"&gt;http://stackoverflow.com&lt;/a&gt; or contact your local Javascript developers on how to do it. It's simple task but a little boring.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Optimization&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+I wrote a Emacs package &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert Org subtree into nikola friendly html drafts.
 &lt;/p&gt;
 
 &lt;p&gt;
-Instead hacking conf.py to tweak js/css/html, now I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's much simpler and powerful.
+Instead hacking conf.py to tweak &lt;code&gt;js/css/html&lt;/code&gt;, I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's much simpler and more powerful.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -147,11 +159,13 @@ Visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt; 
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="https://highlightjs.org/"&gt;highlight.js&lt;/a&gt; is the best solution for code syntax highlighting for the web. I customize the the js library for the languages I use.
+&lt;a href="https://highlightjs.org/"&gt;highlight.js&lt;/a&gt; is the best solution for code syntax highlighting for the web. I customize the &lt;code&gt;highlight.js&lt;/code&gt; to render only the programming languages I use.
 &lt;/p&gt;
 
 &lt;p&gt;
-My static blog is hosted at &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+My static blog is hosted at &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 For jquery.js, see &lt;a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/"&gt;http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/&lt;/a&gt;.
 &lt;/p&gt;
 
