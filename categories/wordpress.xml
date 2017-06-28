@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:08:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:13:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -131,11 +131,7 @@ I wrote a Emacs package &lt;a href="https://github.com/redguardtoo/org2nikola"&g
 &lt;/p&gt;
 
 &lt;p&gt;
-I used to hack conf.py to tweak my js/css/html. But I realized it's simpler to &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-My front end assets is only 90% smaller than the original theme.
+Instead hacking conf.py to tweak js/css/html, now I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's much simpler and powerful.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -143,7 +139,15 @@ For example, the Zen theme use JQuery and its plugin to format post time. I use 
 &lt;/p&gt;
 
 &lt;p&gt;
-If we only use a few icons from &lt;a href="http://fontawesome.io/"&gt;Font Awesome&lt;/a&gt;. We can use NodeJS plugin &lt;a href="https://github.com/aui/font-spider"&gt;font-spider&lt;/a&gt; to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). Visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt; with browser developer tools to see the final result.
+If we only use a few icons from &lt;a href="http://fontawesome.io/"&gt;Font Awesome&lt;/a&gt;. We can use NodeJS plugin &lt;a href="https://github.com/aui/font-spider"&gt;font-spider&lt;/a&gt; to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). 
+&lt;/p&gt;
+
+&lt;p&gt;
+Visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt; with browser developer tools to see the final result. You will notice my web page is 90% smaller than the the page without optimization.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="https://highlightjs.org/"&gt;highlight.js&lt;/a&gt; is the best solution for code syntax highlighting for the web. I customize the the js library for the languages I use.
 &lt;/p&gt;
 
 &lt;p&gt;
