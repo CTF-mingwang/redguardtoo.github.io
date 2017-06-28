@@ -204,85 +204,27 @@ Import the xml into disqus.com.
 </p>
 
 <p>
-Install syntaxhighlighter and google analytics, insert below code into conf.py:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-python">BODY_END = """
-&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&gt;&lt;/script&gt;
-&lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&gt;&lt;/script&gt;
-&lt;script type='text/javascript'&gt;
-function path()
-{
-  var args = arguments,
-      result = [];
-
-  for(var i = 0; i &lt; args.length; i++){
-    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
-  }
-
-  return result;
-};
-
-SyntaxHighlighter.autoloader.apply(null, path(
-  'applescript            @shBrushAppleScript.min.js',
-  'actionscript3 as3      @shBrushAS3.min.js',
-  'bash shell             @shBrushBash.min.js',
-  'coldfusion cf          @shBrushColdFusion.min.js',
-  'cpp c c++              @shBrushCpp.min.js',
-  'clojure                @shBrushScala.min.js',
-  'c# c-sharp csharp      @shBrushCSharp.min.js',
-  'css                    @shBrushCss.min.js',
-  'delphi pascal          @shBrushDelphi.min.js',
-  'diff patch pas         @shBrushDiff.min.js',
-  'erl erlang             @shBrushErlang.min.js',
-  'groovy                 @shBrushGroovy.min.js',
-  'java                   @shBrushJava.min.js',
-  'jfx javafx             @shBrushJavaFX.min.js',
-  'js jscript javascript  @shBrushJScript.min.js',
-  'perl pl                @shBrushPerl.min.js',
-  'php                    @shBrushPhp.min.js',
-  'text plain             @shBrushPlain.min.js',
-  'py python              @shBrushPython.min.js',
-  'ruby rails ror rb      @shBrushRuby.min.js',
-  'sass scss              @shBrushSass.min.js',
-  'scala                  @shBrushScala.min.js',
-  'sql                    @shBrushSql.min.js',
-  'vb vbnet               @shBrushVb.min.js',
-  'xml xhtml xslt html    @shBrushXml.min.js'
-));
-SyntaxHighlighter.all();
-&lt;/script&gt;
-&lt;script type='text/javascript'&gt;
-var _gaq = _gaq || [];
-
-_gaq.push(['_setAccount', 'UA-29850823-2']);
-_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-&lt;/script&gt;
-"""
-
-EXTRA_HEAD_DATA = """
-&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&gt;
-&lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&gt;
-"""
-</code></pre>
-
-</div>
-
-<p>
-In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
+I wrote a Emacs package <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> to convert org subtree into nikola friendly html drafts.
 </p>
 
 <p>
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.</p>
+I used to hack conf.py to tweak my js/css/html. But I realized it's simpler to <b>tweak the theme's javascript/html/css directly</b>.
+</p>
+
+<p>
+My front end assets is only 90% smaller than the original theme.
+</p>
+
+<p>
+For example, the Zen theme use JQuery and its plugin to format post time. I use a old version of <a href="https://momentjs.com/">Moment.js</a> to replace them. 
+</p>
+
+<p>
+If we only use a few icons from <a href="http://fontawesome.io/">Font Awesome</a>. We can use NodeJS plugin <a href="https://github.com/aui/font-spider">font-spider</a> to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). Visit <a href="http://blog.binchen.org">http://blog.binchen.org</a> with browser developer tools to see the final result.
+</p>
+
+<p>
+My static blog is hosted at <a href="https://pages.github.com/">GitHub Pages</a>.</p>
 </div>
         </div>
         

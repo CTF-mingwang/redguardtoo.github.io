@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:48:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about migrate)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/migrate.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:08:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -127,82 +127,24 @@ Import the xml into disqus.com.
 &lt;/p&gt;
 
 &lt;p&gt;
-Install syntaxhighlighter and google analytics, insert below code into conf.py:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-python"&gt;BODY_END = """
-&amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js'&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shAutoloader.min.js'&amp;gt;&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
-function path()
-{
-  var args = arguments,
-      result = [];
-
-  for(var i = 0; i &amp;lt; args.length; i++){
-    result.push(args[i].replace('@', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/'));
-  }
-
-  return result;
-};
-
-SyntaxHighlighter.autoloader.apply(null, path(
-  'applescript            @shBrushAppleScript.min.js',
-  'actionscript3 as3      @shBrushAS3.min.js',
-  'bash shell             @shBrushBash.min.js',
-  'coldfusion cf          @shBrushColdFusion.min.js',
-  'cpp c c++              @shBrushCpp.min.js',
-  'clojure                @shBrushScala.min.js',
-  'c# c-sharp csharp      @shBrushCSharp.min.js',
-  'css                    @shBrushCss.min.js',
-  'delphi pascal          @shBrushDelphi.min.js',
-  'diff patch pas         @shBrushDiff.min.js',
-  'erl erlang             @shBrushErlang.min.js',
-  'groovy                 @shBrushGroovy.min.js',
-  'java                   @shBrushJava.min.js',
-  'jfx javafx             @shBrushJavaFX.min.js',
-  'js jscript javascript  @shBrushJScript.min.js',
-  'perl pl                @shBrushPerl.min.js',
-  'php                    @shBrushPhp.min.js',
-  'text plain             @shBrushPlain.min.js',
-  'py python              @shBrushPython.min.js',
-  'ruby rails ror rb      @shBrushRuby.min.js',
-  'sass scss              @shBrushSass.min.js',
-  'scala                  @shBrushScala.min.js',
-  'sql                    @shBrushSql.min.js',
-  'vb vbnet               @shBrushVb.min.js',
-  'xml xhtml xslt html    @shBrushXml.min.js'
-));
-SyntaxHighlighter.all();
-&amp;lt;/script&amp;gt;
-&amp;lt;script type='text/javascript'&amp;gt;
-var _gaq = _gaq || [];
-
-_gaq.push(['_setAccount', 'UA-29850823-2']);
-_gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
-_gaq.push(['_trackPageview']);
-
-(function() {
-  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-&amp;lt;/script&amp;gt;
-"""
-
-EXTRA_HEAD_DATA = """
-&amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css'&amp;gt;
-&amp;lt;link rel='stylesheet' type='text/css' href='//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCoreEmacs.css'&amp;gt;
-"""
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-In above code, shCoreEmacs.css is the color theme for syntaxhighlighter.
+I wrote a Emacs package &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert org subtree into nikola friendly html drafts.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use FileZilla to upload files to FTP. ncftp is a command line alternative.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>
+I used to hack conf.py to tweak my js/css/html. But I realized it's simpler to &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+My front end assets is only 90% smaller than the original theme.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, the Zen theme use JQuery and its plugin to format post time. I use a old version of &lt;a href="https://momentjs.com/"&gt;Moment.js&lt;/a&gt; to replace them. 
+&lt;/p&gt;
+
+&lt;p&gt;
+If we only use a few icons from &lt;a href="http://fontawesome.io/"&gt;Font Awesome&lt;/a&gt;. We can use NodeJS plugin &lt;a href="https://github.com/aui/font-spider"&gt;font-spider&lt;/a&gt; to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). Visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt; with browser developer tools to see the final result.
+&lt;/p&gt;
+
+&lt;p&gt;
+My static blog is hosted at &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item></channel></rss>
