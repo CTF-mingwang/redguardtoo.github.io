@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about counsel)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/counsel.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 17 May 2017 11:54:07 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about counsel)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/counsel.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 19 Jul 2017 12:43:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is easy if you read code</title><link>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
 &lt;/p&gt;
 
@@ -119,4 +119,37 @@ You can replace the line &lt;code&gt;(message "File relative path=%s" fn)&lt;/co
 &lt;/p&gt;
 
 &lt;p&gt;
-You can &lt;b&gt;insert definition of &lt;code&gt;access-files-in-wgrep-buffer&lt;/code&gt; into your &lt;code&gt;.emacs&lt;/code&gt; and run &lt;code&gt;M-x access-files-in-wgrep-buffer&lt;/code&gt; in wgrep buffer&lt;/b&gt; to have a test.&lt;/p&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item></channel></rss>
+You can &lt;b&gt;insert definition of &lt;code&gt;access-files-in-wgrep-buffer&lt;/code&gt; into your &lt;code&gt;.emacs&lt;/code&gt; and run &lt;code&gt;M-x access-files-in-wgrep-buffer&lt;/code&gt; in wgrep buffer&lt;/b&gt; to have a test.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is an example,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defun p4edit-in-wgrep-buffer()
+  "'p4 edit' files in wgrep buffer.
+Turn off `read-only-mode' of opened files."
+  (interactive)
+  (save-restriction
+    (let* ((start (wgrep-goto-first-found))
+           (end (wgrep-goto-end-of-found))
+           fn-accessed)
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (unless (featurep 'wgrep) (require 'featurep))
+      (while (not (eobp))
+        (if (looking-at wgrep-line-file-regexp)
+            (let* ((filename (match-string-no-properties 1)) buf)
+              (unless (string= filename fn-accessed)
+                (setq fn-accessed filename)
+                (shell-command (format "p4 edit %s" filename))
+                (if (setq buf (get-file-buffer filename))
+                    (with-current-buffer buf
+                      ;; turn off read-only since we've already `p4 edit'
+                      (read-only-mode -1))))))
+        (forward-line 1)))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item></channel></rss>

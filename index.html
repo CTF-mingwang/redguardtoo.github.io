@@ -477,7 +477,40 @@ You can replace the line <code>(message "File relative path=%s" fn)</code> to <c
 </p>
 
 <p>
-You can <b>insert definition of <code>access-files-in-wgrep-buffer</code> into your <code>.emacs</code> and run <code>M-x access-files-in-wgrep-buffer</code> in wgrep buffer</b> to have a test.</p>
+You can <b>insert definition of <code>access-files-in-wgrep-buffer</code> into your <code>.emacs</code> and run <code>M-x access-files-in-wgrep-buffer</code> in wgrep buffer</b> to have a test.
+</p>
+
+<p>
+Here is an example,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-emacs">(defun p4edit-in-wgrep-buffer()
+  "'p4 edit' files in wgrep buffer.
+Turn off `read-only-mode' of opened files."
+  (interactive)
+  (save-restriction
+    (let* ((start (wgrep-goto-first-found))
+           (end (wgrep-goto-end-of-found))
+           fn-accessed)
+      (narrow-to-region start end)
+      (goto-char (point-min))
+      (unless (featurep 'wgrep) (require 'featurep))
+      (while (not (eobp))
+        (if (looking-at wgrep-line-file-regexp)
+            (let* ((filename (match-string-no-properties 1)) buf)
+              (unless (string= filename fn-accessed)
+                (setq fn-accessed filename)
+                (shell-command (format "p4 edit %s" filename))
+                (if (setq buf (get-file-buffer filename))
+                    (with-current-buffer buf
+                      ;; turn off read-only since we've already `p4 edit'
+                      (read-only-mode -1))))))
+        (forward-line 1)))))
+</code></pre>
+
+</div>
 </div>
             </div>
         </div>
