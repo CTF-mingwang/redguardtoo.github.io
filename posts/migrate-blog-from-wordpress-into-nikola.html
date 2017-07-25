@@ -217,27 +217,31 @@ You can use javascript to re-direct the URL, so your old article links are still
 <h3 id="sec-2">Optimization</h3>
 <div class="outline-text-2" id="text-2">
 <p>
-I wrote a Emacs package <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> to convert Org subtree into nikola friendly html drafts.
+I developed <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> to convert Org subtree into Nikola page. 
 </p>
 
 <p>
-Instead hacking conf.py to tweak <code>js/css/html</code>, I <b>tweak the theme's javascript/html/css directly</b>. It's much simpler and more powerful.
+Instead of hacking conf.py, I <b>tweak the theme's javascript/html/css directly</b>. It's simpler and more flexible.
 </p>
 
 <p>
-For example, the Zen theme use JQuery and its plugin to format post time. I use a old version of <a href="https://momentjs.com/">Moment.js</a> to replace them. 
+For example, the <a href="https://themes.getnikola.com/v7/zen/">Zen theme</a> uses JQuery plugins to format time. I replace JQuery with <a href="https://momentjs.com/">Moment.js v1.0</a> which is much smaller. 
 </p>
 
 <p>
-If we only use a few icons from <a href="http://fontawesome.io/">Font Awesome</a>. We can use NodeJS plugin <a href="https://github.com/aui/font-spider">font-spider</a> to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). 
+Since only a few icons from <a href="http://fontawesome.io/">Font Awesome</a> is used by Zen theme.. We can use NodeJS plugin <a href="https://github.com/aui/font-spider">font-spider</a> to trim down the font file.
 </p>
 
 <p>
-Visit <a href="http://blog.binchen.org">http://blog.binchen.org</a> with browser developer tools to see the final result. You will notice my web page is 90% smaller than the the page without optimization.
+Other conventional front end tricks like static assets concatenating/minifying can also be used. These tricks are introduced everywhere. So I won't waste time on details.
 </p>
 
 <p>
-<a href="https://highlightjs.org/">highlight.js</a> is the best solution for code syntax highlighting for the web. I customize the <code>highlight.js</code> to render only the programming languages I use.
+In order to see the real example of optimization, please visit <a href="http://blog.binchen.org">http://blog.binchen.org</a>. Watching through the browser's developer tool, you can see my web page is 90% smaller than pages without optimization.
+</p>
+
+<p>
+<a href="https://highlightjs.org/">highlight.js</a> is the best solution for code syntax highlighting. I customized the <code>highlight.js</code> to render only the programming languages I use.
 </p>
 
 <p>

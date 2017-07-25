@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about nikola)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/nikola.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 28 Jun 2017 12:23:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about nikola)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/nikola.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 25 Jul 2017 13:37:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 python code:
 &lt;/p&gt;
 
@@ -218,27 +218,31 @@ You can use javascript to re-direct the URL, so your old article links are still
 &lt;h3 id="sec-2"&gt;Optimization&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-I wrote a Emacs package &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert Org subtree into nikola friendly html drafts.
+I developed &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert Org subtree into Nikola page. 
 &lt;/p&gt;
 
 &lt;p&gt;
-Instead hacking conf.py to tweak &lt;code&gt;js/css/html&lt;/code&gt;, I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's much simpler and more powerful.
+Instead of hacking conf.py, I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's simpler and more flexible.
 &lt;/p&gt;
 
 &lt;p&gt;
-For example, the Zen theme use JQuery and its plugin to format post time. I use a old version of &lt;a href="https://momentjs.com/"&gt;Moment.js&lt;/a&gt; to replace them. 
+For example, the &lt;a href="https://themes.getnikola.com/v7/zen/"&gt;Zen theme&lt;/a&gt; uses JQuery plugins to format time. I replace JQuery with &lt;a href="https://momentjs.com/"&gt;Moment.js v1.0&lt;/a&gt; which is much smaller. 
 &lt;/p&gt;
 
 &lt;p&gt;
-If we only use a few icons from &lt;a href="http://fontawesome.io/"&gt;Font Awesome&lt;/a&gt;. We can use NodeJS plugin &lt;a href="https://github.com/aui/font-spider"&gt;font-spider&lt;/a&gt; to trim down the font size. There are other a few front end tricks to optimize the web pages like concatenate/minify javascript and css (Frontend development knowledge is required). 
+Since only a few icons from &lt;a href="http://fontawesome.io/"&gt;Font Awesome&lt;/a&gt; is used by Zen theme.. We can use NodeJS plugin &lt;a href="https://github.com/aui/font-spider"&gt;font-spider&lt;/a&gt; to trim down the font file.
 &lt;/p&gt;
 
 &lt;p&gt;
-Visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt; with browser developer tools to see the final result. You will notice my web page is 90% smaller than the the page without optimization.
+Other conventional front end tricks like static assets concatenating/minifying can also be used. These tricks are introduced everywhere. So I won't waste time on details.
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="https://highlightjs.org/"&gt;highlight.js&lt;/a&gt; is the best solution for code syntax highlighting for the web. I customize the &lt;code&gt;highlight.js&lt;/code&gt; to render only the programming languages I use.
+In order to see the real example of optimization, please visit &lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt;. Watching through the browser's developer tool, you can see my web page is 90% smaller than pages without optimization.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="https://highlightjs.org/"&gt;highlight.js&lt;/a&gt; is the best solution for code syntax highlighting. I customized the &lt;code&gt;highlight.js&lt;/code&gt; to render only the programming languages I use.
 &lt;/p&gt;
 
 &lt;p&gt;
