@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about shell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/shell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about shell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/shell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 14 Aug 2017 11:59:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-02-08 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-08-14 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Perforce is a proprietary VCS which is not as powerful as &lt;a href="https://git-scm.com/"&gt;Git&lt;/a&gt; so it takes extra effort to use it with Emacs.
+Perforce is a proprietary VCS. It's less powerful than &lt;a href="https://git-scm.com/"&gt;Git&lt;/a&gt; so need extra effort to be use with Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -16,7 +16,7 @@ For example, git can display the detailed history of a single file using &lt;cod
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Perforce workflow&lt;/h3&gt;
+&lt;h3 id="sec-1"&gt;Perforce workflow&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;p4 set&lt;/code&gt; to &lt;a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html"&gt;set up&lt;/a&gt;
@@ -40,7 +40,7 @@ For example, git can display the detailed history of a single file using &lt;cod
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; My solution&lt;/h3&gt;
+&lt;h3 id="sec-2"&gt;My solution&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 Perforce cygwin portable is not recommended.
@@ -51,14 +51,31 @@ I suggest using executable from Perforce Windows native version which works on b
 &lt;/p&gt;
 
 &lt;p&gt;
-Perforce server has one unique URL for every physical file on the disk. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
+Perforce server assigns unique URL for each physical file. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Emacs&lt;/h4&gt;
+&lt;h4 id="sec-2-1"&gt;Emacs&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-1"&gt;
 &lt;p&gt;
-I provide &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, &lt;code&gt;p4submit&lt;/code&gt;, &lt;code&gt;p4diff&lt;/code&gt;, and &lt;code&gt;p4history&lt;/code&gt;,
+I developed &lt;a href="https://github.com/redguardtoo/vc-msg"&gt;vc-msg&lt;/a&gt; which shows "commit message of current line in Emacs". It supports Perforce out of box (you still need &lt;code&gt;p4 login&lt;/code&gt; at first.)
+&lt;/p&gt;
+
+&lt;p&gt;
+My patched &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/git-gutter/git-gutter.el"&gt;emacs-git-gutter&lt;/a&gt; show Perforce gutters. You only need setup &lt;code&gt;git-gutter:exp-to-create-diff&lt;/code&gt;. Here is a sample,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq-local git-gutter:exp-to-create-diff
+            (shell-command-to-string (format "p4 diff -du -db %s"
+                                             (file-relative-name buffer-file-name))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+I also provided commands like &lt;code&gt;p4edit&lt;/code&gt;, &lt;code&gt;p4revert&lt;/code&gt;, &lt;code&gt;p4submit&lt;/code&gt;, &lt;code&gt;p4diff&lt;/code&gt;, and &lt;code&gt;p4history&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -198,11 +215,14 @@ As a bonus tip, if you use &lt;a href="https://github.com/technomancy/find-file-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 
+&lt;p&gt;
+You can also check my &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-perforce.el"&gt;emacs.d&lt;/a&gt; to get latest code.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Bash Shell&lt;/h4&gt;
+&lt;h4 id="sec-2-2"&gt;Bash Shell&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-2"&gt;
 &lt;p&gt;
 Other operations are finished in Bash Shell,
