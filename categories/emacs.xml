@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 14 Aug 2017 12:14:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance diff-mode with Ivy</title><link>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 05 Sep 2017 13:27:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+The idea comes from  &lt;a href="https://github.com/redguardtoo/emacs.d/issues/607"&gt;yangdaweihit&lt;/a&gt;. Here is my implementation.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar my-ratio-dict
+  '((1 . 1.61803398875)
+    (2 . 2)
+    (3 . 3)
+    (4 . 4)
+    (5 . 0.61803398875))
+  "The ratio dictionary.")
+
+(defun my-split-window-horizontally (&amp;amp;optional ratio)
+  "Split window horizontally and resize the new window.
+Always focus bigger window."
+  (interactive "P")
+  (let* (ratio-val)
+    (cond
+     (ratio
+      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
+      (split-window-horizontally (floor (/ (window-body-width)
+                                           (1+ ratio-val)))))
+     (t
+      (split-window-horizontally)))
+    (set-window-buffer (next-window) (other-buffer))
+    (if (or (not ratio-val)
+            (&amp;gt;= ratio-val 1))
+        (windmove-right))))
+
+(defun my-split-window-vertically (&amp;amp;optional ratio)
+  "Split window vertically and resize the new window.
+Always focus bigger window."
+  (interactive "P")
+  (let* (ratio-val)
+    (cond
+     (ratio
+      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
+      (split-window-vertically (floor (/ (window-body-height)
+                                         (1+ ratio-val)))))
+     (t
+      (split-window-vertically)))
+    ;; open another window with other-buffer
+    (set-window-buffer (next-window) (other-buffer))
+    ;; move focus if new window bigger than current one
+    (if (or (not ratio-val)
+            (&amp;gt;= ratio-val 1))
+        (windmove-down))))
+
+(global-set-key (kbd "C-x 2") 'my-split-window-vertically)
+(global-set-key (kbd "C-x 3") 'my-split-window-horizontally)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Usage is simple.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, &lt;code&gt;C-x 2&lt;/code&gt; is similar to original &lt;code&gt;split-winddow-vertically&lt;/code&gt;. But &lt;code&gt;C-u 1 C-x 2&lt;/code&gt; split the window in golden ratio.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</guid><pubDate>Tue, 05 Sep 2017 13:26:55 GMT</pubDate></item><item><title>Enhance diff-mode with Ivy</title><link>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 My current job requires me to review the freelancer's patches and apply them to our code branch under &lt;a href="https://www.perforce.com/"&gt;Perforce&lt;/a&gt; control. Due to my client's security policy, the freelancer can only work on isolated sandbox environment and can't access our code base directly.
 &lt;/p&gt;
 
@@ -993,35 +1055,4 @@ Screenshot,
 &lt;p&gt;
 Check &lt;a href="https://www.gnu.org/software/global/manual/global.html"&gt;GNU Global manual&lt;/a&gt; to understand environment variables &lt;code&gt;GTAGSLIBPATH&lt;/code&gt; and &lt;code&gt;MAKEOBJDIRPREFIX&lt;/code&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>emacs</category><category>en</category><category>global</category><category>gtags</category><category>ide</category><guid>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</guid><pubDate>Thu, 25 Aug 2016 14:20:28 GMT</pubDate></item><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/elpaclone &amp;amp;&amp;amp; cd ~/elpaclone &amp;amp;&amp;amp; curl -L https://elpa.gnu.org/packages/archive-contents | perl -pe 's/(^\(1|\n)//g' | perl -pe 's/\]\)/])\n/g' | perl -pe 's/^ *\(([a-z0-9A-Z-]*).*\[\(([0-9 ]*).*(single|tar).*/\1-\2.\3/g' | perl -pe 's/ /./g' | perl -pe 's/single/el/g' | perl -pe 's/\)//g' | xargs -I {} curl -L  -O https://elpa.gnu.org/packages/{} &amp;amp;&amp;amp; curl -L -O https://elpa.gnu.org/packages/archive-contents
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-The &lt;a href="https://elpa.gnu.org/packages/archive-contents"&gt;https://elpa.gnu.org/packages/archive-contents&lt;/a&gt; contains all the information of packages. I re-organize it to make sure each line corresponds to one package. Then I use &lt;a href="https://en.wikipedia.org/wiki/CURL"&gt;cURL&lt;/a&gt; to download everything.
-&lt;/p&gt;
-
-&lt;p&gt;
-Usage is simple.
-&lt;/p&gt;
-
-&lt;p&gt;
-Insert below line at the beginning of ~/.emacs when &lt;b&gt;elpa.gnu.org is down&lt;/b&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq package-archives '(("elpaclone" . "~/elpaclone")))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-This solution also works for &lt;a href="https://melpa.org/"&gt;MELPA&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>elpa</category><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</guid><pubDate>Sun, 14 Aug 2016 12:52:27 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>c</category><category>emacs</category><category>en</category><category>global</category><category>gtags</category><category>ide</category><guid>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</guid><pubDate>Thu, 25 Aug 2016 14:20:28 GMT</pubDate></item></channel></rss>
