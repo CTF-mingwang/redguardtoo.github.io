@@ -23,6 +23,41 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/an-example-to-abuse-the-git-merge.html">An example to abuse the git merge</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-06-13T14:23:00+00:00">2013-06-13 14:23</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/an-example-to-abuse-the-git-merge.html#disqus_thread" data-disqus-identifier="cache/posts/an-example-to-abuse-the-git-merge.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/branch.html" rel="tag">branch</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
+           <li><a class="tag p-category" href="categories/merge.html" rel="tag">merge</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>WARNING, this is BAD practice. I'm showing you anti-pattern you'd better avoid. </p> <p> The work flow is simple at the beginning. There is only one master branch where several developers submit the code. </p> <p> Then come bad rules:  </p>
+<ul>
+<li>Rule 1, any feature should be done on new branch (this rule is actually good if without next three rules)  </li> <li>Rule 2, <code>git rebase</code> is forbidden and any minor branch created by developers should be publicized immediately.  </li> <li>Rule 3, keep using your same feature branch forever even it's behind master branch for a very long time.   </li> <li>Rule 4, <code>git merge</code> between feature and master branches frequently </li> </ul>
+<p> After three months developement, this is the result of <code>git log –graph –oneline</code>: <img src="wp-content/uploads/2013/06/git-merge-mess-nq82.png" alt="image/git-merge-mess-nq8.png"></p> <p> Can you see the "M" at the top right corner. It's "M" from "Merge". </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html">Use vimdiff to resolve git/subversion/mercurial merge conflicts effectively</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -704,66 +739,6 @@ cd ~/;wget https://dl.dropboxusercontent.com/u/858862/emacs/.emacs;mkdir -p ~/te
 </pre>
 
 <p></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/how-to-use-keyboard-to-navigate-feedly-com.html">How to use keyboard to navigate feedly.com</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-05-06T21:59:00+00:00">2013-05-06 21:59</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-use-keyboard-to-navigate-feedly-com.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-keyboard-to-navigate-feedly-com.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/keysnail.html" rel="tag">keysnail</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>Here is the detailed steps, </p>
-<ol>
-<li>Install <a href="https://github.com/mooz/keysnail">keysnail</a> (a firefox addon) </li> <li>Install <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a> (no less than version 1.3.9) through keysnail </li> <li>Add below code into .keysnail.js </li> </ol>
-<pre class="src src-javascript"><span style="color: #969896; font-style: italic;">/*<em> </em></span><span style="color: #969896; font-style: italic;">HoK /</span>
-key.setViewKey(<span style="color: #70c0b1;">'e'</span>, <span style="color: #b9ca4a;">function</span> (<span style="color: #e7c547;">aEvent</span>, <span style="color: #e7c547;">aArg</span>) {
-        ext.exec(<span style="color: #70c0b1;">"hok-start-foreground-mode"</span>, aArg);
-}, <span style="color: #70c0b1;">'Hok - Foreground hint mode'</span>, <span style="color: #c397d8;">true</span>);
-<p>key.setViewKey(<span style="color: #70c0b1;">'E'</span>, <span style="color: #b9ca4a;">function</span> (<span style="color: #e7c547;">aEvent</span>, <span style="color: #e7c547;">aArg</span>) {
-        ext.exec(<span style="color: #70c0b1;">"hok-start-background-mode"</span>, aArg);
-}, <span style="color: #70c0b1;">'HoK - Background hint mode'</span>, <span style="color: #c397d8;">true</span>);</p>
-<p>key.setViewKey(<span style="color: #70c0b1;">';'</span>, <span style="color: #b9ca4a;">function</span> (<span style="color: #e7c547;">aEvent</span>, <span style="color: #e7c547;">aArg</span>) {
-        ext.exec(<span style="color: #70c0b1;">"hok-start-extended-mode"</span>, aArg);
-}, <span style="color: #70c0b1;">'HoK - Extented hint mode'</span>, <span style="color: #c397d8;">true</span>);</p>
-<p>key.setViewKey([<span style="color: #70c0b1;">'C-c'</span>, <span style="color: #70c0b1;">'C-e'</span>], <span style="color: #b9ca4a;">function</span> (<span style="color: #e7c547;">aEvent</span>, <span style="color: #e7c547;">aArg</span>) {
-        ext.exec(<span style="color: #70c0b1;">"hok-start-continuous-mode"</span>, aArg);
-}, <span style="color: #70c0b1;">'Start continuous HaH'</span>, <span style="color: #c397d8;">true</span>);</p>
-<p>hook.addToHook(<span style="color: #70c0b1;">'PluginLoaded'</span>, <span style="color: #b9ca4a;">function</span> () {
-  <span style="color: #b9ca4a;">if</span> (!plugins.hok)
-    <span style="color: #b9ca4a;">return</span>;</p>
-<p><span style="color: #969896; font-style: italic;">/<em> </em></span><span style="color: #969896; font-style: italic;">HoK 1.3.9+ requried /</span>
-  plugins.hok.pOptions.selector = plugins.hok.pOptions.selector
-    <span style="color: #969896; font-style: italic;">/<em> </em></span><span style="color: #969896; font-style: italic;">feedly /</span>
-    + <span style="color: #70c0b1;">", <em>[data-uri]"</em></span>
-    + <span style="color: #70c0b1;">", [data-selector-toggle]"</span>
-    + <span style="color: #70c0b1;">", <em>[data-page-action]"</em></span>
-    + <span style="color: #70c0b1;">", [data-app-action]"</span>
-  ;
-});</p>
-<p></p></pre>  <ol>
-<li>Restart Firefox, logged into <a href="http://www.feedly.com">http://www.feedly.com</a> and press hot key "e" </li> <li>Enjoy! </li> </ol>
 </div>
             </div>
         </div>

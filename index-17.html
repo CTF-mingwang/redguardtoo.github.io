@@ -23,6 +23,332 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-30T12:46:31+00:00">2014-04-30 12:46</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/why-gnus-is-better-than-gmail.html#disqus_thread" data-disqus-identifier="cache/posts/why-gnus-is-better-than-gmail.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+Gnus is better than Gmail                                             :en:emacs:email:gnus:
+</p>
+
+<p>
+Here is my use case. My agent notify me that there is a potential contract from a company named "FF".
+</p>
+
+<p>
+My first reaction is to reply the email with "Great! Please forward my CV".
+</p>
+
+<p>
+Before I press the "Send" button, it occurs to me that other agents have possibily <b>already</b> submitted my CV to FF since it is a big organization. I need double check.
+</p>
+
+<p>
+I save current email as draft, search all the mails containing "FF" and forward them to the original email I've not sent yet. Then my agent could figure out whether other guys have already represented me for the same opportunity.
+</p>
+
+<p>
+This operation is doable in desktop application like Outlook. I need search emails in a new dialog box. Select emails. Then drag them to the original email.
+</p>
+
+<p>
+It's hard to do this kind of thing in Gmail.
+</p>
+
+<p>
+Now let me show you how Emacs get the job done:
+</p>
+
+<ul class="org-ul">
+<li>Step 1, Switch to Groups buffer (the buffer which lists email folder). press key "G G" or run command "M-x gnus-group-make-nnir-group", input the keyword "FF" to start search
+</li>
+<li>Step 2, Mark the emails I want to forward with hot key "#"
+</li>
+<li>Step 3, Press key "C-c C-f" or run command "M-x gnus-summary-mail-forward". A new buffer is created. It contains a big chuck of xml string wrapped by either "&lt;#multipart&gt;" tag or "&lt;#mml&gt;" tag.
+</li>
+<li>Step 4, Select and copy that string into you original email. Done!
+</li>
+</ul>
+<p>
+Well, some people may argue that step 4 could be improved a little bit.
+</p>
+
+<p>
+In Emacs, everything could be optimized. Please copy below code into your ~/.emacs:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(defun message-select-forwarded-email-tags ()
+  "select the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (let (start rlt)
+    (when (search-forward "&lt;#")
+      (setq start (point))
+      (push-mark (point) t t)
+      (goto-char (point-max))
+      (search-backward "&gt;")
+      (forward-char)
+      (setq rlt t))
+    rlt))
+
+(defun message-copy-select-forwarded-email-tags ()
+  "copy the &lt;#mml-or-what-ever&gt; tags in message-mode"
+  (interactive)
+  (save-excursion
+    (cond
+     ((message-select-forwarded-email-tags)
+      (copy-region-as-kill (region-beginning) (region-end))
+      (message "forwarded email tags copied!"))
+     (t (message "NO forwarded email tags found!"))
+     )
+    ))
+</code></pre>
+
+</div>
+
+<p>
+All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags into kill-ring.
+</p>
+
+<p>
+UPDATE:
+This is only a case study. My complete guide on Gnus is at <a href="http://blog.binchen.org/posts/notes-on-using-gnus.html">http://blog.binchen.org/posts/notes-on-using-gnus.html</a>.
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/migrate-blog-from-wordpress-into-nikola.html">Migrate blog from wordpress into nikola</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-04-22T09:09:21+00:00">2014-04-22 09:09</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/migrate-blog-from-wordpress-into-nikola.html#disqus_thread" data-disqus-identifier="cache/posts/migrate-blog-from-wordpress-into-nikola.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/migrate.html" rel="tag">migrate</a></li>
+           <li><a class="tag p-category" href="categories/nikola.html" rel="tag">nikola</a></li>
+           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+blog from wordpress into nikola                                       :en:wordpress:nikola:blog:migrate:
+</p>
+
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-04-22&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-28 Wed&gt;</span></span>
+</p>
+
+<p>
+If you are only interested in web page optimization, start from the second section of the article.
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash"># you might need need `sudo apt-get install python-gdbm` on Debian
+# install python2 and make sure sqlite is supported
+sudo USE="sqlite" emerge -a =python-2* # Gentoo Linux
+
+# one debian/ubuntu, you need: `apt-get install libxml2-dev libxslt1-dev python-dev libjpeg-dev` for lxml
+
+# Not to mess up with root
+export PATH=$PATH:$HOME/.local/bin
+
+# Best way to get latest pip,
+# see https://packaging.python.org/installing/#install-pip-setuptools-and-wheel
+python ~/bin/get-pip.py --user # ~/.local/bin/pip
+
+# install dependencies (requests is required by zen theme)
+# sudo pip install markdown webassets phpserialize nikola requests
+# "sudo pip install" could screw up my python setup on Gentoo Linux
+# @see https://forums.gentoo.org/viewtopic-t-1006044-view-next.html?sid=931f7be2c16ac99fd85eb2940c0bf82b
+# so install the python packages in my HOME directory might be better
+# @see http://stackoverflow.com/questions/2915471/install-a-python-package-into-a-different-directory-using-pip
+pip install --user markdown webassets phpserialize nikola requests
+
+# create root directory of nikola
+mkdir -p ~/.config/nikola;cd ~/.config/nikola
+
+# import from wordpress dump
+nicola import_wordpress my_wordpress_dump.xml
+
+# since I use zen theme, I need install lessc
+# obviously NodeJS is required
+npm install -g less # use portable nodejs in $HOME is better
+
+# I use zen theme, before intalling new theme, clean the legacy theme at first
+rm -rf themes/zen/;nikola install_theme zen
+# or rm -rf themes/zen/; http_proxy=http://127.0.0.1:8087 nikola install_theme zen at mainland China
+
+# build the web site
+nikola build
+</code></pre>
+
+</div>
+
+<p>
+Use below command to fix embedded code in HTML files:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash">find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
+find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&lt;/pre&gt;%g"
+</code></pre>
+
+</div>
+
+<p>
+Manually fixed those articles with Chinese title in url_map.csv
+</p>
+
+<p>
+Use below script to fixed the xml dumped from wordpress:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-python">#!/usr/bin/python
+import getopt, sys, csv
+def usage():
+    print '''
+NAME
+    fix url mapping when migrate wordpress blog into nikola
+Usage
+    python fix-url-map.py [options]
+'''[1:-1]
+
+if __name__ == '__main__':
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hf:x:", ["help", "file=","xml="])
+    except getopt.GetoptError as err:
+        # print help information and exit:
+        print str(err) # will print something like "option -a not recognized"
+        usage()
+        sys.exit(2)
+
+    file=""
+    xml=""
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-f", "--file"):
+            file= a
+        elif o in ("-x", "--xml"):
+            xml=a
+        else:
+            assert False, "unhandled option"
+
+    with open(xml, 'r') as content_file:
+        content = content_file.read()
+
+    with open(file, 'rb') as csvfile:
+         spamreader = csv.reader(csvfile, delimiter=',')
+         for row in spamreader:
+             content=content.replace("&gt;"+row[0]+"&lt;","&gt;"+row[1]+"&lt;")
+
+    print content
+</code></pre>
+
+</div>
+
+<p>
+Import the xml into <a href="http://disqus.com">http://disqus.com</a>.
+</p>
+
+<p>
+You can use javascript to re-direct the URL, so your old article links are still valid. Ask at <a href="http://stackoverflow.com">http://stackoverflow.com</a> or contact your local Javascript developers on how to do it. It's simple task but a little boring.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Optimization</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+I developed <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> to convert Org subtree into Nikola page. 
+</p>
+
+<p>
+Instead of hacking conf.py, I <b>tweak the theme's javascript/html/css directly</b>. It's simpler and more flexible.
+</p>
+
+<p>
+For example, the <a href="https://themes.getnikola.com/v7/zen/">Zen theme</a> uses JQuery plugins to format time. I replace JQuery with <a href="https://momentjs.com/">Moment.js v1.0</a> which is much smaller. 
+</p>
+
+<p>
+Since only a few icons from <a href="http://fontawesome.io/">Font Awesome</a> is used by Zen theme.. We can use NodeJS plugin <a href="https://github.com/aui/font-spider">font-spider</a> to trim down the font file.
+</p>
+
+<p>
+Other conventional front end tricks like static assets concatenating/minifying can also be used. These tricks are introduced everywhere. So I won't waste time on details.
+</p>
+
+<p>
+In order to see the real example of optimization, please visit <a href="http://blog.binchen.org">http://blog.binchen.org</a>. Watching through the browser's developer tool, you can see my web page is 90% smaller than pages without optimization.
+</p>
+
+<p>
+<a href="https://highlightjs.org/">highlight.js</a> is the best solution for code syntax highlighting. I customized the <code>highlight.js</code> to render only the programming languages I use.
+</p>
+
+<p>
+My static blog is hosted at <a href="https://pages.github.com/">GitHub Pages</a>.
+</p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/what-s-the-best-spell-check-set-up-in-emacs.html">What's the best spell check setup in emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1069,243 +1395,6 @@ You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.
 <ol>
 <li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>
 <p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html">Hack wordpress php and make cdnjs.com host js</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-07T00:58:00+00:00">2014-03-07 00:58</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html#disqus_thread" data-disqus-identifier="cache/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/blog.html" rel="tag">blog</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
-           <li><a class="tag p-category" href="categories/php.html" rel="tag">php</a></li>
-           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-wordpress php and make cdnjs.com host js                              :en:wordpress:blog:javascript:php:
-</p>
-
-<p>
-For jquery.js, see <a href="http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/">http://rk.md/2012/cdnjs-scripts-without-plugin-wordpress/</a>.
-</p>
-
-<p>
-I added below code into bottom of functions.php (Appearance =&gt; Editor):
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-php">add_action('wp_enqueue_scripts', 'CDNJS_scripts');
-function CDNJS_scripts() 
-{
-    wp_deregister_script('jquery');
-    wp_register_script('jquery','http://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js');
-    wp_enqueue_script('jquery');
-}
-</code></pre>
-
-</div>
-
-<p>
-For js from SyntaxHighlighter Evolved (Plugins =&gt; Installed Plugins =&gt; Edit):
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
-index db8c668..e41ec12 100644
---- a/syntaxhighlighter.php
-+++ b/syntaxhighlighter.php
-@@ -117,30 +117,30 @@ class SyntaxHighlighter {
-        }
-
-        // Register brush scripts
--       wp_register_script( 'syntaxhighlighter-core',             plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shCore.js'),            array(),                         $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-as3',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushAS3.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-bash',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushBash.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-coldfusion', plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushColdFusion.js'), array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-cpp',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCpp.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-csharp',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCSharp.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-css',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushCss.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-delphi',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushDelphi.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-diff',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushDiff.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-erlang',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushErlang.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-groovy',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushGroovy.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-java',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJava.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-javafx',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJavaFX.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-jscript',    plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushJScript.js'),    array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-perl',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPerl.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-php',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPhp.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-plain',      plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPlain.js'),      array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-powershell', plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPowerShell.js'), array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-python',     plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushPython.js'),     array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-ruby',       plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushRuby.js'),       array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-scala',      plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushScala.js'),      array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-sql',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushSql.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-vb',         plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushVb.js'),         array('syntaxhighlighter-core'), $this-&gt;agshver );
--       wp_register_script( 'syntaxhighlighter-brush-xml',        plugins_url('syntaxhighlighter/' . $this-&gt;shfolder . '/scripts/shBrushXml.js'),        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-core',             '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js',            array(),                         $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-as3',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushAS3.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-bash',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushBash.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-coldfusion', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushColdFusion.js', array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-cpp',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCpp.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-csharp',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCSharp.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-css',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCss.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-delphi',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushDelphi.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-diff',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushDiff.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-erlang',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushErlang.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-groovy',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushGroovy.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-java',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-javafx',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJavaFX.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-jscript',    '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJScript.js',    array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-perl',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPerl.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-php',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPhp.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-plain',      '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPlain.js',      array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-powershell', '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPowerShell.js', array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-python',     '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushPython.js',     array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-ruby',       '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushRuby.js',       array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-scala',      '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushScala.js',      array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-sql',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushSql.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-vb',         '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushVb.js',         array('syntaxhighlighter-core'), $this-&gt;agshver );
-+       wp_register_script( 'syntaxhighlighter-brush-xml',        '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushXml.js',        array('syntaxhighlighter-core'), $this-&gt;agshver );
-
-        // Register some popular third-party brushes
-        wp_register_script( 'syntaxhighlighter-brush-clojure',    plugins_url('syntaxhighlighter/third-party-brushes/shBrushClojure.js'),          array('syntaxhighlighter-core'), '20090602'     );
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/how-to-use-org2blog-effectively-as-a-programmer.html">How to use org2blog effectively as a programmer</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-06T14:25:00+00:00">2014-03-06 14:25</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-use-org2blog-effectively-as-a-programmer.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-org2blog-effectively-as-a-programmer.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
-           <li><a class="tag p-category" href="categories/wordpress.html" rel="tag">wordpress</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-to use org2blog effectively as a programmer     :en:emacs:org:wordpress:
-</p>
-
-<p>
-<a href="https://github.com/punchagan/org2blog">org2blog</a> is a beautiful plugin to post to wordpress blog.
-</p>
-
-<p>
-I won't waste your time on the basic usage because it has zero learning curve and its README is very clear.
-</p>
-
-<p>
-I will talk some advanced set up here.
-</p>
-
-<p>
-As a programmer, I need wordpress syntax highlight all the code snippets I post. But it seems org2blog need some tweak to support language like elisp.
-</p>
-
-<p>
-If you grep org2blog's code, you will find a variable "org2blog/wp-sourcecode-langs". It lists all the languages org2blog supports.
-</p>
-
-<p>
-So all you need to do is insert below code into ~/.emacs:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(setq org2blog/wp-sourcecode-langs
-      '("actionscript3" "bash" "coldfusion" "cpp" "csharp" "css" "delphi"
-        "erlang" "fsharp" "diff" "groovy" "javascript" "java" "javafx" "matlab"
-        "objc" "perl" "php" "text" "powershell" "python" "ruby" "scala" "sql"
-        "vb" "xml"
-        "sh" "elisp" "lisp" "lua"))
-</code></pre>
-
-</div>
-
-<p>
-Then you need install the wordpress plugin <a href="http://www.viper007bond.com/wordpress-plugins/syntaxhighlighter/">SyntaxHighlighter Evolved</a> to do the syntax highlight thing. Well, you will find the languages like elisp is not supported by this plugin.
-</p>
-
-<p>
-That's easy to fix. Please log into your blog, modify that plugin online:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-diff">diff --git a/syntaxhighlighter.php b/syntaxhighlighter.php
-index 53b4815..808b14b 100644
---- a/syntaxhighlighter.php
-+++ b/syntaxhighlighter.php
-@@ -222,6 +222,11 @@ class SyntaxHighlighter {
-            'xslt'          =&gt; 'xml',
-            'html'          =&gt; 'xml',
-            'xhtml'         =&gt; 'xml',
-+           'text'          =&gt; 'clojure',
-+           'elisp'         =&gt; 'clojure',
-+           'lisp'          =&gt; 'clojure',
-+           'sh'            =&gt; 'bash',
-+           'lua'           =&gt; 'ruby',
-        ) );
-</code></pre>
-
-</div>
-
-<p>
-As you can see, I use clojure syntax to highlight elisp and use ruby syntax to highlight lua.
-</p>
-
-<p>
-You may ask why I use clojure syntax to highlight simple text in above set up?
-</p>
-
-<p>
-Well, I already submit lots of my elisp code before set up my org2blog correctly. Those code snippets are regarded as simple text. I won't waste my time to mark those old snippets one by one. That's why I render text as clojure code.
-</p>
-
-<p>
-Besides, I find the wordpress theme produced by <a href="http://automattic.com">Automattic</a> (Yes, the company behind wordpress) is good for programmers because they obviously have optimized font size for different screen resolutions. That's important for code reading. I use Trvl v1.0.2.
-</p>
 </div>
             </div>
         </div>
