@@ -50,6 +50,10 @@
             <div class="body">
                 <div>
 <p>
+line with ivy-mode                                                   :en:emacs:ivy:grep:
+</p>
+
+<p>
 Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
 </p>
 
@@ -130,13 +134,19 @@ I also tried <code>grep</code> which is too slow for my project.
 
             </div>
             <div class="body">
-                <div class="org-src-container">
+                <div>
+<p>
+Messages Buffer modifiable in Emacs 24.4                                 :en:emacs:messages:buffer:
+</p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
   (if (string= "*Messages*" (buffer-name))
       (read-only-mode -1)))
 </code></pre>
 
+</div>
 </div>
             </div>
         </div>
@@ -166,6 +176,10 @@ I also tried <code>grep</code> which is too slow for my project.
             </div>
             <div class="body">
                 <div>
+<p>
+to input Non-English character in evil-mode efficiently                   :en:emacs:evil:
+</p>
+
 <p>
 You can <code>M-x toggle-input-method</code> or <code>C-\</code> to input Non-English characters.
 </p>
@@ -240,7 +254,8 @@ Chinese version:
 </li>
 </ul>
 <p>
-代码见上.</p>
+代码见上.
+</p>
 </div>
             </div>
         </div>
@@ -271,6 +286,10 @@ Chinese version:
             </div>
             <div class="body">
                 <div>
+<p>
+tip                                                                :en:emacs:ivy:evil:
+</p>
+
 <p>
 Please install <a href="https://github.com/syl20bnr/evil-escape">evil-escape</a> at first.
 </p>
@@ -312,6 +331,10 @@ When <a href="https://github.com/abo-abo/swiper">Swiper/Ivy</a> candidate window
             </div>
             <div class="body">
                 <div>
+<p>
+general.el to provide multiple leader key in evil-mode                    :en:emacs:evil:vim:
+</p>
+
 <p>
 <a href="https://github.com/noctuid/general.el">General.el</a> "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 </p>
@@ -375,6 +398,10 @@ My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el
             </div>
             <div class="body">
                 <div>
+<p>
+ivy to open recent directories                                            :en:emacs:ivy:
+</p>
+
 <p>
 The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
 </p>
@@ -443,6 +470,10 @@ Screenshot:
             </div>
             <div class="body">
                 <div>
+<p>
+vs Sublime Text on Salesforce development                               :en:emacs:salesforce:sublime:
+</p>
+
 <p>
 Our client decided to move their legacy system to a cloud platform called salesforce.com. So I got a chance to investigate how to <b>deploy code</b> to the salesforce server inside Emacs and Sublime Text.
 </p>
@@ -569,6 +600,10 @@ Here is my setup,
             </div>
             <div class="body">
                 <div>
+<p>
+to be extremely efficient in Emacs                                        :en:emacs:
+</p>
+
 <p>
 All you need to do is using <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>measure</b> how many time you execute commands.
 </p>
@@ -1841,6 +1876,10 @@ Below is the eight month keyfreq data of my office computer,
             <div class="body">
                 <div>
 <p>
+regions in Emacs                                                         :emacs:en:diff:
+</p>
+
+<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-27&gt;</span></span>
 </p>
 
@@ -1990,7 +2029,12 @@ So here is my code,
 
             </div>
             <div class="body">
-                <div class="org-src-container">
+                <div>
+<p>
+ivy-mode to search bash history                                           :en:emacs:bash:ivy:
+</p>
+
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
   "Yank the bash history"
@@ -2010,6 +2054,7 @@ So here is my code,
         (message "%s =&gt; kill-ring" val))))
 </code></pre>
 
+</div>
 </div>
             </div>
         </div>

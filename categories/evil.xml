@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 28 Mar 2017 12:19:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+word in Emacs mini-buffer when using Evil                       :en:emacs:evil:vim:
+&lt;/p&gt;
+
+&lt;p&gt;
 When using &lt;a href="https://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt; I often input &lt;code&gt;%s/old-keyword/new-keyword/g&lt;/code&gt; in &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html"&gt;Minibuffer&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -27,6 +31,10 @@ The solution is to re-define "/" as &lt;a href="https://www.gnu.org/software/ema
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</guid><pubDate>Tue, 28 Mar 2017 12:16:06 GMT</pubDate></item><item><title>How to input Non-English character in evil-mode efficiently</title><link>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+to input Non-English character in evil-mode efficiently                   :en:emacs:evil:
+&lt;/p&gt;
+
+&lt;p&gt;
 You can &lt;code&gt;M-x toggle-input-method&lt;/code&gt; or &lt;code&gt;C-\&lt;/code&gt; to input Non-English characters.
 &lt;/p&gt;
 
@@ -102,7 +110,12 @@ Chinese version:
 &lt;/ul&gt;
 
 &lt;p&gt;
-代码见上.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item><item><title>Swiper/Ivy tip</title><link>http://blog.binchen.org/posts/swiperivy-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+代码见上.
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/how-to-input-non-english-character-in-evil-mode-efficiently.html</guid><pubDate>Mon, 16 May 2016 13:33:25 GMT</pubDate></item><item><title>Swiper/Ivy tip</title><link>http://blog.binchen.org/posts/swiperivy-tip.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+tip                                                                :en:emacs:ivy:evil:
+&lt;/p&gt;
+
+&lt;p&gt;
 Please install &lt;a href="https://github.com/syl20bnr/evil-escape"&gt;evil-escape&lt;/a&gt; at first.
 &lt;/p&gt;
 
@@ -113,6 +126,10 @@ When &lt;a href="https://github.com/abo-abo/swiper"&gt;Swiper/Ivy&lt;/a&gt; cand
 &lt;p&gt;
 &lt;code&gt;fd&lt;/code&gt; is the default key binding from evil-escape. I changed it to &lt;code&gt;kj&lt;/code&gt; instead.
 &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>ivy</category><guid>http://blog.binchen.org/posts/swiperivy-tip.html</guid><pubDate>Wed, 04 May 2016 08:15:27 GMT</pubDate></item><item><title>Use general.el to provide multiple leader key in evil-mode</title><link>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+general.el to provide multiple leader key in evil-mode                    :en:emacs:evil:vim:
+&lt;/p&gt;
+
+&lt;p&gt;
 &lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 &lt;/p&gt;
 
@@ -146,6 +163,10 @@ Minimum setup is simple,
 &lt;p&gt;
 My &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el"&gt;real world setup&lt;/a&gt; is more complicated.
 &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/use-general-el-to-provide-multiple-leader-key-in-evil-mode.html</guid><pubDate>Sat, 09 Apr 2016 04:35:54 GMT</pubDate></item><item><title>Evil text object to select nearby file path</title><link>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+text object to select nearby file path                                   :en:emacs:evil:
+&lt;/p&gt;
+
+&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-08 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+to manage the file path in big project                                    :en:engineering:software:bash:
+&lt;/p&gt;
+
+&lt;p&gt;
 It's not good practice to use relative path in big project.
 &lt;/p&gt;
 
@@ -76,7 +80,12 @@ Or you can override the TTAGROOT value when you executing "test.sh":
 &lt;/div&gt;
 
 &lt;p&gt;
-BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt; for the root directory of project is enough.&lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>engineering</category><category>software</category><guid>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</guid><pubDate>Thu, 29 May 2014 01:31:35 GMT</pubDate></item><item><title>Linux桌面使用之道</title><link>http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt; for the root directory of project is enough.
+&lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>engineering</category><category>software</category><guid>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</guid><pubDate>Thu, 29 May 2014 01:31:35 GMT</pubDate></item><item><title>Linux桌面使用之道</title><link>http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+:zh:linux:software:desktop:
+&lt;/p&gt;
+
+&lt;p&gt;
 作者: 陈斌(redguardtoo)
 &lt;/p&gt;
 
@@ -570,6 +579,10 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>desktop</category><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html</guid><pubDate>Sun, 08 May 2011 18:08:00 GMT</pubDate></item><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+:cygwin:software:zh:chinese:
+&lt;/p&gt;
+
+&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-01-31 Sat&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -663,6 +676,10 @@ exit
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; 在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="example"&gt;term rxvt-256color
 &lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t &lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;因为Ctrl-a在bash和emacs中都是常用快捷键,在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;escape&lt;span style="color:#00cd00;"&gt;"^Tt"&lt;/span&gt;  &lt;span style="color:#cd0000;"&gt;#&lt;/span&gt;&lt;span style="color:#cd0000;"&gt;the default of A interferes with emacs keybindings for terminal, and I never use the emacs transpose command
 &lt;p&gt;&lt;/p&gt;&lt;/span&gt;&lt;/pre&gt;   &lt;p&gt; 这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 12:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
+&lt;/p&gt;
+
+&lt;p&gt;
 作者: 陈斌 (redguardtoo)
 &lt;/p&gt;
 

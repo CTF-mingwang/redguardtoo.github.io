@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 14 Aug 2017 12:14:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Perforce inside Emacs                                                     :en:emacs:perforce:vcs:bash:p4:
+&lt;/p&gt;
+
+&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-12-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -356,7 +360,11 @@ function p4ml(){
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>shell</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+ivy-mode to search bash history                                           :en:emacs:bash:ivy:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
   "Yank the bash history"
@@ -376,7 +384,11 @@ function p4ml(){
         (message "%s =&amp;gt; kill-ring" val))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+to manage the file path in big project                                    :en:engineering:software:bash:
+&lt;/p&gt;
+
+&lt;p&gt;
 It's not good practice to use relative path in big project.
 &lt;/p&gt;
 
@@ -453,7 +465,12 @@ Or you can override the TTAGROOT value when you executing "test.sh":
 &lt;/div&gt;
 
 &lt;p&gt;
-BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt; for the root directory of project is enough.&lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>engineering</category><category>software</category><guid>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</guid><pubDate>Thu, 29 May 2014 01:31:35 GMT</pubDate></item><item><title>paste string from clipboard into minibuffer in Emacs</title><link>http://blog.binchen.org/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt; for the root directory of project is enough.
+&lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>engineering</category><category>software</category><guid>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</guid><pubDate>Thu, 29 May 2014 01:31:35 GMT</pubDate></item><item><title>paste string from clipboard into minibuffer in Emacs</title><link>http://blog.binchen.org/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+string from clipboard into minibuffer in Emacs                          :en:emacs:bash:
+&lt;/p&gt;
+
+&lt;p&gt;
 First, I find "Alt-Y" is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
 &lt;/p&gt;
 

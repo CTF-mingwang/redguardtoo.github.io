@@ -11,21 +11,19 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Code completion for HTML/JS/CSS in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/code-completion-for-htmljscss-in-emacs.html">
-<meta property="og:description" content="CREATED: &lt;2015-11-27&gt;
+<meta property="og:description" content="1 Code completion for HTML/JS/CSS in Emacs   en emacs html web css javascript
 
 
 
-UPDATED: &lt;2015-12-09 Wed&gt;
+CREATED: &lt;2015-11-27&gt;
 
 
 
-Now company-mode is popular in Emacs users. It supports code completion out of box.
+UPDATED: &lt;2017-09-26 Tue&gt;
 
 
 
-Its company-etags.el can use TAGS created by ctags/etags.
-
-">
+Now company-mode is popular in Emacs users. It supports code comp">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-11-27T11:43:59Z">
 <meta property="article:tag" content="css">
@@ -76,13 +74,18 @@ Its company-etags.el can use TAGS created by ctags/etags.
 
         </div>
         <div class="body">
-            <div>
+            <div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Code completion for HTML/JS/CSS in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="html">html</span> <span class="web">web</span> <span class="css">css</span> <span class="javascript">javascript</span></span>
+</h3>
+<div class="outline-text-2" id="text-1">
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-27&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-09-26 Tue&gt;</span></span>
 </p>
 
 <p>
@@ -94,14 +97,18 @@ Its <a href="https://github.com/company-mode/company-mode/blob/master/company-et
 </p>
 
 <p>
+You can jump to the end of this article to <b>quick start</b>.
+</p>
+
+<p>
 Setup is easy.
 </p>
 
 <p>
 Step 1, create TAGS:
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-bash">cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 </code></pre>
@@ -111,8 +118,8 @@ Step 1, create TAGS:
 <p>
 Step 2, add below code into "~/.emacs.d/init.el":
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 </code></pre>
@@ -134,12 +141,10 @@ First, you need upgrade web-mode to <a href="https://github.com/fxbois/web-mode/
 <p>
 Second, you need add below code into your "~/.emacs.d/init.el",
 </p>
-
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(eval-after-load 'company-etags
-  '(progn
-     (add-to-list 'company-etags-modes 'web-mode)))
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags '(progn (add-to-list 'company-etags-modes 'web-mode)))
 </code></pre>
 
 </div>
@@ -151,8 +156,8 @@ You need above setup because web-mode <b>conditionally</b> inherit from prog-mod
 <p>
 Another issue is company-etags.el disables code completion in string and comment by default. We need <b>remove this feature in web-mode temporarily</b>,
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(eval-after-load 'company
   '(progn
@@ -173,8 +178,8 @@ Tested on Emacs23.4 and Emacs24.4.
 UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>:
 <a href="https://github.com/dgutov">Dmitry Gutov</a> has <a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618">fixed</a> the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 </code></pre>
@@ -185,8 +190,35 @@ UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09
 Screenshot of my setup:
 </p>
 
+
 <div class="figure">
 <p><img src="../wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
+</div>
+
+
+<p>
+UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-09-26 Tue&gt;</span></span>:
+Quick start newbies, 
+</p>
+
+<p>
+<b>Step 1</b>, open shell and goto project root. Run command <code>ctags -e -R</code>. A file named <code>TAGS</code> is created.
+</p>
+
+<p>
+<b>Step 2</b>, insert below code into <code>~/.emacs.d/init.el</code> or <code>~/.emacs</code> (replace <code>web-mode</code> to any major mode you use),
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags '(progn (add-to-list 'company-etags-modes 'web-mode)))
+(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
+</code></pre>
+
+</div>
+
+<p>
+All done. Use company-mode as your wish!</p>
 </div>
 </div>
         </div>

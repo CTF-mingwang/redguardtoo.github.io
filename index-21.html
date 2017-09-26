@@ -51,6 +51,10 @@
             <div class="body">
                 <div>
 <p>
+to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
+</p>
+
+<p>
 Group Topics is used to manage Gnus groups.
 </p>
 
@@ -171,6 +175,10 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
             <div class="body">
                 <div>
 <p>
+gutter tip                                                                :en:emacs:git:git:gutter:
+</p>
+
+<p>
 I use <a href="https://github.com/syohex/emacs-git-gutter">git-gutter.el</a> everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 </p>
 
@@ -206,7 +214,8 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
 </p>
 
 <p>
-`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.</p>
+`M-x git-gutter:next-hunk` and `M-x git-gutter:previous-hunk` will jump to the deleted/modified/added line.
+</p>
 </div>
             </div>
         </div>
@@ -236,6 +245,10 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
             </div>
             <div class="body">
                 <div>
+<p>
+gcalcli for google calendar                                               :en:google:calendar:
+</p>
+
 <p>
 I use cli `pip install –user gcalcli parsedatetime` to install <a href="https://github.com/insanum/gcalcli">gcalcli</a> into HOME folder.
 </p>
@@ -300,6 +313,10 @@ Edit crontab to remind me about the calendar events,
             </div>
             <div class="body">
                 <div>
+<p>
+Ivy-mode to tweak workgroups2                                             :en:emacs:ivy:workgroups:
+</p>
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-22&gt;</span></span>
 </p>
@@ -408,6 +425,10 @@ Here is code:
             </div>
             <div class="body">
                 <div>
+<p>
+Ivy-mode, bye Helm                                                      :en:emacs:ivy:helm:
+</p>
+
 <p>
 I love <a href="https://github.com/abo-abo/swiper">Ivy-mode/Swiper</a> because it's quick and easy to extend. So my <a href="https://github.com/emacs-helm/helm">Helm</a> setup is replaced by ivy-mode.
 </p>
@@ -674,6 +695,10 @@ Or else, find files since 24 weeks (6 months) ago."
             <div class="body">
                 <div>
 <p>
+auto-completion for non-programmers                                     :en:emacs:completion:word:
+</p>
+
+<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-01&gt;</span></span>
 </p>
 
@@ -736,7 +761,8 @@ Say if you want to complete words ONLY in org-mode,
 </p>
 
 <p>
-You can download my <a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt">english-words.txt</a>.</p>
+You can download my <a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt">english-words.txt</a>.
+</p>
 </div>
             </div>
         </div>
@@ -768,13 +794,18 @@ You can download my <a href="https://github.com/redguardtoo/emacs.d/raw/master/m
 
             </div>
             <div class="body">
-                <div>
+                <div id="outline-container-sec-1" class="outline-2">
+<h3 id="sec-1">
+<span class="section-number-2">1</span> Code completion for HTML/JS/CSS in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="html">html</span> <span class="web">web</span> <span class="css">css</span> <span class="javascript">javascript</span></span>
+</h3>
+<div class="outline-text-2" id="text-1">
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-27&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-09-26 Tue&gt;</span></span>
 </p>
 
 <p>
@@ -786,14 +817,18 @@ Its <a href="https://github.com/company-mode/company-mode/blob/master/company-et
 </p>
 
 <p>
+You can jump to the end of this article to <b>quick start</b>.
+</p>
+
+<p>
 Setup is easy.
 </p>
 
 <p>
 Step 1, create TAGS:
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-bash">cd ~/myproj/script; ctags -e '*.js'; cd ~/myproj/style; ctags -e '*.css'
 </code></pre>
@@ -803,8 +838,8 @@ Step 1, create TAGS:
 <p>
 Step 2, add below code into "~/.emacs.d/init.el":
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(setq tags-table-list (list "~/myproj/script/TAGS" "~/myproj/style/TAGS"))
 </code></pre>
@@ -826,12 +861,10 @@ First, you need upgrade web-mode to <a href="https://github.com/fxbois/web-mode/
 <p>
 Second, you need add below code into your "~/.emacs.d/init.el",
 </p>
-
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(eval-after-load 'company-etags
-  '(progn
-     (add-to-list 'company-etags-modes 'web-mode)))
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags '(progn (add-to-list 'company-etags-modes 'web-mode)))
 </code></pre>
 
 </div>
@@ -843,8 +876,8 @@ You need above setup because web-mode <b>conditionally</b> inherit from prog-mod
 <p>
 Another issue is company-etags.el disables code completion in string and comment by default. We need <b>remove this feature in web-mode temporarily</b>,
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(eval-after-load 'company
   '(progn
@@ -865,8 +898,8 @@ Tested on Emacs23.4 and Emacs24.4.
 UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09 Wed&gt;</span></span>:
 <a href="https://github.com/dgutov">Dmitry Gutov</a> has <a href="https://github.com/company-mode/company-mode/commit/250ca1c395c6f05b733abce69a2d928b6cd31618">fixed</a> the company-etags.el. After upgrading to company v0.9.0, you only need one line setup instead of my defadvice hack,
 </p>
-
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
 </code></pre>
@@ -877,8 +910,35 @@ UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-09
 Screenshot of my setup:
 </p>
 
+
 <div class="figure">
 <p><img src="wp-content/company-etags-code-completion-nq8.png" alt="company-etags-code-completion-nq8.png"></p>
+</div>
+
+
+<p>
+UPDATE at <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-09-26 Tue&gt;</span></span>:
+Quick start newbies, 
+</p>
+
+<p>
+<b>Step 1</b>, open shell and goto project root. Run command <code>ctags -e -R</code>. A file named <code>TAGS</code> is created.
+</p>
+
+<p>
+<b>Step 2</b>, insert below code into <code>~/.emacs.d/init.el</code> or <code>~/.emacs</code> (replace <code>web-mode</code> to any major mode you use),
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(eval-after-load 'company-etags '(progn (add-to-list 'company-etags-modes 'web-mode)))
+(setq company-etags-everywhere '(php-mode html-mode web-mode nxml-mode))
+</code></pre>
+
+</div>
+
+<p>
+All done. Use company-mode as your wish!</p>
 </div>
 </div>
             </div>
@@ -910,6 +970,10 @@ Screenshot of my setup:
             </div>
             <div class="body">
                 <div>
+<p>
+js2-mode to print json path                                               :en:emacs:js2:javascript:
+</p>
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-10-29&gt;</span></span>
 </p>
@@ -1064,6 +1128,10 @@ My code is <a href="https://github.com/mooz/js2-mode/commit/49555849abf9e5f03766
             </div>
             <div class="body">
                 <div>
+<p>
+text object to select nearby file path                                   :en:emacs:evil:
+</p>
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-08 Sat&gt;</span></span>
 </p>
@@ -1237,6 +1305,10 @@ Insert below code into ~/.emacs:
             </div>
             <div class="body">
                 <div>
+<p>
+Chrouk Soup)                                                  :zh:soup:cuisine:
+</p>
+
 <p>
 视频教程:
 <a href="https://www.youtube.com/watch?v=Aclyh2c_BEs">https://www.youtube.com/watch?v=Aclyh2c_BEs</a>
