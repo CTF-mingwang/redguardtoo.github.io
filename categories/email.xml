@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 13:01:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
 &lt;/p&gt;
 
@@ -230,7 +230,7 @@ Third part uses Emacs and Gnus to replace thunderbrid. It's optional.
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;DavMail as mail gateway&lt;/h3&gt;
+
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;pre class="example"&gt;
 Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LDAP exchange gateway allowing users to use any mail/calendar client (e.g. Thunderbird with Lightning or Apple iCal) with an Exchange server.
@@ -243,6 +243,7 @@ Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LD
 &lt;a href="http://davmail.sourceforge.net/download.html"&gt;Download the installer&lt;/a&gt; at Debian/Ubuntu/Mint:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo apt-get install libswt-gtk-3-jni libswt-gtk-3-java libswt-cairo-gtk-3-jni
 # ubuntu/debian only; for other distribution, just download src package
@@ -369,7 +370,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Problem&lt;/h3&gt;
+
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 As a freelancer, I need reply agent's email frequently.
@@ -390,14 +391,14 @@ So I have several issues to resolve:
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Solution&lt;/h3&gt;
+&lt;h3 id="sec-2"&gt;Solution&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt; is the best solution for email templates because you can embed Lisp code in the template.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-2-1" class="outline-3"&gt;
-&lt;h4 id="sec-2-1"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; Templates&lt;/h4&gt;
+&lt;h4 id="sec-2-1"&gt;Templates&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-1"&gt;
 &lt;p&gt;
 I publicize my .emacs.d at &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;github&lt;/a&gt;. But email templates are my private stuff. So I place them in different location.
@@ -459,7 +460,7 @@ It will automatically fetch the first name of agent,
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-2-2" class="outline-3"&gt;
-&lt;h4 id="sec-2-2"&gt;&lt;span class="section-number-3"&gt;2.2&lt;/span&gt; Emacs setup&lt;/h4&gt;
+&lt;h4 id="sec-2-2"&gt;Emacs setup&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-2-2"&gt;
 &lt;p&gt;
 Add following code into .emacs to make yasnippet load the emacs templates:
@@ -495,7 +496,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Install POPFile&lt;/h3&gt;
+
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 &lt;a href="http://getpopfile.org/docs/download"&gt;Download and extract cross-platform version&lt;/a&gt; to &lt;code&gt;~/bin/popfile/&lt;/code&gt;.
@@ -504,7 +505,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Install third party packages&lt;/h3&gt;
+&lt;h3 id="sec-2"&gt;Install third party packages&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 Run:
@@ -638,7 +639,7 @@ cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::So
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Setup&lt;/h3&gt;
+&lt;h3 id="sec-3"&gt;Setup&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
 I only use IMAP. The purpose of tweak POP3 port is only to make the program executable without root permission.
@@ -788,7 +789,7 @@ The only remaining issue is user name. If it contains "\", you should replace it
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Run the program&lt;/h3&gt;
+&lt;h3 id="sec-4"&gt;Run the program&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
@@ -803,7 +804,7 @@ See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopf
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-5" class="outline-2"&gt;
-&lt;h3 id="sec-5"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; Start the POPFile automatically when bash login&lt;/h3&gt;
+&lt;h3 id="sec-5"&gt;Start the POPFile automatically when bash login&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
 Insert below code in ~/.bashrc:
@@ -830,7 +831,7 @@ fi
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-6" class="outline-2"&gt;
-&lt;h3 id="sec-6"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; Start the POPFile systemd service as a user (OPTIONAL)&lt;/h3&gt;
+&lt;h3 id="sec-6"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-6"&gt;
 &lt;p&gt;
 My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
@@ -859,7 +860,7 @@ WantedBy=multi-user.target
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-7" class="outline-2"&gt;
-&lt;h3 id="sec-7"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Backup&lt;/h3&gt;
+&lt;h3 id="sec-7"&gt;Backup&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-7"&gt;
 &lt;p&gt;
 Please backup popfile.cfg and popfile.db.
@@ -872,7 +873,7 @@ See &lt;a href="http://getpopfile.org/docs/howtos:backup"&gt;http://getpopfile.o
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-8" class="outline-2"&gt;
-&lt;h3 id="sec-8"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;h3 id="sec-8"&gt;Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-8"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Portable

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 13:01:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 a programmer publish static HTML blog in Emacs                            :en:emacs:ftp:
 &lt;/p&gt;
 
@@ -20,7 +20,7 @@ Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generato
 &lt;/p&gt;
 
 &lt;div id="outline-container-sec-1" class="outline-2"&gt;
-&lt;h3 id="sec-1"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; Solution&lt;/h3&gt;
+
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 Tested on &lt;b&gt;Linux and OSX&lt;/b&gt;.
@@ -83,7 +83,7 @@ You can write blog into org file, export and publicize it with command `M-x org2
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; Why&lt;/h3&gt;
+&lt;h3 id="sec-2"&gt;Why&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
@@ -104,10 +104,10 @@ Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, t
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-3" class="outline-2"&gt;
-&lt;h3 id="sec-3"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; Technical Details&lt;/h3&gt;
+&lt;h3 id="sec-3"&gt;Technical Details&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;/div&gt;&lt;div id="outline-container-sec-3-1" class="outline-3"&gt;
-&lt;h4 id="sec-3-1"&gt;&lt;span class="section-number-3"&gt;3.1&lt;/span&gt; Generating HTML&lt;/h4&gt;
+&lt;h4 id="sec-3-1"&gt;Generating HTML&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-1"&gt;
 &lt;p&gt;
 As I said, Nikola is my blog generator which converts my org file into HTML.
@@ -198,7 +198,7 @@ BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHigh
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-3-2" class="outline-3"&gt;
-&lt;h4 id="sec-3-2"&gt;&lt;span class="section-number-3"&gt;3.2&lt;/span&gt; Create blog posts&lt;/h4&gt;
+&lt;h4 id="sec-3-2"&gt;Create blog posts&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-2"&gt;
 &lt;p&gt;
 Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
@@ -239,7 +239,7 @@ Only the files in sub-folder "output" need be uploaded.
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-3-3" class="outline-3"&gt;
-&lt;h4 id="sec-3-3"&gt;&lt;span class="section-number-3"&gt;3.3&lt;/span&gt; Preprocess nikola output&lt;/h4&gt;
+&lt;h4 id="sec-3-3"&gt;Preprocess nikola output&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-3"&gt;
 &lt;p&gt;
 It's all done by Emacs Lisp.
@@ -262,7 +262,7 @@ As you can see, each line is a ftp upload command we need execute in shell.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id="outline-container-sec-3-4" class="outline-3"&gt;
-&lt;h4 id="sec-3-4"&gt;&lt;span class="section-number-3"&gt;3.4&lt;/span&gt; FTP upload&lt;/h4&gt;
+&lt;h4 id="sec-3-4"&gt;FTP upload&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-3-4"&gt;
 &lt;p&gt;
 Ncftp is my choice of FTP client. It's solid and efficient.
@@ -284,7 +284,7 @@ BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
 &lt;/div&gt;
 
 &lt;div id="outline-container-sec-4" class="outline-2"&gt;
-&lt;h3 id="sec-4"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; Summary&lt;/h3&gt;
+&lt;h3 id="sec-4"&gt;Summary&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 The workflow is simple.

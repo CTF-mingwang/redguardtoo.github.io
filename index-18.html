@@ -61,8 +61,7 @@ No extra setup needed! Then keep using your js2-mode happily, as if nothing happ
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
+
 <div class="outline-text-2" id="text-1">
 <p>
 In my previous article <a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">Why Emacs is better editor - a case study for javascript developer</a>, I proved that Emacs is better than <a href="http://www.sublimetext.com/">Sublime Text</a>.
@@ -100,8 +99,7 @@ As you can see, using regular expression to extract the string "MyController" is
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Solution</h3>
+<h3 id="sec-2">Solution</h3>
 <div class="outline-text-2" id="text-2">
 <p>
 My latest <a href="https://github.com/mooz/js2-mode/pull/169">contribution to js2-mode</a> solves this problem perfectly. It <b>combines the powers of AST and regular expression</b>.
@@ -186,8 +184,7 @@ Sublime users also argue that Sublime3 uses <a href="https://www.python.org/">Py
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Quick Start</h3>
+<h3 id="sec-3">Quick Start</h3>
 <div class="outline-text-2" id="text-3">
 <p>
 I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
@@ -565,8 +562,7 @@ I use keyboard only in order to maximize my productivity.
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Preparation</h3>
+
 <div class="outline-text-2" id="text-1">
 <p>
 Install Firefox addon <a href="https://github.com/mooz/keysnail/wiki">Keysnail</a> and its plugin <a href="https://github.com/mooz/keysnail/wiki/plugin">HOK</a>. From now on, all the web browsing is done ONLY in keyboard.
@@ -575,8 +571,7 @@ Install Firefox addon <a href="https://github.com/mooz/keysnail/wiki">Keysnail</
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Step 1</h3>
+<h3 id="sec-2">Step 1</h3>
 <div class="outline-text-2" id="text-2">
 <p>
 Open pull request page at github.com, click the link "command line".
@@ -604,8 +599,7 @@ I have installed a Greasemonkey user script <a href="https://github.com/redguard
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Step 2</h3>
+<h3 id="sec-3">Step 2</h3>
 <div class="outline-text-2" id="text-3">
 <p>
 I open the code file with Emacs.
@@ -630,8 +624,7 @@ In short, I can <b>review the latest commit and change the code in one step</b>.
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Done</h3>
+<h3 id="sec-4">Done</h3>
 <div class="outline-text-2" id="text-4">
 <p>
 After review and code change, the remaining book-keeping things (git-commit/git-merge/git-push) are easy.
@@ -694,8 +687,7 @@ Mendel Cooper provided the original design in <a href="http://www.tldp.org/LDP/a
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
+
 <div class="outline-text-2" id="text-1">
 <p>
 How to find full path of a file by fuzz search?
@@ -708,13 +700,11 @@ The path should be shared easily to other application like Emacs.
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Installation</h3>
+<h3 id="sec-2">Installation</h3>
 <div class="outline-text-2" id="text-2">
 </div>
 <div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">
-<span class="section-number-3">2.1</span> Step 1, Install percol</h4>
+<h4 id="sec-2-1">Step 1, Install percol</h4>
 <div class="outline-text-3" id="text-2-1">
 <p>
 <a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
@@ -723,8 +713,7 @@ The path should be shared easily to other application like Emacs.
 </div>
 
 <div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">
-<span class="section-number-3">2.2</span> Step 2, Insert below code into ~/.bashrc:</h4>
+<h4 id="sec-2-2">Step 2, Insert below code into ~/.bashrc:</h4>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 
@@ -789,8 +778,7 @@ function cf()
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Usage</h3>
+<h3 id="sec-3">Usage</h3>
 <div class="outline-text-2" id="text-3">
 <p>
 Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
@@ -832,8 +820,7 @@ In Emacs community, people try to embed a file explorer into Emacs (Sr speedbar,
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Advanced usage</h3>
+<h3 id="sec-4">Advanced usage</h3>
 <div class="outline-text-2" id="text-4">
 <p>
 More examples follow.
@@ -841,8 +828,7 @@ More examples follow.
 </div>
 
 <div id="outline-container-sec-4-1" class="outline-3">
-<h4 id="sec-4-1">
-<span class="section-number-3">4.1</span> Search the bash history.</h4>
+<h4 id="sec-4-1">Search the bash history.</h4>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Code to insert ~/.bashrc:
@@ -873,8 +859,7 @@ Screenshot:
 </div>
 
 <div id="outline-container-sec-4-2" class="outline-3">
-<h4 id="sec-4-2">
-<span class="section-number-3">4.2</span> Select a file in git commit</h4>
+<h4 id="sec-4-2">Select a file in git commit</h4>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Code to insert ~/.bashrc:
@@ -901,8 +886,7 @@ Screenshot:
 </div>
 
 <div id="outline-container-sec-5" class="outline-2">
-<h3 id="sec-5">
-<span class="section-number-2">5</span> Summary</h3>
+<h3 id="sec-5">Summary</h3>
 <div class="outline-text-2" id="text-5">
 <p>
 The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
@@ -1135,8 +1119,7 @@ code indentation in Emacs                                          :en:emacs:jav
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">
-<span class="section-number-2">1</span> Problem</h3>
+
 <div class="outline-text-2" id="text-1">
 <p>
 There are two styles when insert curly braces in C like languages.
@@ -1184,8 +1167,7 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
 </div>
 
 <div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">
-<span class="section-number-2">2</span> Solution</h3>
+<h3 id="sec-2">Solution</h3>
 <div class="outline-text-2" id="text-2">
 <p>
 Insert below code into ~/.emacs:
@@ -1216,8 +1198,7 @@ That's it.
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">
-<span class="section-number-2">3</span> Explanation</h3>
+<h3 id="sec-3">Explanation</h3>
 <div class="outline-text-2" id="text-3">
 <p>
 When you press the ENTER key, the function <b>c-indent-line</b> will be called.
@@ -1256,8 +1237,7 @@ And the context <b>func-decl-cont</b> corresponds to:
 </div>
 
 <div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">
-<span class="section-number-2">4</span> Technical details</h3>
+<h3 id="sec-4">Technical details</h3>
 <div class="outline-text-2" id="text-4">
 <p>
 When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
@@ -1585,9 +1565,10 @@ If you are only interested in web page optimization, start from the second secti
 </p>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h3 id="sec-1">Migrate from WordPress to Nikola</h3>
+
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
+
 
 <pre><code class="lang-bash"># you might need need `sudo apt-get install python-gdbm` on Debian
 # install python2 and make sure sqlite is supported
