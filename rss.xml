@@ -1,5 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 12 Oct 2017 13:35:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 30 Oct 2017 11:14:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+As a web developer using modern front end framework like React/Angular, I spend a lot of time to use web components. 
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, a component instance named &lt;code&gt;GenericTable&lt;/code&gt; looks like:
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-html"&gt;&amp;lt;GenericTable
+  onSelectRow={ row =&amp;gt; console.log(row) }
+  numberOfPinnedColumns={2}
+  withToolBar
+  onClickCell={ cell =&amp;gt; console.log(cell) }
+&amp;gt;
+  &amp;lt;PaginationButtons /&amp;gt;
+  &amp;lt;TotalSum /&amp;gt;
+  &amp;lt;ReportButtons /&amp;gt;
+&amp;lt;/GenericTable&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Basically a component instance is a big chunk of html tags.
+&lt;/p&gt;
+
+&lt;p&gt;
+I created a new package &lt;a href="https://github.com/redguardtoo/eacl"&gt;EACL&lt;/a&gt; (Emacs auto complete lines) which could help me &lt;b&gt;input components in unbelievable speed&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+The idea is simple. If I've already used one component elsewhere in the project. It's unnecessary to re-type the similar code again.
+&lt;/p&gt;
+
+&lt;p&gt;
+All I need to do is to input the first characters of the component and run &lt;code&gt;M-x eacl-complete-tag&lt;/code&gt; which will grep the project and input the remaining part of component.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is a demo to input component &lt;code&gt;ButtonToolbar&lt;/code&gt;:
+&lt;/p&gt;
+
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+Please note &lt;code&gt;EACL&lt;/code&gt; is generic and can be use in any programming language. 
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;code&gt;M-x eacl-complete-statement&lt;/code&gt; to &lt;b&gt;complete below javascript code&lt;/b&gt;:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-javascript"&gt;import {
+  Button,
+  Row,
+  Column
+} from 'react-bootstrap';
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+
+&lt;p&gt;
+&lt;code&gt;M-x eacl-complete-snippet&lt;/code&gt; to &lt;b&gt;complete below C code&lt;/b&gt;:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-c"&gt;static int v9fs_drop_inode(struct inode *inode)
+{
+    struct v9fs_session_info *v9ses;
+    v9ses = v9fs_inode2v9ses(inode);
+    if (v9ses-&amp;gt;cache == CACHE_LOOSE || v9ses-&amp;gt;cache == CACHE_FSCACHE)
+        return generic_drop_inode(inode);
+    /*
+     * in case of non cached mode always drop the
+     * the inode because we want the inode attribute
+     * to always match that on the server.
+     */
+    return 1;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+You can also create your own commands based on API &lt;code&gt;eacl-complete-multi-lines-internal&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, it is a piece of cake to support Lisp by creating comand &lt;code&gt;my-complete-lisp&lt;/code&gt;:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'eacl)
+(defun my-complete-lisp ()
+  (interactive)
+  (eacl-complete-multi-lines-internal "[^)]*)"))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Emacs window with certain ratio                                        :en:emacs:
 &lt;/p&gt;
 
@@ -917,53 +1032,4 @@ function p4ml(){
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-quora.com with vanilla javascript                                      :en:javascript:quora:
-&lt;/p&gt;
-
-&lt;p&gt;
-"Smart" &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt; always recommends the stories I hate to see.
-&lt;/p&gt;
-
-&lt;p&gt;
-So here is my way to toggle the stories display on Chrome and Firefox.
-&lt;/p&gt;
-
-&lt;p&gt;
-Step 1, create a new bookmark with below link,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;javascript:a=Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));a.forEach(function(e){e.style.display=a[a.length-1].style.display==='none'?'block':'none';});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Step 2, DONE! You only need click the bookmark to hide or show the stories when visiting &lt;a href="http://quora.com"&gt;http://quora.com&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the original vanilla javascript,
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;var a = Array.from(document.getElementsByClassName("AnswerStoryToggleModal"));
-a.forEach(function (e) {
-    // check 'display' of the last item in story feed before toggling
-    e.style.display = a[a.length - 1].style.display === 'none' ? 'block' : 'none';
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Screenshot:
-&lt;/p&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/purify-quora-nq8.png" alt="purify-quora-nq8.png"&gt;
-&lt;/p&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>javascript</category><category>quora</category><guid>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</guid><pubDate>Sun, 09 Oct 2016 12:15:14 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item></channel></rss>

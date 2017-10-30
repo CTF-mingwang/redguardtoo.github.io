@@ -3,28 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Split Emacs window with certain ratio | Chen's blog</title>
+<title>Auto complete everything in Emacs | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="Split Emacs window with certain ratio">
-<meta property="og:url" content="http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html">
-<meta property="og:description" content="Emacs window with certain ratio                                        :en:emacs:
+<meta property="og:title" content="Auto complete everything in Emacs">
+<meta property="og:url" content="http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html">
+<meta property="og:description" content="As a web developer using modern front end framework like React/Angular, I spend a lot of time to use web components. 
 
 
 
-The idea comes from yangdaweihit. Here is the implementation.
+For example, a component instance named GenericTable looks like:
 
 
 
 
-(defvar my-ratio-dict
-  '((1 . 1.61803398875)
-   ">
+
+&lt;GenericT">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2017-09-05T13:26:55Z">
+<meta property="article:published_time" content="2017-10-30T11:13:30Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
 </head>
@@ -42,16 +41,16 @@ The idea comes from yangdaweihit. Here is the implementation.
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Split Emacs window with certain ratio</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Auto complete everything in Emacs</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2017-09-05T13:26:55+00:00">2017-09-05 13:26</time>
+                <time class="timeago" datetime="2017-10-30T11:13:30+00:00">2017-10-30 11:13</time>
             
 
             
           |  
-        <a href="split-emacs-window-with-certain-ratio.wp" id="sourcelink">Source</a>
+        <a href="auto-complete-everything-in-emacs.wp" id="sourcelink">Source</a>
 
             </div>
             
@@ -65,87 +64,134 @@ The idea comes from yangdaweihit. Here is the implementation.
 
         </div>
         <div class="body">
-            <div>
+            <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
 <p>
-Emacs window with certain ratio                                        :en:emacs:
+As a web developer using modern front end framework like React/Angular, I spend a lot of time to use web components. 
 </p>
 
 <p>
-The idea comes from <a href="https://github.com/redguardtoo/emacs.d/issues/607">yangdaweihit</a>. Here is the implementation.
+For example, a component instance named <code>GenericTable</code> looks like:
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defvar my-ratio-dict
-  '((1 . 1.61803398875)
-    (2 . 2)
-    (3 . 3)
-    (4 . 4)
-    (5 . 0.61803398875))
-  "The ratio dictionary.")
 
-(defun my-split-window-horizontally (&amp;optional ratio)
-  "Split window horizontally and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-horizontally (floor (/ (window-body-width)
-                                           (1+ ratio-val)))))
-     (t
-      (split-window-horizontally)))
-    (set-window-buffer (next-window) (other-buffer))
-    (if (or (not ratio-val)
-            (&gt;= ratio-val 1))
-        (windmove-right))))
-
-(defun my-split-window-vertically (&amp;optional ratio)
-  "Split window vertically and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-vertically (floor (/ (window-body-height)
-                                         (1+ ratio-val)))))
-     (t
-      (split-window-vertically)))
-    ;; open another window with other-buffer
-    (set-window-buffer (next-window) (other-buffer))
-    ;; move focus if new window bigger than current one
-    (if (or (not ratio-val)
-            (&gt;= ratio-val 1))
-        (windmove-down))))
-
-(global-set-key (kbd "C-x 2") 'my-split-window-vertically)
-(global-set-key (kbd "C-x 3") 'my-split-window-horizontally)
+<pre><code class="lang-html">&lt;GenericTable
+  onSelectRow={ row =&gt; console.log(row) }
+  numberOfPinnedColumns={2}
+  withToolBar
+  onClickCell={ cell =&gt; console.log(cell) }
+&gt;
+  &lt;PaginationButtons /&gt;
+  &lt;TotalSum /&gt;
+  &lt;ReportButtons /&gt;
+&lt;/GenericTable&gt;
 </code></pre>
 
 </div>
 
 <p>
-Usage is simple. For example, <code>C-x 2</code> is similar to original <code>split-winddow-vertically</code> while <code>C-u 1 C-x 2</code> split the window in golden ratio.
+Basically a component instance is a big chunk of html tags.
 </p>
+
+<p>
+I created a new package <a href="https://github.com/redguardtoo/eacl">EACL</a> (Emacs auto complete lines) which could help me <b>input components in unbelievable speed</b>.
+</p>
+
+<p>
+The idea is simple. If I've already used one component elsewhere in the project. It's unnecessary to re-type the similar code again.
+</p>
+
+<p>
+All I need to do is to input the first characters of the component and run <code>M-x eacl-complete-tag</code> which will grep the project and input the remaining part of component.
+</p>
+
+<p>
+Here is a demo to input component <code>ButtonToolbar</code>:
+</p>
+
+
+<div class="figure">
+<p><img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"></p>
+</div>
+
+<p>
+Please note <code>EACL</code> is generic and can be use in any programming language. 
+</p>
+
+<p>
+<code>M-x eacl-complete-statement</code> to <b>complete below javascript code</b>:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-javascript">import {
+  Button,
+  Row,
+  Column
+} from 'react-bootstrap';
+</code></pre>
+
+</div>
+
+
+<p>
+<code>M-x eacl-complete-snippet</code> to <b>complete below C code</b>:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">static int v9fs_drop_inode(struct inode *inode)
+{
+    struct v9fs_session_info *v9ses;
+    v9ses = v9fs_inode2v9ses(inode);
+    if (v9ses-&gt;cache == CACHE_LOOSE || v9ses-&gt;cache == CACHE_FSCACHE)
+        return generic_drop_inode(inode);
+    /*
+     * in case of non cached mode always drop the
+     * the inode because we want the inode attribute
+     * to always match that on the server.
+     */
+    return 1;
+}
+</code></pre>
+
+</div>
+
+<p>
+You can also create your own commands based on API <code>eacl-complete-multi-lines-internal</code>.
+</p>
+
+<p>
+For example, it is a piece of cake to support Lisp by creating comand <code>my-complete-lisp</code>:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(require 'eacl)
+(defun my-complete-lisp ()
+  (interactive)
+  (eacl-complete-multi-lines-internal "[^)]*)"))
+</code></pre>
+
+</div>
+</div>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="enhance-diff-mode-with-ivy.html" rel="prev" title="Enhance diff-mode with Ivy">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="auto-complete-everything-in-emacs.html" rel="next" title="Auto complete everything in Emacs">Next post</a>
+                <a href="split-emacs-window-with-certain-ratio.html" rel="prev" title="Split Emacs window with certain ratio">Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html",
-        disqus_title="Split Emacs window with certain ratio",
-        disqus_identifier="cache/posts/split-emacs-window-with-certain-ratio.html",
+            disqus_url="http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html",
+        disqus_title="Auto complete everything in Emacs",
+        disqus_identifier="cache/posts/auto-complete-everything-in-emacs.html",
         disqus_config = function () {
             this.language = "en";
         };
