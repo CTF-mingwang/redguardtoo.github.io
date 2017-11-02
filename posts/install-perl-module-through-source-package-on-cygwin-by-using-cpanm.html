@@ -11,15 +11,15 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Install perl module through source package on cygwin by using cpanm">
 <meta property="og:url" content="http://blog.binchen.org/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">
-<meta property="og:description" content="I failed to install package &quot;Template&quot; by running `cpanm Template'.
+<meta property="og:description" content="perl module through source package on cygwin by using cpanm           :cpanm:cpan:perl:module:install:en:
 
 
 
-It's because the binary package requires gcc4 while on my cygwin only gcc3 available.
+I failed to install package &quot;Template&quot; by running `cpanm Template'.
 
 
 
-So I install it from source package (wit">
+It's because the bin">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-07-17T23:22:00Z">
 <meta property="article:tag" content="cpan">
@@ -70,9 +70,11 @@ So I install it from source package (wit">
 
         </div>
         <div class="body">
-            <div id="outline-container-sec-1" class="outline-2">
+            <div>
+<p>
+perl module through source package on cygwin by using cpanm           :cpanm:cpan:perl:module:install:en:
+</p>
 
-<div class="outline-text-2" id="text-1">
 <p>
 I failed to install package "Template" by running `cpanm Template'.
 </p>
@@ -84,8 +86,8 @@ It's because the binary package requires gcc4 while on my cygwin only gcc3 avail
 <p>
 So I install it from source package (with some hack, of course),
 </p>
-<div class="org-src-container">
 
+<div class="org-src-container">
 
 <pre><code class="lang-sh">cpanm --look Template # Download and unpack the distribution and then open the directory with your shellI
 cpanm . #install from local directory
@@ -95,7 +97,6 @@ cpanm . #install from local directory
 
 <p>
 Updated: The simpler solution is to install gcc4 at cygwin.</p>
-</div>
 </div>
         </div>
         

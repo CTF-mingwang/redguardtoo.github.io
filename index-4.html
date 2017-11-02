@@ -47,9 +47,10 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+                <div>
+<p>
+:zh:emacs:ruby:
+</p>
 
 <p>
 原文(英文版本)见<a href="http://www.slideshare.net/yukihiro_matz/how-emacs-changed-my-life">这里</a>.
@@ -58,37 +59,43 @@
 <p>
 以下是我的翻译兼一些背景资料:
 </p>
+
+<div id="outline-container-sec-1" class="outline-2">
+
 </div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h4 id="sec-1-1">1980年,我开始编程.</h4>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Basic,400 steps (此句不知如何翻译)</h3>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h4 id="sec-1-2">Basic,400 steps (此句不知如何翻译)</h4>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">1988年,我遇到了Emacs,在学校的Sun-3上,和200多个学生共用.</h3>
 </div>
-<div id="outline-container-sec-1-3" class="outline-3">
-<h4 id="sec-1-3">1988年,我遇到了Emacs,在学校的Sun-3上,和200多个学生共用.</h4>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">Emacs实际上是被禁止使用的,因为消耗太多内存.所以我只是尝试了一下.</h3>
 </div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h4 id="sec-1-4">Emacs实际上是被禁止使用的,因为消耗太多内存.所以我只是尝试了一下.</h4>
+
+<div id="outline-container-sec-5" class="outline-2">
+<h3 id="sec-5">我可以自由下载Emacs并阅读其源代码.</h3>
 </div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h4 id="sec-1-5">我可以自由下载Emacs并阅读其源代码.</h4>
+
+<div id="outline-container-sec-6" class="outline-2">
+<h3 id="sec-6">Emacs是我的第一个Lisp解释器.</h3>
 </div>
-<div id="outline-container-sec-1-6" class="outline-3">
-<h4 id="sec-1-6">Emacs是我的第一个Lisp解释器.</h4>
+
+<div id="outline-container-sec-7" class="outline-2">
+<h3 id="sec-7">从Emacs我学到了很多关于语言实现的知识.</h3>
 </div>
-<div id="outline-container-sec-1-7" class="outline-3">
-<h4 id="sec-1-7">从Emacs我学到了很多关于语言实现的知识.</h4>
-</div>
-<div id="outline-container-sec-1-8" class="outline-3">
-<h4 id="sec-1-8">例如,emacs的整数实现(Embedding integer in pointers)</h4>
-<div class="outline-text-3" id="text-1-8">
+
+<div id="outline-container-sec-8" class="outline-2">
+<h3 id="sec-8">例如,emacs的整数实现(Embedding integer in pointers)</h3>
+<div class="outline-text-2" id="text-8">
 <p>
 参考Lisp_Object定义,在Emacs源代码的lisp.h中,Lisp_Object是一个既可以作为指针使用又可以作为整数使用的类型
 具体代码见下,注意Lisp_Int为0,使得非负整数可以直接转换为对应的List_Object类型:
 </p>
 <div class="org-src-container">
-
 
 <pre><code class="lang-c">#define VALBITS 29
 #define GCTYPEBITS 3
@@ -142,85 +149,108 @@ Lisp_OLisp_Stringbject;
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-9" class="outline-3">
-<h4 id="sec-1-9">又例如Emacs的内存自动回收机制(Mark and sweep garbage collection)</h4>
-<div class="outline-text-3" id="text-1-9">
+
+<div id="outline-container-sec-9" class="outline-2">
+<h3 id="sec-9">又例如Emacs的内存自动回收机制(Mark and sweep garbage collection)</h3>
+<div class="outline-text-2" id="text-9">
 <p>
 具体细节参考<a href="http://lists.gnu.org/archive/html/emacs-devel/2011-10/msg01289.html">这里</a>的讨论.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-10" class="outline-3">
-<h4 id="sec-1-10">C和Lisp的Calling conventions(不好翻,基本上就是函数如何调用,函数参数的内存模型之类…)</h4>
+
+<div id="outline-container-sec-10" class="outline-2">
+<h3 id="sec-10">C和Lisp的Calling conventions(不好翻,基本上就是函数如何调用,函数参数的内存模型之类…)</h3>
 </div>
-<div id="outline-container-sec-1-11" class="outline-3">
-<h4 id="sec-1-11">我完全理解Lisp怎么工作的</h4>
+
+<div id="outline-container-sec-11" class="outline-2">
+<h3 id="sec-11">我完全理解Lisp怎么工作的</h3>
 </div>
-<div id="outline-container-sec-1-12" class="outline-3">
-<h4 id="sec-1-12">我被Lisp Objects迷住了</h4>
+
+<div id="outline-container-sec-12" class="outline-2">
+<h3 id="sec-12">我被Lisp Objects迷住了</h3>
 </div>
-<div id="outline-container-sec-1-13" class="outline-3">
-<h4 id="sec-1-13">当我得到Sparc工作站时我开始使用Emacs</h4>
+
+<div id="outline-container-sec-13" class="outline-2">
+<h3 id="sec-13">当我得到Sparc工作站时我开始使用Emacs</h3>
 </div>
-<div id="outline-container-sec-1-14" class="outline-3">
-<h4 id="sec-1-14">我完全被迷住了,Emacs成为我的一部分</h4>
+
+<div id="outline-container-sec-14" class="outline-2">
+<h3 id="sec-14">我完全被迷住了,Emacs成为我的一部分</h3>
 </div>
-<div id="outline-container-sec-1-15" class="outline-3">
-<h4 id="sec-1-15">而且Emacs任何我不喜欢的部分我都可以改,Emacs完全可配置.</h4>
+
+<div id="outline-container-sec-15" class="outline-2">
+<h3 id="sec-15">而且Emacs任何我不喜欢的部分我都可以改,Emacs完全可配置.</h3>
 </div>
-<div id="outline-container-sec-1-16" class="outline-3">
-<h4 id="sec-1-16">Emacs使我明白了任何东西都可以被程序员改变</h4>
+
+<div id="outline-container-sec-16" class="outline-2">
+<h3 id="sec-16">Emacs使我明白了任何东西都可以被程序员改变</h3>
 </div>
-<div id="outline-container-sec-1-17" class="outline-3">
-<h4 id="sec-1-17">完全的自由</h4>
+
+<div id="outline-container-sec-17" class="outline-2">
+<h3 id="sec-17">完全的自由</h3>
 </div>
-<div id="outline-container-sec-1-18" class="outline-3">
-<h4 id="sec-1-18">编辑时可以无视键位设置</h4>
+
+<div id="outline-container-sec-18" class="outline-2">
+<h3 id="sec-18">编辑时可以无视键位设置</h3>
 </div>
-<div id="outline-container-sec-1-19" class="outline-3">
-<h4 id="sec-1-19">我想用Emacs做所有的事,编程,文档,邮件…</h4>
+
+<div id="outline-container-sec-19" class="outline-2">
+<h3 id="sec-19">我想用Emacs做所有的事,编程,文档,邮件…</h3>
 </div>
-<div id="outline-container-sec-1-20" class="outline-3">
-<h4 id="sec-1-20">所以我写了"cmail",我的第一个严肃的Lisp程序,我每天用它</h4>
+
+<div id="outline-container-sec-20" class="outline-2">
+<h3 id="sec-20">所以我写了"cmail",我的第一个严肃的Lisp程序,我每天用它</h3>
 </div>
-<div id="outline-container-sec-1-21" class="outline-3">
-<h4 id="sec-1-21">1993年,我开始搞我的Ruby</h4>
+
+<div id="outline-container-sec-21" class="outline-2">
+<h3 id="sec-21">1993年,我开始搞我的Ruby</h3>
 </div>
-<div id="outline-container-sec-1-22" class="outline-3">
-<h4 id="sec-1-22">Ruby的设计受到Emacs实现的影响,例如整数和tagged pointer合用,相似的GC,和Lisp类似的Object Model</h4>
-<div class="outline-text-3" id="text-1-22">
+
+<div id="outline-container-sec-22" class="outline-2">
+<h3 id="sec-22">Ruby的设计受到Emacs实现的影响,例如整数和tagged pointer合用,相似的GC,和Lisp类似的Object Model</h3>
+<div class="outline-text-2" id="text-22">
 <p>
 tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数据类型,低地址的29bit用作指针或者整数(取决于数据类型)
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-23" class="outline-3">
-<h4 id="sec-1-23">接下来我把Smalltalk的OO系统加上去</h4>
+
+<div id="outline-container-sec-23" class="outline-2">
+<h3 id="sec-23">接下来我把Smalltalk的OO系统加上去</h3>
 </div>
-<div id="outline-container-sec-1-24" class="outline-3">
-<h4 id="sec-1-24">语法我用Algol/Ada/Eiffel</h4>
+
+<div id="outline-container-sec-24" class="outline-2">
+<h3 id="sec-24">语法我用Algol/Ada/Eiffel</h3>
 </div>
-<div id="outline-container-sec-1-25" class="outline-3">
-<h4 id="sec-1-25">但是我是Emacs狂,所以在Emacs中支持auto-indent是必须的</h4>
+
+<div id="outline-container-sec-25" class="outline-2">
+<h3 id="sec-25">但是我是Emacs狂,所以在Emacs中支持auto-indent是必须的</h3>
 </div>
-<div id="outline-container-sec-1-26" class="outline-3">
-<h4 id="sec-1-26">在1993年,类似的语法要支持auto-indent很难</h4>
+
+<div id="outline-container-sec-26" class="outline-2">
+<h3 id="sec-26">在1993年,类似的语法要支持auto-indent很难</h3>
 </div>
-<div id="outline-container-sec-1-27" class="outline-3">
-<h4 id="sec-1-27">所以我就写了自己的ruby-mode.el,试图用elisp和正则表达式(regex)解决这个问题.</h4>
+
+<div id="outline-container-sec-27" class="outline-2">
+<h3 id="sec-27">所以我就写了自己的ruby-mode.el,试图用elisp和正则表达式(regex)解决这个问题.</h3>
 </div>
-<div id="outline-container-sec-1-28" class="outline-3">
-<h4 id="sec-1-28">一个礼拜后,我在给Ruby加上end关键字后终于成功了</h4>
+
+<div id="outline-container-sec-28" class="outline-2">
+<h3 id="sec-28">一个礼拜后,我在给Ruby加上end关键字后终于成功了</h3>
 </div>
-<div id="outline-container-sec-1-29" class="outline-3">
-<h4 id="sec-1-29">如果我不能让我的emacs下的ruby-mode成功,那么Ruby的语法会更像C</h4>
+
+<div id="outline-container-sec-29" class="outline-2">
+<h3 id="sec-29">如果我不能让我的emacs下的ruby-mode成功,那么Ruby的语法会更像C</h3>
 </div>
-<div id="outline-container-sec-1-30" class="outline-3">
-<h4 id="sec-1-30">这样就和其他脚本语言差不多,Ruby也不会那么受欢迎</h4>
+
+<div id="outline-container-sec-30" class="outline-2">
+<h3 id="sec-30">这样就和其他脚本语言差不多,Ruby也不会那么受欢迎</h3>
 </div>
-<div id="outline-container-sec-1-31" class="outline-3">
-<h4 id="sec-1-31">小结</h4>
-<div class="outline-text-3" id="text-1-31">
+
+<div id="outline-container-sec-31" class="outline-2">
+<h3 id="sec-31">小结</h3>
+<div class="outline-text-2" id="text-31">
 <ul class="org-ul">
 <li>Emacs教我什么是软件自由(freedom for software)
 </li>
@@ -280,7 +310,7 @@ tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/fasd-make-me-10x-more-produtive-under-shell.html">=fasd= make me 10x more productive under shell</a></h1>
+            <h1 class="title"><a href="posts/fasd-make-me-10x-more-produtive-under-shell.html">fasd make me 10x more productive under shell</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2012-03-14T12:28:00+00:00">2012-03-14 12:28</time>
@@ -298,15 +328,15 @@ tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数
         Tags : 
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/productivity.html" rel="tag">productivity</a></li>
-           <li><a class="tag p-category" href="categories/shell.html" rel="tag">shell</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+                <div>
+<p>
+make me 10x more productive under shell                                  :productivity:en:
+</p>
 
 <p>
 My workflow with <a href="https://github.com/clvv/fasd">fasd.</a>
@@ -315,6 +345,7 @@ My workflow with <a href="https://github.com/clvv/fasd">fasd.</a>
 <p>
 Quick visit my work folder named "NeonSite":
 </p>
+
 <pre class="example">
 $ z neon
 4       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
@@ -322,6 +353,7 @@ $ z neon
 2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
 1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
 </pre>
+
 <p>
 I press <code>1</code> and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh?
 </p>
@@ -338,9 +370,10 @@ $ cp ~/hello.c `s neon`
 2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
 1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
 </pre>
+
 <p>
-I press <code>1</code> and <code>hello.c</code> is copied into the corresponding folder.</p>
-</div>
+I press <code>1</code> and <code>hello.c</code> is copied into the corresponding folder.
+</p>
 </div>
             </div>
         </div>

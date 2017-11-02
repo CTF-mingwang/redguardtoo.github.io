@@ -11,12 +11,16 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Perforce Tip: how to apply my default change to the release branch">
 <meta property="og:url" content="http://blog.binchen.org/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html">
-<meta property="og:description" content="Reasons I need this hack
+<meta property="og:description" content="Tip: how to apply my default change to the release branch :en:linux:scm:perforce:
+
+
+
+
 
 
 Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash \.
 
-My p4 CLI program is from Windows installer because Cygwin version has t">
+My p4 CLI p">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2011-06-24T21:15:00Z">
 <meta property="article:tag" content="en">
@@ -63,13 +67,14 @@ My p4 CLI program is from Windows installer because Cygwin version has t">
 
         </div>
         <div class="body">
-            <div id="outline-container-sec-1" class="outline-2">
+            <div>
+<p>
+Tip: how to apply my default change to the release branch :en:linux:scm:perforce:
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h4 id="sec-1-1">Reasons I need this hack</h4>
-<div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash <code>\</code>.
 </li>
@@ -80,14 +85,14 @@ My p4 CLI program is from Windows installer because Cygwin version has t">
 </ul>
 </div>
 </div>
-<div id="outline-container-sec-1-2" class="outline-3">
-<h4 id="sec-1-2">How to?</h4>
-<div class="outline-text-3" id="text-1-2">
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">How to?</h3>
+<div class="outline-text-2" id="text-2">
 <p>
 Create the patch,
 </p>
 <div class="org-src-container">
-
 
 <pre><code class="lang-sh">p4 diff -du -db main-branch/... &gt; ~/mywork.patch
 </code></pre>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about selection)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/selection.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 13:32:17 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Navigate/Select html tags in Emacs</title><link>http://blog.binchen.org/posts/navigateselect-html-tags-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-
-&lt;div class="outline-text-2" id="text-1"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about selection)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/selection.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:05:54 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Navigate/Select html tags in Emacs</title><link>http://blog.binchen.org/posts/navigateselect-html-tags-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+html tags in Emacs                                            :en:html:tag:selection:matchit:
+&lt;/p&gt;
 
 &lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-11-03 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
@@ -31,8 +31,8 @@ Screen cast:
 &lt;p&gt;
 Here is the code to insert it into your &lt;code&gt;~/.emacs&lt;/code&gt;:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; make sp-select-next-thing works even the cusor is in the open/close tag
 ;; like matchit in vim
@@ -99,8 +99,8 @@ Navigation is easy. After selecting the tags, press &lt;code&gt;C-x C-x&lt;/code
 &lt;p&gt;
 For evil-mode, I write some code which simulate the famous &lt;b&gt;matchit&lt;/b&gt; in vi:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'evil)
 
@@ -128,6 +128,7 @@ Now you can press &lt;code&gt;%&lt;/code&gt; in evil to jump between tags!
 &lt;p&gt;
 Requirement:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;smartparens-1.5
 &lt;/li&gt;
@@ -153,6 +154,4 @@ I started a new project &lt;a href="https://github.com/redguardtoo/evil-matchit"
 &lt;p&gt;
 UPDATED (13rd Jan, 2014):
 &lt;a href="https://github.com/redguardtoo/evil-matchit"&gt;evil-matchit&lt;/a&gt; is now powerful enough to replace my old tricks.
-&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>en</category><category>html</category><category>matchit</category><category>selection</category><category>tag</category><guid>http://blog.binchen.org/posts/navigateselect-html-tags-in-emacs.html</guid><pubDate>Thu, 22 Aug 2013 00:05:00 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>en</category><category>html</category><category>matchit</category><category>selection</category><category>tag</category><guid>http://blog.binchen.org/posts/navigateselect-html-tags-in-emacs.html</guid><pubDate>Thu, 22 Aug 2013 00:05:00 GMT</pubDate></item></channel></rss>

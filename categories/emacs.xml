@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 13:45:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:05:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+complete everything in Emacs                                             :en:emacs:
+&lt;/p&gt;
 
-&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 As a web developer using modern front end framework like React/Angular, I spend a lot of time on web components. 
 &lt;/p&gt;
@@ -9,8 +10,8 @@ As a web developer using modern front end framework like React/Angular, I spend 
 &lt;p&gt;
 A component instance is like:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;&amp;lt;GenericTable
   onSelectRow={ row =&amp;gt; console.log(row) }
@@ -46,7 +47,6 @@ All I need to do is to input the first characters of the component and run &lt;c
 Here is a demo to input component &lt;code&gt;ButtonToolbar&lt;/code&gt;:
 &lt;/p&gt;
 
-
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"&gt;
 &lt;/p&gt;
@@ -59,8 +59,8 @@ Please note &lt;code&gt;EACL&lt;/code&gt; is generic and can be use in any progr
 &lt;p&gt;
 &lt;code&gt;M-x eacl-complete-statement&lt;/code&gt; to &lt;b&gt;complete below Javascript code&lt;/b&gt;:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;import {
   Button,
@@ -71,12 +71,11 @@ Please note &lt;code&gt;EACL&lt;/code&gt; is generic and can be use in any progr
 
 &lt;/div&gt;
 
-
 &lt;p&gt;
 &lt;code&gt;M-x eacl-complete-snippet&lt;/code&gt; to &lt;b&gt;complete below C code&lt;/b&gt;:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;static int v9fs_drop_inode(struct inode *inode)
 {
@@ -102,8 +101,8 @@ You can also create your own commands based on API &lt;code&gt;eacl-complete-mul
 &lt;p&gt;
 For example, it is a piece of cake to support Lisp by creating comand &lt;code&gt;my-complete-lisp&lt;/code&gt;:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'eacl)
 (defun my-complete-lisp ()
@@ -111,9 +110,7 @@ For example, it is a piece of cake to support Lisp by creating comand &lt;code&g
   (eacl-complete-multi-lines-internal "[^)]*)"))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Emacs window with certain ratio                                        :en:emacs:
 &lt;/p&gt;
 

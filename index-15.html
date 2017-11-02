@@ -515,15 +515,16 @@ sudo ls -1 /etc/{rc,init}.d/|grep local
 
             </div>
             <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+                <div>
+<p>
+grub2 configuration                                                        :grub:linux:en:
+</p>
 
 <p>
 Content of <code>/etc/grub.d/11_windows</code>,
 </p>
-<div class="org-src-container">
 
+<div class="org-src-container">
 
 <pre><code class="lang-conf">#!/bin/sh -e
 echo "#        Adding Windows GRUB 2 menu"
@@ -543,8 +544,8 @@ EOF
 <p>
 /etc/default/grub
 </p>
-<div class="org-src-container">
 
+<div class="org-src-container">
 
 <pre><code class="lang-conf"># Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
@@ -597,7 +598,6 @@ GRUB_CMDLINE_LINUX="libata.dma=1"
 
 </div>
 </div>
-</div>
             </div>
         </div>
         <div class="post">
@@ -628,9 +628,10 @@ GRUB_CMDLINE_LINUX="libata.dma=1"
 
             </div>
             <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+                <div>
+<p>
+Emacs is better editor - a case study for javascript developer            :en:emacs:web:html:javascript:js2:
+</p>
 
 <p>
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-01-15 Wed&gt;</span></span>
@@ -639,10 +640,10 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-01-15 
 <p>
 Let's see an example in real life development.
 </p>
-</div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h4 id="sec-1-1">Note</h4>
-<div class="outline-text-3" id="text-1-1">
+
+<div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
 <p>
 For people who does not get the key points of this article, here are the points:
 </p>
@@ -657,9 +658,9 @@ For people who does not get the key points of this article, here are the points:
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h4 id="sec-1-2">Problem</h4>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Problem</h3>
+<div class="outline-text-2" id="text-2">
 <p>
 I'm maintaining a big javascript file with thousands of lines of legacy code.
 </p>
@@ -714,9 +715,9 @@ Most editors like Sublime Text 3 cannot display the javascript functions with me
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h4 id="sec-1-3">Solution</h4>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">Solution</h3>
+<div class="outline-text-2" id="text-3">
 <p>
 Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>.
 </p>
@@ -820,9 +821,9 @@ The screen shot after we applying the above patch:
 </div>
 </div>
 
-<div id="outline-container-sec-1-4" class="outline-3">
-<h4 id="sec-1-4">Summary</h4>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">Summary</h3>
+<div class="outline-text-2" id="text-4">
 <p>
 That's an example of beauty of Emacs.
 </p>
@@ -832,9 +833,10 @@ It gives you freedom and power. You can base your work on the top geeks like Ste
 </p>
 </div>
 </div>
-<div id="outline-container-sec-1-5" class="outline-3">
-<h4 id="sec-1-5">Update</h4>
-<div class="outline-text-3" id="text-1-5">
+
+<div id="outline-container-sec-5" class="outline-2">
+<h3 id="sec-5">Update</h3>
+<div class="outline-text-2" id="text-5">
 <p>
 My patch is incorporated into <code>js2-mode</code> since version <code>20140114</code>.
 </p>

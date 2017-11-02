@@ -11,19 +11,18 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-configure-yasnippet-0-7-0-and-use-it-with-auto-complete-mode.html">
-<meta property="og:description" content="I will only talk about how to set up yasnippet 0.7.0 or higher version.
+<meta property="og:description" content="to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode           :en:yasnippet:emacs:autocomplete:
+
+
+
+I will only talk about how to set up yasnippet 0.7.0 or higher version.
 
 
 
 
-If you follow `normal install` way, setup is simple
 
 
-See its official documentation.
-
-
-
-Install the yasnippet into somewher">
+See its off">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-06-19T21:40:00Z">
 <meta property="article:tag" content="autocomplete">
@@ -70,17 +69,18 @@ Install the yasnippet into somewher">
 
         </div>
         <div class="body">
-            <div id="outline-container-sec-1" class="outline-2">
+            <div>
+<p>
+to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode           :en:yasnippet:emacs:autocomplete:
+</p>
 
-<div class="outline-text-2" id="text-1">
 <p>
 I will only talk about how to set up yasnippet 0.7.0 or higher version.
 </p>
-</div>
 
-<div id="outline-container-sec-1-1" class="outline-3">
-<h4 id="sec-1-1">If you follow `normal install` way, setup is simple</h4>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
 <p>
 See its <a href="http://capitaomorte.github.com/yasnippet/">official documentation</a>.
 </p>
@@ -102,14 +102,13 @@ Install the yasnippet into somewhere and add following code into your .emacs:
 </div>
 </div>
 
-<div id="outline-container-sec-1-2" class="outline-3">
-<h4 id="sec-1-2">If you use elpa package system, setup is even simpler</h4>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">If you use elpa package system, setup is even simpler</h3>
+<div class="outline-text-2" id="text-2">
 <p>
 After installation, you only need two lines in .emacs.
 </p>
 <div class="org-src-container">
-
 
 <pre><code class="lang-lisp">(require 'yasnippet)
 (yas/initialize)
@@ -127,16 +126,16 @@ So you only put your own snippets in "~/.emacs.d/snippets" and done. No need to 
 </div>
 </div>
 
-<div id="outline-container-sec-1-3" class="outline-3">
-<h4 id="sec-1-3">The real world setup is NOT simple</h4>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">The real world setup is NOT simple</h3>
+<div class="outline-text-2" id="text-3">
 <p>
 I will explain the reasons at first and give my complete yasnippet configuration code at the end of the this post.
 </p>
 </div>
-<div id="outline-container-sec-1-3-1" class="outline-4">
-<h5 id="sec-1-3-1">Two snippets may share the same key, so I need activate `yas/dropdown-prompt'</h5>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-sec-3-1" class="outline-3">
+<h4 id="sec-3-1">Two snippets may share the same key, so I need activate `yas/dropdown-prompt'</h4>
+<div class="outline-text-3" id="text-3-1">
 <p>
 One issue is I need a user-friendly dropdown window popped up when the key I input has several candidates. For example, when I type "inc" in C code. There are two candidates `#include "…"' and `#include &lt;…&gt;' available. A handy dropdown popup will help me to choose one of them as efficient as possible.
 </p>
@@ -151,18 +150,18 @@ The bad news is for some strange reason yasnippet won't load that dropdown-list 
 </div>
 </div>
 
-<div id="outline-container-sec-1-3-2" class="outline-4">
-<h5 id="sec-1-3-2">`yas/dropdown-prompt' is not perfect</h5>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h4 id="sec-3-2">`yas/dropdown-prompt' is not perfect</h4>
+<div class="outline-text-3" id="text-3-2">
 <p>
 I cannot scroll down the dropdown window when there are more candidates it can display. That's especially annoying when calling `yas/insert-snippet'. In this case, we need use `yas/completing-prompt' instead. I will show the fix at the end of this article.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-1-3-3" class="outline-4">
-<h5 id="sec-1-3-3">Yasnippet conflicts with other plugins</h5>
-<div class="outline-text-4" id="text-1-3-3">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h4 id="sec-3-3">Yasnippet conflicts with other plugins</h4>
+<div class="outline-text-3" id="text-3-3">
 <p>
 I use <a href="http://cx4a.org/software/auto-complete/">Auto Complete Mode</a> (version 20120327 in elpa).  There are two issues when using it with yasnippet.
 </p>
@@ -186,11 +185,11 @@ curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2f
 </div>
 </div>
 </div>
-<div id="outline-container-sec-1-4" class="outline-3">
-<h4 id="sec-1-4">My final yasnippet setup</h4>
-<div class="outline-text-3" id="text-1-4">
-<div class="org-src-container">
 
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">My final yasnippet setup</h3>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'yasnippet)
 (yas/initialize)
