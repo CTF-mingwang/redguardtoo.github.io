@@ -1,61 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about cue)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cue.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Install necessary CLI tools&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     &lt;pre class="src src-sh"&gt;sudo emerge media-sound/shntool
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about cue)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cue.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:54:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h4 id="sec-1-1"&gt;Install CLI tools&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;# mac to support ape
+sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shntool
 sudo emerge cuetools
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Download the script&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;See &lt;a href="https://bbs.archlinux.org/viewtopic.php?id=58766"&gt;https://bbs.archlinux.org/viewtopic.php?id=58766&lt;/a&gt; for the source of bash script. &lt;/p&gt; &lt;p&gt; Here is the full content of the bash script: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;#&lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;!/bin/&lt;/span&gt;&lt;span style="color: #b9ca4a;"&gt;bash&lt;/span&gt;
-&lt;p&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;split image file (flac, ape, wav, etc.) according to cue-file&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #b9ca4a;"&gt;if&lt;/span&gt; [ -f &lt;span style="color: #70c0b1;"&gt;"$1"&lt;/span&gt; ]; &lt;span style="color: #b9ca4a;"&gt;then&lt;/span&gt;
-    &lt;span style="color: #e7c547;"&gt;i&lt;/span&gt;=0
-    &lt;span style="color: #b9ca4a;"&gt;for&lt;/span&gt; cuefile&lt;span style="color: #b9ca4a;"&gt; in&lt;/span&gt; &lt;em&gt;.cue; &lt;span style="color: #b9ca4a;"&gt;do&lt;/span&gt;
-        &lt;span style="color: #e7c547;"&gt;i&lt;/span&gt;=$(($&lt;span style="color: #e7c547;"&gt;i&lt;/span&gt; + 1))
-    &lt;span style="color: #b9ca4a;"&gt;done&lt;/span&gt;
-    &lt;span style="color: #b9ca4a;"&gt;if&lt;/span&gt; [ $&lt;span style="color: #e7c547;"&gt;i&lt;/span&gt; -eq 1 ]; &lt;span style="color: #b9ca4a;"&gt;then&lt;/span&gt;
-        &lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;precies 1 cuesheet gevonden&lt;/span&gt;
-        &lt;span style="color: #b9ca4a;"&gt;if&lt;/span&gt; grep -q &lt;span style="color: #70c0b1;"&gt;"INDEX 01 00:00:00"&lt;/span&gt; &lt;/em&gt;.cue ; &lt;span style="color: #b9ca4a;"&gt;then&lt;/span&gt;
-            nice shntool split -t &lt;span style="color: #70c0b1;"&gt;"%n %t"&lt;/span&gt; -f &lt;em&gt;.cue &lt;span style="color: #70c0b1;"&gt;"$1"&lt;/span&gt;
-        &lt;span style="color: #b9ca4a;"&gt;else&lt;/span&gt;
-            &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"The first track has a pre-gap. Shntool will cut that off and put it in a seperate file."&lt;/span&gt;
-            &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"You don't want that. Please modify the cuesheet from:"&lt;/span&gt;
-            grep -m1 &lt;span style="color: #70c0b1;"&gt;"INDEX 00"&lt;/span&gt; &lt;/em&gt;.cue
-            grep -m1 &lt;span style="color: #70c0b1;"&gt;"INDEX 01"&lt;/span&gt; *.cue
-            &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"to:"&lt;/span&gt;
-            &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"    INDEX 01 00:00:00"&lt;/span&gt;
-            &lt;span style="color: #b9ca4a;"&gt;exit&lt;/span&gt; 1
-        &lt;span style="color: #b9ca4a;"&gt;fi&lt;/span&gt;
-    &lt;span style="color: #b9ca4a;"&gt;elif&lt;/span&gt; [ $&lt;span style="color: #e7c547;"&gt;i&lt;/span&gt; -eq 0 ]; &lt;span style="color: #b9ca4a;"&gt;then&lt;/span&gt;
-        &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"No cuesheet found in the current directory."&lt;/span&gt;
-        &lt;span style="color: #b9ca4a;"&gt;exit&lt;/span&gt; 1
-    &lt;span style="color: #b9ca4a;"&gt;elif&lt;/span&gt; [ $&lt;span style="color: #e7c547;"&gt;i&lt;/span&gt; -gt 1 ]; &lt;span style="color: #b9ca4a;"&gt;then&lt;/span&gt;
-        &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"$i cuesheets found in the current directory. Please remove the superfluous cuesheets."&lt;/span&gt;
-        &lt;span style="color: #b9ca4a;"&gt;exit&lt;/span&gt; 1
-    &lt;span style="color: #b9ca4a;"&gt;fi&lt;/span&gt;
-&lt;span style="color: #b9ca4a;"&gt;else&lt;/span&gt;
-    &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"Split image file (flac, ape, wav, etc.) according to cue-file."&lt;/span&gt;
-    &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"Output files are in FLAC."&lt;/span&gt;
-    &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"Usage: &lt;code&gt;basename $0&lt;/code&gt; &amp;lt;image-file&amp;gt;"&lt;/span&gt;
-    &lt;span style="color: #b9ca4a;"&gt;exit&lt;/span&gt; 1
-&lt;span style="color: #b9ca4a;"&gt;fi&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #e7c547;"&gt;album&lt;/span&gt;=&lt;span style="color: #c397d8;"&gt;&lt;code&gt;grep -m 1 TITLE *.cue | cut -d\" -f2&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #e7c547;"&gt;artist&lt;/span&gt;=&lt;span style="color: #c397d8;"&gt;&lt;code&gt;grep -m 1 PERFORMER *.cue | cut -d\" -f2&lt;/code&gt;&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #b9ca4a;"&gt;for&lt;/span&gt; file&lt;span style="color: #b9ca4a;"&gt; in&lt;/span&gt; [0-9]*.wav; &lt;span style="color: #b9ca4a;"&gt;do&lt;/span&gt;
-    &lt;span style="color: #c397d8;"&gt;echo&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"Encoding $file"&lt;/span&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #b9ca4a;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; [[ &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; == 0 ]] ; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #b9ca4a;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;then&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;tracknr&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #b9ca4a;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;else&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;tracknr&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;=&lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt; &lt;span class="n"&gt;style&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="n"&gt;span&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #b9ca4a;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;fi&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #e7c547;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;title&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #c397d8;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;`echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt; | sed -e "s/.wav$//"`&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-nice flac -s -T &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"artist=&lt;span class="nv"&gt;$artist&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; -T &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"album=&lt;span class="nv"&gt;$album&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; -T &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"title=&lt;span class="nv"&gt;$title&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;\&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
--T &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"tracknumber=&lt;span class="nv"&gt;$tracknr&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"&lt;span class="nv"&gt;$file&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="ni"&gt;&amp;amp;amp;&amp;amp;amp;&lt;/span&gt; rm &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #70c0b1;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"&lt;span class="nv"&gt;$file&lt;/span&gt;"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h4 id="sec-1-2"&gt;Download script&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
+&lt;p&gt;
+See &lt;a href="https://bbs.archlinux.org/viewtopic.php?id=58766"&gt;https://bbs.archlinux.org/viewtopic.php?id=58766&lt;/a&gt; for the source of bash script.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the full content of the bash script:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
 
-&lt;p&gt;&lt;span style="color: #b9ca4a;"&gt;done&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; Put the script somewhere and name it to "cue2flac" &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Do the real conversion&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;     &lt;pre class="src src-sh"&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"&lt;/span&gt;
-&lt;p&gt;find . -name &lt;span style="color: #70c0b1;"&gt;'*.ape'&lt;/span&gt;|xargs -I {} ffmpeg -i {} {}.wav&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;split wav and convert it to flac, make sure the *.cue exists in current directory&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;cue2flac a.ape.wav&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #969896; font-style: italic;"&gt;# &lt;/span&gt;&lt;span style="color: #969896; font-style: italic;"&gt;do the cleaning (OPTIONAL)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;rm &lt;em&gt;.ape &lt;/em&gt;.wav&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>cue</category><category>en</category><category>flac</category><guid>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</guid><pubDate>Sun, 12 May 2013 20:32:29 GMT</pubDate></item></channel></rss>
+&lt;pre&gt;&lt;code class="lang-sh"&gt;#!/bin/bash
+# split image file (flac, ape, wav, etc.) according to cue-file
+if [ -f "$1" ]; then
+    i=0
+    for cuefile in *.cue; do
+        i=$(($i + 1))
+    done
+    if [ $i -eq 1 ]; then
+        # precies 1 cuesheet gevonden
+        if grep -q "INDEX 01 00:00:00" *.cue ; then
+            nice shntool split -t "%n %t" -f *.cue "$1"
+        else
+            echo "The first track has a pre-gap. Shntool will cut that off and put it in a seperate file."
+            echo "You don't want that. Please modify the cuesheet from:"
+            grep -m1 "INDEX 00" *.cue
+            grep -m1 "INDEX 01" *.cue
+            echo "to:"
+            echo "    INDEX 01 00:00:00"
+            exit 1
+        fi
+    elif [ $i -eq 0 ]; then
+        echo "No cuesheet found in the current directory."
+        exit 1
+    elif [ $i -gt 1 ]; then
+        echo "$i cuesheets found in the current directory. Please remove the superfluous cuesheets."
+        exit 1
+    fi
+else
+    echo "Split image file (flac, ape, wav, etc.) according to cue-file."
+    echo "Output files are in FLAC."
+    echo "Usage: `basename $0` &amp;lt;image-file&amp;gt;"
+    exit 1
+fi
+
+echo
+album=`grep -m 1 TITLE *.cue | cut -d\" -f2`
+artist=`grep -m 1 PERFORMER *.cue | cut -d\" -f2`
+
+for file in [0-9]*.wav; do
+    echo "Encoding $file"
+
+    if [[ ${file:0:1} == 0 ]] ; then
+        tracknr=${file:1:1}
+    else
+        tracknr=${file:0:2}
+    fi
+    title=`echo ${file:2} | sed -e "s/.wav$//"`
+
+    nice flac -s -T "artist=$artist" -T "album=$album" -T "title=$title" \
+    -T "tracknumber=$tracknr" "$file" &amp;amp;&amp;amp; rm "$file"
+done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Put the script somewhere and name it to &lt;code&gt;cue2flac&lt;/code&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h4 id="sec-1-3"&gt;Start conversion&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;# convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
+find . -name '*.ape'|xargs -I {} ffmpeg -i {} {}.wav
+# split wav and convert it to flac, make sure the *.cue exists in current directory
+cue2flac a.ape.wav
+# do the cleaning (OPTIONAL)
+rm *.ape *.wav
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>cue</category><category>en</category><category>flac</category><guid>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</guid><pubDate>Sun, 12 May 2013 22:32:00 GMT</pubDate></item></channel></rss>
