@@ -1,282 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about database)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/database.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>python code to migrate the MySQL database</title><link>http://blog.binchen.org/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;The script can read configuration file and runs on python 2.4. &lt;/p&gt;   &lt;pre class="src src-python"&gt;&lt;span style="color: #af0000;"&gt;#!/usr/bin/python&lt;/span&gt;
-&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; sys
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; os&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; string&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; time&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; datetime&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;import&lt;/span&gt; getopt&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;#############&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;# CONFIG&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;#############&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;DB_NAME&lt;/span&gt;=&lt;span style="color: #87005f;"&gt;'mydb'&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;DB_PASSWORD&lt;/span&gt;=&lt;span style="color: #87005f;"&gt;'111111'&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;DB_USER&lt;/span&gt;=&lt;span style="color: #87005f;"&gt;'root'&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;DB_HOST&lt;/span&gt;=&lt;span style="color: #87005f;"&gt;'mylinux0'&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;SQL_DB_SCHEMA&lt;/span&gt;=os.path.abspath(&lt;span style="color: #87005f;"&gt;"db_schema.sql"&lt;/span&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;SQL_CREATE_TABLE&lt;/span&gt;=os.path.abspath(&lt;span style="color: #87005f;"&gt;"000.sql"&lt;/span&gt;)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;CLONE_TABLES&lt;/span&gt;=[&lt;span style="color: #87005f;"&gt;'MyJobs'&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;'MyUsers'&lt;/span&gt;]&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;#############&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;# GLOBALS&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;#############&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;backup_db&lt;/span&gt;=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;migration&lt;/span&gt;=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;config&lt;/span&gt;=&lt;span style="color: #008787;"&gt;None&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;verbose&lt;/span&gt;=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;delete&lt;/span&gt;=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af5f00;"&gt;remote&lt;/span&gt;=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;sql_cmd&lt;/span&gt;(cmd):
-    &lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; remote:
-        &lt;span style="color: #af00ff;"&gt;return&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'mysql -h %s -u %s -p%s -e " %s " %s'&lt;/span&gt; % (DB_HOST,DB_USER,DB_PASSWORD,cmd,DB_NAME)
-    &lt;span style="color: #af00ff;"&gt;return&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'mysql -u %s -p%s -e " %s " %s'&lt;/span&gt; % (DB_USER,DB_PASSWORD,cmd,DB_NAME)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;sql_script&lt;/span&gt;(script):
-    &lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; remote:
-        &lt;span style="color: #af00ff;"&gt;return&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'mysql -h %s -u %s -p%s %s &amp;lt; %s'&lt;/span&gt; % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,script)
-    &lt;span style="color: #af00ff;"&gt;return&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'mysql -u %s -p%s %s &amp;lt; %s'&lt;/span&gt; % (DB_USER,DB_PASSWORD,DB_NAME,script)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;make_sql_to_create_table&lt;/span&gt;():
-    s=&lt;span style="color: #5f5f87;"&gt;open&lt;/span&gt;(SQL_DB_SCHEMA).read()
-    &lt;span style="color: #af00ff;"&gt;for&lt;/span&gt; t &lt;span style="color: #af00ff;"&gt;in&lt;/span&gt; CLONE_TABLES:
-        s=s.replace(t,t+&lt;span style="color: #87005f;"&gt;'2'&lt;/span&gt;)
-    &lt;span style="color: #5f5f87;"&gt;open&lt;/span&gt;(SQL_CREATE_TABLE,&lt;span style="color: #87005f;"&gt;'w'&lt;/span&gt;).write(s)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;backup_database&lt;/span&gt;():
-    fname=&lt;span style="color: #87005f;"&gt;"%s-%s.dump.gz"&lt;/span&gt; % (DB_NAME,time.strftime(&lt;span style="color: #87005f;"&gt;'%Y%m%d%H%M%S'&lt;/span&gt;, time.gmtime()))
-    &lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; remote:
-        cmd=&lt;span style="color: #87005f;"&gt;"mysqldump -h %s -u %s -p%s --compact %s|gzip -9 &amp;gt; %s"&lt;/span&gt; % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,fname)
-    &lt;span style="color: #af00ff;"&gt;else&lt;/span&gt;:
-        cmd=&lt;span style="color: #87005f;"&gt;"mysqldump -u %s -p%s --compact %s|gzip -9 &amp;gt; %s"&lt;/span&gt; % (DB_USER,DB_PASSWORD,DB_NAME,fname)&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about database)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/database.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 12:12:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>python code to migrate the MySQL database</title><link>http://blog.binchen.org/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+The script reads configuration and requires python 2.4.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
 
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;delete_db_records&lt;/span&gt;():
-    cmd=sql_cmd(&lt;span style="color: #87005f;"&gt;"delete from sources;delete from cameras;"&lt;/span&gt;)
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;"==WILL RUN [ %s ]"&lt;/span&gt; % (cmd)
+&lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
+import sys
+import os
+import string
+import time
+import datetime
+import getopt
+
+#############
+# CONFIG
+#############
+DB_NAME='mydb'
+DB_PASSWORD='111111'
+DB_USER='root'
+DB_HOST='mylinux0'
+SQL_DB_SCHEMA=os.path.abspath("db_schema.sql")
+SQL_CREATE_TABLE=os.path.abspath("000.sql")
+CLONE_TABLES=['MyJobs','MyUsers']
+
+#############
+# GLOBALS
+#############
+backup_db=False
+migration=False
+config=None
+verbose=False
+delete=False
+remote=False
+
+def sql_cmd(cmd):
+    if remote:
+        return 'mysql -h %s -u %s -p%s -e " %s " %s' % (DB_HOST,DB_USER,DB_PASSWORD,cmd,DB_NAME)
+    return 'mysql -u %s -p%s -e " %s " %s' % (DB_USER,DB_PASSWORD,cmd,DB_NAME)
+
+def sql_script(script):
+    if remote:
+        return 'mysql -h %s -u %s -p%s %s &amp;lt; %s' % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,script)
+    return 'mysql -u %s -p%s %s &amp;lt; %s' % (DB_USER,DB_PASSWORD,DB_NAME,script)
+
+
+def make_sql_to_create_table():
+    s=open(SQL_DB_SCHEMA).read()
+    for t in CLONE_TABLES:
+        s=s.replace(t,t+'2')
+    open(SQL_CREATE_TABLE,'w').write(s)
+
+def backup_database():
+    fname="%s-%s.dump.gz" % (DB_NAME,time.strftime('%Y%m%d%H%M%S', time.gmtime()))
+    if remote:
+        cmd="mysqldump -h %s -u %s -p%s --compact %s|gzip -9 &amp;gt; %s" % (DB_HOST,DB_USER,DB_PASSWORD,DB_NAME,fname)
+    else:
+        cmd="mysqldump -u %s -p%s --compact %s|gzip -9 &amp;gt; %s" % (DB_USER,DB_PASSWORD,DB_NAME,fname)
+
+    print "==WILL RUN [ %s ]" % (cmd)
     os.system(cmd)
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;"==DONE"&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;package&lt;/span&gt;():
-    cmd=&lt;span style="color: #87005f;"&gt;"tar zcvf migrate-db.tar.gz &lt;em&gt;.sql migrate.py .migrate_&lt;/em&gt;"&lt;/span&gt;
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;"==WILL RUN [ %s ]"&lt;/span&gt; % (cmd)
+    print "==DONE"
+
+def delete_db_records():
+    cmd=sql_cmd("delete from sources;delete from cameras;")
+    print "==WILL RUN [ %s ]" % (cmd)
     os.system(cmd)
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;"==DONE"&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;read_config&lt;/span&gt;(config):
-    &lt;span style="color: #af00ff;"&gt;global&lt;/span&gt; DB_NAME
-    &lt;span style="color: #af00ff;"&gt;global&lt;/span&gt; DB_PASSWORD
-    &lt;span style="color: #af00ff;"&gt;global&lt;/span&gt; DB_USER
-    &lt;span style="color: #af00ff;"&gt;global&lt;/span&gt; DB_HOST
-    f=&lt;span style="color: #5f5f87;"&gt;open&lt;/span&gt;(config,&lt;span style="color: #87005f;"&gt;"r"&lt;/span&gt;)
-    &lt;span style="color: #af00ff;"&gt;for&lt;/span&gt; line &lt;span style="color: #af00ff;"&gt;in&lt;/span&gt; f:
-        a=line.split(&lt;span style="color: #87005f;"&gt;"="&lt;/span&gt;)
-        &lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; &lt;span style="color: #5f5f87;"&gt;len&lt;/span&gt;(a)!=2:
-            &lt;span style="color: #af00ff;"&gt;continue&lt;/span&gt;
+    print "==DONE"
+
+def package():
+    cmd="tar zcvf migrate-db.tar.gz *.sql migrate.py .migrate_*"
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
+
+def read_config(config):
+    global DB_NAME
+    global DB_PASSWORD
+    global DB_USER
+    global DB_HOST
+    f=open(config,"r")
+    for line in f:
+        a=line.split("=")
+        if len(a)!=2:
+            continue
         n=a[0].strip()
         v=a[1].strip()
-        &lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; n==&lt;span style="color: #87005f;"&gt;"DB_NAME"&lt;/span&gt;:
+        if n=="DB_NAME":
             DB_NAME=v
-        &lt;span style="color: #af00ff;"&gt;elif&lt;/span&gt; n==&lt;span style="color: #87005f;"&gt;"DB_PASSWORD"&lt;/span&gt;:
+        elif n=="DB_PASSWORD":
             DB_PASSWORD=v
-        &lt;span style="color: #af00ff;"&gt;elif&lt;/span&gt; n==&lt;span style="color: #87005f;"&gt;"DB_USER"&lt;/span&gt;:
+        elif n=="DB_USER":
             DB_USER=v
-        &lt;span style="color: #af00ff;"&gt;elif&lt;/span&gt; n==&lt;span style="color: #87005f;"&gt;"DB_HOST"&lt;/span&gt;:
-            DB_HOST=v&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;usage&lt;/span&gt;():
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'''&lt;/span&gt;
-&lt;span style="color: #87005f;"&gt;USAGE: python migrate.py [OPTIONS]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;OPTIONS:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -h, --help&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        print this help&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -b, --backup-database&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        backup the old database before migration (recommended)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -m, --migrate&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        donot start migration&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -v, --verbose&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        print database related information&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -p, --package&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        packge all the scripts into migrate-db.tar.gz&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -d, --delete-db-records&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;        delete database records so we can restart migration&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    -c, --config&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;SAMPLES:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    python migrate.py -b                        #back database and exit&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    python migrate.py -m                        #start migration right now&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    python migrate.py -b -m                     #backup the database and start the migration (recommended)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    python migrate.py -v                        #print database information and exit&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    python migrate.py -c .migrate_staging -v    #print staging database information and exit&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;'''&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;show_info&lt;/span&gt;():
-    &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; &lt;span style="color: #87005f;"&gt;'''&lt;/span&gt;
-&lt;span style="color: #87005f;"&gt;==Database Information&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;name:{name}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;password:{password}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;user:{user}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;host:{host}&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;'''&lt;/span&gt;.format(name=DB_NAME, password=DB_PASSWORD,user=DB_USER,host=DB_HOST)&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;def&lt;/span&gt; &lt;span style="color: #0000ff;"&gt;confirm&lt;/span&gt;(prompt=&lt;span style="color: #008787;"&gt;None&lt;/span&gt;, resp=&lt;span style="color: #af00ff;"&gt;False&lt;/span&gt;):
-    &lt;span style="color: #87005f;"&gt;"""prompts for yes or no response from the user. Returns True for yes and&lt;/span&gt;
-&lt;span style="color: #87005f;"&gt;    False for no.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    'resp' should be set to the default value assumed by the caller when&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    user simply types ENTER.&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=True)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    Create Directory? [y]|n:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    True&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=False)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    Create Directory? [n]|y:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    False&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=False)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    Create Directory? [n]|y: y&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    True&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    """&lt;/span&gt;&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; prompt &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;is&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #008787;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;None&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    prompt = &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'WARNING: DONOT run me twice and migration CANNOT be rolled back, GO?'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+        elif n=="DB_HOST":
+            DB_HOST=v
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; resp:
-    prompt = &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'%s [%s]|%s: '&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (prompt, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'n'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;else&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    prompt = &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'%s [%s]|%s: '&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (prompt, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'n'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
+def usage():
+    print '''
+USAGE: python migrate.py [OPTIONS]
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;while&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    ans = &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;raw_input&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(prompt)
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;not&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans:
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;return&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; resp
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;not&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; [&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'Y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'n'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'N'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;]:
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'please enter y or n.'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;continue&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans == &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;or&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans == &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'Y'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;return&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans == &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'n'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;or&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; ans == &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'N'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;return&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;False&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;
+OPTIONS:
+    -h, --help
+        print this help
 
+    -b, --backup-database
+        backup the old database before migration (recommended)
 
-&lt;p&gt;&lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; &lt;span style="color: #5f5f87;"&gt;&lt;strong&gt;name&lt;/strong&gt;&lt;/span&gt;==&lt;span style="color: #87005f;"&gt;"&lt;strong&gt;main&lt;/strong&gt;"&lt;/span&gt;:
-    &lt;span style="color: #87005f;"&gt;'''&lt;/span&gt;
-&lt;span style="color: #87005f;"&gt;    @see http://linux.byexamples.com/archives/366/python-how-to-run-a-command-line-within-python/&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span style="color: #87005f;"&gt;    '''&lt;/span&gt;
-    &lt;span style="color: #af00ff;"&gt;try&lt;/span&gt;:
-        opts, args = getopt.getopt(sys.argv[1:], &lt;span style="color: #87005f;"&gt;"hbmvpdc:r"&lt;/span&gt;, [&lt;span style="color: #87005f;"&gt;"help"&lt;/span&gt;, &lt;span style="color: #87005f;"&gt;"backup-database"&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--migrate"&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--verbose"&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--package"&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--delete-db-records"&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--config="&lt;/span&gt;,&lt;span style="color: #87005f;"&gt;"--remote"&lt;/span&gt;])
-    &lt;span style="color: #af00ff;"&gt;except&lt;/span&gt; getopt.GetoptError, err:
-        &lt;span style="color: #af00ff;"&gt;print&lt;/span&gt; str(err) &lt;span style="color: #af0000;"&gt;# will print something like "option -a not recognized"&lt;/span&gt;
+    -m, --migrate
+        donot start migration
+
+    -v, --verbose
+        print database related information
+
+    -p, --package
+        packge all the scripts into migrate-db.tar.gz
+
+    -d, --delete-db-records
+        delete database records so we can restart migration
+
+    -c, --config
+
+SAMPLES:
+    python migrate.py -b                        #back database and exit
+    python migrate.py -m                        #start migration right now
+    python migrate.py -b -m                     #backup the database and start the migration (recommended)
+    python migrate.py -v                        #print database information and exit
+    python migrate.py -c .migrate_staging -v    #print staging database information and exit
+'''
+
+def show_info():
+    print '''
+==Database Information
+name:{name}
+password:{password}
+user:{user}
+host:{host}
+'''.format(name=DB_NAME, password=DB_PASSWORD,user=DB_USER,host=DB_HOST)
+
+def confirm(prompt=None, resp=False):
+    """prompts for yes or no response from the user. Returns True for yes and
+    False for no.
+
+    'resp' should be set to the default value assumed by the caller when
+    user simply types ENTER.
+
+    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=True)
+    Create Directory? [y]|n:
+    True
+    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=False)
+    Create Directory? [n]|y:
+    False
+    &amp;gt;&amp;gt;&amp;gt; confirm(prompt='Create Directory?', resp=False)
+    Create Directory? [n]|y: y
+    True
+
+    """
+
+    if prompt is None:
+        prompt = 'WARNING: DONOT run me twice and migration CANNOT be rolled back, GO?'
+
+    if resp:
+        prompt = '%s [%s]|%s: ' % (prompt, 'y', 'n')
+    else:
+        prompt = '%s [%s]|%s: ' % (prompt, 'n', 'y')
+
+    while True:
+        ans = raw_input(prompt)
+        if not ans:
+            return resp
+        if ans not in ['y', 'Y', 'n', 'N']:
+            print 'please enter y or n.'
+            continue
+        if ans == 'y' or ans == 'Y':
+            return True
+        if ans == 'n' or ans == 'N':
+            return False
+
+if __name__=="__main__":
+    '''
+    @see http://linux.byexamples.com/archives/366/python-how-to-run-a-command-line-within-python/
+    '''
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "hbmvpdc:r", ["help", "backup-database","--migrate","--verbose","--package","--delete-db-records","--config=","--remote"])
+    except getopt.GetoptError, err:
+        print str(err) # will print something like "option -a not recognized"
         usage()
-        &lt;span style="color: #5f5f87;"&gt;exit&lt;/span&gt;(2)&lt;/p&gt;
-&lt;pre class="code literal-block"&gt;&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;len&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(opts)==0:
-    usage()
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;exit&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(2)
+        exit(2)
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;for&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o, a &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; opts:
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-h"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--help"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
+    if len(opts)==0:
         usage()
+        exit(2)
+
+    for o, a in opts:
+        if o in ("-h", "--help"):
+            usage()
+            sys.exit()
+        elif o in ("-v", "--verbose"):
+            verbose=True
+        elif o in ("-c", "--config"):
+            config=a
+            print config
+        elif o in ("-d", "--delete-db-records"):
+            delete=True
+        elif o in ("-p", "--package"):
+            package()
+            exit(0)
+        elif o in ("-b", "--backup-database"):
+            backup_db=True
+        elif o in ("-m", "--migrate"):
+            migration=True
+        elif o in ("-r", "--remote"):
+            remote=True
+        else:
+            assert False, "unhandled option"
+
+    if config!=None:
+        read_config(config)
+
+    if delete:
+        delete_db_records()
         sys.exit()
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-v"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--verbose"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        verbose=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-c"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--config"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        config=a
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; config
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-d"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--delete-db-records"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        delete=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-p"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--package"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        package()
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;exit&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(0)
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-b"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--backup-database"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        backup_db=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-m"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--migrate"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        migration=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;elif&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; o &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;in&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; (&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"-r"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"--remote"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;):
-        remote=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;True&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;else&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-        &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;assert&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;False&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;, &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"unhandled option"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; config!=&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #008787;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;None&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    read_config(config)
+    if verbose:
+        show_info()
+        sys.exit()
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; delete:
-    delete_db_records()
-    sys.exit()
+    if backup_db:
+        backup_database()
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; verbose:
-    show_info()
-    sys.exit()
+    if migration==False:
+        exit(0)
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; backup_db:
-    backup_database()
+    if confirm()==False:
+        print "Aborting ..."
+        exit(0)
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; migration==&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;False&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;exit&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(0)
+    make_sql_to_create_table()
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;if&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; confirm()==&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;False&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;:
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"Aborting ..."&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-    &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #5f5f87;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;exit&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;(0)
+    print "==START MIGRATION"
 
-make_sql_to_create_table()
+    # test data base connection
+    cmd=sql_cmd('show databases;use %s;' % (DB_NAME))
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==START MIGRATION"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    cmd=sql_script("000.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af0000;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;# test data base connection&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-cmd=sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;'show databases;use %s;'&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (DB_NAME))
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('001.sql')"))
+    cmd=sql_script("001.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"000.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('002.sql')"))
+    cmd=sql_script("002.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('001.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"001.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('003.sql')"))
+    cmd=sql_script("003.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('002.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"002.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('004.sql')"))
+    cmd=sql_script("004.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('003.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"003.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('005.sql')"))
+    cmd=sql_script("005.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('004.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"004.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('006.sql')"))
+    cmd=sql_script("006.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('005.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"005.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    os.system(sql_cmd("insert into migrate (Action) values ('100.sql')"))
+    cmd=sql_script("100.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('006.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"006.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    cmd=sql_script("insert_sample_sources.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-os.system(sql_cmd(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert into migrate (Action) values ('100.sql')"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;))
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"100.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    cmd=sql_script("app_config.sql")
+    print "==WILL RUN [ %s ]" % (cmd)
+    os.system(cmd)
+    print "==DONE"
 
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"insert_sample_sources.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
+    print "==END MIGRATION"
+# vim: set expandtab tabstop=4 shiftwidth=4:
+&lt;/code&gt;&lt;/pre&gt;
 
-cmd=sql_script(&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"app_config.sql"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==WILL RUN [ %s ]"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; % (cmd)
-os.system(cmd)
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==DONE"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-
-&lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #af00ff;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;print&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; &lt;span class="nt"&gt;&amp;lt;span&lt;/span&gt; &lt;span class="na"&gt;style=&lt;/span&gt;&lt;span class="s"&gt;"color: #87005f;"&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;"==END MIGRATION"&lt;span class="nt"&gt;&amp;lt;/span&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;
-
-
-&lt;p&gt;&lt;span style="color: #af0000;"&gt;# vim: set expandtab tabstop=4 shiftwidth=4:&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>database</category><category>en</category><category>mysql</category><category>python</category><guid>http://blog.binchen.org/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html</guid><pubDate>Wed, 22 Aug 2012 12:08:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>database</category><category>en</category><category>mysql</category><category>python</category><guid>http://blog.binchen.org/posts/python-code-to-migrate-the-mysql-database-enmysqldatabasepython.html</guid><pubDate>Wed, 22 Aug 2012 12:08:00 GMT</pubDate></item></channel></rss>
