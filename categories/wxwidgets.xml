@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wxwidgets)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wxwidgets.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:49:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to embed button in wxDataViewListCtrl</title><link>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wxwidgets)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wxwidgets.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:50:49 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to embed button in wxDataViewListCtrl</title><link>http://blog.binchen.org/posts/how-to-embed-button-in-wxdataviewlistctrl.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to embed button in wxDataViewListCtrl                                     :en:c::wxwidgets:
 &lt;/p&gt;
 
@@ -196,18 +196,17 @@ Please note I don't use libtiff. I think libpng and libjpeg is enough.
 
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;mkdir -p ${WXWIN}/build-release;cd ${WXWIN}/build-release;../configure --disable-shared --without-libtiff;make
-
 mkdir -p ${WXWIN}/build-debug;cd ${WXWIN}/build-debug;../configure --disable-shared --enable-debug --without-libtiff;make
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
-On OSX, I need extra "–with-osx_cocoa" parameter for configure.
+On OSX, I need extra &lt;code&gt;--with-osx_cocoa&lt;/code&gt; parameter for configure.
 &lt;/p&gt;
 
 &lt;p&gt;
-On Linux, build will be fine following above steps. But for building application, I need "sudo apt-get install libgtk2.0-dev" on Debian/Ubuntu/Mint.
+On Linux, build will be fine following above steps. But for building application, I need &lt;code&gt;sudo apt-get install libgtk2.0-dev&lt;/code&gt; on Debian/Ubuntu/Mint.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;

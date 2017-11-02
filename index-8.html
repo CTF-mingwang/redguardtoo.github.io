@@ -673,18 +673,17 @@ Please note I don't use libtiff. I think libpng and libjpeg is enough.
 
 
 <pre><code class="lang-sh">mkdir -p ${WXWIN}/build-release;cd ${WXWIN}/build-release;../configure --disable-shared --without-libtiff;make
-
 mkdir -p ${WXWIN}/build-debug;cd ${WXWIN}/build-debug;../configure --disable-shared --enable-debug --without-libtiff;make
 </code></pre>
 
 </div>
 
 <p>
-On OSX, I need extra "–with-osx_cocoa" parameter for configure.
+On OSX, I need extra <code>--with-osx_cocoa</code> parameter for configure.
 </p>
 
 <p>
-On Linux, build will be fine following above steps. But for building application, I need "sudo apt-get install libgtk2.0-dev" on Debian/Ubuntu/Mint.
+On Linux, build will be fine following above steps. But for building application, I need <code>sudo apt-get install libgtk2.0-dev</code> on Debian/Ubuntu/Mint.
 </p>
 </div>
 </div>
