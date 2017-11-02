@@ -11,15 +11,15 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Clean up emacs mode line for tiny netbook">
 <meta property="og:url" content="http://blog.binchen.org/posts/clean-up-emacs-mode-line-for-tiny-netbook.html">
-<meta property="og:description" content="up emacs mode line for tiny netbook                                     :linux:emacs:en:
+<meta property="og:description" content="Emacs's status bar is called the mode-line.
 
 
 
-Emacs's status bar is called the mode-line.
+It contains too much information for me because my screen is tiny (I use the netbook Eee PC 701 whose LCD resolution is 800x480).
 
 
 
-It contains too much information for me because my screen is ">
+For example, org-mod">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-01-13T16:56:00Z">
 <meta property="article:tag" content="emacs">
@@ -64,10 +64,9 @@ It contains too much information for me because my screen is ">
 
         </div>
         <div class="body">
-            <div>
-<p>
-up emacs mode line for tiny netbook                                     :linux:emacs:en:
-</p>
+            <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
 
 <p>
 Emacs's status bar is called the <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Mode-Line-Format.html">mode-line</a>.
@@ -86,13 +85,12 @@ See <a href="http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html">cu
 </p>
 
 <p>
-But there is one problem. The variable "global-mode-string" is missing in mode-line, so my favourite org-mode goodie "M-x org-timer-set-timer" won't work.
+But there is one problem. The variable <code>global-mode-string</code> is missing in mode-line. So my favorite org-mode trick <code>M-x org-timer-set-timer</code> won't work.
 </p>
 
 <p>
 Here is my fixed version.
 </p>
-
 <ul class="org-ul">
 <li>screenshot
 </li>
@@ -100,12 +98,12 @@ Here is my fixed version.
 <div class="figure">
 <p><img src="../wp-content/2012-01-14-034733-800x480.png" alt="2012-01-14-034733-800x480.png"></p>
 </div>
-
 <ul class="org-ul">
-<li>Elisp code
+<li>Emacs Lisp code
 </li>
 </ul>
 <div class="org-src-container">
+
 
 <pre><code class="lang-lisp">;; @see http://emacs-fu.blogspot.com/2011/08/customizing-mode-line.html
 ;; But I need global-mode-string,
@@ -168,10 +166,7 @@ Here is my fixed version.
 </code></pre>
 
 </div>
-
-<p>
-#+./image/2012-01-14-034733-800x480.png <img src="http://blog.binchen.org/wp-content/uploads/2012/01/wpid-2012-01-14-034733-800x4802.png" alt="wpid-2012-01-14-034733-800x4802.png">*
-</p>
+</div>
 </div>
         </div>
         
