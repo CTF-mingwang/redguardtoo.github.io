@@ -23,6 +23,51 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html">Emacs中的完美多窗口操作</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-07-20T14:56:00+00:00">2012-07-20 14:56</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-zhong-de-wan-mei-duo-chuang-kou-cao-zuo.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/multiple.html" rel="tag">multiple</a></li>
+           <li><a class="tag p-category" href="categories/window.html" rel="tag">window</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">典型的工作流</h4> <div class="outline-text-3" id="text-1">  <ol>
+<li>在两个子窗口中对比文件内容 </li> <li>打开更多的窗口以参考其他信息. </li> <li>对某个窗口内容比较有兴趣,跳转到该窗口,将该窗口最大化 </li> <li>看完最大化的窗口内容后,undo最大化操作,重新回到早先的多个小窗口模式以便继续纵览全局 </li> </ol>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">将子窗口自动编号,然后按M-0…9跳转(最爱)</h4> <div class="outline-text-3" id="text-2">  <p>安装<a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(<span style="color: #af00ff;">require</span> '<span style="color: #008787;">window-numbering</span>)
+(window-numbering-mode 1)
+<p></p></pre>  </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">undo/redo之前的窗口操作(最爱)</h4> <div class="outline-text-3" id="text-3">  <p>安装<a href="http://www.emacswiki.org/emacs/WinnerMode">Winner Mode</a>,然后在.emacs中添加以下代码, </p>   <pre class="src src-elisp">(winner-mode 1)
+<p><span style="color: #af0000;">;; </span><span style="color: #af0000;">copied from http://puntoblogspot.blogspot.com/2011/05/undo-layouts-in-emacs.html</span></p>
+<p>(global-set-key (kbd <span style="color: #87005f;">"C-x 4 u"</span>) 'winner-undo)</p>
+<p>(global-set-key (kbd <span style="color: #87005f;">"C-x 4 r"</span>) 'winner-redo)</p>
+<p></p></pre>  </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">焦点移动到下一窗口(常用)</h4> <div class="outline-text-3" id="text-4">  <p>M-x other-window,快捷键是<code>C-x o</code>. </p>
+</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">水平/垂直切分当前窗口(常用)</h4> <div class="outline-text-3" id="text-5">  <p>快捷键C-x 2/3 </p>
+</div>  </div>  <div id="outline-container-6" class="outline-3"> <h4 id="sec-6">将当前子窗口最大化(常用)</h4> <div class="outline-text-3" id="text-6">  <p>M-x delete-other-windows,快捷键<code>C-x 1</code>. </p>
+</div>  </div>  <div id="outline-container-7" class="outline-3"> <h4 id="sec-7">删除当前子窗口(偶尔用)</h4> <div class="outline-text-3" id="text-7">  <p>M-x delete-window (快捷键<code>C-x 0</code>) </p> <p> 顺便说一下,M-x kill-buffer-and-window (快捷键<code>C-x 4 0</code>),我现在用得更多 些. </p>
+</div>  </div>  <div id="outline-container-8" class="outline-3"> <h4 id="sec-8">移动焦点到上下左右的窗口(基本不用)</h4> <div class="outline-text-3" id="text-8">  <p>因我较喜欢vi快捷键,所以我安装了<a href="http://emacswiki.org/emacs/Evil">Evil Mode</a>.快捷键和Vi一样. C-w h/j/k/l移动至各方向的子窗口. </p>
+</div>  </div>  <div id="outline-container-9" class="outline-3"> <h4 id="sec-9">存储/载入窗口布局到register(基本不用)</h4> <div class="outline-text-3" id="text-9">  <p><code>C-x r w &amp;lt;register&amp;gt;</code>存储,<code>C-x r j &amp;lt;register&amp;gt;</code>载入. </p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/convert-tex-to-pdf.html">Convert TEX to PDF</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -60,15 +105,15 @@ cpanm Template <span style="color: #af0000;"># </span><span style="color: #af000
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html">Install perl module through source package on cygwin by using cpanm</a></h1>
+            <h1 class="title"><a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Install perl module through source package on cygwin by using cpanm</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2012-07-17T23:22:23+00:00">2012-07-17 23:22</time>
+                    <time class="timeago" datetime="2012-07-17T23:22:00+00:00">2012-07-17 23:22</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html#disqus_thread" data-disqus-identifier="cache/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm-2.html">Comments</a>
+    <a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html#disqus_thread" data-disqus-identifier="cache/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Comments</a>
 
 
                 </div>
@@ -78,7 +123,6 @@ cpanm Template <span style="color: #af0000;"># </span><span style="color: #af000
         Tags : 
            <li><a class="tag p-category" href="categories/cpan.html" rel="tag">cpan</a></li>
            <li><a class="tag p-category" href="categories/cpanm.html" rel="tag">cpanm</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="categories/install.html" rel="tag">install</a></li>
            <li><a class="tag p-category" href="categories/module.html" rel="tag">module</a></li>
@@ -88,11 +132,32 @@ cpanm Template <span style="color: #af0000;"># </span><span style="color: #af000
 
             </div>
             <div class="body">
-                <div>
-<p></p>
-<p>I failed to install package "Template" by running `cpanm Template'. </p> <p> It's because the binary package requires gcc4 while on my cygwin only gcc3 available. </p> <p> So I install it from source package (with some hack, of course), </p>   <pre class="src src-sh">cpanm --look Template <span style="color: #af0000;"># </span><span style="color: #af0000;">Download and unpack the distribution and then open the directory with your shellI</span>
-cpanm . <span style="color: #af0000;">#</span><span style="color: #af0000;">install from local directory</span>
-<p></p></pre>   <p> Updated: I found the simpler solution was to install gcc4 at cygwin. </p>
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+I failed to install package "Template" by running `cpanm Template'.
+</p>
+
+<p>
+It's because the binary package requires gcc4 while on my cygwin only gcc3 available.
+</p>
+
+<p>
+So I install it from source package (with some hack, of course),
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">cpanm --look Template # Download and unpack the distribution and then open the directory with your shellI
+cpanm . #install from local directory
+</code></pre>
+
+</div>
+
+<p>
+Updated: The simpler solution is to install gcc4 at cygwin.</p>
+</div>
 </div>
             </div>
         </div>
@@ -133,43 +198,6 @@ cpanm . <span style="color: #af0000;">#</span><span style="color: #af0000;">inst
 <span style="color: #af00ff;">fi</span></p>
 <p>  </p>
 </div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Install perl module through source package on cygwin by using cpanm</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-07-08T15:26:35+00:00">2012-07-08 15:26</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html#disqus_thread" data-disqus-identifier="cache/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cpan.html" rel="tag">cpan</a></li>
-           <li><a class="tag p-category" href="categories/cpanm.html" rel="tag">cpanm</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/install.html" rel="tag">install</a></li>
-           <li><a class="tag p-category" href="categories/module.html" rel="tag">module</a></li>
-           <li><a class="tag p-category" href="categories/perl.html" rel="tag">perl</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>Install source package with some hack, </p>   <pre class="src src-sh">cpanm --look Template <span style="color: #af0000;"># </span><span style="color: #af0000;">Download and unpack the distribution and then open the directory with your shellI</span>
-<span style="color: #af0000;">#</span><span style="color: #af0000;">hacking ...</span>
-<p>cpanm . <span style="color: #af0000;">#</span><span style="color: #af0000;">install from local directory</span></p>
-<p></p></pre>  </div>
             </div>
         </div>
         <div class="post">
