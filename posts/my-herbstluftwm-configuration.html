@@ -11,9 +11,25 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="My herbstluftwm configuration">
 <meta property="og:url" content="http://blog.binchen.org/posts/my-herbstluftwm-configuration.html">
-<meta property="og:description" content="herbstluftwm is the best manual tile window manager I've used.   The default configuration is fine in most cases.   I added hc rules to make some firefox addons usable at my tiny netbook.   So here is">
+<meta property="og:description" content="CREATED: &lt;2011-12-25&gt;
+
+
+
+UPDATED: &lt;2017-11-02 Thu&gt;
+
+
+
+It's the best manual tile window manager I've used.
+
+
+
+The default configuration is fine in most cases.
+
+
+
+I added rules to make some firefox addo">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2011-12-25T13:53:00Z">
+<meta property="article:published_time" content="2011-12-25T21:53:00Z">
 <meta property="article:tag" content="config">
 <meta property="article:tag" content="en">
 <meta property="article:tag" content="herbstluftwm">
@@ -39,7 +55,7 @@
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2011-12-25T13:53:00+00:00">2011-12-25 13:53</time>
+                <time class="timeago" datetime="2011-12-25T21:53:00+00:00">2011-12-25 21:53</time>
             
 
             
@@ -62,191 +78,262 @@
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>herbstluftwm is the best manual tile window manager I've used. </p> <p> The default configuration is fine in most cases. </p> <p> I added hc rules to make some firefox addons usable at my tiny netbook. </p> <p> So here is my modified $HOME/.config/herbstluftwm/autostart: </p>   <pre class="src src-sh"><span style="color: #cd0000;">#</span><span style="color: #cd0000;">!/bin/</span><span style="color: #00cdcd; font-weight: bold;">bash</span>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">this is a simple config for herbstluftwm</span></p>
-<p><span style="color: #00cdcd; font-weight: bold;">function</span> hc() {
-    herbstclient <span style="color: #00cd00;">"$@"</span>
-}</p>
-<p>hc emit_hook reload</p>
-<p>xsetroot -solid <span style="color: #00cd00;">'#000000'</span></p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">feh --bg-scale /home/cb/.config/herbstluftwm/wallpaper.jpg</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">keybindings</span></p>
-<p><span style="color: #cdcd00;">Mod</span>=Mod4</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-q quit</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-r reload</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-c close</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Return spawn terminator</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-x spawn dmenu_run</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-q spawn scrot -e <span style="color: #00cd00;">'mkdir -p ~/screenshot;mv $f ~/screenshot/'</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">tags</span></p>
-<p><span style="color: #cdcd00;">TAG_NAMES</span>=( {1..4} )</p>
-<p><span style="color: #cdcd00;">TAG_KEYS</span>=( {1..4} 0 )</p>
-<p>hc rename default <span style="color: #00cd00;">"${TAG_NAMES[0]}"</span> || true</p>
-<p><span style="color: #00cdcd; font-weight: bold;">for</span> i<span style="color: #00cdcd; font-weight: bold;"> in</span> ${!TAG_NAMES[@]} ; <span style="color: #00cdcd; font-weight: bold;">do</span>
-    hc add <span style="color: #00cd00;">"${TAG_NAMES[$i]}"</span>
-    <span style="color: #cdcd00;">key</span>=<span style="color: #00cd00;">"${TAG_KEYS[$i]}"</span>
-    <span style="color: #00cdcd; font-weight: bold;">if</span> ! [ -z <span style="color: #00cd00;">"$key"</span> ] ; <span style="color: #00cdcd; font-weight: bold;">then</span>
-        hc keybind <span style="color: #00cd00;">"$Mod-$key"</span> use <span style="color: #00cd00;">"${TAG_NAMES[$i]}"</span>
-        hc keybind <span style="color: #00cd00;">"$Mod-Shift-$key"</span> move <span style="color: #00cd00;">"${TAG_NAMES[$i]}"</span>
-    <span style="color: #00cdcd; font-weight: bold;">fi</span>
-<span style="color: #00cdcd; font-weight: bold;">done</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">layouting</span></p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-r remove</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-space cycle_layout 1</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-s split vertical 0.5</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-s split horizontal 0.5</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-o floating toggle</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-f fullscreen toggle</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-p pseudotile toggle</p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">resizing</span></p>
-<p><span style="color: #cdcd00;">RESIZESTEP</span>=0.05</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Control-h resize left +$<span style="color: #cdcd00;">RESIZESTEP</span></p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Control-j resize down +$<span style="color: #cdcd00;">RESIZESTEP</span></p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Control-k resize up +$<span style="color: #cdcd00;">RESIZESTEP</span></p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Control-l resize right +$<span style="color: #cdcd00;">RESIZESTEP</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">mouse</span></p>
-<p>hc mousebind $<span style="color: #cdcd00;">Mod</span>-Button1 move</p>
-<p>hc mousebind $<span style="color: #cdcd00;">Mod</span>-Button2 resize</p>
-<p>hc mousebind $<span style="color: #cdcd00;">Mod</span>-Button3 zoom</p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">focus</span></p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-BackSpace   cycle_monitor</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Tab         cycle_all +1</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-Tab   cycle_all -1</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-c cycle</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-h focus left</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-j focus down</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-k focus up</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-l focus right</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-h shift left</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-j shift down</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-k shift up</p>
-<p>hc keybind $<span style="color: #cdcd00;">Mod</span>-Shift-l shift right</p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">colors</span></p>
-<p>hc set frame_border_active_color <span style="color: #00cd00;">'#49351D'</span></p>
-<p>hc set frame_border_normal_color <span style="color: #00cd00;">'#73532D'</span></p>
-<p>hc set frame_bg_normal_color <span style="color: #00cd00;">'#BD9768'</span></p>
-<p>hc set frame_bg_active_color <span style="color: #00cd00;">'#BD8541'</span></p>
-<p>hc set frame_border_width 0</p>
-<p>hc set window_border_width 0</p>
-<p>hc set window_border_normal_color <span style="color: #00cd00;">'#AE8451'</span></p>
-<p>hc set window_border_active_color <span style="color: #00cd00;">'#F6FF00'</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">rules</span></p>
-<p>hc unrule -F</p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">hc rule class=XTerm tag=3 # move all xterms to tag 3</span></p>
-<p>hc rule <span style="color: #cdcd00;">focus</span>=on <span style="color: #cd0000;"># </span><span style="color: #cd0000;">normally do not focus new clients</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">give focus to most common terminals</span></p>
-<p>hc rule class~<span style="color: #00cd00;">'(.<em>[Rr]xvt.</em>|.*[Tt]erm|Konsole)'</span> <span style="color: #cdcd00;">focus</span>=on</p>
-<p>hc rule windowtype~<span style="color: #00cd00;">'<em>NET_WM_WINDOW_TYPE</em>(DIALOG|UTILITY|SPLASH)'</span> <span style="color: #cdcd00;">pseudotile</span>=on</p>
-<p>hc rule <span style="color: #cdcd00;">windowtype</span>=<span style="color: #00cd00;">'_NET_WM_WINDOW_TYPE_DIALOG'</span> <span style="color: #cdcd00;">focus</span>=on</p>
-<p>hc rule windowtype~<span style="color: #00cd00;">'<em>NET_WM_WINDOW_TYPE</em>(NOTIFICATION|DOCK)'</span> <span style="color: #cdcd00;">manage</span>=off</p>
-<p>hc rule <span style="color: #cdcd00;">instance</span>=xv <span style="color: #cdcd00;">class</span>=MPlayer <span style="color: #cdcd00;">fullscreen</span>=on</p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">firefox dialog should be fullscreen, useful for my tiny eeepc</span></p>
-<p>hc rule <span style="color: #cdcd00;">instance</span>=<span style="color: #00cd00;">"Dialog"</span> <span style="color: #cdcd00;">class</span>=<span style="color: #00cd00;">"Firefox"</span> <span style="color: #cdcd00;">fullscreen</span>=on <span style="color: #cd0000;">#</span><span style="color: #cd0000;">delicious bookmark</span></p>
-<p>hc rule <span style="color: #cdcd00;">instance</span>=<span style="color: #00cd00;">"Aup"</span> <span style="color: #cdcd00;">class</span>=<span style="color: #00cd00;">"Firefox"</span> <span style="color: #cdcd00;">fullscreen</span>=on <span style="color: #cd0000;">#</span><span style="color: #cd0000;">autoproxy</span></p>
-<p>hc rule <span style="color: #cdcd00;">instance</span>=<span style="color: #00cd00;">"Abp"</span> <span style="color: #cdcd00;">class</span>=<span style="color: #00cd00;">"Firefox"</span> <span style="color: #cdcd00;">fullscreen</span>=on <span style="color: #cd0000;">#</span><span style="color: #cd0000;">adblock plus</span></p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">view the image in fullscreen</span></p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">hc rule instance=feh class=feh fullscreen=on #feh has some bug</span></p>
-<p><span style="color: #cd0000;">#</span><span style="color: #cd0000;">autorun</span></p>
-<p>hc spawn ~/.config/herbstluftwm/panel.sh</p>
-<p>hc spawn parcellite -nd <span style="color: #cd0000;">#</span><span style="color: #cd0000;">use parcellite -p/-c to see the content</span></p>
-<p></p></pre>  <p> xprop is usefult for writing "hc rule". Please <code>man herbstclient</code>. </p> <p> panel.sh is from the official package. It will display a panel at the top of the screen. </p> <p> Here is my $HOME/.config/herbstluftwm/panel.sh (modified for display batttery rate): </p>   <pre class="src src-sh"><span style="color: #cd0000;">#</span><span style="color: #cd0000;">!/bin/</span><span style="color: #00cdcd; font-weight: bold;">bash</span>
-<p><span style="color: #cdcd00;">monitor</span>=${<span style="color: #cdcd00;">1</span>:-0}</p>
-<p><span style="color: #cdcd00;">geometry</span>=( $(<span style="color: #cd00cd;">herbstclient</span> monitor_rect <span style="color: #00cd00;">"$monitor"</span>) )</p>
-<p><span style="color: #00cdcd; font-weight: bold;">if</span> [ -z <span style="color: #00cd00;">"$geometry"</span> ] ;<span style="color: #00cdcd; font-weight: bold;">then</span>
-    <span style="color: #0000ee; font-weight: bold;">echo</span> <span style="color: #00cd00;">"Invalid monitor $monitor"</span>
-    <span style="color: #00cdcd; font-weight: bold;">exit</span> 1
-<span style="color: #00cdcd; font-weight: bold;">fi</span></p>
-<p><span style="color: #cd0000;"># </span><span style="color: #cd0000;">geometry has the format: WxH+X+Y</span></p>
-<p><span style="color: #cdcd00;">x</span>=${<span style="color: #cdcd00;">geometry</span>[0]}</p>
-<p><span style="color: #cdcd00;">y</span>=${<span style="color: #cdcd00;">geometry</span>[1]}</p>
-<p><span style="color: #cdcd00;">width</span>=${<span style="color: #cdcd00;">geometry</span>[2]}</p>
-<p><span style="color: #cdcd00;">height</span>=16</p>
-<p><span style="color: #cdcd00;">font</span>=<span style="color: #00cd00;">"-<em>-fixed-medium-</em>-<em>-</em>-12-<em>-</em>-<em>-</em>-<em>-</em>-*"</span></p>
-<p><span style="color: #cdcd00;">bgcolor</span>=<span style="color: #00cd00;">'#3E2600'</span></p>
-<p><span style="color: #00cdcd; font-weight: bold;">function</span> uniq_linebuffered() {
-    awk <span style="color: #00cd00;">'$0 != l { print ; l=$0 ; fflush(); }'</span> <span style="color: #00cd00;">"$@"</span>
-}</p>
-<p>herbstclient pad $<span style="color: #cdcd00;">monitor</span> $<span style="color: #cdcd00;">height</span></p>
-<p>{
-    <span style="color: #cd0000;"># </span><span style="color: #cd0000;">events:</span>
-    <span style="color: #cd0000;">#</span><span style="color: #cd0000;">mpc idleloop player &amp;</span>
-    <span style="color: #00cdcd; font-weight: bold;">while</span> true ; <span style="color: #00cdcd; font-weight: bold;">do</span>
-        date +<span style="color: #00cd00;">'date ^fg(#efefef)%H:%M^fg(#909090), %Y-%m-^fg(#efefef)%d'</span>
-        sleep 1 || <span style="color: #00cdcd; font-weight: bold;">break</span>
-    <span style="color: #00cdcd; font-weight: bold;">done</span> &gt; &gt;(uniq_linebuffered)  &amp;
-    <span style="color: #cdcd00;">childpid</span>=$!
+            <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2011-12-25&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-11-02 Thu&gt;</span></span>
+</p>
+
+<p>
+It's the best manual tile window manager I've used.
+</p>
+
+<p>
+The default configuration is fine in most cases.
+</p>
+
+<p>
+I added rules to make some firefox addons usable at my tiny netbook.
+</p>
+
+<p>
+Here is my modified $HOME/.config/herbstluftwm/autostart:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">#!/bin/bash
+
+# this is a simple config for herbstluftwm
+
+function hc() {
+    herbstclient "$@"
+}
+
+hc emit_hook reload
+
+xsetroot -solid '#000000'
+#feh --bg-scale /home/cb/.config/herbstluftwm/wallpaper.jpg
+
+
+# keybindings
+Mod=Mod4
+hc keybind $Mod-Shift-q quit
+hc keybind $Mod-Shift-r reload
+hc keybind $Mod-Shift-c close
+hc keybind $Mod-Return spawn terminator
+hc keybind $Mod-x spawn dmenu_run
+hc keybind $Mod-q spawn scrot -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/'
+
+# tags
+TAG_NAMES=( {1..4} )
+TAG_KEYS=( {1..4} 0 )
+
+hc rename default "${TAG_NAMES[0]}" || true
+for i in ${!TAG_NAMES[@]} ; do
+    hc add "${TAG_NAMES[$i]}"
+    key="${TAG_KEYS[$i]}"
+    if ! [ -z "$key" ] ; then
+        hc keybind "$Mod-$key" use "${TAG_NAMES[$i]}"
+        hc keybind "$Mod-Shift-$key" move "${TAG_NAMES[$i]}"
+    fi
+done
+
+# layouting
+hc keybind $Mod-r remove
+hc keybind $Mod-space cycle_layout 1
+hc keybind $Mod-Shift-s split vertical 0.5
+hc keybind $Mod-s split horizontal 0.5
+hc keybind $Mod-o floating toggle
+hc keybind $Mod-f fullscreen toggle
+hc keybind $Mod-p pseudotile toggle
+
+# resizing
+RESIZESTEP=0.05
+hc keybind $Mod-Control-h resize left +$RESIZESTEP
+hc keybind $Mod-Control-j resize down +$RESIZESTEP
+hc keybind $Mod-Control-k resize up +$RESIZESTEP
+hc keybind $Mod-Control-l resize right +$RESIZESTEP
+
+# mouse
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 resize
+hc mousebind $Mod-Button3 zoom
+
+# focus
+hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-Tab         cycle_all +1
+hc keybind $Mod-Shift-Tab   cycle_all -1
+hc keybind $Mod-c cycle
+hc keybind $Mod-h focus left
+hc keybind $Mod-j focus down
+hc keybind $Mod-k focus up
+hc keybind $Mod-l focus right
+hc keybind $Mod-Shift-h shift left
+hc keybind $Mod-Shift-j shift down
+hc keybind $Mod-Shift-k shift up
+hc keybind $Mod-Shift-l shift right
+
+# colors
+hc set frame_border_active_color '#49351D'
+hc set frame_border_normal_color '#73532D'
+hc set frame_bg_normal_color '#BD9768'
+hc set frame_bg_active_color '#BD8541'
+hc set frame_border_width 0
+hc set window_border_width 0
+hc set window_border_normal_color '#AE8451'
+hc set window_border_active_color '#F6FF00'
+
+# rules
+hc unrule -F
+#hc rule class=XTerm tag=3 # move all xterms to tag 3
+hc rule focus=on # normally do not focus new clients
+# give focus to most common terminals
+hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK)' manage=off
+hc rule instance=xv class=MPlayer fullscreen=on
+#firefox dialog should be fullscreen, useful for my tiny eeepc
+hc rule instance="Dialog" class="Firefox" fullscreen=on #delicious bookmark
+hc rule instance="Aup" class="Firefox" fullscreen=on #autoproxy
+hc rule instance="Abp" class="Firefox" fullscreen=on #adblock plus
+#view the image in fullscreen
+#hc rule instance=feh class=feh fullscreen=on #feh has some bug
+
+#autorun
+hc spawn ~/.config/herbstluftwm/panel.sh
+hc spawn parcellite -nd #use parcellite -p/-c to see the content
+</code></pre>
+
+</div>
+<p>
+xprop is useful for writing "hc rule". Please <code>man herbstclient</code>.
+</p>
+
+<p>
+panel.sh is from the official package. It will display a panel at the top of the screen.
+</p>
+
+<p>
+Here is my $HOME/.config/herbstluftwm/panel.sh (modified for display batttery rate):
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">#!/bin/bash
+
+monitor=${1:-0}
+geometry=( $(herbstclient monitor_rect "$monitor") )
+if [ -z "$geometry" ] ;then
+    echo "Invalid monitor $monitor"
+    exit 1
+fi
+# geometry has the format: WxH+X+Y
+x=${geometry[0]}
+y=${geometry[1]}
+width=${geometry[2]}
+height=16
+font="-*-fixed-medium-*-*-*-12-*-*-*-*-*-*-*"
+bgcolor='#3E2600'
+
+function uniq_linebuffered() {
+    awk '$0 != l { print ; l=$0 ; fflush(); }' "$@"
+}
+
+herbstclient pad $monitor $height
+{
+    # events:
+    #mpc idleloop player &amp;
+    while true ; do
+        date +'date ^fg(#efefef)%H:%M^fg(#909090), %Y-%m-^fg(#efefef)%d'
+        sleep 1 || break
+    done &gt; &gt;(uniq_linebuffered)  &amp;
+    childpid=$!
     herbstclient --idle
-    <span style="color: #0000ee; font-weight: bold;">kill</span> $<span style="color: #cdcd00;">childpid</span>
+    kill $childpid
 } 2&gt; /dev/null | {
-    <span style="color: #cdcd00;">TAGS</span>=( $(<span style="color: #cd00cd;">herbstclient</span> tag_status $<span style="color: #cdcd00;">monitor</span>) )
-    <span style="color: #cdcd00;">date</span>=<span style="color: #00cd00;">""</span>
-    <span style="color: #00cdcd; font-weight: bold;">while</span> true ; <span style="color: #00cdcd; font-weight: bold;">do</span>
-        <span style="color: #cdcd00;">bordercolor</span>=<span style="color: #00cd00;">"#26221C"</span>
-        <span style="color: #cdcd00;">hintcolor</span>=<span style="color: #00cd00;">"#573500"</span>
-        <span style="color: #cdcd00;">separator</span>=<span style="color: #00cd00;">"^fg(#141414)^ro(1x$height)^fg()"</span>
-        <span style="color: #cd0000;"># </span><span style="color: #cd0000;">draw tags</span>
-        <span style="color: #00cdcd; font-weight: bold;">for</span> i<span style="color: #00cdcd; font-weight: bold;"> in</span> <span style="color: #00cd00;">"${TAGS[@]}"</span> ; <span style="color: #00cdcd; font-weight: bold;">do</span>
-            <span style="color: #00cdcd; font-weight: bold;">case</span> ${<span style="color: #cdcd00;">i</span>:0:1} <span style="color: #00cdcd; font-weight: bold;">in</span>
-                <span style="color: #00cd00;">'#'</span>)
-                    <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg(#9fbc00)^fg(#141414)"</span>
+    TAGS=( $(herbstclient tag_status $monitor) )
+    date=""
+    while true ; do
+        bordercolor="#26221C"
+        hintcolor="#573500"
+        separator="^fg(#141414)^ro(1x$height)^fg()"
+        # draw tags
+        for i in "${TAGS[@]}" ; do
+            case ${i:0:1} in
+                '#')
+                    echo -n "^bg(#9fbc00)^fg(#141414)"
                     ;;
-                <span style="color: #00cd00;">'+'</span>)
-                    <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg(#9CA668)^fg(#141414)"</span>
+                '+')
+                    echo -n "^bg(#9CA668)^fg(#141414)"
                     ;;
-                <span style="color: #00cd00;">':'</span>)
-                    <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg(#6A4100)^fg(#141414)"</span>
+                ':')
+                    echo -n "^bg(#6A4100)^fg(#141414)"
                     ;;
-                <span style="color: #00cd00;">'!'</span>)
-                    <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg(#FF0675)^fg(#141414)"</span>
+                '!')
+                    echo -n "^bg(#FF0675)^fg(#141414)"
                     ;;
-                <em>)
-                    <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg()^fg()"</span>
+                *)
+                    echo -n "^bg()^fg()"
                     ;;
-            <span style="color: #00cdcd; font-weight: bold;">esac</span>
-            <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^ca(1,herbstclient focus_monitor $monitor &amp;&amp; "'herbstclient use "'</span>${<span style="color: #cdcd00;">i</span>:1}<span style="color: #00cd00;">'") '"${i:1} ^ca()"</span>
-            <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"$separator"</span>
-        <span style="color: #00cdcd; font-weight: bold;">done</span>
-        <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^bg()^p(_CENTER)"</span>
-        <span style="color: #cd0000;"># </span><span style="color: #cd0000;">small adjustments</span>
-        <span style="color: #cdcd00;">battery</span>=$(<span style="color: #cd00cd;">expr</span> $(<span style="color: #cd00cd;">expr</span> $(<span style="color: #cd00cd;">cat</span> /sys/class/power_supply/BAT</em>/charge_now) <span style="color: #00cd00;">*</span> 100) / $(<span style="color: #cd00cd;">cat</span> /sys/class/power_supply/BAT<em>/charge_full))
-        <span style="color: #00cdcd; font-weight: bold;">if</span> [ <span style="color: #00cd00;">"$battery"</span> = <span style="color: #00cd00;">"/"</span> ] ;<span style="color: #00cdcd; font-weight: bold;">then</span>
-            <span style="color: #cdcd00;">right</span>=<span style="color: #00cd00;">"$separator^bg($hintcolor) $date $separator"</span>
-        <span style="color: #00cdcd; font-weight: bold;">else</span>
-            <span style="color: #cdcd00;">right</span>=<span style="color: #00cd00;">"$separator^bg($hintcolor) $battery% $date $separator"</span>
-        <span style="color: #00cdcd; font-weight: bold;">fi</span>
-        <span style="color: #cdcd00;">right_text_only</span>=$(<span style="color: #cd00cd;">echo</span> -n <span style="color: #00cd00;">"$right"</span>|sed <span style="color: #00cd00;">'s.\^[^(]</span></em>([^)]<em>)..g')
-        <span style="color: #cd0000;"># </span><span style="color: #cd0000;">get width of right aligned text.. and add some space..</span>
-        <span style="color: #cdcd00;">width</span>=$(<span style="color: #cd00cd;">textwidth</span> <span style="color: #00cd00;">"$font"</span> <span style="color: #00cd00;">"$right_text_only  "</span>)
-        <span style="color: #0000ee; font-weight: bold;">echo</span> -n <span style="color: #00cd00;">"^p(_RIGHT)^p(-$width)$right"</span>
-        <span style="color: #0000ee; font-weight: bold;">echo</span>
-        <span style="color: #cd0000;"># </span><span style="color: #cd0000;">wait for next event</span>
-        <span style="color: #0000ee; font-weight: bold;">read</span> line || <span style="color: #00cdcd; font-weight: bold;">break</span>
-        <span style="color: #cdcd00;">cmd</span>=( $<span style="color: #cdcd00;">line</span> )
-        <span style="color: #cd0000;"># </span><span style="color: #cd0000;">find out event origin</span>
-        <span style="color: #00cdcd; font-weight: bold;">case</span> <span style="color: #00cd00;">"${cmd[0]}"</span><span style="color: #00cdcd; font-weight: bold;"> in</span>
-            tag</em>)
-                <span style="color: #cd0000;">#</span><span style="color: #cd0000;">echo "reseting tags" &gt;&amp;2</span>
-                <span style="color: #cdcd00;">TAGS</span>=( $(<span style="color: #cd00cd;">herbstclient</span> tag_status $<span style="color: #cdcd00;">monitor</span>) )
+            esac
+            echo -n "^ca(1,herbstclient focus_monitor $monitor &amp;&amp; "'herbstclient use "'${i:1}'") '"${i:1} ^ca()"
+            echo -n "$separator"
+        done
+        echo -n "^bg()^p(_CENTER)"
+        # small adjustments
+        battery=$(expr $(expr $(cat /sys/class/power_supply/BAT*/charge_now) \* 100) / $(cat /sys/class/power_supply/BAT*/charge_full))
+        if [ "$battery" = "/" ] ;then
+            right="$separator^bg($hintcolor) $date $separator"
+        else
+            right="$separator^bg($hintcolor) $battery% $date $separator"
+        fi
+        right_text_only=$(echo -n "$right"|sed 's.\^[^(]*([^)]*)..g')
+        # get width of right aligned text.. and add some space..
+        width=$(textwidth "$font" "$right_text_only  ")
+        echo -n "^p(_RIGHT)^p(-$width)$right"
+        echo
+        # wait for next event
+        read line || break
+        cmd=( $line )
+        # find out event origin
+        case "${cmd[0]}" in
+            tag*)
+                #echo "reseting tags" &gt;&amp;2
+                TAGS=( $(herbstclient tag_status $monitor) )
                 ;;
             date)
-                <span style="color: #cd0000;">#</span><span style="color: #cd0000;">echo "reseting date" &gt;&amp;2</span>
-                <span style="color: #cdcd00;">date</span>=<span style="color: #00cd00;">"${cmd[@]:1}"</span>
+                #echo "reseting date" &gt;&amp;2
+                date="${cmd[@]:1}"
                 ;;
             quit_panel)
-                <span style="color: #00cdcd; font-weight: bold;">exit</span>
+                exit
                 ;;
             reload)
-                <span style="color: #00cdcd; font-weight: bold;">exit</span>
+                exit
                 ;;
-            <span style="color: #cd0000;">#</span><span style="color: #cd0000;">player)</span>
-            <span style="color: #cd0000;">#    </span><span style="color: #cd0000;">;;</span>
-        <span style="color: #00cdcd; font-weight: bold;">esac</span>
-        <span style="color: #00cdcd; font-weight: bold;">done</span>
-} 2&gt; /dev/null | dzen2 -w $<span style="color: #cdcd00;">width</span> -x $<span style="color: #cdcd00;">x</span> -y $<span style="color: #cdcd00;">y</span> -fn <span style="color: #00cd00;">"$font"</span> -h $<span style="color: #cdcd00;">height</span> <span style="color: #00cd00;">\</span>
-    -ta l -bg <span style="color: #00cd00;">"$bgcolor"</span> -fg <span style="color: #00cd00;">'#efefef'</span>
-</p></pre>  </div>
+            #player)
+            #    ;;
+        esac
+        done
+} 2&gt; /dev/null | dzen2 -w $width -x $x -y $y -fn "$font" -h $height \
+    -ta l -bg "$bgcolor" -fg '#efefef'
+</code></pre>
+
+</div>
+
+<p>
+UPDATE: I use <a href="https://i3wm.org/">https://i3wm.org/</a> now
+</p>
+</div>
+</div>
         </div>
         
         <ul class="pager hidden-print">
