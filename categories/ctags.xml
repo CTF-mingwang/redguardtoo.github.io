@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 13:01:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 13:11:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 code navigation for web development                                 :en:javascript:emacs:ctags:
 &lt;/p&gt;
 
@@ -366,22 +366,95 @@ UPDATE:
 (add-hook 'c-mode-hook 'my-setup-develop-environment)
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; UPDATE: There is some discussion at &lt;a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3"&gt;Google Plus&lt;/a&gt; about using ctags. Kaushal Modi recommended three emacs plugins: &lt;/p&gt;&lt;ol&gt; &lt;li&gt;ctags-update &lt;/li&gt; &lt;li&gt;etags-table &lt;/li&gt; &lt;li&gt;etags-select &lt;/li&gt; &lt;/ol&gt;   &lt;p&gt; I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about &lt;b&gt;only one global variable tags-table-list&lt;/b&gt; makes my code shorter. &lt;/p&gt; &lt;p&gt; But I do like etags-select, it provide better UI for finding tag and I will use it from now on. &lt;/p&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html</guid><pubDate>Tue, 11 Mar 2014 18:52:00 GMT</pubDate></item><item><title>How to use ctags with Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;  See &lt;a href="http://emacswiki.org/emacs/EmacsTags"&gt;http://emacswiki.org/emacs/EmacsTags&lt;/a&gt; for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing. &lt;/p&gt; &lt;p&gt;   According wiki page, people usually use ctags to do two things, &lt;/p&gt;&lt;ol&gt; &lt;li&gt;Code navigation &lt;/li&gt; &lt;li&gt;Auto-complete/Intellisense  &lt;p&gt;   In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like &lt;a href="http://cscope.sourceforge.net/"&gt;cscope&lt;/a&gt; or &lt;a href="http://www.gnu.org/software/global"&gt;GNU Global&lt;/a&gt;. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux kenel in the most efficient way, you should use better tools like &lt;a href="http://www.gnu.org/software/global"&gt;GNU Global&lt;/a&gt;. See the head up from &lt;a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451"&gt;Nick Alcock&lt;/a&gt;. His summary of the Pro/Con of GNU Global is great. &lt;/p&gt; &lt;p&gt;   Intellisense is a different story. For programming languages like Javascript, ctags provide some intellisense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++. &lt;/p&gt; &lt;p&gt;   I found one missing piece from Emacswiki is the tip on how to &lt;b&gt;manage tags file&lt;/b&gt; easily when the TAGS is built from some code of third party libraries (&lt;a href="http://http://en.wikipedia.org/wiki/Qt_(framework)"&gt;QT&lt;/a&gt;, &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, &lt;a href="http://www.gtk.org"&gt;GTK&lt;/a&gt;, &lt;a href="http://www.boost.org"&gt;Boost&lt;/a&gt;, just name a few). &lt;/p&gt; &lt;p&gt;   My typical work flow is: &lt;/p&gt;&lt;/li&gt; &lt;li&gt;Load the tags file for my own code. &lt;/li&gt; &lt;li&gt;Load other tags files built from third party libraries related to my current task. &lt;/li&gt; &lt;li&gt;Unload third party tags immediately if its not needed.  &lt;p&gt;   The purpose to load tags files is to look up API easily. For example, I use C++ library &lt;a href="http://wxwidgets.org"&gt;wxWidgets&lt;/a&gt; to develop my application. I want to use its API called wxWindow::Maximize. I type 'M-x find-tag" and input the keyword "Maximize". So I can check the function definition and know what parameters I need fill in to use "Maximize". &lt;/p&gt; &lt;p&gt;   The reason to do the unload thing is to avoid function name confliction from some tags files. Emacswiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day. &lt;/p&gt;&lt;/li&gt; &lt;/ol&gt;   &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Produce tags files for all the environments&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;  &lt;p&gt;For exmaple, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at "/home/cb/tags/Library_A/linux" &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Use git and github to manage the tags files&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library. &lt;/p&gt; &lt;p&gt; Emacswiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library. &lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Write emacs lisp code to load/unload these tags files&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;Here is the code. In this example, if I need load tags file for &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use &lt;a href="http://www.emacswiki.org/Smex"&gt;Smex&lt;/a&gt;, calling function doesn't mean pressing many keys. &lt;/p&gt;   
-&lt;pre class="prettyprint lang-lisp"&gt;
-; Set up tags built from third party libraries ===begin
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; UPDATE: There is some discussion at &lt;a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3"&gt;Google Plus&lt;/a&gt; about using ctags. Kaushal Modi recommended three emacs plugins: &lt;/p&gt;&lt;ol&gt; &lt;li&gt;ctags-update &lt;/li&gt; &lt;li&gt;etags-table &lt;/li&gt; &lt;li&gt;etags-select &lt;/li&gt; &lt;/ol&gt;   &lt;p&gt; I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about &lt;b&gt;only one global variable tags-table-list&lt;/b&gt; makes my code shorter. &lt;/p&gt; &lt;p&gt; But I do like etags-select, it provide better UI for finding tag and I will use it from now on. &lt;/p&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html</guid><pubDate>Tue, 11 Mar 2014 18:52:00 GMT</pubDate></item><item><title>How to use ctags with Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+
+&lt;p&gt;
+See &lt;a href="http://emacswiki.org/emacs/EmacsTags"&gt;http://emacswiki.org/emacs/EmacsTags&lt;/a&gt; for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing.
+&lt;/p&gt;
+
+&lt;p&gt;
+According wiki page, people usually use ctags to do two things,
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Code navigation
+&lt;/li&gt;
+&lt;li&gt;Auto-complete/IntelliSense
+&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+In my opinion, ctags is OK for code navigation because it's integrated into Emacs well and ctags supports more programming language. But ctags only uses regular expression to analyze the code. So it's not as precise as professional tools like &lt;a href="http://cscope.sourceforge.net/"&gt;cscope&lt;/a&gt; or &lt;a href="http://www.gnu.org/software/global"&gt;GNU Global&lt;/a&gt;. According to my own experience, ctags plus grep is actually good enough for code navigation in big enterprise projects with mixed environments. If you are among a few talented geeks who are developing Linux Kernel in the most efficient way, you should use better tools like &lt;a href="http://www.gnu.org/software/global"&gt;GNU Global&lt;/a&gt;. See the head up from &lt;a href="https://plus.google.com/113859563190964307534/posts/Ayr687eH451"&gt;Nick Alcock&lt;/a&gt;. His summary of the Pro/Con of GNU Global is great.
+&lt;/p&gt;
+
+&lt;p&gt;
+IntelliSense is a different story. For programming languages like Javascript, ctags provide some IntelliSense with is better than nothing. C++ is a more complex language which is a litter harder for ctags to handle unless you are not using those "advanced" features of C++.
+&lt;/p&gt;
+
+&lt;p&gt;
+I found one missing piece from EmacsWiki is the tip on how to &lt;b&gt;manage tags file&lt;/b&gt; easily when the TAGS is built from some code of third party libraries (&lt;a href="http://http://en.wikipedia.org/wiki/Qt_(framework)"&gt;QT&lt;/a&gt;, &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, &lt;a href="http://www.gtk.org"&gt;GTK&lt;/a&gt;, &lt;a href="http://www.boost.org"&gt;Boost&lt;/a&gt;, just name a few).
+&lt;/p&gt;
+
+&lt;p&gt;
+My typical work flow is:
+&lt;/p&gt;
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;Load the tags file for my own code.
+&lt;/li&gt;
+&lt;li&gt;Load other tags files built from third party libraries related to my current task.
+&lt;/li&gt;
+&lt;li&gt;Unload third party tags immediately if its not needed.
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+The purpose to load tags files is to look up API easily. For example, I use C++ library &lt;a href="http://wxwidgets.org"&gt;wxWidgets&lt;/a&gt; to develop my application. I want to use its API called &lt;code&gt;wxWindow::Maximize&lt;/code&gt;. I type &lt;code&gt;M-x find-tag&lt;/code&gt; and input the keyword &lt;code&gt;Maximize&lt;/code&gt;. So I can check the function definition and know what parameters I need fill in to use "Maximize".
+&lt;/p&gt;
+
+&lt;p&gt;
+The reason to do the unload thing is to avoid function name conflict from some tags files. EmacsWiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h4 id="sec-1-1"&gt;Produce tags files for all the environments&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;p&gt;
+For example, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at &lt;code&gt;/home/cb/tags/Library_A/linux&lt;/code&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h4 id="sec-1-2"&gt;Use git and github to manage the tags files&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
+&lt;p&gt;
+So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library.
+&lt;/p&gt;
+
+&lt;p&gt;
+EmacsWiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h4 id="sec-1-3"&gt;Write emacs lisp code to load/unload these tags files&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
+&lt;p&gt;
+Here is the code. In this example, if I need load tags file for &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use &lt;a href="http://www.emacswiki.org/Smex"&gt;Smex&lt;/a&gt;, calling function doesn't mean pressing many keys.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;; Set up tags built from third party libraries ===begin
 ; define tags alias like "wx-tags" here
 (setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
 
 ; @see &amp;lt;Selecting a Tags Table&amp;gt; in Emacs manual for details.
 ; We only change the list "tags-table-list". It is documented officialy.
 (defun insert-into-tags-table-list(e)
-  (add-to-list 'tags-table-list e t)
-  )
-
+  (add-to-list 'tags-table-list e t))
 (defun delete-from-tags-table-list (e)
-  (setq tags-table-list (delete e tags-table-list))
-  )
-
+  (setq tags-table-list (delete e tags-table-list)))
 ; This is a sample command, all you need is copy/paste this template
 ; for other new commands
 (defun add-wx-tags (&amp;amp;optional del)
@@ -393,11 +466,18 @@ UPDATE:
     ; change below line to add them
     (setq mytags (list wx-tags))
     (if del (mapc 'delete-from-tags-table-list mytags)
-      (mapc 'insert-into-tags-table-list mytags)
-      )
-    )
-  )
-; === end
-&lt;/pre&gt;
+      (mapc 'insert-into-tags-table-list mytags))))
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; This solution only uses one standard variable "tags-table-list" in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem. &lt;/p&gt; &lt;p&gt; See &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html"&gt;Emacs manual&lt;/a&gt; for technical details. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html</guid><pubDate>Thu, 22 Nov 2012 12:35:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;
+
+&lt;p&gt;
+This solution only uses one standard variable &lt;code&gt;tags-table-list&lt;/code&gt; in Emacs. So it will always work with any other Emacs plugins you install. And you can use all the old hotkeys and functions ("find-tag", for example) without any problem.
+&lt;/p&gt;
+
+&lt;p&gt;
+See &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html"&gt;Emacs manual&lt;/a&gt; for technical details.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html</guid><pubDate>Thu, 22 Nov 2012 15:35:00 GMT</pubDate></item></channel></rss>

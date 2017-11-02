@@ -212,13 +212,21 @@ Updated: The simpler solution is to install gcc4 at cygwin.</p>
             <div class="body">
                 <div>
 <p></p>
-<p>All you need  to do is to install <a href="http://www.tug.org/texlive/">TexLive</a>. The org-mode has some handy function to find the TexLive and do the conversion. So all you need to trigger the conversion in Emacs is pressing <code>C-c C-e p'. &lt;/p&gt; &lt;p&gt; At Cygwin and Linux, installing TexLive is a piece of cake by using default package system. &lt;/p&gt; &lt;p&gt; At Mac, I use &lt;a href="http://www.tug.org/texlive/acquire-netinstall.html"&gt;the default TexLive source package&lt;/a&gt; (install-tl-unx.tar.gz). After installation, you need set up environment varaibles. &lt;/p&gt; &lt;p&gt; If you use Bash (default at my OS X 10.7.3), you can paste below code to you ~/.bashrc: &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #af00ff;"&gt;if&lt;/span&gt; [[ &lt;span style="color: #cd00cd;"&gt;</code>uname -s` == <em>Darwin</em> ]]; <span style="color: #af00ff;">then</span>
+<p>All you need  to do is to install <a href="http://www.tug.org/texlive/">TexLive</a>. The org-mode has some handy function to find the TexLive and do the conversion. So all you need to trigger the conversion in Emacs is pressing </p>
+<pre>C-c C-e p</pre>.
+
+<p> At Cygwin and Linux, installing TexLive is a piece of cake by using default package system. </p>
+
+<p></p>
+<p> At Mac, I use <a href="http://www.tug.org/texlive/acquire-netinstall.html">the default TexLive source package</a> (install-tl-unx.tar.gz). After installation, you need set up environment varaibles. </p> <p> If you use Bash (default at my OS X 10.7.3), you can paste below code to you ~/.bashrc: </p>
+<pre class="src src-sh"><span style="color: #af00ff;">if</span> [[ <span style="color: #cd00cd;">`uname -s`</span> == *Darwin* ]]; <span style="color: #af00ff;">then</span>
    <span style="color: #af0000;">#</span><span style="color: #af0000;">tex live on OS X</span>
    <span style="color: #5f5f87;">export</span> <span style="color: #af5f00;">PATH</span>=/usr/local/texlive/2011/bin/universal-darwin:$<span style="color: #af5f00;">PATH</span>
    <span style="color: #5f5f87;">export</span> <span style="color: #af5f00;">MANPATH</span>=/usr/local/texlive/2011/texmf/doc/man:$<span style="color: #af5f00;">MANPAH</span>
    <span style="color: #5f5f87;">export</span> <span style="color: #af5f00;">INFOPATH</span>=/usr/local/texlive/2011/texmf/doc/info:$<span style="color: #af5f00;">INFOPATH</span>
-<span style="color: #af00ff;">fi</span></p>
-<p>  </p>
+<span style="color: #af00ff;">fi</span></pre>
+
+<p></p>
 </div>
             </div>
         </div>
