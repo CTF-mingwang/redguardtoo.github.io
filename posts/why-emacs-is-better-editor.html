@@ -11,13 +11,28 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Why Emacs is better editor - a case study for javascript developer">
 <meta property="og:url" content="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">
-<meta property="og:description" content="UPDATED:  2014-01-15 Wed   Let's see an example in real life development.   Note   For people who does not get the key points of this article, here are the points:  Emacs has an embedded javascript in">
+<meta property="og:description" content="UPDATED: &lt;2014-01-15 Wed&gt;
+
+
+
+Let's see an example in real life development.
+
+
+
+Note
+
+
+For people who does not get the key points of this article, here are the points:
+
+
+Emacs has an embedded javascrip">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2013-12-15T19:02:00Z">
+<meta property="article:published_time" content="2013-12-15T22:02:00Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
 <meta property="article:tag" content="html">
 <meta property="article:tag" content="javascript">
+<meta property="article:tag" content="js2">
 <meta property="article:tag" content="web">
 </head>
 <body>
@@ -38,7 +53,7 @@
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2013-12-15T19:02:00+00:00">2013-12-15 19:02</time>
+                <time class="timeago" datetime="2013-12-15T22:02:00+00:00">2013-12-15 22:02</time>
             
 
             
@@ -54,21 +69,64 @@
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="../categories/html.html" rel="tag">html</a></li>
            <li><a class="tag p-category" href="../categories/javascript.html" rel="tag">javascript</a></li>
+           <li><a class="tag p-category" href="../categories/js2.html" rel="tag">js2</a></li>
            <li><a class="tag p-category" href="../categories/web.html" rel="tag">web</a></li>
         </ul>
 </div>
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>UPDATED: <span class="timestamp-wrapper"> <span class="timestamp">2014-01-15 Wed</span></span> </p> <p> Let's see an example in real life development. </p> <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Note</h4> <div class="outline-text-3" id="text-1">  <p>For people who does not get the key points of this article, here are the points: </p>
-<ul>
-<li>Emacs has an embedded <b>javascript interpreter</b> which I extend a little bit. </li> <li>Other editors just use external tools or regular expression to do the semantic analysis. </li> <li>The difference of above two is bigger than the difference between machine gun and spear. </li> </ul>
-</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Problem</h4> <div class="outline-text-3" id="text-2">  <p>I'm maintaining a big javascript file with thousands of lines of legacy code. </p> <p> My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily. </p> <p> The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions. </p> <p> To understand what "complex" means, let's check some code from real world application: </p>   
-<pre class="prettyprint ">
+            <div id="outline-container-sec-1" class="outline-2">
 
-$(el.completeRegistrationForm).validate({
+<div class="outline-text-2" id="text-1">
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-01-15 Wed&gt;</span></span>
+</p>
+
+<p>
+Let's see an example in real life development.
+</p>
+</div>
+<div id="outline-container-sec-1-1" class="outline-3">
+<h4 id="sec-1-1">Note</h4>
+<div class="outline-text-3" id="text-1-1">
+<p>
+For people who does not get the key points of this article, here are the points:
+</p>
+<ul class="org-ul">
+<li>Emacs has an embedded <b>javascript interpreter</b> which I extend a little bit.
+</li>
+<li>Other editors just use external tools or regular expression to do the semantic analysis.
+</li>
+<li>The difference of above two is bigger than the difference between machine gun and spear.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h4 id="sec-1-2">Problem</h4>
+<div class="outline-text-3" id="text-1-2">
+<p>
+I'm maintaining a big javascript file with thousands of lines of legacy code.
+</p>
+
+<p>
+My most urgent issue is how to list all the functions in that javascript file and jump to the definition of specific function easily.
+</p>
+
+<p>
+The modern enterprise application usually define the javascript function in some complex data structure. So most editors are not good at listing the functions.
+</p>
+
+<p>
+To understand what "complex" means, let's check some code from real world application:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-javascript">$(el.completeRegistrationForm).validate({
     ignore: " :hidden",
     rules : {
         password : {
@@ -94,22 +152,169 @@ $(el.completeRegistrationForm).validate({
         // ... I skipped next 200 lines which are similar to above lines
     }
 });
+</code></pre>
+
+</div>
+
+<p>
+Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".:
+<img src="../wp-content/sublime-functions.png" alt="sublime-functions.png"></p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h4 id="sec-1-3">Solution</h4>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>.
+</p>
+
+<p>
+Since js2-mode is a interpreter, basically it can do anything you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode.
+</p>
+
+<p>
+Here is my code patch to make the js2-mode display the list of functions with correct context:
+</p>
+
+<pre class="example">
+commit 56ed89bf18a6b58fd4620056288ea2ab52bd4d77
+Author: Chen Bin &lt;chenbin.sh@gmail.com&gt;
+Date:   Sun Dec 15 18:18:06 2013 +1100
+
+    more hint for orphan function
+
+diff --git a/js2-imenu-extras.el b/js2-imenu-extras.el
+index e8e15a5..17bf158 100644
+--- a/js2-imenu-extras.el
++++ b/js2-imenu-extras.el
+@@ -174,6 +174,39 @@ prefix any functions defined inside the IIFE with the module name."
+          (js2-imenu-record-module-pattern node)))
+        t))))
+
++(defun js2-imenu-get-parent-keyname-list (node)
++  "get the list of keys of parent of node
++for example, for javascript code, {rules:{ password {required: function(){}}}}
++the return will be '(rules password)."
++  (let ((rlt '())
++        (n node))
++    (while (setq n (js2-imenu-parent-prop-node n))
++      (add-to-list 'rlt (js2-prop-node-name (js2-object-prop-node-left n)))
++      )
++    rlt
++    )
++  )
++
++(defun js2-imenu-parent-prop-node (node)
++  "for javascript code: parent-key-name:{ required:function(){} }
++we need know the  parent-key-name.
++ step1, 'required:function(){}' is the js2-object-prop-node
++ step2, '{ required:function(){} }' is the js2-object-node
++ step3, 'parent-key-name:{ required:function(){} }' is js2-object-prop-node
++"
++  (let (p2 p3)
++    ;; step 2
++    (setq p2 (js2-node-parent node))
++    ;; step 3
++    (when (and p2 (js2-object-node-p p2))
++      (setq p3 (js2-node-parent p2))
++      (if (and p3 (js2-object-prop-node-p p3))
++        p3
++        )
++      )
++    )
++  )
++
+ (defun js2-imenu-record-orphan-function (node)
+   "Record orphan function when it's the value of NODE.
+ NODE must be `js2-object-prop-node'."
+@@ -181,10 +214,15 @@ NODE must be `js2-object-prop-node'."
+     (let ((fn-node (js2-object-prop-node-right node)))
+       (unless (and js2-imenu-function-map
+                    (gethash fn-node js2-imenu-function-map))
+-        (let ((key-node (js2-object-prop-node-left node)))
+-          (js2-record-imenu-entry fn-node
+-                                  (list js2-imenu-other-functions-ns
+-                                        (js2-prop-node-name key-node))
++        (let ((key-node (js2-object-prop-node-left node))
++              (parent-prop-node (js2-imenu-parent-prop-node node))
++              mylist
++              )
++          (setq mylist (append (js2-imenu-get-parent-keyname-list node)
++                               (list (js2-prop-node-name key-node))
++                               ))
++          (add-to-list 'mylist js2-imenu-other-functions-ns)
++          (js2-record-imenu-entry fn-node mylist
+                                   (js2-node-abs-pos key-node)))))))
+
+ (defun js2-imenu-record-module-pattern (node)
 </pre>
 
-<p></p>
-<p> Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".: <img src="../wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png"></p> </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Solution</h4> <div class="outline-text-3" id="text-3">  <p>Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>. </p> <p> Since js2-mode is a interpreter, basically it can do anythig you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode. </p>
-<p> I already submitted the patch to mooz so everyone will enjoy this feature in the future. </p>
+<p>
+I already submitted the patch to mooz so everyone will enjoy this feature in the future.
+</p>
 
-<p></p>
-<p> Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>: <img src="../wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png"></p> <p> The screen shot after we applying the above patch:  <img src="../wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png"></p> </div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">Summary</h4> <div class="outline-text-3" id="text-4">  <p>That's an example of beauty of Emacs. </p> <p> It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass. </p>
-</div>  </div>  <div id="outline-container-5" class="outline-3"> <h4 id="sec-5">Update</h4> <div class="outline-text-3" id="text-5">  <p>My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager. </p> <p> After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature: </p>   
-<pre class="prettyprint ">
-(js2-imenu-extras-mode)
-</pre>
+<p>
+Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>:
+<img src="../wp-content/emacs-functions.png" alt="emacs-functions.png"></p>
 
-<p></p>
-<p> The UI to display the candidate in this actile is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm. </p> <p> The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>. </p> <p> After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>: </p> <p> <img src="../wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png" alt="http://blog.binchen.org/wp-content/uploads/2014/01/wpid-helm-imenu-and-js2-mode-nq8.png"></p>
-</div> </div> </div>
+<p>
+The screen shot after we applying the above patch: 
+<img src="../wp-content/emacs-functions-improved.png" alt="emacs-functions-improved.png"></p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h4 id="sec-1-4">Summary</h4>
+<div class="outline-text-3" id="text-1-4">
+<p>
+That's an example of beauty of Emacs.
+</p>
+
+<p>
+It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass.
+#+image/sublime-functions.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="wpid-sublime-functions.png">
+#+image/emacs-functions.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="wpid-emacs-functions.png">
+#+image/emacs-functions-improved.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="wpid-emacs-functions-improved.png"></p>
+</div>
+</div>
+<div id="outline-container-sec-1-5" class="outline-3">
+<h4 id="sec-1-5">Update</h4>
+<div class="outline-text-3" id="text-1-5">
+<p>
+My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager.
+</p>
+
+<p>
+After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(js2-imenu-extras-mode)
+</code></pre>
+
+</div>
+
+<p>
+The UI to display the candidate is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm.
+</p>
+
+<p>
+The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>.
+</p>
+
+<p>
+After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>:
+</p>
+
+
+<div class="figure">
+<p><img src="../wp-content/helm-imenu-and-js2-mode-nq8.png" alt="helm-imenu-and-js2-mode-nq8.png"></p>
+</div>
+</div>
+</div>
+</div>
         </div>
         
         <ul class="pager hidden-print">
