@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 12:21:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 12:23:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to manage the file path in big project                                    :en:engineering:software:bash:
 &lt;/p&gt;
 
@@ -731,14 +731,14 @@ $TERM too long - sorry.
 &lt;/div&gt;
 
 &lt;p&gt;
-原因为screen的开发者对于环境变量=$TERM=的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单.
-在=.Xdefaults=中添加一行,
+原因为screen的开发者对于环境变量 &lt;code&gt;$TERM&lt;/code&gt; 的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单.
+在 &lt;code&gt;.Xdefaults&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
 &lt;pre class="example"&gt;
 urxvt*termName: rxvt-256color
 &lt;/pre&gt;
 &lt;p&gt;
-在=.screenrc=中添加一行,
+在 &lt;code&gt;.screenrc&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
 &lt;pre class="example"&gt;
 term rxvt-256color
@@ -750,7 +750,7 @@ term rxvt-256color
 &lt;h4 id="sec-1-4"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1-4"&gt;
 &lt;p&gt;
-因为=Ctrl-a=在Bash和Emacs中都是常用快捷键,在=.screenrc=中添加一行,
+因为 &lt;code&gt;Ctrl-a&lt;/code&gt; 在Bash和Emacs中都是常用快捷键,在 &lt;code&gt;.screenrc&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -760,7 +760,7 @@ term rxvt-256color
 
 &lt;/div&gt;
 &lt;p&gt;
-这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置.
+这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;EmacsWiki&lt;/a&gt;获得更多兼容Emacs的设置.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;

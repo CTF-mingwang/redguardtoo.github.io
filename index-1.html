@@ -787,14 +787,14 @@ $TERM too long - sorry.
 </div>
 
 <p>
-原因为screen的开发者对于环境变量=$TERM=的最大长度做了不合理的假定.这里是<a href="https://bbs.archlinux.org/viewtopic.php?pid=885446">具体讨论</a>,解决办法很简单.
-在=.Xdefaults=中添加一行,
+原因为screen的开发者对于环境变量 <code>$TERM</code> 的最大长度做了不合理的假定.这里是<a href="https://bbs.archlinux.org/viewtopic.php?pid=885446">具体讨论</a>,解决办法很简单.
+在 <code>.Xdefaults</code> 中添加一行,
 </p>
 <pre class="example">
 urxvt*termName: rxvt-256color
 </pre>
 <p>
-在=.screenrc=中添加一行,
+在 <code>.screenrc</code> 中添加一行,
 </p>
 <pre class="example">
 term rxvt-256color
@@ -806,7 +806,7 @@ term rxvt-256color
 <h4 id="sec-1-4">使用screen前我将screen的Ctrl-a改为Ctrl-t</h4>
 <div class="outline-text-3" id="text-1-4">
 <p>
-因为=Ctrl-a=在Bash和Emacs中都是常用快捷键,在=.screenrc=中添加一行,
+因为 <code>Ctrl-a</code> 在Bash和Emacs中都是常用快捷键,在 <code>.screenrc</code> 中添加一行,
 </p>
 <div class="org-src-container">
 
@@ -816,7 +816,7 @@ term rxvt-256color
 
 </div>
 <p>
-这个修改我是从<a href="http://jinome.stanford.edu/">Balaji S. Srinivasan</a>的<a href="http://jinome.stanford.edu/stat366/unix/.screenrc">.screenrc</a>抄来的. 可以参考<a href="http://www.emacswiki.org/emacs/GnuScreen">emacs wiki</a>获得更多兼容emacs的设置.
+这个修改我是从<a href="http://jinome.stanford.edu/">Balaji S. Srinivasan</a>的<a href="http://jinome.stanford.edu/stat366/unix/.screenrc">.screenrc</a>抄来的. 可以参考<a href="http://www.emacswiki.org/emacs/GnuScreen">EmacsWiki</a>获得更多兼容Emacs的设置.
 </p>
 </div>
 </div>
