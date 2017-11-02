@@ -11,13 +11,21 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Convert TEX to PDF">
 <meta property="og:url" content="http://blog.binchen.org/posts/convert-tex-to-pdf.html">
-<meta property="og:description" content="Install TexLive in your OS.   Install latex2pdf which is dependent on TexLive.    cpan App::cpanminus # handy tool to install cpan module
+<meta property="og:description" content="Install TexLive in your OS.
+
+
+
+Install latex2pdf which is dependent on TexLive.
+
+
+
+
+cpan App::cpanminus # handy tool to install cpan module
 cpanm Template # Template is missing on cygwin
-cpanm latex2pdf">
+cpanm latex2p">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2012-07-17T23:22:41Z">
+<meta property="article:published_time" content="2012-07-17T23:22:00Z">
 <meta property="article:tag" content="cpan">
-<meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
 <meta property="article:tag" content="latex">
 <meta property="article:tag" content="pdf">
@@ -41,7 +49,7 @@ cpanm latex2pdf">
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2012-07-17T23:22:41+00:00">2012-07-17 23:22</time>
+                <time class="timeago" datetime="2012-07-17T23:22:00+00:00">2012-07-17 23:22</time>
             
 
             
@@ -54,7 +62,6 @@ cpanm latex2pdf">
         <ul>
         Tags : 
            <li><a class="tag p-category" href="../categories/cpan.html" rel="tag">cpan</a></li>
-           <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
            <li><a class="tag p-category" href="../categories/latex.html" rel="tag">latex</a></li>
            <li><a class="tag p-category" href="../categories/pdf.html" rel="tag">pdf</a></li>
@@ -64,13 +71,38 @@ cpanm latex2pdf">
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>Install <a href="http://www.tug.org/texlive/">TexLive</a> in your OS. </p> <p> Install latex2pdf which is dependent on TexLive. </p>   <pre class="src src-sh">cpan App::cpanminus <span style="color: #af0000;"># </span><span style="color: #af0000;">handy tool to install cpan module</span>
-cpanm Template <span style="color: #af0000;"># </span><span style="color: #af0000;">Template is missing on cygwin</span>
-<p>cpanm latex2pdf <span style="color: #af0000;"># </span><span style="color: #af0000;">finally</span></p>
-<p></p></pre>   <p> Convert now! </p>   <pre class="src src-sh">pdf2latex cv.tex
-<p></p></pre>  </div>
+            <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+Install <a href="http://www.tug.org/texlive/">TexLive</a> in your OS.
+</p>
+
+<p>
+Install latex2pdf which is dependent on TexLive.
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">cpan App::cpanminus # handy tool to install cpan module
+cpanm Template # Template is missing on cygwin
+cpanm latex2pdf # finally
+</code></pre>
+
+</div>
+
+<p>
+Convert now!
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">pdf2latex cv.tex
+</code></pre>
+
+</div>
+</div>
+</div>
         </div>
         
         <ul class="pager hidden-print">
