@@ -376,7 +376,7 @@
             <h1 class="title"><a href="posts/mysqldump-for-sqlite3.html">mysqldump for sqlite3</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2011-09-18T15:09:00+00:00">2011-09-18 15:09</time>
+                    <time class="timeago" datetime="2011-09-18T23:09:00+00:00">2011-09-18 23:09</time>
 </div>
                 <div class="stats">
                     
@@ -397,11 +397,25 @@
 
             </div>
             <div class="body">
-                <div>
-<p></p>
-<p>Be careful that import data into Sqlite3 could be very slow in this way. </p>   <pre class="src src-sh">mysqldump -u root -p111111 -c --compact -t --skip-opt dbname tbl1 tbl2|sed -e <span style="color:#00cd00;">"s/\'/''/g"</span>|gzip -9 &gt; data.dump.gz
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+Please note that data import could be very slow in this way.
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-sh">mysqldump -u root -p111111 -c --compact -t --skip-opt dbname tbl1 tbl2|sed -e "s/\\\'/''/g"|gzip -9 &gt; data.dump.gz
 zcat data.dump.gz | sqlite3 db.sqlite3
-<p></p></pre>    </div>
+</code></pre>
+
+</div>
+<p>
+<a href="https://github.com/redguardtoo/emacs.dhttps://github.com/redguardtoo/emacs.dhttps://github.com/redguardtoo/emacs.d">https://github.com/redguardtoo/emacs.dhttps://github.com/redguardtoo/emacs.dhttps://github.com/redguardtoo/emacs.d</a>
+</p>
+</div>
+</div>
             </div>
         </div>
         <div class="post">
@@ -436,15 +450,12 @@ zcat data.dump.gz | sqlite3 db.sqlite3
 </pre>    </div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Some plugins need be compiled for better performance (OPTIONAL) </h4> <div class="outline-text-3" id="text-3">  <ul>
 <li>cedet,ecb,emacs-w3m,org-mode,nxml-mode,mmm-mode,auto-complete </li> </ul>
 <pre class="src src-sh"><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp;make -C cedet;make -C ecb;make -C org-mode;make -C nxml-mode;make -C auto-complete
-<p><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/emacs-w3m;autoconf;./configure;make;sudo make install-info-en;</p>
-<p><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/mmm-mode;./autogen.sh;./configure;make;sudo make install-info;</p>
-<p></p></pre>   <p>  sh </p> <ul>
+<span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/emacs-w3m;autoconf;./configure;make;sudo make install-info-en;
+<span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/mmm-mode;./autogen.sh;./configure;make;sudo make install-info;</pre>   <p>  sh </p> <ul>
 <li>rinari (install info only) </li> </ul>
-<pre class="src src-sh"><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/rinari;rake doc:make_info;sudo cp doc/rinari.info /usr/share/info;sudo install-info /usr/share/info/rinari.info /usr/share/info/dir
-<p></p></pre>     <ul>
+<pre class="src src-sh"><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/rinari;rake doc:make_info;sudo cp doc/rinari.info /usr/share/info;sudo install-info /usr/share/info/rinari.info /usr/share/info/dir</pre>     <ul>
 <li>eim </li> </ul>
-<pre class="src src-sh"><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/eim;emacs -batch -f batch-byte-compile *.el;
-<p></p></pre>    </div> </div> </div>
+<pre class="src src-sh"><span style="color:#0000ee;font-weight:bold;">cd</span> ~/.emacs.d/site-lisp/eim;emacs -batch -f batch-byte-compile *.el;</pre>    </div> </div> </div>
             </div>
         </div>
         <div class="post">
