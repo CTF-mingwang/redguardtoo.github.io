@@ -170,15 +170,17 @@ Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which 
 </p>
 
 <p>
-Since js2-mode is a interpreter, basically it can do anything you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode.
+Since <code>js2-mode</code> is a interpreter, basically it can do anything you want. The key point is to understand the <a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract Syntax Tree (AST)</a> defined in js2-mode.
 </p>
 
 <p>
-Here is my code patch to make the js2-mode display the list of functions with correct context:
+Here is my patch to make <code>js2-mode</code> display the list of functions with correct context:
 </p>
 
-<pre class="example">
-commit 56ed89bf18a6b58fd4620056288ea2ab52bd4d77
+<div class="org-src-container">
+
+
+<pre><code class="lang-diff">commit 56ed89bf18a6b58fd4620056288ea2ab52bd4d77
 Author: Chen Bin &lt;chenbin.sh@gmail.com&gt;
 Date:   Sun Dec 15 18:18:06 2013 +1100
 
@@ -248,14 +250,16 @@ index e8e15a5..17bf158 100644
                                    (js2-node-abs-pos key-node)))))))
 
  (defun js2-imenu-record-module-pattern (node)
-</pre>
+</code></pre>
+
+</div>
 
 <p>
 I already submitted the patch to mooz so everyone will enjoy this feature in the future.
 </p>
 
 <p>
-Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">helm</a>:
+Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="http://www.emacswiki.org/emacs/ImenuMode">Imenu Mode</a> and <a href="https://github.com/emacs-helm/helm">Helm</a>:
 <img src="../wp-content/emacs-functions.png" alt="emacs-functions.png"></p>
 
 <p>
@@ -273,20 +277,18 @@ That's an example of beauty of Emacs.
 
 <p>
 It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass.
-#+image/sublime-functions.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="wpid-sublime-functions.png">
-#+image/emacs-functions.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="wpid-emacs-functions.png">
-#+image/emacs-functions-improved.png <img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="wpid-emacs-functions-improved.png"></p>
+</p>
 </div>
 </div>
 <div id="outline-container-sec-1-5" class="outline-3">
 <h4 id="sec-1-5">Update</h4>
 <div class="outline-text-3" id="text-1-5">
 <p>
-My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager.
+My patch is incorporated into <code>js2-mode</code> since version <code>20140114</code>.
 </p>
 
 <p>
-After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature:
+After installing <code>js2-mode</code>, you need paste one line setup into your <code>~/.emacs</code>,
 </p>
 <div class="org-src-container">
 
@@ -297,21 +299,25 @@ After installing js2-mode, you need paste only one line code into your ~/.emacs 
 </div>
 
 <p>
-The UI to display the candidate is from package <a href="https://github.com/emacs-helm/helm">helm</a>. But there are many other UI front end for imenu instead of helm.
+The UI to display the candidate is from package <a href="https://github.com/emacs-helm/helm">Helm</a>.
 </p>
 
 <p>
-The helm version should be 20140125.1101 or higher, you can install helm from <a href="http://melpa.milkbox.net/">melpa</a>.
+The <code>Helm</code> version should be <code>20140125.1101</code> or higher, you can install <code>Helm</code> from <a href="http://melpa.milkbox.net/">MELPA</a>.
 </p>
 
 <p>
-After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>:
+After installing <code>Helm</code>, you can use command <code>M-x helm-imenu</code> to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>:
 </p>
 
 
 <div class="figure">
 <p><img src="../wp-content/helm-imenu-and-js2-mode-nq8.png" alt="helm-imenu-and-js2-mode-nq8.png"></p>
 </div>
+
+<p>
+UPDATE: I suggest using <code>counsel-imenu</code> from <a href="https://github.com/abo-abo/swiper">Counsel</a> instead of <code>Helm</code>.
+</p>
 </div>
 </div>
 </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 13:38:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 13:45:24 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 js2-mode as minor mode to process JSON                                    :en:emacs:json:js2:
 &lt;/p&gt;
 
@@ -345,15 +345,17 @@ Emacs has a &lt;a href="http://www.emacswiki.org/emacs/Js2Mode"&gt;js2-mode&lt;/
 &lt;/p&gt;
 
 &lt;p&gt;
-Since js2-mode is a interpreter, basically it can do anything you want. The key point is to understand the &lt;a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"&gt;Abstract Syntax Tree (AST)&lt;/a&gt; defined in js2-mode.
+Since &lt;code&gt;js2-mode&lt;/code&gt; is a interpreter, basically it can do anything you want. The key point is to understand the &lt;a href="http://en.wikipedia.org/wiki/Abstract_syntax_tree"&gt;Abstract Syntax Tree (AST)&lt;/a&gt; defined in js2-mode.
 &lt;/p&gt;
 
 &lt;p&gt;
-Here is my code patch to make the js2-mode display the list of functions with correct context:
+Here is my patch to make &lt;code&gt;js2-mode&lt;/code&gt; display the list of functions with correct context:
 &lt;/p&gt;
 
-&lt;pre class="example"&gt;
-commit 56ed89bf18a6b58fd4620056288ea2ab52bd4d77
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-diff"&gt;commit 56ed89bf18a6b58fd4620056288ea2ab52bd4d77
 Author: Chen Bin &amp;lt;chenbin.sh@gmail.com&amp;gt;
 Date:   Sun Dec 15 18:18:06 2013 +1100
 
@@ -423,14 +425,16 @@ index e8e15a5..17bf158 100644
                                    (js2-node-abs-pos key-node)))))))
 
  (defun js2-imenu-record-module-pattern (node)
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
 
 &lt;p&gt;
 I already submitted the patch to mooz so everyone will enjoy this feature in the future.
 &lt;/p&gt;
 
 &lt;p&gt;
-Here is the screen shot of emacs in old js2-mode, the UI is based on &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu Mode&lt;/a&gt; and &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;:
+Here is the screen shot of emacs in old js2-mode, the UI is based on &lt;a href="http://www.emacswiki.org/emacs/ImenuMode"&gt;Imenu Mode&lt;/a&gt; and &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt;:
 &lt;img src="http://blog.binchen.org/wp-content/emacs-functions.png" alt="emacs-functions.png"&gt;
 &lt;/p&gt;
 
@@ -450,9 +454,6 @@ That's an example of beauty of Emacs.
 
 &lt;p&gt;
 It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass.
-#+image/sublime-functions.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-sublime-functions.png" alt="wpid-sublime-functions.png"&gt;
-#+image/emacs-functions.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions.png" alt="wpid-emacs-functions.png"&gt;
-#+image/emacs-functions-improved.png &lt;img src="http://blog.binchen.org/wp-content/uploads/2013/12/wpid-emacs-functions-improved.png" alt="wpid-emacs-functions-improved.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -460,11 +461,11 @@ It gives you freedom and power. You can base your work on the top geeks like Ste
 &lt;h4 id="sec-1-5"&gt;Update&lt;/h4&gt;
 &lt;div class="outline-text-3" id="text-1-5"&gt;
 &lt;p&gt;
-My patch is incorporated into js2-mode since version 20140114. You can install it through emacs package manager.
+My patch is incorporated into &lt;code&gt;js2-mode&lt;/code&gt; since version &lt;code&gt;20140114&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-After installing js2-mode, you need paste only one line code into your ~/.emacs to enable the feature:
+After installing &lt;code&gt;js2-mode&lt;/code&gt;, you need paste one line setup into your &lt;code&gt;~/.emacs&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -475,15 +476,15 @@ After installing js2-mode, you need paste only one line code into your ~/.emacs 
 &lt;/div&gt;
 
 &lt;p&gt;
-The UI to display the candidate is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;helm&lt;/a&gt;. But there are many other UI front end for imenu instead of helm.
+The UI to display the candidate is from package &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-The helm version should be 20140125.1101 or higher, you can install helm from &lt;a href="http://melpa.milkbox.net/"&gt;melpa&lt;/a&gt;.
+The &lt;code&gt;Helm&lt;/code&gt; version should be &lt;code&gt;20140125.1101&lt;/code&gt; or higher, you can install &lt;code&gt;Helm&lt;/code&gt; from &lt;a href="http://melpa.milkbox.net/"&gt;MELPA&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-After installing helm, you can use command "M-x helm-imenu" to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;:
+After installing &lt;code&gt;Helm&lt;/code&gt;, you can use command &lt;code&gt;M-x helm-imenu&lt;/code&gt; to show the list of functions to jump to. Here is the screen shot how I use imenu in my &lt;a href="https://github.com/redguardtoo/hello/raw/master/hello2.js"&gt;hello2.js&lt;/a&gt;:
 &lt;/p&gt;
 
 
@@ -491,6 +492,10 @@ After installing helm, you can use command "M-x helm-imenu" to show the list of 
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/helm-imenu-and-js2-mode-nq8.png" alt="helm-imenu-and-js2-mode-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
+
+&lt;p&gt;
+UPDATE: I suggest using &lt;code&gt;counsel-imenu&lt;/code&gt; from &lt;a href="https://github.com/abo-abo/swiper"&gt;Counsel&lt;/a&gt; instead of &lt;code&gt;Helm&lt;/code&gt;.
+&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description><category>emacs</category><category>en</category><category>html</category><category>javascript</category><category>js2</category><category>web</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor.html</guid><pubDate>Sun, 15 Dec 2013 22:02:00 GMT</pubDate></item></channel></rss>
