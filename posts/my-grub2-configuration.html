@@ -11,21 +11,20 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="My grub2 configuration">
 <meta property="og:url" content="http://blog.binchen.org/posts/my-grub2-configuration.html">
-<meta property="og:description" content='/etc/grub.d/11_windows  
+<meta property="og:description" content='Content of /etc/grub.d/11_windows,
 
-!/bin/sh -e
+
+
+
+#!/bin/sh -e
 echo "#        Adding Windows GRUB 2 menu"
-cat &amp;lt;&amp;lt; EOF
+cat &lt;&lt; EOF
 menuentry "Windows XP" {
 savedefault
 insmod chain
 insmod ntfs
 set root=(hd0,1)
 chainloader +1
-}
-EOF
-
-
 '>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-12-31T19:09:00Z">
@@ -71,64 +70,88 @@ EOF
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>/etc/grub.d/11_windows </p> <br><pre class="prettyprint ">
-<h2>!/bin/sh -e</h2>
-<p>echo "#        Adding Windows GRUB 2 menu"</p>
-<p>cat &amp;lt;&amp;lt; EOF</p>
-<p>menuentry "Windows XP" {</p>
-<p>savedefault</p>
-<p>insmod chain</p>
-<p>insmod ntfs</p>
-<p>set root=(hd0,1)</p>
-<p>chainloader +1</p>
-<p>}</p>
-<p>EOF</p>
-</pre>
+            <div id="outline-container-sec-1" class="outline-2">
 
-<p></p>
-<p> /etc/default/grub </p> <br><pre class="prettyprint ">
-<h2>Copyright 1999-2013 Gentoo Foundation</h2>
-<h2>Distributed under the terms of the GNU General Public License v2</h2>
-<h2>$Header: /var/cvsroot/gentoo-x86/sys-boot/grub/files/grub.default-2,v 1.4 2013/09/21 18:10:55 floppym Exp $</h2>
-<h2></h2>
-<h2>To populate all changes in this file you need to regenerate your</h2>
-<h2>grub configuration file afterwards:</h2>
-<h2>'grub2-mkconfig -o /boot/grub/grub.cfg'</h2>
-<h2></h2>
-<h2>See the grub info page for documentation on possible variables and</h2>
-<h2>their associated values.</h2>
-<p>GRUB_DISTRIBUTOR="Gentoo"</p>
-<p>GRUB_DEFAULT=saved</p>
-<p>GRUB_SAVEDEFAULT=true</p>
-<p>GRUB_HIDDEN_TIMEOUT=0</p>
-<p>GRUB_HIDDEN_TIMEOUT_QUIET=true</p>
-<p>GRUB_TIMEOUT=10</p>
-<h2>Append parameters to the linux kernel command line</h2>
-<p>GRUB_CMDLINE_LINUX="libata.dma=1"</p>
-<h2>Append parameters to the linux kernel command line for non-recovery entries</h2>
-<h2>GRUB_CMDLINE_LINUX_DEFAULT=""</h2>
-<h2>Uncomment to disable graphical terminal (grub-pc only)</h2>
-<h2>GRUB_TERMINAL=console</h2>
-<h2>The resolution used on graphical terminal.</h2>
-<h2>Note that you can use only modes which your graphic card supports via VBE.</h2>
-<h2>You can see them in real GRUB with the command `vbeinfo'.</h2>
-<h2>GRUB_GFXMODE=640x480</h2>
-<h2>Path to theme spec txt file.</h2>
-<h2>The starfield is by default provided with use truetype.</h2>
-<h2>NOTE: when enabling custom theme, ensure you have required font/etc.</h2>
-<h2>GRUB_THEME="/boot/grub/themes/starfield/theme.txt"</h2>
-<h2>Background image used on graphical terminal.</h2>
-<h2>Can be in various bitmap formats.</h2>
-<h2>GRUB_BACKGROUND="/boot/grub/mybackground.png"</h2>
-<h2>Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to kernel</h2>
-<h2>GRUB_DISABLE_LINUX_UUID=true</h2>
-<h2>Uncomment to disable generation of recovery mode menu entries</h2>
-<h2>GRUB_DISABLE_RECOVERY=true</h2>
-</pre>
+<div class="outline-text-2" id="text-1">
 
-<p></p>
+<p>
+Content of <code>/etc/grub.d/11_windows</code>,
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-conf">#!/bin/sh -e
+echo "#        Adding Windows GRUB 2 menu"
+cat &lt;&lt; EOF
+menuentry "Windows XP" {
+savedefault
+insmod chain
+insmod ntfs
+set root=(hd0,1)
+chainloader +1
+}
+EOF
+</code></pre>
+
+</div>
+
+<p>
+/etc/default/grub
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-conf"># Copyright 1999-2013 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/sys-boot/grub/files/grub.default-2,v 1.4 2013/09/21 18:10:55 floppym Exp $
+#
+# To populate all changes in this file you need to regenerate your
+# grub configuration file afterwards:
+#     'grub2-mkconfig -o /boot/grub/grub.cfg'
+#
+# See the grub info page for documentation on possible variables and
+# their associated values. 
+
+GRUB_DISTRIBUTOR="Gentoo"
+
+GRUB_DEFAULT=saved
+GRUB_SAVEDEFAULT=true
+GRUB_HIDDEN_TIMEOUT=0
+GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT=10
+
+# Append parameters to the linux kernel command line
+GRUB_CMDLINE_LINUX="libata.dma=1"
+
+# Append parameters to the linux kernel command line for non-recovery entries
+#GRUB_CMDLINE_LINUX_DEFAULT=""
+
+# Uncomment to disable graphical terminal (grub-pc only)
+#GRUB_TERMINAL=console
+
+# The resolution used on graphical terminal.
+# Note that you can use only modes which your graphic card supports via VBE.
+# You can see them in real GRUB with the command `vbeinfo'.
+#GRUB_GFXMODE=640x480
+
+# Path to theme spec txt file.
+# The starfield is by default provided with use truetype.
+# NOTE: when enabling custom theme, ensure you have required font/etc.
+#GRUB_THEME="/boot/grub/themes/starfield/theme.txt"
+
+# Background image used on graphical terminal.
+# Can be in various bitmap formats.
+#GRUB_BACKGROUND="/boot/grub/mybackground.png"
+
+# Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to kernel
+#GRUB_DISABLE_LINUX_UUID=true
+
+# Uncomment to disable generation of recovery mode menu entries
+#GRUB_DISABLE_RECOVERY=true
+</code></pre>
+
+</div>
+</div>
 </div>
         </div>
         
