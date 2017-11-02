@@ -11,7 +11,9 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="My git set up">
 <meta property="og:url" content="http://blog.binchen.org/posts/my-git-set-up.html">
-<meta property="og:description" content="Content of my .gitconfig:    
+<meta property="og:description" content="Content of my .gitconfig:
+
+
 
 
 [apply]
@@ -21,9 +23,9 @@
     email =my@email.com
 [core]
     ; @see http://comments.gmane.org/gmane.comp.version-control.git/166098
-    ">
+    fi">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2013-07-07T20:17:00Z">
+<meta property="article:published_time" content="2013-07-07T22:17:00Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
 <meta property="article:tag" content="git">
@@ -47,7 +49,7 @@
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2013-07-07T20:17:00+00:00">2013-07-07 20:17</time>
+                <time class="timeago" datetime="2013-07-07T22:17:00+00:00">2013-07-07 22:17</time>
             
 
             
@@ -68,12 +70,16 @@
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>Content of my .gitconfig: </p>   
-<pre class="prettyprint ">
+            <div id="outline-container-sec-1" class="outline-2">
 
-[apply]
+<div class="outline-text-2" id="text-1">
+<p>
+Content of my <code>.gitconfig</code>:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-conf">[apply]
     whitespace = nowarn
 [user]
     name = my name
@@ -154,7 +160,6 @@
 [push]
     default = tracking
 
-
 [merge]
     branchdesc = true
     log = true
@@ -163,17 +168,18 @@
     tool = vimdiff
 [mergetool]
     prompt = false
+</code></pre>
 
-</pre>
+</div>
 
-<p></p>
-<p> content of my .bashrc: </p>   
-<pre class="prettyprint ">
+<p>
+Content of my <code>.bashrc</code>:
+</p>
+<div class="org-src-container">
 
-# enable bash completion in interactive shells
 
+<pre><code class="lang-sh"># enable bash completion in interactive shells
 # @see http://www.simplicidade.org/notes/archives/2008/02/bash_completion.html
-
 if [ -f /etc/bash_completion ]; then
     # ArchLinux
     . /etc/bash_completion
@@ -181,23 +187,15 @@ elif [ -f /etc/profile.d/bash-completion.sh ]; then
     # Gentoo Linux
     . /etc/profile.d/bash-completion.sh
 fi
-
 . $HOME/bash_completion.d/gibo-completion.bash
-
 . $HOME/bash_completion.d/git-completion.bash
 
-
-
 function parse_git_branch ()
-
 {
    git branch --no-color 2&gt; /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-
-
 function simpleprompt()
-
 {
    if test -n "`type -t git`"; then
       PS1="\$(parse_git_branch) \\$ "
@@ -206,66 +204,35 @@ function simpleprompt()
    fi
 }
 
-
-
 alias gcd='cd $(git rev-parse --show-cdup)'
-
 alias g="git status --short -b"
-
 alias gn="git status --untracked-files=no --short -b"
-
 alias gfl="git diff-tree --no-commit-id --name-only -r"
-
 alias ga="git add"
-
 alias gaa="git add ."
-
 alias gau="git add -u"
-
 alias gc="git commit -m"
-
 alias gca="git commit --amend"
-
 alias gb="git branch"
-
 alias gbd="git branch -d"
-
 alias gco="git checkout"
-
 alias gcob="git checkout -b"
-
 alias gt="git stash"
-
 alias gta="git stash apply"
-
 alias gm="git merge"
-
 alias gmt="git mergetool"
-
 alias gr="git rebase"
-
 alias gl="git log --oneline --decorate --graph"
-
 alias gs="git show"
-
 alias gss="git show --stat"
-
 alias gd="git diff"
-
 alias gds="git diff --stat"
-
 alias gdc="git diff --cached"
-
 alias gdcs="git diff --cached --stat"
-
 alias gbl="git blame"
-
 alias gps="git push"
-
 alias gpl="git pull"
-
 alias cdgr='cd $(git rev-parse --show-toplevel)' #goto root dir
-
 function gu(){
     local st=`git status --porcelain --untracked=no`
     if [ -z "$st" ]; then
@@ -274,8 +241,6 @@ function gu(){
         git stash &amp;&amp; git pull --rebase &amp;&amp; git stash pop
     fi
 }
-
-
 
 function gsrp(){
   if [ -z "$1" ]; then
@@ -288,12 +253,8 @@ function gsrp(){
   fi
 }
 
-
-
 [ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
-
 # xclip has some problem with my emacs, so I use xsel for everything
-
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -312,39 +273,38 @@ function pclip() {
     fi
 }
 
-
-
 # search the file in root directory of git repository, pop up dialog let you choose the path,
-
 # then put the full path in clipboard
-
 function gg()
-
 {
     local cli=`find $(git rev-parse --show-toplevel) -type f -iname '*'$*'*'|percol`
     echo -n ${cli}|pclip
     echo ${cli}
 }
 
-
-
 alias ge='grep -rsn --exclude=TAGS --exclude=tags --exclude=GTAGS --exclude-dir=.svn --exclude-dir=.sass-cache --exclude-dir=.cache  --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude=\*.swp --exclude=\*~ --color=auto'
-
 function ggs()
-
 {
     local cli=`ge -l $* $(git rev-parse --show-toplevel)/*|percol`
     echo -n ${cli} |pclip;
     echo ${cli}
 }
-</pre>
+</code></pre>
 
-<p></p>
-<p> I do lots of git stuff  under shell, so I'm heavly dependent on some bash tools: </p>
-<ul>
+</div>
+
+<p>
+I do lots of git stuff under shell, so I'm heavly dependent on below bash tools,
+</p>
+<ul class="org-ul">
 <li>
-<a href="https://github.com/clvv/fasd">fasd</a> to change current directory quickly. </li> <li>
-<a href="https://github.com/mooz/percol">percol</a> to filter the text from stdin interactively. </li> </ul>
+<a href="https://github.com/clvv/fasd">fasd</a> to change current directory quickly
+</li>
+<li>
+<a href="https://github.com/mooz/percol">percol</a> to filter the text from stdin interactively
+</li>
+</ul>
+</div>
 </div>
         </div>
         

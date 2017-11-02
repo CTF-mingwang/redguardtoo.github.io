@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about github)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/github.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Mar 2017 12:36:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>My git set up</title><link>http://blog.binchen.org/posts/my-git-set-up.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Content of my .gitconfig: &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about github)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/github.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 15:09:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>My git set up</title><link>http://blog.binchen.org/posts/my-git-set-up.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
-[apply]
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Content of my &lt;code&gt;.gitconfig&lt;/code&gt;:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[apply]
     whitespace = nowarn
 [user]
     name = my name
@@ -83,7 +89,6 @@
 [push]
     default = tracking
 
-
 [merge]
     branchdesc = true
     log = true
@@ -92,16 +97,18 @@
     tool = vimdiff
 [mergetool]
     prompt = false
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;/pre&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; content of my .bashrc: &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;p&gt;
+Content of my &lt;code&gt;.bashrc&lt;/code&gt;:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
-# enable bash completion in interactive shells
 
+&lt;pre&gt;&lt;code class="lang-sh"&gt;# enable bash completion in interactive shells
 # @see http://www.simplicidade.org/notes/archives/2008/02/bash_completion.html
-
 if [ -f /etc/bash_completion ]; then
     # ArchLinux
     . /etc/bash_completion
@@ -109,23 +116,15 @@ elif [ -f /etc/profile.d/bash-completion.sh ]; then
     # Gentoo Linux
     . /etc/profile.d/bash-completion.sh
 fi
-
 . $HOME/bash_completion.d/gibo-completion.bash
-
 . $HOME/bash_completion.d/git-completion.bash
 
-
-
 function parse_git_branch ()
-
 {
    git branch --no-color 2&amp;gt; /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
-
-
 function simpleprompt()
-
 {
    if test -n "`type -t git`"; then
       PS1="\$(parse_git_branch) \\$ "
@@ -134,66 +133,35 @@ function simpleprompt()
    fi
 }
 
-
-
 alias gcd='cd $(git rev-parse --show-cdup)'
-
 alias g="git status --short -b"
-
 alias gn="git status --untracked-files=no --short -b"
-
 alias gfl="git diff-tree --no-commit-id --name-only -r"
-
 alias ga="git add"
-
 alias gaa="git add ."
-
 alias gau="git add -u"
-
 alias gc="git commit -m"
-
 alias gca="git commit --amend"
-
 alias gb="git branch"
-
 alias gbd="git branch -d"
-
 alias gco="git checkout"
-
 alias gcob="git checkout -b"
-
 alias gt="git stash"
-
 alias gta="git stash apply"
-
 alias gm="git merge"
-
 alias gmt="git mergetool"
-
 alias gr="git rebase"
-
 alias gl="git log --oneline --decorate --graph"
-
 alias gs="git show"
-
 alias gss="git show --stat"
-
 alias gd="git diff"
-
 alias gds="git diff --stat"
-
 alias gdc="git diff --cached"
-
 alias gdcs="git diff --cached --stat"
-
 alias gbl="git blame"
-
 alias gps="git push"
-
 alias gpl="git pull"
-
 alias cdgr='cd $(git rev-parse --show-toplevel)' #goto root dir
-
 function gu(){
     local st=`git status --porcelain --untracked=no`
     if [ -z "$st" ]; then
@@ -202,8 +170,6 @@ function gu(){
         git stash &amp;amp;&amp;amp; git pull --rebase &amp;amp;&amp;amp; git stash pop
     fi
 }
-
-
 
 function gsrp(){
   if [ -z "$1" ]; then
@@ -216,12 +182,8 @@ function gsrp(){
   fi
 }
 
-
-
 [ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;amp;&amp;amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
-
 # xclip has some problem with my emacs, so I use xsel for everything
-
 function pclip() {
     if [ $OS_NAME == CYGWIN ]; then
         putclip $@;
@@ -240,34 +202,37 @@ function pclip() {
     fi
 }
 
-
-
 # search the file in root directory of git repository, pop up dialog let you choose the path,
-
 # then put the full path in clipboard
-
 function gg()
-
 {
     local cli=`find $(git rev-parse --show-toplevel) -type f -iname '*'$*'*'|percol`
     echo -n ${cli}|pclip
     echo ${cli}
 }
 
-
-
 alias ge='grep -rsn --exclude=TAGS --exclude=tags --exclude=GTAGS --exclude-dir=.svn --exclude-dir=.sass-cache --exclude-dir=.cache  --exclude-dir=.cvs --exclude-dir=.git --exclude-dir=.hg --exclude=\*.swp --exclude=\*~ --color=auto'
-
 function ggs()
-
 {
     local cli=`ge -l $* $(git rev-parse --show-toplevel)/*|percol`
     echo -n ${cli} |pclip;
     echo ${cli}
 }
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; I do lots of git stuff  under shell, so I'm heavly dependent on some bash tools: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;&lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to change current directory quickly. &lt;/li&gt; &lt;li&gt;&lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; to filter the text from stdin interactively. &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>github</category><guid>http://blog.binchen.org/posts/my-git-set-up.html</guid><pubDate>Sun, 07 Jul 2013 20:17:00 GMT</pubDate></item><item><title>open README under git root directory in Emacs</title><link>http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I often need update my README files at the root directory of my project which is always managed by git. &lt;/p&gt; &lt;p&gt; As a lazy guy, I' rather use some hotkey to open that README. &lt;/p&gt; &lt;p&gt; So if you add below elisp code into your ~/ .emacs, you can use hot key &lt;code&gt;C-c C-f&lt;/code&gt; to open the README: &lt;/p&gt;    &lt;pre class="src src-elisp"&gt;(&lt;span style="color: #b5bd68;"&gt;defun&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;open-readme-in-git-root-directory&lt;/span&gt; ()
+&lt;/div&gt;
+
+&lt;p&gt;
+I do lots of git stuff under shell, so I'm heavly dependent on below bash tools,
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt; to change current directory quickly
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/mooz/percol"&gt;percol&lt;/a&gt; to filter the text from stdin interactively
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>git</category><category>github</category><guid>http://blog.binchen.org/posts/my-git-set-up.html</guid><pubDate>Sun, 07 Jul 2013 22:17:00 GMT</pubDate></item><item><title>open README under git root directory in Emacs</title><link>http://blog.binchen.org/posts/open-readme-under-git-root-directory-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I often need update my README files at the root directory of my project which is always managed by git. &lt;/p&gt; &lt;p&gt; As a lazy guy, I' rather use some hotkey to open that README. &lt;/p&gt; &lt;p&gt; So if you add below elisp code into your ~/ .emacs, you can use hot key &lt;code&gt;C-c C-f&lt;/code&gt; to open the README: &lt;/p&gt;    &lt;pre class="src src-elisp"&gt;(&lt;span style="color: #b5bd68;"&gt;defun&lt;/span&gt; &lt;span style="color: #81a2be;"&gt;open-readme-in-git-root-directory&lt;/span&gt; ()
   (interactive)
   (&lt;span style="color: #b5bd68;"&gt;let&lt;/span&gt; (filename
         (root-dir (locate-dominating-file (file-name-as-directory (file-name-directory buffer-file-name)) &lt;span style="color: #8abeb7;"&gt;".git"&lt;/span&gt;))
