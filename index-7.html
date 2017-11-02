@@ -215,7 +215,7 @@ Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup a
             <h1 class="title"><a href="posts/commentuncomment-line-is-easy-in-emacs.html">Comment/uncomment line(s) is easy in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2013-02-01T20:49:00+00:00">2013-02-01 20:49</time>
+                    <time class="timeago" datetime="2013-02-01T23:49:00+00:00">2013-02-01 23:49</time>
 </div>
                 <div class="stats">
                     
@@ -235,11 +235,37 @@ Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup a
 
             </div>
             <div class="body">
-                <div>
-<p></p>
-<p>It's easy if you use <a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-comment</a>er. As its README said, comment/uncomment line is only pressing ",ci" in evil-mode. </p> <p> You can also select the region and press "M-;" to comment the lines in the region. If part of the line is not in the region, the whole line will still be commented out. This saves your extra key pressing for moving cursor to the beginning of the first line or moving the cursor to the end of the last line. </p> <p> The reason to make commenting so efficient is that I need comment/uncomment code for debug purpose. </p> <p> Some people say comment out the code is not a right way to debug. The right way is using debugger. </p> <p> But if you debug some huge project, using the debugger makes no sense for many reasons: </p>
-<ul>
-<li>debugging DSL the middleware whose debugger simply does not exist </li> <li>The bug can be reproduced on production server </li> <li>Too much overhead to set up debugger. Say I'm debugging component from other teams and developers and the technologies they use make configuring debugger very harder. </li> </ul>
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+It's easy if you use <a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-comment</a>er. As its README said, comment/uncomment line is only pressing =,ci= in evil-mode.
+</p>
+
+<p>
+You can also select the region and press <code>M-;</code> to comment the lines in the region. If part of the line is not in the region, the whole line will still be commented out. This saves your extra key pressing for moving cursor to the beginning of the first line or moving the cursor to the end of the last line.
+</p>
+
+<p>
+The reason to make commenting so efficient is that I need comment/uncomment code for debug purpose.
+</p>
+
+<p>
+Some people say comment out the code is not a right way to debug. The right way is using debugger.
+</p>
+
+<p>
+But if you debug some huge project, using the debugger makes no sense for many reasons:
+</p>
+<ul class="org-ul">
+<li>debugging Domain Specific Language (DSL). The debugger for that DSL simply does not exist
+</li>
+<li>The bug can be reproduced <b>ONLY</b> on production server. Installing debugger is usually not allowed on production server
+</li>
+<li>Too much overhead to set up debugger. Say I'm debugging component from other teams and developers and the technologies they use make configuring debugger very harder
+</li>
+</ul>
+</div>
 </div>
             </div>
         </div>
