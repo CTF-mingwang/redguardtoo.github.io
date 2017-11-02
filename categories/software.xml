@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 13:01:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 12:21:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to manage the file path in big project                                    :en:engineering:software:bash:
 &lt;/p&gt;
 
@@ -667,15 +667,104 @@ start %_termapp% -w full /bin/bash --login -i
 exit
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>chinese</category><category>cygwin</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</guid><pubDate>Fri, 29 Apr 2011 15:00:00 GMT</pubDate></item><item><title>坚持使用gnu screen</title><link>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;虽然tmux很优秀,但是目前很难支持&lt;a href="http://www.cygwin.com"&gt;cygwin&lt;/a&gt;(&lt;a href="http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1093"&gt;Nicholas Marriott在2010年12月说的&lt;/a&gt;),而我的工作需要使用windows. &lt;/p&gt; &lt;p&gt; 最新版的screen的一个重要特性就是已支持垂直分屏,其快捷键为"C-a |". &lt;/p&gt;  &lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;要安装最新版的screen,在我的&lt;a href="http://www.archlinux.org"&gt;Arch Linux&lt;/a&gt;下很简单, &lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     &lt;pre class="src src-sh"&gt;yaourt -S screen-git
-&lt;/pre&gt;    &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;在windows的cygwin下安装要多几步. &lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;  &lt;p&gt;首先安装软件包libncurse-devel,然后去&lt;a href="http://ftp.gnu.org/gnu/screen/"&gt;官方网站&lt;/a&gt;下载最新源代码包(目前版本为4.0.3),解压缩, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;tar zxf screen-4.0.3.tar.gz
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;p&gt; 编译安装, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color:#0000ee;font-weight:bold;"&gt;cd&lt;/span&gt; screen-4.0.3;configure;make;make install;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错, &lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;     &lt;pre class="src src-sh"&gt;$ screen
-&lt;p&gt;$&lt;span style="color:#cdcd00;"&gt;TERM&lt;/span&gt; too long - sorry.&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;p&gt; 原因为screen的开发者对于环境变量$TERM的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单. 在.Xdefaults中添加一行, &lt;/p&gt;   &lt;pre class="example"&gt;urxvt*termName: rxvt-256color
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; 在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="example"&gt;term rxvt-256color
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;    &lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-4" class="outline-3"&gt; &lt;h4 id="sec-4"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t &lt;/h4&gt; &lt;div class="outline-text-3" id="text-4"&gt;  &lt;p&gt;因为Ctrl-a在bash和emacs中都是常用快捷键,在.screenrc中添加一行, &lt;/p&gt;   &lt;pre class="src src-sh"&gt;escape&lt;span style="color:#00cd00;"&gt;"^Tt"&lt;/span&gt;  &lt;span style="color:#cd0000;"&gt;#&lt;/span&gt;&lt;span style="color:#cd0000;"&gt;the default of A interferes with emacs keybindings for terminal, and I never use the emacs transpose command
-&lt;p&gt;&lt;/p&gt;&lt;/span&gt;&lt;/pre&gt;   &lt;p&gt; 这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置. &lt;/p&gt;&lt;/div&gt; &lt;/div&gt;&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 12:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>chinese</category><category>cygwin</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</guid><pubDate>Fri, 29 Apr 2011 15:00:00 GMT</pubDate></item><item><title>坚持使用gnu screen</title><link>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+虽然tmux很优秀,但是目前很难支持&lt;a href="http://www.cygwin.com"&gt;cygwin&lt;/a&gt;(&lt;a href="http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1093"&gt;Nicholas Marriott在2010年12月说的&lt;/a&gt;),而我的工作需要使用windows.
+&lt;/p&gt;
+
+&lt;p&gt;
+最新版的screen的一个重要特性就是已支持垂直分屏,其快捷键为=C-a |=.
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
+&lt;h4 id="sec-1-1"&gt;要安装最新版的screen,在我的&lt;a href="http://www.archlinux.org"&gt;Arch Linux&lt;/a&gt;下很简单,&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;packer -S screen-git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
+&lt;h4 id="sec-1-2"&gt;在windows的cygwin下安装要多几步.&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
+&lt;p&gt;
+首先安装软件包libncurse-devel,然后去&lt;a href="http://ftp.gnu.org/gnu/screen/"&gt;官方网站&lt;/a&gt;下载最新源代码包(目前版本为4.0.3),解压缩,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;tar zxf screen-4.0.3.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+编译安装,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;cd screen-4.0.3;configure;make;make install;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
+&lt;h4 id="sec-1-3"&gt;如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错,&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-3"&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;$ screen
+$TERM too long - sorry.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+原因为screen的开发者对于环境变量=$TERM=的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单.
+在=.Xdefaults=中添加一行,
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+urxvt*termName: rxvt-256color
+&lt;/pre&gt;
+&lt;p&gt;
+在=.screenrc=中添加一行,
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+term rxvt-256color
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-1-4" class="outline-3"&gt;
+&lt;h4 id="sec-1-4"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-1-4"&gt;
+&lt;p&gt;
+因为=Ctrl-a=在Bash和Emacs中都是常用快捷键,在=.screenrc=中添加一行,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;escape"^Tt"  #the default of A interferes with emacs keybindings for terminal, and I never use the emacs transpose command
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;p&gt;
+这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;emacs wiki&lt;/a&gt;获得更多兼容emacs的设置.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 20:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;/p&gt;
 
