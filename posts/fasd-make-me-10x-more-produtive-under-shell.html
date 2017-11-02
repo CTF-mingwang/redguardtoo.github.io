@@ -3,17 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>`fasd` make me 10x more productive under shell | Chen's blog</title>
+<title>=fasd= make me 10x more productive under shell | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content="`fasd` make me 10x more productive under shell">
+<meta property="og:title" content="=fasd= make me 10x more productive under shell">
 <meta property="og:url" content="http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html">
-<meta property="og:description" content='I will show you my typical workflow with fasd.   Quick visit my work folder named "NeonSite":    $ z neon
+<meta property="og:description" content='My workflow with fasd.
+
+
+
+Quick visit my work folder named "NeonSite":
+
+
+$ z neon
 4       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
-3       22.995 '>
+3       22.995     /home/chenbi/work/ra'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-03-14T12:28:00Z">
 <meta property="article:tag" content="en">
@@ -34,7 +41,7 @@
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">`fasd` make me 10x more productive under shell</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">=fasd= make me 10x more productive under shell</h1>
 
         <div class="meta">
             <div class="authordate">
@@ -58,22 +65,43 @@
 
         </div>
         <div class="body">
-            <div>
-<p></p>
-<p>I will show you my typical workflow with <a href="https://github.com/clvv/fasd">fasd</a>. </p> <p> Quick visit my work folder named "NeonSite": </p>   <pre class="example">$ z neon
+            <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+
+<p>
+My workflow with <a href="https://github.com/clvv/fasd">fasd.</a>
+</p>
+
+<p>
+Quick visit my work folder named "NeonSite":
+</p>
+<pre class="example">
+$ z neon
 4       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
-<p>3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css</p>
-<p>2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js</p>
-<p>1       5292       /home/chenbi/work/raas/current/webapp/NeonSite</p>
-<p></p></pre>  <p> I press '1' and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh? </p> <p> Copy file 'hello.c' to a folder named "NeonSite": </p>   <pre class="example">$ cp ~/hello.c <code>s neon</code>
-<p>5       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page</p>
-<p>4       4.41       /home/chenbi/work/raas/current/webapp/NeonSite/js/gallery2.js</p>
-<p>3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css</p>
-<p>2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js</p>
-<p>1       5292       /home/chenbi/work/raas/current/webapp/NeonSite</p>
-<p></p></pre>  <p> I press '1' and 'hello.c' is copied into the corresponding folder. </p> <p> In order to install and setup fasd, you need only put fasd under some folder in $PATH and add the below code into you $HOME/.bashrc. </p>   <pre class="src src-sh"><span style="color: #c397d8;">eval</span> <span style="color: #70c0b1;">"$(fasd --init auto)"</span>
-<p>alias <span style="color: #e7c547;">z</span>=<span style="color: #70c0b1;">'fasd_cd -di'</span></p>
-<p></p></pre>   <p> Please note you can use any POSIX shell (zsh, for example) with fasd. Check <a href="https://github.com/clvv/fasd/blob/master/README.md">fasd's documentation</a> for details. </p> <p> At last, I want to thank <a href="https://github.com/clvv">clvv (Wei Dai)</a> for designing such a elegant and beautiful tool. </p> <p> 你是我的大救星(you're my lifesaver),Wei Dai! </p>
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+</pre>
+<p>
+I press <code>1</code> and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh?
+</p>
+
+<ul class="org-ul">
+<li>Copy file <code>hello.c</code> to a folder named "NeonSite":
+</li>
+</ul>
+<pre class="example">
+$ cp ~/hello.c `s neon`
+5       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
+4       4.41       /home/chenbi/work/raas/current/webapp/NeonSite/js/gallery2.js
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+</pre>
+<p>
+I press <code>1</code> and <code>hello.c</code> is copied into the corresponding folder.</p>
+</div>
 </div>
         </div>
         
@@ -89,7 +117,7 @@
         <script>
         var disqus_shortname ="chenbin0",
             disqus_url="http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html",
-        disqus_title="`fasd` make me 10x more productive under shell",
+        disqus_title="=fasd= make me 10x more productive under shell",
         disqus_identifier="cache/posts/fasd-make-me-10x-more-produtive-under-shell.html",
         disqus_config = function () {
             this.language = "en";

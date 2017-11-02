@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about shell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/shell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 26 Sep 2017 12:29:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use terminal in Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-use-terminal-in-emacs-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about shell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/shell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 12:55:34 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use terminal in Emacs effectively</title><link>http://blog.binchen.org/posts/how-to-use-terminal-in-emacs-effectively.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use terminal in Emacs effectively                                      :emacs:terminal:en:shell:
 &lt;/p&gt;
 
@@ -33,17 +33,41 @@ The beauty is I've got the Vi power to select,search, filter, yank.
 
 &lt;p&gt;
 BTW, "C-z" is the default hot key from evil-mode. Evil-mode assign "C-x C-z" for "M-x suspend-frame".
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>shell</category><category>terminal</category><guid>http://blog.binchen.org/posts/how-to-use-terminal-in-emacs-effectively.html</guid><pubDate>Wed, 10 Jul 2013 12:11:00 GMT</pubDate></item><item><title>`fasd` make me 10x more productive under shell</title><link>http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I will show you my typical workflow with &lt;a href="https://github.com/clvv/fasd"&gt;fasd&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Quick visit my work folder named "NeonSite": &lt;/p&gt;   &lt;pre class="example"&gt;$ z neon
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>shell</category><category>terminal</category><guid>http://blog.binchen.org/posts/how-to-use-terminal-in-emacs-effectively.html</guid><pubDate>Wed, 10 Jul 2013 12:11:00 GMT</pubDate></item><item><title>=fasd= make me 10x more productive under shell</title><link>http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+
+&lt;p&gt;
+My workflow with &lt;a href="https://github.com/clvv/fasd"&gt;fasd.&lt;/a&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+Quick visit my work folder named "NeonSite":
+&lt;/p&gt;
+&lt;pre class="example"&gt;
+$ z neon
 4       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
-&lt;p&gt;3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css&lt;/p&gt;
-&lt;p&gt;2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js&lt;/p&gt;
-&lt;p&gt;1       5292       /home/chenbi/work/raas/current/webapp/NeonSite&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;p&gt; I press '1' and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh? &lt;/p&gt; &lt;p&gt; Copy file 'hello.c' to a folder named "NeonSite": &lt;/p&gt;   &lt;pre class="example"&gt;$ cp ~/hello.c &lt;code&gt;s neon&lt;/code&gt;
-&lt;p&gt;5       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page&lt;/p&gt;
-&lt;p&gt;4       4.41       /home/chenbi/work/raas/current/webapp/NeonSite/js/gallery2.js&lt;/p&gt;
-&lt;p&gt;3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css&lt;/p&gt;
-&lt;p&gt;2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js&lt;/p&gt;
-&lt;p&gt;1       5292       /home/chenbi/work/raas/current/webapp/NeonSite&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;  &lt;p&gt; I press '1' and 'hello.c' is copied into the corresponding folder. &lt;/p&gt; &lt;p&gt; In order to install and setup fasd, you need only put fasd under some folder in $PATH and add the below code into you $HOME/.bashrc. &lt;/p&gt;   &lt;pre class="src src-sh"&gt;&lt;span style="color: #c397d8;"&gt;eval&lt;/span&gt; &lt;span style="color: #70c0b1;"&gt;"$(fasd --init auto)"&lt;/span&gt;
-&lt;p&gt;alias &lt;span style="color: #e7c547;"&gt;z&lt;/span&gt;=&lt;span style="color: #70c0b1;"&gt;'fasd_cd -di'&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;&lt;/pre&gt;   &lt;p&gt; Please note you can use any POSIX shell (zsh, for example) with fasd. Check &lt;a href="https://github.com/clvv/fasd/blob/master/README.md"&gt;fasd's documentation&lt;/a&gt; for details. &lt;/p&gt; &lt;p&gt; At last, I want to thank &lt;a href="https://github.com/clvv"&gt;clvv (Wei Dai)&lt;/a&gt; for designing such a elegant and beautiful tool. &lt;/p&gt; &lt;p&gt; 你是我的大救星(you're my lifesaver),Wei Dai! &lt;/p&gt;&lt;/div&gt;</description><category>en</category><category>productivity</category><category>shell</category><guid>http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html</guid><pubDate>Wed, 14 Mar 2012 12:28:00 GMT</pubDate></item></channel></rss>
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+&lt;/pre&gt;
+&lt;p&gt;
+I press &lt;code&gt;1&lt;/code&gt; and go into the folder "/home/chenbi/work/raas/current/webapp/NeonSite". Awesome, eh?
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Copy file &lt;code&gt;hello.c&lt;/code&gt; to a folder named "NeonSite":
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="example"&gt;
+$ cp ~/hello.c `s neon`
+5       1.701      /home/chenbi/work/raas/current/webapp/NeonSite/css/src/page
+4       4.41       /home/chenbi/work/raas/current/webapp/NeonSite/js/gallery2.js
+3       22.995     /home/chenbi/work/raas/current/webapp/NeonSite/css
+2       40.005     /home/chenbi/work/raas/current/webapp/NeonSite/js
+1       5292       /home/chenbi/work/raas/current/webapp/NeonSite
+&lt;/pre&gt;
+&lt;p&gt;
+I press &lt;code&gt;1&lt;/code&gt; and &lt;code&gt;hello.c&lt;/code&gt; is copied into the corresponding folder.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>en</category><category>productivity</category><category>shell</category><guid>http://blog.binchen.org/posts/fasd-make-me-10x-more-produtive-under-shell.html</guid><pubDate>Wed, 14 Mar 2012 12:28:00 GMT</pubDate></item></channel></rss>
