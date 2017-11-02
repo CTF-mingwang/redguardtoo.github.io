@@ -11,7 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to use ctags with Emacs effectively">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html">
-<meta property="og:description" content="See http://emacswiki.org/emacs/EmacsTags for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' o">
+<meta property="og:description" content="See http://emacswiki.org/emacs/EmacsTags for general usage of tags file. A file name of tags files is TAGS by default. But in Emacs manual the tags file is named tags table. Either tags file or tags t">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-11-22T15:35:00Z">
 <meta property="article:tag" content="ctags">
@@ -61,7 +61,7 @@
 <div class="outline-text-2" id="text-1">
 
 <p>
-See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is 'TAGS' by default. But in Emacs manual the 'tags file' is named 'tags table'. Either 'tags file' or 'tags table' or 'TAGS' is only different name for the same thing.
+See <a href="http://emacswiki.org/emacs/EmacsTags">http://emacswiki.org/emacs/EmacsTags</a> for general usage of tags file. A file name of tags files is <code>TAGS</code> by default. But in Emacs manual the <code>tags file</code> is named <code>tags table</code>. Either <code>tags file</code> or <code>tags table</code> or <code>TAGS</code> is only different name for the same thing.
 </p>
 
 <p>
@@ -88,14 +88,14 @@ I found one missing piece from EmacsWiki is the tip on how to <b>manage tags fil
 <p>
 My typical work flow is:
 </p>
-<ol class="org-ol">
+<ul class="org-ul">
 <li>Load the tags file for my own code.
 </li>
 <li>Load other tags files built from third party libraries related to my current task.
 </li>
 <li>Unload third party tags immediately if its not needed.
 </li>
-</ol>
+</ul>
 <p>
 The purpose to load tags files is to look up API easily. For example, I use C++ library <a href="http://wxwidgets.org">wxWidgets</a> to develop my application. I want to use its API called <code>wxWindow::Maximize</code>. I type <code>M-x find-tag</code> and input the keyword <code>Maximize</code>. So I can check the function definition and know what parameters I need fill in to use "Maximize".
 </p>
