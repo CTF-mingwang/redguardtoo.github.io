@@ -514,7 +514,7 @@ zcat data.dump.gz | sqlite3 db.sqlite3
 <h4 id="sec-1-1">Reasons I need this hack</h4>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li>Our current project used mix platforms (WIN64/Linux64), so the file path contains backward slash `\`.
+<li>Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash <code>\</code>.
 </li>
 <li>My p4 CLI program is from Windows installer because Cygwin version has the slash issue.
 </li>
@@ -549,13 +549,15 @@ Go to the work directory of release branch.
 </div>
 
 <p>
-`p4 edit' the files I want to patch under release branch.
+<code>p4 edit</code> the files I want to patch under release branch.
 Please note,
 </p>
 <ul class="org-ul">
-<li>`lsdiff' is from the package `patchutils'.
+<li>
+<code>lsdiff</code> is from the package <code>patchutils</code>.
 </li>
-<li>`nosl' will strip the backward/forward slashes. It's written by me.
+<li>
+<code>nosl</code> will strip the backward/forward slashes. It's written by me.
 </li>
 </ul>
 <div class="org-src-container">
@@ -578,7 +580,7 @@ Patch the files and DONE!
 </div>
 
 <p>
-Here is the source code of nosl. I put it in my .bashrc
+Here is the source code of <code>nosl</code> placed in my <code>.bashrc</code>,
 </p>
 <div class="org-src-container">
 
@@ -601,7 +603,7 @@ BTW, you could avoid all the trouble of <a href="http://www.perforce.com">Perfor
 </p>
 
 <p>
-UPDATE: <code>git-p4</code> is better than this solution.</p>
+UPDATE: <code>git-p4</code> is better solution.</p>
 </div>
 </div>
 </div>
