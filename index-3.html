@@ -26,7 +26,7 @@
             <h1 class="title"><a href="posts/hotkeys-for-moving-windows-in-emacs.html">Hotkeys for moving windows in emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2012-01-31T08:26:00+00:00">2012-01-31 08:26</time>
+                    <time class="timeago" datetime="2012-01-31T11:26:00+00:00">2012-01-31 11:26</time>
 </div>
                 <div class="stats">
                     
@@ -47,23 +47,42 @@
 
             </div>
             <div class="body">
-                <div>
-<p></p>
-<p>See <a href="http://www.emacswiki.org/emacs/WindMove">http://www.emacswiki.org/emacs/WindMove</a> for details. </p> <p> My hotkeys are different from emacswiki because: </p>
-<ul>
-<li>I was a vi guy, I prefer H,J,K,L for navigation. </li> <li>Arrow keys does not work on my terminal simulators.  <p>   Here is my hotkeys: </p>
-</li> </ul>
-<pre class="prettyprint ">
+                <div id="outline-container-sec-1" class="outline-2">
 
-(when (fboundp 'windmove-left)
+<div class="outline-text-2" id="text-1">
+<p>
+See <a href="http://www.emacswiki.org/emacs/WindMove">http://www.emacswiki.org/emacs/WindMove</a> for details.
+</p>
+
+<p>
+My hotkeys are different from EmacsWiki because:
+</p>
+<ul class="org-ul">
+<li>As a vi guy I prefer H,J,K,L for navigation
+</li>
+<li>Arrow keys does not work on my terminal simulators
+</li>
+</ul>
+<p>
+Here is setup:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(when (fboundp 'windmove-left)
   (global-set-key "\C-ch" 'windmove-left)
   (global-set-key "\C-cj" 'windmove-down)
   (global-set-key "\C-ck" 'windmove-up)
   (global-set-key "\C-cl" 'windmove-right))
-</pre>
+</code></pre>
 
-<p></p>
-<p> Note:   <code>C-c j</code> is originall hokey of function <code>join-line</code>. </p>
+</div>
+
+<p>
+Note:
+<code>C-c j</code> is original assigned to <code>join-line</code>.
+</p>
+</div>
 </div>
             </div>
         </div>
