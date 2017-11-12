@@ -66,7 +66,7 @@ The package solves all the problems using Ctags/Etags with Emacs.
 </p>
 
 <p>
-The first problem: Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. One line setup in <code>~/.emacs</code> is enough:
+The problem 1: Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. One line setup in <code>~/.emacs</code> is enough:
 </p>
 <div class="org-src-container">
 
@@ -77,7 +77,7 @@ The first problem: Ctags takes a few seconds to update the tags file (the index 
 </div>
 
 <p>
-The second problem: Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
+The problem 2: Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
 </p>
 
 <p>
@@ -97,7 +97,7 @@ Enhancement 3: <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> provides
 </p>
 
 <p>
-Enhanment 4: <code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
+Enhancement 4: <code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
 </p>
 
 <p>
