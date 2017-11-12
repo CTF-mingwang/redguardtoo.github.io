@@ -23,6 +23,142 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-git-send-email-at-ubuntu.html">Use `git send-email' at ubuntu</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-08-15T08:24:21+00:00">2013-08-15 08:24</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-git-send-email-at-ubuntu.html#disqus_thread" data-disqus-identifier="cache/posts/use-git-send-email-at-ubuntu.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/git.html" rel="tag">git</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p> When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. </p>  <p> So here is one line command to install all missing perl modules: </p> <div class="org-src-container">
+<br><pre class="prettyprint ">
+<p>sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL</p>
+</pre>
+
+<p></p>
+</div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/one-liner-bash-to-createupdate-playlist-for-mpd.html">One liner bash to create/update playlist for mpd</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-08-13T21:30:00+00:00">2013-08-13 21:30</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/one-liner-bash-to-createupdate-playlist-for-mpd.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-bash-to-createupdate-playlist-for-mpd.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/mpd.html" rel="tag">mpd</a></li>
+           <li><a class="tag p-category" href="categories/music.html" rel="tag">music</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p> I put all my audio files in ~/Music. </p>  <p> The below script create a playlist in m3u format and ask mpd to load it: </p> <div class="org-src-container">
+<pre class="prettyprint ">cd ~/Music;find . -name '<em>.mp3' -o -name '</em>.flac'|sed -e 's%^./%%g' &amp;gt; all.m3u;mpd ~/.mpd/config;mpc clear;mpc load all.m3u;mpc update</pre>
+<p></p>
+</div>  <p> Here is content of my ~/.mpd/config which is basically only a copy from official sample configuration: </p> <div class="org-src-container">
+<pre class="prettyprint "># See the mpd.conf man page for a more detailed description of each parameter.
+music_directory     "~/Music"
+playlist_directory "~/.mpd/playlists"
+db_file "~/.mpd/mpd.db"
+log_file "~/.mpd/mpd.log"
+pid_file "~/.mpd/mpd.pid"
+state_file "~/.mpd/mpdstate"</pre>
+<p></p>
+</div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-install-emacs-source-code-under-ubuntu.html">How to install Emacs source code under Ubuntu</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-08-12T11:44:00+00:00">2013-08-12 11:44</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-install-emacs-source-code-under-ubuntu.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-install-emacs-source-code-under-ubuntu.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/ubuntu.html" rel="tag">ubuntu</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+Only one command:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">sudo apt-get install emacs24-el
+</code></pre>
+
+</div>
+
+<p>
+How I locate that package emacs24-el:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-bash">sudo apt-get install apt-file;sudo apt-file update;
+apt-file search help.el.gz
+</code></pre>
+
+</div>
+
+<p>
+BTW, I assign hot key <code>C-h C-f</code> to command <code>find-function</code> which "Find the definition of the FUNCTION near point".</p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html">How to avoid Repeated Strain Injury when using emacs by re-assigning hotkeys</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -613,145 +749,6 @@ pkgfile amidi # archlinux, You need install pkgfile
 </code></pre>
 
 </div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/nai-you-bao-yu-gu.html">奶油鲍鱼菇</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-27T16:05:00+00:00">2013-07-27 16:05</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/nai-you-bao-yu-gu.html#disqus_thread" data-disqus-identifier="cache/posts/nai-you-bao-yu-gu.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<ul>
-<li>
-<a href="https://www.youtube.com/watch?v=6axDHwWVlLw">美食好简单视频教程</a> </li> <li>
-<a href="http://www.ttv.com.tw/drama11/GourmetEasy/cook_content.asp?info=17273">菜谱</a> </li> </ul>
-<pre class="example">材料：
-鮑魚菇300公克、洋地瓜200公克、樹子50公克、薑末10公克、香菜10公克、麵粉30公克。
-<p>調味料：</p>
-<p>醬油2大匙、蘋果淳1大匙、香油1大匙、糖1/2小匙、黑胡椒粒1/2小匙。</p>
-<p>作法：</p>
-<pre class="code literal-block">鮑魚菇切花刀、洋地瓜切成末、香菜切末，備用。
-鮑魚菇沾上麵粉放入鍋中煎至上色，備用。
-鍋中放入1大匙葡萄籽油，爆香洋地瓜、樹子、薑末放入鮑魚菇、調味料燒至入味，灑上香菜即可盛盤。
-</pre>
-
-
-<p></p></pre>  <ul>
-<li>我误用红薯代替了<a href="http://blog.sina.com.tw/yoko6712/article.php?entryid=580537">洋地瓜</a>.洋地瓜又名豆薯,见<a href="http://en.wikipedia.org/wiki/Pachyrhizus">Wiki</a>. </li> <li>菇应该煎得焦一点 </li> <li>红薯本身甜的，加苹果醋和糖后就过甜了.而洋地瓜则是淡的,可能口感上也好一点 </li> <li>生姜尽可能切碎 </li> <li>面粉应该一开始放在干燥的碗里,面粉本身不结块,用生粉代替不好 </li> <li>黑胡椒粒还是需要的 </li> <li>香菜保持干燥包好隔绝空气放到冰箱保存 </li> <li>树子是台湾特产,在悉尼可能只能买罐头了，见<a href="http://www.sbar.com.cn/caipu/66836">这道菜谱</a>. </li> <li>酱油好像放了多一点 </li> <li>不过再视频里一大勺实际上是满满两勺 </li> </ul>
-<p><img src="wp-content/uploads/2013/07/wpid-butter-chinese-mushroom.jpg" alt="image/butter-chinese-mushroom.jpg"></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html">蘑菇鸡肉意大利面做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-24T19:34:00+00:00">2013-07-24 19:34</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/mo-gu-ji-rou-yi-da-li-mian-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/pasta.html" rel="tag">pasta</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<ul>
-<li>大蒜15片切碎，橄榄油炸到焦黄 </li> <li>蘑菇倒入翻炒到软掉 </li> <li>倒入鸡肉块300克炒至鸡肉变白 </li> <li>倒入Five Brother Alfredo Pasta Sauce 220克加少量水 </li> <li>又有说小火炒5分钟,偶尔翻炒,到浆粘稠，不要沸腾 </li> <li>参考<a href="http://en.wikipedia.org/wiki/Fettuccine_Alfredo">Fettuccine Alfredo at wikipedia</a>获得背景，看来要加大量黄油和Cheese </li> <li>看<a href="http://www.taste.com.au/recipes/3157/fettuccine+alfredo">另一菜谱</a> </li> <li>盐要少加一点调味,因为sauce以有盐 </li> <li>起锅拌上熟意大利面，加九层塔(Basil),撒上黑胡椒 </li> <li>大概三人份 </li> </ul>
-<p><img src="wp-content/uploads/2013/07/wpid-mushroom-chicken-pasta.jpg" alt="image/mushroom-chicken-pasta.jpg"></p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/hu-luo-bo-zhou-zuo-fa.html">胡萝卜粥做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-07-20T16:37:00+00:00">2013-07-20 16:37</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/hu-luo-bo-zhou-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/hu-luo-bo-zhou-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-:zh:cuisine:
-</p>
-
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-07-20&gt;</span></span> 
-</p>
-
-<p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-30 Fri&gt;</span></span>
-</p>
-
-<ul class="org-ul">
-<li>
-<a href="http://jingyan.baidu.com/article/ceb9fb10f996e48cad2ba0f7.html">菜谱</a>
-</li>
-<li>
-<a href="https://www.youtube.com/watch?v=OBfZc5nmkpU">胡萝卜切丝刀法</a> (刀沾水好切)
-</li>
-<li>新鲜萝卜
-</li>
-<li>多放油炒胡萝卜丝
-</li>
-<li>米水比例至少1:6
-</li>
-<li>吃前放碎香菜,胡椒粉,盐,味精
-</li>
-</ul>
-<div class="figure">
-<p><img src="wp-content/carrot-rice.jpg" alt="carrot-rice.jpg"></p>
 </div>
 </div>
             </div>

@@ -23,6 +23,433 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/how-to-manage-the-file-path-in-big-project.html">How to manage the file path in big project</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-05-29T01:31:35+00:00">2014-05-29 01:31</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-manage-the-file-path-in-big-project.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-manage-the-file-path-in-big-project.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/engineering.html" rel="tag">engineering</a></li>
+           <li><a class="tag p-category" href="categories/software.html" rel="tag">software</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+to manage the file path in big project                                    :en:engineering:software:bash:
+</p>
+
+<p>
+It's not good practice to use relative path in big project.
+</p>
+
+<p>
+Reasons:
+</p>
+
+<ul class="org-ul">
+<li>If file B refer to file A with "../A". Then B's position in the project *CANNOT be changed. Or else its reference to A will be wrong.
+</li>
+<li>Relative path is not intuitive when debugging.
+</li>
+<li>If the dependency is complex. Figure out the right path is mission impossible. For example, file A refer to file B with "./a/../../B" and file B refer to file C  "../../b/C".
+</li>
+</ul>
+<p>
+So you should <b>ALWAYS use the absolute path</b>.
+</p>
+
+<p>
+Absolute path is tedious to type and not portable.
+</p>
+
+<p>
+It could be improved a little bit be use an environment variable to replace the common prefix of the full path.
+</p>
+
+<p>
+For example, we can replace absolute path "/home/cb/projects/app1/src/test.c" with "$TTAGROOT/src/test.c", if the value of environment variable TTAGROOT is "/home/cb/projects/app1".
+</p>
+
+<p>
+Insert below code into ~/.bashrc so TTAGROOT value is set when you logged into bash:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-sh">export TTAGROOT="/home/cb/projects/app1"
+</code></pre>
+
+</div>
+
+<p>
+In you script to do the real job, you could make TTAGROOT optional and still use your full path happily. It's just one bash liner.
+</p>
+
+<p>
+Here is a sample file named test.sh:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-sh">#!/bin/bash
+[ -z "$TTAGROOT" ] &amp;&amp; TTAGROOT="hard-coded-full-path"
+echo "TTAGROOT = $TTAGROOT"
+</code></pre>
+
+</div>
+
+<p>
+You could use test.sh without $TTAGROOT. Or you can set up default value of $TTAGROOT in ~/.bashrc as I already mentioned.
+</p>
+
+<p>
+Or you can override the TTAGROOT value when you executing "test.sh":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-sh">TTAGROOT="hello" ./test.sh
+</code></pre>
+
+</div>
+
+<p>
+BTW, don't abuse this technique. Set <b>one environment variable</b> for the root directory of project is enough.
+</p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/ccjava-code-indentation-in-emacs.html">C/C++/Java code indentation in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-05-09T09:19:18+00:00">2014-05-09 09:19</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/ccjava-code-indentation-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/ccjava-code-indentation-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/c.html" rel="tag">c</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+code indentation in Emacs                                          :en:emacs:java:c::c:
+</p>
+
+<div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+There are two styles when insert curly braces in C like languages.
+</p>
+
+<p>
+Style 1:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">if(true) {
+    printf("hello world\n");
+}
+</code></pre>
+
+</div>
+
+<p>
+Style 2:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">if(true)
+{
+    printf("hello world\n");
+}
+</code></pre>
+
+</div>
+
+<p>
+Whatever style I use, I expect Emacs will properly handle the indentation for me.
+</p>
+
+<p>
+In "Style 1", when I press ENTER key after "{" at first line, I expect the new line will indent four spaces.
+</p>
+
+<p>
+In "Style 2", when I press ENTER key after ")" at first line, I expect the new line will NOT indent.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h3 id="sec-2">Solution</h3>
+<div class="outline-text-2" id="text-2">
+<p>
+Insert below code into ~/.emacs:
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(defun fix-c-indent-offset-according-to-syntax-context (key val)
+  ;; remove the old element
+  (setq c-offsets-alist (delq (assoc key c-offsets-alist) c-offsets-alist))
+  ;; new value
+  (add-to-list 'c-offsets-alist '(key . val)))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              ;; indent
+              (fix-c-indent-offset-according-to-syntax-context 'substatement 0)
+              (fix-c-indent-offset-according-to-syntax-context 'func-decl-cont 0))
+            ))
+</code></pre>
+
+</div>
+
+<p>
+That's it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h3 id="sec-3">Explanation</h3>
+<div class="outline-text-2" id="text-3">
+<p>
+When you press the ENTER key, the function <b>c-indent-line</b> will be called.
+</p>
+
+<p>
+That function will do some simple syntax analysis and decide current syntactic context..
+</p>
+
+<p>
+It will use that syntactic context to look up a global variable c-offsets-alist and decide how many spaces the new line will indent.
+</p>
+
+<p>
+For example, the context <b>substatement</b> corresponds to the code like below:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">if(true) // press ENTER here
+</code></pre>
+
+</div>
+
+<p>
+And the context <b>func-decl-cont</b> corresponds to:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">void fn () //press ENTER here
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h3 id="sec-4">Technical details</h3>
+<div class="outline-text-2" id="text-4">
+<p>
+When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
+</p>
+
+<p>
+<b>indent-according-to-mode</b> will call function object <b>indent-line-function</b> if it's not nil.
+</p>
+
+<p>
+In C/C++/Java, that object is actually <b>c-indent-line</b>.
+</p>
+
+<p>
+<b>c-indent-line</b> is defined in /usr/share/emacs/24.3/lisp/progmodes/cc-cmds.el (I use Emacs 24.3 on Gentoo Linux).
+</p>
+
+<p>
+In that function, just below the code line:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(setq c-syntactic-context (c-guess-basic-syntax))
+</code></pre>
+
+</div>
+
+<p>
+You can insert log code as below:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(message "c-syntactic-context=%s" c-syntactic-context)
+</code></pre>
+
+</div>
+
+<p>
+You will know the current syntactic context when you press ENTER key through the output of log code.
+</p>
+
+<p>
+<a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki</a> says you can run command "c-set-offset", whose hot key is "C-x C-o", in order to "see the syntax at point". As I tested, it does not work as expected. My way may seem a little bit intrusive but is reliable.
+</p>
+
+<p>
+For example, the context <b>statement-cont</b> corresponds to the use case like this:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-c">int a=3, // press ENTER here
+</code></pre>
+
+</div>
+
+<p>
+Please note syntax analysis in c-indent-line is turned on if and <b>only if</b> the global flag <b>c-syntactic-indentation</b> is true.
+</p>
+
+<p>
+Thanks for <a href="https://github.com/chengyi">chengyi</a> for <a href="https://github.com/redguardtoo/emacs.d/issues/98">reporting the issue and suggesting the fix</a>.
+</p>
+
+<p>
+BTW, <a href="http://www.emacswiki.org/emacs/IndentingC">EmacsWiki has a section</a> to discuss the indenting in C. You may not need it if you have read this article and can read the Emacs lisp code.
+</p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/what-s-aop-in-java.html">What's AOP in Java</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-05-03T06:21:31+00:00">2014-05-03 06:21</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/what-s-aop-in-java.html#disqus_thread" data-disqus-identifier="cache/posts/what-s-aop-in-java.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/java.html" rel="tag">java</a></li>
+           <li><a class="tag p-category" href="categories/lisp.html" rel="tag">lisp</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+AOP in Java                                                            :en:java:emacs:lisp:
+</p>
+
+<p>
+Yesterday in a interview I was asked what's AOP and how to use it. The two interviewers
+</p>
+
+<p>
+I was wordless then so I came back to read the documentation.
+</p>
+
+<p>
+It turns out AOP is simple. It's like emacs lisp's defadvice but less powerful. I've been using this since day one on different languages.
+</p>
+
+<p>
+Please read <a href="http://developers.slashdot.org/story/05/04/24/0343224/aspect-oriented-programming-considered-harmful">slashdot discussion</a> about AOP.
+</p>
+
+<p>
+Here is the comment from MarkusQ,
+</p>
+
+<pre class="example">
+ by MarkusQ (450076) on Sunday April 24, 2005 @11:01PM (#12333504) Journal
+
+Exactly.
+
+When I implemented this sort of thing for a project in Ruby a few years back, I just grabbed all the CLOS nomenclature because I was familiar with it. I didn't even realize I was using "AOP with funny names" until someone reading the code mentioned it. When he asked why I didn't use the "standard" terminology, I lent him a copy of "Object Oriented Programing in Common Lisp" (c) 1988, and asked why the AOP people had to invent new words for everything.
+
+I have yet to get an answer.
+
+--MarkusQ
+</pre>
+
+<p>
+So it's just some enterprise guy inventing new buzz words (<a href="http://en.wikipedia.org/wiki/Cross-cutting_concern">cross-cutting concern</a>, for example) on some old idea.
+</p>
+
+<p>
+Now as guy who got seven years academical training on system design (Bachelor and Master degree in system controlling major from <a href="http://en.wikipedia.org/wiki/Shanghai_Jiao_Tong_University">best engineering school in China</a>), I will give you some precious advice on how to use this thing (AOP in java, API hook in C, devadvice in Emacs lisp or whatever the buzz word is):
+</p>
+
+<p>
+<b>DO NOT USE IT IN ANY REAL SYSTEM OR APPLICATION!</b>
+</p>
+
+<p>
+Here are the reasons:
+</p>
+
+<ul class="org-ul">
+<li>The code change an external API's behavior
+</li>
+<li>The code's location is not close to the API's
+</li>
+<li>The system will detoriate quickly with those AOP things
+</li>
+</ul>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/why-gnus-is-better-than-gmail.html">Why Gnus is better than Gmail</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1054,347 +1481,6 @@ curl -L https://raw.githubusercontent.com/lunaryorn/dotfiles/master/emacs/bin/ma
 
 <p></p>
 <p> Please note if the same version already exists on server, I need delete it before uploading. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-firefox-in-emacs-way-3.html">Use firefox in Emacs way</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-23T20:03:00+00:00">2014-03-23 20:03</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-firefox-in-emacs-way-3.html#disqus_thread" data-disqus-identifier="cache/posts/use-firefox-in-emacs-way-3.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/firefox.html" rel="tag">firefox</a></li>
-           <li><a class="tag p-category" href="categories/keysnail.html" rel="tag">keysnail</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-firefox in Emacs way                                                      :en:firefox:keysnail:emacs:
-</p>
-
-<p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-05-20 Tue&gt;</span></span>
-</p>
-
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-03-23 Sun&gt;</span></span>
-</p>
-
-<p>
-I use <a href="https://github.com/mooz/keysnail/wiki">keysnail</a>. it's a firefox addon to convert firefox into Emacs.
-</p>
-
-<p>
-I install keysnail's own plugins "HoK" and "Tanything".
-</p>
-
-<p>
-Here are the use cases of keysnail.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">HoK</a>.
-</p>
-
-<p>
-Insert below code into ~/.keysnail.js:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">hook.setHook("PluginLoaded", function () {
-    if (!plugins.hok) return;
-
-    /* HoK 1.3.9+ required */
-    plugins.hok.pOptions.selector = plugins.hok.pOptions.selector
-    /* feedly */
-    + ", *[data-uri]" + ", *[data-selector-toggle]" + ", *[data-page-action]" + ", *[data-app-action]"
-    /* google plus */
-    + ", *[guidedhelpid]"
-    /* twitter */
-    + ", *[data-item-count]";
-});
-
-key.setGlobalKey(["C-c","C-f"], function (aEvent, aArg) {
-        ext.exec("hok-start-foreground-mode", aArg);
-}, "Hok - Foreground hint mode", true);
-
-key.setGlobalKey(["C-c","C-b"], function (aEvent, aArg) {
-        ext.exec("hok-start-background-mode", aArg);
-}, "HoK - Background hint mode", true);
-
-key.setGlobalKey(["C-c","C-y"], function (aEvent, aArg) {
-        ext.exec("hok-yank-foreground-mode", aArg);
-}, "HoK - Background hint mode", true);
-
-key.setGlobalKey(["C-c","C-;"], function (aEvent, aArg) {
-        ext.exec("hok-start-extended-mode", aArg);
-}, "HoK - Extented hint mode", true);
-
-key.setGlobalKey(["C-c", "C-e"], function (aEvent, aArg) {
-        ext.exec("hok-start-continuous-mode", aArg);
-}, "Start continuous HaH", true);
-</code></pre>
-
-</div>
-
-<p>
-Now I can press "Ctrl-C Ctrl-F" to select the links to click.
-</p>
-
-<p>
-The links will be highlighted as below screen shot:
-<img src="wp-content/keysnail-hok-nq8.png" alt="keysnail-hok-nq8.png"></p>
-
-<p>
-I can press the highlighted hint to click the link.
-</p>
-
-<p>
-Copy the link into clipboard is also easy. I press "C-c C-y" and similar UI will be displayed. I press the hint above to finish the operation.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Copy the text of link</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-This is my most favorite tool. As a developer, I need copy text of links from bug tracking software and paste it into git commit message frequently.
-</p>
-
-<p>
-That's error prone because:
-</p>
-<ol class="org-ol">
-<li>The links are cluttered so it's hard to select the text of the link without actually clicking the link. 
-</li>
-<li>The web UI of bug tracing system may use some CSS magic. Only part of the text of links are displayed. So it's impossible to select the text at all. For example, <a href="https://www.atlassian.com/software/jira">JIRA</a> will display file name of "Screenshot 03/05/2014-193024.png" as "Screenshot 03/05/2014…png".
-</li>
-</ol>
-<p>
-If you use keysnail+HOK, it's as simple as press hot key "C-c ; Y". That's it!
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">Switch tab</h3>
-<div class="outline-text-2" id="text-3">
-<p>
-Install the <a href="https://github.com/mooz/keysnail/wiki/plugin">Tanything</a>.
-</p>
-
-<p>
-Insert below code into ~/.keysnail.js:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">key.setGlobalKey(["C-c", "C-a"], function (ev, arg) {
-  ext.exec("tanything", arg);
-}, "view all tabs", true);
-</code></pre>
-
-</div>
-
-<p>
-Press "Ctrl-C Ctrl-A", you got below UI:
-<img src="wp-content/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"></p>
-
-<p>
-Tanything will locate the tab by finding match in web page's title or URL.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">My keysnail set up</h3>
-<div class="outline-text-2" id="text-4">
-<p>
-You can download my ~/.keysnail.js from <a href="https://gist.githubusercontent.com/redguardtoo/003ac86d4c11b70b870a/raw/32356b071785248c0ff56d9c5896168263efefdd/.keysnail.js">HERE</a>.
-</p>
-
-<p>
-#+image/keysnail-hok-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/wpid-keysnail-hok-nq8.png" alt="wpid-keysnail-hok-nq8.png">
-#+image/keysnail-tanything-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2014/03/keysnail-tanything-nq8.png" alt="keysnail-tanything-nq8.png"></p>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/debug-emacs-lisp-code-the-hard-way.html">Debug Emacs Lisp code the hard way</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-19T19:45:00+00:00">2014-03-19 19:45</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/debug-emacs-lisp-code-the-hard-way.html#disqus_thread" data-disqus-identifier="cache/posts/debug-emacs-lisp-code-the-hard-way.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/debug.html" rel="tag">debug</a></li>
-           <li><a class="tag p-category" href="categories/elisp.html" rel="tag">elisp</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>I <a href="https://github.com/emacs-helm/helm/issues/448">met some issue</a> when using helm several days ago. </p> <p> With the help from Michael Heerdegen, I can locate the line error message is dumped. </p> <p> But the problem is I cannot get the backtrace at all. </p> <p> So I insert some <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html">backtrace printing code</a> above that line and "M-x eval-buffer": </p>   
-<pre class="prettyprint ">
-
-(with-output-to-temp-buffer "backtrace-output"
-  (let ((var 1))
-    (save-excursion
-      (setq var (eval '(progn
-                         (1+ var)
-                         (list 'testing (backtrace))))))))
-</pre>
-
-<p></p>
-<p> It turns out that some third party package I installed changes the emacs variable "display-buffer-function". I guess that's why the backtrace is blocked. Because backtrace is usually dumped into a backtrace buffer. And backtrace buffer's is actually influenced by the variable. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-03-11T18:52:00+00:00">2014-03-11 18:52</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-use-ctags-in-emacs-effectively-3.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-ctags-in-emacs-effectively-3.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p><a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> is a code navigation tool. It supports many language and could be integrated into Emacs well. </p> <p> Please read <a href="http://www.emacswiki.org/emacs/BuildTags">EmacsWiki</a> for basic usage. </p> <p> I will talk about how I manage my ctags. </p> <p> Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". </p> <p> An example of tags-table-list: </p>
-<pre class="prettyprint ">
-(setq tags-table-list '("~/wxWidgets-master/TAGS" "~/projs/Loris/src/desktop/TAGS"))
-</pre>
-
-<p></p>
-<p> Every time we you "M-x find-tag", the TAGS file in above list will be read from the scratch to locate the definition of the symbol under cursor. </p> <p> Here is my strategy to manage TAGS <b>automatically</b>: </p>
-<ul>
-<li>I hard coded full path of TAGS in .emacs because I usually don't change project path. </li> <li>In major mode hook like c++-mode-hook or js2-mode-hook I will check the directory path of current file. If it contains certain string, I suppose the file belong to certain project. </li> <li>Then I will create TAGS for that project if needed </li> <li>Every time when I save the file, I may update TAGS according to the value of tags-table-list. </li> </ul>
-<p> Here is the code: </p>
-<pre class="prettyprint lang-lisp">
-(defun my-project-name-contains-substring (REGEX)
-  (let ((dir (if (buffer-file-name)
-                 (file-name-directory (buffer-file-name))
-               "")))
-    (string-match-p REGEX dir)))
-
-(defun my-create-tags-if-needed (SRC-DIR &amp;optional FORCE)
-  "return the full path of tags file"
-  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
-       file)
-    (setq file (concat dir "TAGS"))
-    (when (or FORCE (not (file-exists-p file)))
-      (message "Creating TAGS in %s ..." dir)
-      (shell-command
-       (format "ctags -f %s -e -R %s" file dir))
-      )
-    file
-    ))
-
-(defvar my-tags-updated-time nil)
-
-(defun my-update-tags ()
-  (interactive)
-  "check the tags in tags-table-list and re-create it"
-  (dolist (tag tags-table-list)
-    (my-create-tags-if-needed (file-name-directory tag) t)
-    ))
-
-(defun my-auto-update-tags-when-save ()
-  (interactive)
-  (cond
-   ((not my-tags-updated-time)
-    (setq my-tags-updated-time (current-time)))
-   ((&lt; (- (float-time (current-time)) (float-time my-tags-updated-time)) 300)
-    ;; &lt; 300 seconds
-    ;; do nothing
-    )
-   (t
-    (setq my-tags-updated-time (current-time))
-    (my-update-tags)
-    (message "updated tags after %d seconds." (- (float-time (current-time))  (float-time my-tags-updated-time)))
-    )
-   ))
-
-(defun my-setup-develop-environment ()
-    (when (my-project-name-contains-substring "Loris")
-      (cond
-       ((my-project-name-contains-substring "src/desktop")
-        ;; C++ project don't need html tags
-        (setq tags-table-list (list
-                               (my-create-tags-if-needed
-                                (concat (file-name-as-directory (getenv "WXWIN")) "include"))
-                               (my-create-tags-if-needed "~/projs/Loris/loris/src/desktop")))
-        )
-       ((my-project-name-contains-substring "src/html")
-        ;; html project donot need C++ tags
-        (setq tags-table-list (list (my-create-tags-if-needed "~/projs/Loris/loris/src/html")))
-        ))))
-
-(add-hook 'after-save-hook 'my-auto-update-tags-when-save)
-(add-hook 'js2-mode-hook 'my-setup-develop-environment)
-(add-hook 'web-mode-hook 'my-setup-develop-environment)
-(add-hook 'c++-mode-hook 'my-setup-develop-environment)
-(add-hook 'c-mode-hook 'my-setup-develop-environment)
-</pre>
-
-<p></p>
-<p> UPDATE: There is some discussion at <a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3">Google Plus</a> about using ctags. Kaushal Modi recommended three emacs plugins: </p>
-<ol>
-<li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>
-<p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
 </div>
             </div>
         </div>

@@ -23,6 +23,221 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/why-some-systemd-service-on-archlinux-does-not-work.html">Why some systemd service on ArchLinux does not work</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-12-01T14:53:00+00:00">2013-12-01 14:53</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/why-some-systemd-service-on-archlinux-does-not-work.html#disqus_thread" data-disqus-identifier="cache/posts/why-some-systemd-service-on-archlinux-does-not-work.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/archlinux.html" rel="tag">archlinux</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/systemd.html" rel="tag">systemd</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">List failed services</h4> <div class="outline-text-3" id="text-1">     
+<pre class="prettyprint ">
+
+sudo systemctl --failed
+</pre>
+
+<p></p>
+<p> I can also use <code>sudo journalctl -b</code> to get the log message when booting all the services. But not very useful. </p>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Find the root cause of failed service</h4> <div class="outline-text-3" id="text-2">     
+<pre class="prettyprint ">
+
+sudo systemctl status service-name
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Why my /usr/lib/systemd/system/network-wifi.service does not work</h4> <div class="outline-text-3" id="text-3">  <p>Here is the content of my wifi service </p>   
+<pre class="prettyprint ">
+
+[Unit]
+
+Description=Wireless networkd connectivity (wlan0)
+
+Wants=network.target
+
+Before=network.target
+
+BindsTo=sys-subsystem-net-devices-wlan0.device
+
+After=sys-subsystem-net-devices-wlan0.device
+
+
+
+[Service]
+
+Type=oneshot
+
+RemainAfterExit=yes
+
+#EnvironmentFile=/etc/conf.d/network-wireless@wlan0
+
+
+
+ExecStart=/usr/bin/ip link set wlan0 up
+
+ExecStart=/usr/bin/wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/yang.conf
+
+ExecStart=/usr/bin/dhcpcd wlan0
+
+
+
+ExecStop=/usr/bin/ip addr flush dev wlan0
+
+ExecStop=/usr/bin/ip link set dev wlan0 down
+
+
+
+[Install]
+
+WantedBy=multi-user.target
+</pre>
+
+<p></p>
+<p> It's because netcfg.service blocks my network-wifi.service. </p> <p> Solutin is simple: </p>   
+<pre class="prettyprint ">
+
+sudo systemctl disable netcfg
+</pre>
+
+<p></p>
+</div>  </div>  <div id="outline-container-4" class="outline-3"> <h4 id="sec-4">How to start a service as as specific user (mpd, for example)</h4> <div class="outline-text-3" id="text-4">  <p>This is the content of /usr/lib/systemd/system/mpd.service:  </p>   
+<pre class="prettyprint ">
+
+[Unit]
+
+Description=Music Player Daemon
+
+After=network.target sound.target
+
+
+
+[Service]
+
+ExecStart=/usr/bin/mpd --no-daemon /home/cb/.mpd/config
+
+User=cb
+
+
+
+[Install]
+
+WantedBy=multi-user.target
+</pre>
+
+<p></p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/hao-you-shen-cai-zuo-fa.html">蚝油生菜做法</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-11-17T19:43:00+00:00">2013-11-17 19:43</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/hao-you-shen-cai-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/hao-you-shen-cai-zuo-fa.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/beef.html" rel="tag">beef</a></li>
+           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
+           <li><a class="tag p-category" href="categories/garlic.html" rel="tag">garlic</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<ul>
+<li>
+<a href="http://www.xinshipu.com/%E7%AE%80%E6%98%93%E7%89%88%E8%9A%9D%E6%B2%B9%E7%94%9F%E8%8F%9C-15533.htm">菜谱</a> </li> <li>油炸蒜末,倒入蚝油(至少4大勺)搅拌,最后放入生菜(半颗),搅拌一下即可,可以最后放盐如果嫌不咸的话 </li> <li>生菜用开水烫过沥干,因为其容易出水 </li> <li>不要放糖,蚝油本身有甜味了 </li> </ul>
+<p>阿基师的做法 </p>   <pre class="example">小叮嚀:
+<p>1.西生菜要集中加熱（顏色才可以保持鮮綠跟脆口）</p>
+<p>2.可以利用香菇去蠔油腥味</p>
+<p>2.1. 利用香菇去做燴的動作，讓一些物料巴在上頭</p>
+<p>2.2. 不要加雞精粉跟糖，蠔油已經有甜度了。</p>
+<p>2.3. 蠔油跟豬油一起拌會更香</p>
+<p>做法:</p>
+<p>1.去除香菇蒂頭，斜刀將香菇切片。</p>
+<p>2.起鍋下1茶匙油，爆香香菇片，下蠔油拌炒〈炒過的蠔油有焦糖味在裡面， 味道會更香〉，加入自來高湯〈自來高湯的量，只要抓蠔油鹹度即可〉，小滾一會兒， 讓香菇的甜味煮出來。</p>
+<p>3.調太白粉水〈粉1：水3〉，加入適量的太白粉水，加入少許香油，不需攪拌，熄火 〈澱粉會吃油，攪拌的話會膨脹變成一團糊〉。</p>
+<p>4.在滾水鍋中加鹽，汆燙西生菜〈菜要最後汆燙〉，加入少許薑末〈薑汁也行，薑可提味，巴在葉片上會更好吃〉汆燙，撈起西生菜瀝乾水份〈因為西生菜很會出水， 一定要徹底瀝乾水份，否則會水水的〉。</p>
+<p>5.將蠔油醬汁淋在西生菜上即可。</p>
+<p></p></pre>  <p> -<a href="http://www.youtube.com/watch?feature=player_detailpage&amp;v=X5fY_CtpUGo#t=1731">阿基师视频</a> </p> <p> Screen shot: <img src="wp-content/uploads/2013/11/wpid-fried-cabbage.jpg" alt="http://blog.binchen.org/wp-content/uploads/2013/11/wpid-fried-cabbage.jpg"></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/memo-on-upgrading-archlinux.html">Memo on upgrading ArchLinux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-11-03T20:29:55+00:00">2013-11-03 20:29</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/memo-on-upgrading-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/memo-on-upgrading-archlinux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gentoo.html" rel="tag">gentoo</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/upgrade.html" rel="tag">upgrade</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p></p>
+<pre class="prettyprint ">
+<h2>shit happens</h2>
+<p>pacman -Syu </p>
+<h2>archlinux replace grub with grub2</h2>
+<h2>I cannot install grub2, blocklists stuff</h2>
+<h2>downgrade to grub-obsolete</h2>
+<h2>then grub</h2>
+<h2>setup (hd0) to install MBR</h2>
+<h2>restart netbook (make sure the boot priority is right)</h2>
+</pre>
+
+<p></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/notes-on-upgrading-gentoo-linux.html">notes on upgrading Gentoo Linux</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -556,106 +771,6 @@ ff line-from-clipboard
 
 <p></p>
 <p> It support Cygwin and OSX out of the box. You need install xsel under Linux. </p> <p> BTW, I suggest installing a clipboard manager like parcellite under Linux to sync the two X clipboards. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/fan-qie-ji-dan-tang-zuo-fa.html">番茄鸡蛋汤做法</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-09-25T19:54:19+00:00">2013-09-25 19:54</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/fan-qie-ji-dan-tang-zuo-fa.html#disqus_thread" data-disqus-identifier="cache/posts/fan-qie-ji-dan-tang-zuo-fa.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cuisine.html" rel="tag">cuisine</a></li>
-           <li><a class="tag p-category" href="categories/soup.html" rel="tag">soup</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<ul>
-<li>放蒜(可以加姜,葱)大火爆炒,也可以加点老抽 </li> <li>放入番茄超出茄红素 </li> <li>加水煮,调味放盐糖 </li> <li>最后放入打碎鸡蛋,五秒钟后起锅 </li> </ul>
-<p>有人介绍下面也是类似原理,加葱花老抽爆炒,然后放水煮面 </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html">Matthew Keeler video tutorial on org-mode in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-09-23T20:21:25+00:00">2013-09-23 20:21</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/matthew-keeler-video-tutorial-on-org-mode-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p>At <a href="https://www.youtube.com/watch?feature=player_detailpage&amp;v=lsYdK0C2RvQ#t=308">4:57</a> it becomes interesting. </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/one-liner-to-load-m3u-into-mpd.html">One liner to load m3u into mpd</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-09-23T20:01:37+00:00">2013-09-23 20:01</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/one-liner-to-load-m3u-into-mpd.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-to-load-m3u-into-mpd.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/mpd.html" rel="tag">mpd</a></li>
-           <li><a class="tag p-category" href="categories/music.html" rel="tag">music</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<p></p>
-<pre class="prettyprint ">
-<p>mpc clear;ln -s ~/Music/all.m3u ~/.mpd/playlists/all.m3u;mpc load all;mpc update;mpc shuffle;mpc play;
-</p></pre>
-<p></p>
 </div>
             </div>
         </div>
