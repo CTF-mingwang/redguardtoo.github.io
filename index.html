@@ -23,6 +23,79 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/counsel-etags-v1-3-1-is-released-enemacsctags.html">counsel-etags v1.3.1 is released                                              :en:emacs:ctags</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2017-11-12T09:40:15+00:00">2017-11-12 09:40</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/counsel-etags-v1-3-1-is-released-enemacsctags.html#disqus_thread" data-disqus-identifier="cache/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html">Comments</a>
+
+
+                </div>
+            
+
+            </div>
+            <div class="body">
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://github.com/redguardtoo/counsel-etags">Counsel-etags</a> is a generic solution for code navigation in Emacs.
+</p>
+
+<p>
+It basically needs no setup. For example, just run <code>counsel-etags-find-tag-at-point</code> is enough to start code navigation immediately.
+</p>
+
+<p>
+The package solves all the problems using Ctags/Etags with Emacs.
+</p>
+
+<p>
+The first problem is it's takes a few seconds to update the tags file (the index file to lookup tags) which blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. You only need add one line setup into <code>~/.emacs</code>:
+</p>
+<div class="org-src-container">
+
+
+<pre><code class="lang-lisp">(add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)
+</code></pre>
+
+</div>
+
+<p>
+The second problem is tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
+</p>
+
+<p>
+There are also other enhancements.
+</p>
+
+<p>
+Levenshtein Distance algorithm is used to place the better matching candidates at the the top of multiple candidates. For example, in a ReactJS component, when a function named <code>renderTable</code> could be defined all around the project. But it's very possible user prefers the definition in same component or same sub-project folder where she triggers code navigation.
+</p>
+
+<p>
+It's inefficient to search the same tag again and again. <code>counsel-etags-recent-tag</code> is used to jump to previous definitions.
+</p>
+
+<p>
+<a href="https://github.com/abo-abo/swiper">Ivy-mode</a> provides filter UI for <code>counsel-etags</code>. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to <b>exclude</b> candidates matching "keyword1".
+</p>
+
+<p>
+<code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
+</p>
+
+<p>
+Please check <a href="https://github.com/redguardtoo/counsel-etags">https://github.com/redguardtoo/counsel-etags</a> for more tips.</p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/auto-complete-everything-in-emacs.html">Auto complete everything in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -958,406 +1031,6 @@ The algorithm of pinyinlib is simple. We build a big lookup table to convert the
 <p>
 You can apply the <b>same algorithm to other non-English languages</b>.
 </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-perforce-inside-emacs.html">Use Perforce inside Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2016-12-05T11:51:47+00:00">2016-12-05 11:51</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-perforce-inside-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/use-perforce-inside-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/p4.html" rel="tag">p4</a></li>
-           <li><a class="tag p-category" href="categories/perforce.html" rel="tag">perforce</a></li>
-           <li><a class="tag p-category" href="categories/vcs.html" rel="tag">vcs</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-Perforce inside Emacs                                                     :en:emacs:perforce:vcs:bash:p4:
-</p>
-
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-12-05&gt;</span></span>
-</p>
-
-<p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-08-14 Mon&gt;</span></span>
-</p>
-
-<p>
-Perforce is a proprietary VCS. It's less powerful than <a href="https://git-scm.com/">Git</a> so need extra effort to be use with Emacs.
-</p>
-
-<p>
-For example, <code>git log -p file-path</code> displays the detailed history of a single file. There is no way you can do this in perforce. Even ClI like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> can't do it. I have to use Emacs Lisp to clean the output of <code>p4</code>.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<ul class="org-ul">
-<li>
-<code>p4 set</code> to <a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html">set up</a>
-</li>
-<li>
-<code>p4 login</code> to login
-</li>
-<li>
-<code>p4 client</code> creates a new work space to tell server the directories/files to check out or to ignore
-</li>
-<li>
-<code>p4 sync //depot/url/...</code> to checkout files
-</li>
-<li>Files are read-only by default. You need <code>p4 edit file</code> to make files writable before editing
-</li>
-<li>
-<code>p4 add files</code> to add new files. <code>p4 revert</code> to revert edited file to it original status and lose the local changes
-</li>
-<li>
-<code>p4 change</code> to create a pending change. Then <code>p4 submit -c #changelist</code> to actually submit code to main branch. Pending change gives you a chance to tweak the change before submit
-</li>
-<li>Or <code>p4 submit -d"description" file</code> to submit a single file directly
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">My solution</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-Perforce Cygwin portable is not recommended.
-</p>
-
-<p>
-I suggest using executable from Perforce Windows native version which works on both Cygwin and Windows.
-</p>
-
-<p>
-Perforce server assigns unique URL for each physical file. If I only feed <code>p4</code> that URL, the operation is always successful.
-</p>
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">Emacs</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-I developed <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a> which shows "commit message of current line in Emacs". It supports Perforce out of box (you still need <code>p4 login</code> at first.)
-</p>
-
-<p>
-My patched <a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/git-gutter/git-gutter.el">emacs-git-gutter</a> show Perforce gutters. You only need setup <code>git-gutter:exp-to-create-diff</code>. Here is a sample,
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(setq-local git-gutter:exp-to-create-diff
-            (shell-command-to-string (format "p4 diff -du -db %s"
-                                             (file-relative-name buffer-file-name))))
-</code></pre>
-
-</div>
-
-<p>
-I also provided commands like <code>p4edit</code>, <code>p4revert</code>, <code>p4submit</code>, <code>p4diff</code>, and <code>p4history</code>,
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">;; {{ perforce utilities
-(defvar p4-file-to-url '("" "")
-  "(car p4-file-to-url) is the original file prefix
-(cadr p4-file-to-url) is the url prefix")
-
-(defun p4-current-file-url ()
-  (replace-regexp-in-string (car p4-file-to-url)
-                            (cadr p4-file-to-url)
-                            buffer-file-name))
-
-(defun p4-generate-cmd (opts)
-  (format "p4 %s %s" opts (p4-current-file-url)))
-
-(defun p4edit ()
-  "p4 edit current file."
-  (interactive)
-  (shell-command (p4-generate-cmd "edit"))
-  (read-only-mode -1))
-
-(defun p4submit (&amp;optional file-opened)
-  "p4 submit current file.
-If FILE-OPENED, current file is still opened."
-  (interactive "P")
-  (let* ((msg (read-string "Say (ENTER to abort):"))
-         (open-opts (if file-opened "-f leaveunchanged+reopen -r" ""))
-         (full-opts (format "submit -d '%s' %s" msg open-opts)))
-    ;; (message "(p4-generate-cmd full-opts)=%s" (p4-generate-cmd full-opts))
-    (if (string= "" msg)
-        (message "Abort submit.")
-      (shell-command (p4-generate-cmd full-opts))
-      (unless file-opened (read-only-mode 1))
-      (message (format "%s submitted."
-                       (file-name-nondirectory buffer-file-name))))))
-
-(defun p4revert ()
-  "p4 revert current file."
-  (interactive)
-  (shell-command (p4-generate-cmd "revert"))
-  (read-only-mode 1))
-
-(defun p4-show-changelist-patch (line)
-  (let* ((chg (nth 1 (split-string line "[\t ]+")))
-         (url (p4-current-file-url))
-         (pattern "^==== //.*====$")
-         sep
-         seps
-         (start 0)
-         (original (if chg (shell-command-to-string (format "p4 describe -du %s" chg)) ""))
-         rlt)
-
-    (while (setq sep (string-match pattern original start))
-      (let* ((str (match-string 0 original)))
-        (setq start (+ sep (length str)))
-        (add-to-list 'seps (list sep str) t)))
-    (setq rlt (substring original 0 (car (nth 0 seps))))
-    (let* ((i 0) found)
-      (while (and (not found)
-                  (&lt; i (length seps)))
-        (when (string-match url (cadr (nth i seps)))
-          (setq rlt (concat rlt (substring original
-                                           (car (nth i seps))
-                                           (if (= i (- (length seps) 1))
-                                               (length original)
-                                             (car (nth (+ 1 i) seps))))))
-          ;; out of loop now since current file patch found
-          (setq found t))
-        (setq i (+ 1 i))))
-
-    ;; remove p4 verbose bullshit
-    (setq rlt (replace-regexp-in-string "^\\(Affected\\|Moved\\) files \.\.\.[\r\n]+\\(\.\.\. .*[\r\n]+\\)+"
-                                        ""
-                                        rlt))
-    (setq rlt (replace-regexp-in-string "Differences \.\.\.[\r\n]+" "" rlt))
-    ;; one line short description of change list
-    (setq rlt (replace-regexp-in-string "Change \\([0-9]+\\) by \\([^ @]+\\)@[^ @]+ on \\([^ \r\n]*\\).*[\r\n \t]+\\([^ \t].*\\)" "\\1 by \\2@\\3 \\4" rlt))
-    rlt))
-
-(defun p4--create-buffer (buf-name content &amp;optional enable-imenu)
-  (let* (rlt-buf)
-    (if (get-buffer buf-name)
-        (kill-buffer buf-name))
-    (setq rlt-buf (get-buffer-create buf-name))
-    (save-current-buffer
-      (switch-to-buffer-other-window rlt-buf)
-      (set-buffer rlt-buf)
-      (erase-buffer)
-      (insert content)
-      (diff-mode)
-      (goto-char (point-min))
-      ;; nice imenu output
-      (if enable-imenu
-          (setq imenu-create-index-function
-                (lambda ()
-                  (save-excursion
-                    (imenu--generic-function '((nil "^[0-9]+ by .*" 0)))))))
-      ;; quit easily in evil-mode
-      (evil-local-set-key 'normal "q" (lambda () (interactive) (quit-window t))))))
-
-(defun p4diff ()
-  "Show diff of current file like `git diff'."
-  (interactive)
-  (let* ((content (shell-command-to-string (p4-generate-cmd "diff -du -db"))))
-    (p4--create-buffer "*p4diff*" content)))
-
-(defun p4history ()
-  "Show history of current file like `git log -p'."
-  (interactive)
-  (let* ((changes (split-string (shell-command-to-string (p4-generate-cmd "changes")) "\n"))
-         (content (mapconcat 'p4-show-changelist-patch
-                             changes
-                             "\n\n")))
-    (p4--create-buffer "*p4log*" content t)))
-;; }}
-</code></pre>
-
-</div>
-
-<p>
-As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a>, insert below code into <code>prog-mode-hook</code> to view any perforce change inside Emacs,
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(setq-local ffip-diff-backends
-            '((ivy-read "p4 change to show:"
-                        (split-string (shell-command-to-string "p4 changes //depot/development/DIR/PROJ1/...")
-                                      "\n")
-                        :action (lambda (i)
-                                  (if (string-match "^ Change \\([0-9]*\\)" i)
-                                      (shell-command-to-string (format "p4 describe -du -db %s"
-                                                                       (match-string 1 i))))))
-              "p4 diff -du -db //depot/development/DIR/PROJ1/..."))
-</code></pre>
-
-</div>
-
-<p>
-You can also check my <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-perforce.el">emacs.d</a> to get latest code.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">Bash Shell</h4>
-<div class="outline-text-3" id="text-2-2">
-<p>
-Other operations are finished in Bash Shell,
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-bash"># {{ Perforce, I hope I will never use it
-if [ "$OS_NAME" = "CYGWIN" ]; then
-    function p4() {
-        export PWD=`cygpath -wa .`
-        /cygdrive/c/Program\ Files/Perforce/p4.exe $@
-    }
-fi
-
-# p4 workflow:
-#
-#   # basic setup
-#   p4 set P4CLIENT=clientname  # set your default client
-#   p4 set P4PORT=SERVER:1666
-#   p4 set P4USER=username
-#   p4 client # create/edit client, client views selected files
-#
-#   # checkout code
-#   p4 sync [-f] //depot/project-name/path/...
-#   p4 edit file[s]
-#   ... do some editing ...
-#
-#   # submit code
-#   either `p4 submit -d"say hi" file` or `p4 change`
-#
-#   I recommend `p4 change` because you can edit files list before submit happens.
-#   After `p4 change`,  `p4 submit -c changelist#` to actually submit change.
-#
-alias p4clr='p4 diff -sr | p4 -x - revert' # like `git reset HEAD`
-alias p4blame='p4 annotate -c -db ' # could add -a see deleted lines
-alias p4cr='p4 submit -f leaveunchanged+reopen -r'
-alias reviewcl='ccollab addchangelist new'
-alias p4pending='p4 changes -s pending' # add ... for current directory
-alias p4untrack='find . -type f| p4 -x - fstat &gt;/dev/null'
-alias p4v='p4 resolve' # after `p4 sync ...`, maybe resolve
-alias p4r='p4 revert' # discard changes
-alias p4e='p4 edit'
-alias p4s='p4 submit'
-alias p4sr='p4 submit -f submitunchanged+reopen' #submit&amp;reopen
-alias p4up='p4 sync ...' # synchronize from current directory
-alias p4o='p4 opened' # list opened files
-alias p4c='p4 changes' # create a new pending change
-alias p4chg='p4 change' # create a pending change
-alias p4d='p4 diff -du -db'
-alias p4ds='p4 diff -du -db | lsdiff' # diff summary, patchutils required
-alias p4i='p4 integrate'
-alias p4unsh='p4 unshelve -s' # Usage: p4unsh changelist#, like `git stash apply`
-alias p4h='p4 changes -m 1 ...' # show the head change
-
-function p4mypending {
-    local P4USERNAME="`p4 user -o | grep '^User:\s' | sed 's/User:\s\([a-bA-B0-9]*\)/\1/g'`"
-    p4 changes -s pending -u $P4USERNAME
-}
-
-function p4shelved {
-    local P4USERNAME="`p4 user -o | grep '^User:\s' | sed 's/User:\s\([a-bA-B0-9]*\)/\1/g'`"
-    p4 changes -s shelved -u $P4USERNAME # add ... for current directory
-}
-
-function p4cmp {
-    if [ -z "$1" ]; then
-        echo "Usage: p4cmp changelist-number changelist-number"
-    else
-        p4 diff2 -dub -q -u ...@$1 ...@$2
-    fi
-}
-
-function p4dl {
-    # git diff
-    p4 diff -du -db $@ | vim -c "set syntax=diff" -R -
-}
-function p4sh(){
-    # show specific change or the latest change
-    if [ -z "$1" ]; then
-        p4 changes | python ~/bin/percol.py | awk '{print $2}' | xargs -i p4 describe -du {} | vim -c "set syntax=diff" -R -
-    else
-        p4 describe -du -db $@ | vim -c "set syntax=diff" -R -
-    fi
-}
-
-function p4lp {
-    #like `git log -p`
-    p4 changes $@ | awk '{print $2}' | xargs -i p4 describe -du {} | less -F
-}
-
-function p4mlp {
-    #like `git log -p`
-    p4 changes -u $P4USERNAME $@ | awk '{print $2}' | xargs -i p4 describe -du {} | less -F
-}
-
-function p4adddir(){
-    if [ -z "$1" ]; then
-        echo "Usage: p4adddir directory"
-    else
-        find $1 -type f -print | p4 -x - add
-    fi
-}
-
-# p4's suggestion,http://kb.perforce.com/article/27/creating-release-notes
-# @google "assing variable from bash to perl in a bash script"
-function p4l(){
-    # p4 log
-    if [ -z "$1" ]; then
-        # show the full log
-        p4 changes -l ... | less
-    else
-        # p4log since-changelist-number
-        p4 changes -l ...@$1,#head|perl -pe "if(\$_=~/$1/){ last;};"
-    fi
-}
-
-function p4ml(){
-    # my p4 log
-    if [ -z "$1" ]; then
-        # show the full log
-        p4 changes -l -u $P4USERNAME ... | less
-    else
-        # p4log since-changelist-number
-        p4 changes -l -u $P4USERNAME ...@$1,#head|perl -pe "if(\$_=~/$1/){ last;};"
-    fi
-}
-# }}
-</code></pre>
-
-</div>
-</div>
-</div>
-</div>
 </div>
             </div>
         </div>
