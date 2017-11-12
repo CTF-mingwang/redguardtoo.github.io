@@ -55,7 +55,7 @@ The package solves all the problems using Ctags/Etags with Emacs.
 </p>
 
 <p>
-The first problem is it's takes a few seconds to update the tags file (the index file to lookup tags) which blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. You only need add one line setup into <code>~/.emacs</code>:
+The first problem is that Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. One line setup in <code>~/.emacs</code> is enough:
 </p>
 <div class="org-src-container">
 
@@ -66,7 +66,7 @@ The first problem is it's takes a few seconds to update the tags file (the index
 </div>
 
 <p>
-The second problem is tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
+The second problem is that tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
 </p>
 
 <p>
