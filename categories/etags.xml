@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about etags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/etags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Nov 2017 10:42:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about etags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/etags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Nov 2017 12:02:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -15,7 +15,7 @@ The package solves all the problems using Ctags/Etags with Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-The problem 1: Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from &lt;code&gt;counsel-etags&lt;/code&gt;. One line setup in &lt;code&gt;~/.emacs&lt;/code&gt; is enough:
+&lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from &lt;code&gt;counsel-etags&lt;/code&gt;. One line setup in &lt;code&gt;~/.emacs&lt;/code&gt; is enough:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -26,7 +26,7 @@ The problem 1: Ctags takes a few seconds to update the tags file (the index file
 &lt;/div&gt;
 
 &lt;p&gt;
-The problem 2: Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running &lt;code&gt;counsel-etags-grep&lt;/code&gt; &lt;b&gt;automatically&lt;/b&gt; if &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; fails. So users always get results.
+&lt;b&gt;Problem 2:&lt;/b&gt; Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running &lt;code&gt;counsel-etags-grep&lt;/code&gt; &lt;b&gt;automatically&lt;/b&gt; if &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; fails. So users always get results.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -34,19 +34,19 @@ There are also other enhancements.
 &lt;/p&gt;
 
 &lt;p&gt;
-Enhancement 1: Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named &lt;code&gt;renderTable&lt;/code&gt; could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
+&lt;b&gt;Enhancement 1:&lt;/b&gt; Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named &lt;code&gt;renderTable&lt;/code&gt; could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
 &lt;/p&gt;
 
 &lt;p&gt;
-Enhancement 2: It's inefficient to search the same tag again and again. &lt;code&gt;counsel-etags-recent-tag&lt;/code&gt; is used to jump to previous definitions.
+&lt;b&gt;Enhancement 2:&lt;/b&gt; It's inefficient to search the same tag again and again. &lt;code&gt;counsel-etags-recent-tag&lt;/code&gt; is used to jump to previous definitions.
 &lt;/p&gt;
 
 &lt;p&gt;
-Enhancement 3: &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; provides filter UI for &lt;code&gt;counsel-etags&lt;/code&gt;. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to &lt;b&gt;exclude&lt;/b&gt; candidates matching "keyword1".
+&lt;b&gt;Enhancement 3:&lt;/b&gt; &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; provides filter UI for &lt;code&gt;counsel-etags&lt;/code&gt;. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to &lt;b&gt;exclude&lt;/b&gt; candidates matching "keyword1".
 &lt;/p&gt;
 
 &lt;p&gt;
-Enhancement 4: &lt;code&gt;counsel-etags-grep&lt;/code&gt; uses the fastest grep program &lt;a href="https://github.com/BurntSushi/ripgrep"&gt;ripgrep&lt;/a&gt; if it's installed. Or else it falls back to standard grep.
+&lt;b&gt;Enhancement 4:&lt;/b&gt; &lt;code&gt;counsel-etags-grep&lt;/code&gt; uses the fastest grep program &lt;a href="https://github.com/BurntSushi/ripgrep"&gt;ripgrep&lt;/a&gt; if it's installed. Or else it falls back to standard grep.
 &lt;/p&gt;
 
 &lt;p&gt;

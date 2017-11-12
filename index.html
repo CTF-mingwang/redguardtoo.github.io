@@ -63,7 +63,7 @@ The package solves all the problems using Ctags/Etags with Emacs.
 </p>
 
 <p>
-The problem 1: Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. One line setup in <code>~/.emacs</code> is enough:
+<b>Problem 1:</b> Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual saving command from <code>counsel-etags</code>. One line setup in <code>~/.emacs</code> is enough:
 </p>
 <div class="org-src-container">
 
@@ -74,7 +74,7 @@ The problem 1: Ctags takes a few seconds to update the tags file (the index file
 </div>
 
 <p>
-The problem 2: Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
+<b>Problem 2:</b> Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
 </p>
 
 <p>
@@ -82,19 +82,19 @@ There are also other enhancements.
 </p>
 
 <p>
-Enhancement 1: Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named <code>renderTable</code> could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
+<b>Enhancement 1:</b> Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named <code>renderTable</code> could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
 </p>
 
 <p>
-Enhancement 2: It's inefficient to search the same tag again and again. <code>counsel-etags-recent-tag</code> is used to jump to previous definitions.
+<b>Enhancement 2:</b> It's inefficient to search the same tag again and again. <code>counsel-etags-recent-tag</code> is used to jump to previous definitions.
 </p>
 
 <p>
-Enhancement 3: <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> provides filter UI for <code>counsel-etags</code>. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to <b>exclude</b> candidates matching "keyword1".
+<b>Enhancement 3:</b> <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> provides filter UI for <code>counsel-etags</code>. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to <b>exclude</b> candidates matching "keyword1".
 </p>
 
 <p>
-Enhancement 4: <code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
+<b>Enhancement 4:</b> <code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
 </p>
 
 <p>
