@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 12 Nov 2017 12:04:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 02 Dec 2017 02:47:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -7,7 +7,7 @@
 &lt;/p&gt;
 
 &lt;p&gt;
-It basically needs no setup. For example, run one command &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; is enough to start code navigation immediately.
+It basically needs no setup. For example, one command &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; is enough to start code navigation immediately.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -15,12 +15,21 @@ The package solves all the problems using Ctags/Etags with Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from &lt;code&gt;counsel-etags&lt;/code&gt;. One line setup in &lt;code&gt;~/.emacs&lt;/code&gt; is enough:
+&lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from &lt;code&gt;counsel-etags&lt;/code&gt;. The setup is simple:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Don't ask before rereading the TAGS files if they have changed
+(setq tags-revert-without-query t)
+;; Don't warn when TAGS files are large
+(setq large-file-warning-threshold nil)
+;; Setup auto update now
+(add-hook 'prog-mode-hook
+  (lambda ()
+    (add-hook 'after-save-hook
+              'counsel-etags-virtual-update-tags 'append 'local)))
+(add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
