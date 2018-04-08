@@ -23,15 +23,15 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/tips-for-debug-c-code-in-emacs.html">Tips for debug C++ code in emacs</a></h1>
+            <h1 class="title"><a href="posts/hotkeys-for-moving-windows-in-emacs.html">Hotkeys for moving windows in emacs</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2012-02-10T13:20:52+00:00">2012-02-10 13:20</time>
+                    <time class="timeago" datetime="2012-01-31T11:26:00+00:00">2012-01-31 11:26</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/tips-for-debug-c-code-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/tips-for-debug-c-code-in-emacs.html">Comments</a>
+    <a href="posts/hotkeys-for-moving-windows-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/hotkeys-for-moving-windows-in-emacs.html">Comments</a>
 
 
                 </div>
@@ -39,47 +39,53 @@
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
-           <li><a class="tag p-category" href="categories/cpp.html" rel="tag">cpp</a></li>
-           <li><a class="tag p-category" href="categories/debug.html" rel="tag">debug</a></li>
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/gdb.html" rel="tag">gdb</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
                 <div>
-<p></p>
-<ul>
-<li>M-x gdb then M-x gdb-many-windows </li> <li>display/call/s(tep)/n(ext)/watch in gud-mode </li> <li>assert, use frame #num to located the failed assertion </li> <li>windmove-down/up/left/right to move between many windows </li> <li>winnner-mode to redo/undo windows layout </li> <li>C-x r w to save widnows layout, C-x r j to load windows layout </li> </ul>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html">一年成为Emacs高手(像神一样使用编辑器)</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-01-31T15:08:00+00:00">2012-01-31 15:08</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html#disqus_thread" data-disqus-identifier="cache/posts/yi-nian-cheng-wei-emacs-gao-shou-xiang-shen-yi-yang-shi-yong-bian-ji-qi.html">Comments</a>
+<p>
+for moving windows in emacs                                           :emacs:linux:en:
+</p>
 
+<p>
+See <a href="http://www.emacswiki.org/emacs/WindMove">http://www.emacswiki.org/emacs/WindMove</a> for details.
+</p>
 
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
-        </ul>
+<p>
+My hotkeys are different from EmacsWiki because:
+</p>
+
+<ul class="org-ul">
+<li>As a vi guy I prefer H,J,K,L for navigation
+</li>
+<li>Arrow keys does not work on my terminal simulators
+</li>
+</ul>
+<p>
+Here is setup:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(when (fboundp 'windmove-left)
+  (global-set-key "\C-ch" 'windmove-left)
+  (global-set-key "\C-cj" 'windmove-down)
+  (global-set-key "\C-ck" 'windmove-up)
+  (global-set-key "\C-cl" 'windmove-right))
+</code></pre>
+
 </div>
 
-            </div>
-            <div class="body">
-                <p>本页面停止更新,最新版本在GitHub上 (<a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide">https://github.com/redguardtoo/mastering-emacs-in-one-year-guide</a>)</p>
+<p>
+Note:
+<code>C-c j</code> is original assigned to <code>join-line</code>.
+</p>
+</div>
             </div>
         </div>
         <div class="post">
@@ -375,6 +381,179 @@ Use below command to ssh the Linux server. Then you can share the clipboard betw
 </tr>
 </tbody>
 </table>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/start-wxwdigets-programming-on-windows.html">Start wxWdigets programming on Windows</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-01-18T14:28:00+00:00">2012-01-18 14:28</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/start-wxwdigets-programming-on-windows.html#disqus_thread" data-disqus-identifier="cache/posts/start-wxwdigets-programming-on-windows.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/win32.html" rel="tag">win32</a></li>
+           <li><a class="tag p-category" href="categories/wxwidgets.html" rel="tag">wxwidgets</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+wxWdigets programming on Windows                                        :win32:en:wxwidgets:
+</p>
+
+<ul class="org-ul">
+<li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a>
+</li>
+<li>Extracted it somewhere. "c:\wxWidgets-3.0.0", for example.
+</li>
+<li>Create environment variable WXWIN with value "c:\wxWidgets-3.3.0"
+</li>
+<li>Install Visual Studio Express 2010
+</li>
+<li>If the source is on network drive, <a href="http://social.msdn.microsoft.com/Forums/vstudio/en-US/07ba35be-d0c7-4989-9bc1-edff61bfb556/fatal-error-c1085-cannot-write-precompiled-header-file?forum=vclanguage">you need set pch directory</a>. Maybe the best way is use local folder.
+</li>
+<li>Compile wxWidgets library by running the dos batch file:
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre><code class="lang-sh">@echo off
+call "C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"
+nmake -f %WXWIN%\build\msw\makefile.vc BUILD=debug
+nmake -f %WXWIN%\build\msw\makefile.vc BUILD=release
+</code></pre>
+
+</div>
+
+<p>
+We use vcvars32.bat to set up the CLI tool chains.
+</p>
+
+<ul class="org-ul">
+<li>Install <a href="http://www.cmake.org">CMake</a>
+</li>
+<li>Create a simple project with files main.cpp, main.hpp, and CMakeLists.txt
+</li>
+</ul>
+<p>
+CMakeLists.txt is the project file for CMake:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-cmake">PROJECT(main)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+
+# sets variable SOURCES to the project source files.
+set(XRCS
+  main_frame.xrc
+  )
+
+set(XRCS_DIR ${main_SOURCE_DIR}/rc)
+
+if(CMAKE_COMPILER_IS_GNUCC)
+  # needed for gcc 4.6+
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive")
+endif()
+
+set( CPP_SOURCES
+  main.cpp
+  )
+
+set( H_SOURCES
+    main.hpp
+    )
+  )
+
+set(SOURCES
+  ${CPP_SOURCES}
+  ${H_SOURCES}
+  )
+
+# xrc -&gt; xml, adv, html
+set(wxWidgets_USE_LIBS xrc xml adv html core base)
+find_package(wxWidgets REQUIRED)
+include(${wxWidgets_USE_FILE})
+
+#try to embed resource
+foreach(XRC ${XRCS})
+  string(REGEX REPLACE "[.].*$" ".h" XRC_HEADER ${XRC})
+  set(XRC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/${XRC_HEADER})
+  set(XRC ${XRCS_DIR}/${XRC})
+  add_custom_command(OUTPUT ${XRC_HEADER}
+    COMMAND bin2c -c ${XRC} ${XRC_HEADER}
+    MAIN_DEPENDENCY ${XRC} )
+  set(SOURCES ${SOURCES} ${XRC_HEADER})
+endforeach(XRC)
+
+set(INC
+  )
+
+if(UNIX AND NOT APPLE)
+  include(FindPkgConfig)
+  pkg_check_modules(GTK2 REQUIRED gtk+-2.0&gt;=2.10)
+  set(INC ${INC} ${GTK2_INCLUDE_DIRS})
+endif()
+
+#add other librarie
+include_directories(${INC})
+
+if(UNIX)
+  add_definitions(-Wno-write-strings)
+endif()
+
+if(WIN32)
+  # WIN32 := subsystem is windows instead of console?
+  add_executable(main WIN32 ${SOURCES})
+else(WIN32)
+  add_executable(main ${SOURCES})
+endif()
+
+set(LIBS
+  ${wxWidgets_LIBRARIES}
+  )
+
+if(MINGW AND WIN32)
+  set(LIBS ${LIBS} ole32 uuid oleaut32)
+endif()
+target_link_libraries(main ${LIBS})
+</code></pre>
+
+</div>
+
+<ul class="org-ul">
+<li>Running the below dos batch the create Visual Studio Project Files
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre><code class="lang-sh">@echo off
+call "C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\vcvars32.bat"
+cmake path/of/directory/which/contains/CMakeLists.txt/
+</code></pre>
+
+</div>
+
+<ul class="org-ul">
+<li>Enjoy!
+</li>
+</ul>
+<p>
+BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>.
+</p>
 </div>
             </div>
         </div>
@@ -734,7 +913,7 @@ Version        : 1.8-1
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2017         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

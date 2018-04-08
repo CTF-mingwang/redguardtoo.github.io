@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about elisp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/elisp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:05:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Debug Emacs Lisp code the hard way</title><link>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I &lt;a href="https://github.com/emacs-helm/helm/issues/448"&gt;met some issue&lt;/a&gt; when using helm several days ago. &lt;/p&gt; &lt;p&gt; With the help from Michael Heerdegen, I can locate the line error message is dumped. &lt;/p&gt; &lt;p&gt; But the problem is I cannot get the backtrace at all. &lt;/p&gt; &lt;p&gt; So I insert some &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html"&gt;backtrace printing code&lt;/a&gt; above that line and "M-x eval-buffer": &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about elisp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/elisp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 08 Apr 2018 02:12:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Debug Emacs Lisp code the hard way</title><link>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I &lt;a href="https://github.com/emacs-helm/helm/issues/448"&gt;met some issue&lt;/a&gt; when using helm several days ago. &lt;/p&gt; &lt;p&gt; With the help from Michael Heerdegen, I can locate the line error message is dumped. &lt;/p&gt; &lt;p&gt; But the problem is I cannot get the backtrace at all. &lt;/p&gt; &lt;p&gt; So I insert some &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html"&gt;backtrace printing code&lt;/a&gt; above that line and "M-x eval-buffer": &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 (with-output-to-temp-buffer "backtrace-output"
@@ -100,15 +100,15 @@ http proxy in emacs-w3m                                                :&lt;a hr
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="http://www.emacswiki.org/emacs/emacs-w3m"&gt;emacs-w3m&lt;/a&gt; is a browser embedded in Emacs. It can handle all my basic web surfing needs.
+&lt;a href="http://www.emacswiki.org/emacs/emacs-w3m"&gt;emacs-w3m&lt;/a&gt; is a browser which handles all my basic web surfing needs.
 &lt;/p&gt;
 
 &lt;p&gt;
-For some reason, I need switch my http proxy frequently when accessing the internet. So I need figure out a easy way doing this.
+For some reason, I need switch my http proxy frequently.
 &lt;/p&gt;
 
 &lt;p&gt;
-It turns out all I need to do is to set/unset the environment variable "http_proxy" in elisp code. Restarting the w3m session after change the environment variable is not needed at all.
+The solution is to set/unset the environment variable "http_proxy" in elisp code. Restarting the w3m session after change the environment variable is not needed at all.
 &lt;/p&gt;
 
 &lt;p&gt;
