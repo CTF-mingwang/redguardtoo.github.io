@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 08 Apr 2018 02:12:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 08 Apr 2018 02:13:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+&lt;a href="https://github.com/redguardtoo/evil-nerd-commenter"&gt;evil-nerd-commenter&lt;/a&gt; v3.2.0 add a new function &lt;code&gt;evilnc-imenu-create-index-function&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="http://www.gnu.org/s/emacs/manual/html_node/emacs/Imenu.html"&gt;Imenu&lt;/a&gt; could use this function to list all comments in current file.
+&lt;/p&gt;
+
+&lt;p&gt;
+Usage:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'counsel)
+(defun counsel-imenu-comments ()
+  "Imenu display comments."
+  (interactive)
+  (let* ((imenu-create-index-function 'evilnc-imenu-create-index-function))
+    (counsel-imenu)))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Screen cast:
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;i&gt;image/counsel-imenu-comments.gif&lt;/i&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>imenu</category><guid>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</guid><pubDate>Sun, 08 Apr 2018 02:12:04 GMT</pubDate></item><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -683,50 +717,4 @@ So the solution is as simple as advice &lt;code&gt;js-jsx-indent-line&lt;/code&g
                         (line-beginning-position) (line-end-position))))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item><item><title>Find the buffer with Chinese name</title><link>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-the buffer with Chinese name                                             :en:emacs:chinese:
-&lt;/p&gt;
-
-&lt;p&gt;
-We can find the buffer with Chinese name efficiently by using the first character of &lt;a href="https://en.wikipedia.org/wiki/Pinyin"&gt;pinyin&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is the code (&lt;a href="https://github.com/abo-abo/swiper"&gt;ivy&lt;/a&gt; and &lt;a href="https://github.com/cute-jumper/pinyinlib.el"&gt;pinyinlib&lt;/a&gt; is required):
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun ivy-switch-buffer-matcher-pinyin (regexp candidates)
-  (unless (featurep 'pinyinlib) (require 'pinyinlib))
-  (let* ((pys (split-string regexp "[ \t]+"))
-         (regexp (format ".*%s.*"
-                         (mapconcat 'pinyinlib-build-regexp-string pys ".*"))))
-    (ivy--switch-buffer-matcher regexp candidates)))
-
-(defun ivy-switch-buffer-by-pinyin ()
-  "Switch to another buffer."
-  (interactive)
-  (unless (featurep 'ivy) (require 'ivy))
-  (let ((this-command 'ivy-switch-buffer))
-    (ivy-read "Switch to buffer: " 'internal-complete-buffer
-              :matcher #'ivy-switch-buffer-matcher-pinyin
-              :preselect (buffer-name (other-buffer (current-buffer)))
-              :action #'ivy--switch-buffer-action
-              :keymap ivy-switch-buffer-map
-              :caller 'ivy-switch-buffer)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-You can &lt;code&gt;M-x ivy-switch-buffer-by-pinyin&lt;/code&gt; to switch buffer.
-&lt;/p&gt;
-
-&lt;p&gt;
-The algorithm of pinyinlib is simple. We build a big lookup table to convert the a plain English string into a regular expression containing Chinese characters.
-&lt;/p&gt;
-
-&lt;p&gt;
-You can apply the &lt;b&gt;same algorithm to other non-English languages&lt;/b&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>chinese</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/find-the-buffer-named-by-pinyin.html</guid><pubDate>Sun, 26 Feb 2017 04:27:42 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item></channel></rss>
