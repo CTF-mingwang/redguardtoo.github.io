@@ -115,118 +115,137 @@ Note:
 
             </div>
             <div class="body">
-                <div>
-<p>
-in Emacs                                                           :emacs:linux:cygwin:clipboard:en:
-</p>
+                <div id="outline-container-sec-1" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
 
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2012-01-30&gt;</span></span>
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-08-23 Sat&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-06-04 Mon&gt;</span></span>
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h4 id="sec-1-1">Prepare</h4>
+<div class="outline-text-3" id="text-1-1">
+<p>
+On Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
 </p>
 
 <p>
-See <a href="http://www.emacswiki.org/emacs/CopyAndPaste">http://www.emacswiki.org/emacs/CopyAndPaste</a> for discussion.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-For Emacs console version under Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
+On Cygwin, please install package <code>cygutils-extra</code>.
 </p>
 
 <p>
-For Emacs GUI version on any OS, NO external tool is needed.
+On MacOS, NO external tool is required.
 </p>
 
 <p>
-For Emacs under Cygwin, you need install its package "cygutils-extra".
-</p>
-
-<p>
-For Emacs console version under OS X, NO external tool is needed.
+On Windows 10 Linux Subsystem. No external tool is required.
 </p>
 </div>
 </div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Solution</h3>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-sec-1-2" class="outline-3">
+<h4 id="sec-1-2">Solution</h4>
+<div class="outline-text-3" id="text-1-2">
 <p>
-This solution works reliably at <b>any environment</b>.
+This solution works reliably on <b>any environment</b>.
 </p>
 
 <p>
-Insert below code into ~/.emacs. Use 'M-x yank-to-x-clipboard' to copy, 'M-x paste-from-xclipboard' to paste.
+Insert below code into <code>~/.emacs</code>. Run <code>M-x paste-from-xclipboard</code> to paste.
 </p>
 <div class="org-src-container">
 
 
-<pre><code class="lang-lisp">(setq *is-a-mac* (eq system-type 'darwin))
-(setq *cygwin* (eq system-type 'cygwin) )
-(setq *linux* (or (eq system-type 'gnu/linux) (eq system-type 'linux)) )
-(defun copy-to-x-clipboard ()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (cond
-         ((and (display-graphic-p) x-select-enable-clipboard)
-          (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
-         (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
-            ))
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-        (message "No region active; can't yank to clipboard!")))
-
-(defun paste-from-x-clipboard()
-  (interactive)
+<pre><code class="lang-lisp">(defun my-gclip ()
+  "Get clipboard content."
   (cond
-   ((and (display-graphic-p) x-select-enable-clipboard)
-    (insert (x-get-selection 'CLIPBOARD)))
-   (t (shell-command
-       (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
-        (t "xsel -ob"))
-       1))
-   ))
+   ((eq system-type 'darwin)
+    (with-output-to-string
+      (with-current-buffer standard-output
+        (call-process "/usr/bin/pbpaste" nil t nil "-Prefer" "txt"))))
+   ((eq system-type 'cygwin)
+    (with-output-to-string
+      (with-current-buffer standard-output
+        (call-process "getclip" nil t nil))))
+   ((memq system-type '(gnu gnu/linux gnu/kfreebsd))
+    (let* ((powershell-program (executable-find "powershell.exe"))
+           (cond
+            (powershell-program
+             ;; PowerLine adds extra white space character at the end of text
+             (string-trim-right
+              (with-output-to-string
+                (with-current-buffer standard-output
+                  (call-process powershell-program nil t nil "-command" "Get-Clipboard")))))
+            (t
+             (with-output-to-string
+               (with-current-buffer standard-output
+                 (call-process "xsel" nil t nil "--clipboard" "--output"))))))))))
 
-(defun my/paste-in-minibuffer ()
-  (local-set-key (kbd "M-y") 'paste-from-x-clipboard)
-  )
+(defun my-pclip (str-val)
+  "Copy STR-VAL into clipboard."
+  (cond
+   ((eq system-type 'darwin)
+    (with-temp-buffer
+      (insert str-val)
+      (call-process-region (point-min) (point-max) "/usr/bin/pbcopy")))
+   ((eq system-type 'cygwin)
+    (with-temp-buffer
+      (insert str-val)
+      (call-process-region (point-min) (point-max) "putclip")))
+   ((memq system-type '(gnu gnu/linux gnu/kfreebsd))
+    (let* ((win64-clip-program (executable-find "clip.exe")))
+      (with-temp-buffer
+        (insert str-val)
+        (cond
+         ;; Linux Subsystem on Windows 10
+         (win64-clip-program
+          (call-process-region (point-min) (point-max) win64-clip-program))
+         (t
+          (call-process-region (point-min) (point-max) "xsel" nil nil nil "--clipboard" "--input"))))))))
 
-(add-hook 'minibuffer-setup-hook 'my/paste-in-minibuffer)
+(defun paste-from-x-clipboard(&amp;optional n)
+  "Paste string clipboard."
+  (interactive "P")
+  ;; paste after the cursor in evil normal state
+  (when (and (functionp 'evil-normal-state-p)
+             (functionp 'evil-move-cursor-back)
+             (evil-normal-state-p)
+             (not (eolp))
+             (not (eobp)))
+    (forward-char))
+  (insert (my-gclip)))
+
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (local-set-key (kbd "M-y") 'paste-from-xclipboard)))
 </code></pre>
 
 </div>
+
+<p>
+My actual setup is more robust. See <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el</a> for details.
+</p>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">Advanced Tips</h3>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h4 id="sec-1-3">Tips</h4>
+<div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h4 id="sec-3-1">Clipboard manager</h4>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-sec-1-3-1" class="outline-4">
+<h5 id="sec-1-3-1">Clipboard manager</h5>
+<div class="outline-text-4" id="text-1-3-1">
 <p>
-Clipboard manager is handy sometimes.
+I suggest <a href="http://parcellite.sourceforge.net/">Parcellite</a> on Linux, <a href="http://ditto-cp.sourceforge.net/">Ditto</a> on Windows, <a href="https://github.com/TermiT/Flycut">Flycut</a> on MacOS.
 </p>
 
 <p>
-I suggest <a href="http://parcellite.sourceforge.net/">parcellite</a> at Linux, <a href="http://ditto-cp.sourceforge.net/">ditto</a> under windows.
-</p>
-
-<p>
-Here is my parcellite setup ($HOME/.config/parcellite/parcelliterc):
+My parcellite setup ($HOME/.config/parcellite/parcelliterc):
 </p>
 <div class="org-src-container">
 
@@ -260,13 +279,12 @@ trim_newline=false
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h4 id="sec-3-2">Remote clipboard</h4>
-<div class="outline-text-3" id="text-3-2">
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h5 id="sec-1-3-2">Clipboard when ssh</h5>
+<div class="outline-text-4" id="text-1-3-2">
 <p>
-Use below command to ssh the Linux server. Then you can share the clipboard between the server and your local computer seamlessly. No furthe setup needed.
+Try,
 </p>
-
 <div class="org-src-container">
 
 
