@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:05:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about blog)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/blog.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 16 Jun 2018 08:40:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Demo blog post created by nikola&amp;org2nikola</title><link>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 blog post created by nikola&amp;amp;org2nikola                                   :en:emacs:org2nikola:nikola:blog:
 &lt;/p&gt;
 
@@ -82,12 +82,11 @@ This is list:
 &lt;/li&gt;
 &lt;li&gt;list item 4
 &lt;/li&gt;
-&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-blog from wordpress into nikola                                       :en:wordpress:nikola:blog:migrate:
-&lt;/p&gt;
-
+&lt;/ul&gt;&lt;/div&gt;</description><category>blog</category><category>emacs</category><category>en</category><category>nikola</category><category>org2nikola</category><guid>http://blog.binchen.org/posts/demo-blog-post-created-by-nikolaorg2nikola.html</guid><pubDate>Sun, 25 Jan 2015 10:11:19 GMT</pubDate></item><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgb9fe57e" class="outline-2"&gt;
+&lt;h3 id="orgb9fe57e"&gt;Migrate blog from wordpress into nikola   &lt;span class="tag"&gt;&lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="wordpress"&gt;wordpress&lt;/span&gt; &lt;span class="nikola"&gt;nikola&lt;/span&gt; &lt;span class="blog"&gt;blog&lt;/span&gt; &lt;span class="migrate"&gt;migrate&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb9fe57e"&gt;
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-04-22 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -97,12 +96,12 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;p&gt;
 If you are only interested in web page optimization, start from the second section of the article.
 &lt;/p&gt;
+&lt;/div&gt;
 
-&lt;div id="outline-container-sec-1" class="outline-2"&gt;
-
-&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;div id="outline-container-orgb0fb4e8" class="outline-3"&gt;
+&lt;h4 id="orgb0fb4e8"&gt;Migrate from WordPress to Nikola&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgb0fb4e8"&gt;
 &lt;div class="org-src-container"&gt;
-
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# you might need need `sudo apt-get install python-gdbm` on Debian
 # install python2 and make sure sqlite is supported
@@ -150,7 +149,6 @@ Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
 find -name '*.wp' -exec grep -l "~~~~~~~~~~~~" {} \;|xargs sed -i "s%~~~~~~~~~~~~%&amp;lt;/pre&amp;gt;%g"
 &lt;/code&gt;&lt;/pre&gt;
@@ -165,7 +163,6 @@ Manually fixed those articles with Chinese title in url_map.csv
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
-
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
 import getopt, sys, csv
@@ -222,10 +219,9 @@ You can use javascript to re-direct the URL, so your old article links are still
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
-&lt;div id="outline-container-sec-2" class="outline-2"&gt;
-&lt;h3 id="sec-2"&gt;Optimization&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;div id="outline-container-org1d00056" class="outline-3"&gt;
+&lt;h4 id="org1d00056"&gt;Optimization&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org1d00056"&gt;
 &lt;p&gt;
 I developed &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert Org subtree into Nikola page. 
 &lt;/p&gt;
@@ -258,7 +254,8 @@ In order to see the real example of optimization, please visit &lt;a href="http:
 My static blog is hosted at &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 wordpress php and make cdnjs.com host js                              :en:wordpress:blog:javascript:php:
 &lt;/p&gt;
 
