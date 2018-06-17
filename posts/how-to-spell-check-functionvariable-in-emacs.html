@@ -64,7 +64,7 @@ But this solution">
 
         </div>
         <div class="body">
-            <div id="outline-container-org25c1b61" class="outline-2">
+            <div id="outline-container-org728c71f" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -80,9 +80,16 @@ But this solution is not perfect. It wrongly identifies two character interior w
 </p>
 
 <p>
-In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will show you a complete setup.
+In this article,
 </p>
-
+<ul class="org-ul">
+<li>I will <b>explain how Emacs spell checker works</b>
+</li>
+<li>Then we <b>study the algorithm of aspell</b>
+</li>
+<li>Finally, I will <b>show you a complete setup</b>
+</li>
+</ul>
 <p>
 In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos of text into <code>Fly Spell</code>. <code>Fly Spell</code> then select certain typos to display. For example, when <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> is on, only typos in comments and strings are visible.
 </p>
