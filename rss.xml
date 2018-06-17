@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 05:35:37 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org642e80b" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 07:41:02 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org25c1b61" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -11,15 +11,15 @@ It uses the &lt;code&gt;--run-together&lt;/code&gt; option of &lt;a href="http:/
 &lt;/p&gt;
 
 &lt;p&gt;
-But this solution is not perfect. It wrongly labels two character interior word as typo. For example, since "on" from "onChange" is typo, the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is regards as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is indentified as typo, every word containing namespace "MS" is regarded as typo.
 &lt;/p&gt;
 
 &lt;p&gt;
-In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will give you a complete setup to solve all issues we mentioned at the end of this article.
+In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will show you a complete setup.
 &lt;/p&gt;
 
 &lt;p&gt;
-In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up the final list of typos to be displayed. For example, if &lt;code&gt;flyspell-prog-mode&lt;/code&gt; is on, only typos in comments and strings are reported.
+In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos of text into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then select certain typos to display. For example, when &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; is on, only typos in comments and strings are visible.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -35,11 +35,11 @@ In aspell, there are two extra "run-together" word options:
 &lt;/ul&gt;
 
 &lt;p&gt;
-Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp".
+Let's study the code of aspell to understand these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp".
 &lt;/p&gt;
 
 &lt;p&gt;
-To help you understand this fuction, I documented the code line by line,
+In order to help you understand this function, I documented the code line by line,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -103,7 +103,7 @@ Here is our conclusion after studying the code:
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; should always be 3 which is its default value. Actually, it should never be tweakable by user at the beginning&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; should always be 3 which is its default value. Actually, it should never be tweak-able by user at the beginning&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -111,7 +111,7 @@ Since &lt;code&gt;--run-together-min&lt;/code&gt; is 3. the word "onChange" is a
 &lt;/p&gt;
 
 &lt;p&gt;
-When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from orginal word and spell check new word again.
+When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from original word and spell check new word again.
 &lt;/p&gt;
 
 &lt;p&gt;

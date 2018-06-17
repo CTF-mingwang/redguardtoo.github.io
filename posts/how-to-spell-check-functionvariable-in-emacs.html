@@ -64,7 +64,7 @@ But this solution">
 
         </div>
         <div class="body">
-            <div id="outline-container-org642e80b" class="outline-2">
+            <div id="outline-container-org25c1b61" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -76,15 +76,15 @@ It uses the <code>--run-together</code> option of <a href="http://aspell.net/">G
 </p>
 
 <p>
-But this solution is not perfect. It wrongly labels two character interior word as typo. For example, since "on" from "onChange" is typo, the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is regards as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is indentified as typo, every word containing namespace "MS" is regarded as typo.
 </p>
 
 <p>
-In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will give you a complete setup to solve all issues we mentioned at the end of this article.
+In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will show you a complete setup.
 </p>
 
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up the final list of typos to be displayed. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos of text into <code>Fly Spell</code>. <code>Fly Spell</code> then select certain typos to display. For example, when <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> is on, only typos in comments and strings are visible.
 </p>
 
 <p>
@@ -101,11 +101,11 @@ In aspell, there are two extra "run-together" word options:
 <code>--run-together-min</code> is "Minimal length of interior words"</li>
 </ul>
 <p>
-Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp".
+Let's study the code of aspell to understand these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp".
 </p>
 
 <p>
-To help you understand this fuction, I documented the code line by line,
+In order to help you understand this function, I documented the code line by line,
 </p>
 <div class="org-src-container">
 
@@ -172,14 +172,14 @@ Here is our conclusion after studying the code:
 <li>
 <code>--run-together-min</code> can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")</li>
 <li>
-<code>--run-together-min</code> should always be 3 which is its default value. Actually, it should never be tweakable by user at the beginning</li>
+<code>--run-together-min</code> should always be 3 which is its default value. Actually, it should never be tweak-able by user at the beginning</li>
 </ul>
 <p>
 Since <code>--run-together-min</code> is 3. the word "onChange" is always regarded as typo because of two character interior word "on". Since there is nothing we can do at aspell side, we have to turn to Emacs to fix this problem.
 </p>
 
 <p>
-When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from orginal word and spell check new word again.
+When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from original word and spell check new word again.
 </p>
 
 <p>
