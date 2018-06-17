@@ -47,7 +47,7 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org25aee07" class="outline-2">
+                <div id="outline-container-org4105596" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -59,7 +59,7 @@ It uses the <code>--run-together</code> option of <a href="http://aspell.net/">G
 </p>
 
 <p>
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is regards as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is indentified as typo, every word containing namespace "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is regards as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing namespace "MS" is regarded as typo.
 </p>
 
 <p>
@@ -149,7 +149,7 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 <li>So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"</li>
 <li>In the new context of "check_word", we extract "Hel" from "Helle" initially</li>
 <li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e".</li>
-<li>"e" is not valid and at the end of rescursion. So "hisHelle" is a typo.</li>
+<li>"e" is not valid and at the end of recursion. So "hisHelle" is a typo.</li>
 </ul>
 <p>
 Here is our conclusion after studying the code:
