@@ -47,7 +47,7 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org4105596" class="outline-2">
+                <div id="outline-container-org3d27333" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -143,13 +143,13 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 Let's use "hisHelle" as demo how <code>check_word</code> runs:
 </p>
 <ul class="org-ul">
-<li>"word" points to string array "hisHelle"</li>
+<li>"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')</li>
 <li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
 <li>"check_word_s" return "true" for interior word "his"</li>
 <li>So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"</li>
 <li>In the new context of "check_word", we extract "Hel" from "Helle" initially</li>
-<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e".</li>
-<li>"e" is not valid and at the end of recursion. So "hisHelle" is a typo.</li>
+<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e"</li>
+<li>"e" is not valid and at the end of recursion. So "hisHelle" is a typo</li>
 </ul>
 <p>
 Here is our conclusion after studying the code:
