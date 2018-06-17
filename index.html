@@ -47,8 +47,8 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org7c35ff4" class="outline-2">
-<h3 id="org7c35ff4">
+                <div id="outline-container-orge63cb3a" class="outline-2">
+<h3 id="orge63cb3a">
 <span class="section-number-2">1</span> How to spell check function/variable in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="flyspell">flyspell</span></span>
 </h3>
 <div class="outline-text-2" id="text-1">
@@ -61,15 +61,15 @@ It uses the <code>--run-together</code> option of <a href="http://aspell.net/">G
 </p>
 
 <p>
-But this solution is not perfect. It will wrongly identify two character interior word as typo. For example, "on" from "onChange" is typo, so the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
+But this solution is not perfect. It wrongly labels two character interior word as typo. For example, since "on" from "onChange" is typo, the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
 </p>
 
 <p>
-In this article, I will first explain how Emacs spell checker works. Then we still study the algorithm of aspell. Finally, a setup to solve all issues we mentioned.
+In this article, I will explain how Emacs spell checker works at first. Then we study the algorithm of aspell. Finally, I will give you a complete setup to solve all issues we mentioned at the end of this article.
 </p>
 
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> will pick up the final list of typos to be reported to user. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up the final list of typos to be displayed. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
 </p>
 
 <p>
