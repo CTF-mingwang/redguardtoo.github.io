@@ -47,10 +47,8 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-orge63cb3a" class="outline-2">
-<h3 id="orge63cb3a">
-<span class="section-number-2">1</span> How to spell check function/variable in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="flyspell">flyspell</span></span>
-</h3>
+                <div id="outline-container-orgacb7d07" class="outline-2">
+
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how developers can check typos of function/variable while programming in Emacs.
@@ -86,9 +84,12 @@ In aspell, there are two extra "run-together" word options:
 <code>--run-together-min</code> is "Minimal length of interior words"</li>
 </ul>
 <p>
-Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp". I documented the code line by line.
+Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp".
 </p>
 
+<p>
+To help you understand this fuction, I documented the code line by line,
+</p>
 <div class="org-src-container">
 
 <pre><code class="lang-c">class Working : public Score {
