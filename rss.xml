@@ -1,5 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sat, 16 Jun 2018 13:40:11 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 03:17:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org699fb79" class="outline-2"&gt;
+&lt;h3 id="org699fb79"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; How to spell check function/variable in Emacs   &lt;span class="tag"&gt;&lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt; &lt;span class="flyspell"&gt;flyspell&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how developers can check typos of function/variable while programming in Emacs.
+&lt;/p&gt;
+
+&lt;p&gt;
+It uses the &lt;code&gt;--run-together&lt;/code&gt; option of &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt; to check camel cased word.
+&lt;/p&gt;
+
+&lt;p&gt;
+But this solution is not perfect. It will wrongly identify two character interior word as typo. For example, "on" from "onChange" is typo, so the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
+&lt;/p&gt;
+
+&lt;p&gt;
+In this article, I will first explain how Emacs spell checker works. Then we still study the algorithm of aspell. Finally, a setup to solve all issues we mentioned.
+&lt;/p&gt;
+
+&lt;p&gt;
+In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and text to process to command line tool Aspell. Aspell checks the text and pass the list of typos back into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; will pick up the final list of typos to be reported to user. For example, if &lt;code&gt;flyspell-prog-mode&lt;/code&gt; is on, only typos in comments and strings are reported.
+&lt;/p&gt;
+
+&lt;p&gt;
+So aspell doesn't understand syntax of any programming language. It scans plain text and report all typos to Fly Spell.
+&lt;/p&gt;
+
+&lt;p&gt;
+In aspell, there are two extra "run-together" word options:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; is "Maximum number of words can be strung together"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; is "Minimal length of interior words"&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Let's study the code of Aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp". I documented the code line by line.
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-c"&gt;class Working : public Score {
+  unsigned check_word(char * word, char * word_end, CheckInfo * ci, unsigned pos = 1);
+};
+unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
+                             /* it WILL modify word */
+                             unsigned pos)
+{
+  // check the whole word before go into run-together mode
+  unsigned res = check_word_s(word, ci);
+  // if `res` is true, it's a valid word, don't bother run-together
+  if (res) return pos + 1;
+  // it's typo because number of interior words is greater than "--run-together-limit"
+  if (pos + 1 &amp;gt;= sp-&amp;gt;run_together_limit_) return 0;
+
+  // `i` is the `end` of interior word, the poition AFTER last character of interior word
+  for (char * i = word + sp-&amp;gt;run_together_min_; 
+       // we already checked the word; besides, any interior word whose length is less 
+       // than "--run-together-min" is regarded as invalid word
+       i &amp;lt;= word_end - sp-&amp;gt;run_together_min_;
+       ++i)
+  {
+    char t = *i;
+    *i = '\0'; // read the interior word by set the character at `end` position to '\0'
+    res = check_word_s(word, ci);
+    *i = t; // restore original character at `end` position
+    // Well, current interior word is invalid, we need include append the character at current
+    //  `end` position into this it to create a new interior word. Also increment `end` position.
+    if (!res) continue;
+    // OK, current interior word is valid, we strip it from the whole word to create a totally
+    // new word for `check_word`, `check_word` is a recursive function
+    res = check_word(i, word_end, ci + 1, pos + 1);
+    if (res) return res;
+  }
+  memset(ci, 0, sizeof(CheckInfo));
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;"word" points to string array "hisHelle"&lt;/li&gt;
+&lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
+&lt;li&gt;"check_word_s" return "true" for interior word "his"&lt;/li&gt;
+&lt;li&gt;So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"&lt;/li&gt;
+&lt;li&gt;In the new context of "check_word", we extract "Hel" from "Helle" initially&lt;/li&gt;
+&lt;li&gt;"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e".&lt;/li&gt;
+&lt;li&gt;"e" is not valid and at the end of rescursion. So "hisHelle" is a typo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Here is our conclusion after studying the code:
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; should always be 3 which is its default value. Actually, it should never be tweakable by user at the beginning&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+Since &lt;code&gt;--run-together-min&lt;/code&gt; is 3. the word "onChange" is always regarded as typo because of two character interior word "on". Since there is nothing we can do at aspell side, we have to turn to Emacs to fix this problem.
+&lt;/p&gt;
+
+&lt;p&gt;
+When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from orginal word and spell check new word again.
+&lt;/p&gt;
+
+&lt;p&gt;
+We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
+  (let* ((font-face (get-text-property (- (point) 1) 'face))
+         (word (thing-at-point 'word)))
+    (message "font-face=%s word=%s" font-face word)
+    t))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So namespace is also easy problem. If namespace is three characters, it will be automatically processed by aspell. All we need to do is add namespace into our personal dictionary &lt;code&gt;$HOME/.aspell.en.pws&lt;/code&gt;. If namespace is one or two characters, we strip down it from original word. Same way as we deal with two character interior word.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I setup for &lt;code&gt;js2-mode&lt;/code&gt; and &lt;code&gt;rjsx-mode&lt;/code&gt; but code is generic enough),
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq ispell-program-name "aspell")
+(defun flyspell-detect-ispell-args (&amp;amp;optional run-together)
+  "If RUN-TOGETHER is true, spell check the CamelCase words.
+Please note RUN-TOGETHER will make aspell less capable. So it should only be used in prog-mode-hook."
+  ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+  (let* ((args (list "--sug-mode=ultra" "--lang=en_US"))args)
+    (if run-together
+        (setq args (append args '("--run-together" "--run-together-limit=16"))))
+    args))
+
+(defvar extra-flyspell-predicate '(lambda (word) t)
+  "A callback to check WORD.  Return t if WORD is typo.")
+
+(defun my-flyspell-predicate (word)
+  "Use aspell to check WORD.  If it's typo return true."
+  (if (string-match-p (concat "^&amp;amp; " word)
+                      (shell-command-to-string (format "echo %s | %s %s pipe"
+                                                       word
+                                                       ispell-program-name
+                                                       (mapconcat 'identity
+                                                                  (flyspell-detect-ispell-args t)
+                                                                  " "))))
+      t))
+
+(defmacro my-flyspell-predicate-factory (preffix)
+  `(lambda (word)
+     (let* ((pattern (concat "^\\(" ,preffix "\\)\\([A-Z]\\)"))
+            rlt)
+       (cond
+        ((string-match-p pattern word)
+         (setq word (replace-regexp-in-string pattern "\\2" word))
+         (setq rlt (my-flyspell-predicate word)))
+        (t
+         (setq rlt t)))
+       rlt)))
+
+(defun js-flyspell-verify ()
+  (let* ((case-fold-search nil)
+         (font-matched (memq (get-text-property (- (point) 1) 'face)
+                             '(js2-function-call
+                               js2-function-param
+                               js2-object-property
+                               font-lock-variable-name-face
+                               font-lock-string-face
+                               font-lock-function-name-face
+                               font-lock-builtin-face
+                               rjsx-tag
+                               rjsx-attr)))
+         word
+         (rlt t))
+    (cond
+     ((not font-matched)
+      (setq rlt nil))
+     ((not (string-match-p "aspell$" ispell-program-name))
+      ;; Only override aspell's result
+      (setq rlt t))
+     ((string-match-p "^[a-zA-Z][a-zA-Z]$"
+                      (setq word (thing-at-point 'word)))
+      (setq rlt nil))
+     ((string-match-p "\\([A-Z][a-z]\\|^[a-z][a-z]\\)[A-Z]\\|[a-z][A-Z][a-z]$"
+                      word)
+      ;; strip two character interior words
+      (setq word (replace-regexp-in-string "\\([A-Z][a-z]\\|^[a-z][a-z]\\)\\([A-Z]\\)" "\\2" word))
+      (setq word (replace-regexp-in-string "\\([a-z]\\)[A-Z][a-z]$" "\\1" word))
+      ;; check stripped word
+      (setq rlt (my-flyspell-predicate word)))
+     (t
+      (setq rlt (funcall extra-flyspell-predicate word))))
+    rlt))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+(put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+
+(defun prog-mode-hook-setup ()
+  ;; remove namespace "MS" and "X"
+  (setq-local extra-flyspell-predicate (my-flyspell-predicate-factory "MS\\|X")))
+(add-hook 'prog-mode-hook 'prog-mode-hook-setup)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -688,35 +907,4 @@ The solution is to re-define "/" as &lt;a href="https://www.gnu.org/software/ema
 (add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</guid><pubDate>Tue, 28 Mar 2017 12:16:06 GMT</pubDate></item><item><title>Indent JSX in Emacs</title><link>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-JSX in Emacs                                                           :en:jsx:react:emacs:
-&lt;/p&gt;
-
-&lt;p&gt;
-I find &lt;a href="https://github.com/felipeochoa/rjsx-mode"&gt;rjsx-mode&lt;/a&gt; annoying when it indents closed html tag with extra spaces.
-&lt;/p&gt;
-
-&lt;p&gt;
-It's based on js2-mode which is actually just calling Emacs v25 API &lt;code&gt;js-jsx-indent-line&lt;/code&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-So the solution is as simple as advice &lt;code&gt;js-jsx-indent-line&lt;/code&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
-  "Workaround sgml-mode and follow airbnb component style."
-  (let* ((cur-line (buffer-substring-no-properties
-                    (line-beginning-position)
-                    (line-end-position))))
-    (if (string-match "^\\( +\\)\/?&amp;gt; *$" cur-line)
-      (let* ((empty-spaces (match-string 1 cur-line)))
-        (replace-regexp empty-spaces
-                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
-                        nil
-                        (line-beginning-position) (line-end-position))))))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>jsx</category><category>react</category><guid>http://blog.binchen.org/posts/indent-jsx-in-emacs.html</guid><pubDate>Tue, 28 Mar 2017 11:54:58 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</guid><pubDate>Tue, 28 Mar 2017 12:16:06 GMT</pubDate></item></channel></rss>

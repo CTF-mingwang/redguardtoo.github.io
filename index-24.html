@@ -23,6 +23,68 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/indent-jsx-in-emacs.html">Indent JSX in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2017-03-28T11:54:58+00:00">2017-03-28 11:54</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/indent-jsx-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/indent-jsx-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/jsx.html" rel="tag">jsx</a></li>
+           <li><a class="tag p-category" href="categories/react.html" rel="tag">react</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+JSX in Emacs                                                           :en:jsx:react:emacs:
+</p>
+
+<p>
+I find <a href="https://github.com/felipeochoa/rjsx-mode">rjsx-mode</a> annoying when it indents closed html tag with extra spaces.
+</p>
+
+<p>
+It's based on js2-mode which is actually just calling Emacs v25 API <code>js-jsx-indent-line</code>.
+</p>
+
+<p>
+So the solution is as simple as advice <code>js-jsx-indent-line</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
+  "Workaround sgml-mode and follow airbnb component style."
+  (let* ((cur-line (buffer-substring-no-properties
+                    (line-beginning-position)
+                    (line-end-position))))
+    (if (string-match "^\\( +\\)\/?&gt; *$" cur-line)
+      (let* ((empty-spaces (match-string 1 cur-line)))
+        (replace-regexp empty-spaces
+                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
+                        nil
+                        (line-beginning-position) (line-end-position))))))
+</code></pre>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/find-the-buffer-named-by-pinyin.html">Find the buffer with Chinese name</a></h1>
             <div class="meta">
                 <div class="authordate">

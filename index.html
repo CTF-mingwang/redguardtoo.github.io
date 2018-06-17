@@ -23,6 +23,258 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/how-to-spell-check-functionvariable-in-emacs.html">How to spell check function/variable in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2018-06-17T03:16:41+00:00">2018-06-17 03:16</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-spell-check-functionvariable-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-spell-check-functionvariable-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/flyspell.html" rel="tag">flyspell</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div id="outline-container-org699fb79" class="outline-2">
+<h3 id="org699fb79">
+<span class="section-number-2">1</span> How to spell check function/variable in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="flyspell">flyspell</span></span>
+</h3>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how developers can check typos of function/variable while programming in Emacs.
+</p>
+
+<p>
+It uses the <code>--run-together</code> option of <a href="http://aspell.net/">GNU Aspell</a> to check camel cased word.
+</p>
+
+<p>
+But this solution is not perfect. It will wrongly identify two character interior word as typo. For example, "on" from "onChange" is typo, so the whole word "onChange" becomes typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". "MS" should be excluded from check.
+</p>
+
+<p>
+In this article, I will first explain how Emacs spell checker works. Then we still study the algorithm of aspell. Finally, a setup to solve all issues we mentioned.
+</p>
+
+<p>
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool Aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> will pick up the final list of typos to be reported to user. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
+</p>
+
+<p>
+So aspell doesn't understand syntax of any programming language. It scans plain text and report all typos to Fly Spell.
+</p>
+
+<p>
+In aspell, there are two extra "run-together" word options:
+</p>
+<ul class="org-ul">
+<li>
+<code>--run-together-limit</code> is "Maximum number of words can be strung together"</li>
+<li>
+<code>--run-together-min</code> is "Minimal length of interior words"</li>
+</ul>
+<p>
+Let's study the code of Aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp". I documented the code line by line.
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-c">class Working : public Score {
+  unsigned check_word(char * word, char * word_end, CheckInfo * ci, unsigned pos = 1);
+};
+unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
+                             /* it WILL modify word */
+                             unsigned pos)
+{
+  // check the whole word before go into run-together mode
+  unsigned res = check_word_s(word, ci);
+  // if `res` is true, it's a valid word, don't bother run-together
+  if (res) return pos + 1;
+  // it's typo because number of interior words is greater than "--run-together-limit"
+  if (pos + 1 &gt;= sp-&gt;run_together_limit_) return 0;
+
+  // `i` is the `end` of interior word, the poition AFTER last character of interior word
+  for (char * i = word + sp-&gt;run_together_min_; 
+       // we already checked the word; besides, any interior word whose length is less 
+       // than "--run-together-min" is regarded as invalid word
+       i &lt;= word_end - sp-&gt;run_together_min_;
+       ++i)
+  {
+    char t = *i;
+    *i = '\0'; // read the interior word by set the character at `end` position to '\0'
+    res = check_word_s(word, ci);
+    *i = t; // restore original character at `end` position
+    // Well, current interior word is invalid, we need include append the character at current
+    //  `end` position into this it to create a new interior word. Also increment `end` position.
+    if (!res) continue;
+    // OK, current interior word is valid, we strip it from the whole word to create a totally
+    // new word for `check_word`, `check_word` is a recursive function
+    res = check_word(i, word_end, ci + 1, pos + 1);
+    if (res) return res;
+  }
+  memset(ci, 0, sizeof(CheckInfo));
+  return 0;
+}
+</code></pre>
+
+</div>
+
+<p>
+Let's use "hisHelle" as demo how <code>check_word</code> runs:
+</p>
+<ul class="org-ul">
+<li>"word" points to string array "hisHelle"</li>
+<li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
+<li>"check_word_s" return "true" for interior word "his"</li>
+<li>So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"</li>
+<li>In the new context of "check_word", we extract "Hel" from "Helle" initially</li>
+<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e".</li>
+<li>"e" is not valid and at the end of rescursion. So "hisHelle" is a typo.</li>
+</ul>
+<p>
+Here is our conclusion after studying the code:
+</p>
+<ul class="org-ul">
+<li>
+<code>--run-together-limit</code> could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.</li>
+<li>
+<code>--run-together-min</code> can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)</li>
+<li>
+<code>--run-together-min</code> can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")</li>
+<li>
+<code>--run-together-min</code> should always be 3 which is its default value. Actually, it should never be tweakable by user at the beginning</li>
+</ul>
+<p>
+Since <code>--run-together-min</code> is 3. the word "onChange" is always regarded as typo because of two character interior word "on". Since there is nothing we can do at aspell side, we have to turn to Emacs to fix this problem.
+</p>
+
+<p>
+When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from orginal word and spell check new word again.
+</p>
+
+<p>
+We can attach a predicate into specific major-mode. The predicate return <code>t</code> if current word at cursor is typo,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(defun js-flyspell-verify ()
+  (let* ((font-face (get-text-property (- (point) 1) 'face))
+         (word (thing-at-point 'word)))
+    (message "font-face=%s word=%s" font-face word)
+    t))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+</code></pre>
+
+</div>
+
+<p>
+As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. So namespace is also easy problem. If namespace is three characters, it will be automatically processed by aspell. All we need to do is add namespace into our personal dictionary <code>$HOME/.aspell.en.pws</code>. If namespace is one or two characters, we strip down it from original word. Same way as we deal with two character interior word.
+</p>
+
+<p>
+Here is complete setup you can paste into <code>.emacs</code> (I setup for <code>js2-mode</code> and <code>rjsx-mode</code> but code is generic enough),
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq ispell-program-name "aspell")
+(defun flyspell-detect-ispell-args (&amp;optional run-together)
+  "If RUN-TOGETHER is true, spell check the CamelCase words.
+Please note RUN-TOGETHER will make aspell less capable. So it should only be used in prog-mode-hook."
+  ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
+  (let* ((args (list "--sug-mode=ultra" "--lang=en_US"))args)
+    (if run-together
+        (setq args (append args '("--run-together" "--run-together-limit=16"))))
+    args))
+
+(defvar extra-flyspell-predicate '(lambda (word) t)
+  "A callback to check WORD.  Return t if WORD is typo.")
+
+(defun my-flyspell-predicate (word)
+  "Use aspell to check WORD.  If it's typo return true."
+  (if (string-match-p (concat "^&amp; " word)
+                      (shell-command-to-string (format "echo %s | %s %s pipe"
+                                                       word
+                                                       ispell-program-name
+                                                       (mapconcat 'identity
+                                                                  (flyspell-detect-ispell-args t)
+                                                                  " "))))
+      t))
+
+(defmacro my-flyspell-predicate-factory (preffix)
+  `(lambda (word)
+     (let* ((pattern (concat "^\\(" ,preffix "\\)\\([A-Z]\\)"))
+            rlt)
+       (cond
+        ((string-match-p pattern word)
+         (setq word (replace-regexp-in-string pattern "\\2" word))
+         (setq rlt (my-flyspell-predicate word)))
+        (t
+         (setq rlt t)))
+       rlt)))
+
+(defun js-flyspell-verify ()
+  (let* ((case-fold-search nil)
+         (font-matched (memq (get-text-property (- (point) 1) 'face)
+                             '(js2-function-call
+                               js2-function-param
+                               js2-object-property
+                               font-lock-variable-name-face
+                               font-lock-string-face
+                               font-lock-function-name-face
+                               font-lock-builtin-face
+                               rjsx-tag
+                               rjsx-attr)))
+         word
+         (rlt t))
+    (cond
+     ((not font-matched)
+      (setq rlt nil))
+     ((not (string-match-p "aspell$" ispell-program-name))
+      ;; Only override aspell's result
+      (setq rlt t))
+     ((string-match-p "^[a-zA-Z][a-zA-Z]$"
+                      (setq word (thing-at-point 'word)))
+      (setq rlt nil))
+     ((string-match-p "\\([A-Z][a-z]\\|^[a-z][a-z]\\)[A-Z]\\|[a-z][A-Z][a-z]$"
+                      word)
+      ;; strip two character interior words
+      (setq word (replace-regexp-in-string "\\([A-Z][a-z]\\|^[a-z][a-z]\\)\\([A-Z]\\)" "\\2" word))
+      (setq word (replace-regexp-in-string "\\([a-z]\\)[A-Z][a-z]$" "\\1" word))
+      ;; check stripped word
+      (setq rlt (my-flyspell-predicate word)))
+     (t
+      (setq rlt (funcall extra-flyspell-predicate word))))
+    rlt))
+(put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+(put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
+
+(defun prog-mode-hook-setup ()
+  ;; remove namespace "MS" and "X"
+  (setq-local extra-flyspell-predicate (my-flyspell-predicate-factory "MS\\|X")))
+(add-hook 'prog-mode-hook 'prog-mode-hook-setup)
+</code></pre>
+
+</div>
+
+<p>
+Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el</a> for my real world setup.</p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/use-imenu-to-list-comments-in-current-buffer.html">Use Imenu to list comments in current buffer</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -971,68 +1223,6 @@ The solution is to re-define "/" as <a href="https://www.gnu.org/software/emacs/
                       (modify-syntax-entry ?/ "." table)
                       table)))
 (add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/indent-jsx-in-emacs.html">Indent JSX in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-03-28T11:54:58+00:00">2017-03-28 11:54</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/indent-jsx-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/indent-jsx-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/jsx.html" rel="tag">jsx</a></li>
-           <li><a class="tag p-category" href="categories/react.html" rel="tag">react</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-JSX in Emacs                                                           :en:jsx:react:emacs:
-</p>
-
-<p>
-I find <a href="https://github.com/felipeochoa/rjsx-mode">rjsx-mode</a> annoying when it indents closed html tag with extra spaces.
-</p>
-
-<p>
-It's based on js2-mode which is actually just calling Emacs v25 API <code>js-jsx-indent-line</code>.
-</p>
-
-<p>
-So the solution is as simple as advice <code>js-jsx-indent-line</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defadvice js-jsx-indent-line (after js-jsx-indent-line-after-hack activate)
-  "Workaround sgml-mode and follow airbnb component style."
-  (let* ((cur-line (buffer-substring-no-properties
-                    (line-beginning-position)
-                    (line-end-position))))
-    (if (string-match "^\\( +\\)\/?&gt; *$" cur-line)
-      (let* ((empty-spaces (match-string 1 cur-line)))
-        (replace-regexp empty-spaces
-                        (make-string (- (length empty-spaces) sgml-basic-offset) 32)
-                        nil
-                        (line-beginning-position) (line-end-position))))))
 </code></pre>
 
 </div>
