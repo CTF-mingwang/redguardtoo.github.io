@@ -47,7 +47,7 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-orgacb7d07" class="outline-2">
+                <div id="outline-container-org642e80b" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -189,8 +189,7 @@ Here is complete setup you can paste into <code>.emacs</code> (I setup for <code
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(setq ispell-program-name "aspell")
-(defun flyspell-detect-ispell-args (&amp;optional run-together)
+<pre><code class="lang-lisp">(defun flyspell-detect-ispell-args (&amp;optional run-together)
   "If RUN-TOGETHER is true, spell check the CamelCase words.
 Please note RUN-TOGETHER will make aspell less capable. So it should only be used in prog-mode-hook."
   ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
@@ -198,6 +197,9 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
     (if run-together
         (setq args (append args '("--run-together" "--run-together-limit=16"))))
     args))
+
+(setq ispell-program-name "aspell")
+(setq-default ispell-extra-args (flyspell-detect-ispell-args t))
 
 (defvar extra-flyspell-predicate '(lambda (word) t)
   "A callback to check WORD.  Return t if WORD is typo.")
