@@ -47,7 +47,7 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org3d27333" class="outline-2">
+                <div id="outline-container-org24d5e05" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -115,19 +115,25 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 
   // `i` is the `end` of interior word, the poition AFTER last character of interior word
   for (char * i = word + sp-&gt;run_together_min_; 
-       // we already checked the word; besides, any interior word whose length is less 
-       // than "--run-together-min" is regarded as invalid word
+       // already checked the whole word; besides, any interior word whose size is less 
+       // than "--run-together-min" is regarded as invalid
        i &lt;= word_end - sp-&gt;run_together_min_;
        ++i)
   {
     char t = *i;
-    *i = '\0'; // read the interior word by set the character at `end` position to '\0'
+
+    // read the interior word by set the character at `end` position to '\0'
+    *i = '\0';
     res = check_word_s(word, ci);
-    *i = t; // restore original character at `end` position
-    // Well, current interior word is invalid, we need include append the character at current
-    //  `end` position into this it to create a new interior word. Also increment `end` position.
+    // restore original character at `end` position
+    *i = t;
+
+    // Current interior word is invalid, we need append the character at current
+    //  `end` position to creata new interior word.
+    //  Inncrement `i` because `i` always points to the `end` of interior word
     if (!res) continue;
-    // OK, current interior word is valid, we strip it from the whole word to create a totally
+
+    // Current interior word is valid, strip it from the whole word to create a totally
     // new word for `check_word`, `check_word` is a recursive function
     res = check_word(i, word_end, ci + 1, pos + 1);
     if (res) return res;
