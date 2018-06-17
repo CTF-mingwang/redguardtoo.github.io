@@ -63,8 +63,8 @@ It uses the --run-togethe">
 
         </div>
         <div class="body">
-            <div id="outline-container-org699fb79" class="outline-2">
-<h3 id="org699fb79">
+            <div id="outline-container-org78516b6" class="outline-2">
+<h3 id="org78516b6">
 <span class="section-number-2">1</span> How to spell check function/variable in Emacs   <span class="tag"><span class="en">en</span> <span class="emacs">emacs</span> <span class="flyspell">flyspell</span></span>
 </h3>
 <div class="outline-text-2" id="text-1">
@@ -85,7 +85,7 @@ In this article, I will first explain how Emacs spell checker works. Then we sti
 </p>
 
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool Aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> will pick up the final list of typos to be reported to user. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into <code>Fly Spell</code>. <code>Fly Spell</code> will pick up the final list of typos to be reported to user. For example, if <code>flyspell-prog-mode</code> is on, only typos in comments and strings are reported.
 </p>
 
 <p>
@@ -102,7 +102,7 @@ In aspell, there are two extra "run-together" word options:
 <code>--run-together-min</code> is "Minimal length of interior words"</li>
 </ul>
 <p>
-Let's study the code of Aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp". I documented the code line by line.
+Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp". I documented the code line by line.
 </p>
 
 <div class="org-src-container">

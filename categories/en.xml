@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 03:17:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org699fb79" class="outline-2"&gt;
-&lt;h3 id="org699fb79"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; How to spell check function/variable in Emacs   &lt;span class="tag"&gt;&lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt; &lt;span class="flyspell"&gt;flyspell&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 03:18:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org78516b6" class="outline-2"&gt;
+&lt;h3 id="org78516b6"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; How to spell check function/variable in Emacs   &lt;span class="tag"&gt;&lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt; &lt;span class="flyspell"&gt;flyspell&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 &lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how developers can check typos of function/variable while programming in Emacs.
@@ -19,7 +19,7 @@ In this article, I will first explain how Emacs spell checker works. Then we sti
 &lt;/p&gt;
 
 &lt;p&gt;
-In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and text to process to command line tool Aspell. Aspell checks the text and pass the list of typos back into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; will pick up the final list of typos to be reported to user. For example, if &lt;code&gt;flyspell-prog-mode&lt;/code&gt; is on, only typos in comments and strings are reported.
+In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and text to process to command line tool aspell. Aspell checks the text and pass the list of typos back into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; will pick up the final list of typos to be reported to user. For example, if &lt;code&gt;flyspell-prog-mode&lt;/code&gt; is on, only typos in comments and strings are reported.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -35,7 +35,7 @@ In aspell, there are two extra "run-together" word options:
 &lt;/ul&gt;
 
 &lt;p&gt;
-Let's study the code of Aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp". I documented the code line by line.
+Let's study the code of aspell to understand the meaning of these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp". I documented the code line by line.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
