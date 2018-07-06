@@ -16,10 +16,8 @@
 
 
 Download wxWidgets
-
 Extracted it somewhere. "c:\wxWidgets-3.0.0", for example.
-
-Create environment varia'>
+Create environment variabl'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2012-01-18T14:28:00Z">
 <meta property="article:tag" content="en">
@@ -72,16 +70,11 @@ wxWdigets programming on Windows                                        :win32:e
 <ul class="org-ul">
 <li>Download <a href="http://wwww.wxwdigets.org">wxWidgets</a>
 </li>
-<li>Extracted it somewhere. "c:\wxWidgets-3.0.0", for example.
-</li>
-<li>Create environment variable WXWIN with value "c:\wxWidgets-3.3.0"
-</li>
-<li>Install Visual Studio Express 2010
-</li>
-<li>If the source is on network drive, <a href="http://social.msdn.microsoft.com/Forums/vstudio/en-US/07ba35be-d0c7-4989-9bc1-edff61bfb556/fatal-error-c1085-cannot-write-precompiled-header-file?forum=vclanguage">you need set pch directory</a>. Maybe the best way is use local folder.
-</li>
-<li>Compile wxWidgets library by running the dos batch file:
-</li>
+<li>Extracted it somewhere. "c:\wxWidgets-3.0.0", for example.</li>
+<li>Create environment variable WXWIN with value "c:\wxWidgets-3.3.0"</li>
+<li>Install Visual Studio Express 2010</li>
+<li>If the source is on network drive, <a href="http://social.msdn.microsoft.com/Forums/vstudio/en-US/07ba35be-d0c7-4989-9bc1-edff61bfb556/fatal-error-c1085-cannot-write-precompiled-header-file?forum=vclanguage">you need set pch directory</a>. Maybe the best way is use local folder.</li>
+<li>Compile wxWidgets library by running the dos batch file:</li>
 </ul>
 <div class="org-src-container">
 
@@ -100,8 +93,7 @@ We use vcvars32.bat to set up the CLI tool chains.
 <ul class="org-ul">
 <li>Install <a href="http://www.cmake.org">CMake</a>
 </li>
-<li>Create a simple project with files main.cpp, main.hpp, and CMakeLists.txt
-</li>
+<li>Create a simple project with files main.cpp, main.hpp, and CMakeLists.txt</li>
 </ul>
 <p>
 CMakeLists.txt is the project file for CMake:
@@ -190,8 +182,7 @@ target_link_libraries(main ${LIBS})
 </div>
 
 <ul class="org-ul">
-<li>Running the below dos batch the create Visual Studio Project Files
-</li>
+<li>Running the below dos batch the create Visual Studio Project Files</li>
 </ul>
 <div class="org-src-container">
 
@@ -203,8 +194,7 @@ cmake path/of/directory/which/contains/CMakeLists.txt/
 </div>
 
 <ul class="org-ul">
-<li>Enjoy!
-</li>
+<li>Enjoy!</li>
 </ul>
 <p>
 BTW, for other systems, see <a href="http://wiki.wxwidgets.org/Compiling_wxWidgets_using_the_command-line_(Terminal)">wxWiki</a>.

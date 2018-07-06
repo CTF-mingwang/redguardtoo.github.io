@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 06 Jul 2018 06:12:47 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org82893ad" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 06 Jul 2018 12:57:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org8052c82" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -28,7 +28,7 @@ In this article,
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;I will explain &lt;b&gt;how Emacs spell checker works&lt;/b&gt;&lt;/li&gt;
 &lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;Finally, I will show you &lt;b&gt;a complete setup&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Finally, I will show you &lt;b&gt;a complete setup which could check camel case word using either aspell or hunspell&lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -105,7 +105,6 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 &lt;p&gt;
 Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')&lt;/li&gt;
 &lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
@@ -119,7 +118,6 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;p&gt;
 Here is our conclusion after studying the code:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
@@ -136,9 +134,16 @@ When Emacs got potential typo on Emacs side, we can strip out all the two charac
 &lt;/p&gt;
 
 &lt;p&gt;
-We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
+Please note &lt;code&gt;hunspell&lt;/code&gt; can't check camel case word at all while aspell can check camel case word but with a little noise. So there is nothing we can study in hunspell.
 &lt;/p&gt;
 
+&lt;p&gt;
+We will use Emacs Lisp to solve this problem completely, using &lt;b&gt;either aspell or hunspell&lt;/b&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
+&lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
@@ -152,7 +157,7 @@ We can attach a predicate into specific major-mode. The predicate return &lt;cod
 &lt;/div&gt;
 
 &lt;p&gt;
-As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. You could regard &lt;code&gt;predicate&lt;/code&gt; as the last chance to fix wrongly identified typos.
+As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So &lt;code&gt;predicate&lt;/code&gt; is actually the last chance to fix wrongly identified typos.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -162,7 +167,6 @@ Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I set
 &lt;p&gt;
 Please note function &lt;code&gt;split-camel-case&lt;/code&gt; split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun split-camel-case (word)
@@ -235,22 +239,46 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
         (setq args (append args '("--run-together" "--run-together-limit=16"))))
     args))
 
+;; {{ for aspell only, hunspell does not need setup `ispell-extra-args'
 (setq ispell-program-name "aspell")
 (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
+;; }}
+
+;; ;; {{ hunspell setup, please note we use dictionary "en_US" here
+;; (setq ispell-program-name "hunspell")
+;; (setq ispell-local-dictionary "en_US")
+;; (setq ispell-local-dictionary-alist
+;;       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
+;; ;; }}
 
 (defvar extra-flyspell-predicate '(lambda (word) t)
   "A callback to check WORD.  Return t if WORD is typo.")
 
 (defun my-flyspell-predicate (word)
-  "Use aspell to check WORD.  If it's typo return true."
-  (if (string-match-p "^&amp;amp;"
-                      (shell-command-to-string (format "echo %s | %s %s pipe"
-                                                       word
-                                                       ispell-program-name
-                                                       (mapconcat 'identity
-                                                                  (flyspell-detect-ispell-args t)
-                                                                  " "))))
-      t))
+  "Use aspell to check WORD.  If it's typo return t."
+  (let* ((cmd (cond
+               ;; aspell: `echo "helle world" | aspell pipe`
+               ((string-match-p "aspell$" ispell-program-name)
+                (format "echo \"%s\" | %s pipe"
+                        word
+                        ispell-program-name))
+               ;; hunspell: `echo "helle world" | hunspell -a -d en_US`
+               (t
+                (format "echo \"%s\" | %s -a -d en_US"
+                        word
+                        ispell-program-name))))
+         (cmd-output (shell-command-to-string cmd))
+         rlt)
+    ;; (message "word=%s cmd=%s" word cmd)
+    ;; (message "cmd-output=%s" cmd-output)
+    (cond
+     ((string-match-p "^&amp;amp;" cmd-output)
+      ;; it's a typo because at least one sub-word is typo
+      (setq rlt t))
+     (t
+      ;; not a typo
+      (setq rlt nil)))
+    rlt))
 
 (defun js-flyspell-verify ()
   (let* ((case-fold-search nil)
@@ -272,9 +300,6 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
     (cond
      ((not font-matched)
       (setq rlt nil))
-     ((not (string-match-p "aspell$" ispell-program-name))
-      ;; Only override aspell's result
-      (setq rlt t))
      ;; ignore two character word
      ((&amp;lt; (length (setq word (thing-at-point 'word))) 2)
       (setq rlt nil))
@@ -303,6 +328,5 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 &lt;p&gt;
 Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item></channel></rss>

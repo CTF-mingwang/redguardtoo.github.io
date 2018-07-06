@@ -104,59 +104,57 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </p>
 
 <ul class="org-ul">
-<li>说明哪些框架流行
-</li>
-<li>如何使用框架
-</li>
+<li>说明哪些框架流行</li>
+<li>如何使用框架</li>
 </ul>
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org9167f7c" class="outline-2">
+<h3 id="org9167f7c">概述</h3>
+<div class="outline-text-2" id="text-org9167f7c">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
-<col class="left">
-<col class="left">
-<col class="left">
+<col class="org-left">
+<col class="org-left">
+<col class="org-left">
 </colgroup>
 <thead><tr>
-<th scope="col" class="left">函数/插件名</th>
-<th scope="col" class="left">快捷键</th>
-<th scope="col" class="left">使用频率</th>
+<th scope="col" class="org-left">函数/插件名</th>
+<th scope="col" class="org-left">快捷键</th>
+<th scope="col" class="org-left">使用频率</th>
 </tr></thead>
 <tbody>
 <tr>
-<td class="left">company-mode (结合clang)</td>
-<td class="left">不需要 (也可启用TAB)</td>
-<td class="left">高</td>
+<td class="org-left">company-mode (结合clang)</td>
+<td class="org-left">不需要 (也可启用TAB)</td>
+<td class="org-left">高</td>
 </tr>
 <tr>
-<td class="left">hippie-expand</td>
-<td class="left">M-/</td>
-<td class="left">高</td>
+<td class="org-left">hippie-expand</td>
+<td class="org-left">M-/</td>
+<td class="org-left">高</td>
 </tr>
 <tr>
-<td class="left">evil-mode</td>
-<td class="left">C-n/C-p(完成词),C-x C-n/p(完成行)</td>
-<td class="left">高</td>
+<td class="org-left">evil-mode</td>
+<td class="org-left">C-n/C-p(完成词),C-x C-n/p(完成行)</td>
+<td class="org-left">高</td>
 </tr>
 <tr>
-<td class="left">auto-complete (结合clang)</td>
-<td class="left">TAB</td>
-<td class="left">低</td>
+<td class="org-left">auto-complete (结合clang)</td>
+<td class="org-left">TAB</td>
+<td class="org-left">低</td>
 </tr>
 <tr>
-<td class="left">complete-symbol</td>
-<td class="left">C-M-i</td>
-<td class="left">低</td>
+<td class="org-left">complete-symbol</td>
+<td class="org-left">C-M-i</td>
+<td class="org-left">低</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">auto-complete结合clang</h3>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org6a5211d" class="outline-2">
+<h3 id="org6a5211d">auto-complete结合clang</h3>
+<div class="outline-text-2" id="text-org6a5211d">
 <p>
 <a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟).
 </p>
@@ -183,18 +181,18 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">company-mode</h3>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org6273ea7" class="outline-2">
+<h3 id="org6273ea7">company-mode</h3>
+<div class="outline-text-2" id="text-org6273ea7">
 <p>
 <a href="https://github.com/company-mode/company-mode">company-mode</a>和auto-complete功能类似，唯一的区别是clang以及其他语言支持已内置，所以不需要安装其他elisp插件或者额外配置.目前我已用company-mode代替了auto-complete.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">hippie-expand</h3>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org164bedb" class="outline-2">
+<h3 id="org164bedb">hippie-expand</h3>
+<div class="outline-text-2" id="text-org164bedb">
 <p>
 <a href="http://emacswiki.org/emacs/HippieExpand">hippie-expand</a>是Emacs自带的自动完成框架.
 </p>
@@ -205,9 +203,9 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </div>
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h3 id="sec-5">complete-symbol</h3>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orgc3167a3" class="outline-2">
+<h3 id="orgc3167a3">complete-symbol</h3>
+<div class="outline-text-2" id="text-orgc3167a3">
 <p>
 Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,它默认仅仅调用了后台的ctags而已.
 </p>
@@ -242,9 +240,9 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </div>
 </div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h3 id="sec-6">evil-mode</h3>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-orgc542072" class="outline-2">
+<h3 id="orgc542072">evil-mode</h3>
+<div class="outline-text-2" id="text-orgc542072">
 <p>
 <a href="http://emacswiki.org/emacs/Evil">Evil-mode</a>把Emacs模拟成了Vim,是我最喜欢的第三方插件,其自动完成很简单,就是根据当前文件内容自动完成词或行.
 </p>
@@ -259,9 +257,9 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </div>
 </div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h3 id="sec-7">其他</h3>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-orgb03be6a" class="outline-2">
+<h3 id="orgb03be6a">其他</h3>
+<div class="outline-text-2" id="text-orgb03be6a">
 <p>
 我的一个想法. 类似于Evil的完成行.但是可以扫瞄指定目录中所有的文件,列出相似的行.
 </p>
@@ -270,10 +268,8 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 优点在于:
 </p>
 <ul class="org-ul">
-<li>匹配可以更加宽容一点
-</li>
-<li>使用目前最快的grep工具如<a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>扫瞄文本
-</li>
+<li>匹配可以更加宽容一点</li>
+<li>使用目前最快的grep工具如<a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>扫瞄文本</li>
 </ul>
 <p>
 实现见<a href="https://github.com/redguardtoo/emacs.d/blob/24dd0d7/lisp/init-ivy.el">init-ivy</a>中的=counsel-complete-line-by-grep=.
@@ -285,9 +281,9 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 </div>
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h3 id="sec-8">小结</h3>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org41cc617" class="outline-2">
+<h3 id="org41cc617">小结</h3>
+<div class="outline-text-2" id="text-org41cc617">
 <p>
 自动完成包括前端用户界面和后端语法解析引擎两个部分.
 </p>
