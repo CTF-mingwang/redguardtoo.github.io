@@ -47,9 +47,17 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org24d5e05" class="outline-2">
+                <div id="outline-container-org85293a6" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
+<p>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-06-17 Sun&gt;</span></span>
+</p>
+
+<p>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-07-06 Fri&gt;</span></span>
+</p>
+
 <p>
 <a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how developers can check typos of function/variable while programming in Emacs.
 </p>
@@ -148,6 +156,7 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 <p>
 Let's use "hisHelle" as demo how <code>check_word</code> runs:
 </p>
+
 <ul class="org-ul">
 <li>"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')</li>
 <li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
@@ -160,6 +169,7 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 <p>
 Here is our conclusion after studying the code:
 </p>
+
 <ul class="org-ul">
 <li>
 <code>--run-together-limit</code> could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.</li>
@@ -181,6 +191,7 @@ When Emacs got potential typo on Emacs side, we can strip out all the two charac
 <p>
 We can attach a predicate into specific major-mode. The predicate return <code>t</code> if current word at cursor is typo,
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun js-flyspell-verify ()
@@ -194,15 +205,81 @@ We can attach a predicate into specific major-mode. The predicate return <code>t
 </div>
 
 <p>
-As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. So namespace is also easy problem. If namespace is three characters, it will be automatically processed by aspell. All we need to do is add namespace into our personal dictionary <code>$HOME/.aspell.en.pws</code>. If namespace is one or two characters, we strip down it from original word. Same way as we deal with two character interior word.
+As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. You could regard <code>predicate</code> as the last chance to fix wrongly identified typos.
 </p>
 
 <p>
-Here is complete setup you can paste into <code>.emacs</code> (I setup for <code>js2-mode</code> and <code>rjsx-mode</code> but code is generic enough),
+Here is complete setup you can paste into <code>.emacs</code> (I setup for <code>js2-mode</code> and <code>rjsx-mode</code> but code is generic enough).
 </p>
+
+<p>
+Please note function <code>split-camel-case</code> split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
+</p>
+
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(defun flyspell-detect-ispell-args (&amp;optional run-together)
+<pre><code class="lang-lisp">(defun split-camel-case (word)
+  "Split camel case WORD into a list of strings.
+Ported from 'https://github.com/fatih/camelcase/blob/master/camelcase.go'."
+  (let* ((case-fold-search nil)
+         (len (length word))
+         ;; ten sub-words is enough
+         (runes [nil nil nil nil nil nil nil nil nil nil])
+         (runes-length 0)
+         (i 0)
+         ch
+         (last-class 0)
+         (class 0)
+         rlt)
+
+    ;; split into fields based on class of character
+    (while (&lt; i len)
+      (setq ch (elt word i))
+      (cond
+       ;; lower case
+       ((and (&gt;= ch ?a) (&lt;= ch ?z))
+        (setq class 1))
+       ;; upper case
+       ((and (&gt;= ch ?A) (&lt;= ch ?Z))
+        (setq class 2))
+       ((and (&gt;= ch ?0) (&lt;= ch ?9))
+        (setq class 3))
+       (t
+        (setq class 4)))
+
+      (cond
+       ((= class last-class)
+        (aset runes
+              (1- runes-length)
+              (concat (aref runes (1- runes-length)) (char-to-string ch))))
+       (t
+        (aset runes runes-length (char-to-string ch))
+        (setq runes-length (1+ runes-length))))
+      (setq last-class class)
+      ;; end of while
+      (setq i (1+ i)))
+
+    ;; handle upper case -&gt; lower case sequences, e.g.
+    ;;     "PDFL", "oader" -&gt; "PDF", "Loader"
+    (setq i 0)
+    (while (&lt; i (1- runes-length))
+      (let* ((ch-first (aref (aref runes i) 0))
+             (ch-second (aref (aref runes (1+ i)) 0)))
+        (when (and (and (&gt;= ch-first ?A) (&lt;= ch-first ?Z))
+                   (and (&gt;= ch-second ?a) (&lt;= ch-second ?z)))
+          (aset runes (1+ i) (concat (substring (aref runes i) -1) (aref runes (1+ i))))
+          (aset runes i (substring (aref runes i) 0 -1))))
+      (setq i (1+ i)))
+
+    ;; construct final result
+    (setq i 0)
+    (while (&lt; i runes-length)
+      (when (&gt; (length (aref runes i)) 0)
+        (setq rlt (add-to-list 'rlt (aref runes i) t)))
+      (setq i (1+ i)))
+     rlt))
+
+(defun flyspell-detect-ispell-args (&amp;optional run-together)
   "If RUN-TOGETHER is true, spell check the CamelCase words.
 Please note RUN-TOGETHER will make aspell less capable. So it should only be used in prog-mode-hook."
   ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
@@ -219,7 +296,7 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 (defun my-flyspell-predicate (word)
   "Use aspell to check WORD.  If it's typo return true."
-  (if (string-match-p (concat "^&amp; " word)
+  (if (string-match-p "^&amp;"
                       (shell-command-to-string (format "echo %s | %s %s pipe"
                                                        word
                                                        ispell-program-name
@@ -228,30 +305,21 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
                                                                   " "))))
       t))
 
-(defmacro my-flyspell-predicate-factory (preffix)
-  `(lambda (word)
-     (let* ((pattern (concat "^\\(" ,preffix "\\)\\([A-Z]\\)"))
-            rlt)
-       (cond
-        ((string-match-p pattern word)
-         (setq word (replace-regexp-in-string pattern "\\2" word))
-         (setq rlt (my-flyspell-predicate word)))
-        (t
-         (setq rlt t)))
-       rlt)))
-
 (defun js-flyspell-verify ()
   (let* ((case-fold-search nil)
          (font-matched (memq (get-text-property (- (point) 1) 'face)
                              '(js2-function-call
                                js2-function-param
                                js2-object-property
+                               js2-object-property-access
                                font-lock-variable-name-face
                                font-lock-string-face
                                font-lock-function-name-face
                                font-lock-builtin-face
+                               rjsx-text
                                rjsx-tag
                                rjsx-attr)))
+         subwords
          word
          (rlt t))
     (cond
@@ -260,46 +328,50 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
      ((not (string-match-p "aspell$" ispell-program-name))
       ;; Only override aspell's result
       (setq rlt t))
-     ((string-match-p "^[a-zA-Z][a-zA-Z]$"
-                      (setq word (thing-at-point 'word)))
+     ;; ignore two character word
+     ((&lt; (length (setq word (thing-at-point 'word))) 2)
       (setq rlt nil))
-     ((string-match-p "\\([A-Z][a-z]\\|^[a-z][a-z]\\)[A-Z]\\|[a-z][A-Z][a-z]$"
-                      word)
-      ;; strip two character interior words
-      (setq word (replace-regexp-in-string "\\([A-Z][a-z]\\|^[a-z][a-z]\\)\\([A-Z]\\)" "\\2" word))
-      (setq word (replace-regexp-in-string "\\([a-z]\\)[A-Z][a-z]$" "\\1" word))
-      ;; check stripped word
-      (setq rlt (my-flyspell-predicate word)))
+     ;; handle camel case word
+     ((and (setq subwords (split-camel-case word)) (&gt; (length subwords) 1))
+      (let* ((s (mapconcat (lambda (w)
+                             (cond
+                              ;; sub-word wholse length is less than three
+                              ((&lt; (length w) 3)
+                               "")
+                               ;; special characters 
+                              ((not (string-match-p "^[a-zA-Z]*$" w))
+                               "")
+                              (t
+                               w))) subwords " ")))
+        (setq rlt (my-flyspell-predicate s))))
      (t
       (setq rlt (funcall extra-flyspell-predicate word))))
     rlt))
+
 (put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
 (put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
-
-(defun prog-mode-hook-setup ()
-  ;; remove namespace "MS" and "X"
-  (setq-local extra-flyspell-predicate (my-flyspell-predicate-factory "MS\\|X")))
-(add-hook 'prog-mode-hook 'prog-mode-hook-setup)
 </code></pre>
 
 </div>
 
 <p>
 Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el</a> for my real world setup.</p>
+
+<p></p>
 </div>
 </div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/use-imenu-to-list-comments-in-current-buffer.html">Use Imenu to list comments in current buffer</a></h1>
+            <h1 class="title"><a href="posts/upload-emacs-package-to-marmalade.html">Upload emacs package to marmalade</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2018-04-08T02:12:04+00:00">2018-04-08 02:12</time>
+                    <time class="timeago" datetime="2014-03-28T07:26:01+00:00">2014-03-28 07:26</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/use-imenu-to-list-comments-in-current-buffer.html#disqus_thread" data-disqus-identifier="cache/posts/use-imenu-to-list-comments-in-current-buffer.html">Comments</a>
+    <a href="posts/upload-emacs-package-to-marmalade.html#disqus_thread" data-disqus-identifier="cache/posts/upload-emacs-package-to-marmalade.html">Comments</a>
 
 
                 </div>
@@ -309,482 +381,195 @@ Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/m
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/imenu.html" rel="tag">imenu</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-<a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> v3.2.0 has a new function <code>evilnc-imenu-create-index-function</code>.
-</p>
-
-<p>
-<a href="http://www.gnu.org/s/emacs/manual/html_node/emacs/Imenu.html">Imenu</a> could use this function to list all comments in current file.
-</p>
-
-<p>
-Usage:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(require 'counsel)
-(defun counsel-imenu-comments ()
-  "Imenu display comments."
-  (interactive)
-  (let* ((imenu-create-index-function 'evilnc-imenu-create-index-function))
-    (counsel-imenu)))
-</code></pre>
-
-</div>
-
-<p>
-Screen cast:
-</p>
-
-
-<div class="figure">
-<p><img src="wp-content/counsel-imenu-comments.gif" alt="counsel-imenu-comments.gif"></p>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/counsel-etags-v1-3-1-is-released-enemacsctags.html">counsel-etags v1.3.1 is released</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-11-12T09:40:15+00:00">2017-11-12 09:40</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/counsel-etags-v1-3-1-is-released-enemacsctags.html#disqus_thread" data-disqus-identifier="cache/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/etags.html" rel="tag">etags</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-<a href="https://github.com/redguardtoo/counsel-etags">Counsel-etags</a> is a generic solution for code navigation in Emacs.
-</p>
-
-<p>
-It basically needs no setup. For example, one command <code>counsel-etags-find-tag-at-point</code> is enough to start code navigation immediately.
-</p>
-
-<p>
-The package solves all the problems using Ctags/Etags with Emacs.
-</p>
-
-<p>
-<b>Problem 1:</b> Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from <code>counsel-etags</code>. The setup is simple:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">;; Don't ask before rereading the TAGS files if they have changed
-(setq tags-revert-without-query t)
-;; Don't warn when TAGS files are large
-(setq large-file-warning-threshold nil)
-;; Setup auto update now
-(add-hook 'prog-mode-hook
-  (lambda ()
-    (add-hook 'after-save-hook
-              'counsel-etags-virtual-update-tags 'append 'local)))
-(add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)
-</code></pre>
-
-</div>
-
-<p>
-<b>Problem 2:</b> Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running <code>counsel-etags-grep</code> <b>automatically</b> if <code>counsel-etags-find-tag-at-point</code> fails. So users always get results.
-</p>
-
-<p>
-There are also other enhancements.
-</p>
-
-<p>
-<b>Enhancement 1:</b> Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named <code>renderTable</code> could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
-</p>
-
-<p>
-<b>Enhancement 2:</b> It's inefficient to search the same tag again and again. <code>counsel-etags-recent-tag</code> is used to jump to previous definitions.
-</p>
-
-<p>
-<b>Enhancement 3:</b> <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> provides filter UI for <code>counsel-etags</code>. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to <b>exclude</b> candidates matching "keyword1".
-</p>
-
-<p>
-<b>Enhancement 4:</b> <code>counsel-etags-grep</code> uses the fastest grep program <a href="https://github.com/BurntSushi/ripgrep">ripgrep</a> if it's installed. Or else it falls back to standard grep.
-</p>
-
-<p>
-Please check <a href="https://github.com/redguardtoo/counsel-etags">https://github.com/redguardtoo/counsel-etags</a> for more tips.</p>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/auto-complete-everything-in-emacs.html">Auto complete everything in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-10-30T11:13:30+00:00">2017-10-30 11:13</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/auto-complete-everything-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/auto-complete-everything-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/marmalade.html" rel="tag">marmalade</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-complete everything in Emacs                                             :en:emacs:
-</p>
+<p></p>
+<p>Thanks to <a href="https://plus.google.com/+SebastianWiesner/posts">Sebastian Wiesner</a> for providing a python script to upload package to <a href="http://marmalade-repo.org/">http://marmalade-repo.org/</a>. </p>    
+<pre class="prettyprint ">
 
-<p>
-As a web developer using modern front end framework like React/Angular, I spend a lot of time on web components. 
-</p>
+sudo pip install requests keyring
 
-<p>
-A component instance is like:
-</p>
+curl -L https://raw.githubusercontent.com/lunaryorn/dotfiles/master/emacs/bin/marmalade-upload &gt; ~/bin/marmalade-upload &amp;&amp; chmod +x ~/bin/marmalade-upload
 
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">&lt;GenericTable
-  onSelectRow={ row =&gt; console.log(row) }
-  numberOfPinnedColumns={2}
-  withToolBar
-  onClickCell={ cell =&gt; console.log(cell) }
-&gt;
-  &lt;PaginationButtons /&gt;
-  &lt;TotalSum /&gt;
-  &lt;ReportButtons /&gt;
-&lt;/GenericTable&gt;
-</code></pre>
-
-</div>
-
-<p>
-Basically a component instance is a big chunk of html tags.
-</p>
-
-<p>
-I created a new package <a href="https://github.com/redguardtoo/eacl">EACL</a> (Emacs auto complete lines) which could help me <b>input components in unbelievable speed</b>.
-</p>
-
-<p>
-The idea is simple. If I've already used one component elsewhere in the project. It's unnecessary to re-type the similar code again.
-</p>
-
-<p>
-All I need to do is to input the first characters of the component and run <code>M-x eacl-complete-tag</code> which will grep the project and input the remaining part of component.
-</p>
-
-<p>
-Here is a demo to input component <code>ButtonToolbar</code>:
-</p>
-
-<div class="figure">
-<p><img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"></p>
-</div>
-
-<p>
-Please note <code>EACL</code> is generic and can be use in any programming language. 
-</p>
-
-<p>
-<code>M-x eacl-complete-statement</code> to <b>complete below Javascript code</b>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">import {
-  Button,
-  Row,
-  Column
-} from 'react-bootstrap';
-</code></pre>
-
-</div>
-
-<p>
-<code>M-x eacl-complete-snippet</code> to <b>complete below C code</b>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-c">static int v9fs_drop_inode(struct inode *inode)
-{
-    struct v9fs_session_info *v9ses;
-    v9ses = v9fs_inode2v9ses(inode);
-    if (v9ses-&gt;cache == CACHE_LOOSE || v9ses-&gt;cache == CACHE_FSCACHE)
-        return generic_drop_inode(inode);
-    /*
-     * in case of non cached mode always drop the
-     * the inode because we want the inode attribute
-     * to always match that on the server.
-     */
-    return 1;
-}
-</code></pre>
-
-</div>
-
-<p>
-You can also create your own commands based on API <code>eacl-complete-multi-lines-internal</code>.
-</p>
-
-<p>
-For example, it is a piece of cake to support Lisp by creating comand <code>my-complete-lisp</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(require 'eacl)
-(defun my-complete-lisp ()
-  (interactive)
-  (eacl-complete-multi-lines-internal "[^)]*)"))
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/split-emacs-window-with-certain-ratio.html">Split Emacs window with certain ratio</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-09-05T13:26:55+00:00">2017-09-05 13:26</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/split-emacs-window-with-certain-ratio.html#disqus_thread" data-disqus-identifier="cache/posts/split-emacs-window-with-certain-ratio.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-Emacs window with certain ratio                                        :en:emacs:
-</p>
-
-<p>
-The idea comes from <a href="https://github.com/redguardtoo/emacs.d/issues/607">yangdaweihit</a>. Here is the implementation.
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defvar my-ratio-dict
-  '((1 . 1.61803398875)
-    (2 . 2)
-    (3 . 3)
-    (4 . 4)
-    (5 . 0.61803398875))
-  "The ratio dictionary.")
-
-(defun my-split-window-horizontally (&amp;optional ratio)
-  "Split window horizontally and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-horizontally (floor (/ (window-body-width)
-                                           (1+ ratio-val)))))
-     (t
-      (split-window-horizontally)))
-    (set-window-buffer (next-window) (other-buffer))
-    (if (or (not ratio-val)
-            (&gt;= ratio-val 1))
-        (windmove-right))))
-
-(defun my-split-window-vertically (&amp;optional ratio)
-  "Split window vertically and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-vertically (floor (/ (window-body-height)
-                                         (1+ ratio-val)))))
-     (t
-      (split-window-vertically)))
-    ;; open another window with other-buffer
-    (set-window-buffer (next-window) (other-buffer))
-    ;; move focus if new window bigger than current one
-    (if (or (not ratio-val)
-            (&gt;= ratio-val 1))
-        (windmove-down))))
-
-(global-set-key (kbd "C-x 2") 'my-split-window-vertically)
-(global-set-key (kbd "C-x 3") 'my-split-window-horizontally)
-</code></pre>
-
-</div>
-
-<p>
-Usage is simple. For example, <code>C-x 2</code> is similar to original <code>split-winddow-vertically</code> while <code>C-u 1 C-x 2</code> split the window in golden ratio.
-</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/enhance-diff-mode-with-ivy.html">Enhance diff-mode with Ivy</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-05-30T12:29:12+00:00">2017-05-30 12:29</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/enhance-diff-mode-with-ivy.html#disqus_thread" data-disqus-identifier="cache/posts/enhance-diff-mode-with-ivy.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/diff.html" rel="tag">diff</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-diff-mode with Ivy                                                    :en:emacs:diff:ivy:
-</p>
-
-<p>
-My current job requires me to review the freelancer's patches and apply them to our code branch under <a href="https://www.perforce.com/">Perforce</a> control. Due to my client's security policy, the freelancer can only work on isolated sandbox environment and can't access our code base directly.
-</p>
-
-<p>
-I need two steps to finish the task:
-</p>
-
-<ul class="org-ul">
-<li>Open the freelancer's patch in <code>diff-mode</code>
-</li>
-<li>Run <code>diff-apply-hunk</code> to apply the hunks interactively
-</li>
-</ul>
-<p>
-The problem is <code>diff-mode</code> always ask me to specify the file to be patched.
-</p>
-
-<p>
-I read the code of <code>diff-apply-hunk</code>. The logic of <code>diff-apply-hunk</code> is simple. It tries different algorithms to guess the right file to patch. When the algorithms fail, it calls API <code>read-file-name</code> to ask me to provide the file path manually. If right file is found, the algorithms will work again and <code>read-file-name</code> will never be used for other hunks.
-</p>
-
-<p>
-Here is my solution. I can find the file to patch in recent opened files because I store all of them by <code>(setq recentf-max-saved-items 2048)</code>. I plan to use <code>ivy-read</code> from <a href="https://github.com/abo-abo/swiper">Ivy</a> to locate the file at first. If this step fails , I can still fall back on original API <code>read-file-name</code>.
-</p>
-
-<p>
-Here is the code
-</p>
-
-<pre class="example">
+~/bin/marmalade-upload -h # see help
 </pre>
 
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defvar ffip-read-file-name-hijacked-p nil)
-(defun ffip-diff-apply-hunk (&amp;optional reverse)
-  (interactive "P")
-  (unless recentf-mode (recentf-mode 1))
-  (setq ffip-read-file-name-hijacked-p t)
-  (defadvice read-file-name (around ffip-read-file-name-hack activate)
-    (cond
-     (ffip-read-file-name-hijacked-p
-      (let* ((args (ad-get-args 0))
-             (file-name (file-name-nondirectory (nth 2 args)))
-             (cands (remove nil (mapcar (lambda (s) (if (string-match-p (format "%s$" file-name) s) s))
-                                        (mapcar #'substring-no-properties recentf-list))))
-             (rlt (ivy-read "Recentf: " cands)))
-        (if rlt (setq ad-return-value rlt) rlt ad-doit)))
-     (t
-      ad-do-it)))
-  (diff-apply-hunk reverse)
-  (setq ffip-read-file-name-hijacked-p nil))
-</code></pre>
-
-</div>
-
-<p>
-Please note <code>ffip-diff-apply-hunk</code> can replace <code>diff-apply-hunk</code>.
-</p>
-
-<p>
-BTW, I can edit the patch on the spot when applying hunks. Similar to the work flow of <code>git add --patch</code>.
-</p>
-
-<p>
-The solution is added into <a href="https://github.com/technomancy/find-file-in-project">https://github.com/technomancy/find-file-in-project</a>.</p>
+<p></p>
+<p> Please note if the same version already exists on server, I need delete it before uploading. </p>
 </div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/firefox-and-emacs.html">Firefox and Emacs</a></h1>
+            <h1 class="title"><a href="posts/debug-emacs-lisp-code-the-hard-way.html">Debug Emacs Lisp code the hard way</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2017-05-23T12:24:25+00:00">2017-05-23 12:24</time>
+                    <time class="timeago" datetime="2014-03-19T19:45:00+00:00">2014-03-19 19:45</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/firefox-and-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/firefox-and-emacs.html">Comments</a>
+    <a href="posts/debug-emacs-lisp-code-the-hard-way.html#disqus_thread" data-disqus-identifier="cache/posts/debug-emacs-lisp-code-the-hard-way.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/debug.html" rel="tag">debug</a></li>
+           <li><a class="tag p-category" href="categories/elisp.html" rel="tag">elisp</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>I <a href="https://github.com/emacs-helm/helm/issues/448">met some issue</a> when using helm several days ago. </p> <p> With the help from Michael Heerdegen, I can locate the line error message is dumped. </p> <p> But the problem is I cannot get the backtrace at all. </p> <p> So I insert some <a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html">backtrace printing code</a> above that line and "M-x eval-buffer": </p>   
+<pre class="prettyprint ">
+
+(with-output-to-temp-buffer "backtrace-output"
+  (let ((var 1))
+    (save-excursion
+      (setq var (eval '(progn
+                         (1+ var)
+                         (list 'testing (backtrace))))))))
+</pre>
+
+<p></p>
+<p> It turns out that some third party package I installed changes the emacs variable "display-buffer-function". I guess that's why the backtrace is blocked. Because backtrace is usually dumped into a backtrace buffer. And backtrace buffer's is actually influenced by the variable. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-11T18:52:00+00:00">2014-03-11 18:52</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-use-ctags-in-emacs-effectively-3.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-use-ctags-in-emacs-effectively-3.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p><a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> is a code navigation tool. It supports many language and could be integrated into Emacs well. </p> <p> Please read <a href="http://www.emacswiki.org/emacs/BuildTags">EmacsWiki</a> for basic usage. </p> <p> I will talk about how I manage my ctags. </p> <p> Basically ctags will produce a index file with file name TAGS. The full path of TAGS will be stored in a global list "tags-table-list". </p> <p> An example of tags-table-list: </p>
+<pre class="prettyprint ">
+(setq tags-table-list '("~/wxWidgets-master/TAGS" "~/projs/Loris/src/desktop/TAGS"))
+</pre>
+
+<p></p>
+<p> Every time we you "M-x find-tag", the TAGS file in above list will be read from the scratch to locate the definition of the symbol under cursor. </p> <p> Here is my strategy to manage TAGS <b>automatically</b>: </p>
+<ul>
+<li>I hard coded full path of TAGS in .emacs because I usually don't change project path. </li> <li>In major mode hook like c++-mode-hook or js2-mode-hook I will check the directory path of current file. If it contains certain string, I suppose the file belong to certain project. </li> <li>Then I will create TAGS for that project if needed </li> <li>Every time when I save the file, I may update TAGS according to the value of tags-table-list. </li> </ul>
+<p> Here is the code: </p>
+<pre class="prettyprint lang-lisp">
+(defun my-project-name-contains-substring (REGEX)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p REGEX dir)))
+
+(defun my-create-tags-if-needed (SRC-DIR &amp;optional FORCE)
+  "return the full path of tags file"
+  (let ((dir (file-name-as-directory (file-truename SRC-DIR)) )
+       file)
+    (setq file (concat dir "TAGS"))
+    (when (or FORCE (not (file-exists-p file)))
+      (message "Creating TAGS in %s ..." dir)
+      (shell-command
+       (format "ctags -f %s -e -R %s" file dir))
+      )
+    file
+    ))
+
+(defvar my-tags-updated-time nil)
+
+(defun my-update-tags ()
+  (interactive)
+  "check the tags in tags-table-list and re-create it"
+  (dolist (tag tags-table-list)
+    (my-create-tags-if-needed (file-name-directory tag) t)
+    ))
+
+(defun my-auto-update-tags-when-save ()
+  (interactive)
+  (cond
+   ((not my-tags-updated-time)
+    (setq my-tags-updated-time (current-time)))
+   ((&lt; (- (float-time (current-time)) (float-time my-tags-updated-time)) 300)
+    ;; &lt; 300 seconds
+    ;; do nothing
+    )
+   (t
+    (setq my-tags-updated-time (current-time))
+    (my-update-tags)
+    (message "updated tags after %d seconds." (- (float-time (current-time))  (float-time my-tags-updated-time)))
+    )
+   ))
+
+(defun my-setup-develop-environment ()
+    (when (my-project-name-contains-substring "Loris")
+      (cond
+       ((my-project-name-contains-substring "src/desktop")
+        ;; C++ project don't need html tags
+        (setq tags-table-list (list
+                               (my-create-tags-if-needed
+                                (concat (file-name-as-directory (getenv "WXWIN")) "include"))
+                               (my-create-tags-if-needed "~/projs/Loris/loris/src/desktop")))
+        )
+       ((my-project-name-contains-substring "src/html")
+        ;; html project donot need C++ tags
+        (setq tags-table-list (list (my-create-tags-if-needed "~/projs/Loris/loris/src/html")))
+        ))))
+
+(add-hook 'after-save-hook 'my-auto-update-tags-when-save)
+(add-hook 'js2-mode-hook 'my-setup-develop-environment)
+(add-hook 'web-mode-hook 'my-setup-develop-environment)
+(add-hook 'c++-mode-hook 'my-setup-develop-environment)
+(add-hook 'c-mode-hook 'my-setup-develop-environment)
+</pre>
+
+<p></p>
+<p> UPDATE: There is some discussion at <a href="https://plus.google.com/110954683162859211810/posts/NsdzvywuoX3">Google Plus</a> about using ctags. Kaushal Modi recommended three emacs plugins: </p>
+<ol>
+<li>ctags-update </li> <li>etags-table </li> <li>etags-select </li> </ol>
+<p> I tried these three plugins. ctags-update and etags-table duplicate my above elisp code. I prefer my own code because it's simpler and totally controllable. For example, the fact that I need only care about <b>only one global variable tags-table-list</b> makes my code shorter. </p> <p> But I do like etags-select, it provide better UI for finding tag and I will use it from now on. </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html">How to adapt my work style to the employer's standard in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-03-05T10:53:00+00:00">2014-03-05 10:53</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-adapt-my-work-style-to-the-employers-standard-in-emacs.html">Comments</a>
 
 
                 </div>
@@ -794,155 +579,288 @@ The solution is added into <a href="https://github.com/technomancy/find-file-in-
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>I write some set up code in ~/.custom.el. It will detect which machine and what directory I'm working on. Then I hook the set up code when major mode (js2-mode, web-mode, for example) loaded. </p> <p> In my ~/.emacs, </p>   
+<pre class="prettyprint lang-lisp">
+(if (file-readable-p (expand-file-name "~/.custom.el"))
+     (load-file (expand-file-name "~/.custom.el")))
+</pre>
+
+<p></p>
+<p> Content of my ~/.custom.el: </p>   
+<pre class="prettyprint lang-lisp">
+;; (getenv "HOSTNAME") won't work because $HOSTNAME is not an env variable
+;; (system-name) won't work because as Optus required, my /etc/hosts is changed
+(defun my/at-office ()
+  (interactive)
+  (let ((my-hostname (with-temp-buffer
+                       (shell-command "hostname" t)
+                       (goto-char (point-max))
+                       (delete-char -1)
+                       (buffer-string))
+                     ))
+    (and (string= my-hostname "my-sydney-workpc")
+         (not (or (string= my-hostname "sydneypc")
+                  (string= my-hostname "ChenBinMacAir")
+                  (string= my-hostname "eee")
+                  )))
+    ))
+
+(defun my/use-office-style ()
+  (interactive)
+  (let ((dir (if (buffer-file-name)
+                 (file-name-directory (buffer-file-name))
+               "")))
+    (string-match-p "CompanyProject" dir)
+    ))
+
+(defun my/setup-develop-environment ()
+  (cond
+   ((my/use-office-style)
+    (message "Office code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 4)
+    (setq js-indent-level 4)
+    (setq js2-basic-offset 4)
+    (setq web-mode-indent-style 4))
+   (t
+    (message "My code style!")
+    (setq coffee-tab-width 4)
+    (setq javascript-indent-level 2)
+    (setq js-indent-level 2)
+    (setq js2-basic-offset 2)
+    (setq web-mode-indent-style 2))
+   ))
+
+(add-hook 'js2-mode-hook 'my/setup-develop-environment)
+(add-hook 'web-mode-hook 'my/setup-develop-environment)
+</pre>
+
+<p></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">My answer to "How do you use Emacs without a directory tree on the side of the editor?" on quora.com</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-19T21:40:00+00:00">2014-02-19 21:40</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html#disqus_thread" data-disqus-identifier="cache/posts/my-answer-to-how-do-you-use-emacs-without-a-directory-tree-on-the-side-of-the-editor-on-quora-com.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/bash.html" rel="tag">bash</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>This is <a href="http://www.quora.com/Emacs/How-do-you-use-Emacs-without-a-directory-tree-on-the-side-of-the-editor">original link of the question</a>. Please note I focus on programming for large projects. I need search/grep/modify files scattered in different places without documentation. </p> <p> If your use case is different, a embedded file explorer may be a better choice </p>  <div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Tools I use to replace a file explorer</h4> <div class="outline-text-3" id="text-1">  <ol>
+<li>ido-find-file (emacs), just type any characters, it will fuzz search matched file in parent/sibling/current/or-whatever directory.  </li> <li>helm-find-file (emacs), this one use regular expression and has bigger window  </li> <li>recentf and helm (emacs), I use regular expression open recent opened files.  </li> <li>ctags, gtags or whatever tag tools (CLI tool), as mentioned by other people  </li> <li>I also use lots of bash functions written by myself, those functions are trivial, but combined with a wonderful tool called percol, they become really powerful.  </li> <li>I use some CLI clipboard tool so I can easily share the file path between terminal/emacs/firefox.  </li> <li>there is also a emacs bundled feature called speedbar, which is similar to the file explorer, I used it once, but it does not fit in my ninja style ;) It's fine but the UI is almost same to those average text editors.  </li> <li>I also write some elisp snippets, for example, convert absolute path to relative path; given one relative path, output one absolute path, etc …  </li> <li>there is also some git based emacs plugin: you can search file under the project root directory.  </li> <li>there is a CLI tool called fasd which can let you interactively select the file or folder you recently visited.  </li> <li>many other tools, plug-ins, code snippets I can use … </li> </ol>
+</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Use case</h4> <div class="outline-text-3" id="text-2">  <ol>
+<li>I need search a big project for a certain library (it's a freemarker file I need include) whose full path I don't know, I just search the API's name by type: </li> </ol>
+<p>"gef keyword *". gef is my bash function based on grep. </p>
+<ol>
+<li>matched files are displayed instantly (grep is much more quick than IDEs, BTW) in a interactive console filter (use percol), I type a regular expression to filter file name and press enter </li> <li>the full path is in clipboard now, then I type ":e Shift-insert" to open that file. </li> </ol>
+<p>This is the most difficult case, I usually strike less keys and not get out of Emacs. </p>
+<ol>
+<li>If i need insert this file's relative path, I press a hot key and another emacs plugin will correctly convert absolute path to relative one (relative to the file I'm editing in Emacs) and insert it into my editor. </li> </ol>
+</div>  </div>  <div id="outline-container-3" class="outline-3"> <h4 id="sec-3">Demo</h4> <div class="outline-text-3" id="text-3">  <p>Here is screen cast. In this demo I grepped and open a ftl file and then search another js file in the same project. <img src="wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif" alt="http://blog.binchen.org/wp-content/uploads/2014/02/wpid-emacs-grep-search-open-file.gif"></p>
+</div> </div> </div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html">One liner to download and install emacs lisp source code</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-18T11:56:00+00:00">2014-02-18 11:56</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html#disqus_thread" data-disqus-identifier="cache/posts/one-liner-to-download-and-extract-emacs-lisp-source-code.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Run the below command in shell, </p>   
+<pre class="prettyprint ">
+
+curl http://ftp.gnu.org/gnu/emacs/emacs-`emacs --version|head -n1|sed 's/[^0-9.]*\([0-9]\+\.[0-9]\+\).*/\1/g'`.tar.gz | sudo tar --exclude=admin/* --exclude=etc/* --exclude=nt/* --exclude=doc/* --exclude=leim/* -C /usr/share/emacs/`emacs --version|head -n1|sed 's/[^0-9.]*\([0-9]\+\.[0-9]\+\).*/\1/g'`/lisp/ --strip-components=2 --wildcards -zxv *.el
+</pre>
+
+<p></p>
+<p> For example, after installing the lisp code. You can <code>M-x find-function package-list-packages</code> in Emacs, you will jump to the definition of that command in "/usr/share/emacs/24.3/lisp/emacs-lisp/package.el" (I assume your emacs version is 24.3). </p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/add-current-directory-into-load-path-in-emacs.html">Add current directory into load-path in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-17T13:24:23+00:00">2014-02-17 13:24</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/add-current-directory-into-load-path-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/add-current-directory-into-load-path-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/elisp.html" rel="tag">elisp</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/programming.html" rel="tag">programming</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p>Useful when developing emacs plugin: </p>
+<pre class="prettyprint lang-lisp">
+(defun add-pwd-into-load-path ()
+  "add current directory into load-path, useful for elisp developers"
+  (interactive)
+  (let ((dir (expand-file-name default-directory)))
+    (if (not (memq dir load-path))
+        (add-to-list 'load-path dir)
+        )
+    (message "Directory added into load-path:%s" dir)
+    )
+  )
+</pre>
+
+<p></p>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/code-rush.html">Code Rush</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2014-02-14T17:12:00+00:00">2014-02-14 17:12</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/code-rush.html#disqus_thread" data-disqus-identifier="cache/posts/code-rush.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/engineering.html" rel="tag">engineering</a></li>
            <li><a class="tag p-category" href="categories/firefox.html" rel="tag">firefox</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-           <li><a class="tag p-category" href="categories/keysnail.html" rel="tag">keysnail</a></li>
+           <li><a class="tag p-category" href="categories/zh.html" rel="tag">zh</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-and Emacs                                                             :en:emacs:firefox:ivy:keysnail:
-</p>
-
-<p>
-For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
-</p>
-
-<p>
-Three years ago, I wrote <a href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html">Use firefox in Emacs way</a> to demo how to convert Firefox into Emacs by <a href="https://github.com/mooz/keysnail/wiki">Keynsail.</a>
-</p>
-
-<p>
-A year ago I published <a href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html">Hello Ivy-mode, bye Helm</a> to prove how powerful <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> is by using its API <code>ivy-read</code>.
-</p>
-
-<p>
-Keysnail has similar javascript API <code>prompt.selector</code> and it's as powerful as <code>ivy-read</code> if not more powerful.
-</p>
-
-<p>
-For example, you can insert below snippet into <code>~/.keysnail.js</code> and press ",hh" or "C-c C-h" to query browse history:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">function searchHistory(evt, arg) {
-  function timeSince(now, date) {
-
-    var seconds = Math.floor((now - date) / 1000);
-
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval &gt; 1) {
-      return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval &gt; 1) {
-      return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval &gt; 1) {
-      return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval &gt; 1) {
-      return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval &gt; 1) {
-      return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
-
-  function searchWithKeyword(q) {
-    var collection = (function() {
-      //search option
-      var options = PlacesUtils.history.getNewQueryOptions();
-      options.maxResults = 4096;
-      options.queryType = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
-      //options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_FRECENCY_DESCENDING;
-      options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_DATE_DESCENDING;
-      options.includeHidden = true;
-
-      //search query
-      var query = PlacesUtils.history.getNewQuery();
-      // read keyworld
-      if(q &amp;&amp; q !== '') {
-        query.searchTerms  = q;
-      }
-
-      var result = PlacesUtils.history.executeQuery(query, options);
-      var root = result.root;
-
-      var collection = [];
-      var now = new Date().getTime();
-      var siteNode;
-      root.containerOpen = true;
-      for (var i = 0; i &lt; root.childCount; i++) {
-        // siteNode =&gt; nsINavHistoryResultNode
-        siteNode = root.getChild(i);
-        collection.push([siteNode.icon,siteNode.title,siteNode.uri, siteNode.time/1000]);
-      }
-      collection.sort(function(a, b) {
-        return b[3]-a[3];
-      });
-      // reformat the time
-      for (i = 0; i &lt; collection.length; i++) {
-        collection[i][3] = timeSince(now, collection[i][3]) + ' ago';
-      }
-      root.containerOpen = false;
-      return collection;
-    })();
-
-    prompt.selector({
-      message    : "Search history"+ (q &amp;&amp; q !== ''? (' @'+q +':') : ':' ),
-      collection : collection,
-      flags      : [ICON | IGNORE, 0, 0, 0],
-      header     : ["Title", "Url", "Last visited"],
-      width      : [30, 60, 10],
-      callback: function (i) {
-        if (i &gt;= 0) {
-          openUILinkIn(collection[i][2], "tab");
-        }
-      },
-      onFinish: function() {
-        gBrowser.focus();
-        _content.focus();
-      }
-    });
-  }
-
-  prompt.finish(true);
-  prompt.read('Keyword to search history?', searchWithKeyword, null, null, null, 0, "history_search");
-  // searchWithKeyword('test');
-
-}
-key.setViewKey([',', 'h', 'h'], searchHistory, "Search history");
-key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
-</code></pre>
-
-</div>
-
-<p>
-Here is my complete <a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a">.keysnail.js</a>.
-</p>
+<p></p>
+<p>小结,代码库庞大,质量有问题,招了一些废物.M Toy:"我们不是要痛扁谁…". 1998年3月31日,Netscape公开其源代码. </p> <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<caption></caption> <colgroup>
+<col class="left">
+<col class="left">
+</colgroup>
+<thead><tr>
+<th scope="col" class="left">人名</th>
+<th scope="col" class="left">背景</th>
+</tr></thead>
+<tbody>
+<tr>
+<td class="left"><a href="http://en.wikipedia.org/wiki/Jamie_Zawinski">Jamie Zawinski</a></td>
+<td class="left">黑客,擅长C/Perl/Lisp,不喜欢C++,XEmacs开发者,Netscape早期版本开发者)解释源代码的意义.注意键盘符合人体工程学.</td>
+</tr>
+<tr>
+<td class="left"><a href="http://en.wikipedia.org/wiki/Michael_Toy">Michael Toy</a></td>
+<td class="left">牢游戏Rogue的开发者,该游戏被PC World杂志2009年评为史上最伟大PC游戏第六,是Diablo的老祖宗,Netscape最早员工</td>
+</tr>
+<tr>
+<td class="left"><a href="http://en.wikipedia.org/wiki/Jim_Barksdale">Jim Barksdale</a></td>
+<td class="left">CEO</td>
+</tr>
+<tr>
+<td class="left"><a href="http://www.linkedin.com/pub/jim-roskind/0/20/195">Jim Roskind</a></td>
+<td class="left">Security Expert,开发大型软件,很麻烦.还说了一大堆屁话.</td>
+</tr>
+<tr>
+<td class="left">Scott Collins</td>
+<td class="left">值夜班,惨透了.</td>
+</tr>
+<tr>
+<td class="left"><a href="http://en.wikipedia.org/wiki/Brendan_Eich">Brendan Eich</a></td>
+<td class="left">javascript</td>
+</tr>
+<tr>
+<td class="left"><a href="http://www.linkedin.com/pub/jeff-weinstein/b/869/433">Jeff Weinstein</a></td>
+<td class="left">programmer at Netscape.并不是Netscape最优秀的员工.嘿嘿.</td>
+</tr>
+<tr>
+<td class="left">Tara Hernandez</td>
+<td class="left">QA</td>
+</tr>
+<tr>
+<td class="left"><a href="http://en.wikipedia.org/wiki/Blake_Ross">Blake Ross</a></td>
+<td class="left"><a href="http://www.insanely-great.com/news.php?id=3993">http://www.insanely-great.com/news.php?id=3993</a></td>
+</tr>
+</tbody>
+</table>
 </div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Use wgrep and evil to replace text efficiently</a></h1>
+            <h1 class="title"><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html">My answer to "What are some must-have emacs additions" on quora.com</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2017-05-22T13:14:35+00:00">2017-05-22 13:14</time>
+                    <time class="timeago" datetime="2014-02-13T19:44:00+00:00">2014-02-13 19:44</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html#disqus_thread" data-disqus-identifier="cache/posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Comments</a>
+    <a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#disqus_thread" data-disqus-identifier="cache/posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html">Comments</a>
 
 
                 </div>
@@ -950,307 +868,65 @@ Here is my complete <a href="https://gist.github.com/redguardtoo/003ac86d4c11b70
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
+           <li><a class="tag p-category" href="categories/addon.html" rel="tag">addon</a></li>
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/wgrep.html" rel="tag">wgrep</a></li>
+           <li><a class="tag p-category" href="categories/plugin.html" rel="tag">plugin</a></li>
         </ul>
 </div>
 
             </div>
             <div class="body">
                 <div>
-<p>
-wgrep and evil to replace text efficiently                                :en:emacs:wgrep:
-</p>
-
-<p>
-In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> in order to search/replace text in project root directory.
-</p>
-
-<p>
-My wgrep-mode enabled buffer is in evil-mode. I prefer pressing vi key binding <code>dd</code> to remove lines in that buffer to tell wgrep skip them.
-</p>
-
-<p>
-It turns out we need <code>M-x C-c C-p</code> or <code>M-x wgrep-toggle-readonly-area</code> before removing lines.
-</p>
-
-<p>
-I'm too lazy to remember extra commands. So here is the workaround:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">;; Press `dd' to delete lines in `wgrep-mode' in evil directly
-(defadvice evil-delete (around evil-delete-hack activate)
-  ;; make buffer writable
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area))
-  ad-do-it
-  ;; make buffer read-only
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area)))
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-05-09T13:38:06+00:00">2017-05-09 13:38</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/emacs-is-easy-if-you-read-code.html#disqus_thread" data-disqus-identifier="cache/posts/emacs-is-easy-if-you-read-code.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/counsel.html" rel="tag">counsel</a></li>
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-is easy if you read code                                      :en:emacs:ivy:counsel:
-</p>
-
-<p>
-If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
-</p>
-
-<p>
-For example, here is a useful tip on <a href="https://sam217pa.github.io/2016/09/11/nuclear-power-editing-via-ivy-and-ag/">using counsel-ag and wgrep to edit multiple files</a> I recently learned.
-</p>
-
-<p>
-To <b>understand this black magic</b>, you only need know <code>counsel-ag-occur</code> from <code>counsel.el</code> (v0.9.1):
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun counsel-ag-occur ()
-  "Generate a custom occur buffer for `counsel-ag'."
-  (unless (eq major-mode 'ivy-occur-grep-mode)
-    (ivy-occur-grep-mode))
-  (setq default-directory counsel--git-grep-dir)
-  (let* ((regex (counsel-unquote-regex-parens
-                 (setq ivy--old-re
-                       (ivy--regex
-                        (progn (string-match "\"\\(.*\\)\"" (buffer-name))
-                               (match-string 1 (buffer-name)))))))
-         (cands (split-string
-                 (shell-command-to-string
-                  (format counsel-ag-base-command (shell-quote-argument regex)))
-                 "\n"
-                 t)))
-    ;; Need precise number of header lines for `wgrep' to work.
-    (insert (format "-*- mode:grep; default-directory: %S -*-\n\n\n"
-                    default-directory))
-    (insert (format "%d candidates:\n" (length cands)))
-    (ivy--occur-insert-lines
-     (mapcar
-      (lambda (cand) (concat "./" cand))
-      cands))))
-(ivy-set-occur 'counsel-ag 'counsel-ag-occur)
-(ivy-set-display-transformer 'counsel-ag 'counsel-git-grep-transformer)
-</code></pre>
-
-</div>
-
-<p>
-Inside <code>counsel-ag-occur</code>:
-</p>
-
-<ul class="org-ul">
-<li>The variable <code>regex</code> is the regular expression built from the filter string you input. Please note that <code>regex</code> is unquoted by <code>counsel-unquote-regex-parens</code> so it can be used in shell. If you use <code>regex</code> in Emacs Lisp, you don't need unquote it
-</li>
-<li>The variable <code>cands</code> is the candidate lines created by running <code>ag</code> with <code>regex</code> as parameters in shell
-</li>
-<li>Then a wgrep-friendly buffer is created
-</li>
-</ul>
-<p>
-After spending 5 minutes to understand the internals, you can <b>easily implement similar features</b>.
-</p>
-
-<p>
-Now let's <b>develop our own black magic</b> by enhancing the wgrep-friendly buffer.
-</p>
-
-<p>
-My project uses Perforce as VCS. So <b>I need check out files and make them writable before using wgrep</b>.
-</p>
-
-<p>
-Read code of <code>wgrep.el</code> (v2.1.10),
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun wgrep-prepare-context ()
-  (save-restriction
-    (let ((start (wgrep-goto-first-found))
-          (end (wgrep-goto-end-of-found)))
-      (narrow-to-region start end)
-      (goto-char (point-min))
-      (funcall wgrep-results-parser))))
-</code></pre>
-
-</div>
-
-<p>
-<code>wgrep-results-parser</code> is actually alias of <code>wgrep-parse-command-results</code> whose code is too much to paste here. You can <code>M-x find-function wgrep-parse-command-results</code> to read its code.
-</p>
-
-<p>
-By combining <code>wgrep-prepare-context</code> and <code>wgrep-parse-command-results</code> I got my own <code>access-files-in-wgrep-buffer</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun access-files-in-wgrep-buffer()
-  (interactive)
-  (save-restriction
-    (let* ((start (wgrep-goto-first-found))
-           (end (wgrep-goto-end-of-found))
-           fn-accessed)
-      (narrow-to-region start end)
-      (goto-char (point-min))
-      (unless (featurep 'wgrep) (require 'featurep))
-      (while (not (eobp))
-        (if (looking-at wgrep-line-file-regexp)
-            (let* ((fn (match-string-no-properties 1)))
-              (unless (string= fn fn-accessed)
-                (setq fn-accessed fn)
-                (message "File relative path=%s" fn))))
-        (forward-line 1)))))
-</code></pre>
-
-</div>
-
-<p>
-You can replace the line <code>(message "File relative path=%s" fn)</code> to <code>(shell-command (format "any-shell-cli %s" fn))</code> to <b>do anything on the files</b>.
-</p>
-
-<p>
-You can insert definition of <code>access-files-in-wgrep-buffer</code> into your <code>.emacs</code> and run <code>M-x access-files-in-wgrep-buffer</code> in wgrep buffer to have a test.
-</p>
-
-<p>
-For example, I modified <code>access-files-in-wgrep-buffer</code> to <code>p4edit-in-grep-buffer</code> to checkout files under <a href="https://www.perforce.com/">Perforce</a> control,
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-emacs">(defun p4edit-in-wgrep-buffer()
-  "'p4 edit' files in wgrep buffer.
-Turn off `read-only-mode' of opened files."
-  (interactive)
-  (save-restriction
-    (let* ((start (wgrep-goto-first-found))
-           (end (wgrep-goto-end-of-found))
-           fn-accessed)
-      (narrow-to-region start end)
-      (goto-char (point-min))
-      (unless (featurep 'wgrep) (require 'featurep))
-      (while (not (eobp))
-        (if (looking-at wgrep-line-file-regexp)
-            (let* ((filename (match-string-no-properties 1)) buf)
-              (unless (string= filename fn-accessed)
-                (setq fn-accessed filename)
-                (shell-command (format "p4 edit %s" filename))
-                (if (setq buf (get-file-buffer filename))
-                    (with-current-buffer buf
-                      ;; turn off read-only since we've already `p4 edit'
-                      (read-only-mode -1))))))
-        (forward-line 1)))))
-</code></pre>
-
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">Auto-complete word in Emacs mini-buffer when using Evil</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-03-28T12:16:06+00:00">2017-03-28 12:16</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html#disqus_thread" data-disqus-identifier="cache/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/evil.html" rel="tag">evil</a></li>
-           <li><a class="tag p-category" href="categories/vim.html" rel="tag">vim</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-word in Emacs mini-buffer when using Evil                       :en:emacs:evil:vim:
-</p>
-
-<p>
-When using <a href="https://www.emacswiki.org/emacs/Evil">Evil</a> I often input <code>%s/old-keyword/new-keyword/g</code> in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html">Minibuffer</a>.
-</p>
-
-<p>
-The problem is auto completions of <code>new-keyword</code> using <a href="http://www.gnu.org/s/emacs/manual/html_node/autotype/Hippie-Expand.html">hippie-expand</a> always fail.
-</p>
-
-<p>
-It turns out that the character "/" is treated as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Word constituent</a> in minibuffer.
-</p>
-
-<p>
-The solution is to re-define "/" as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Punctuation characters</a>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(defun minibuffer-inactive-mode-hook-setup ()
-  ;; make `try-expand-dabbrev' from `hippie-expand' work in mini-buffer
-  ;; @see `he-dabbrev-beg', so we need re-define syntax for '/'
-  (set-syntax-table (let* ((table (make-syntax-table)))
-                      (modify-syntax-entry ?/ "." table)
-                      table)))
-(add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
-</code></pre>
-
-</div>
-</div>
+<p></p>
+<div id="table-of-contents"> <h3>Table of Contents</h3> <div id="text-table-of-contents"> <ul>
+<li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-1">1. Warning</a></li> <li>
+<a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2">2. third party plugins</a> <ul>
+<li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-1">2.1. company-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-2">2.2. yasnippet</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-3">2.3. js2-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-4">2.4. evil-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-5">2.5. evil-leader</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-6">2.6. evil-matchit (written by me)</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-7">2.7. evil-nerd-commenter (written by me)</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-8">2.8. helm</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-9">2.9. web-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-10">2.10. windows-numbering.el</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-2-11">2.11. smex</a></li> </ul>
+</li> <li>
+<a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3">3. plugins bundled with emacs 24</a> <ul>
+<li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-1">3.1. org-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-2">3.2. winner-mode</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-3">3.3. gnus</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-4">3.4. ido</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-5">3.5. imenu</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-6">3.6. flymake</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-3-7">3.7. flyspell</a></li> </ul>
+</li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-4">4. The last and best plugin</a></li> <li><a href="posts/my-answer-to-what-are-some-must-have-emacs-additions-on-quora-com.html#sec-5">5. Tip</a></li> </ul>
+</div> </div> <p> This is my answer for <a href="http://www.quora.com/Emacs/What-are-some-must-have-additions-to-your-emacs-file">What are some must-have additions to your .emacs file?</a> on quora.com. </p>  <p> Emacs 24 is already bundled with a package manager. So you can download and install the package without leaving Emacs. See <a href="http://www.emacswiki.org/emacs/ELPA">http://www.emacswiki.org/emacs/ELPA</a> for how to set up. </p>  <p> If you want to know more tips about specific plugin. Please search its name in <a href="http://www.emacswiki.org">Emacswiki</a>. </p>  <div id="outline-container-sec-1" class="outline-2"> <h3 id="sec-1">
+<span class="section-number-2">1</span> Warning</h3> <div class="outline-text-2" id="text-1"> <p> I'm a web programmer, so my focus could be different from other emacs users. </p> </div> </div> <div id="outline-container-sec-2" class="outline-2"> <h3 id="sec-2">
+<span class="section-number-2">2</span> third party plugins</h3> <div class="outline-text-2" id="text-2"> </div>
+<div id="outline-container-sec-2-1" class="outline-3"> <h4 id="sec-2-1">
+<span class="section-number-3">2.1</span> company-mode</h4> <div class="outline-text-3" id="text-2-1"> <p> auto completing code, it requires less key typing than another emacs plugin auto-complete. Besides, it's actively maintained  </p> </div> </div>  <div id="outline-container-sec-2-2" class="outline-3"> <h4 id="sec-2-2">
+<span class="section-number-3">2.2</span> yasnippet</h4> <div class="outline-text-3" id="text-2-2"> <p> insert template </p> </div> </div>  <div id="outline-container-sec-2-3" class="outline-3"> <h4 id="sec-2-3">
+<span class="section-number-3">2.3</span> js2-mode</h4> <div class="outline-text-3" id="text-2-3"> <p> javascript development, best of the best </p> </div> </div>  <div id="outline-container-sec-2-4" class="outline-3"> <h4 id="sec-2-4">
+<span class="section-number-3">2.4</span> evil-mode</h4> <div class="outline-text-3" id="text-2-4"> <p> vim simulator, I cannot live without it as a vi guy </p> </div> </div>  <div id="outline-container-sec-2-5" class="outline-3"> <h4 id="sec-2-5">
+<span class="section-number-3">2.5</span> evil-leader</h4> <div class="outline-text-3" id="text-2-5"> <p> evil's plugin, simple and powerful if you realize that ALL the hot keys (for example, I map "M-x" to ",mx") can be re-mapped with it </p> </div> </div>  <div id="outline-container-sec-2-6" class="outline-3"> <h4 id="sec-2-6">
+<span class="section-number-3">2.6</span> evil-matchit (written by me)</h4> <div class="outline-text-3" id="text-2-6"> <p> jump between tag pair, port of  vim matchit </p> </div> </div>  <div id="outline-container-sec-2-7" class="outline-3"> <h4 id="sec-2-7">
+<span class="section-number-3">2.7</span> evil-nerd-commenter (written by me)</h4> <div class="outline-text-3" id="text-2-7"> <p> (un)comment by lines,  port of nerd-comment </p> </div> </div>  <div id="outline-container-sec-2-8" class="outline-3"> <h4 id="sec-2-8">
+<span class="section-number-3">2.8</span> helm</h4> <div class="outline-text-3" id="text-2-8"> <p> hard to describe but powerful </p> </div> </div>  <div id="outline-container-sec-2-9" class="outline-3"> <h4 id="sec-2-9">
+<span class="section-number-3">2.9</span> web-mode</h4> <div class="outline-text-3" id="text-2-9"> <p> major-mode for all html templates </p> </div> </div>  <div id="outline-container-sec-2-10" class="outline-3"> <h4 id="sec-2-10">
+<span class="section-number-3">2.10</span> windows-numbering.el</h4> <div class="outline-text-3" id="text-2-10"> <p> sub-window navigation, best one. well, it occupies hotkey from M-1 to M-9, For normal emacs user this could be issue. but I'm evil guy;) </p> </div> </div>  <div id="outline-container-sec-2-11" class="outline-3"> <h4 id="sec-2-11">
+<span class="section-number-3">2.11</span> smex</h4> <div class="outline-text-3" id="text-2-11"> <p> you don't need remember hot key or command any more </p> </div> </div> </div> <div id="outline-container-sec-3" class="outline-2"> <h3 id="sec-3">
+<span class="section-number-2">3</span> plugins bundled with emacs 24</h3> <div class="outline-text-2" id="text-3"> </div>
+<div id="outline-container-sec-3-1" class="outline-3"> <h4 id="sec-3-1">
+<span class="section-number-3">3.1</span> org-mode</h4> <div class="outline-text-3" id="text-3-1"> <p> gtd tool, it changed my life, as git,vim,emacs did to me ages ago. </p> </div> </div>  <div id="outline-container-sec-3-2" class="outline-3"> <h4 id="sec-3-2">
+<span class="section-number-3">3.2</span> winner-mode</h4> <div class="outline-text-3" id="text-3-2"> <p> undo sub window-layout </p> </div> </div>  <div id="outline-container-sec-3-3" class="outline-3"> <h4 id="sec-3-3">
+<span class="section-number-3">3.3</span> gnus</h4> <div class="outline-text-3" id="text-3-3"> <p> hate and love it. the UI is too geek. but has some killer feature,  for example, forward email, send email quickly, attach file. but the point is I can use with other awesome plugins like yasnippet, company-mode,evil. </p> </div> </div>  <div id="outline-container-sec-3-4" class="outline-3"> <h4 id="sec-3-4">
+<span class="section-number-3">3.4</span> ido</h4> <div class="outline-text-3" id="text-3-4"> <p> similar to helm, my tip, you can tell helm when to use ido, when to use helm. </p> </div> </div>  <div id="outline-container-sec-3-5" class="outline-3"> <h4 id="sec-3-5">
+<span class="section-number-3">3.5</span> imenu</h4> <div class="outline-text-3" id="text-3-5"> <p> display list of function in current buffer, the point is it is programmable </p> </div> </div>  <div id="outline-container-sec-3-6" class="outline-3"> <h4 id="sec-3-6">
+<span class="section-number-3">3.6</span> flymake</h4> <div class="outline-text-3" id="text-3-6"> <p> real time syntax check </p> </div> </div>  <div id="outline-container-sec-3-7" class="outline-3"> <h4 id="sec-3-7">
+<span class="section-number-3">3.7</span> flyspell</h4> <div class="outline-text-3" id="text-3-7"> <p> best spell checker, if you know how to do programming for it </p> </div> </div> </div> <div id="outline-container-sec-4" class="outline-2"> <h3 id="sec-4">
+<span class="section-number-2">4</span> The last and best plugin</h3> <div class="outline-text-2" id="text-4"> <p> Lisp! </p> <ul class="org-ul">
+<li>simple </li> <li>no learning curve, </li> <li>it's syntax ensure that its plugin developer are experienced developers who knows at least three programming languages. </li> </ul>
+</div> </div> <div id="outline-container-sec-5" class="outline-2"> <h3 id="sec-5">
+<span class="section-number-2">5</span> Tip</h3> <div class="outline-text-2" id="text-5"> <p> If I find some awesome plugin, I will investigate the original author and make sure what other tools he/she uses or develops </p>  <p> For example, mooz maintains js2-mode, he also developed: </p> <dl class="org-dl">
+<dt> keysnail </dt>
+<dd>firefox is converted into Emacs, best one in similar tools (I tried 3 or 2 similar firefox/chrome addons before settled on keysnail) </dd> <dt> percol </dt>
+<dd>A genius utility for shell operation. Make me ten times faster when working in bash shell. Without it, I will quit my programming career immediately. </dd> </dl>
+</div> </div> </div>
             </div>
         </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="next">
-                <a href="index-24.html" rel="next">Older posts</a>
+                <a href="index-10.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

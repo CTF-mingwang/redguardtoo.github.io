@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 17 Jun 2018 07:56:12 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org24d5e05" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 06 Jul 2018 06:11:20 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org85293a6" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-17 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-07-06 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
 &lt;p&gt;
 &lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how developers can check typos of function/variable while programming in Emacs.
 &lt;/p&gt;
@@ -97,6 +105,7 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 &lt;p&gt;
 Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')&lt;/li&gt;
 &lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
@@ -110,6 +119,7 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;p&gt;
 Here is our conclusion after studying the code:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
@@ -128,6 +138,7 @@ When Emacs got potential typo on Emacs side, we can strip out all the two charac
 &lt;p&gt;
 We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
 &lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
@@ -141,15 +152,81 @@ We can attach a predicate into specific major-mode. The predicate return &lt;cod
 &lt;/div&gt;
 
 &lt;p&gt;
-As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So namespace is also easy problem. If namespace is three characters, it will be automatically processed by aspell. All we need to do is add namespace into our personal dictionary &lt;code&gt;$HOME/.aspell.en.pws&lt;/code&gt;. If namespace is one or two characters, we strip down it from original word. Same way as we deal with two character interior word.
+As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. You could regard &lt;code&gt;predicate&lt;/code&gt; as the last chance to fix wrongly identified typos.
 &lt;/p&gt;
 
 &lt;p&gt;
-Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I setup for &lt;code&gt;js2-mode&lt;/code&gt; and &lt;code&gt;rjsx-mode&lt;/code&gt; but code is generic enough),
+Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I setup for &lt;code&gt;js2-mode&lt;/code&gt; and &lt;code&gt;rjsx-mode&lt;/code&gt; but code is generic enough).
 &lt;/p&gt;
+
+&lt;p&gt;
+Please note function &lt;code&gt;split-camel-case&lt;/code&gt; split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
+&lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun flyspell-detect-ispell-args (&amp;amp;optional run-together)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun split-camel-case (word)
+  "Split camel case WORD into a list of strings.
+Ported from 'https://github.com/fatih/camelcase/blob/master/camelcase.go'."
+  (let* ((case-fold-search nil)
+         (len (length word))
+         ;; ten sub-words is enough
+         (runes [nil nil nil nil nil nil nil nil nil nil])
+         (runes-length 0)
+         (i 0)
+         ch
+         (last-class 0)
+         (class 0)
+         rlt)
+
+    ;; split into fields based on class of character
+    (while (&amp;lt; i len)
+      (setq ch (elt word i))
+      (cond
+       ;; lower case
+       ((and (&amp;gt;= ch ?a) (&amp;lt;= ch ?z))
+        (setq class 1))
+       ;; upper case
+       ((and (&amp;gt;= ch ?A) (&amp;lt;= ch ?Z))
+        (setq class 2))
+       ((and (&amp;gt;= ch ?0) (&amp;lt;= ch ?9))
+        (setq class 3))
+       (t
+        (setq class 4)))
+
+      (cond
+       ((= class last-class)
+        (aset runes
+              (1- runes-length)
+              (concat (aref runes (1- runes-length)) (char-to-string ch))))
+       (t
+        (aset runes runes-length (char-to-string ch))
+        (setq runes-length (1+ runes-length))))
+      (setq last-class class)
+      ;; end of while
+      (setq i (1+ i)))
+
+    ;; handle upper case -&amp;gt; lower case sequences, e.g.
+    ;;     "PDFL", "oader" -&amp;gt; "PDF", "Loader"
+    (setq i 0)
+    (while (&amp;lt; i (1- runes-length))
+      (let* ((ch-first (aref (aref runes i) 0))
+             (ch-second (aref (aref runes (1+ i)) 0)))
+        (when (and (and (&amp;gt;= ch-first ?A) (&amp;lt;= ch-first ?Z))
+                   (and (&amp;gt;= ch-second ?a) (&amp;lt;= ch-second ?z)))
+          (aset runes (1+ i) (concat (substring (aref runes i) -1) (aref runes (1+ i))))
+          (aset runes i (substring (aref runes i) 0 -1))))
+      (setq i (1+ i)))
+
+    ;; construct final result
+    (setq i 0)
+    (while (&amp;lt; i runes-length)
+      (when (&amp;gt; (length (aref runes i)) 0)
+        (setq rlt (add-to-list 'rlt (aref runes i) t)))
+      (setq i (1+ i)))
+     rlt))
+
+(defun flyspell-detect-ispell-args (&amp;amp;optional run-together)
   "If RUN-TOGETHER is true, spell check the CamelCase words.
 Please note RUN-TOGETHER will make aspell less capable. So it should only be used in prog-mode-hook."
   ;; force the English dictionary, support Camel Case spelling check (tested with aspell 0.6)
@@ -166,7 +243,7 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 (defun my-flyspell-predicate (word)
   "Use aspell to check WORD.  If it's typo return true."
-  (if (string-match-p (concat "^&amp;amp; " word)
+  (if (string-match-p "^&amp;amp;"
                       (shell-command-to-string (format "echo %s | %s %s pipe"
                                                        word
                                                        ispell-program-name
@@ -175,30 +252,21 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
                                                                   " "))))
       t))
 
-(defmacro my-flyspell-predicate-factory (preffix)
-  `(lambda (word)
-     (let* ((pattern (concat "^\\(" ,preffix "\\)\\([A-Z]\\)"))
-            rlt)
-       (cond
-        ((string-match-p pattern word)
-         (setq word (replace-regexp-in-string pattern "\\2" word))
-         (setq rlt (my-flyspell-predicate word)))
-        (t
-         (setq rlt t)))
-       rlt)))
-
 (defun js-flyspell-verify ()
   (let* ((case-fold-search nil)
          (font-matched (memq (get-text-property (- (point) 1) 'face)
                              '(js2-function-call
                                js2-function-param
                                js2-object-property
+                               js2-object-property-access
                                font-lock-variable-name-face
                                font-lock-string-face
                                font-lock-function-name-face
                                font-lock-builtin-face
+                               rjsx-text
                                rjsx-tag
                                rjsx-attr)))
+         subwords
          word
          (rlt t))
     (cond
@@ -207,31 +275,34 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
      ((not (string-match-p "aspell$" ispell-program-name))
       ;; Only override aspell's result
       (setq rlt t))
-     ((string-match-p "^[a-zA-Z][a-zA-Z]$"
-                      (setq word (thing-at-point 'word)))
+     ;; ignore two character word
+     ((&amp;lt; (length (setq word (thing-at-point 'word))) 2)
       (setq rlt nil))
-     ((string-match-p "\\([A-Z][a-z]\\|^[a-z][a-z]\\)[A-Z]\\|[a-z][A-Z][a-z]$"
-                      word)
-      ;; strip two character interior words
-      (setq word (replace-regexp-in-string "\\([A-Z][a-z]\\|^[a-z][a-z]\\)\\([A-Z]\\)" "\\2" word))
-      (setq word (replace-regexp-in-string "\\([a-z]\\)[A-Z][a-z]$" "\\1" word))
-      ;; check stripped word
-      (setq rlt (my-flyspell-predicate word)))
+     ;; handle camel case word
+     ((and (setq subwords (split-camel-case word)) (&amp;gt; (length subwords) 1))
+      (let* ((s (mapconcat (lambda (w)
+                             (cond
+                              ;; sub-word wholse length is less than three
+                              ((&amp;lt; (length w) 3)
+                               "")
+                               ;; special characters 
+                              ((not (string-match-p "^[a-zA-Z]*$" w))
+                               "")
+                              (t
+                               w))) subwords " ")))
+        (setq rlt (my-flyspell-predicate s))))
      (t
       (setq rlt (funcall extra-flyspell-predicate word))))
     rlt))
+
 (put 'js2-mode 'flyspell-mode-predicate 'js-flyspell-verify)
 (put 'rjsx-mode 'flyspell-mode-predicate 'js-flyspell-verify)
-
-(defun prog-mode-hook-setup ()
-  ;; remove namespace "MS" and "X"
-  (setq-local extra-flyspell-predicate (my-flyspell-predicate-factory "MS\\|X")))
-(add-hook 'prog-mode-hook 'prog-mode-hook-setup)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
 
 &lt;p&gt;
 Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;
-&lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item></channel></rss>
