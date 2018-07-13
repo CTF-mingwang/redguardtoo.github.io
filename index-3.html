@@ -126,9 +126,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2012-01-30 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-06-04 Mon&gt;</span></span>
 </p>
 
-<div id="outline-container-orgb58b986" class="outline-2">
-<h3 id="orgb58b986">Prepare</h3>
-<div class="outline-text-2" id="text-orgb58b986">
+<div id="outline-container-orgf20e43d" class="outline-2">
+<h3 id="orgf20e43d">Prepare</h3>
+<div class="outline-text-2" id="text-orgf20e43d">
 <p>
 On Linux, <a href="http://www.vergenet.net/~conrad/software/xsel/">xsel</a> is required.
 </p>
@@ -145,18 +145,19 @@ On macOS, NO external tool is required.
 On Windows 10 Linux Subsystem. No external tool is required.
 </p>
 </div>
-</div>
 
-<div id="outline-container-org4ee1691" class="outline-2">
-<h3 id="org4ee1691">Solution</h3>
-<div class="outline-text-2" id="text-org4ee1691">
+<p></p>
+</div>
+<div id="outline-container-org3d5191e" class="outline-2">
+<h3 id="org3d5191e">Solution</h3>
+<div class="outline-text-2" id="text-org3d5191e">
 <p>
 This solution works reliably on <b>any environment</b>.
 </p>
-
 <p>
 Insert below code into <code>~/.emacs</code>. Run <code>M-x paste-from-xclipboard</code> to paste.
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun my-gclip ()
@@ -228,16 +229,17 @@ Insert below code into <code>~/.emacs</code>. Run <code>M-x paste-from-xclipboar
 <p>
 My actual setup is more robust. See <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el</a> for details.
 </p>
-</div>
-</div>
 
-<div id="outline-container-orgf1670a2" class="outline-2">
-<h3 id="orgf1670a2">Tips</h3>
-<div class="outline-text-2" id="text-orgf1670a2">
+<p></p>
 </div>
-<div id="outline-container-org0cc0a9d" class="outline-3">
-<h4 id="org0cc0a9d">Clipboard manager</h4>
-<div class="outline-text-3" id="text-org0cc0a9d">
+</div>
+<div id="outline-container-org7c3ecda" class="outline-2">
+<h3 id="org7c3ecda">Tips</h3>
+<div class="outline-text-2" id="text-org7c3ecda">
+</div>
+<div id="outline-container-org852f3b7" class="outline-3">
+<h4 id="org852f3b7">Clipboard manager</h4>
+<div class="outline-text-3" id="text-org852f3b7">
 <p>
 I suggest <a href="http://parcellite.sourceforge.net/">Parcellite</a> on Linux, <a href="http://ditto-cp.sourceforge.net/">Ditto</a> on Windows, <a href="https://github.com/TermiT/Flycut">Flycut</a> on macOS.
 </p>
@@ -274,19 +276,21 @@ trim_newline=false
 </code></pre>
 
 </div>
+
+<p></p>
 </div>
 </div>
-<div id="outline-container-orgf6a1f2f" class="outline-3">
-<h4 id="orgf6a1f2f">Clipboard when ssh</h4>
-<div class="outline-text-3" id="text-orgf6a1f2f">
+<div id="outline-container-org656bef7" class="outline-3">
+<h4 id="org656bef7">Clipboard when ssh</h4>
+<div class="outline-text-3" id="text-org656bef7">
 <p>
 Try,
 </p>
 <div class="org-src-container">
-
 <pre><code class="lang-sh">ssh -X -C -c blowfish-cbc,arcfour $@
 </code></pre>
 
+<p></p>
 </div>
 </div>
 </div>
@@ -917,7 +921,7 @@ Version        : 1.8-1
             <li class="next">
                 <a href="index-2.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

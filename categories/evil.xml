@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:15:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (evil)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/evil.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 word in Emacs mini-buffer when using Evil                       :en:emacs:evil:vim:
 &lt;/p&gt;
 
@@ -43,12 +43,9 @@ Analysis about evil-mode,
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method
-&lt;/li&gt;
-&lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while &lt;b&gt;staying in evil-insert state&lt;/b&gt;
-&lt;/li&gt;
-&lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;notification of input method status&lt;/b&gt;
-&lt;/li&gt;
+&lt;li&gt;You only input Non-English characters in evil-insert-state. So you need &lt;b&gt;go into evil-insert-state at first&lt;/b&gt; before toggle on input method&lt;/li&gt;
+&lt;li&gt;In evil-insert-state, you can toggle off input method to input English characters while &lt;b&gt;staying in evil-insert state&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;When press &lt;code&gt;ESC&lt;/code&gt;, you quit from evil-insert-state. But input method could be still activated. So when you re-enter evil-insert-state, you need &lt;b&gt;notification of input method status&lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -101,12 +98,9 @@ Chinese version:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;输中文前须进入evil-insert-state
-&lt;/li&gt;
-&lt;li&gt;在evil-insert-state中可能会切换输入法
-&lt;/li&gt;
-&lt;li&gt;按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态
-&lt;/li&gt;
+&lt;li&gt;输中文前须进入evil-insert-state&lt;/li&gt;
+&lt;li&gt;在evil-insert-state中可能会切换输入法&lt;/li&gt;
+&lt;li&gt;按ESC退出evil-insert-state时输入法可能还开着,所以再进入evil-insert-state时需提示输入法状态&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -134,7 +128,7 @@ general.el to provide multiple leader key in evil-mode                    :en:em
 &lt;/p&gt;
 
 &lt;p&gt;
-I have been using it for more than one month without any issue. I prefer general.el to &lt;a href="https://github.com/cofi/evil-leader"&gt;evil-leader&lt;/a&gt; because I need both comma and space key as &lt;a href="http://vimdoc.sourceforge.net/htmldoc/map.html#&amp;lt;Leader&amp;gt;"&gt;leader key&lt;/a&gt;.
+I have been using it for more than one month without any issue. I prefer general.el to &lt;a href="https://github.com/cofi/evil-leader"&gt;evil-leader&lt;/a&gt; because I need both comma and space key as &lt;a href="http://vimdoc.sourceforge.net/htmldoc/map.html#%3CLeader%3E"&gt;leader key&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -309,9 +303,10 @@ Insert below code into ~/.emacs:
 ;; }}
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>How to avoid Repeated Strain Injury when using emacs by re-assigning hotkeys</title><link>http://blog.binchen.org/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><guid>http://blog.binchen.org/posts/evil-text-object-to-select-nearby-file-path.html</guid><pubDate>Sat, 08 Aug 2015 13:16:39 GMT</pubDate></item><item><title>How to avoid Repeated Strain Injury when using emacs by re-assigning hotkeys</title><link>http://blog.binchen.org/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+to avoid Repeated Strain Injury when using emacs by re-assigning hotkeys :en:emacs:evil:rsi:
+&lt;/p&gt;
 
-&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 I've read all the Emacs RSI related articles from the internet.
 &lt;/p&gt;
@@ -319,17 +314,13 @@ I've read all the Emacs RSI related articles from the internet.
 &lt;p&gt;
 Typical solutions are:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;buy special hardware
-&lt;/li&gt;
-&lt;li&gt;remap ctrl key (because Emacs users press Ctrl key too often)
-&lt;/li&gt;
-&lt;li&gt;use Vi key binding
-&lt;/li&gt;
-&lt;li&gt;other Emacs keybinding with some hacking
-&lt;/li&gt;
-&lt;li&gt;voice input
-&lt;/li&gt;
+&lt;li&gt;buy special hardware&lt;/li&gt;
+&lt;li&gt;remap ctrl key (because Emacs users press Ctrl key too often)&lt;/li&gt;
+&lt;li&gt;use Vi key binding&lt;/li&gt;
+&lt;li&gt;other Emacs keybinding with some hacking&lt;/li&gt;
+&lt;li&gt;voice input&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -345,7 +336,7 @@ These top three need me move my left hands too often. That may be the problem of
 &lt;/p&gt;
 
 &lt;p&gt;
-In vi, we use key combination start with &amp;lt;leader&amp;gt; key. The leader key is actually the comma key =,=.
+In vi, we use key combination start with &amp;lt;leader&amp;gt; key. The leader key is actually the comma key &lt;code&gt;,&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -357,10 +348,10 @@ The principle here is &lt;b&gt;DO NOT&lt;/b&gt; move hands at all. Following thi
 &lt;/p&gt;
 
 &lt;p&gt;
-For example, by using &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt; and &lt;a href="https://github.com/cofi/evil-leader"&gt;evil-leader&lt;/a&gt;. With hot key prefix &lt;code&gt;C-x&lt;/code&gt;, I use =,x= to replace. For example, &lt;code&gt;C-x C-c&lt;/code&gt; is replaced with =,xc=,
+For example, by using &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt; and &lt;a href="https://github.com/cofi/evil-leader"&gt;evil-leader&lt;/a&gt;. With hot key prefix &lt;code&gt;C-x&lt;/code&gt;, I use &lt;code&gt;,x&lt;/code&gt; to replace. For example, &lt;code&gt;C-x C-c&lt;/code&gt; is replaced with &lt;code&gt;,xc&lt;/code&gt;,
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'evil-leader)
 (evil-leader/set-key
@@ -383,8 +374,8 @@ On some keyboard, the &lt;code&gt;Alt&lt;/code&gt; key is easy to press because 
 &lt;p&gt;
 Please note &lt;code&gt;Alt&lt;/code&gt; and &lt;code&gt;k&lt;/code&gt; is also close to my fingers. Here is my setup in &lt;code&gt;.emacs&lt;/code&gt;:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "M-k") 'keyboard-quit)
 (define-key evil-insert-state-map (kbd "M-k") 'evil-normal-state)
@@ -396,10 +387,10 @@ Please note &lt;code&gt;Alt&lt;/code&gt; and &lt;code&gt;k&lt;/code&gt; is also 
 &lt;/div&gt;
 
 &lt;p&gt;
-Some minor modes will re-assign the hot key &lt;code&gt;C-g&lt;/code&gt;, so when I say replace &lt;code&gt;C-g&lt;/code&gt; with =,k=. It may be a bit more elisp code:
+Some minor modes will re-assign the hot key &lt;code&gt;C-g&lt;/code&gt;, so when I say replace &lt;code&gt;C-g&lt;/code&gt; with &lt;code&gt;,k&lt;/code&gt;. It may be a bit more elisp code:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; the original hot key of helm-keyboard-quit is "C-g"
 (define-key helm-map (kbd ",k") 'helm-keyboard-quit)
@@ -410,18 +401,13 @@ Some minor modes will re-assign the hot key &lt;code&gt;C-g&lt;/code&gt;, so whe
 &lt;p&gt;
 The key point is to understand the principles instead copy my configuration:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;comma is a good key for hot key prefix, it's used by vi users for ages
-&lt;/li&gt;
-&lt;li&gt;use keys close to fingers (L,J,K,L, for example) in hot keys 
-&lt;/li&gt;
-&lt;li&gt;Other keys close to right hand is also useful in key combinations
-&lt;/li&gt;
-&lt;li&gt;Avoid move left hand
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>rsi</category><guid>http://blog.binchen.org/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html</guid><pubDate>Fri, 09 Aug 2013 10:05:00 GMT</pubDate></item><item><title>How to refactor/rename a variable name in a function efficiently</title><link>http://blog.binchen.org/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;As we dicussed in &lt;a href="https://plus.google.com/110954683162859211810/posts/TgnyDRqBWkb"&gt;Emacs community at Google+&lt;/a&gt;. Although &lt;a href="https://github.com/magnars/multiple-cursors.el"&gt;multiple-cursor&lt;/a&gt; is good for this task, I cannot use it because it conflicts with my favourite &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;evil-mode&lt;/a&gt; (Vim simulation in Emacs). &lt;/p&gt; &lt;p&gt; There is another emacs plugin called &lt;a href="https://github.com/victorhge/iedit"&gt;iedit&lt;/a&gt; which could do the similar job (I usually use its command called iedit-mode-toggle-on-function) &lt;/p&gt; &lt;p&gt; Though iedit is good, there is still room for improvement. When using iedit-mode-toggle-on-function, we need press key twice to rename the variable name. Once to enable it, twice to disable it. &lt;/p&gt; &lt;p&gt; Magnar Sveen pointed out in the G+ discussion that the key point we need plugins like multiple-cursor or iedit-mode is that we can see all the changes while doing the editing. &lt;/p&gt; &lt;p&gt; This reminds me that evil-mode has a excellent regex string replacing mode which also show the changes when you are typing EACH character of new string. &lt;/p&gt; &lt;p&gt; So by using evil-mode's default regex replacing command, I can implement similar feature even more efficiently then iedit-mode! &lt;/p&gt; &lt;p&gt; Here is my elisp code: &lt;/p&gt;   &lt;pre class="src src-elisp"&gt;(&lt;span style="color: #b9ca4a;"&gt;defun&lt;/span&gt; &lt;span style="color: #7aa6da;"&gt;evilcvn-change-symbol-in-defun&lt;/span&gt; ()
+&lt;li&gt;comma is a good key for hot key prefix, it's used by vi users for ages&lt;/li&gt;
+&lt;li&gt;use keys close to fingers (L,J,K,L, for example) in hot keys&lt;/li&gt;
+&lt;li&gt;Other keys close to right hand is also useful in key combinations&lt;/li&gt;
+&lt;li&gt;Avoid move left hand&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>rsi</category><guid>http://blog.binchen.org/posts/how-to-avoid-ris-when-using-emacs-by-re-assigning-hotkeys-2.html</guid><pubDate>Fri, 09 Aug 2013 10:05:00 GMT</pubDate></item><item><title>How to refactor/rename a variable name in a function efficiently</title><link>http://blog.binchen.org/posts/how-to-refactorrename-a-variable-name-in-a-function-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;As we dicussed in &lt;a href="https://plus.google.com/110954683162859211810/posts/TgnyDRqBWkb"&gt;Emacs community at Google+&lt;/a&gt;. Although &lt;a href="https://github.com/magnars/multiple-cursors.el"&gt;multiple-cursor&lt;/a&gt; is good for this task, I cannot use it because it conflicts with my favourite &lt;a href="http://www.emacswiki.org/emacs/Evil"&gt;evil-mode&lt;/a&gt; (Vim simulation in Emacs). &lt;/p&gt; &lt;p&gt; There is another emacs plugin called &lt;a href="https://github.com/victorhge/iedit"&gt;iedit&lt;/a&gt; which could do the similar job (I usually use its command called iedit-mode-toggle-on-function) &lt;/p&gt; &lt;p&gt; Though iedit is good, there is still room for improvement. When using iedit-mode-toggle-on-function, we need press key twice to rename the variable name. Once to enable it, twice to disable it. &lt;/p&gt; &lt;p&gt; Magnar Sveen pointed out in the G+ discussion that the key point we need plugins like multiple-cursor or iedit-mode is that we can see all the changes while doing the editing. &lt;/p&gt; &lt;p&gt; This reminds me that evil-mode has a excellent regex string replacing mode which also show the changes when you are typing EACH character of new string. &lt;/p&gt; &lt;p&gt; So by using evil-mode's default regex replacing command, I can implement similar feature even more efficiently then iedit-mode! &lt;/p&gt; &lt;p&gt; Here is my elisp code: &lt;/p&gt;   &lt;pre class="src src-elisp"&gt;(&lt;span style="color: #b9ca4a;"&gt;defun&lt;/span&gt; &lt;span style="color: #7aa6da;"&gt;evilcvn-change-symbol-in-defun&lt;/span&gt; ()
   &lt;span style="color: #c397d8;"&gt;"mark the region in defun (definition of function) and use string replacing UI in evil-mode&lt;/span&gt;
 &lt;span style="color: #c397d8;"&gt;to replace the symbol under cursor"&lt;/span&gt;
   (interactive)

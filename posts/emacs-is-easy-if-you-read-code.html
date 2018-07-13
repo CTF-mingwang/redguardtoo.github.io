@@ -119,12 +119,9 @@ Inside <code>counsel-ag-occur</code>:
 </p>
 
 <ul class="org-ul">
-<li>The variable <code>regex</code> is the regular expression built from the filter string you input. Please note that <code>regex</code> is unquoted by <code>counsel-unquote-regex-parens</code> so it can be used in shell. If you use <code>regex</code> in Emacs Lisp, you don't need unquote it
-</li>
-<li>The variable <code>cands</code> is the candidate lines created by running <code>ag</code> with <code>regex</code> as parameters in shell
-</li>
-<li>Then a wgrep-friendly buffer is created
-</li>
+<li>The variable <code>regex</code> is the regular expression built from the filter string you input. Please note that <code>regex</code> is unquoted by <code>counsel-unquote-regex-parens</code> so it can be used in shell. If you use <code>regex</code> in Emacs Lisp, you don't need unquote it</li>
+<li>The variable <code>cands</code> is the candidate lines created by running <code>ag</code> with <code>regex</code> as parameters in shell</li>
+<li>Then a wgrep-friendly buffer is created</li>
 </ul>
 <p>
 After spending 5 minutes to understand the internals, you can <b>easily implement similar features</b>.
@@ -246,12 +243,12 @@ Turn off `read-only-mode' of opened files."
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -259,7 +256,7 @@ Turn off `read-only-mode' of opened files."
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -23,15 +23,15 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/why-people-say-emacs-is-the-best-operating-system.html">Why people say "Emacs is the best operating system"</a></h1>
+            <h1 class="title"><a href="posts/easy-indentation-setup-in-emacs-for-web-development.html">Easy indentation setup in Emacs for web development</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2015-02-01T09:40:44+00:00">2015-02-01 09:40</time>
+                    <time class="timeago" datetime="2015-04-02T13:57:48+00:00">2015-04-02 13:57</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/why-people-say-emacs-is-the-best-operating-system.html#disqus_thread" data-disqus-identifier="cache/posts/why-people-say-emacs-is-the-best-operating-system.html">Comments</a>
+    <a href="posts/easy-indentation-setup-in-emacs-for-web-development.html#disqus_thread" data-disqus-identifier="cache/posts/easy-indentation-setup-in-emacs-for-web-development.html">Comments</a>
 
 
                 </div>
@@ -41,10 +41,8 @@
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/font.html" rel="tag">font</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/terminal.html" rel="tag">terminal</a></li>
-           <li><a class="tag p-category" href="categories/terminator.html" rel="tag">terminator</a></li>
+           <li><a class="tag p-category" href="categories/indent.html" rel="tag">indent</a></li>
+           <li><a class="tag p-category" href="categories/web.html" rel="tag">web</a></li>
         </ul>
 </div>
 
@@ -52,177 +50,468 @@
             <div class="body">
                 <div>
 <p>
- people say "Emacs is the best operating system"                           :en:emacs:font:linux:terminal:terminator:
-It's becasue Emacs has great documentation and enough APIs.
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-Emacs manual even helps me even on non-Emacs stuff.
+indentation setup in Emacs for web development                           :en:emacs:web:indent:
 </p>
 
 <p>
-When configuring the font for <a href="http://gnometerminator.blogspot.com/p/introduction.html">Terminator</a> (a terminal emulator) I find its manual is NOT clear. The manual doesn't explain what is "Pango font name". But Emacs manual provides all I need.
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-04-02 Thu&gt;</span></span>
 </p>
 
 <p>
-<code>fc-list</code> is to list installed fonts. Since terminal use Mono font, I can type below command:
+UPDATE: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-22 Wed&gt;</span></span>
+</p>
+
+<p>
+This question has been asked so many times, so I answered it here once for all.
+</p>
+
+<div id="outline-container-orgc6d1ae6" class="outline-2">
+<h3 id="orgc6d1ae6">Solution</h3>
+<div class="outline-text-2" id="text-orgc6d1ae6">
+<p>
+Insert below code into ~/.emacs:
 </p>
 <div class="org-src-container">
 
+<pre><code class="lang-lisp">(defun my-setup-indent (n)
+  ;; java/c/c++
+  (setq-local c-basic-offset n)
+  ;; web development
+  (setq-local coffee-tab-width n) ; coffeescript
+  (setq-local javascript-indent-level n) ; javascript-mode
+  (setq-local js-indent-level n) ; js-mode
+  (setq-local js2-basic-offset n) ; js2-mode, in latest js2-mode, it's alias of js-indent-level
+  (setq-local web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+  (setq-local web-mode-css-indent-offset n) ; web-mode, css in html file
+  (setq-local web-mode-code-indent-offset n) ; web-mode, js code in html file
+  (setq-local css-indent-offset n) ; css-mode
+  )
 
-<pre><code class="lang-bash">fc-list | grep Mono
+(defun my-office-code-style ()
+  (interactive)
+  (message "Office code style!")
+  ;; use tab instead of space
+  (setq-local indent-tabs-mode t)
+  ;; indent 4 spaces width
+  (my-setup-indent 4))
+
+(defun my-personal-code-style ()
+  (interactive)
+  (message "My personal code style!")
+  ;; use space instead of tab
+  (setq indent-tabs-mode nil)
+  ;; indent 2 spaces width
+  (my-setup-indent 2))
+
+(defun my-setup-develop-environment ()
+  (interactive)
+  (let ((proj-dir (file-name-directory (buffer-file-name))))
+    ;; if hobby project path contains string "hobby-proj1"
+    (if (string-match-p "hobby-proj1" proj-dir)
+        (my-personal-code-style))
+
+    ;; if commericial project path contains string "commerical-proj"
+    (if (string-match-p "commerical-proj" proj-dir)
+        (my-office-code-style))))
+
+;; prog-mode-hook requires emacs24+
+(add-hook 'prog-mode-hook 'my-setup-develop-environment)
+;; a few major-modes does NOT inherited from prog-mode
+(add-hook 'lua-mode-hook 'my-setup-develop-environment)
+(add-hook 'web-mode-hook 'my-setup-develop-environment)
 </code></pre>
 
 </div>
 
 <p>
-The output is like:
-</p>
-
-<pre class="example">
-/usr/share/fonts/urw-fonts/n022003l.pfb: Nimbus Mono L:style=Regular
-/usr/share/fonts/urw-fonts/n022024l.pfb: Nimbus Mono L:style=Bold Oblique
-/usr/share/fonts/liberation-fonts/LiberationMono-Regular.ttf: Liberation Mono:style=Regular
-/usr/share/fonts/urw-fonts/n022004l.pfb: Nimbus Mono L:style=Bold
-/usr/share/fonts/liberation-fonts/LiberationMono-BoldItalic.ttf: Liberation Mono:style=Bold Italic
-/usr/share/fonts/liberation-fonts/LiberationMono-Bold.ttf: Liberation Mono:style=Bold
-/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc: 文泉驿等宽正黑,文泉驛等寬正黑,WenQuanYi Zen Hei Mono:style=Medium,中等
-/usr/share/fonts/liberation-fonts/LiberationMono-Italic.ttf: Liberation Mhttp://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.htmlono:style=Italic
-/usr/share/fonts/urw-fonts/n022023l.pfb: Nimbus Mono L:style=Regular Oblique
-</pre>
-
-<p>
-Since Emacs manual explains the meaning of output, I know the font name "WenQuanYi Zen Hei Mono" is the key component of "Pango font name"
+You can use `prog-mode-hook` and `buffer-file-name` to do the per project setup easily.
 </p>
 
 <p>
-Because the manual also gives the details of other components of "Pango font name", the final "~/.config/terminator/config" is like:
+For <b>any new programming language</b> not covered in this post, there are two steps:
 </p>
 
+<ul class="org-ul">
+<li>Know your major-mode by pressing `ALT-X major-mode ENTER`. Say you got "org-mode".</li>
+
+<li>Google "Emacs org-mode indent offset"</li>
+</ul>
+<p></p>
+</div>
+</div>
+<div id="outline-container-orgf09dda0" class="outline-2">
+<h3 id="orgf09dda0">Tips (OPTIONAL)</h3>
+<div class="outline-text-2" id="text-orgf09dda0">
+<ul class="org-ul">
+<li>Please note the first paramter of `string-match-p` is actually <b>regular expression</b>. So you can write regular expression like "\\(/proj1\\|work.org\\)"</li>
+
+<li>Emacs gives you full freedom to setup project. If you prefer per computer setup instead of per project setup, you only need re-write `my-setup-develop-environment',</li>
+</ul>
 <div class="org-src-container">
 
+<pre><code class="lang-lisp">(defun my-setup-develop-environment ()
+  (interactive)
+  (let ((hostname (with-temp-buffer
+                    (shell-command "hostname" t)
+                    (goto-char (point-max))
+                    (delete-char -1)
+                    (buffer-string))))
 
-<pre><code class="lang-conf">[profiles]
-  [[default]]
-  use_system_font = False
-  # @see emacs manual for tools and explanation of font formats
-  # https://www.gnu.org/software/emacs/manual/html_node/emacs/GTK-Resource-Basics.html
-  # https://www.gnu.org/software/emacs/manual/html_node/emacs/Fonts.html#Fonts
-  font =  WenQuanYi Zen Hei Mono 16
+  (if (string-match-p "home-pc" hostname)
+      (my-personal-code-style))
+
+  (if (string-match-p "office-pc" hostname)
+      (my-office-code-style))))
 </code></pre>
 
 </div>
-</div>
-</div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">API</h3>
-<div class="outline-text-2" id="text-2">
-<p>
-I create a new Emacs plugin which lists file names containing Chinese characters. At beginning I use Emacs API "find-name-dired". It uses the GNU find as the backend. But there is some integration issue on Linux. Chinese file names are displayed as garbled text in Emacs. I guess there is some decode/encode error between the interaction of Emacs process and GNU find process because Chinese files are fine on OS X.
-</p>
+<ul class="org-ul">
+<li>Instead of press TAB manually to indent code line by line, you can select a region and press `Alt-x indent-region ENTER`</li>
 
-<p>
-Emacs has enough APIs. Later I found another pure Lisp API "find-lisp-find-dired". Problem solved.
-</p>
+<li>Because I use <a href="http://www.emacswiki.org/emacs/Evil">Evil</a>, indenting the whole file is as simple as pressing `gg=G`</li>
+</ul>
+<p></p>
 </div>
 </div>
 </div>
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/demo-blog-1.html">Demo blog post created by nikola&amp;org2nikola</a></h1>
+            <h1 class="title"><a href="posts/effective-code-navigation-for-web-development.html">Effective code navigation for web development</a></h1>
             <div class="meta">
                 <div class="authordate">
-                    <time class="timeago" datetime="2015-01-25T10:11:19+00:00">2015-01-25 10:11</time>
+                    <time class="timeago" datetime="2015-04-02T12:51:21+00:00">2015-04-02 12:51</time>
 </div>
                 <div class="stats">
                     
         
-    <a href="posts/demo-blog-1.html#disqus_thread" data-disqus-identifier="cache/posts/demo-blog-1.html">Comments</a>
+    <a href="posts/effective-code-navigation-for-web-development.html#disqus_thread" data-disqus-identifier="cache/posts/effective-code-navigation-for-web-development.html">Comments</a>
 
 
                 </div>
             
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/ctags.html" rel="tag">ctags</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/javascript.html" rel="tag">javascript</a></li>
+        </ul>
+</div>
 
             </div>
             <div class="body">
                 <div>
 <p>
-python code:
+code navigation for web development                                 :en:javascript:emacs:ctags:
 </p>
 
+<p>
+I use <a href="https://angularjs.org/">AngularJS</a> as an example. The technique applies to other web frameworks.
+</p>
+
+<div id="outline-container-orgc5b92a7" class="outline-2">
+<h3 id="orgc5b92a7">Problem</h3>
+<div class="outline-text-2" id="text-orgc5b92a7">
+<p>
+In Angular application, a function is defined in a javascript file and called in a html file.
+</p>
+
+<p>
+javascript file:
+</p>
 <div class="org-src-container">
 
-<pre><code class="lang-python">
-import getopt, sys
-if __name__ == '__main__':
-    opts, args = getopt.getopt(sys.argv[1:], "hf:", ["help", "file="])
-    for o, a in opts:
-        if o in ("-h", "--help"):
-            sys.exit()
-        else:
-            assert False, "unhandled option"
-    print "hello world";
+<pre><code class="lang-html">&lt;div ng-controller="MyController" ng-init="init()"&gt;
+  &lt;button ng-click="onClick()"&gt;&lt;/button&gt;
+&lt;/div&gt;
 </code></pre>
 
 </div>
 
 <p>
-This is table:
+html file:
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<colgroup>
-<col class="left">
-<col class="left">
-<col class="left">
-</colgroup>
-<thead><tr>
-<th scope="col" class="left">Name</th>
-<th scope="col" class="left">Description</th>
-<th scope="col" class="left">Alternatives</th>
-</tr></thead>
-<tbody>
-<tr>
-<td class="left"><a href="http://www.emacswiki.org/emacs/Evil">Evil</a></td>
-<td class="left">convert Emacs into vim</td>
-<td class="left">none</td>
-</tr>
-<tr>
-<td class="left"><a href="http://orgmode.org">org-mode</a></td>
-<td class="left"><a href="http://en.wikipedia.org/wiki/Getting_Things_Done">Get Things Done (GTD)</a></td>
-<td class="left">none</td>
-</tr>
-<tr>
-<td class="left"><a href="https://github.com/company-mode/company-mode">company-mode</a></td>
-<td class="left">code completion</td>
-<td class="left">auto-complete</td>
-</tr>
-<tr>
-<td class="left"><a href="https://github.com/magnars/expand-region.el">expand-region</a></td>
-<td class="left">selection region efficiently</td>
-<td class="left">none</td>
-</tr>
-</tbody>
-</table>
+<div class="org-src-container">
+
+<pre><code class="lang-javascript">angular.module['myapp'].controller('MyController', function ($scope, $http) {
+
+  $scope.init = function () {
+  };
+
+  $scope.onClick= function() {
+  };
+});
+</code></pre>
+
+</div>
+
 <p>
-This is list:
+As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is <b>regular expression</b>.
+</p>
+
+<p></p>
+</div>
+</div>
+<div id="outline-container-org2f8000c" class="outline-2">
+<h3 id="org2f8000c">Solution</h3>
+<div class="outline-text-2" id="text-org2f8000c">
+<p>
+CTags is good at parsing files with <b>regular expression</b>.
+</p>
+
+<p>
+I use CTags instead of IDEs because:
+</p>
+<ul class="org-ul">
+<li>New web frameworks keep popping up. I don't want to waste time&amp;money on upgrading IDE frequently</li>
+<li>As a freelancer, I have to deal with in-house frameworks which IDE developers NEVER heard of</li>
+<li>Setup of ctags and text editors is easy. Once the first project is set up, others are just five minutes of copy&amp;paste jobs.</li>
+</ul>
+</div>
+
+<div id="outline-container-orgee29836" class="outline-3">
+<h4 id="orgee29836">CTags setup</h4>
+<div class="outline-text-3" id="text-orgee29836">
+<p>
+Create a file named ".ctags":
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-conf">--langdef=html
+--langmap=html:.htm.html.erb
+--regex-html=/[ \t]+id[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-controller[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-click[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-change[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-show[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-if[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-blur[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-focus[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-disabled[ \t]*=[ \t]*['"]([^'"]+)/\1/o,object/
+--regex-html=/[ \t]+ng-repeat[ \t]*=[ \t]*['"][^'"]+ in \([^'"]+\)['"]/\1/o,object/
+
+--langdef=js
+--langmap=js:.js
+--regex-js=/\$scope\.([A-Za-z0-9._\$]+)[ \t]*[:=]/\1/,variable/
+--regex-js=/\.controller[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,controller/
+--regex-js=/\.filter[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,filter/
+--regex-js=/\.factory[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,factory/
+--regex-js=/\.service[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,service/
+--regex-js=/\.directive[ \t]*\([ \t]*['"]([A-Za-z0-9_$.]+)['"][ \t]*,/\1/,directive/
+--regex-js=/.*[.][\s]*module\(['"]([a-zA-Z0-9_.]+)['"]/\1/m,module/
+--regex-js=/[.](when\(['"][a-zA-Z0-9_\/]+['"])/\1/r,ngRoute/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\{/\5/,object/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*function[ \t]*\(/\5/,function/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*\[/\5/,array/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[^"]'[^']*/\5/,string/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*(true|false)/\5/,boolean/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*[0-9]+/\5/,number/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*=[ \t]*.+([,;=]|$)/\5/,variable/
+--regex-js=/(,|(;|^)[ \t]*(var|let|([A-Za-z_$][A-Za-z0-9_$.]+\.)*))[ \t]*([A-Za-z0-9_$]+)[ \t]*[ \t]*([,;]|$)/\5/,variable/
+--regex-js=/function[ \t]+([A-Za-z0-9_$]+)[ \t]*\([^)]*\)/\1/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\{/\2/,object/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*function[ \t]*\(/\2/,function/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*\[/\2/,array/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^"]'[^']*/\2/,string/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*(true|false)/\2/,boolean/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[0-9]+/\2/,number/
+--regex-js=/(,|^)[ \t]*([A-Za-z_$][A-Za-z0-9_$]+)[ \t]*:[ \t]*[^=]+([,;]|$)/\2/,variable/
+</code></pre>
+
+</div>
+
+<p>
+The key point of this setup is the regular expression for HTML should be <b>as simple as possible</b>!
+</p>
+
+<p>
+On Mac, location of ".ctags":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">/Users/yourname/.ctags
+</code></pre>
+
+</div>
+
+<p>
+On Linux, location of ".ctags":
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-bash">/home/yourname/.ctags
+</code></pre>
+
+</div>
+
+<p>
+On Windows, place ".ctags" anywhere. Then <a href="http://support.microsoft.com/en-us/kb/310519">create an environment variable</a> named "HOME" whose value is the parent directory of ".ctags".
+</p>
+
+<p></p>
+</div>
+</div>
+</div>
+<div id="outline-container-org00850f1" class="outline-2">
+<h3 id="org00850f1"><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
+<div class="outline-text-2" id="text-org00850f1">
+<p>
+Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and follow its instruction.
+</p>
+</div>
+</div>
+<div id="outline-container-org5dd3ba7" class="outline-2">
+<h3 id="org5dd3ba7"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h3>
+<div class="outline-text-2" id="text-org5dd3ba7">
+<p>
+Run CTags at least once:
+</p>
+<div class="org-src-container">
+<pre><code class="lang-bash">ctags -e -R -f /app/path/TAGS
+</code></pre>
+
+</div>
+
+<p>
+Then insert below code into your ~/.emacs:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq tags-table-list '("/app/path/TAGS"))
+</code></pre>
+
+</div>
+
+<p>
+Open Emacs and `M-x find-tag` to start code navigation. That's all.
+</p>
+
+<p>
+If you prefer <a href="https://github.com/emacs-helm/helm">Helm</a> UI, install it and `M-x helm-etags-select` instead.
+</p>
+
+<p>
+Please install the latest helm because I <a href="https://github.com/emacs-helm/helm/pull/965">enhanced helm-etags-select</a> for this problem.
+</p>
+
+<p></p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/autocomplete-with-a-dictionary-with-hippie-expand.html">Autocomplete with a dictionary and hippie-expand</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2015-03-30T03:53:40+00:00">2015-03-30 03:53</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/autocomplete-with-a-dictionary-with-hippie-expand.html#disqus_thread" data-disqus-identifier="cache/posts/autocomplete-with-a-dictionary-with-hippie-expand.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/autocomplete.html" rel="tag">autocomplete</a></li>
+           <li><a class="tag p-category" href="categories/dictionary.html" rel="tag">dictionary</a></li>
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+with a dictionary and hippie-expand                              :en:emacs:dictionary:autocomplete:
+</p>
+
+<p>
+I use <a href="http://company-mode.github.io/">company-mode</a> most of the time. Sometimes I use <a href="http://emacswiki.org/emacs/HippieExpand">Hippie Expand</a> to autocomplete the English words from a dictionary.
+</p>
+
+<p>
+I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
+</p>
+
+<div id="outline-container-orgcdd1e2e" class="outline-2">
+<h3 id="orgcdd1e2e">Solution</h3>
+<div class="outline-text-2" id="text-orgcdd1e2e">
+<p>
+This solution works <b>in any environment</b>.
 </p>
 
 <ul class="org-ul">
-<li>list item 1
-</li>
-<li>list item 2
-</li>
-<li>list item 3
-</li>
-<li>list item 4
-</li>
+<li>Step1 (OPTIONAL), download <a href="https://github.com/redguardtoo/emacs.d/raw/master/misc/english-words.txt">english-words.txt</a> and place it under "~/.emacs.d/misc/".</li>
+
+<li>Step 2, Copy below setup into ~/.emacs and use key binding "M-/" to complete the word:</li>
 </ul>
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(global-set-key (kbd "M-/") 'hippie-expand)
+
+;; The actual expansion function
+(defun try-expand-by-dict (old)
+  ;; old is true if we have already attempted an expansion
+  (unless (bound-and-true-p ispell-minor-mode)
+    (ispell-minor-mode 1))
+
+  ;; english-words.txt is the fallback dicitonary
+  (if (not ispell-alternate-dictionary)
+      (setq ispell-alternate-dictionary (file-truename "~/.emacs.d/misc/english-words.txt")))
+  (let ((lookup-func (if (fboundp 'ispell-lookup-words)
+                       'ispell-lookup-words
+                       'lookup-words)))
+    (unless old
+      (he-init-string (he-lisp-symbol-beg) (point))
+      (if (not (he-string-member he-search-string he-tried-table))
+        (setq he-tried-table (cons he-search-string he-tried-table)))
+      (setq he-expand-list
+            (and (not (equal he-search-string ""))
+                 (funcall lookup-func (concat (buffer-substring-no-properties (he-lisp-symbol-beg) (point)) "*")))))
+    (if (null he-expand-list)
+      (if old (he-reset-string))
+      (he-substitute-string (car he-expand-list))
+      (setq he-expand-list (cdr he-expand-list))
+      t)
+    ))
+
+(setq hippie-expand-try-functions-list
+      '(;; try-expand-dabbrev
+        ;; try-expand-dabbrev-all-buffers
+        try-expand-by-dict))
+</code></pre>
+
+</div>
+
+<p></p>
+</div>
+</div>
+<div id="outline-container-org033b6db" class="outline-2">
+<h3 id="org033b6db">Technical details</h3>
+<div class="outline-text-2" id="text-org033b6db">
+<ul class="org-ul">
+<li>based on <a href="https://github.com/syohex/emacs-ac-ispell">ac-ispell</a>
+</li>
+<li>lazy load of ispell-mode to speed Emacs startup</li>
+<li>add a fallback dictionary "english-words.txt" so autocompletion never fails</li>
+<li>
+<code>ispell-lookup-words</code> or <code>lookup-words</code> simply does grep thing, so english-words.txt is just a plain text file.</li>
+</ul>
+</div>
+</div>
 </div>
             </div>
         </div>
@@ -283,35 +572,35 @@ This is table:
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
-<col class="left">
-<col class="left">
-<col class="left">
+<col class="org-left">
+<col class="org-left">
+<col class="org-left">
 </colgroup>
 <thead><tr>
-<th scope="col" class="left">Name</th>
-<th scope="col" class="left">Description</th>
-<th scope="col" class="left">Alternatives</th>
+<th scope="col" class="org-left">Name</th>
+<th scope="col" class="org-left">Description</th>
+<th scope="col" class="org-left">Alternatives</th>
 </tr></thead>
 <tbody>
 <tr>
-<td class="left"><a href="http://www.emacswiki.org/emacs/Evil">Evil</a></td>
-<td class="left">convert Emacs into vim</td>
-<td class="left">none</td>
+<td class="org-left"><a href="http://www.emacswiki.org/emacs/Evil">Evil</a></td>
+<td class="org-left">convert Emacs into vim</td>
+<td class="org-left">none</td>
 </tr>
 <tr>
-<td class="left"><a href="http://orgmode.org">org-mode</a></td>
-<td class="left"><a href="http://en.wikipedia.org/wiki/Getting_Things_Done">Get Things Done (GTD)</a></td>
-<td class="left">none</td>
+<td class="org-left"><a href="http://orgmode.org">org-mode</a></td>
+<td class="org-left"><a href="http://en.wikipedia.org/wiki/Getting_Things_Done">Get Things Done (GTD)</a></td>
+<td class="org-left">none</td>
 </tr>
 <tr>
-<td class="left"><a href="https://github.com/company-mode/company-mode">company-mode</a></td>
-<td class="left">code completion</td>
-<td class="left">auto-complete</td>
+<td class="org-left"><a href="https://github.com/company-mode/company-mode">company-mode</a></td>
+<td class="org-left">code completion</td>
+<td class="org-left">auto-complete</td>
 </tr>
 <tr>
-<td class="left"><a href="https://github.com/magnars/expand-region.el">expand-region</a></td>
-<td class="left">selection region efficiently</td>
-<td class="left">none</td>
+<td class="org-left"><a href="https://github.com/magnars/expand-region.el">expand-region</a></td>
+<td class="org-left">selection region efficiently</td>
+<td class="org-left">none</td>
 </tr>
 </tbody>
 </table>
@@ -320,14 +609,10 @@ This is list:
 </p>
 
 <ul class="org-ul">
-<li>list item 1
-</li>
-<li>list item 2
-</li>
-<li>list item 3
-</li>
-<li>list item 4
-</li>
+<li>list item 1</li>
+<li>list item 2</li>
+<li>list item 3</li>
+<li>list item 4</li>
 </ul>
 </div>
             </div>
@@ -365,11 +650,11 @@ to validate HTML5 code with Flymake effectively                           :en:em
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11&gt;</span></span> 
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-11 Thu&gt; </span></span> 
 </p>
 
 <p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05&gt;</span></span>
+CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-12-05 Fri&gt;</span></span>
 </p>
 
 <p>
@@ -622,21 +907,17 @@ In summary, <b>there are ONLY two points</b>:
 </p>
 
 <ul class="org-ul">
-<li>What's the `tags-table-list`
-</li>
-<li>How the tags file are created by ctags
-</li>
+<li>What's the `tags-table-list`</li>
+<li>How the tags file are created by ctags</li>
 </ul>
 <p>
 UPDATE:
 </p>
 
 <ol class="org-ol">
-<li>My tags file management strategy is described at <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a>. It's effective to me. But it may be not generic enough to apply to others' use cases.
-</li>
+<li>My tags file management strategy is described at <a href="http://blog.binchen.org/posts/how-to-use-ctags-in-emacs-effectively-3.html">How to use ctags in Emacs effectively</a>. It's effective to me. But it may be not generic enough to apply to others' use cases.</li>
 
-<li>I do use <a href="http://www.gnu.org/software/global/">Gnu Global</a> for <b>C/C++/Java</b> code. I use it exactly in the <b>same way</b> as ctags. Please `man global` for the details. Hint, all you need care is the environment variable <b>GTAGSLIBPATH</b>.
-</li>
+<li>I do use <a href="http://www.gnu.org/software/global/">Gnu Global</a> for <b>C/C++/Java</b> code. I use it exactly in the <b>same way</b> as ctags. Please `man global` for the details. Hint, all you need care is the environment variable <b>GTAGSLIBPATH</b>.</li>
 </ol>
 </div>
             </div>
@@ -676,16 +957,13 @@ Please note:
 </p>
 
 <ul class="org-ul">
-<li>I use javascript as a use case. The solution is <b>generic</b> enough to be applied to <b>any language</b>. At the end of the article, Emacs Lisp is used as another example.
-</li>
-<li>I'm good at most debuggers. The point of this article is to deal with <b>more difficult issues</b> the debugger can not handle.
-</li>
-<li>My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.
-</li>
+<li>I use javascript as a use case. The solution is <b>generic</b> enough to be applied to <b>any language</b>. At the end of the article, Emacs Lisp is used as another example.</li>
+<li>I'm good at most debuggers. The point of this article is to deal with <b>more difficult issues</b> the debugger can not handle.</li>
+<li>My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.</li>
 </ul>
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orga976c00" class="outline-2">
+<h3 id="orga976c00">Problem</h3>
+<div class="outline-text-2" id="text-orga976c00">
 <p>
 As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 </p>
@@ -698,20 +976,21 @@ The only way to debug such application is to insert as many as possible logging 
 So my problem is how to insert logging code as quickly as possible.
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Solution</h3>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org976852c" class="outline-2">
+<h3 id="org976852c">Solution</h3>
+<div class="outline-text-2" id="text-org976852c">
 <p>
 My solution is <a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a>. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">Logging simple JS variable</h3>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org7347c1f" class="outline-2">
+<h3 id="org7347c1f">Logging simple JS variable</h3>
+<div class="outline-text-2" id="text-org7347c1f">
 <p>
 Given a variable name like "var1", I need insert javascript code as below:
 </p>
@@ -730,12 +1009,13 @@ Snippet:
 <p>
 This snippet need you input variable name once.
 </p>
-</div>
-</div>
 
-<div id="outline-container-sec-4" class="outline-2">
-<h3 id="sec-4">Logging complex JS variable</h3>
-<div class="outline-text-2" id="text-4">
+<p></p>
+</div>
+</div>
+<div id="outline-container-orga440537" class="outline-2">
+<h3 id="orga440537">Logging complex JS variable</h3>
+<div class="outline-text-2" id="text-orga440537">
 <p>
 In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 </p>
@@ -749,11 +1029,12 @@ Snippet:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet</a>
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-5" class="outline-2">
-<h3 id="sec-5">Logging JS function name when it's called</h3>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-orge76b657" class="outline-2">
+<h3 id="orge76b657">Logging JS function name when it's called</h3>
+<div class="outline-text-2" id="text-orge76b657">
 <p>
 In below example, I need insert  "console.log('hello is called');" in function "hello":
 </p>
@@ -783,12 +1064,13 @@ Please check <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/in
 <p>
 The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 </p>
-</div>
-</div>
 
-<div id="outline-container-sec-6" class="outline-2">
-<h3 id="sec-6">Logging JS function name with its parameters</h3>
-<div class="outline-text-2" id="text-6">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org54d0f01" class="outline-2">
+<h3 id="org54d0f01">Logging JS function name with its parameters</h3>
+<div class="outline-text-2" id="text-org54d0f01">
 <p>
 JS example:
 </p>
@@ -814,12 +1096,13 @@ Snippet:
 <p>
 BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the parameter into kill-ring is as simple as pressing "yi(".
 </p>
-</div>
-</div>
 
-<div id="outline-container-sec-7" class="outline-2">
-<h3 id="sec-7">Insert JS debugger statement</h3>
-<div class="outline-text-2" id="text-7">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org151d6c3" class="outline-2">
+<h3 id="org151d6c3">Insert JS debugger statement</h3>
+<div class="outline-text-2" id="text-org151d6c3">
 <p>
 @cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
 </p>
@@ -833,11 +1116,12 @@ Snippets:
 <a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet">https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet</a>
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-8" class="outline-2">
-<h3 id="sec-8">Bonus</h3>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-org07fa9a3" class="outline-2">
+<h3 id="org07fa9a3">Bonus</h3>
+<div class="outline-text-2" id="text-org07fa9a3">
 <p>
 Similar snippets for Emacs Lisp are defined <a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode">HERE</a>.
 </p>
@@ -886,31 +1170,27 @@ Live demo:
 Screenshot:
 <img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"></p>
 
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org88f3735" class="outline-2">
+<h3 id="org88f3735">Environment</h3>
+<div class="outline-text-2" id="text-org88f3735">
 <ul class="org-ul">
-<li>Bootstrap 2.3.2
-</li>
-<li>font-awesome 3.2.1
-</li>
-<li>JQuery 1.8.2
-</li>
+<li>Bootstrap 2.3.2</li>
+<li>font-awesome 3.2.1</li>
+<li>JQuery 1.8.2</li>
 </ul>
 <p>
 I only use the grid layout from bootstrap and minimum API from jQuery.
 </p>
 </div>
+
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Notes</h3>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org1139ed8" class="outline-2">
+<h3 id="org1139ed8">Notes</h3>
+<div class="outline-text-2" id="text-org1139ed8">
 <ul class="org-ul">
-<li>IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".
-</li>
-<li>IE7 does not support inline-block properly, I need below css code hack:
-</li>
+<li>IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".</li>
+<li>IE7 does not support inline-block properly, I need below css code hack:</li>
 </ul>
 <div class="org-src-container">
 
@@ -923,14 +1203,12 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </code></pre>
 
 </div>
+
 <ul class="org-ul">
-<li>bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.
-</li>
-<li>add below code into javascript so that I can hack IE7-only css code:
-</li>
+<li>bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.</li>
+<li>add below code into javascript so that I can hack IE7-only css code:</li>
 </ul>
 <div class="org-src-container">
-
 
 <pre><code class="lang-javascript">if($.browser.msie &amp;&amp; parseFloat($.browser.version) &lt; 8){
   that.ie7 = true;
@@ -939,6 +1217,8 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </code></pre>
 
 </div>
+
+<p></p>
 </div>
 </div>
 </div>
@@ -996,202 +1276,6 @@ Insert below code into ~/.emacs:
 </div>
             </div>
         </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/export-org-file-embedded-with-code-snippets.html">Export org file embedded with code snippets</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-11-20T12:22:17+00:00">2014-11-20 12:22</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/export-org-file-embedded-with-code-snippets.html#disqus_thread" data-disqus-identifier="cache/posts/export-org-file-embedded-with-code-snippets.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/export.html" rel="tag">export</a></li>
-           <li><a class="tag p-category" href="categories/html.html" rel="tag">html</a></li>
-           <li><a class="tag p-category" href="categories/org.html" rel="tag">org</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-org file embedded with code snippets                                   :en:emacs:org:export:html:
-</p>
-
-<p>
-CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-11-20 Thu&gt;</span></span>
-</p>
-
-<p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-06-06 Sat&gt;</span></span>
-</p>
-
-<div id="outline-container-sec-1" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
-<p>
-I use <a href="http://orgmode.org/">Org-mode</a> to record all my notes.
-</p>
-
-<p>
-As a developer, I place code snippets from many programming languages into one org file.
-</p>
-
-<p>
-The issue is when exporting the org file, major mode for each language will be loaded to render the code snippet.
-</p>
-
-<p>
-It means the hooks of the major modes will be executed. Since I put lots of heavy weight setup things in those hooks, my exporting is extremely slow.
-</p>
-
-<p>
-My hooks are also dependent on third party tools. So if anyone else uses my setup without those tools, his/her exporting will <a href="https://github.com/redguardtoo/emacs.d/issues/316">fail</a>.
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2" class="outline-2">
-<h3 id="sec-2">Solution</h3>
-<div class="outline-text-2" id="text-2">
-</div>
-<div id="outline-container-sec-2-1" class="outline-3">
-<h4 id="sec-2-1">Setup</h4>
-<div class="outline-text-3" id="text-2-1">
-<p>
-In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
-</p>
-
-<p>
-The function basically check whether the `(buffer-file-name)` is the temporary file created by Org-mode or the output HTML converted from org file. If answer is "YES", then code in major mode hook will not be executed.
-</p>
-
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(defvar load-user-customized-major-mode-hook t)
-(defvar cached-normal-file-full-path nil)
-(defun is-buffer-file-temp ()
-  (interactive)
-  "If (buffer-file-name) is nil or a temp file or HTML file converted from org file"
-  (let ((f (buffer-file-name))
-        org
-        (rlt t))
-    (cond
-     ((not load-user-customized-major-mode-hook) t)
-     ((not f)
-      ;; file does not exist at all
-      (setq rlt t))
-     ((string= f cached-normal-file-full-path)
-      (setq rlt nil))
-     ((string-match (concat "^" temporary-file-directory) f)
-      ;; file is create from temp directory
-      (setq rlt t))
-     ((and (string-match "\.html$" f)
-           (file-exists-p (setq org (replace-regexp-in-string "\.html$" ".org" f))))
-      ;; file is a html file exported from org-mode
-      (setq rlt t))
-     (t
-      ;; avoid calling to file-exists-p too often for performance reason
-      (setq cached-normal-file-full-path f)
-      (setq rlt nil)))
-    rlt))
-</code></pre>
-
-</div>
-</div>
-</div>
-<div id="outline-container-sec-2-2" class="outline-3">
-<h4 id="sec-2-2">Usage</h4>
-<div class="outline-text-3" id="text-2-2">
-<p>
-I use python-mode-hook setup as an example:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(add-hook 'python-mode-hook
-          '(lambda ()
-             (unless (is-buffer-file-temp)
-               (anaconda-mode)
-               (eldoc-mode)
-               (if (executable-find "pyflakes")
-                   (flymake-python-pyflakes-load))
-               (setq electric-indent-chars (delq ?: electric-indent-chars))
-               )))
-</code></pre>
-
-</div>
-</div>
-</div>
-</div>
-
-<div id="outline-container-sec-3" class="outline-2">
-<h3 id="sec-3">Tips</h3>
-<div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h4 id="sec-3-1">Export shell code</h4>
-<div class="outline-text-3" id="text-3-1">
-<p>
-Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h4 id="sec-3-2">Yasnippet setup</h4>
-<div class="outline-text-3" id="text-3-2">
-<p>
-To avoid loading yasnippets when exporting, I have to <a href="https://github.com/capitaomorte/yasnippet#use-yas-minor-mode-on-a-per-buffer-basis">"use yas-minor-mode on a per-buffer basis"</a>.
-</p>
-</div>
-</div>
-<div id="outline-container-sec-3-3" class="outline-3">
-<h4 id="sec-3-3">Manually turn off the major-mode hook</h4>
-<div class="outline-text-3" id="text-3-3">
-<p>
-It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
-</p>
-
-<p>
-Say I want to turn off the major mode hooks when `M-x org-publish`, here is the setup:
-</p>
-<div class="org-src-container">
-
-
-<pre><code class="lang-lisp">(defadvice org-publish (around org-publish-advice activate)
-  "Stop running major-mode hook when org-publish"
-  (let ((old load-user-customized-major-mode-hook))
-    (setq load-user-customized-major-mode-hook nil)
-    ad-do-it
-    (setq load-user-customized-major-mode-hook old)))
-</code></pre>
-
-</div>
-</div>
-</div>
-<div id="outline-container-sec-3-4" class="outline-3">
-<h4 id="sec-3-4">after-save-hook</h4>
-<div class="outline-text-3" id="text-3-4">
-<p>
-`after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files
-</p>
-</div>
-</div>
-</div>
-</div>
-            </div>
-        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
@@ -1200,7 +1284,7 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
             <li class="next">
                 <a href="index-18.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

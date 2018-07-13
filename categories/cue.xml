@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about cue)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cue.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:54:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (cue)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cue.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
+&lt;/p&gt;
 
-&lt;div class="outline-text-2" id="text-1"&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-1-1" class="outline-3"&gt;
-&lt;h4 id="sec-1-1"&gt;Install CLI tools&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;div id="outline-container-org39bbd11" class="outline-2"&gt;
+&lt;h3 id="org39bbd11"&gt;Install CLI tools&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org39bbd11"&gt;
 &lt;div class="org-src-container"&gt;
-
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# mac to support ape
 sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shntool
@@ -15,20 +14,20 @@ sudo emerge cuetools
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-1-2" class="outline-3"&gt;
-&lt;h4 id="sec-1-2"&gt;Download script&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1-2"&gt;
+&lt;div id="outline-container-org523d9e5" class="outline-2"&gt;
+&lt;h3 id="org523d9e5"&gt;Download script&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org523d9e5"&gt;
 &lt;p&gt;
 See &lt;a href="https://bbs.archlinux.org/viewtopic.php?id=58766"&gt;https://bbs.archlinux.org/viewtopic.php?id=58766&lt;/a&gt; for the source of bash script.
 &lt;/p&gt;
-
 &lt;p&gt;
 Here is the full content of the bash script:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#!/bin/bash
 # split image file (flac, ape, wav, etc.) according to cue-file
@@ -88,14 +87,13 @@ done
 &lt;p&gt;
 Put the script somewhere and name it to &lt;code&gt;cue2flac&lt;/code&gt;
 &lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-sec-1-3" class="outline-3"&gt;
-&lt;h4 id="sec-1-3"&gt;Start conversion&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-1-3"&gt;
+&lt;div id="outline-container-org1e36f10" class="outline-2"&gt;
+&lt;h3 id="org1e36f10"&gt;Start conversion&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1e36f10"&gt;
 &lt;div class="org-src-container"&gt;
-
-
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
 find . -name '*.ape'|xargs -I {} ffmpeg -i {} {}.wav
 # split wav and convert it to flac, make sure the *.cue exists in current directory
@@ -104,7 +102,6 @@ cue2flac a.ape.wav
 rm *.ape *.wav
 &lt;/code&gt;&lt;/pre&gt;
 
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>cue</category><category>en</category><category>flac</category><guid>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</guid><pubDate>Sun, 12 May 2013 22:32:00 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>cue</category><category>en</category><category>flac</category><guid>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</guid><pubDate>Sun, 12 May 2013 22:32:00 GMT</pubDate></item></channel></rss>

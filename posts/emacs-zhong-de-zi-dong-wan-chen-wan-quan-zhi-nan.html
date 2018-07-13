@@ -107,9 +107,9 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 <li>说明哪些框架流行</li>
 <li>如何使用框架</li>
 </ul>
-<div id="outline-container-org9167f7c" class="outline-2">
-<h3 id="org9167f7c">概述</h3>
-<div class="outline-text-2" id="text-org9167f7c">
+<div id="outline-container-org90b2369" class="outline-2">
+<h3 id="org90b2369">概述</h3>
+<div class="outline-text-2" id="text-org90b2369">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-left">
@@ -150,15 +150,15 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 </tbody>
 </table>
 </div>
-</div>
 
-<div id="outline-container-org6a5211d" class="outline-2">
-<h3 id="org6a5211d">auto-complete结合clang</h3>
-<div class="outline-text-2" id="text-org6a5211d">
+<p></p>
+</div>
+<div id="outline-container-org4c05a28" class="outline-2">
+<h3 id="org4c05a28">auto-complete结合clang</h3>
+<div class="outline-text-2" id="text-org4c05a28">
 <p>
 <a href="http://emacswiki.org/emacs/AutoComplete">auto-complete</a>是第三方开发的插件,提供了自动完成需要的支持(例如在命令行环境下对下拉菜单的模拟).
 </p>
-
 <p>
 而<a href="http://clang.llvm.org">clang</a>是苹果公司C/C++/Objective-C编译器,对C++语法的解析很好.
 </p>
@@ -178,38 +178,37 @@ Emacs比普通IDE的Intellisense强大,例如可输入当前文件名(带或者�
 <p>
 已被company-mode取代,不推荐.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org6273ea7" class="outline-2">
-<h3 id="org6273ea7">company-mode</h3>
-<div class="outline-text-2" id="text-org6273ea7">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org4836d19" class="outline-2">
+<h3 id="org4836d19">company-mode</h3>
+<div class="outline-text-2" id="text-org4836d19">
 <p>
 <a href="https://github.com/company-mode/company-mode">company-mode</a>和auto-complete功能类似，唯一的区别是clang以及其他语言支持已内置，所以不需要安装其他elisp插件或者额外配置.目前我已用company-mode代替了auto-complete.
 </p>
 </div>
 </div>
-
-<div id="outline-container-org164bedb" class="outline-2">
-<h3 id="org164bedb">hippie-expand</h3>
-<div class="outline-text-2" id="text-org164bedb">
+<div id="outline-container-org3ead8d1" class="outline-2">
+<h3 id="org3ead8d1">hippie-expand</h3>
+<div class="outline-text-2" id="text-org3ead8d1">
 <p>
 <a href="http://emacswiki.org/emacs/HippieExpand">hippie-expand</a>是Emacs自带的自动完成框架.
 </p>
-
 <p>
 其默认的一些特色功能(例如,完成词/文件名/行的功能,或在 <code>minibuffer</code> 中使用)可作为 <code>company-mode</code> 补充.
 </p>
-</div>
-</div>
 
-<div id="outline-container-orgc3167a3" class="outline-2">
-<h3 id="orgc3167a3">complete-symbol</h3>
-<div class="outline-text-2" id="text-orgc3167a3">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org7228e1a" class="outline-2">
+<h3 id="org7228e1a">complete-symbol</h3>
+<div class="outline-text-2" id="text-org7228e1a">
 <p>
 Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,它默认仅仅调用了后台的ctags而已.
 </p>
-
 <p>
 <code>hippie-expand</code> 经过调教也可用 <code>Ctags</code>,且默认特色功能比 <code>complete-symbol</code> 多,所以我没兴趣配置第三个自动完成框架了.
 </p>
@@ -237,16 +236,16 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 <p>
 已被 <code>company-mode</code> 取代,不推荐.
 </p>
-</div>
-</div>
 
-<div id="outline-container-orgc542072" class="outline-2">
-<h3 id="orgc542072">evil-mode</h3>
-<div class="outline-text-2" id="text-orgc542072">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org78ee3e2" class="outline-2">
+<h3 id="org78ee3e2">evil-mode</h3>
+<div class="outline-text-2" id="text-org78ee3e2">
 <p>
 <a href="http://emacswiki.org/emacs/Evil">Evil-mode</a>把Emacs模拟成了Vim,是我最喜欢的第三方插件,其自动完成很简单,就是根据当前文件内容自动完成词或行.
 </p>
-
 <p>
 值得推荐是因为我也是重度Vim用户,Vim的快捷键已成为我本能了.
 </p>
@@ -254,19 +253,20 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 <p>
 无需配置,启动 <code>evil-mode</code> 即可,参见我的<a href="https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el">init-evil.el</a>.
 </p>
-</div>
-</div>
 
-<div id="outline-container-orgb03be6a" class="outline-2">
-<h3 id="orgb03be6a">其他</h3>
-<div class="outline-text-2" id="text-orgb03be6a">
+<p></p>
+</div>
+</div>
+<div id="outline-container-org5559885" class="outline-2">
+<h3 id="org5559885">其他</h3>
+<div class="outline-text-2" id="text-org5559885">
 <p>
 我的一个想法. 类似于Evil的完成行.但是可以扫瞄指定目录中所有的文件,列出相似的行.
 </p>
-
 <p>
 优点在于:
 </p>
+
 <ul class="org-ul">
 <li>匹配可以更加宽容一点</li>
 <li>使用目前最快的grep工具如<a href="https://github.com/BurntSushi/ripgrep">ripgrep</a>扫瞄文本</li>
@@ -278,16 +278,16 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 <p>
 试用好几个月了,非常好用.
 </p>
-</div>
-</div>
 
-<div id="outline-container-org41cc617" class="outline-2">
-<h3 id="org41cc617">小结</h3>
-<div class="outline-text-2" id="text-org41cc617">
+<p></p>
+</div>
+</div>
+<div id="outline-container-orgf919526" class="outline-2">
+<h3 id="orgf919526">小结</h3>
+<div class="outline-text-2" id="text-orgf919526">
 <p>
 自动完成包括前端用户界面和后端语法解析引擎两个部分.
 </p>
-
 <p>
 作为前端的用户界面, <code>company-mode</code> 和 <code>auto-complete</code> 相当成熟.
 </p>
@@ -314,6 +314,8 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
 
 <p>
 基于框架自己发明新技术会更好用.</p>
+
+<p></p>
 </div>
 </div>
 </div>
@@ -338,12 +340,12 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -351,7 +353,7 @@ Emacs自带的一个函数,我对这个方案感觉一般,因为在Emacs23中,�
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

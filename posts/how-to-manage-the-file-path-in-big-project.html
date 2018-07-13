@@ -84,12 +84,9 @@ Reasons:
 </p>
 
 <ul class="org-ul">
-<li>If file B refer to file A with "../A". Then B's position in the project *CANNOT be changed. Or else its reference to A will be wrong.
-</li>
-<li>Relative path is not intuitive when debugging.
-</li>
-<li>If the dependency is complex. Figure out the right path is mission impossible. For example, file A refer to file B with "./a/../../B" and file B refer to file C  "../../b/C".
-</li>
+<li>If file B refer to file A with "../A". Then B's position in the project *CANNOT be changed. Or else its reference to A will be wrong.</li>
+<li>Relative path is not intuitive when debugging.</li>
+<li>If the dependency is complex. Figure out the right path is mission impossible. For example, file A refer to file B with "./a/../../B" and file B refer to file C  "../../b/C".</li>
 </ul>
 <p>
 So you should <b>ALWAYS use the absolute path</b>.
@@ -175,12 +172,12 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -188,7 +185,7 @@ BTW, don't abuse this technique. Set <b>one environment variable</b> for the roo
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

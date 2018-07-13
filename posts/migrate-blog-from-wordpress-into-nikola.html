@@ -11,7 +11,8 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Migrate blog from wordpress into nikola">
 <meta property="og:url" content="http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html">
-<meta property="og:description" content="Migrate blog from wordpress into nikola   en wordpress nikola blog migrate
+<meta property="og:description" content="blog from wordpress into nikola                                       :en:wordpress:nikola:blog:migrate:
+
 
 
 CREATED: &lt;2014-04-22 Tue&gt;
@@ -22,7 +23,7 @@ UPDATED: &lt;2017-06-28 Wed&gt;
 
 
 
-If you are only interested in web page optimization, start from t">
+If you are only interested in web ">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-04-22T09:09:21Z">
 <meta property="article:tag" content="blog">
@@ -71,10 +72,11 @@ If you are only interested in web page optimization, start from t">
 
         </div>
         <div class="body">
-            <div id="outline-container-orgb9fe57e" class="outline-2">
-<h3 id="orgb9fe57e">Migrate blog from wordpress into nikola   <span class="tag"><span class="en">en</span> <span class="wordpress">wordpress</span> <span class="nikola">nikola</span> <span class="blog">blog</span> <span class="migrate">migrate</span></span>
-</h3>
-<div class="outline-text-2" id="text-orgb9fe57e">
+            <div>
+<p>
+blog from wordpress into nikola                                       :en:wordpress:nikola:blog:migrate:
+</p>
+
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-04-22 Tue&gt;</span></span>
 </p>
@@ -86,11 +88,10 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-06-28 
 <p>
 If you are only interested in web page optimization, start from the second section of the article.
 </p>
-</div>
 
-<div id="outline-container-orgb0fb4e8" class="outline-3">
-<h4 id="orgb0fb4e8">Migrate from WordPress to Nikola</h4>
-<div class="outline-text-3" id="text-orgb0fb4e8">
+<div id="outline-container-org723402b" class="outline-2">
+<h3 id="org723402b">Migrate from WordPress to Nikola</h3>
+<div class="outline-text-2" id="text-org723402b">
 <div class="org-src-container">
 
 <pre><code class="lang-bash"># you might need need `sudo apt-get install python-gdbm` on Debian
@@ -137,6 +138,7 @@ nikola build
 <p>
 Use below command to fix embedded code in HTML files:
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-bash">find -name '*.wp' -exec grep -l "\[sourcecode.*\&lt;diff\&gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&lt;diff\&gt;.*\]/&lt;pre class="brush: diff;"&gt;/g
@@ -152,6 +154,7 @@ Manually fixed those articles with Chinese title in url_map.csv
 <p>
 Use below script to fixed the xml dumped from wordpress:
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-python">#!/usr/bin/python
@@ -207,15 +210,16 @@ Import the xml into <a href="http://disqus.com">http://disqus.com</a>.
 <p>
 You can use javascript to re-direct the URL, so your old article links are still valid. Ask at <a href="http://stackoverflow.com">http://stackoverflow.com</a> or contact your local Javascript developers on how to do it. It's simple task but a little boring.
 </p>
+
+<p></p>
 </div>
 </div>
-<div id="outline-container-org1d00056" class="outline-3">
-<h4 id="org1d00056">Optimization</h4>
-<div class="outline-text-3" id="text-org1d00056">
+<div id="outline-container-orgd115734" class="outline-2">
+<h3 id="orgd115734">Optimization</h3>
+<div class="outline-text-2" id="text-orgd115734">
 <p>
 I developed <a href="https://github.com/redguardtoo/org2nikola">org2nikola</a> to convert Org subtree into Nikola page. 
 </p>
-
 <p>
 Instead of hacking conf.py, I <b>tweak the theme's javascript/html/css directly</b>. It's simpler and more flexible.
 </p>
@@ -243,6 +247,8 @@ In order to see the real example of optimization, please visit <a href="http://b
 <p>
 My static blog is hosted at <a href="https://pages.github.com/">GitHub Pages</a>.
 </p>
+
+<p></p>
 </div>
 </div>
 </div>
@@ -267,12 +273,12 @@ My static blog is hosted at <a href="https://pages.github.com/">GitHub Pages</a>
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -280,7 +286,7 @@ My static blog is hosted at <a href="https://pages.github.com/">GitHub Pages</a>
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

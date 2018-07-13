@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ivy)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ivy.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 02 Nov 2017 14:05:55 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance diff-mode with Ivy</title><link>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ivy)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ivy.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:12:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance diff-mode with Ivy</title><link>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 diff-mode with Ivy                                                    :en:emacs:diff:ivy:
 &lt;/p&gt;
 
@@ -12,10 +12,8 @@ I need two steps to finish the task:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;Open the freelancer's patch in &lt;code&gt;diff-mode&lt;/code&gt;
-&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;diff-apply-hunk&lt;/code&gt; to apply the hunks interactively
-&lt;/li&gt;
+&lt;li&gt;Open the freelancer's patch in &lt;code&gt;diff-mode&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;diff-apply-hunk&lt;/code&gt; to apply the hunks interactively&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -35,6 +33,7 @@ Here is the code
 &lt;/p&gt;
 
 &lt;pre class="example"&gt;
+
 &lt;/pre&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -248,12 +247,9 @@ Inside &lt;code&gt;counsel-ag-occur&lt;/code&gt;:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unquoted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it
-&lt;/li&gt;
-&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; is the candidate lines created by running &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters in shell
-&lt;/li&gt;
-&lt;li&gt;Then a wgrep-friendly buffer is created
-&lt;/li&gt;
+&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unquoted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it&lt;/li&gt;
+&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; is the candidate lines created by running &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters in shell&lt;/li&gt;
+&lt;li&gt;Then a wgrep-friendly buffer is created&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -440,7 +436,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-06-05&amp;gt;&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-06-05 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -624,7 +620,7 @@ Ivy-mode to tweak workgroups2                                             :en:em
 &lt;/p&gt;
 
 &lt;p&gt;
-CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-22&amp;gt;&lt;/span&gt;&lt;/span&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-12-22 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;

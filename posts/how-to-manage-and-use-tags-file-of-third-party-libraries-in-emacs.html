@@ -114,18 +114,18 @@ The purpose to load tags files is to look up API easily. For example, I use C++ 
 The reason to do the unload thing is to avoid function name conflict from some tags files. EmacsWiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day.
 </p>
 
-<div id="outline-container-org4a9d941" class="outline-2">
-<h3 id="org4a9d941">Produce tags files for all the environments</h3>
-<div class="outline-text-2" id="text-org4a9d941">
+<div id="outline-container-org7b3e60a" class="outline-2">
+<h3 id="org7b3e60a">Produce tags files for all the environments</h3>
+<div class="outline-text-2" id="text-org7b3e60a">
 <p>
 For example, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at <code>/home/cb/tags/Library_A/linux</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org78115b4" class="outline-2">
-<h3 id="org78115b4">Use git and github to manage the tags files</h3>
-<div class="outline-text-2" id="text-org78115b4">
+<div id="outline-container-org4c531df" class="outline-2">
+<h3 id="org4c531df">Use git and github to manage the tags files</h3>
+<div class="outline-text-2" id="text-org4c531df">
 <p>
 So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library.
 </p>
@@ -134,16 +134,16 @@ So I can have copies of the tags files at github server and my local computers. 
 EmacsWiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library.
 </p>
 </div>
-</div>
 
-<div id="outline-container-org1279bae" class="outline-2">
-<h3 id="org1279bae">Write emacs lisp code to load/unload these tags files</h3>
-<div class="outline-text-2" id="text-org1279bae">
+<p></p>
+</div>
+<div id="outline-container-org160ffdd" class="outline-2">
+<h3 id="org160ffdd">Write emacs lisp code to load/unload these tags files</h3>
+<div class="outline-text-2" id="text-org160ffdd">
 <p>
 Here is the code. In this example, if I need load tags file for <a href="http://www.wxwidgets.org">wxWidgets</a>, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use <a href="http://www.emacswiki.org/Smex">Smex</a>, calling function doesn't mean pressing many keys.
 </p>
 <div class="org-src-container">
-
 <pre><code class="lang-lisp">; Set up tags built from third party libraries ===begin
 ; define tags alias like "wx-tags" here
 (setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
@@ -177,6 +177,8 @@ This solution only uses one standard variable <code>tags-table-list</code> in Em
 <p>
 See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html">Emacs manual</a> for technical details.
 </p>
+
+<p></p>
 </div>
 </div>
 </div>
@@ -201,12 +203,12 @@ See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tag
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -214,7 +216,7 @@ See <a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tag
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

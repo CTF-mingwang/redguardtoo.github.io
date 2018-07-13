@@ -68,7 +68,7 @@ It uses the --run-together option of ">
 
         </div>
         <div class="body">
-            <div id="outline-container-orgc993ebc" class="outline-2">
+            <div id="outline-container-org82893ad" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -97,8 +97,9 @@ In this article,
 <ul class="org-ul">
 <li>I will explain <b>how Emacs spell checker works</b>
 </li>
-<li>Then we study the <b>algorithm of aspell</b> (We can learn nothing from hunspell because <b>hunspell can NOT check camel case word at all</b>)</li>
-<li>Finally, I will show you <b>a complete solution</b> which works with <b>either aspell or hunspell</b>
+<li>Then we study the <b>algorithm of aspell</b>
+</li>
+<li>Finally, I will show you <b>a complete setup</b>
 </li>
 </ul>
 <p>
@@ -176,6 +177,7 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 <p>
 Let's use "hisHelle" as demo how <code>check_word</code> runs:
 </p>
+
 <ul class="org-ul">
 <li>"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')</li>
 <li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
@@ -188,6 +190,7 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 <p>
 Here is our conclusion after studying the code:
 </p>
+
 <ul class="org-ul">
 <li>
 <code>--run-together-limit</code> could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.</li>
@@ -207,16 +210,9 @@ When Emacs got potential typo on Emacs side, we can strip out all the two charac
 </p>
 
 <p>
-Please note <code>hunspell</code> can't check camel case word at all while aspell can check camel case word but with a little noise. So there is nothing we can study in hunspell.
-</p>
-
-<p>
-We will use Emacs Lisp to solve this problem completely, using <b>either aspell or hunspell</b>.
-</p>
-
-<p>
 We can attach a predicate into specific major-mode. The predicate return <code>t</code> if current word at cursor is typo,
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun js-flyspell-verify ()
@@ -230,7 +226,7 @@ We can attach a predicate into specific major-mode. The predicate return <code>t
 </div>
 
 <p>
-As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. So <code>predicate</code> is actually the last chance to fix wrongly identified typos.
+As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. You could regard <code>predicate</code> as the last chance to fix wrongly identified typos.
 </p>
 
 <p>
@@ -240,6 +236,7 @@ Here is complete setup you can paste into <code>.emacs</code> (I setup for <code
 <p>
 Please note function <code>split-camel-case</code> split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun split-camel-case (word)
@@ -312,46 +309,22 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
         (setq args (append args '("--run-together" "--run-together-limit=16"))))
     args))
 
-;; {{ for aspell only, hunspell does not need setup `ispell-extra-args'
 (setq ispell-program-name "aspell")
 (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
-;; }}
-
-;; ;; {{ hunspell setup, please note we use dictionary "en_US" here
-;; (setq ispell-program-name "hunspell")
-;; (setq ispell-local-dictionary "en_US")
-;; (setq ispell-local-dictionary-alist
-;;       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-;; ;; }}
 
 (defvar extra-flyspell-predicate '(lambda (word) t)
   "A callback to check WORD.  Return t if WORD is typo.")
 
 (defun my-flyspell-predicate (word)
-  "Use aspell to check WORD.  If it's typo return t."
-  (let* ((cmd (cond
-               ;; aspell: `echo "helle world" | aspell pipe`
-               ((string-match-p "aspell$" ispell-program-name)
-                (format "echo \"%s\" | %s pipe"
-                        word
-                        ispell-program-name))
-               ;; hunspell: `echo "helle world" | hunspell -a -d en_US`
-               (t
-                (format "echo \"%s\" | %s -a -d en_US"
-                        word
-                        ispell-program-name))))
-         (cmd-output (shell-command-to-string cmd))
-         rlt)
-    ;; (message "word=%s cmd=%s" word cmd)
-    ;; (message "cmd-output=%s" cmd-output)
-    (cond
-     ((string-match-p "^&amp;" cmd-output)
-      ;; it's a typo because at least one sub-word is typo
-      (setq rlt t))
-     (t
-      ;; not a typo
-      (setq rlt nil)))
-    rlt))
+  "Use aspell to check WORD.  If it's typo return true."
+  (if (string-match-p "^&amp;"
+                      (shell-command-to-string (format "echo %s | %s %s pipe"
+                                                       word
+                                                       ispell-program-name
+                                                       (mapconcat 'identity
+                                                                  (flyspell-detect-ispell-args t)
+                                                                  " "))))
+      t))
 
 (defun js-flyspell-verify ()
   (let* ((case-fold-search nil)
@@ -373,6 +346,9 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
     (cond
      ((not font-matched)
       (setq rlt nil))
+     ((not (string-match-p "aspell$" ispell-program-name))
+      ;; Only override aspell's result
+      (setq rlt t))
      ;; ignore two character word
      ((&lt; (length (setq word (thing-at-point 'word))) 2)
       (setq rlt nil))
@@ -401,6 +377,8 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 <p>
 Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el</a> for my real world setup.</p>
+
+<p></p>
 </div>
 </div>
         </div>
@@ -421,12 +399,12 @@ Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/m
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -434,7 +412,7 @@ Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/m
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

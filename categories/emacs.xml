@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 06 Jul 2018 13:04:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgc993ebc" class="outline-2"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org82893ad" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -27,8 +27,8 @@ In this article,
 &lt;/p&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;I will explain &lt;b&gt;how Emacs spell checker works&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt; (We can learn nothing from hunspell because &lt;b&gt;hunspell can NOT check camel case word at all&lt;/b&gt;)&lt;/li&gt;
-&lt;li&gt;Finally, I will show you &lt;b&gt;a complete solution&lt;/b&gt; which works with &lt;b&gt;either aspell or hunspell&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Finally, I will show you &lt;b&gt;a complete setup&lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -105,6 +105,7 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 &lt;p&gt;
 Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')&lt;/li&gt;
 &lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
@@ -118,6 +119,7 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;p&gt;
 Here is our conclusion after studying the code:
 &lt;/p&gt;
+
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
@@ -134,16 +136,9 @@ When Emacs got potential typo on Emacs side, we can strip out all the two charac
 &lt;/p&gt;
 
 &lt;p&gt;
-Please note &lt;code&gt;hunspell&lt;/code&gt; can't check camel case word at all while aspell can check camel case word but with a little noise. So there is nothing we can study in hunspell.
-&lt;/p&gt;
-
-&lt;p&gt;
-We will use Emacs Lisp to solve this problem completely, using &lt;b&gt;either aspell or hunspell&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
 We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
 &lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
@@ -157,7 +152,7 @@ We can attach a predicate into specific major-mode. The predicate return &lt;cod
 &lt;/div&gt;
 
 &lt;p&gt;
-As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So &lt;code&gt;predicate&lt;/code&gt; is actually the last chance to fix wrongly identified typos.
+As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. You could regard &lt;code&gt;predicate&lt;/code&gt; as the last chance to fix wrongly identified typos.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -167,6 +162,7 @@ Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I set
 &lt;p&gt;
 Please note function &lt;code&gt;split-camel-case&lt;/code&gt; split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
 &lt;/p&gt;
+
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun split-camel-case (word)
@@ -239,46 +235,22 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
         (setq args (append args '("--run-together" "--run-together-limit=16"))))
     args))
 
-;; {{ for aspell only, hunspell does not need setup `ispell-extra-args'
 (setq ispell-program-name "aspell")
 (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
-;; }}
-
-;; ;; {{ hunspell setup, please note we use dictionary "en_US" here
-;; (setq ispell-program-name "hunspell")
-;; (setq ispell-local-dictionary "en_US")
-;; (setq ispell-local-dictionary-alist
-;;       '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']" nil ("-d" "en_US") nil utf-8)))
-;; ;; }}
 
 (defvar extra-flyspell-predicate '(lambda (word) t)
   "A callback to check WORD.  Return t if WORD is typo.")
 
 (defun my-flyspell-predicate (word)
-  "Use aspell to check WORD.  If it's typo return t."
-  (let* ((cmd (cond
-               ;; aspell: `echo "helle world" | aspell pipe`
-               ((string-match-p "aspell$" ispell-program-name)
-                (format "echo \"%s\" | %s pipe"
-                        word
-                        ispell-program-name))
-               ;; hunspell: `echo "helle world" | hunspell -a -d en_US`
-               (t
-                (format "echo \"%s\" | %s -a -d en_US"
-                        word
-                        ispell-program-name))))
-         (cmd-output (shell-command-to-string cmd))
-         rlt)
-    ;; (message "word=%s cmd=%s" word cmd)
-    ;; (message "cmd-output=%s" cmd-output)
-    (cond
-     ((string-match-p "^&amp;amp;" cmd-output)
-      ;; it's a typo because at least one sub-word is typo
-      (setq rlt t))
-     (t
-      ;; not a typo
-      (setq rlt nil)))
-    rlt))
+  "Use aspell to check WORD.  If it's typo return true."
+  (if (string-match-p "^&amp;amp;"
+                      (shell-command-to-string (format "echo %s | %s %s pipe"
+                                                       word
+                                                       ispell-program-name
+                                                       (mapconcat 'identity
+                                                                  (flyspell-detect-ispell-args t)
+                                                                  " "))))
+      t))
 
 (defun js-flyspell-verify ()
   (let* ((case-fold-search nil)
@@ -300,6 +272,9 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
     (cond
      ((not font-matched)
       (setq rlt nil))
+     ((not (string-match-p "aspell$" ispell-program-name))
+      ;; Only override aspell's result
+      (setq rlt t))
      ;; ignore two character word
      ((&amp;lt; (length (setq word (thing-at-point 'word))) 2)
       (setq rlt nil))
@@ -328,10 +303,12 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 &lt;p&gt;
 Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
 
-&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Imenu to list comments in current buffer                                  :en:emacs:imenu:
+&lt;/p&gt;
+
 &lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/evil-nerd-commenter"&gt;evil-nerd-commenter&lt;/a&gt; v3.2.0 has a new function &lt;code&gt;evilnc-imenu-create-index-function&lt;/code&gt;.
 &lt;/p&gt;
@@ -343,8 +320,8 @@ Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blo
 &lt;p&gt;
 Usage:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'counsel)
 (defun counsel-imenu-comments ()
@@ -360,14 +337,12 @@ Usage:
 Screen cast:
 &lt;/p&gt;
 
-
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/counsel-imenu-comments.gif" alt="counsel-imenu-comments.gif"&gt;
-&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>en</category><category>imenu</category><guid>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</guid><pubDate>Sun, 08 Apr 2018 02:12:04 GMT</pubDate></item><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>imenu</category><guid>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</guid><pubDate>Sun, 08 Apr 2018 02:12:04 GMT</pubDate></item><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+v1.3.1 is released                                              :en:emacs:etags:
+&lt;/p&gt;
 
-&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;Counsel-etags&lt;/a&gt; is a generic solution for code navigation in Emacs.
 &lt;/p&gt;
@@ -383,8 +358,8 @@ The package solves all the problems using Ctags/Etags with Emacs.
 &lt;p&gt;
 &lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from &lt;code&gt;counsel-etags&lt;/code&gt;. The setup is simple:
 &lt;/p&gt;
-&lt;div class="org-src-container"&gt;
 
+&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Don't ask before rereading the TAGS files if they have changed
 (setq tags-revert-without-query t)
@@ -425,9 +400,7 @@ There are also other enhancements.
 &lt;/p&gt;
 
 &lt;p&gt;
-Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 complete everything in Emacs                                             :en:emacs:
 &lt;/p&gt;
 
@@ -613,10 +586,8 @@ I need two steps to finish the task:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;Open the freelancer's patch in &lt;code&gt;diff-mode&lt;/code&gt;
-&lt;/li&gt;
-&lt;li&gt;Run &lt;code&gt;diff-apply-hunk&lt;/code&gt; to apply the hunks interactively
-&lt;/li&gt;
+&lt;li&gt;Open the freelancer's patch in &lt;code&gt;diff-mode&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Run &lt;code&gt;diff-apply-hunk&lt;/code&gt; to apply the hunks interactively&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
@@ -636,6 +607,7 @@ Here is the code
 &lt;/p&gt;
 
 &lt;pre class="example"&gt;
+
 &lt;/pre&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -882,12 +854,9 @@ Inside &lt;code&gt;counsel-ag-occur&lt;/code&gt;:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unquoted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it
-&lt;/li&gt;
-&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; is the candidate lines created by running &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters in shell
-&lt;/li&gt;
-&lt;li&gt;Then a wgrep-friendly buffer is created
-&lt;/li&gt;
+&lt;li&gt;The variable &lt;code&gt;regex&lt;/code&gt; is the regular expression built from the filter string you input. Please note that &lt;code&gt;regex&lt;/code&gt; is unquoted by &lt;code&gt;counsel-unquote-regex-parens&lt;/code&gt; so it can be used in shell. If you use &lt;code&gt;regex&lt;/code&gt; in Emacs Lisp, you don't need unquote it&lt;/li&gt;
+&lt;li&gt;The variable &lt;code&gt;cands&lt;/code&gt; is the candidate lines created by running &lt;code&gt;ag&lt;/code&gt; with &lt;code&gt;regex&lt;/code&gt; as parameters in shell&lt;/li&gt;
+&lt;li&gt;Then a wgrep-friendly buffer is created&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
