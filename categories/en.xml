@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:13:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-to spell check function/variable in Emacs                                 :en:emacs:flyspell:
-&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:18:25 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgafa06a0" class="outline-2"&gt;
 
+&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-17 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
@@ -16,7 +15,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-It uses the &lt;code&gt;--run-together&lt;/code&gt; option of &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt; to check camel cased word.
+It uses options &lt;code&gt;--run-together&lt;/code&gt; from &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt; to check camel cased word.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -26,7 +25,6 @@ But this solution is not perfect. It wrongly identifies two character interior w
 &lt;p&gt;
 In this article,
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;I will explain &lt;b&gt;how Emacs spell checker works&lt;/b&gt;&lt;/li&gt;
 &lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt; (We can learn nothing from hunspell because &lt;b&gt;hunspell can NOT check camel case word at all&lt;/b&gt;)&lt;/li&gt;
@@ -44,7 +42,6 @@ So aspell doesn't understand syntax of any programming language. It scans plain 
 &lt;p&gt;
 In aspell, there are two extra "run-together" word options:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; is "Maximum number of words can be strung together"&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; is "Minimal length of interior words"&lt;/li&gt;
@@ -57,7 +54,6 @@ Let's study the code of aspell to understand these two options. The "run-togethe
 &lt;p&gt;
 In order to help you understand this function, I documented the code line by line,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;class Working : public Score {
@@ -109,7 +105,6 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 &lt;p&gt;
 Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')&lt;/li&gt;
 &lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
@@ -123,7 +118,6 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;p&gt;
 Here is our conclusion after studying the code:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
@@ -150,7 +144,6 @@ We will use Emacs Lisp to solve this problem completely, using &lt;b&gt;either a
 &lt;p&gt;
 We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun js-flyspell-verify ()
@@ -174,7 +167,6 @@ Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I set
 &lt;p&gt;
 Please note function &lt;code&gt;split-camel-case&lt;/code&gt; split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun split-camel-case (word)
@@ -335,7 +327,9 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 &lt;/div&gt;
 
 &lt;p&gt;
-Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Imenu to list comments in current buffer                                  :en:emacs:imenu:
 &lt;/p&gt;
 

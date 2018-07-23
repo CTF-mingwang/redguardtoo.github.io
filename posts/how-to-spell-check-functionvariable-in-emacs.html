@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to spell check function/variable in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html">
-<meta property="og:description" content="to spell check function/variable in Emacs                                 :en:emacs:flyspell:
-
-
-
-CREATED: &lt;2018-06-17 Sun&gt;
+<meta property="og:description" content="CREATED: &lt;2018-06-17 Sun&gt;
 
 
 
@@ -23,7 +19,11 @@ UPDATED: &lt;2018-07-06 Fri&gt;
 
 
 
-This article explains how developers can chec">
+This article explains how developers can check typos of function/variable while programming in Emacs.
+
+
+
+It uses options --run-together from G">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2018-06-17T03:16:41Z">
 <meta property="article:tag" content="emacs">
@@ -68,11 +68,9 @@ This article explains how developers can chec">
 
         </div>
         <div class="body">
-            <div>
-<p>
-to spell check function/variable in Emacs                                 :en:emacs:flyspell:
-</p>
+            <div id="outline-container-orgafa06a0" class="outline-2">
 
+<div class="outline-text-2" id="text-1">
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-06-17 Sun&gt;</span></span>
 </p>
@@ -86,7 +84,7 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-07-06 
 </p>
 
 <p>
-It uses the <code>--run-together</code> option of <a href="http://aspell.net/">GNU Aspell</a> to check camel cased word.
+It uses options <code>--run-together</code> from <a href="http://aspell.net/">GNU Aspell</a> to check camel cased word.
 </p>
 
 <p>
@@ -96,7 +94,6 @@ But this solution is not perfect. It wrongly identifies two character interior w
 <p>
 In this article,
 </p>
-
 <ul class="org-ul">
 <li>I will explain <b>how Emacs spell checker works</b>
 </li>
@@ -115,7 +112,6 @@ So aspell doesn't understand syntax of any programming language. It scans plain 
 <p>
 In aspell, there are two extra "run-together" word options:
 </p>
-
 <ul class="org-ul">
 <li>
 <code>--run-together-limit</code> is "Maximum number of words can be strung together"</li>
@@ -129,7 +125,6 @@ Let's study the code of aspell to understand these two options. The "run-togethe
 <p>
 In order to help you understand this function, I documented the code line by line,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-c">class Working : public Score {
@@ -181,7 +176,6 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
 <p>
 Let's use "hisHelle" as demo how <code>check_word</code> runs:
 </p>
-
 <ul class="org-ul">
 <li>"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')</li>
 <li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
@@ -194,7 +188,6 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 <p>
 Here is our conclusion after studying the code:
 </p>
-
 <ul class="org-ul">
 <li>
 <code>--run-together-limit</code> could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.</li>
@@ -224,7 +217,6 @@ We will use Emacs Lisp to solve this problem completely, using <b>either aspell 
 <p>
 We can attach a predicate into specific major-mode. The predicate return <code>t</code> if current word at cursor is typo,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun js-flyspell-verify ()
@@ -248,7 +240,6 @@ Here is complete setup you can paste into <code>.emacs</code> (I setup for <code
 <p>
 Please note function <code>split-camel-case</code> split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun split-camel-case (word)
@@ -410,6 +401,7 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 
 <p>
 Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el</a> for my real world setup.</p>
+</div>
 </div>
         </div>
         
