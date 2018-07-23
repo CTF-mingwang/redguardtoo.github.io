@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about torrent)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/torrent.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:28 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use screen/rtorrent/cronie to manage torrent client</title><link>http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about torrent)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/torrent.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use screen/rtorrent/cronie to manage torrent client</title><link>http://blog.binchen.org/posts/use-screenrtorrentcronie-to-manage-torrent-client.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 screen/rtorrent/cronie to manage torrent client                           :linux:archlinux:torrent:
 &lt;/p&gt;
 
@@ -17,9 +17,9 @@ screen/rtorrent/cronie to manage torrent client                           :linux
 For &lt;a href="http://www.archlinux.org"&gt;ArchLinux&lt;/a&gt; only:
 &lt;/p&gt;
 
-&lt;div id="outline-container-org1447f65" class="outline-2"&gt;
-&lt;h3 id="org1447f65"&gt;Prepare directory&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1447f65"&gt;
+&lt;div id="outline-container-org380ab97" class="outline-2"&gt;
+&lt;h3 id="org380ab97"&gt;Prepare directory&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org380ab97"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;mkdir -p ~/bt/{session,finished,torrent}
@@ -29,9 +29,9 @@ For &lt;a href="http://www.archlinux.org"&gt;ArchLinux&lt;/a&gt; only:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7e11a32" class="outline-2"&gt;
-&lt;h3 id="org7e11a32"&gt;Install&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7e11a32"&gt;
+&lt;div id="outline-container-orgd06b5f8" class="outline-2"&gt;
+&lt;h3 id="orgd06b5f8"&gt;Install&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd06b5f8"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo pacman -S cronie
@@ -43,9 +43,9 @@ sudo systemctl start cronie
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb9168fa" class="outline-2"&gt;
-&lt;h3 id="orgb9168fa"&gt;Add cron task to start and stop rtorrent service&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgb9168fa"&gt;
+&lt;div id="outline-container-org21e1f9d" class="outline-2"&gt;
+&lt;h3 id="org21e1f9d"&gt;Add cron task to start and stop rtorrent service&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org21e1f9d"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;crontab -e #add cron task as current user

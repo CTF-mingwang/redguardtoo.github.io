@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
 &lt;h2&gt;shit happens&lt;/h2&gt;
 &lt;p&gt;pacman -Syu &lt;/p&gt;
 &lt;h2&gt;archlinux replace grub with grub2&lt;/h2&gt;
@@ -37,9 +37,9 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 to install Gentoo Linux                                                 :gentoo:linux:install:en:
 &lt;/p&gt;
 
-&lt;div id="outline-container-org0546db1" class="outline-2"&gt;
-&lt;h3 id="org0546db1"&gt;Intel integrated video card&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0546db1"&gt;
+&lt;div id="outline-container-org408926c" class="outline-2"&gt;
+&lt;h3 id="org408926c"&gt;Intel integrated video card&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org408926c"&gt;
 &lt;p&gt;
 Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&amp;gt; Intel) is critical:
 &lt;/p&gt;
@@ -52,9 +52,9 @@ Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&a
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8368ea3" class="outline-2"&gt;
-&lt;h3 id="org8368ea3"&gt;Grub2&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org8368ea3"&gt;
+&lt;div id="outline-container-org1a14d40" class="outline-2"&gt;
+&lt;h3 id="org1a14d40"&gt;Grub2&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1a14d40"&gt;
 &lt;p&gt;
 Let grub2 create the cfg for me automatically,
 &lt;/p&gt;
@@ -67,13 +67,13 @@ Let grub2 create the cfg for me automatically,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6e925b3" class="outline-2"&gt;
-&lt;h3 id="org6e925b3"&gt;Network&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org6e925b3"&gt;
+&lt;div id="outline-container-org6db5d9c" class="outline-2"&gt;
+&lt;h3 id="org6db5d9c"&gt;Network&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6db5d9c"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5decd7a" class="outline-3"&gt;
-&lt;h4 id="org5decd7a"&gt;Ethernet&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org5decd7a"&gt;
+&lt;div id="outline-container-org187cb75" class="outline-3"&gt;
+&lt;h4 id="org187cb75"&gt;Ethernet&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org187cb75"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -88,9 +88,9 @@ rc-update add net.eth0 default
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge3978f0" class="outline-3"&gt;
-&lt;h4 id="orge3978f0"&gt;Wireless (wifi)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orge3978f0"&gt;
+&lt;div id="outline-container-orgaf1d29a" class="outline-3"&gt;
+&lt;h4 id="orgaf1d29a"&gt;Wireless (wifi)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgaf1d29a"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -163,18 +163,18 @@ Modify /lib/netifrc/net/wpa_supplicant.sh to for it use wext,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1936903" class="outline-2"&gt;
-&lt;h3 id="org1936903"&gt;Clock Synchronization&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1936903"&gt;
+&lt;div id="outline-container-org0dd0fc6" class="outline-2"&gt;
+&lt;h3 id="org0dd0fc6"&gt;Clock Synchronization&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0dd0fc6"&gt;
 &lt;p&gt;
 &lt;a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate"&gt;htpdate&lt;/a&gt; is great because it only use HTTP protocol, don't forget add server in its config file.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1181f3a" class="outline-2"&gt;
-&lt;h3 id="org1181f3a"&gt;Sound&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1181f3a"&gt;
+&lt;div id="outline-container-orgb5fb7ca" class="outline-2"&gt;
+&lt;h3 id="orgb5fb7ca"&gt;Sound&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb5fb7ca"&gt;
 &lt;p&gt;
 Nothing to tell. There may be some issue, but I forgot.&lt;/p&gt;
 &lt;/div&gt;

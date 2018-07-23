@@ -130,15 +130,15 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org5451507" class="outline-2">
+                <div id="outline-container-orgfac70d2" class="outline-2">
 
-<div class="outline-text-2" id="text-org5451507">
+<div class="outline-text-2" id="text-orgfac70d2">
 </div>
-<div id="outline-container-orgbb29bbc" class="outline-3">
-<h4 id="orgbb29bbc">Setup git-send-email</h4>
-<div class="outline-text-3" id="text-orgbb29bbc">
+<div id="outline-container-org8a70941" class="outline-3">
+<h4 id="org8a70941">Setup git-send-email</h4>
+<div class="outline-text-3" id="text-org8a70941">
 <p>
-On Debian please run <code>sudo apt-get install git-email</code> to install git command line tools.
+On Debian run <code>sudo apt-get install git-email</code> to install git command line tools.
 </p>
 
 <p>
@@ -146,7 +146,7 @@ Then run <code>cpan Authen::SASL MIME::Base64 Net::SMTP::SSL</code> to install p
 </p>
 
 <p>
-Modify <code>~/.gitconfig</code> if you use Gmail SMTP:
+Modify <code>~/.gitconfig</code> to use Gmail SMTP:
 </p>
 <div class="org-src-container">
 
@@ -160,9 +160,9 @@ Modify <code>~/.gitconfig</code> if you use Gmail SMTP:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb98b3de" class="outline-3">
-<h4 id="orgb98b3de">Send the latest commit</h4>
-<div class="outline-text-3" id="text-orgb98b3de">
+<div id="outline-container-org321dec7" class="outline-3">
+<h4 id="org321dec7">Send the latest commit</h4>
+<div class="outline-text-3" id="text-org321dec7">
 <div class="org-src-container">
 
 <pre><code class="lang-bash"># send one commit
@@ -173,9 +173,9 @@ git send-email -1 --annotate
 </div>
 </div>
 
-<div id="outline-container-orgb76022d" class="outline-3">
-<h4 id="orgb76022d">Apply patch</h4>
-<div class="outline-text-3" id="text-orgb76022d">
+<div id="outline-container-orga5db506" class="outline-3">
+<h4 id="orga5db506">Apply patch</h4>
+<div class="outline-text-3" id="text-orga5db506">
 <p>
 Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
 </p>
@@ -191,9 +191,9 @@ Emacs will ask for directory to save that patch. Say I save it as <code>~/News/p
 </div>
 </div>
 </div>
-<div id="outline-container-org21e6269" class="outline-3">
-<h4 id="org21e6269">Syntax highlight patch embedded in mail (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-org21e6269">
+<div id="outline-container-org6e57dd4" class="outline-3">
+<h4 id="org6e57dd4">Syntax highlight patch embedded in mail (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-org6e57dd4">
 <p>
 Use <a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch/gnus-article-treat-patch.el">gnus-article-treat-patch.el</a>.
 </p>

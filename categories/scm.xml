@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about scm)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/scm.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Perforce Tip: how to apply my default change to the release branch</title><link>http://blog.binchen.org/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about scm)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/scm.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Perforce Tip: how to apply my default change to the release branch</title><link>http://blog.binchen.org/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Tip: how to apply my default change to the release branch :en:linux:scm:perforce:
 &lt;/p&gt;
 
-&lt;div id="outline-container-org4834995" class="outline-2"&gt;
-&lt;h3 id="org4834995"&gt;Reasons I need this hack&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4834995"&gt;
+&lt;div id="outline-container-orgdfd051d" class="outline-2"&gt;
+&lt;h3 id="orgdfd051d"&gt;Reasons I need this hack&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdfd051d"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash &lt;code&gt;\&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;My p4 CLI program is from Windows installer because Cygwin version has the slash issue.&lt;/li&gt;
@@ -14,9 +14,9 @@ Tip: how to apply my default change to the release branch :en:linux:scm:perforce
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org51aefe8" class="outline-2"&gt;
-&lt;h3 id="org51aefe8"&gt;How to?&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org51aefe8"&gt;
+&lt;div id="outline-container-org32f3107" class="outline-2"&gt;
+&lt;h3 id="org32f3107"&gt;How to?&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org32f3107"&gt;
 &lt;p&gt;
 Create the patch,
 &lt;/p&gt;

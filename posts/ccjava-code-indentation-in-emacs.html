@@ -79,9 +79,9 @@ if(true) {
 code indentation in Emacs                                          :en:emacs:java:c::c:
 </p>
 
-<div id="outline-container-org3326e55" class="outline-2">
-<h3 id="org3326e55">Problem</h3>
-<div class="outline-text-2" id="text-org3326e55">
+<div id="outline-container-orgec3a2d6" class="outline-2">
+<h3 id="orgec3a2d6">Problem</h3>
+<div class="outline-text-2" id="text-orgec3a2d6">
 <p>
 There are two styles when insert curly braces in C like languages.
 </p>
@@ -125,9 +125,9 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
 </div>
 </div>
 
-<div id="outline-container-org2c9bcb1" class="outline-2">
-<h3 id="org2c9bcb1">Solution</h3>
-<div class="outline-text-2" id="text-org2c9bcb1">
+<div id="outline-container-org0436c52" class="outline-2">
+<h3 id="org0436c52">Solution</h3>
+<div class="outline-text-2" id="text-org0436c52">
 <p>
 Insert below code into ~/.emacs:
 </p>
@@ -157,9 +157,9 @@ That's it.
 </div>
 </div>
 
-<div id="outline-container-orgde9f293" class="outline-2">
-<h3 id="orgde9f293">Explanation</h3>
-<div class="outline-text-2" id="text-orgde9f293">
+<div id="outline-container-org3993e8f" class="outline-2">
+<h3 id="org3993e8f">Explanation</h3>
+<div class="outline-text-2" id="text-org3993e8f">
 <p>
 When you press the ENTER key, the function <b>c-indent-line</b> will be called.
 </p>
@@ -194,9 +194,9 @@ And the context <b>func-decl-cont</b> corresponds to:
 </div>
 </div>
 
-<div id="outline-container-org49c1b51" class="outline-2">
-<h3 id="org49c1b51">Technical details</h3>
-<div class="outline-text-2" id="text-org49c1b51">
+<div id="outline-container-orgf349334" class="outline-2">
+<h3 id="orgf349334">Technical details</h3>
+<div class="outline-text-2" id="text-orgf349334">
 <p>
 When you press ENTER key, the new line will be inserted. Then the function <b>indent-according-to-mode</b> will always be called
 </p>
