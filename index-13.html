@@ -130,14 +130,13 @@
 
             </div>
             <div class="body">
-                <div id="outline-container-org7022dba" class="outline-2">
-<h3 id="org7022dba">Use Gnus to apply patch sent by `git send-email`   <span class="tag"><span class="git">git</span> <span class="email">email</span> <span class="patch">patch</span> <span class="gnus">gnus</span> <span class="en">en</span> <span class="emacs">emacs</span></span>
-</h3>
-<div class="outline-text-2" id="text-org7022dba">
+                <div id="outline-container-org489d2fb" class="outline-2">
+org489d2fb"&gt;Use Gnus to apply patch sent by `git send-email`   <span class="tag"><span class="git">git</span> <span class="email">email</span> <span class="patch">patch</span> <span class="gnus">gnus</span> <span class="en">en</span> <span class="emacs">emacs</span></span>
+<div class="outline-text-2" id="text-org489d2fb">
 </div>
-<div id="outline-container-org267afbe" class="outline-3">
-<h4 id="org267afbe">Setup git-send-email</h4>
-<div class="outline-text-3" id="text-org267afbe">
+<div id="outline-container-orga1211e4" class="outline-3">
+<h4 id="orga1211e4">Setup git-send-email</h4>
+<div class="outline-text-3" id="text-orga1211e4">
 <p>
 On Debian you need run <code>sudo apt-get install git-email</code> at first.
 </p>
@@ -161,9 +160,9 @@ Modify <code>~/.gitconfig</code> if you use Gmail SMTP:
 </div>
 </div>
 </div>
-<div id="outline-container-org2871756" class="outline-3">
-<h4 id="org2871756">Send the latest commit</h4>
-<div class="outline-text-3" id="text-org2871756">
+<div id="outline-container-org5c70212" class="outline-3">
+<h4 id="org5c70212">Send the latest commit</h4>
+<div class="outline-text-3" id="text-org5c70212">
 <div class="org-src-container">
 
 <pre><code class="lang-bash"># send one commit
@@ -174,15 +173,15 @@ git send-email -1 --annotate
 </div>
 </div>
 
-<div id="outline-container-org0a7b707" class="outline-3">
-<h4 id="org0a7b707">Apply patch in Gnus</h4>
-<div class="outline-text-3" id="text-org0a7b707">
+<div id="outline-container-orge9026fd" class="outline-3">
+<h4 id="orge9026fd">Apply patch</h4>
+<div class="outline-text-3" id="text-orge9026fd">
 <p>
 Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
 </p>
 
 <p>
-Emacs will ask for directory to sve that email. Say I save it as <code>~/News/patch/hello.patch</code>.
+Emacs will ask for directory to save that patch. Say I save it as <code>~/News/patch/hello.patch</code>.
 </p>
 <div class="org-src-container">
 
@@ -192,9 +191,9 @@ Emacs will ask for directory to sve that email. Say I save it as <code>~/News/pa
 </div>
 </div>
 </div>
-<div id="outline-container-orgd720baa" class="outline-3">
-<h4 id="orgd720baa">Syntax highlight patch embedded in email (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-orgd720baa">
+<div id="outline-container-org93d7f29" class="outline-3">
+<h4 id="org93d7f29">Syntax highlight patch when reading mail (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-org93d7f29">
 <p>
 Use <a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch/gnus-article-treat-patch.el">gnus-article-treat-patch.el</a>.
 </p>
