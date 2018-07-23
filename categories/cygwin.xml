@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (cygwin)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cygwin.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:00 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy/Paste in Emacs</title><link>http://blog.binchen.org/posts/copypaste-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about cygwin)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/cygwin.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy/Paste in Emacs</title><link>http://blog.binchen.org/posts/copypaste-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 in Emacs                                                           :emacs:linux:cygwin:clipboard:en:
 &lt;/p&gt;
 
@@ -11,9 +11,9 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-04 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgf20e43d" class="outline-2"&gt;
-&lt;h3 id="orgf20e43d"&gt;Prepare&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf20e43d"&gt;
+&lt;div id="outline-container-orgfdaf898" class="outline-2"&gt;
+&lt;h3 id="orgfdaf898"&gt;Prepare&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgfdaf898"&gt;
 &lt;p&gt;
 On Linux, &lt;a href="http://www.vergenet.net/~conrad/software/xsel/"&gt;xsel&lt;/a&gt; is required.
 &lt;/p&gt;
@@ -30,18 +30,18 @@ On macOS, NO external tool is required.
 On Windows 10 Linux Subsystem. No external tool is required.
 &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-org3d5191e" class="outline-2"&gt;
-&lt;h3 id="org3d5191e"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3d5191e"&gt;
+&lt;div id="outline-container-orgbe72529" class="outline-2"&gt;
+&lt;h3 id="orgbe72529"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbe72529"&gt;
 &lt;p&gt;
 This solution works reliably on &lt;b&gt;any environment&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 Insert below code into &lt;code&gt;~/.emacs&lt;/code&gt;. Run &lt;code&gt;M-x paste-from-xclipboard&lt;/code&gt; to paste.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun my-gclip ()
@@ -113,16 +113,16 @@ Insert below code into &lt;code&gt;~/.emacs&lt;/code&gt;. Run &lt;code&gt;M-x pa
 &lt;p&gt;
 My actual setup is more robust. See &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-clipboard.el&lt;/a&gt; for details.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-orgbee837e" class="outline-2"&gt;
+&lt;h3 id="orgbee837e"&gt;Tips&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbee837e"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org7c3ecda" class="outline-2"&gt;
-&lt;h3 id="org7c3ecda"&gt;Tips&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7c3ecda"&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org852f3b7" class="outline-3"&gt;
-&lt;h4 id="org852f3b7"&gt;Clipboard manager&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org852f3b7"&gt;
+&lt;div id="outline-container-orgbc43a30" class="outline-3"&gt;
+&lt;h4 id="orgbc43a30"&gt;Clipboard manager&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbc43a30"&gt;
 &lt;p&gt;
 I suggest &lt;a href="http://parcellite.sourceforge.net/"&gt;Parcellite&lt;/a&gt; on Linux, &lt;a href="http://ditto-cp.sourceforge.net/"&gt;Ditto&lt;/a&gt; on Windows, &lt;a href="https://github.com/TermiT/Flycut"&gt;Flycut&lt;/a&gt; on macOS.
 &lt;/p&gt;
@@ -159,20 +159,20 @@ trim_newline=false
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org656bef7" class="outline-3"&gt;
-&lt;h4 id="org656bef7"&gt;Clipboard when ssh&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org656bef7"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org190f70e" class="outline-3"&gt;
+&lt;h4 id="org190f70e"&gt;Clipboard when ssh&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org190f70e"&gt;
 &lt;p&gt;
 Try,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-sh"&gt;ssh -X -C -c blowfish-cbc,arcfour $@
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>clipboard</category><category>cygwin</category><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/copypaste-in-emacs.html</guid><pubDate>Mon, 30 Jan 2012 10:52:00 GMT</pubDate></item><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;

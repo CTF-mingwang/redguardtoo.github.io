@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ide)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ide.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:01 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ide)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ide.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 as C++ IDE, easy way                                                    :en:emacs:c:global:gtags:c:ide:
 &lt;/p&gt;
 
@@ -28,9 +28,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org3df5b43" class="outline-2"&gt;
-&lt;h3 id="org3df5b43"&gt;Step 1, create sample projects for experiment&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3df5b43"&gt;
+&lt;div id="outline-container-org6b16639" class="outline-2"&gt;
+&lt;h3 id="org6b16639"&gt;Step 1, create sample projects for experiment&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6b16639"&gt;
 &lt;p&gt;
 I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;.
 &lt;/p&gt;
@@ -56,7 +56,6 @@ Let's create directories,
 &lt;p&gt;
 The content of &lt;code&gt;~/proj2/lib.cpp&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;void proj2_hello(int a2, char* b2) {
@@ -68,7 +67,6 @@ The content of &lt;code&gt;~/proj2/lib.cpp&lt;/code&gt;,
 &lt;p&gt;
 The content of &lt;code&gt;~/proj1/main.cpp&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-c"&gt;void proj1_hello(int a1, char* b1) {
@@ -80,16 +78,17 @@ int main(int argc, char *argv[]) {
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc72a34f" class="outline-2"&gt;
-&lt;h3 id="orgc72a34f"&gt;Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc72a34f"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org07f02e6" class="outline-2"&gt;
+&lt;h3 id="org07f02e6"&gt;Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org07f02e6"&gt;
 &lt;p&gt;
 Run below command in shell to scan code,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# dump index files to ~/obj if the project/library directories are read only
 cd /usr/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
 cd /usr/linux/include &amp;amp;&amp;amp; MAKEOBJDIRPREFIX=~/obj gtags 
@@ -105,7 +104,6 @@ cd ~/proj2 &amp;amp;&amp;amp; gtags
 &lt;p&gt;
 If you are &lt;b&gt;using old Global&lt;/b&gt; (v5.7.1, for example), the command to create tags file in read only directory may fail. This is Global's bug. But there is workaround:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# dump index files to ~/obj if the project/library directories are read only
@@ -122,7 +120,6 @@ Global introduced &lt;code&gt;MAKEOBJDIRPREFIX&lt;/code&gt; on 2008-03-23.
 &lt;p&gt;
 After installing Emacs plugins and setup (minimum setup from their website is enough), insert below code into ~/.emacs,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Please note `file-truename' must be used!
@@ -138,15 +135,16 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd5a09bb" class="outline-2"&gt;
-&lt;h3 id="orgd5a09bb"&gt;Usage&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd5a09bb"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org5ca4d01" class="outline-2"&gt;
+&lt;h3 id="org5ca4d01"&gt;Usage&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5ca4d01"&gt;
 &lt;p&gt;
 Use the Emacs plugins as usual.
 &lt;/p&gt;
+
 &lt;p&gt;
 But you need install latest company built on 25th August because I &lt;a href="https://github.com/company-mode/company-mode/issues/570"&gt;fixed a company issue&lt;/a&gt; yesterday.
 &lt;/p&gt;
@@ -155,16 +153,17 @@ But you need install latest company built on 25th August because I &lt;a href="h
 Screenshot,
 &lt;/p&gt;
 
+
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/cpp-gtags-demo-nq8.png" alt="cpp-gtags-demo-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga1d8765" class="outline-2"&gt;
-&lt;h3 id="orga1d8765"&gt;Technical Details (Optional)&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orga1d8765"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org427e01d" class="outline-2"&gt;
+&lt;h3 id="org427e01d"&gt;Technical Details (Optional)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org427e01d"&gt;
 &lt;p&gt;
 Check &lt;a href="https://www.gnu.org/software/global/manual/global.html"&gt;GNU Global manual&lt;/a&gt; to understand environment variables &lt;code&gt;GTAGSLIBPATH&lt;/code&gt; and &lt;code&gt;MAKEOBJDIRPREFIX&lt;/code&gt;.
 &lt;/p&gt;

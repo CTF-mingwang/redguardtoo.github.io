@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:00 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about software)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/software.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to manage the file path in big project                                    :en:engineering:software:bash:
 &lt;/p&gt;
 
@@ -102,37 +102,37 @@ BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt;
 这是为有志于成为高手的中级Linux用户而写的入门指导.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org5a80b99" class="outline-2"&gt;
-&lt;h3 id="org5a80b99"&gt;哲学&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org5a80b99"&gt;
+&lt;div id="outline-container-org69fde6b" class="outline-2"&gt;
+&lt;h3 id="org69fde6b"&gt;哲学&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org69fde6b"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org126b282" class="outline-3"&gt;
-&lt;h4 id="org126b282"&gt;长期投资&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org126b282"&gt;
+&lt;div id="outline-container-orgf137b2f" class="outline-3"&gt;
+&lt;h4 id="orgf137b2f"&gt;长期投资&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf137b2f"&gt;
 &lt;p&gt;
 软件对我而言是长期投资.所以我会花很多时间学习软件的快捷键(快捷键长期来说操作比鼠标高效),那种只能用鼠标操作的软件对我来说就是"坏"软件.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgaafc3af" class="outline-3"&gt;
-&lt;h4 id="orgaafc3af"&gt;理性思维&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgaafc3af"&gt;
+&lt;div id="outline-container-orgbd2b835" class="outline-3"&gt;
+&lt;h4 id="orgbd2b835"&gt;理性思维&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbd2b835"&gt;
 &lt;p&gt;
 以文件管理器来说,在Windows平台下我长期使用并热爱Total Commander,在Linux下平台下也有几款文件管理器在界面和功能上和Total Commander上非常接近,自然从感情上讲我会爱屋及乌.但是我最后还是选择了以Emacs作为主要的文件管理器,以丑陋的Midnight Commander为辅助,因我已确定选择软件的总的原则是尽可能用少的的软件做尽可能多的事.具体说来就是以Emacs做任何事,如果一定要用其他软件辅助Emacs,快捷键也应是Emacs的.Midnight Commander符合该条件
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd148ae3" class="outline-3"&gt;
-&lt;h4 id="orgd148ae3"&gt;科学方法&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd148ae3"&gt;
+&lt;div id="outline-container-org8d3f6fb" class="outline-3"&gt;
+&lt;h4 id="org8d3f6fb"&gt;科学方法&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org8d3f6fb"&gt;
 &lt;p&gt;
 细节见后文,我要强调的是我的工具和方法都是有高手验证过,有官方文档支持.对我而言,科学的含义,就是前人反复验证过的,过去100%成功也许能保证现在将来可能成功(因工具环境不断在变化,所以只是有可能).除此以外都不叫科学.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga1bb3c4" class="outline-3"&gt;
-&lt;h4 id="orga1bb3c4"&gt;以人为本&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orga1bb3c4"&gt;
+&lt;div id="outline-container-org9074cee" class="outline-3"&gt;
+&lt;h4 id="org9074cee"&gt;以人为本&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org9074cee"&gt;
 &lt;p&gt;
 在后文我会列出一些筛选软件的方法.也会推荐一些软件.但你决不要认为只要用了这些软件或者记住了我的方法就能成为高手了.这只是敲门砖而已.
 &lt;/p&gt;
@@ -141,31 +141,31 @@ BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt;
 实际上我推荐的不是软件,而是人.这些软件和用户和开发者是一个精英荟萃的圈子.重要的是跟对人.
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orge447d83" class="outline-2"&gt;
-&lt;h3 id="orge447d83"&gt;少而精&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge447d83"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge839172" class="outline-2"&gt;
+&lt;h3 id="orge839172"&gt;少而精&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge839172"&gt;
 &lt;p&gt;
 软件数量少,品质高,功能强,依赖小,界面通用.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2f1cb7f" class="outline-3"&gt;
-&lt;h4 id="org2f1cb7f"&gt;数量少&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2f1cb7f"&gt;
+&lt;div id="outline-container-orgd68176c" class="outline-3"&gt;
+&lt;h4 id="orgd68176c"&gt;数量少&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgd68176c"&gt;
 &lt;p&gt;
 很重要,只有用的软件少(但是完成工作不少),才能有精力精通.
 &lt;/p&gt;
+
 &lt;p&gt;
 软件少的另一好处是维护省心,例如找出多个软件快捷键冲突和在安装软件数量有关系.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org62bdd59" class="outline-3"&gt;
-&lt;h4 id="org62bdd59"&gt;品质高&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org62bdd59"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgc96c133" class="outline-3"&gt;
+&lt;h4 id="orgc96c133"&gt;品质高&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgc96c133"&gt;
 &lt;p&gt;
 实质很简单,就是:
 &lt;/p&gt;
@@ -173,100 +173,102 @@ BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt;
 &lt;li&gt;久经考验(例如Emacs的开发历史有35年以上)&lt;/li&gt;
 &lt;li&gt;聪明人认同&lt;/li&gt;
 &lt;/ul&gt;
+
 &lt;p&gt;
 何为久经考验,何为聪明人,是可找出客观指标.指标越严格,筛选结果就越少.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org3a39fc1" class="outline-3"&gt;
-&lt;h4 id="org3a39fc1"&gt;功能强&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org3a39fc1"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org67c149f" class="outline-3"&gt;
+&lt;h4 id="org67c149f"&gt;功能强&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org67c149f"&gt;
 &lt;p&gt;
 原谅我又用Emacs举例,它可以看网页,收邮件,写程序,做笔记,写博客.
 &lt;/p&gt;
+
 &lt;p&gt;
 功能强的终极境界就是提供了一个无所不能的可编程平台.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2c0ed2e" class="outline-3"&gt;
-&lt;h4 id="org2c0ed2e"&gt;依赖小&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2c0ed2e"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgc59dc62" class="outline-3"&gt;
+&lt;h4 id="orgc59dc62"&gt;依赖小&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgc59dc62"&gt;
 &lt;p&gt;
 例如,命令行软件不依赖于QT,GTK之类图形界面库,安装包小很多,运行时消耗内存也小,启动快.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgade5dcc" class="outline-3"&gt;
-&lt;h4 id="orgade5dcc"&gt;界面通用&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgade5dcc"&gt;
+&lt;div id="outline-container-orgf393acc" class="outline-3"&gt;
+&lt;h4 id="orgf393acc"&gt;界面通用&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf393acc"&gt;
 &lt;p&gt;
 例如,我写程序用emacs,一般操作用bash shell,上网用Firefox,但是通过适当的设置(Firefox需要安装插件keysnail,其他软件只要用最新版即可),他们的快捷键都是Emacs的.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgbe54678" class="outline-2"&gt;
-&lt;h3 id="orgbe54678"&gt;软件推荐&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgbe54678"&gt;
+
+&lt;div id="outline-container-org9deba75" class="outline-2"&gt;
+&lt;h3 id="org9deba75"&gt;软件推荐&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org9deba75"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgb330acd" class="outline-3"&gt;
-&lt;h4 id="orgb330acd"&gt;编辑器&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgb330acd"&gt;
+&lt;div id="outline-container-org53eb218" class="outline-3"&gt;
+&lt;h4 id="org53eb218"&gt;编辑器&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org53eb218"&gt;
 &lt;p&gt;
 我用Emacs,考虑到它可以做任何事,可以认为它是轻量级的.
 &lt;/p&gt;
+
 &lt;p&gt;
 Vim也用,万不得已用nano,结束了.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf393552" class="outline-3"&gt;
-&lt;h4 id="orgf393552"&gt;浏览器&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgf393552"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orge0cb8f9" class="outline-3"&gt;
+&lt;h4 id="orge0cb8f9"&gt;浏览器&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orge0cb8f9"&gt;
 &lt;p&gt;
 Firefox.它是自由软件,所以有很多顶尖Geek为其写插件.例如&lt;a href="https://github.com/mooz/keysnail/wiki"&gt;keysnail&lt;/a&gt;可以把Firefox的快捷键设置为Emacs的快捷键.所以我可以不用鼠标浏览网页.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org8ee9fbb" class="outline-3"&gt;
-&lt;h4 id="org8ee9fbb"&gt;Shell&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org8ee9fbb"&gt;
+&lt;div id="outline-container-org69984c8" class="outline-3"&gt;
+&lt;h4 id="org69984c8"&gt;Shell&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org69984c8"&gt;
 &lt;p&gt;
 我用bash,在我的.bashrc中有如下一行,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-sh"&gt;export HISTSIZE=200000
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;
 确保我输入的所有命令都不会丢失,我偏爱命令行软件,但是记命令会消耗我很多脑细胞,所以我让shell替我记住.我只要记住按Ctrl+R可搜索历史就好了.
 &lt;/p&gt;
+
 &lt;p&gt;
 其他有用的选项还很多.这只是个例子,说明Bash是可编程的.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2cb37b9" class="outline-3"&gt;
-&lt;h4 id="org2cb37b9"&gt;桌面&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2cb37b9"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org55a84fa" class="outline-3"&gt;
+&lt;h4 id="org55a84fa"&gt;桌面&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org55a84fa"&gt;
 &lt;p&gt;
 Gnome是不考虑,用轻量级的&lt;a href="http://i3wm.org/"&gt;i3&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 i3是平铺桌面(例如左窗口写代码,右窗口看PDF文档),学习曲线低.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org088b46f" class="outline-3"&gt;
-&lt;h4 id="org088b46f"&gt;其他&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org088b46f"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgfa0f9fd" class="outline-3"&gt;
+&lt;h4 id="orgfa0f9fd"&gt;其他&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgfa0f9fd"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;联网自己写脚本,因为GUI工具如wicd之类的依赖多&lt;/li&gt;
 &lt;li&gt;听音乐用命令行工具mpd和mpc&lt;/li&gt;
@@ -276,24 +278,25 @@ i3是平铺桌面(例如左窗口写代码,右窗口看PDF文档),学习曲线�
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org9599785" class="outline-2"&gt;
-&lt;h3 id="org9599785"&gt;软件使用也需维护&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org9599785"&gt;
+
+&lt;div id="outline-container-org2b48d28" class="outline-2"&gt;
+&lt;h3 id="org2b48d28"&gt;软件使用也需维护&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org2b48d28"&gt;
 &lt;p&gt;
 安装软件在包管理系统的帮助下很简单.麻烦的是最新软件有时候不稳定,这通常是因为软件的配置文件更新引起的.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgb5b9826" class="outline-3"&gt;
-&lt;h4 id="orgb5b9826"&gt;将/etc目录下的默认配置文件备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgb5b9826"&gt;
+&lt;div id="outline-container-org91795cb" class="outline-3"&gt;
+&lt;h4 id="org91795cb"&gt;将/etc目录下的默认配置文件备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org91795cb"&gt;
 &lt;p&gt;
 Linux的软件默认配置文件在/etc/目录下.
 我使用分布式版本控制软件&lt;a href="http://git-scm.com/"&gt;git&lt;/a&gt;管理/etc目录,分布式版本控制系统好处很多,最大好处就是数据到处有完整备份,非常安全.具体细节请参考&lt;a href="http://en.wikipedia.org/wiki/Distributed_revision_control_system"&gt;wikipedia&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 在Linux上更新完系统或者安装最新软件包后,可以考虑手动将/etc目录下的文件用git备份.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo git add /etc/
@@ -305,7 +308,6 @@ sudo git commit -am "backup"
 &lt;p&gt;
 一旦某软件不正常,可检查其/etc下默认配置文件的修改纪录,将配置文件恢复到上一正常版本.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo git log /etc/mysql/my.cnf #check history
@@ -313,12 +315,12 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orge73da83" class="outline-3"&gt;
-&lt;h4 id="orge73da83"&gt;将用户目录下的用户定制配置文件备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orge73da83"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge5d762d" class="outline-3"&gt;
+&lt;h4 id="orge5d762d"&gt;将用户目录下的用户定制配置文件备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orge5d762d"&gt;
 &lt;p&gt;
 我也用git将配置文件(在/home/username/下)备份到&lt;a href="http://www.github.com"&gt;github&lt;/a&gt;的服务器上.这里必须用第三方服务器同步配置,因为我使用多台电脑.
 &lt;/p&gt;
@@ -327,18 +329,17 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 具体操作不展开了.
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-org44bb9c1" class="outline-3"&gt;
-&lt;h4 id="org44bb9c1"&gt;将软件版本降级&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org44bb9c1"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgbd04117" class="outline-3"&gt;
+&lt;h4 id="orgbd04117"&gt;将软件版本降级&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbd04117"&gt;
 &lt;p&gt;
 最新版本的软件可能不稳定,这时降级是必要的.
 &lt;/p&gt;
+
 &lt;p&gt;
 对于Arch Linux来说很简单,请参考&lt;a href="https://wiki.archlinux.org/index.php/Downgrading_Packages"&gt;Archwiki&lt;/a&gt;,实际上很简单,安装名为downgrade的软件,然后让它干所有的体力活就行了.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;packer downgrade
@@ -353,38 +354,36 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;p&gt;
 小众版本(我用Gentoo Linux)策略是不随意用最新版本的软件.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf34307b" class="outline-3"&gt;
-&lt;h4 id="orgf34307b"&gt;云备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgf34307b"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgcabc007" class="outline-3"&gt;
+&lt;h4 id="orgcabc007"&gt;云备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgcabc007"&gt;
 &lt;p&gt;
 多媒体文件用云备份服务更好,我推荐&lt;a href="https://www.getdropbox.com/referrals/NTg1ODg2Mjk"&gt;Dropbox&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 顺便说一下,国内的服务不要用,安全原因,不言自明.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc908faa" class="outline-3"&gt;
-&lt;h4 id="orgc908faa"&gt;备份操作系统&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc908faa"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org0be5a87" class="outline-3"&gt;
+&lt;h4 id="org0be5a87"&gt;备份操作系统&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org0be5a87"&gt;
 &lt;p&gt;
 不用经常作,又有云备份,又有分布式版本控制系统,怕什么.
 &lt;/p&gt;
+
 &lt;p&gt;
 备份整个硬盘是用&lt;a href="http://clonezilla.org/"&gt;Clonezilla&lt;/a&gt;,只是备份操作系统的话用以下命令,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;tar zcvpf mylinux.tgz --exclude=/proc/* --exclude=/lost+found --exclude='mylinux.tgz' --exclude=/mnt/* --exclude=/home/username/* --exclude=/sys/* /
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 我建议用前者,因为省事.
 &lt;/p&gt;
@@ -396,15 +395,15 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;p&gt;
 如果能够按照少而精的原则选软件的话,操作系统分区不需很大(8G足够了),目前我所占空间控制在3G左右(例子比较极端,因我netbook只有4G硬盘),这样clonezilla的操作就很快.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc411111" class="outline-3"&gt;
-&lt;h4 id="orgc411111"&gt;阅读官方文档&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc411111"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org9402abf" class="outline-3"&gt;
+&lt;h4 id="org9402abf"&gt;阅读官方文档&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org9402abf"&gt;
 &lt;p&gt;
 阅读官方和社区文档.
 &lt;/p&gt;
+
 &lt;p&gt;
 Ubuntu社区的特点用户多,少见的bug一般都会在该社区报告.缺点是其文档深度不够.
 &lt;/p&gt;
@@ -412,24 +411,25 @@ Ubuntu社区的特点用户多,少见的bug一般都会在该社区报告.缺点
 &lt;p&gt;
 Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术含量很高.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5e42234" class="outline-3"&gt;
-&lt;h4 id="org5e42234"&gt;虚拟机的用处&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org5e42234"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org1d9ce3e" class="outline-3"&gt;
+&lt;h4 id="org1d9ce3e"&gt;虚拟机的用处&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org1d9ce3e"&gt;
 &lt;p&gt;
 我虚拟机软件使用VirtualBox,虚拟机为Windows XP,该操作系统我会定期更新安全补丁.软件只安装了IE和firefox.该操作系统我只用来操作网络银行.每次操作完毕,我会重置虚拟机状态到操作前的snapshot.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org25716e2" class="outline-2"&gt;
-&lt;h3 id="org25716e2"&gt;常用软件的诊断修复&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org25716e2"&gt;
+
+&lt;div id="outline-container-orgbb6a8b5" class="outline-2"&gt;
+&lt;h3 id="orgbb6a8b5"&gt;常用软件的诊断修复&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbb6a8b5"&gt;
 &lt;p&gt;
 即使用了上述做法,一年中也会有一次倒霉.就是某个版本软件出问题了.没人能帮忙,不能降级,改配置也没用,也没有可用的错误信息.
 &lt;/p&gt;
+
 &lt;p&gt;
 问题看起来很难,事实上5分钟就搞定.这往往是因为依赖的第三方库的版本出问题了.
 &lt;/p&gt;
@@ -437,14 +437,12 @@ Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术
 &lt;p&gt;
 比如说firefox不能启动,运行如下命令调试,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;strace -o err.txt firefox
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 读一下err.txt就可以知道是哪个库出问题了.不需要任何编程知识的,猜加google就可以了.
 &lt;/p&gt;
@@ -456,14 +454,12 @@ Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术
 &lt;p&gt;
 如果/usr/lib/libpng.so.15是存在的,我们可以用该库顶替libpng.so.14,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;sudo ln -s /usr/lib/libpng.so.15 /usr/lib/libpng.so.14
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 通常这样就行了.
 &lt;/p&gt;
@@ -475,33 +471,31 @@ Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术
 &lt;p&gt;
 以Arch Linux为例(其他发行版也有类似功能):
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;pkgfile libpng
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;packer -S pkgtools-git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org3091e6f" class="outline-2"&gt;
-&lt;h3 id="org3091e6f"&gt;系统启动失败的修复&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3091e6f"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgcac5ca6" class="outline-2"&gt;
+&lt;h3 id="orgcac5ca6"&gt;系统启动失败的修复&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcac5ca6"&gt;
 &lt;p&gt;
 解决方法很简单,用常见的Linux启动光盘启动,然后chroot,其作用是以指定目录作为操作系统根目录(root directory),然后以此根目录为基准建立一个新的环境.
 &lt;/p&gt;
+
 &lt;p&gt;
 细节请参考&lt;a href="https://wiki.archlinux.org/index.php/Change_Root"&gt;https://wiki.archlinux.org/index.php/Change_Root&lt;/a&gt;.
 &lt;/p&gt;
@@ -509,16 +503,18 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;p&gt;
 比如说我升级kernel后系统启动失败,而老的kernel没有备份,我可以光盘启动电脑,然后chroot,再使用上文所提的工具升级或者降级kernel.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5dd1b4a" class="outline-2"&gt;
-&lt;h3 id="org5dd1b4a"&gt;书籍推荐&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org5dd1b4a"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgf5d01ad" class="outline-2"&gt;
+&lt;h3 id="orgf5d01ad"&gt;书籍推荐&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf5d01ad"&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -531,6 +527,7 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;td class="org-left"&gt;&lt;a href="http://www.tldp.org/LDP/abs/html/index.html"&gt;Advanced Bash-Scripting Guide&lt;/a&gt; by Mendel Cooper&lt;/td&gt;
 &lt;td class="org-left"&gt;经典,其.bashrc模板很有价值&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;&lt;a href="http://www.catb.org/esr/writings/taoup/"&gt;The Art of Unix Programming by Eric Steven Raymond&lt;/a&gt;&lt;/td&gt;
 &lt;td class="org-left"&gt;开拓思路,当八卦看,和编程关系不大&lt;/td&gt;
@@ -540,30 +537,31 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;td class="org-left"&gt;&lt;a href="http://debian-handbook.info/browse/stable/"&gt;The Debian Administrator's Handbook&lt;/a&gt;&lt;/td&gt;
 &lt;td class="org-left"&gt;很好.捡有用的章节看&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgea04e8f" class="outline-2"&gt;
-&lt;h3 id="orgea04e8f"&gt;常见问题&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgea04e8f"&gt;
+
+&lt;div id="outline-container-orgd18d2ce" class="outline-2"&gt;
+&lt;h3 id="orgd18d2ce"&gt;常见问题&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd18d2ce"&gt;
 &lt;p&gt;
 等你的问题了.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org66f8039" class="outline-2"&gt;
-&lt;h3 id="org66f8039"&gt;联系我&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org66f8039"&gt;
+
+&lt;div id="outline-container-org17ceb46" class="outline-2"&gt;
+&lt;h3 id="org17ceb46"&gt;联系我&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org17ceb46"&gt;
 &lt;p&gt;
 这是我的&lt;a href="https://twitter.com/#!/chen_bin"&gt;twitter&lt;/a&gt;和&lt;a href="https://plus.google.com/110954683162859211810"&gt;google plus&lt;/a&gt;,也可以通过我的email&amp;lt;chenbin DOT sh AT GMAIL DOT COM&amp;gt;联系我.
 &lt;/p&gt;
+
 &lt;p&gt;
 我的主力博客为&lt;a href="http://blog.binchen.org"&gt;http://blog.binchen.org&lt;/a&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>desktop</category><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/linux-zhuo-mian-shi-yong-zhi-dao.html</guid><pubDate>Sun, 08 May 2011 18:08:00 GMT</pubDate></item><item><title>用mintty作为cygwin的console</title><link>http://blog.binchen.org/posts/yong-mintty-zuo-wei-cyginw-de-console.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 :cygwin:software:zh:chinese:
 &lt;/p&gt;
@@ -663,25 +661,26 @@ screen                         :software:linux:zh:
 最新版的screen的一个重要特性就是已支持垂直分屏,其快捷键为=C-a |=.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd6ff34c" class="outline-2"&gt;
-&lt;h3 id="orgd6ff34c"&gt;要安装最新版的screen,在我的&lt;a href="http://www.archlinux.org"&gt;Arch Linux&lt;/a&gt;下很简单,&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd6ff34c"&gt;
+&lt;div id="outline-container-org787c41f" class="outline-2"&gt;
+&lt;h3 id="org787c41f"&gt;要安装最新版的screen,在我的&lt;a href="http://www.archlinux.org"&gt;Arch Linux&lt;/a&gt;下很简单,&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org787c41f"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;packer -S screen-git
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd61f992" class="outline-2"&gt;
-&lt;h3 id="orgd61f992"&gt;在windows的cygwin下安装要多几步.&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd61f992"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgf25caac" class="outline-2"&gt;
+&lt;h3 id="orgf25caac"&gt;在windows的cygwin下安装要多几步.&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf25caac"&gt;
 &lt;p&gt;
 首先安装软件包libncurse-devel,然后去&lt;a href="http://ftp.gnu.org/gnu/screen/"&gt;官方网站&lt;/a&gt;下载最新源代码包(目前版本为4.0.3),解压缩,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-sh"&gt;tar zxf screen-4.0.3.tar.gz
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -690,19 +689,18 @@ screen                         :software:linux:zh:
 &lt;p&gt;
 编译安装,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;cd screen-4.0.3;configure;make;make install;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org0465418" class="outline-2"&gt;
-&lt;h3 id="org0465418"&gt;如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错,&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0465418"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgcca29e9" class="outline-2"&gt;
+&lt;h3 id="orgcca29e9"&gt;如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错,&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcca29e9"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;$ screen
@@ -715,24 +713,21 @@ $TERM too long - sorry.
 原因为screen的开发者对于环境变量 &lt;code&gt;$TERM&lt;/code&gt; 的最大长度做了不合理的假定.这里是&lt;a href="https://bbs.archlinux.org/viewtopic.php?pid=885446"&gt;具体讨论&lt;/a&gt;,解决办法很简单.
 在 &lt;code&gt;.Xdefaults&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
-
 &lt;pre class="example"&gt;
 urxvt*termName: rxvt-256color
 &lt;/pre&gt;
-
 &lt;p&gt;
 在 &lt;code&gt;.screenrc&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
-
 &lt;pre class="example"&gt;
 term rxvt-256color
 &lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga833362" class="outline-2"&gt;
-&lt;h3 id="orga833362"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orga833362"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge97871c" class="outline-2"&gt;
+&lt;h3 id="orge97871c"&gt;使用screen前我将screen的Ctrl-a改为Ctrl-t&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge97871c"&gt;
 &lt;p&gt;
 因为 &lt;code&gt;Ctrl-a&lt;/code&gt; 在Bash和Emacs中都是常用快捷键,在 &lt;code&gt;.screenrc&lt;/code&gt; 中添加一行,
 &lt;/p&gt;
@@ -742,12 +737,10 @@ term rxvt-256color
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 这个修改我是从&lt;a href="http://jinome.stanford.edu/"&gt;Balaji S. Srinivasan&lt;/a&gt;的&lt;a href="http://jinome.stanford.edu/stat366/unix/.screenrc"&gt;.screenrc&lt;/a&gt;抄来的. 可以参考&lt;a href="http://www.emacswiki.org/emacs/GnuScreen"&gt;EmacsWiki&lt;/a&gt;获得更多兼容Emacs的设置.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>linux</category><category>software</category><category>zh</category><guid>http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html</guid><pubDate>Sat, 23 Apr 2011 20:37:00 GMT</pubDate></item><item><title>奇客(Geek)的常用软件清单(OS X, Windows, Linux)</title><link>http://blog.binchen.org/posts/geek-chang-yong-ruan-jian-qin-dan.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;/p&gt;
@@ -779,9 +772,9 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;li&gt;绿色软件,配置文件最好是纯文本&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div id="outline-container-orgddc8431" class="outline-2"&gt;
-&lt;h3 id="orgddc8431"&gt;Windows软件清单&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgddc8431"&gt;
+&lt;div id="outline-container-orgdf61615" class="outline-2"&gt;
+&lt;h3 id="orgdf61615"&gt;Windows软件清单&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdf61615"&gt;
 &lt;p&gt;
 工作中我90%的时间用Cygwin+Visual Studio+Vim+Firefox.下班后基本不碰windows.
 &lt;/p&gt;
@@ -1129,19 +1122,22 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-org4b1c5f5" class="outline-2"&gt;
-&lt;h3 id="org4b1c5f5"&gt;Linux软件清单&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4b1c5f5"&gt;
+&lt;div id="outline-container-org6135758" class="outline-2"&gt;
+&lt;h3 id="org6135758"&gt;Linux软件清单&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6135758"&gt;
 &lt;p&gt;
 操作系统为&lt;a href="http://www.gentoo.org"&gt;Gentoo Linux&lt;/a&gt;.使用频率最高的为Git+Emacs+Vi+Firefox+I3+Bash. &lt;a href="http://ftp.mozilla.org/pub/firefox/releases/"&gt;Firefox&lt;/a&gt;和&lt;a href="http://ftp.mozilla.org/pub/thunderbird/releases/"&gt;Thunderbird&lt;/a&gt;用的是绿色版本.
 &lt;/p&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1156,6 +1152,7 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;任何事&lt;/td&gt;
 &lt;td class="org-left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;Vim&lt;/td&gt;
 &lt;td class="org-left"&gt;文本编辑&lt;/td&gt;
@@ -1293,18 +1290,20 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;邮件分类&lt;/td&gt;
 &lt;td class="org-left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org0a392cc" class="outline-2"&gt;
-&lt;h3 id="org0a392cc"&gt;Mac软件清单&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0a392cc"&gt;
+
+&lt;div id="outline-container-org43a574f" class="outline-2"&gt;
+&lt;h3 id="org43a574f"&gt;Mac软件清单&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org43a574f"&gt;
 &lt;p&gt;
 使用频率最高的软件为Emacs, Firefox, Bash, Adium.
 &lt;/p&gt;
+
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
+
 
 &lt;colgroup&gt;
 &lt;col class="org-left"&gt;
@@ -1418,21 +1417,24 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-org6b9f8dd" class="outline-2"&gt;
+&lt;h3 id="org6b9f8dd"&gt;某些优秀软件的配置&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6b9f8dd"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org757f4c1" class="outline-2"&gt;
-&lt;h3 id="org757f4c1"&gt;某些优秀软件的配置&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org757f4c1"&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-orgc9415af" class="outline-3"&gt;
-&lt;h4 id="orgc9415af"&gt;Firefox&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc9415af"&gt;
+&lt;div id="outline-container-org9de521b" class="outline-3"&gt;
+&lt;h4 id="org9de521b"&gt;Firefox&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org9de521b"&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1447,6 +1449,7 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;过滤广告,支持正则表达式&lt;/td&gt;
 &lt;td class="org-left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;KeySnail&lt;/td&gt;
 &lt;td class="org-left"&gt;安装了HoK脚本&lt;/td&gt;
@@ -1536,22 +1539,25 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;网页截屏&lt;/td&gt;
 &lt;td class="org-left"&gt;低&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orge288872" class="outline-3"&gt;
-&lt;h4 id="orge288872"&gt;ThunderBird&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orge288872"&gt;
+&lt;div id="outline-container-org760ff46" class="outline-3"&gt;
+&lt;h4 id="org760ff46"&gt;ThunderBird&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org760ff46"&gt;
 &lt;p&gt;
 原生支持Gtalk.
 &lt;/p&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1566,6 +1572,7 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;收集邮件地址&lt;/td&gt;
 &lt;td class="org-left"&gt;右击, Pick email IDs from this folder&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;Lightning&lt;/td&gt;
 &lt;td class="org-left"&gt;Calendar&lt;/td&gt;
@@ -1577,22 +1584,25 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;redirect mail&lt;/td&gt;
 &lt;td class="org-left"&gt;不回信给你&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org52773a4" class="outline-3"&gt;
-&lt;h4 id="org52773a4"&gt;Greasemonkey&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org52773a4"&gt;
+&lt;div id="outline-container-orgf3e9b93" class="outline-3"&gt;
+&lt;h4 id="orgf3e9b93"&gt;Greasemonkey&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf3e9b93"&gt;
 &lt;p&gt;
 需刷新网页使script生效
 &lt;/p&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1607,40 +1617,44 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;从网站拷贝代码&lt;/td&gt;
 &lt;td class="org-left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;眼不见心不烦&lt;/td&gt;
 &lt;td class="org-left"&gt;清理weibo.com&lt;/td&gt;
 &lt;td class="org-left"&gt;高&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org075d875" class="outline-3"&gt;
-&lt;h4 id="org075d875"&gt;Vim&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org075d875"&gt;
+&lt;div id="outline-container-orgb3c1e77" class="outline-3"&gt;
+&lt;h4 id="orgb3c1e77"&gt;Vim&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgb3c1e77"&gt;
 &lt;p&gt;
 见&lt;a href="https://github.com/redguardtoo/vimrc"&gt;https://github.com/redguardtoo/vimrc&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgca4ddb2" class="outline-3"&gt;
-&lt;h4 id="orgca4ddb2"&gt;Emacs&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgca4ddb2"&gt;
+&lt;div id="outline-container-orgea1813b" class="outline-3"&gt;
+&lt;h4 id="orgea1813b"&gt;Emacs&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgea1813b"&gt;
 &lt;p&gt;
 见&lt;a href="https://github.com/redguardtoo/emacs.d"&gt;https://github.com/redguardtoo/emacs.d&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgac80e22" class="outline-3"&gt;
-&lt;h4 id="orgac80e22"&gt;Total Commander&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgac80e22"&gt;
+&lt;div id="outline-container-org3264269" class="outline-3"&gt;
+&lt;h4 id="org3264269"&gt;Total Commander&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org3264269"&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;colgroup&gt;
+
+
+&lt;colgroup&gt;
 &lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
-&lt;p&gt;&lt;/p&gt;&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
+
+&lt;col class="org-left"&gt;
 &lt;/colgroup&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1655,6 +1669,7 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;创建文件列表&lt;/td&gt;
 &lt;td class="org-left"&gt;低&lt;/td&gt;
 &lt;/tr&gt;
+
 &lt;tr&gt;
 &lt;td class="org-left"&gt;CHMDir.wcx&lt;/td&gt;
 &lt;td class="org-left"&gt;生成chm文件&lt;/td&gt;
@@ -1696,8 +1711,7 @@ X, Windows, Linux)                    :software:geek:win32:linux:zh:mac:
 &lt;td class="org-left"&gt;看图&lt;/td&gt;
 &lt;td class="org-left"&gt;低&lt;/td&gt;
 &lt;/tr&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/tbody&gt;
+&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;

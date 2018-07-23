@@ -66,64 +66,6 @@
             </div>
         </div>
         <div class="post">
-            <h1 class="title"><a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Install perl module through source package on cygwin by using cpanm</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2012-07-17T23:22:00+00:00">2012-07-17 23:22</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html#disqus_thread" data-disqus-identifier="cache/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cpan.html" rel="tag">cpan</a></li>
-           <li><a class="tag p-category" href="categories/cpanm.html" rel="tag">cpanm</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/install.html" rel="tag">install</a></li>
-           <li><a class="tag p-category" href="categories/module.html" rel="tag">module</a></li>
-           <li><a class="tag p-category" href="categories/perl.html" rel="tag">perl</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-perl module through source package on cygwin by using cpanm           :cpanm:cpan:perl:module:install:en:
-</p>
-
-<p>
-I failed to install package "Template" by running `cpanm Template'.
-</p>
-
-<p>
-It's because the binary package requires gcc4 while on my cygwin only gcc3 available.
-</p>
-
-<p>
-So I install it from source package (with some hack, of course),
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-sh">cpanm --look Template # Download and unpack the distribution and then open the directory with your shellI
-cpanm . #install from local directory
-</code></pre>
-
-</div>
-
-<p>
-Updated: The simpler solution is to install gcc4 at cygwin.</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/convert-tex-to-pdf.html">Convert TEX to PDF</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -182,6 +124,64 @@ Convert now!
 </code></pre>
 
 </div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Install perl module through source package on cygwin by using cpanm</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2012-07-17T23:22:00+00:00">2012-07-17 23:22</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html#disqus_thread" data-disqus-identifier="cache/posts/install-perl-module-through-source-package-on-cygwin-by-using-cpanm.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/cpan.html" rel="tag">cpan</a></li>
+           <li><a class="tag p-category" href="categories/cpanm.html" rel="tag">cpanm</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/install.html" rel="tag">install</a></li>
+           <li><a class="tag p-category" href="categories/module.html" rel="tag">module</a></li>
+           <li><a class="tag p-category" href="categories/perl.html" rel="tag">perl</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+perl module through source package on cygwin by using cpanm           :cpanm:cpan:perl:module:install:en:
+</p>
+
+<p>
+I failed to install package "Template" by running `cpanm Template'.
+</p>
+
+<p>
+It's because the binary package requires gcc4 while on my cygwin only gcc3 available.
+</p>
+
+<p>
+So I install it from source package (with some hack, of course),
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-sh">cpanm --look Template # Download and unpack the distribution and then open the directory with your shellI
+cpanm . #install from local directory
+</code></pre>
+
+</div>
+
+<p>
+Updated: The simpler solution is to install gcc4 at cygwin.</p>
 </div>
             </div>
         </div>
@@ -327,9 +327,9 @@ to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode           :en:ya
 I will only talk about how to set up yasnippet 0.7.0 or higher version.
 </p>
 
-<div id="outline-container-org9b91c2f" class="outline-2">
-<h3 id="org9b91c2f">If you follow `normal install` way, setup is simple</h3>
-<div class="outline-text-2" id="text-org9b91c2f">
+<div id="outline-container-orgd88e2a8" class="outline-2">
+<h3 id="orgd88e2a8">If you follow `normal install` way, setup is simple</h3>
+<div class="outline-text-2" id="text-orgd88e2a8">
 <p>
 See its <a href="http://capitaomorte.github.com/yasnippet/">official documentation</a>.
 </p>
@@ -347,13 +347,12 @@ Install the yasnippet into somewhere and add following code into your .emacs:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgecee38f" class="outline-2">
-<h3 id="orgecee38f">If you use elpa package system, setup is even simpler</h3>
-<div class="outline-text-2" id="text-orgecee38f">
+<div id="outline-container-orgfd2e98c" class="outline-2">
+<h3 id="orgfd2e98c">If you use elpa package system, setup is even simpler</h3>
+<div class="outline-text-2" id="text-orgfd2e98c">
 <p>
 After installation, you only need two lines in .emacs.
 </p>
@@ -372,20 +371,19 @@ Yasnippet 0.7.0 have already defined two locations for the snippets, "~/.emacs.d
 <p>
 So you only put your own snippets in "~/.emacs.d/snippets" and done. No need to tweak .emacs at all. To verify my claim, you can `C-h v yas/snippet-dirs' to check value of "yas/snippet-dirs". Please note "yas/root-directory" is the alias of "yas/snippet-dirs".
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org77cf9c9" class="outline-2">
-<h3 id="org77cf9c9">The real world setup is NOT simple</h3>
-<div class="outline-text-2" id="text-org77cf9c9">
+<div id="outline-container-org6c6b771" class="outline-2">
+<h3 id="org6c6b771">The real world setup is NOT simple</h3>
+<div class="outline-text-2" id="text-org6c6b771">
 <p>
 I will explain the reasons at first and give my complete yasnippet configuration code at the end of the this post.
 </p>
 </div>
-<div id="outline-container-orge657745" class="outline-3">
-<h4 id="orge657745">Two snippets may share the same key, so I need activate `yas/dropdown-prompt'</h4>
-<div class="outline-text-3" id="text-orge657745">
+<div id="outline-container-orga00cd02" class="outline-3">
+<h4 id="orga00cd02">Two snippets may share the same key, so I need activate `yas/dropdown-prompt'</h4>
+<div class="outline-text-3" id="text-orga00cd02">
 <p>
 One issue is I need a user-friendly dropdown window popped up when the key I input has several candidates. For example, when I type "inc" in C code. There are two candidates `#include "…"' and `#include &lt;…&gt;' available. A handy dropdown popup will help me to choose one of them as efficient as possible.
 </p>
@@ -398,21 +396,20 @@ The good news is such fancy popup is a standard component of yasnippet. It's cal
 The bad news is for some strange reason yasnippet won't load that dropdown-list by default. So you need manually load that component by one line of elisp code `(require 'dropdown-list)'.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-org5d64811" class="outline-3">
-<h4 id="org5d64811">`yas/dropdown-prompt' is not perfect</h4>
-<div class="outline-text-3" id="text-org5d64811">
+<div id="outline-container-orgd414252" class="outline-3">
+<h4 id="orgd414252">`yas/dropdown-prompt' is not perfect</h4>
+<div class="outline-text-3" id="text-orgd414252">
 <p>
 I cannot scroll down the dropdown window when there are more candidates it can display. That's especially annoying when calling `yas/insert-snippet'. In this case, we need use `yas/completing-prompt' instead. I will show the fix at the end of this article.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org76a94d5" class="outline-3">
-<h4 id="org76a94d5">Yasnippet conflicts with other plugins</h4>
-<div class="outline-text-3" id="text-org76a94d5">
+<div id="outline-container-org2626d46" class="outline-3">
+<h4 id="org2626d46">Yasnippet conflicts with other plugins</h4>
+<div class="outline-text-3" id="text-org2626d46">
 <p>
 I use <a href="http://cx4a.org/software/auto-complete/">Auto Complete Mode</a> (version 20120327 in elpa).  There are two issues when using it with yasnippet.
 </p>
@@ -432,15 +429,15 @@ curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2f
 </code></pre>
 
 </div>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org07cef15" class="outline-2">
-<h3 id="org07cef15">My final yasnippet setup</h3>
-<div class="outline-text-2" id="text-org07cef15">
+<div id="outline-container-org8d6276d" class="outline-2">
+<h3 id="org8d6276d">My final yasnippet setup</h3>
+<div class="outline-text-2" id="text-org8d6276d">
 <div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'yasnippet)
 (yas/initialize)
 ;; default TAB key is occupied by auto-complete
@@ -457,7 +454,6 @@ curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2f
              ad-do-it))
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -614,7 +610,7 @@ curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2f
             <li class="next">
                 <a href="index-4.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

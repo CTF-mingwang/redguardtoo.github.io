@@ -73,9 +73,9 @@ If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.
 No extra setup needed! Then keep using your js2-mode happily, as if nothing happened. ;) 
 </p>
 
-<div id="outline-container-orgf3615fb" class="outline-2">
-<h3 id="orgf3615fb">Problem</h3>
-<div class="outline-text-2" id="text-orgf3615fb">
+<div id="outline-container-org0b59e6e" class="outline-2">
+<h3 id="org0b59e6e">Problem</h3>
+<div class="outline-text-2" id="text-org0b59e6e">
 <p>
 In my previous article <a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html">Why Emacs is better editor - a case study for javascript developer</a>, I proved that Emacs is better than <a href="http://www.sublimetext.com/">Sublime Text</a>.
 </p>
@@ -107,16 +107,16 @@ In modern MVC javascript frameworks (<a href="https://angularjs.org/">Angular</a
 <p>
 As you can see, using regular expression to extract the string "MyController" is more versatile and simpler.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgcf15d61" class="outline-2">
-<h3 id="orgcf15d61">Solution</h3>
-<div class="outline-text-2" id="text-orgcf15d61">
+<div id="outline-container-orgfdbfa2f" class="outline-2">
+<h3 id="orgfdbfa2f">Solution</h3>
+<div class="outline-text-2" id="text-orgfdbfa2f">
 <p>
 My latest <a href="https://github.com/mooz/js2-mode/pull/169">contribution to js2-mode</a> solves this problem perfectly. It <b>combines the powers of AST and regular expression</b>.
 </p>
+
 <p>
 The js2-mode will integrate this feature soon. I will notify you when next version is ready.
 </p>
@@ -128,7 +128,6 @@ Let's cut off the boring technical details and see the demo,
 <p>
 For a simple <a href="https://gist.github.com/redguardtoo/558ea0133daa72010b73#file-hello-js">hello.js</a> with below content,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-javascript">function helloworld() {
@@ -192,16 +191,16 @@ Another valuable feedback is that native Sublime provides better experience <b>o
 <p>
 Sublime users also argue that Sublime3 uses <a href="https://www.python.org/">Python</a>. Python is a <b>better programming language</b>. I'm qualified to answer this question because I wrote some large commercial Python application when I worked in Kodak R&amp;D. First version I used was v2.2. So I've got about <b>10 years experience</b> in Python. And I write lots of <a href="https://github.com/redguardtoo/">Emacs Lisp code</a> these days. My opinion is that both languages are good enough as DSL for text editors. In Python, you can use OO. In Emacs Lisp, you can treat function as object and there are <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Macros.html">Macros</a> and <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html">Advising</a>. Both languages have enough widgets to shoot yourself in the foot. Python is surely newbie-friendly. But <b>number of newbies</b> doesn't matter in high-end rival.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org6bd9b38" class="outline-2">
-<h3 id="org6bd9b38">Quick Start</h3>
-<div class="outline-text-2" id="text-org6bd9b38">
+<div id="outline-container-org291eb25" class="outline-2">
+<h3 id="org291eb25">Quick Start</h3>
+<div class="outline-text-2" id="text-org291eb25">
 <p>
 I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
 </p>
+
 <p>
 Dmitry Gutov updated the algorithm to parse the imenu items by walking the AST instead. It's better than my REGEX hacking because AST could show the context of the function.
 </p>
@@ -213,7 +212,6 @@ But my patch is still useful for extract strings from modern JS framework, as I'
 <p>
 In the meantime, you can paste below code into your ~/.emacs before the patch is officially merged.
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; below regex list could be used in both js-mode and js2-mode
@@ -367,8 +365,6 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -393,12 +389,12 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -406,7 +402,7 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

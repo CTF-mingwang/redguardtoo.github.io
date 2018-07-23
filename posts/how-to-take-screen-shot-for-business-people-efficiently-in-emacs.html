@@ -102,9 +102,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-23 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 Tue&gt;</span></span>
 </p>
 
-<div id="outline-container-org951a4c6" class="outline-2">
-<h3 id="org951a4c6">Tools</h3>
-<div class="outline-text-2" id="text-org951a4c6">
+<div id="outline-container-org4143f51" class="outline-2">
+<h3 id="org4143f51">Tools</h3>
+<div class="outline-text-2" id="text-org4143f51">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-left">
@@ -140,27 +140,27 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 
 </tbody>
 </table>
 </div>
+</div>
 
-<p></p>
+<div id="outline-container-org843ac71" class="outline-2">
+<h3 id="org843ac71">Work flow</h3>
+<div class="outline-text-2" id="text-org843ac71">
 </div>
-<div id="outline-container-org465751c" class="outline-2">
-<h3 id="org465751c">Work flow</h3>
-<div class="outline-text-2" id="text-org465751c">
-</div>
-<div id="outline-container-orgefd2b22" class="outline-3">
-<h4 id="orgefd2b22">Use scrot to screenshot and put its path into clipboard</h4>
-<div class="outline-text-3" id="text-orgefd2b22">
+<div id="outline-container-org9ad2701" class="outline-3">
+<h4 id="org9ad2701">Use scrot to screenshot and put its path into clipboard</h4>
+<div class="outline-text-3" id="text-org9ad2701">
 <div class="org-src-container">
+
 <pre><code class="lang-bash">scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfddd78c" class="outline-3">
-<h4 id="orgfddd78c">Create org file and insert path of screen shot</h4>
-<div class="outline-text-3" id="text-orgfddd78c">
+
+<div id="outline-container-orgc3cdac5" class="outline-3">
+<h4 id="orgc3cdac5">Create org file and insert path of screen shot</h4>
+<div class="outline-text-3" id="text-orgc3cdac5">
 <p>
 Actually I use below elisp command to do the insertion for me.
 </p>
@@ -191,16 +191,15 @@ The full path into relative path and insert it as a local file link in org-mode"
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
-<div id="outline-container-org9849c42" class="outline-3">
-<h4 id="org9849c42">Convert org file into Microsoft Word format</h4>
-<div class="outline-text-3" id="text-org9849c42">
+<div id="outline-container-org254c663" class="outline-3">
+<h4 id="org254c663">Convert org file into Microsoft Word format</h4>
+<div class="outline-text-3" id="text-org254c663">
 <p>
 I'm sure this method works even on Windows. But I don't have Windows PC to validate my belief. Libreoffice is required.
 </p>
+
 <p>
 Run the command "M-x org-export-as-odt".
 </p>
@@ -208,7 +207,6 @@ Run the command "M-x org-export-as-odt".
 <p>
 Word document is <b>automatically created</b> if you insert below code into your ~/.emacs:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; This setup is tested on Emacs 24.3 &amp; Emacs 24.4 on Linux/OSX
@@ -236,13 +234,12 @@ Word document is <b>automatically created</b> if you insert below code into your
 <p>
 Emacs will find the binary "soffice" from libreoffice to do the conversion.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org5bdce47" class="outline-3">
-<h4 id="org5bdce47">Tips</h4>
-<div class="outline-text-3" id="text-org5bdce47">
+<div id="outline-container-org6ddc3bb" class="outline-3">
+<h4 id="org6ddc3bb">Tips</h4>
+<div class="outline-text-3" id="text-org6ddc3bb">
 <p>
 If you need page break in exported document, insert below snippet into the org file:
 </p>
@@ -252,8 +249,6 @@ If you need page break in exported document, insert below snippet into the org f
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -279,12 +274,12 @@ If you need page break in exported document, insert below snippet into the org f
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -292,7 +287,7 @@ If you need page break in exported document, insert below snippet into the org f
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

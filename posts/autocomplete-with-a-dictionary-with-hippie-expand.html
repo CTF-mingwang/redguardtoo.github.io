@@ -75,9 +75,9 @@ I use <a href="http://company-mode.github.io/">company-mode</a> most of the time
 I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
 </p>
 
-<div id="outline-container-orgcdd1e2e" class="outline-2">
-<h3 id="orgcdd1e2e">Solution</h3>
-<div class="outline-text-2" id="text-orgcdd1e2e">
+<div id="outline-container-orge84c0f0" class="outline-2">
+<h3 id="orge84c0f0">Solution</h3>
+<div class="outline-text-2" id="text-orge84c0f0">
 <p>
 This solution works <b>in any environment</b>.
 </p>
@@ -124,20 +124,18 @@ This solution works <b>in any environment</b>.
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org033b6db" class="outline-2">
-<h3 id="org033b6db">Technical details</h3>
-<div class="outline-text-2" id="text-org033b6db">
+<div id="outline-container-orgab30d52" class="outline-2">
+<h3 id="orgab30d52">Technical details</h3>
+<div class="outline-text-2" id="text-orgab30d52">
 <ul class="org-ul">
 <li>based on <a href="https://github.com/syohex/emacs-ac-ispell">ac-ispell</a>
 </li>
 <li>lazy load of ispell-mode to speed Emacs startup</li>
 <li>add a fallback dictionary "english-words.txt" so autocompletion never fails</li>
-<li>
-<code>ispell-lookup-words</code> or <code>lookup-words</code> simply does grep thing, so english-words.txt is just a plain text file.</li>
+<li>`ispell-lookup-words` or `lookup-words` simply does grep thing, so english-words.txt is just a plain text file.</li>
 </ul>
 </div>
 </div>
@@ -146,7 +144,7 @@ This solution works <b>in any environment</b>.
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="demo-blog-post-created-by-nikolaorg2nikola.html" rel="prev" title="Demo blog post created by nikola&amp;org2nikola">Previous post</a>
+                <a href="why-people-say-emacs-is-the-best-operating-system.html" rel="prev" title='Why people say "Emacs is the best operating system"'>Previous post</a>
             </li>
             <li class="next">
                 <a href="effective-code-navigation-for-web-development.html" rel="next" title="Effective code navigation for web development">Next post</a>
@@ -163,12 +161,12 @@ This solution works <b>in any environment</b>.
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -176,7 +174,7 @@ This solution works <b>in any environment</b>.
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

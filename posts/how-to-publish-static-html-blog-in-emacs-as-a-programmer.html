@@ -85,9 +85,9 @@ Basic Emacs lisp knowledges are required.
 Please note I'm <b>NOT</b> targeted at specific static site generator like <a href="http://getnikola.com/blog/">Nikola</a> or <a href="http://jekyllrb.com/">Jekyll</a>.
 </p>
 
-<div id="outline-container-org0407a56" class="outline-2">
-<h3 id="org0407a56">Solution</h3>
-<div class="outline-text-2" id="text-org0407a56">
+<div id="outline-container-org6e5167e" class="outline-2">
+<h3 id="org6e5167e">Solution</h3>
+<div class="outline-text-2" id="text-org6e5167e">
 <p>
 Tested on <b>Linux and OSX</b>.
 </p>
@@ -140,13 +140,12 @@ Requirements:
 <p>
 You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgda19bdb" class="outline-2">
-<h3 id="orgda19bdb">Why</h3>
-<div class="outline-text-2" id="text-orgda19bdb">
+<div id="outline-container-org45ed9ac" class="outline-2">
+<h3 id="org45ed9ac">Why</h3>
+<div class="outline-text-2" id="text-org45ed9ac">
 <p>
 I used <a href="https://wordpress.org">Wordpress</a> and <a href="https://github.com/punchagan/org2blog">Org2blog</a> for a very long time. Then I turned to static blog generator because:
 </p>
@@ -159,16 +158,15 @@ I used <a href="https://wordpress.org">Wordpress</a> and <a href="https://github
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by <a href="https://github.com/punchagan">Puneeth Chaganti</a>'s excellent work on org2blog.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-org67fd296" class="outline-2">
-<h3 id="org67fd296">Technical Details</h3>
-<div class="outline-text-2" id="text-org67fd296">
+<div id="outline-container-org484917d" class="outline-2">
+<h3 id="org484917d">Technical Details</h3>
+<div class="outline-text-2" id="text-org484917d">
 </div>
-<div id="outline-container-orgafea9bf" class="outline-3">
-<h4 id="orgafea9bf">Generating HTML</h4>
-<div class="outline-text-3" id="text-orgafea9bf">
+<div id="outline-container-org4a8790f" class="outline-3">
+<h4 id="org4a8790f">Generating HTML</h4>
+<div class="outline-text-3" id="text-org4a8790f">
 <p>
 As I said, Nikola is my blog generator which converts my org file into HTML.
 </p>
@@ -253,13 +251,12 @@ The code snippet inside "&lt;pre&gt;" tag could be rendered by 3rd party javascr
 <p>
 BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org253f392" class="outline-3">
-<h4 id="org253f392">Create blog posts</h4>
-<div class="outline-text-3" id="text-org253f392">
+<div id="outline-container-org0122084" class="outline-3">
+<h4 id="org0122084">Create blog posts</h4>
+<div class="outline-text-3" id="text-org0122084">
 <p>
 Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
 </p>
@@ -296,12 +293,11 @@ Scanning posts....done!
 Only the files in sub-folder "output" need be uploaded.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-orgb805391" class="outline-3">
-<h4 id="orgb805391">Preprocess nikola output</h4>
-<div class="outline-text-3" id="text-orgb805391">
+<div id="outline-container-orgbb9a030" class="outline-3">
+<h4 id="orgbb9a030">Preprocess nikola output</h4>
+<div class="outline-text-3" id="text-orgbb9a030">
 <p>
 It's all done by Emacs Lisp.
 </p>
@@ -319,16 +315,15 @@ The final output contain lines like:
 <p>
 As you can see, each line is a ftp upload command we need execute in shell.
 </p>
-
-<p></p>
 </div>
 </div>
-<div id="outline-container-org2491d0f" class="outline-3">
-<h4 id="org2491d0f">FTP upload</h4>
-<div class="outline-text-3" id="text-org2491d0f">
+<div id="outline-container-org01013ec" class="outline-3">
+<h4 id="org01013ec">FTP upload</h4>
+<div class="outline-text-3" id="text-org01013ec">
 <p>
 Ncftp is my choice of FTP client. It's solid and efficient.
 </p>
+
 <p>
 Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is <b>extremely fast</b>.
 </p>
@@ -340,17 +335,17 @@ I use Emacs Lisp API `file-truename` to convert all relative path to absolute pa
 <p>
 BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-orgf0708ea" class="outline-2">
-<h3 id="orgf0708ea">Summary</h3>
-<div class="outline-text-2" id="text-orgf0708ea">
+<div id="outline-container-org922a62b" class="outline-2">
+<h3 id="org922a62b">Summary</h3>
+<div class="outline-text-2" id="text-org922a62b">
 <p>
 The workflow is simple.
 </p>
+
 <p>
 Emacs and third party JS libraries are responsible for the look and feel of my website.
 </p>
@@ -362,8 +357,6 @@ Blog generator like Nikola is just a thin layer to relay the HTML files created 
 <p>
 Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -388,12 +381,12 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -401,7 +394,7 @@ Ncftp will upload HTML files. It's the best FTP client which could be easily int
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

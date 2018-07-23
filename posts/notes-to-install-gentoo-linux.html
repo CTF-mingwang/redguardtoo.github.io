@@ -70,9 +70,9 @@ Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&gt; Graphic">
 to install Gentoo Linux                                                 :gentoo:linux:install:en:
 </p>
 
-<div id="outline-container-org8235fbb" class="outline-2">
-<h3 id="org8235fbb">Intel integrated video card</h3>
-<div class="outline-text-2" id="text-org8235fbb">
+<div id="outline-container-org0546db1" class="outline-2">
+<h3 id="org0546db1">Intel integrated video card</h3>
+<div class="outline-text-2" id="text-org0546db1">
 <p>
 Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&gt; Graphic =&gt; Intel) is critical:
 </p>
@@ -82,32 +82,33 @@ Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&gt; Graphic =&gt; I
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org981be05" class="outline-2">
-<h3 id="org981be05">Grub2</h3>
-<div class="outline-text-2" id="text-org981be05">
+<div id="outline-container-org8368ea3" class="outline-2">
+<h3 id="org8368ea3">Grub2</h3>
+<div class="outline-text-2" id="text-org8368ea3">
 <p>
 Let grub2 create the cfg for me automatically,
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-sh">grub2-mkconfig -o /boot/grub/grub.cfg
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6a43bcd" class="outline-2">
-<h3 id="org6a43bcd">Network</h3>
-<div class="outline-text-2" id="text-org6a43bcd">
+
+<div id="outline-container-org6e925b3" class="outline-2">
+<h3 id="org6e925b3">Network</h3>
+<div class="outline-text-2" id="text-org6e925b3">
 </div>
-<div id="outline-container-org4a69ae7" class="outline-3">
-<h4 id="org4a69ae7">Ethernet</h4>
-<div class="outline-text-3" id="text-org4a69ae7">
+<div id="outline-container-org5decd7a" class="outline-3">
+<h4 id="org5decd7a">Ethernet</h4>
+<div class="outline-text-3" id="text-org5decd7a">
 <div class="org-src-container">
+
 <pre><code class="lang-sh">#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
 # @see https://wiki.gentoo.org/wiki/Netifrc
 ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
@@ -116,13 +117,13 @@ echo 'config_eth0="dhcp"' &gt;&gt; /etc/conf.d/net
 rc-update add net.eth0 default
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
-<div id="outline-container-org98daa9c" class="outline-3">
-<h4 id="org98daa9c">Wireless (wifi)</h4>
-<div class="outline-text-3" id="text-org98daa9c">
+
+<div id="outline-container-orge3978f0" class="outline-3">
+<h4 id="orge3978f0">Wireless (wifi)</h4>
+<div class="outline-text-3" id="text-orge3978f0">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -139,7 +140,6 @@ rc-update add net.ra0 default
 <p>
 Content of /etc/wpa_supplicant/wpa_supplicant.conf:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-conf">#let wpa_supplicant take care of scanning and AP selection
@@ -163,7 +163,6 @@ For kernel 3.17.*+, by default wpa_supplicant use <code>nl80211</code> driver in
 <p>
 We need for it use <code>wext</code> instead. To double check <code>wext</code> does work,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">sudo wpa_supplicant -dd -B -i ra0 -Dwext -c /etc/wpa_supplicant/wpa_supplicant.conf
@@ -174,7 +173,6 @@ We need for it use <code>wext</code> instead. To double check <code>wext</code> 
 <p>
 But OpenRC script does not have <code>-Dwext</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash"># as root
@@ -188,29 +186,28 @@ cd /lib;grep -rsn --exclude-dir=/home "Starting wpa_supplicant on" *
 <p>
 Modify /lib/netifrc/net/wpa_supplicant.sh to for it use wext,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">opts="-Dwext ${opts} -c ${cfgfile}"
 </code></pre>
 
 </div>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org2da0d69" class="outline-2">
-<h3 id="org2da0d69">Clock Synchronization</h3>
-<div class="outline-text-2" id="text-org2da0d69">
+<div id="outline-container-org1936903" class="outline-2">
+<h3 id="org1936903">Clock Synchronization</h3>
+<div class="outline-text-2" id="text-org1936903">
 <p>
 <a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate">htpdate</a> is great because it only use HTTP protocol, don't forget add server in its config file.
 </p>
 </div>
 </div>
-<div id="outline-container-org2194092" class="outline-2">
-<h3 id="org2194092">Sound</h3>
-<div class="outline-text-2" id="text-org2194092">
+
+<div id="outline-container-org1181f3a" class="outline-2">
+<h3 id="org1181f3a">Sound</h3>
+<div class="outline-text-2" id="text-org1181f3a">
 <p>
 Nothing to tell. There may be some issue, but I forgot.</p>
 </div>
@@ -237,12 +234,12 @@ Nothing to tell. There may be some issue, but I forgot.</p>
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -250,7 +247,7 @@ Nothing to tell. There may be some issue, but I forgot.</p>
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

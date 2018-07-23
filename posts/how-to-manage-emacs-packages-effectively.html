@@ -81,9 +81,9 @@ The techniques are compatible with <a href="https://github.com/jwiegley/use-pack
 Mid-level Lisp knowledge is required to read this article.
 </p>
 
-<div id="outline-container-org834ee2d" class="outline-2">
-<h3 id="org834ee2d">Do NOT use package.el for certain packages</h3>
-<div class="outline-text-2" id="text-org834ee2d">
+<div id="outline-container-org515af9e" class="outline-2">
+<h3 id="org515af9e">Do NOT use package.el for certain packages</h3>
+<div class="outline-text-2" id="text-org515af9e">
 <p>
 Create the directory <code>~/.emacs.d/site-lisp</code>. Then insert below code into <code>~/.emacs</code>,
 </p>
@@ -102,24 +102,22 @@ Create the directory <code>~/.emacs.d/site-lisp</code>. Then insert below code i
 </code></pre>
 
 </div>
-
 <p>
 You can place a package's source code at sub-directory of <code>~/.emacs.d/site-lisp/</code>. That's all you need to do to install packages.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org7ae2f18" class="outline-2">
-<h3 id="org7ae2f18">Create your own package repository</h3>
-<div class="outline-text-2" id="text-org7ae2f18">
+<div id="outline-container-org93c60b2" class="outline-2">
+<h3 id="org93c60b2">Create your own package repository</h3>
+<div class="outline-text-2" id="text-org93c60b2">
 <p>
 Step 1, Place two files "archive-contents" and "hello-1.0.0.el" in any directory. Say <code>~/.emacs.d/localelpa</code>. 
 </p>
+
 <p>
 Here is the content of <code>archive-contents</code>:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(1
@@ -132,7 +130,6 @@ Here is the content of <code>archive-contents</code>:
 <p>
 Here is the content of <code>hello-1.0.0.el</code>:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;;;###autoload
@@ -148,7 +145,6 @@ Here is the content of <code>hello-1.0.0.el</code>:
 <p>
 Step 2, insert below code into <code>~/.emacs</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(add-to-list 'package-archives '("localelpa" . "~/.emacs.d/localelpa"))
@@ -171,14 +167,13 @@ I also create a <a href="https://github.com/redguardtoo/elpa-mirror">elpa-mirror
 <p>
 Orphan package issue is also resolved by <code>elpa-mirror</code>. You can delete everything from <code>~/.emacs.d/elpa</code> and set the repository to the local repository created by <code>elpa-mirror</code>. It only takes 30 seconds to install 300 packages.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org89eb49b" class="outline-2">
-<h3 id="org89eb49b">
+<div id="outline-container-org09ce162" class="outline-2">
+<h3 id="org09ce162">
 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html">Advice</a> <code>package--add-to-archive-contents</code> to filter packages</h3>
-<div class="outline-text-2" id="text-org89eb49b">
+<div class="outline-text-2" id="text-org09ce162">
 <p>
 Insert below code into ~/.emacs,
 </p>
@@ -239,20 +234,19 @@ Surely you can build your own filter.
 <p>
 This solution is copied from Steve Purcell's setup with a little modification.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orge889c8b" class="outline-2">
-<h3 id="orge889c8b">Summary</h3>
-<div class="outline-text-2" id="text-orge889c8b">
+<div id="outline-container-org2ea9d40" class="outline-2">
+<h3 id="org2ea9d40">Summary</h3>
+<div class="outline-text-2" id="text-org2ea9d40">
 <p>
 You can combine above techniques to <b>solve any package issue</b>.
 </p>
+
 <p>
 For example, package A is dependent on package B. Both A and B have two versions, 1.0 and 2.0:
 </p>
-
 <ul class="org-ul">
 <li>A 2.0 can use B 1.0 and B 2.0, but A 1.0 can ONLY use B 1.0</li>
 <li>A 2.0 can ONLY use B 2.0, and A 1.0 can only use B 1.0</li>
@@ -267,8 +261,6 @@ I know some one believs "Emacs package manager sucks" after mastering it for sev
 
 <p>
 It's possibly I started my journey by <a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide">learning from experts</a> instead of "studiyng" by myself.</p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -293,12 +285,12 @@ It's possibly I started my journey by <a href="https://github.com/redguardtoo/ma
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -306,7 +298,7 @@ It's possibly I started my journey by <a href="https://github.com/redguardtoo/ma
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

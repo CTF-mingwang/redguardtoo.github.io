@@ -78,9 +78,9 @@ code navigation for web development                                 :en:javascri
 I use <a href="https://angularjs.org/">AngularJS</a> as an example. The technique applies to other web frameworks.
 </p>
 
-<div id="outline-container-orgc5b92a7" class="outline-2">
-<h3 id="orgc5b92a7">Problem</h3>
-<div class="outline-text-2" id="text-orgc5b92a7">
+<div id="outline-container-orgbd2a2d7" class="outline-2">
+<h3 id="orgbd2a2d7">Problem</h3>
+<div class="outline-text-2" id="text-orgbd2a2d7">
 <p>
 In Angular application, a function is defined in a javascript file and called in a html file.
 </p>
@@ -100,7 +100,6 @@ javascript file:
 <p>
 html file:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-javascript">angular.module['myapp'].controller('MyController', function ($scope, $http) {
@@ -118,13 +117,12 @@ html file:
 <p>
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is <b>regular expression</b>.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org2f8000c" class="outline-2">
-<h3 id="org2f8000c">Solution</h3>
-<div class="outline-text-2" id="text-org2f8000c">
+<div id="outline-container-org0a67a4d" class="outline-2">
+<h3 id="org0a67a4d">Solution</h3>
+<div class="outline-text-2" id="text-org0a67a4d">
 <p>
 CTags is good at parsing files with <b>regular expression</b>.
 </p>
@@ -139,9 +137,9 @@ I use CTags instead of IDEs because:
 </ul>
 </div>
 
-<div id="outline-container-orgee29836" class="outline-3">
-<h4 id="orgee29836">CTags setup</h4>
-<div class="outline-text-3" id="text-orgee29836">
+<div id="outline-container-orga99af1d" class="outline-3">
+<h4 id="orga99af1d">CTags setup</h4>
+<div class="outline-text-3" id="text-orga99af1d">
 <p>
 Create a file named ".ctags":
 </p>
@@ -197,7 +195,6 @@ The key point of this setup is the regular expression for HTML should be <b>as s
 <p>
 On Mac, location of ".ctags":
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">/Users/yourname/.ctags
@@ -208,7 +205,6 @@ On Mac, location of ".ctags":
 <p>
 On Linux, location of ".ctags":
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">/home/yourname/.ctags
@@ -219,26 +215,27 @@ On Linux, location of ".ctags":
 <p>
 On Windows, place ".ctags" anywhere. Then <a href="http://support.microsoft.com/en-us/kb/310519">create an environment variable</a> named "HOME" whose value is the parent directory of ".ctags".
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org00850f1" class="outline-2">
-<h3 id="org00850f1"><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
-<div class="outline-text-2" id="text-org00850f1">
+<div id="outline-container-orge1d98a6" class="outline-2">
+<h3 id="orge1d98a6"><a href="http://www.sublimetext.com/">Sublime Text</a></h3>
+<div class="outline-text-2" id="text-orge1d98a6">
 <p>
 Install <a href="https://github.com/SublimeText/CTags">CTags plugin</a> and follow its instruction.
 </p>
 </div>
 </div>
-<div id="outline-container-org5dd3ba7" class="outline-2">
-<h3 id="org5dd3ba7"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h3>
-<div class="outline-text-2" id="text-org5dd3ba7">
+
+<div id="outline-container-org1450693" class="outline-2">
+<h3 id="org1450693"><a href="https://www.gnu.org/software/emacs/">Emacs</a></h3>
+<div class="outline-text-2" id="text-org1450693">
 <p>
 Run CTags at least once:
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-bash">ctags -e -R -f /app/path/TAGS
 </code></pre>
 
@@ -247,7 +244,6 @@ Run CTags at least once:
 <p>
 Then insert below code into your ~/.emacs:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(setq tags-table-list '("/app/path/TAGS"))
@@ -266,8 +262,6 @@ If you prefer <a href="https://github.com/emacs-helm/helm">Helm</a> UI, install 
 <p>
 Please install the latest helm because I <a href="https://github.com/emacs-helm/helm/pull/965">enhanced helm-etags-select</a> for this problem.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -292,12 +286,12 @@ Please install the latest helm because I <a href="https://github.com/emacs-helm/
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -305,7 +299,7 @@ Please install the latest helm because I <a href="https://github.com/emacs-helm/
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

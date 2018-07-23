@@ -23,83 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/notes-on-set-up-nfs-on-archlinux.html">Notes on set up nfs on ArchLinux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2014-02-07T17:24:09+00:00">2014-02-07 17:24</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/notes-on-set-up-nfs-on-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/notes-on-set-up-nfs-on-archlinux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/archlinux.html" rel="tag">archlinux</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<div id="outline-container-1" class="outline-3"> <h4 id="sec-1">Key points</h4> <div class="outline-text-3" id="text-1">  <ul>
-<li>see <a href="http://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html">Redhat documenation</a>, best doc on exportfs </li> <li>
-<a href="http://superuser.com/questions/492989/understanding-subnet-mask">Understanding Subnet mask</a> and <a href="http://superuser.com/questions/186850/what-are-the-essentials-of-a-subnet-mask">essential Subnet mask</a> </li> <li>
-<code>sudo exportfs -r</code> to reload /etc/exports </li> <li>
-<code>sudo exportfs -v</code> to see current nfs exports </li> <li>content of /etc/exports: </li> </ul>
-<pre class="prettyprint ">
-
-/srv/nfs4/z 192.168.0.0/16(ro,insecure,no_subtree_check)
-</pre>
-
-<p></p>
-<ul>
-<li>check <a href="http://alephnull.com/benchmarks/sata2012/nfsv4.html">optimizatioin tips</a> </li> <li>
-<code>man 5 exports</code> for the documentation of /etc/exports </li> <li>
-<a href="https://www.serverstack.com/blog/2012/11/21/debugging-nfs-file-access-on-server-and-client-side/">Debugging NFS File Access on Server and Client Side</a> </li> </ul>
-<pre class="prettyprint ">
-
-# turn on the log
-
-sudo rpcdebug -m nfsd -s proc
-
-# turn off the log
-</pre>
-
-<p></p>
-<ul>
-<li>then <code>sudo tail -f /var/log/messages.log</code> </li> <li>Basically you need <code>sudo systemctl enable syslog-ng.service</code> to enable system log before you use rpcdebug </li> </ul>
-</div>  </div>  <div id="outline-container-2" class="outline-3"> <h4 id="sec-2">Summary</h4> <div class="outline-text-3" id="text-2">  <p>On server side: </p>   
-<pre class="prettyprint ">
-
-sudo exportfs
-
-# got output like:
-
-# /srv/nfs4/z   192.168.0.0/16
-</pre>
-
-<p></p>
-<p> Then on client side: </p>   
-<pre class="prettyprint ">
-
-# 131072 is 128K
-
-sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodiratime,intr
-</pre>
-
-<p></p>
-</div> </div> </div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/git-merge-in-command-line.html">Git merge in command line</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -248,9 +171,9 @@ There is also a <a href="http://blog.binchen.org/posts/what-s-the-best-spell-che
 <li>Difference between hunspell and aspell</li>
 <li>How to setup hunspell</li>
 </ul>
-<div id="outline-container-orgd9e9caf" class="outline-2">
-<h3 id="orgd9e9caf">Spell check in HTML</h3>
-<div class="outline-text-2" id="text-orgd9e9caf">
+<div id="outline-container-org2a9f4c1" class="outline-2">
+<h3 id="org2a9f4c1">Spell check in HTML</h3>
+<div class="outline-text-2" id="text-org2a9f4c1">
 <p>
 I will spell check,
 </p>
@@ -307,13 +230,12 @@ My setup:
 <p>
 I use <a href="http://web-mode.org/">web-mode</a> for HTML files. The technique applies on other modes (php-mode, html-mode ….) .
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org40e6a51" class="outline-2">
-<h3 id="org40e6a51">Don't display doublon (double word) as error</h3>
-<div class="outline-text-2" id="text-org40e6a51">
+<div id="outline-container-org176d795" class="outline-2">
+<h3 id="org176d795">Don't display doublon (double word) as error</h3>
+<div class="outline-text-2" id="text-org176d795">
 <p>
 Modern CSS frameworks like <a href="http://getbootstrap.com/">Bootstrap</a> make doublon unavoidable. For example, CSS class name <code>btn btn-default</code> contains double word <code>btn</code>.
 </p>
@@ -339,13 +261,12 @@ So we need stop displaying doublon as error in HTML,
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org89ca429" class="outline-2">
-<h3 id="org89ca429">Spell check camel case strings</h3>
-<div class="outline-text-2" id="text-org89ca429">
+<div id="outline-container-org4bd0ad3" class="outline-2">
+<h3 id="org4bd0ad3">Spell check camel case strings</h3>
+<div class="outline-text-2" id="text-org4bd0ad3">
 <p>
 We can check camel cased string/variable/function if and only if <a href="http://aspell.net/">aspell</a> is used.
 </p>
@@ -368,13 +289,12 @@ Insert below code into <code>.emacs</code>,
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgf91d180" class="outline-2">
-<h3 id="orgf91d180">Summary</h3>
-<div class="outline-text-2" id="text-orgf91d180">
+<div id="outline-container-org8f36de7" class="outline-2">
+<h3 id="org8f36de7">Summary</h3>
+<div class="outline-text-2" id="text-org8f36de7">
 <p>
 <a href="http://www.emacswiki.org/emacs/FlySpell">EmacsWiki</a> suggests <code>(flyspell-prog-mode)</code> which only checks typo in comments.
 </p>
@@ -392,12 +312,11 @@ Screen shot (typos are underscored):
 <p><img src="wp-content/spell-check-html-in-emacs.png" alt="spell-check-html-in-emacs.png"></p>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-orga38f170" class="outline-2">
-<h3 id="orga38f170">Javascript and ReactJS setup (OPTIONAL)</h3>
-<div class="outline-text-2" id="text-orga38f170">
+<div id="outline-container-orgab71536" class="outline-2">
+<h3 id="orgab71536">Javascript and ReactJS setup (OPTIONAL)</h3>
+<div class="outline-text-2" id="text-orgab71536">
 <p>
 If you fully understand my previous sections, you don't need read this section.
 </p>
@@ -422,8 +341,6 @@ Insert below code into <code>.emacs</code>,
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -712,9 +629,9 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-01-15 
 Let's see an example in real life development.
 </p>
 
-<div id="outline-container-org9e0ac9f" class="outline-2">
-<h3 id="org9e0ac9f">Note</h3>
-<div class="outline-text-2" id="text-org9e0ac9f">
+<div id="outline-container-org6a5a1ca" class="outline-2">
+<h3 id="org6a5a1ca">Note</h3>
+<div class="outline-text-2" id="text-org6a5a1ca">
 <p>
 For people who does not get the key points of this article, here are the points:
 </p>
@@ -726,9 +643,9 @@ For people who does not get the key points of this article, here are the points:
 </div>
 </div>
 
-<div id="outline-container-org6266a0c" class="outline-2">
-<h3 id="org6266a0c">Problem</h3>
-<div class="outline-text-2" id="text-org6266a0c">
+<div id="outline-container-org169916f" class="outline-2">
+<h3 id="org169916f">Problem</h3>
+<div class="outline-text-2" id="text-org169916f">
 <p>
 I'm maintaining a big javascript file with thousands of lines of legacy code.
 </p>
@@ -779,13 +696,12 @@ To understand what "complex" means, let's check some code from real world applic
 <p>
 Most editors like Sublime Text 3 cannot display the javascript functions with meaningful context in this case. All you can see is only a bunch of functions with name "required".:
 <img src="wp-content/sublime-functions.png" alt="sublime-functions.png"></p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org13ee3f4" class="outline-2">
-<h3 id="org13ee3f4">Solution</h3>
-<div class="outline-text-2" id="text-org13ee3f4">
+<div id="outline-container-orgbae2dd5" class="outline-2">
+<h3 id="orgbae2dd5">Solution</h3>
+<div class="outline-text-2" id="text-orgbae2dd5">
 <p>
 Emacs has a <a href="http://www.emacswiki.org/emacs/Js2Mode">js2-mode</a> which is basically a javascript interpreter written in lisp. It's created by <a href="http://www.emacswiki.org/emacs/SteveYegge">Steve Yegge</a> and now maintained by <a href="https://github.com/mooz/js2-mode">mooz</a>.
 </p>
@@ -885,13 +801,12 @@ Here is the screen shot of emacs in old js2-mode, the UI is based on <a href="ht
 <p>
 The screen shot after we applying the above patch: 
 <img src="wp-content/emacs-functions-improved.png" alt="emacs-functions-improved.png"></p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org1845d78" class="outline-2">
-<h3 id="org1845d78">Summary</h3>
-<div class="outline-text-2" id="text-org1845d78">
+<div id="outline-container-orga2137ae" class="outline-2">
+<h3 id="orga2137ae">Summary</h3>
+<div class="outline-text-2" id="text-orga2137ae">
 <p>
 That's an example of beauty of Emacs.
 </p>
@@ -900,19 +815,18 @@ That's an example of beauty of Emacs.
 It gives you freedom and power. You can base your work on the top geeks like Steve Yegge and mooz. Just a few lines of lisp code to kick ass.
 </p>
 </div>
-
-<p></p>
 </div>
-<div id="outline-container-orga7b44f9" class="outline-2">
-<h3 id="orga7b44f9">Update</h3>
-<div class="outline-text-2" id="text-orga7b44f9">
+
+<div id="outline-container-org6b8dec3" class="outline-2">
+<h3 id="org6b8dec3">Update</h3>
+<div class="outline-text-2" id="text-org6b8dec3">
 <p>
 My patch is incorporated into <code>js2-mode</code> since version <code>20140114</code>.
 </p>
+
 <p>
 After installing <code>js2-mode</code>, you need paste one line setup into your <code>~/.emacs</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(js2-imenu-extras-mode)
@@ -932,6 +846,7 @@ The <code>Helm</code> version should be <code>20140125.1101</code> or higher, yo
 After installing <code>Helm</code>, you can use command <code>M-x helm-imenu</code> to show the list of functions to jump to. Here is the screen shot how I use imenu in my <a href="https://github.com/redguardtoo/hello/raw/master/hello2.js">hello2.js</a>:
 </p>
 
+
 <div class="figure">
 <p><img src="wp-content/helm-imenu-and-js2-mode-nq8.png" alt="helm-imenu-and-js2-mode-nq8.png"></p>
 </div>
@@ -939,8 +854,6 @@ After installing <code>Helm</code>, you can use command <code>M-x helm-imenu</co
 <p>
 UPDATE: I suggest using <code>counsel-imenu</code> from <a href="https://github.com/abo-abo/swiper">Counsel</a> instead of <code>Helm</code>.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -1117,6 +1030,50 @@ WantedBy=multi-user.target
 </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/memo-on-upgrading-archlinux.html">Memo on upgrading ArchLinux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-11-03T20:29:55+00:00">2013-11-03 20:29</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/memo-on-upgrading-archlinux.html#disqus_thread" data-disqus-identifier="cache/posts/memo-on-upgrading-archlinux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gentoo.html" rel="tag">gentoo</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+           <li><a class="tag p-category" href="categories/upgrade.html" rel="tag">upgrade</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p></p>
+<p></p>
+<pre class="prettyprint ">
+<h2>shit happens</h2>
+<p>pacman -Syu </p>
+<h2>archlinux replace grub with grub2</h2>
+<h2>I cannot install grub2, blocklists stuff</h2>
+<h2>downgrade to grub-obsolete</h2>
+<h2>then grub</h2>
+<h2>setup (hd0) to install MBR</h2>
+<h2>restart netbook (make sure the boot priority is right)</h2>
+</pre>
+
+<p></p>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
@@ -1125,7 +1082,7 @@ WantedBy=multi-user.target
             <li class="next">
                 <a href="index-14.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

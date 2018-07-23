@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
 &lt;/p&gt;
 
@@ -174,30 +174,62 @@ All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags 
 &lt;p&gt;
 UPDATE:
 This is only a case study. My complete guide on Gnus is at &lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html"&gt;http://blog.binchen.org/posts/notes-on-using-gnus.html&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Send the latest commit&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     
-&lt;pre class="prettyprint "&gt;
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgdeb477d" class="outline-2"&gt;
+&lt;h3 id="orgdeb477d"&gt;Use Gnus to apply patch sent by `git send-email`   &lt;span class="tag"&gt;&lt;span class="git"&gt;git&lt;/span&gt; &lt;span class="email"&gt;email&lt;/span&gt; &lt;span class="patch"&gt;patch&lt;/span&gt; &lt;span class="gnus"&gt;gnus&lt;/span&gt; &lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdeb477d"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgdf9ad06" class="outline-3"&gt;
+&lt;h4 id="orgdf9ad06"&gt;Send the latest commit&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgdf9ad06"&gt;
+&lt;div class="org-src-container"&gt;
 
-# send one commit
-
+&lt;pre&gt;&lt;code class="lang-bash"&gt;# send one commit
 git send-email -1 --annotate
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Apply patch&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;   &lt;p&gt; Select that email, run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer. &lt;/p&gt; &lt;p&gt; Emacs will prompt you where to save that email. Say I save it in ~/News/patch/hello.patch. &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-git am ~/News/patch/hello.patch
-&lt;/pre&gt;
+&lt;div id="outline-container-org2c94076" class="outline-3"&gt;
+&lt;h4 id="org2c94076"&gt;Apply patch&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2c94076"&gt;
+&lt;p&gt;
+Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
+&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Syntax highlight of patch email&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;See &lt;a href="https://github.com/fgeller/emacs.d/blob/master/site-lisp/gnus-article-treat-patch.el"&gt;fgeller's plugin&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Add following code to configure his plugin: &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;p&gt;
+Emacs will ask for directory to sve that email. Say I save it as &lt;code&gt;~/News/patch/hello.patch&lt;/code&gt;.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
-(require 'gnus-article-treat-patch)
+&lt;pre&gt;&lt;code class="lang-bash"&gt;git am ~/News/patch/hello.patch
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org1e7cb68" class="outline-3"&gt;
+&lt;h4 id="org1e7cb68"&gt;Syntax highlight of patch email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org1e7cb68"&gt;
+&lt;p&gt;
+Use &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch.el"&gt;gnus-article-treat-patch.el&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Add below code to setup: 
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'gnus-article-treat-patch)
 (setq gnus-article-patch-conditions
       '( "^@@ -[0-9]+,[0-9]+ \\+[0-9]+,[0-9]+ @@" ))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Fri, 06 Sep 2013 22:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
 &lt;pre class="prettyprint "&gt;
 &lt;p&gt;sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL&lt;/p&gt;
 &lt;/pre&gt;
@@ -222,16 +254,16 @@ Second part uses &lt;a href="https://www.mozilla.org/en-US/thunderbird/"&gt;thun
 Third part uses Emacs and Gnus to replace thunderbird. It's optional.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd32ebd8" class="outline-2"&gt;
-&lt;h3 id="orgd32ebd8"&gt;DavMail as mail gateway&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd32ebd8"&gt;
+&lt;div id="outline-container-orgc42e55d" class="outline-2"&gt;
+&lt;h3 id="orgc42e55d"&gt;DavMail as mail gateway&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc42e55d"&gt;
 &lt;pre class="example"&gt;
 Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LDAP exchange gateway allowing users to use any mail/calendar client (e.g. Thunderbird with Lightning or Apple iCal) with an Exchange server.
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1ed7b80" class="outline-3"&gt;
-&lt;h4 id="org1ed7b80"&gt;Install&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org1ed7b80"&gt;
+&lt;div id="outline-container-org928f980" class="outline-3"&gt;
+&lt;h4 id="org928f980"&gt;Install&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org928f980"&gt;
 &lt;p&gt;
 &lt;a href="http://davmail.sourceforge.net/download.html"&gt;Download the installer&lt;/a&gt; at Debian/Ubuntu/Mint:
 &lt;/p&gt;
@@ -247,15 +279,15 @@ sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 &lt;p&gt;
 Installation is easy. DavMail by itself is a portable java application. Since its GUI is dependent on SWT. So I give the instruction on how to install SWT in ubuntu. If you don't use ubuntu, then you are already technically good enough to know how to install SWT.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd2eae14" class="outline-3"&gt;
-&lt;h4 id="orgd2eae14"&gt;Configuration&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd2eae14"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orga6742c7" class="outline-3"&gt;
+&lt;h4 id="orga6742c7"&gt;Configuration&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga6742c7"&gt;
 &lt;p&gt;
 Now start DavMail. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Please input the web Outlook url like "&lt;a href="https://webmail.mycompany.com.au/owa/"&gt;https://webmail.mycompany.com.au/owa/&lt;/a&gt;" in its GUI.
 &lt;/p&gt;
@@ -283,16 +315,17 @@ For example, my EWS URL is &lt;code&gt;https://my-company.local/EWS/Exchange.asm
 &lt;p&gt;
 BTW, &lt;a href="https://outlook.office365.com/"&gt;https://outlook.office365.com/&lt;/a&gt; EWS URL is &lt;code&gt;https://outlook.office365.com/EWS/Exchange.asmx&lt;/code&gt;.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org3c34520" class="outline-2"&gt;
-&lt;h3 id="org3c34520"&gt;Thunderbird&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3c34520"&gt;
+&lt;div id="outline-container-org5ecd382" class="outline-2"&gt;
+&lt;h3 id="org5ecd382"&gt;Thunderbird&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5ecd382"&gt;
 &lt;p&gt;
 Create a new account, and &lt;b&gt;manually&lt;/b&gt; configure the server. The server name is "127.0.0.1", the port number is already on your paper. The minimum setup needs IMAP port to  receive mail and SMTP port to send email.
 &lt;/p&gt;
+
 &lt;p&gt;
 You don't need care about ssl stuff, let thunderbird handle it. But if you get the error message like "BAD command authentication required" in davmail's log, modify setup in "Account Settings -&amp;gt; Server Settings -&amp;gt; Security Settings -&amp;gt; Connection Settings". Select "None".
 &lt;/p&gt;
@@ -300,15 +333,16 @@ You don't need care about ssl stuff, let thunderbird handle it. But if you get t
 &lt;p&gt;
 The only issue is the "Username". You can log in Outlook Web UI, click "Options -&amp;gt; Change Password". The user name is displayed above the first input box. Please note the full user name may include the work domain.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org98b8ec7" class="outline-2"&gt;
-&lt;h3 id="org98b8ec7"&gt;Emacs Gnus&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org98b8ec7"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgf2c3366" class="outline-2"&gt;
+&lt;h3 id="orgf2c3366"&gt;Emacs Gnus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf2c3366"&gt;
 &lt;p&gt;
 Gnus cannot access IMAP service of DavMail. There is &lt;a href="http://permalink.gmane.org/gmane.emacs.gnus.general/83301"&gt;some bug&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 So we have to turn to POP3. Check &lt;a href="http://www.emacswiki.org/emacs/GnusTutorial"&gt;documentation&lt;/a&gt; at EmacsWiki.
 &lt;/p&gt;
@@ -320,7 +354,6 @@ If you use POP3, don NOT delete mails on server. You &lt;b&gt;must&lt;/b&gt; set
 &lt;p&gt;
 Insert below code into your ~/.emacs:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; gnus+davmail bug, so I have to use pop3 for DavMail
@@ -346,8 +379,7 @@ Since I've got many mails in INBOX folder, POP3 could take some time to get them
 &lt;p&gt;
 Another tip is when opening a folder in Gnus, press &lt;code&gt;C-u ENTER&lt;/code&gt; instead of &lt;code&gt;ENTER&lt;/code&gt; key. &lt;code&gt;C-u&lt;/code&gt; here means display all the read &lt;b&gt;and unread mails&lt;/b&gt;. It's awkward when product manager ask you open an important mail but that mail is invisible because it's marked READ. Check my article &lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org"&gt;Practical guide to use Gnus with Gmail&lt;/a&gt; for more tips.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><category>imap</category><category>linux</category><category>outlook</category><guid>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</guid><pubDate>Tue, 06 Aug 2013 20:26:00 GMT</pubDate></item><item><title>How to use yasnippets to produce email templates in Emacs</title><link>http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use yasnippets to produce email templates in Emacs                     :en:emacs:email:
 &lt;/p&gt;
@@ -360,9 +392,9 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-13 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd76c7be" class="outline-2"&gt;
-&lt;h3 id="orgd76c7be"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd76c7be"&gt;
+&lt;div id="outline-container-org79e28ab" class="outline-2"&gt;
+&lt;h3 id="org79e28ab"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org79e28ab"&gt;
 &lt;p&gt;
 As a freelancer, I need reply agent's email frequently.
 &lt;/p&gt;
@@ -376,19 +408,18 @@ So I have several issues to resolve:
 &lt;li&gt;Get the agent's name right. This is not easy since I'm living in Sydney&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge714615" class="outline-2"&gt;
-&lt;h3 id="orge714615"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge714615"&gt;
+&lt;div id="outline-container-orgc29ed4a" class="outline-2"&gt;
+&lt;h3 id="orgc29ed4a"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc29ed4a"&gt;
 &lt;p&gt;
 &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt; is the best solution for email templates because you can embed Lisp code in the template.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5540b99" class="outline-3"&gt;
-&lt;h4 id="org5540b99"&gt;Templates&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org5540b99"&gt;
+&lt;div id="outline-container-org15483e1" class="outline-3"&gt;
+&lt;h4 id="org15483e1"&gt;Templates&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org15483e1"&gt;
 &lt;p&gt;
 I publicize my .emacs.d at &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;github&lt;/a&gt;. But email templates are my private stuff. So I place them in different location.
 &lt;/p&gt;
@@ -445,16 +476,16 @@ It will automatically fetch the first name of agent,
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgf9a0d00" class="outline-3"&gt;
-&lt;h4 id="orgf9a0d00"&gt;Emacs setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgf9a0d00"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgabf736c" class="outline-3"&gt;
+&lt;h4 id="orgabf736c"&gt;Emacs setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgabf736c"&gt;
 &lt;p&gt;
 Add following code into .emacs to make yasnippet load the emacs templates:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'yasnippet)
 (setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
@@ -463,10 +494,415 @@ Add following code into .emacs to make yasnippet load the emacs templates:
 (yas-global-mode 1)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html</guid><pubDate>Wed, 01 May 2013 15:53:08 GMT</pubDate></item><item><title>Simplest workflow on email git commit in Emacs (No magit needed)</title><link>http://blog.binchen.org/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Sometimes I just want to email my trivial patch to the original author and forget it. In this case "github fork" or "git format-patch" is too heavy weight for me. &lt;/p&gt; &lt;p&gt; So here is the simplest workflow I can figure out: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Step 1, command "M-x vc-dir" whose hotkey is "C-x v d" &lt;/li&gt; &lt;li&gt;Step 2, command "M-x git-print-log" whose hotkey is "C-x v l" &lt;/li&gt; &lt;li&gt;Step 3, Move focus to the specific commit and run command "M-x log-view-diff" whose hotkey is "d". &lt;/li&gt; &lt;li&gt;Step 4, Yank the commit/diff &lt;/li&gt; &lt;li&gt;Step 5, Compose new email (command "M-x compose-mail" whose hotkey is "C-x m") &lt;/li&gt; &lt;li&gt;Step 6, Make sure the subject of email start with "[PATCH]". See &lt;a href="http://linuxtv.org/wiki/index.php/Development:_How_to_submit_patches"&gt;this patch sumbit guide&lt;/a&gt; for reasons. &lt;/li&gt; &lt;li&gt;Step 7, Paste the content of commit/diff into email body. &lt;/li&gt; &lt;li&gt;Step 8, Send the email by command "M-x message-send-and-exit" whose hotkey is "C-c C-c" &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; Please note: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Step 1 is usually necessary unless you only need the diff of current file. &lt;/li&gt; &lt;li&gt;Step 2 and step 3 could be replaced with command "M-x vc-diff" or hotkey "C-x v =" if you want to email the diff of work directory. &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>patch</category><guid>http://blog.binchen.org/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html</guid><pubDate>Sun, 27 Jan 2013 15:51:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-use-yasnippets-to-produce-email-templates-in-emacs.html</guid><pubDate>Wed, 01 May 2013 15:53:08 GMT</pubDate></item><item><title>Simplest workflow on email git commit in Emacs (No magit needed)</title><link>http://blog.binchen.org/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Sometimes I just want to email my trivial patch to the original author and forget it. In this case "github fork" or "git format-patch" is too heavy weight for me. &lt;/p&gt; &lt;p&gt; So here is the simplest workflow I can figure out: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Step 1, command "M-x vc-dir" whose hotkey is "C-x v d" &lt;/li&gt; &lt;li&gt;Step 2, command "M-x git-print-log" whose hotkey is "C-x v l" &lt;/li&gt; &lt;li&gt;Step 3, Move focus to the specific commit and run command "M-x log-view-diff" whose hotkey is "d". &lt;/li&gt; &lt;li&gt;Step 4, Yank the commit/diff &lt;/li&gt; &lt;li&gt;Step 5, Compose new email (command "M-x compose-mail" whose hotkey is "C-x m") &lt;/li&gt; &lt;li&gt;Step 6, Make sure the subject of email start with "[PATCH]". See &lt;a href="http://linuxtv.org/wiki/index.php/Development:_How_to_submit_patches"&gt;this patch sumbit guide&lt;/a&gt; for reasons. &lt;/li&gt; &lt;li&gt;Step 7, Paste the content of commit/diff into email body. &lt;/li&gt; &lt;li&gt;Step 8, Send the email by command "M-x message-send-and-exit" whose hotkey is "C-c C-c" &lt;/li&gt; &lt;/ul&gt;   &lt;p&gt; Please note: &lt;/p&gt;&lt;ul&gt; &lt;li&gt;Step 1 is usually necessary unless you only need the diff of current file. &lt;/li&gt; &lt;li&gt;Step 2 and step 3 could be replaced with command "M-x vc-diff" or hotkey "C-x v =" if you want to email the diff of work directory. &lt;/li&gt; &lt;/ul&gt;  &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>patch</category><guid>http://blog.binchen.org/posts/simplest-workflow-on-email-git-commit-in-emacs-no-magit-needed.html</guid><pubDate>Sun, 27 Jan 2013 15:51:00 GMT</pubDate></item><item><title>Use POPFile at Linux</title><link>http://blog.binchen.org/posts/use-popfile-at-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+POPFile at Linux                                                            :linux:en:popfile:spam:filter:email:
+&lt;/p&gt;
+
+&lt;p&gt;
+CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2012-12-28&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2017-03-12 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="http://getpopfile.org"&gt;POPFile&lt;/a&gt; automatically sorts emails.
+&lt;/p&gt;
+
+&lt;div id="outline-container-sec-1" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+&lt;a href="http://getpopfile.org/docs/download"&gt;Download and extract cross-platform version&lt;/a&gt; to &lt;code&gt;~/bin/popfile/&lt;/code&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-2" class="outline-2"&gt;
+&lt;h3 id="sec-2"&gt;Install third party packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+Run:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode Mozilla::CA
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+When being asked by cpan, say you prefer installing local lib.
+&lt;/p&gt;
+
+&lt;p&gt;
+This is my cpan setup,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-perl"&gt;$CPAN::Config = {
+  'applypatch' =&amp;gt; q[],
+  'auto_commit' =&amp;gt; q[0],
+  'build_cache' =&amp;gt; q[100],
+  'build_dir' =&amp;gt; q[/home/cb/.cpan/build],
+  'build_dir_reuse' =&amp;gt; q[0],
+  'build_requires_install_policy' =&amp;gt; q[yes],
+  'bzip2' =&amp;gt; q[/bin/bzip2],
+  'cache_metadata' =&amp;gt; q[1],
+  'check_sigs' =&amp;gt; q[0],
+  'colorize_output' =&amp;gt; q[0],
+  'commandnumber_in_prompt' =&amp;gt; q[1],
+  'connect_to_internet_ok' =&amp;gt; q[1],
+  'cpan_home' =&amp;gt; q[/home/cb/.cpan],
+  'ftp_passive' =&amp;gt; q[1],
+  'ftp_proxy' =&amp;gt; q[],
+  'getcwd' =&amp;gt; q[cwd],
+  'gpg' =&amp;gt; q[/usr/bin/gpg],
+  'gzip' =&amp;gt; q[/bin/gzip],
+  'halt_on_failure' =&amp;gt; q[0],
+  'histfile' =&amp;gt; q[/home/cb/.cpan/histfile],
+  'histsize' =&amp;gt; q[100],
+  'http_proxy' =&amp;gt; q[],
+  'inactivity_timeout' =&amp;gt; q[0],
+  'index_expire' =&amp;gt; q[90],
+  'inhibit_startup_message' =&amp;gt; q[0],
+  'keep_source_where' =&amp;gt; q[/home/cb/.cpan/sources],
+  'load_module_verbosity' =&amp;gt; q[none],
+  'make' =&amp;gt; q[/usr/bin/make],
+  'make_arg' =&amp;gt; q[],
+  'make_install_make_command' =&amp;gt; q[/usr/bin/make],
+  'mbuild_arg' =&amp;gt; q[--install-dirs site],
+  'mbuild_install_arg' =&amp;gt; q[./Build],
+  'mbuild_install_build_command' =&amp;gt; q[./Build],
+  'mbuildpl_arg' =&amp;gt; q[--installdirs site],
+  'no_proxy' =&amp;gt; q[],
+  'pager' =&amp;gt; q[/usr/bin/less],
+  'patch' =&amp;gt; q[/usr/bin/patch],
+  'perl5lib_verbosity' =&amp;gt; q[none],
+  'prefer_external_tar' =&amp;gt; q[1],
+  'prefer_installer' =&amp;gt; q[MB],
+  'prefs_dir' =&amp;gt; q[/home/cb/.cpan/prefs],
+  'prerequisites_policy' =&amp;gt; q[follow],
+  'recommends_policy' =&amp;gt; q[1],
+  'scan_cache' =&amp;gt; q[atstart],
+  'shell' =&amp;gt; q[/bin/bash],
+  'show_unparsable_versions' =&amp;gt; q[0],
+  'show_upload_date' =&amp;gt; q[0],
+  'show_zero_versions' =&amp;gt; q[0],
+  'suggests_policy' =&amp;gt; q[0],
+  'tar' =&amp;gt; q[/bin/tar],
+  'tar_verbosity' =&amp;gt; q[none],
+  'term_is_latin' =&amp;gt; q[1],
+  'term_ornaments' =&amp;gt; q[1],
+  'test_report' =&amp;gt; q[0],
+  'trust_test_report_history' =&amp;gt; q[0],
+  'unzip' =&amp;gt; q[/usr/bin/unzip],
+  'urllist' =&amp;gt; [q[http://mirror.optusnet.com.au/CPAN/]],
+  'use_prompt_default' =&amp;gt; q[0],
+  'use_sqlite' =&amp;gt; q[0],
+  'version_timeout' =&amp;gt; q[15],
+  'wget' =&amp;gt; q[/usr/bin/wget],
+  'yaml_load_code' =&amp;gt; q[0],
+  'yaml_module' =&amp;gt; q[YAML],
+};
+__END__
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+&lt;code&gt;cpan&lt;/code&gt; will append setup ~/.bashrc,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Double check installed packages:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -MDBI -e 'print $MIME::DBI::VERSION'
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+If there is any error:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;perl -V
+rm -rf ~/perl5/*
+cpan DBD::SQLite DBI Date::Format Date::Parse HTML::Tagset HTML::Template IO::Socket::SSL Net::IDN::Encode MOZILLA::CA
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-3" class="outline-2"&gt;
+&lt;h3 id="sec-3"&gt;Setup&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+I only use IMAP. The purpose of tweak POP3 port is only to make the program executable without root permission.
+&lt;/p&gt;
+
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:mayneedroot"&gt;http://getpopfile.org/docs/howtos:mayneedroot&lt;/a&gt; for details.
+&lt;/p&gt;
+
+&lt;p&gt;
+Run the below command to fix the root issue.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;sed -i 's/pop3_port \+110/pop3_port 1110/g' ~/bin/popfile/popfile.cfg
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Here is my popfile setup for &lt;a href="http://davmail.sourceforge.net/"&gt;Davmail&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Davmail is a gateway to convert Outlook/Exchange service to IMAP/POP3). It's required if and only if you use Microsoft's Exchange/Outlook.
+&lt;/p&gt;
+
+&lt;p&gt;
+For other email service, you DON'T need Davmail.
+&lt;/p&gt;
+
+&lt;p&gt;
+If you don't use Davmail and fetch mails directly, you'd better set &lt;code&gt;imap_expunge 1&lt;/code&gt; to fix &lt;a href="http://getpopfile.org/discussion/1/550/2144"&gt;Microsoft Office 365 has some issue&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Please note ssl is disabled in my setup because I'm running local Davmail Server. Or else, you need enable ssl.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;bayes_bad_sqlite_version 4.0.0
+bayes_corpus corpus
+bayes_database popfile.db
+bayes_dbauth 
+bayes_dbconnect dbi:SQLite:dbname=$dbname
+bayes_dbuser 
+bayes_hostname 192-168-1-3.tpgi.com.au
+bayes_localhostname 
+bayes_nihongo_parser kakasi
+bayes_sqlite_journal_mode delete
+bayes_sqlite_tweaks 4294967295
+bayes_subject_mod_left [
+bayes_subject_mod_pos 1
+bayes_subject_mod_right ]
+bayes_unclassified_weight 100
+bayes_xpl_angle 0
+config_pidcheck_interval 5
+config_piddir ./
+GLOBAL_debug 1
+GLOBAL_last_update_check 1407715200
+GLOBAL_message_cutoff 100000
+GLOBAL_msgdir messages/
+GLOBAL_ssl_verify_peer_certs 0
+GLOBAL_timeout 60
+GLOBAL_update_check 1
+history_archive 0
+history_archive_classes 0
+history_archive_dir archive
+history_history_days 2
+html_cache_templates 0
+html_column_characters 0
+html_columns +inserted,+from,+to,-cc,+subject,-date,-size,+bucket
+html_date_format 
+html_language English
+html_last_reset Sat Dec  1 11:06:48 2012
+html_local 0
+html_page_size 20
+html_password b6b3637136ad630eba43aa5ee7106780
+html_port 8888
+html_search_filter_highlight 0
+html_send_stats 1
+html_session_dividers 1
+html_show_bucket_help 1
+html_show_training_help 0
+html_skin simplyblue
+html_strict_templates 0
+html_test_language 0
+html_wordtable_format 
+imap_bucket_folder_mappings job--&amp;gt;job--&amp;gt;geek--&amp;gt;geek--&amp;gt;business--&amp;gt;business--&amp;gt;ad--&amp;gt;ad--&amp;gt;unclassified--&amp;gt;INBOX--&amp;gt;work--&amp;gt;work--&amp;gt;
+imap_enabled 1
+imap_expunge 1
+imap_hostname localhost
+imap_login binc1
+imap_password password1
+imap_port 1143
+imap_training_mode 0
+imap_uidnexts work--&amp;gt;749--&amp;gt;job--&amp;gt;5914--&amp;gt;INBOX--&amp;gt;20736--&amp;gt;geek--&amp;gt;5009--&amp;gt;ad--&amp;gt;1296--&amp;gt;business--&amp;gt;15--&amp;gt;
+imap_uidvalidities job--&amp;gt;98--&amp;gt;work--&amp;gt;107--&amp;gt;ad--&amp;gt;100--&amp;gt;business--&amp;gt;106--&amp;gt;geek--&amp;gt;99--&amp;gt;INBOX--&amp;gt;2--&amp;gt;
+imap_update_interval 1000
+imap_use_ssl 0
+imap_watched_folders INBOX--&amp;gt;INBOX--&amp;gt;
+logger_format default
+logger_level 0
+logger_logdir ./
+nntp_enabled 0
+nntp_force_fork 1
+nntp_headtoo 0
+nntp_local 1
+nntp_port 119
+nntp_separator :
+nntp_socks_port 1080
+nntp_socks_server 
+nntp_welcome_string NNTP POPFile (v1.1.3) server ready
+pop3_enabled 0
+pop3_force_fork 1
+pop3_local 1
+pop3_port 1110
+pop3_secure_port 110
+pop3_secure_server 
+pop3_separator :
+pop3_socks_port 1080
+pop3_socks_server 
+pop3_toptoo 0
+pop3_welcome_string POP3 POPFile (v1.1.3) server ready
+smtp_chain_port 25
+smtp_chain_server 
+smtp_enabled 0
+smtp_force_fork 1
+smtp_local 1
+smtp_port 25
+smtp_socks_port 1080
+smtp_socks_server 
+smtp_welcome_string SMTP POPFile (v1.1.3) welcome
+xmlrpc_enabled 0
+xmlrpc_local 1
+xmlrpc_port 8081
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+The only remaining issue is user name. If it contains "\", you should replace it with "\\" when inputting in Popfile!
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-4" class="outline-2"&gt;
+&lt;h3 id="sec-4"&gt;Run the program&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:runlocation"&gt;http://getpopfile.org/docs/howtos:runlocation&lt;/a&gt; for details.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-sh"&gt;cd ~/bin/popfile;perl popfile.pl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-5" class="outline-2"&gt;
+&lt;h3 id="sec-5"&gt;Start the POPFile automatically when bash login&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-5"&gt;
+&lt;p&gt;
+Insert below code in ~/.bashrc:
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-bash"&gt;OS_NAME=`uname -s`
+if [ $OS_NAME == Linux ]; then
+   # start popfile
+   if [ -f $HOME/bin/popfile/popfile.pl ]; then
+      # @see http://getpopfile.org/docs/howtos:runlocation
+      pop_pid=`ps -ef | grep perl | grep popfile.pl | gawk '{print $2}'`
+      if [ "${pop_pid}" = "" ] ; then
+         cd $HOME/bin/popfile
+         perl popfile.pl &amp;gt;&amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;
+      fi
+      cd $HOME
+   fi
+fi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-6" class="outline-2"&gt;
+&lt;h3 id="sec-6"&gt;Start the POPFile systemd service as a user (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-6"&gt;
+&lt;p&gt;
+My user name is cb. Put popfile.service in &lt;i&gt;usr/lib/systemd/system&lt;/i&gt;. Then run `systemctl enable popfile` to install service. Run `systemctl start popfile` to start the service. My Linux distribution is ArchLinux.
+&lt;/p&gt;
+
+&lt;p&gt;
+here is content of popfile.service.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[Unit]
+Description=POPFile (Automatic Email Classification) Service
+
+[Service]
+WorkingDirectory=/home/cb/bin/popfile
+ExecStart=/usr/bin/perl popfile.pl
+User=cb
+
+[Install]
+WantedBy=multi-user.target
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-7" class="outline-2"&gt;
+&lt;h3 id="sec-7"&gt;Backup&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-7"&gt;
+&lt;p&gt;
+Please backup popfile.cfg and popfile.db.
+&lt;/p&gt;
+
+&lt;p&gt;
+See &lt;a href="http://getpopfile.org/docs/howtos:backup"&gt;http://getpopfile.org/docs/howtos:backup&lt;/a&gt; for details.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-sec-8" class="outline-2"&gt;
+&lt;h3 id="sec-8"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-8"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;Portable
+&lt;/li&gt;
+&lt;li&gt;No root privilege needed
+&lt;/li&gt;
+&lt;li&gt;No X windows needed. I can manage mails in remote shell
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>email</category><category>en</category><category>filter</category><category>linux</category><category>popfile</category><category>spam</category><guid>http://blog.binchen.org/posts/use-popfile-at-linux.html</guid><pubDate>Fri, 28 Dec 2012 13:37:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 guide to use Gnus with Gmail                                        :emacs:email:gmail:gnus:
 &lt;/p&gt;
 

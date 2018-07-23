@@ -23,144 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html">How to split album into different flac and tag them under Gentoo Linux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-05-12T22:32:00+00:00">2013-05-12 22:32</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/cue.html" rel="tag">cue</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/flac.html" rel="tag">flac</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
-</p>
-
-<div id="outline-container-org39bbd11" class="outline-2">
-<h3 id="org39bbd11">Install CLI tools</h3>
-<div class="outline-text-2" id="text-org39bbd11">
-<div class="org-src-container">
-
-<pre><code class="lang-sh"># mac to support ape
-sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shntool
-sudo emerge cuetools
-</code></pre>
-
-</div>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-org523d9e5" class="outline-2">
-<h3 id="org523d9e5">Download script</h3>
-<div class="outline-text-2" id="text-org523d9e5">
-<p>
-See <a href="https://bbs.archlinux.org/viewtopic.php?id=58766">https://bbs.archlinux.org/viewtopic.php?id=58766</a> for the source of bash script.
-</p>
-<p>
-Here is the full content of the bash script:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-sh">#!/bin/bash
-# split image file (flac, ape, wav, etc.) according to cue-file
-if [ -f "$1" ]; then
-    i=0
-    for cuefile in *.cue; do
-        i=$(($i + 1))
-    done
-    if [ $i -eq 1 ]; then
-        # precies 1 cuesheet gevonden
-        if grep -q "INDEX 01 00:00:00" *.cue ; then
-            nice shntool split -t "%n %t" -f *.cue "$1"
-        else
-            echo "The first track has a pre-gap. Shntool will cut that off and put it in a seperate file."
-            echo "You don't want that. Please modify the cuesheet from:"
-            grep -m1 "INDEX 00" *.cue
-            grep -m1 "INDEX 01" *.cue
-            echo "to:"
-            echo "    INDEX 01 00:00:00"
-            exit 1
-        fi
-    elif [ $i -eq 0 ]; then
-        echo "No cuesheet found in the current directory."
-        exit 1
-    elif [ $i -gt 1 ]; then
-        echo "$i cuesheets found in the current directory. Please remove the superfluous cuesheets."
-        exit 1
-    fi
-else
-    echo "Split image file (flac, ape, wav, etc.) according to cue-file."
-    echo "Output files are in FLAC."
-    echo "Usage: `basename $0` &lt;image-file&gt;"
-    exit 1
-fi
-
-echo
-album=`grep -m 1 TITLE *.cue | cut -d\" -f2`
-artist=`grep -m 1 PERFORMER *.cue | cut -d\" -f2`
-
-for file in [0-9]*.wav; do
-    echo "Encoding $file"
-
-    if [[ ${file:0:1} == 0 ]] ; then
-        tracknr=${file:1:1}
-    else
-        tracknr=${file:0:2}
-    fi
-    title=`echo ${file:2} | sed -e "s/.wav$//"`
-
-    nice flac -s -T "artist=$artist" -T "album=$album" -T "title=$title" \
-    -T "tracknumber=$tracknr" "$file" &amp;&amp; rm "$file"
-done
-</code></pre>
-
-</div>
-
-<p>
-Put the script somewhere and name it to <code>cue2flac</code>
-</p>
-
-<p></p>
-</div>
-</div>
-<div id="outline-container-org1e36f10" class="outline-2">
-<h3 id="org1e36f10">Start conversion</h3>
-<div class="outline-text-2" id="text-org1e36f10">
-<div class="org-src-container">
-<pre><code class="lang-sh"># convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
-find . -name '*.ape'|xargs -I {} ffmpeg -i {} {}.wav
-# split wav and convert it to flac, make sure the *.cue exists in current directory
-cue2flac a.ape.wav
-# do the cleaning (OPTIONAL)
-rm *.ape *.wav
-</code></pre>
-
-<p></p>
-</div>
-</div>
-</div>
-</div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/the-minimum-emacs-for-debug-purpose.html">The minimum .emacs for debug purpose</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -344,9 +206,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-01 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-13 Fri&gt;</span></span>
 </p>
 
-<div id="outline-container-orgd76c7be" class="outline-2">
-<h3 id="orgd76c7be">Problem</h3>
-<div class="outline-text-2" id="text-orgd76c7be">
+<div id="outline-container-org79e28ab" class="outline-2">
+<h3 id="org79e28ab">Problem</h3>
+<div class="outline-text-2" id="text-org79e28ab">
 <p>
 As a freelancer, I need reply agent's email frequently.
 </p>
@@ -360,19 +222,18 @@ So I have several issues to resolve:
 <li>Get the agent's name right. This is not easy since I'm living in Sydney</li>
 </ul>
 </div>
-
 </div>
 
-<div id="outline-container-orge714615" class="outline-2">
-<h3 id="orge714615">Solution</h3>
-<div class="outline-text-2" id="text-orge714615">
+<div id="outline-container-orgc29ed4a" class="outline-2">
+<h3 id="orgc29ed4a">Solution</h3>
+<div class="outline-text-2" id="text-orgc29ed4a">
 <p>
 <a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a> is the best solution for email templates because you can embed Lisp code in the template.
 </p>
 </div>
-<div id="outline-container-org5540b99" class="outline-3">
-<h4 id="org5540b99">Templates</h4>
-<div class="outline-text-3" id="text-org5540b99">
+<div id="outline-container-org15483e1" class="outline-3">
+<h4 id="org15483e1">Templates</h4>
+<div class="outline-text-3" id="text-org15483e1">
 <p>
 I publicize my .emacs.d at <a href="https://github.com/redguardtoo/emacs.d">github</a>. But email templates are my private stuff. So I place them in different location.
 </p>
@@ -429,17 +290,16 @@ It will automatically fetch the first name of agent,
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
-<div id="outline-container-orgf9a0d00" class="outline-3">
-<h4 id="orgf9a0d00">Emacs setup</h4>
-<div class="outline-text-3" id="text-orgf9a0d00">
+<div id="outline-container-orgabf736c" class="outline-3">
+<h4 id="orgabf736c">Emacs setup</h4>
+<div class="outline-text-3" id="text-orgabf736c">
 <p>
 Add following code into .emacs to make yasnippet load the emacs templates:
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-lisp">(require 'yasnippet)
 (setq my-yasnippets (expand-file-name "~/my-yasnippets"))
 (if (and  (file-exists-p my-yasnippets) (not (member my-yasnippets yas-snippet-dirs)))
@@ -448,7 +308,6 @@ Add following code into .emacs to make yasnippet load the emacs templates:
 (yas-global-mode 1)
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -692,22 +551,21 @@ screen/rtorrent/cronie to manage torrent client                           :linux
 For <a href="http://www.archlinux.org">ArchLinux</a> only:
 </p>
 
-<div id="outline-container-org82fda58" class="outline-2">
-<h3 id="org82fda58">Prepare directory</h3>
-<div class="outline-text-2" id="text-org82fda58">
+<div id="outline-container-org1447f65" class="outline-2">
+<h3 id="org1447f65">Prepare directory</h3>
+<div class="outline-text-2" id="text-org1447f65">
 <div class="org-src-container">
 
 <pre><code class="lang-bash">mkdir -p ~/bt/{session,finished,torrent}
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orga09cb9e" class="outline-2">
-<h3 id="orga09cb9e">Install</h3>
-<div class="outline-text-2" id="text-orga09cb9e">
+<div id="outline-container-org7e11a32" class="outline-2">
+<h3 id="org7e11a32">Install</h3>
+<div class="outline-text-2" id="text-org7e11a32">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">sudo pacman -S cronie
@@ -716,13 +574,12 @@ sudo systemctl start cronie
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org4bb443f" class="outline-2">
-<h3 id="org4bb443f">Add cron task to start and stop rtorrent service</h3>
-<div class="outline-text-2" id="text-org4bb443f">
+<div id="outline-container-orgb9168fa" class="outline-2">
+<h3 id="orgb9168fa">Add cron task to start and stop rtorrent service</h3>
+<div class="outline-text-2" id="text-orgb9168fa">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">crontab -e #add cron task as current user
@@ -733,7 +590,6 @@ sudo systemctl start cronie
 <p>
 The default editor will be open, input below content:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-conf">#start rtorrent sesssion at 1am
@@ -747,8 +603,6 @@ The default editor will be open, input below content:
 <p>
 Done!
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -792,9 +646,9 @@ wxWidgets 3.0.0
 WARNING: before building, please make sure remove everything in build directory, <b>including hidden directory</b>!
 </p>
 
-<div id="outline-container-org2f49c0c" class="outline-2">
-<h3 id="org2f49c0c">Install webkit by using Linux distribution's package manager</h3>
-<div class="outline-text-2" id="text-org2f49c0c">
+<div id="outline-container-org21cd6bd" class="outline-2">
+<h3 id="org21cd6bd">Install webkit by using Linux distribution's package manager</h3>
+<div class="outline-text-2" id="text-org21cd6bd">
 <p>
 I need use wxWebView which dependent on webkit on Linux. The issue here is that webkit on Linux is using GTK.
 </p>
@@ -803,16 +657,16 @@ I need use wxWebView which dependent on webkit on Linux. The issue here is that 
 Make sure the webkit and wxWidgets are using same version of GTK.
 </p>
 </div>
-
-<p></p>
 </div>
-<div id="outline-container-org212f141" class="outline-2">
-<h3 id="org212f141">build the source</h3>
-<div class="outline-text-2" id="text-org212f141">
+
+<div id="outline-container-org929aaed" class="outline-2">
+<h3 id="org929aaed">build the source</h3>
+<div class="outline-text-2" id="text-org929aaed">
 <p>
 Please note I don't use libtiff. I think libpng and libjpeg is enough.
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-sh">mkdir -p ${WXWIN}/build-release;cd ${WXWIN}/build-release;../configure --disable-shared --without-libtiff;make
 mkdir -p ${WXWIN}/build-debug;cd ${WXWIN}/build-debug;../configure --disable-shared --enable-debug --without-libtiff;make
 </code></pre>
@@ -826,8 +680,182 @@ On OSX, I need extra <code>--with-osx_cocoa</code> parameter for configure.
 <p>
 On Linux, build will be fine following above steps. But for building application, I need <code>sudo apt-get install libgtk2.0-dev</code> on Debian/Ubuntu/Mint.
 </p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/notes-to-install-gentoo-linux.html">Notes to install Gentoo Linux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-02-25T02:22:00+00:00">2013-02-25 02:22</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/notes-to-install-gentoo-linux.html#disqus_thread" data-disqus-identifier="cache/posts/notes-to-install-gentoo-linux.html">Comments</a>
 
-<p></p>
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gentoo.html" rel="tag">gentoo</a></li>
+           <li><a class="tag p-category" href="categories/install.html" rel="tag">install</a></li>
+           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+to install Gentoo Linux                                                 :gentoo:linux:install:en:
+</p>
+
+<div id="outline-container-org0546db1" class="outline-2">
+<h3 id="org0546db1">Intel integrated video card</h3>
+<div class="outline-text-2" id="text-org0546db1">
+<p>
+Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&gt; Graphic =&gt; Intel) is critical:
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-sh">sudo genkernel --menuconfig all
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8368ea3" class="outline-2">
+<h3 id="org8368ea3">Grub2</h3>
+<div class="outline-text-2" id="text-org8368ea3">
+<p>
+Let grub2 create the cfg for me automatically,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-sh">grub2-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6e925b3" class="outline-2">
+<h3 id="org6e925b3">Network</h3>
+<div class="outline-text-2" id="text-org6e925b3">
+</div>
+<div id="outline-container-org5decd7a" class="outline-3">
+<h4 id="org5decd7a">Ethernet</h4>
+<div class="outline-text-3" id="text-org5decd7a">
+<div class="org-src-container">
+
+<pre><code class="lang-sh">#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
+# @see https://wiki.gentoo.org/wiki/Netifrc
+ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
+echo 'config_eth0="dhcp"' &gt;&gt; /etc/conf.d/net
+/etc/init.d/net.eth0 start
+rc-update add net.eth0 default
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge3978f0" class="outline-3">
+<h4 id="orge3978f0">Wireless (wifi)</h4>
+<div class="outline-text-3" id="text-orge3978f0">
+<div class="org-src-container">
+
+<pre><code class="lang-sh">#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
+# @see https://wiki.gentoo.org/wiki/Netifrc
+# I need setup /etc/wpa_supplicant/wpa_supplicant.conf at first
+ln -s /etc/init.d/net.lo /etc/init.d/net.ra0
+echo 'config_ra0="dhcp"' &gt;&gt; /etc/conf.d/net
+/etc/init.d/net.ra0 start
+rc-update add net.ra0 default
+</code></pre>
+
+</div>
+
+<p>
+Content of /etc/wpa_supplicant/wpa_supplicant.conf:
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-conf">#let wpa_supplicant take care of scanning and AP selection
+ap_scan=1
+
+#simple case: WPA-PSK, PPSK as an simple passphrase
+network={
+  ssid="myssid"
+  psk="mypassword"
+  # the higher priority the sooner we matched
+  priority=5
+}
+</code></pre>
+
+</div>
+
+<p>
+For kernel 3.17.*+, by default wpa_supplicant use <code>nl80211</code> driver instead of <code>wext</code>.
+</p>
+
+<p>
+We need for it use <code>wext</code> instead. To double check <code>wext</code> does work,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-bash">sudo wpa_supplicant -dd -B -i ra0 -Dwext -c /etc/wpa_supplicant/wpa_supplicant.conf
+</code></pre>
+
+</div>
+
+<p>
+But OpenRC script does not have <code>-Dwext</code>,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-bash"># as root
+cd /lib;grep -rsn --exclude-dir=/home "Starting wpa_supplicant on" *
+# netifrc/net/wpa_supplicant.sh:85: ebegin "Starting wpa_supplicant on ${IF
+# VAR}"
+</code></pre>
+
+</div>
+
+<p>
+Modify /lib/netifrc/net/wpa_supplicant.sh to for it use wext,
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-bash">opts="-Dwext ${opts} -c ${cfgfile}"
+</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1936903" class="outline-2">
+<h3 id="org1936903">Clock Synchronization</h3>
+<div class="outline-text-2" id="text-org1936903">
+<p>
+<a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate">htpdate</a> is great because it only use HTTP protocol, don't forget add server in its config file.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1181f3a" class="outline-2">
+<h3 id="org1181f3a">Sound</h3>
+<div class="outline-text-2" id="text-org1181f3a">
+<p>
+Nothing to tell. There may be some issue, but I forgot.</p>
 </div>
 </div>
 </div>
@@ -841,7 +869,7 @@ On Linux, build will be fine following above steps. But for building application
             <li class="next">
                 <a href="index-7.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

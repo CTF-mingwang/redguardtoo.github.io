@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (package)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/package.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about package)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/package.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>No worries when elpa is down</title><link>http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 worries when elpa is down                                                  :en:emacs:package:elpa:
 &lt;/p&gt;
 
@@ -51,9 +51,9 @@ The techniques are compatible with &lt;a href="https://github.com/jwiegley/use-p
 Mid-level Lisp knowledge is required to read this article.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org834ee2d" class="outline-2"&gt;
-&lt;h3 id="org834ee2d"&gt;Do NOT use package.el for certain packages&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org834ee2d"&gt;
+&lt;div id="outline-container-org515af9e" class="outline-2"&gt;
+&lt;h3 id="org515af9e"&gt;Do NOT use package.el for certain packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org515af9e"&gt;
 &lt;p&gt;
 Create the directory &lt;code&gt;~/.emacs.d/site-lisp&lt;/code&gt;. Then insert below code into &lt;code&gt;~/.emacs&lt;/code&gt;,
 &lt;/p&gt;
@@ -72,23 +72,22 @@ Create the directory &lt;code&gt;~/.emacs.d/site-lisp&lt;/code&gt;. Then insert 
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;p&gt;
 You can place a package's source code at sub-directory of &lt;code&gt;~/.emacs.d/site-lisp/&lt;/code&gt;. That's all you need to do to install packages.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org7ae2f18" class="outline-2"&gt;
-&lt;h3 id="org7ae2f18"&gt;Create your own package repository&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7ae2f18"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org93c60b2" class="outline-2"&gt;
+&lt;h3 id="org93c60b2"&gt;Create your own package repository&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org93c60b2"&gt;
 &lt;p&gt;
 Step 1, Place two files "archive-contents" and "hello-1.0.0.el" in any directory. Say &lt;code&gt;~/.emacs.d/localelpa&lt;/code&gt;. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Here is the content of &lt;code&gt;archive-contents&lt;/code&gt;:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(1
@@ -101,7 +100,6 @@ Here is the content of &lt;code&gt;archive-contents&lt;/code&gt;:
 &lt;p&gt;
 Here is the content of &lt;code&gt;hello-1.0.0.el&lt;/code&gt;:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;;;###autoload
@@ -117,7 +115,6 @@ Here is the content of &lt;code&gt;hello-1.0.0.el&lt;/code&gt;:
 &lt;p&gt;
 Step 2, insert below code into &lt;code&gt;~/.emacs&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(add-to-list 'package-archives '("localelpa" . "~/.emacs.d/localelpa"))
@@ -140,12 +137,12 @@ I also create a &lt;a href="https://github.com/redguardtoo/elpa-mirror"&gt;elpa-
 &lt;p&gt;
 Orphan package issue is also resolved by &lt;code&gt;elpa-mirror&lt;/code&gt;. You can delete everything from &lt;code&gt;~/.emacs.d/elpa&lt;/code&gt; and set the repository to the local repository created by &lt;code&gt;elpa-mirror&lt;/code&gt;. It only takes 30 seconds to install 300 packages.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org89eb49b" class="outline-2"&gt;
-&lt;h3 id="org89eb49b"&gt;&lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;Advice&lt;/a&gt; &lt;code&gt;package--add-to-archive-contents&lt;/code&gt; to filter packages&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org89eb49b"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org09ce162" class="outline-2"&gt;
+&lt;h3 id="org09ce162"&gt;&lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;Advice&lt;/a&gt; &lt;code&gt;package--add-to-archive-contents&lt;/code&gt; to filter packages&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org09ce162"&gt;
 &lt;p&gt;
 Insert below code into ~/.emacs,
 &lt;/p&gt;
@@ -206,19 +203,19 @@ Surely you can build your own filter.
 &lt;p&gt;
 This solution is copied from Steve Purcell's setup with a little modification.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orge889c8b" class="outline-2"&gt;
-&lt;h3 id="orge889c8b"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge889c8b"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org2ea9d40" class="outline-2"&gt;
+&lt;h3 id="org2ea9d40"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org2ea9d40"&gt;
 &lt;p&gt;
 You can combine above techniques to &lt;b&gt;solve any package issue&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 For example, package A is dependent on package B. Both A and B have two versions, 1.0 and 2.0:
 &lt;/p&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;A 2.0 can use B 1.0 and B 2.0, but A 1.0 can ONLY use B 1.0&lt;/li&gt;
 &lt;li&gt;A 2.0 can ONLY use B 2.0, and A 1.0 can only use B 1.0&lt;/li&gt;
@@ -234,8 +231,7 @@ I know some one believs "Emacs package manager sucks" after mastering it for sev
 
 &lt;p&gt;
 It's possibly I started my journey by &lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide"&gt;learning from experts&lt;/a&gt; instead of "studiyng" by myself.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>package</category><guid>http://blog.binchen.org/posts/how-to-manage-emacs-packages-effectively.html</guid><pubDate>Thu, 30 Jun 2016 11:09:42 GMT</pubDate></item><item><title>Find which package contains a file</title><link>http://blog.binchen.org/posts/find-which-package-contains-a-file.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 which package contains a file                                            :linux:package:find:&lt;a href="http://blog.binchen.org/posts/en"&gt;en&lt;/a&gt;:
 &lt;/p&gt;

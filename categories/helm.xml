@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (helm)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/helm.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about helm)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/helm.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Hello Ivy-mode, bye Helm</title><link>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Ivy-mode, bye Helm                                                      :en:emacs:ivy:helm:
 &lt;/p&gt;
 
@@ -15,13 +15,13 @@ I will show you how I use ivy-mode.
 &lt;b&gt;Only one API&lt;/b&gt; `ivy-read` from ivy-mode is used.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org3f80763" class="outline-2"&gt;
-&lt;h3 id="org3f80763"&gt;Demo&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3f80763"&gt;
+&lt;div id="outline-container-org2ebb3dd" class="outline-2"&gt;
+&lt;h3 id="org2ebb3dd"&gt;Demo&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org2ebb3dd"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org272146d" class="outline-3"&gt;
-&lt;h4 id="org272146d"&gt;M-x counsel-git-grep-yank-line&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org272146d"&gt;
+&lt;div id="outline-container-orgdf4ef31" class="outline-3"&gt;
+&lt;h4 id="orgdf4ef31"&gt;M-x counsel-git-grep-yank-line&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgdf4ef31"&gt;
 &lt;p&gt;
 Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep lines. Then copy the selected line into kill ring.
 &lt;/p&gt;
@@ -31,55 +31,59 @@ Use &lt;a href="https://git-scm.com/docs/git-grep"&gt;git-grep&lt;/a&gt; to grep
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-orgf8aa6b3" class="outline-3"&gt;
-&lt;h4 id="orgf8aa6b3"&gt;M-x counsel-git-find-my-file&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgf8aa6b3"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org38e1881" class="outline-3"&gt;
+&lt;h4 id="org38e1881"&gt;M-x counsel-git-find-my-file&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org38e1881"&gt;
 &lt;p&gt;
 Find my file under git version control in recent N weeks.
 &lt;/p&gt;
+
+
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-git-find-my-file-nq8.png" alt="ivy-git-find-my-file-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgb1a91e9" class="outline-3"&gt;
-&lt;h4 id="orgb1a91e9"&gt;M-x ivy-imenu-goto&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgb1a91e9"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgba35f26" class="outline-3"&gt;
+&lt;h4 id="orgba35f26"&gt;M-x ivy-imenu-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgba35f26"&gt;
 &lt;p&gt;
 Imenu. It's quick.
 &lt;/p&gt;
+
+
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-imenu-goto-nq8.png" alt="ivy-imenu-goto-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgcbee9aa" class="outline-3"&gt;
-&lt;h4 id="orgcbee9aa"&gt;M-x ivy-bookmark-goto&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgcbee9aa"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgf75a7a0" class="outline-3"&gt;
+&lt;h4 id="orgf75a7a0"&gt;M-x ivy-bookmark-goto&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf75a7a0"&gt;
 &lt;p&gt;
 Quick and customizable.
 &lt;/p&gt;
+
+
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/ivy-bookmarks-goto-nq8.png" alt="ivy-bookmarks-goto-nq8.png"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org0c5a336" class="outline-2"&gt;
-&lt;h3 id="org0c5a336"&gt;Code&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0c5a336"&gt;
+&lt;div id="outline-container-org6fc5798" class="outline-2"&gt;
+&lt;h3 id="org6fc5798"&gt;Code&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6fc5798"&gt;
 &lt;p&gt;
 Swiper 7.0+ required.
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; {{ @see http://oremacs.com/2015/04/19/git-grep-ivy/
 (defun counsel-git-grep-or-find-api (fn git-cmd hint open-another-window)
   "Apply FN on the output lines of GIT-CMD.  HINT is hint when user input.
@@ -229,6 +233,6 @@ Or else, find files since 24 weeks (6 months) ago."
     ))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>helm</category><category>ivy</category><guid>http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html</guid><pubDate>Fri, 18 Dec 2015 02:41:04 GMT</pubDate></item></channel></rss>

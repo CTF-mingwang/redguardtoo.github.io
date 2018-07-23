@@ -23,110 +23,6 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/install-google-talk-plugin-64bit-on-gentoo-linux.html">install google talk plugin (64bit) on gentoo Linux</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2013-06-24T20:42:00+00:00">2013-06-24 20:42</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/install-google-talk-plugin-64bit-on-gentoo-linux.html#disqus_thread" data-disqus-identifier="cache/posts/install-google-talk-plugin-64bit-on-gentoo-linux.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/google.html" rel="tag">google</a></li>
-           <li><a class="tag p-category" href="categories/linux.html" rel="tag">linux</a></li>
-           <li><a class="tag p-category" href="categories/talk.html" rel="tag">talk</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p></p>
-<pre class="src src-sh">firefox <span style="color: #8abeb7;">'http://www.google.com/chat/video/thankyou.html'</span>
-emerge -v deb2targz &amp;&amp;
-<p>deb2targz google-talkplugin_current_amd64.deb &amp;&amp;</p>
-<p>mkdir googletalk &amp;&amp; <span style="color: #b294bb;">cd</span> googletalk</p>
-<p>tar xvf ../google-talkplugin_current_i386.tar.gz &amp;&amp;</p>
-<p>sudo cp -Rfv {etc,opt} /</p>
-<p>sudo cp -Rfv usr/lib/* /usr/lib64/</p>
-<p></p></pre>   <p> Here is the content of google talk: </p>   <pre class="src src-sh">./etc/cron.daily:
-<p>google-talkplugin</p>
-<p>./opt/google:</p>
-<p>chrome</p>
-<p>talkplugin</p>
-<p>./opt/google/chrome:</p>
-<p>pepper</p>
-<p>./opt/google/chrome/pepper:</p>
-<p>libppo1d.so</p>
-<p>./opt/google/talkplugin:</p>
-<p>./usr/lib:</p>
-<p>firefox</p>
-<p>iceape</p>
-<p>iceweasel</p>
-<p>midbrowser</p>
-<p>mozilla</p>
-<p>xulrunner</p>
-<p>xulrunner-addons</p>
-<p>./usr/lib/firefox:</p>
-<p>plugins</p>
-<p>./usr/lib/firefox/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/iceape:</p>
-<p>plugins</p>
-<p>./usr/lib/iceape/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/iceweasel:</p>
-<p>plugins</p>
-<p>./usr/lib/iceweasel/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/midbrowser:</p>
-<p>plugins</p>
-<p>./usr/lib/midbrowser/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/mozilla:</p>
-<p>plugins</p>
-<p>./usr/lib/mozilla/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/xulrunner:</p>
-<p>plugins</p>
-<p>./usr/lib/xulrunner/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/lib/xulrunner-addons:</p>
-<p>plugins</p>
-<p>./usr/lib/xulrunner-addons/plugins:</p>
-<p>libnpgoogletalk.so</p>
-<p>libnpgtpo3dautoplugin.so</p>
-<p>libnpo1d.so</p>
-<p>./usr/share:</p>
-<p>doc</p>
-<p>./usr/share/doc:</p>
-<p>google-talkplugin</p>
-<p>./usr/share/doc/google-talkplugin:</p>
-<p>changelog.Debian.gz</p>
-<p></p></pre>  </div>
-            </div>
-        </div>
-        <div class="post">
             <h1 class="title"><a href="posts/set-up-nfs-server-on-archlinux.html">set up nfs server on ArchLinux</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -234,16 +130,16 @@ vimdiff to resolve git/subversion/mercurial merge conflicts effectively   :en:gi
 </p>
 
 <p>
-You can jump to <a href="posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#orgf3e8c35">No description for this link</a> section at the end of this article.
+You can jump to <a href="posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#org98f9ca1">No description for this link</a> section at the end of this article.
 </p>
 
 <p>
 I use git as an example of version control software. But you can use any other version control software instead.
 </p>
 
-<div id="outline-container-orge8a496d" class="outline-2">
-<h3 id="orge8a496d">The reasons to use vimdiff to do the merge?</h3>
-<div class="outline-text-2" id="text-orge8a496d">
+<div id="outline-container-orgcdf0154" class="outline-2">
+<h3 id="orgcdf0154">The reasons to use vimdiff to do the merge?</h3>
+<div class="outline-text-2" id="text-orgcdf0154">
 <ul class="org-ul">
 <li>It's free (vim)</li>
 <li>It works on any OS</li>
@@ -253,13 +149,13 @@ I use git as an example of version control software. But you can use any other v
 </div>
 </div>
 
-<div id="outline-container-org37f1299" class="outline-2">
-<h3 id="org37f1299">Setup</h3>
-<div class="outline-text-2" id="text-org37f1299">
+<div id="outline-container-orgdb5424b" class="outline-2">
+<h3 id="orgdb5424b">Setup</h3>
+<div class="outline-text-2" id="text-orgdb5424b">
 </div>
-<div id="outline-container-org820c8d3" class="outline-3">
-<h4 id="org820c8d3">Setup vimdiff (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-org820c8d3">
+<div id="outline-container-org23b5345" class="outline-3">
+<h4 id="org23b5345">Setup vimdiff (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-org23b5345">
 <p>
 The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code.
 </p>
@@ -274,7 +170,6 @@ set statusline=%-10.3n  "buffer number
 </code></pre>
 
 </div>
-
 <p>
 The purpose of above two lines is to display buffer number at the status line of vim. It's OPTIONAL. You don't need see the buffer number if you are familiar with the all the buffer's position. The left top is buffer number 2. The middle top is buffer number 3. The right top is buffer number 4.
 </p>
@@ -283,7 +178,6 @@ The purpose of above two lines is to display buffer number at the status line of
 Second, if you know the buffer number, you can use hot key like ",2" (press comma first, then press two key as quickly as possible) to pull change from buffer number 2.
 Add below code into your ~/.vimrc to set up hot keys:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-vimrc">map &lt;silent&gt; &lt;leader&gt;2 :diffget 2&lt;CR&gt;
@@ -292,13 +186,12 @@ map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt;
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org992cd49" class="outline-3">
-<h4 id="org992cd49">Setup git</h4>
-<div class="outline-text-3" id="text-org992cd49">
+<div id="outline-container-org39cf066" class="outline-3">
+<h4 id="org39cf066">Setup git</h4>
+<div class="outline-text-3" id="text-org39cf066">
 <p>
 Run below commands in shell,
 </p>
@@ -309,25 +202,24 @@ git config --global mergetool.prompt false
 </code></pre>
 
 </div>
+</div>
+</div>
+</div>
 
-<p></p>
+<div id="outline-container-org8dfda9f" class="outline-2">
+<h3 id="org8dfda9f">Usage</h3>
+<div class="outline-text-2" id="text-org8dfda9f">
 </div>
-</div>
-</div>
-<div id="outline-container-org2b70be9" class="outline-2">
-<h3 id="org2b70be9">Usage</h3>
-<div class="outline-text-2" id="text-org2b70be9">
-</div>
-<div id="outline-container-orgd3ed759" class="outline-3">
-<h4 id="orgd3ed759">Create a "hello world" project</h4>
-<div class="outline-text-3" id="text-orgd3ed759">
+<div id="outline-container-org6cb8354" class="outline-3">
+<h4 id="org6cb8354">Create a "hello world" project</h4>
+<div class="outline-text-3" id="text-org6cb8354">
 <p>
 I setup a "hello world" project at <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a> for your practice.
 </p>
+
 <p>
 It has three branches "master", "bob", and "chen",
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-sh">git clone https://github.com/redguardtoo/test-git-mergetool.git
@@ -341,7 +233,6 @@ git checkout -b chen origin/chen # create local mirror of chen branch
 <p>
 Bob and Chen has edited same files. So please merge branch "bob" into "master" at first. Then merge from "chen". The merge conflicts will be created.
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-sh">git branch # double check that we got three local branches: master, bob, chen
@@ -351,13 +242,12 @@ git merge chen # now some conflicts created because Bob has already edited and m
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org98b4c7e" class="outline-3">
-<h4 id="org98b4c7e">Resolve merge conflict</h4>
-<div class="outline-text-3" id="text-org98b4c7e">
+<div id="outline-container-org8c40fdb" class="outline-3">
+<h4 id="org8c40fdb">Resolve merge conflict</h4>
+<div class="outline-text-3" id="text-org8c40fdb">
 <p>
 Now start merge tool,
 </p>
@@ -375,7 +265,6 @@ Git will invoke vimdiff with the following window layout. There are four buffers
 <p>
 Here is the explanation of each buffer:
 </p>
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-left">
@@ -444,34 +333,34 @@ After finishing editing of the conflicting file in MERGED buffer, you can use ho
 <p>
 When you have resolved all the conflicts, follow the hint of git to commit your changes.
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org8915ac7" class="outline-2">
-<h3 id="org8915ac7">Tips</h3>
-<div class="outline-text-2" id="text-org8915ac7">
+<div id="outline-container-orge929624" class="outline-2">
+<h3 id="orge929624">Tips</h3>
+<div class="outline-text-2" id="text-orge929624">
 <ul class="org-ul">
 <li>fugitive.vim (<a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a>) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code</li>
 <li>You can use Emacs to do the similar job (<a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool">http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool</a>). For me, Emacs start up time is too much for this task. Some people use <code>emacsclient</code> which has other overhead I don't like</li>
-<li>If you prefer GUI, use command line <code>git mergetool -t gvimdiff</code> instead</li>
+<li>If you prefer GUI, use command line `git mergetool -t gvimdiff` instead</li>
 <li>The <code>:diffget</code> command is valid if and only if there are <b>MARKED</b> conflicts in merged buffer. If there is <b>NO</b> marked string like "&gt;&gt;&gt;&gt;" or "&lt;&lt;&lt;&lt;&lt;" around current change (you can jump to previous/next change by press <code>[c</code> or <code>]c</code>), it means the git have automatically resolved potential conflict for you. Reviewing is still wise because git is not as smart as human</li>
 <li>If you prefer navigating between the unresolved conflicts <b>only</b>, you can install Tim Pope's <a href="https://github.com/tpope/vim-unimpaired">vim-unimpaired</a> and use hot key "[n" and "]n" to do the navigation</li>
 <li>I map <code>[n</code> and <code>]n</code> to more handy hot keys:</li>
 </ul>
 <div class="org-src-container">
+
 <pre><code class="lang-vimrc">map ]] ]n
 map [[ [n
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
-<div id="outline-container-org6ade18b" class="outline-2">
-<h3 id="org6ade18b"><a id="orgf3e8c35"></a></h3>
-<div class="outline-text-2" id="text-org6ade18b">
+
+<div id="outline-container-org610bf3f" class="outline-2">
+<h3 id="org610bf3f"><a id="org98f9ca1"></a></h3>
+<div class="outline-text-2" id="text-org610bf3f">
 <p>
 You can use command line like "git mergetool -t vimdiff" to start vimdiff from git.
 </p>
@@ -498,20 +387,19 @@ Then you can press hot key ",2" ",3" ",4" in vimdiff to pull change from top thr
 
 <p>
 #+image/git-merge-tool-nq8.png <img src="http://blog.binchen.org/wp-content/uploads/2013/06/wpid-git-merge-tool-nq8.png" alt="wpid-git-merge-tool-nq8.png"></p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org7e1c88b" class="outline-2">
-<h3 id="org7e1c88b">subversion/mercurial</h3>
-<div class="outline-text-2" id="text-org7e1c88b">
+<div id="outline-container-orge5152bc" class="outline-2">
+<h3 id="orge5152bc">subversion/mercurial</h3>
+<div class="outline-text-2" id="text-orge5152bc">
 <p>
 Until now I'm focusing on how to tweak the vimdiff UI because the git has already setup the <a href="https://github.com/git/git/blob/master/mergetools/vimdiff">basic vimdiff layout for us</a>. So we just follow the Git layout in other VCS.
 </p>
 </div>
-<div id="outline-container-org6d4e1c6" class="outline-3">
-<h4 id="org6d4e1c6">subversion</h4>
-<div class="outline-text-3" id="text-org6d4e1c6">
+<div id="outline-container-org8f7c872" class="outline-3">
+<h4 id="org8f7c872">subversion</h4>
+<div class="outline-text-3" id="text-org8f7c872">
 <p>
 Insert below code into ~/.subversion/config:
 </p>
@@ -526,7 +414,6 @@ merge-tool-cmd = vimdiff.sh
 <p>
 Content of vimdiff.sh
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">
@@ -558,18 +445,18 @@ vimdiff -f -d -c 'wincmd J' "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 </code></pre>
 
 </div>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org57a46c9" class="outline-2">
-<h3 id="org57a46c9">mercurial</h3>
-<div class="outline-text-2" id="text-org57a46c9">
+<div id="outline-container-org55454f6" class="outline-2">
+<h3 id="org55454f6">mercurial</h3>
+<div class="outline-text-2" id="text-org55454f6">
 <p>
 Insert below code into <code>~/.hgrc</code>:
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-conf">[ui]
 merge = vimdiff
 [merge-tools]
@@ -577,7 +464,6 @@ vimdiff.executable = vim
 vimdiff.args = -f -d -c 'wincmd J' "$output" "$local" "$base" "$other" +close +close
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -944,6 +830,142 @@ Here is my setup:
 </div>
             </div>
         </div>
+        <div class="post">
+            <h1 class="title"><a href="posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html">How to split album into different flac and tag them under Gentoo Linux</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2013-05-12T22:32:00+00:00">2013-05-12 22:32</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html#disqus_thread" data-disqus-identifier="cache/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/cue.html" rel="tag">cue</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/flac.html" rel="tag">flac</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
+</p>
+
+<div id="outline-container-orgdc64dc1" class="outline-2">
+<h3 id="orgdc64dc1">Install CLI tools</h3>
+<div class="outline-text-2" id="text-orgdc64dc1">
+<div class="org-src-container">
+
+<pre><code class="lang-sh"># mac to support ape
+sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shntool
+sudo emerge cuetools
+</code></pre>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c95576" class="outline-2">
+<h3 id="org7c95576">Download script</h3>
+<div class="outline-text-2" id="text-org7c95576">
+<p>
+See <a href="https://bbs.archlinux.org/viewtopic.php?id=58766">https://bbs.archlinux.org/viewtopic.php?id=58766</a> for the source of bash script.
+</p>
+
+<p>
+Here is the full content of the bash script:
+</p>
+<div class="org-src-container">
+
+<pre><code class="lang-sh">#!/bin/bash
+# split image file (flac, ape, wav, etc.) according to cue-file
+if [ -f "$1" ]; then
+    i=0
+    for cuefile in *.cue; do
+        i=$(($i + 1))
+    done
+    if [ $i -eq 1 ]; then
+        # precies 1 cuesheet gevonden
+        if grep -q "INDEX 01 00:00:00" *.cue ; then
+            nice shntool split -t "%n %t" -f *.cue "$1"
+        else
+            echo "The first track has a pre-gap. Shntool will cut that off and put it in a seperate file."
+            echo "You don't want that. Please modify the cuesheet from:"
+            grep -m1 "INDEX 00" *.cue
+            grep -m1 "INDEX 01" *.cue
+            echo "to:"
+            echo "    INDEX 01 00:00:00"
+            exit 1
+        fi
+    elif [ $i -eq 0 ]; then
+        echo "No cuesheet found in the current directory."
+        exit 1
+    elif [ $i -gt 1 ]; then
+        echo "$i cuesheets found in the current directory. Please remove the superfluous cuesheets."
+        exit 1
+    fi
+else
+    echo "Split image file (flac, ape, wav, etc.) according to cue-file."
+    echo "Output files are in FLAC."
+    echo "Usage: `basename $0` &lt;image-file&gt;"
+    exit 1
+fi
+
+echo
+album=`grep -m 1 TITLE *.cue | cut -d\" -f2`
+artist=`grep -m 1 PERFORMER *.cue | cut -d\" -f2`
+
+for file in [0-9]*.wav; do
+    echo "Encoding $file"
+
+    if [[ ${file:0:1} == 0 ]] ; then
+        tracknr=${file:1:1}
+    else
+        tracknr=${file:0:2}
+    fi
+    title=`echo ${file:2} | sed -e "s/.wav$//"`
+
+    nice flac -s -T "artist=$artist" -T "album=$album" -T "title=$title" \
+    -T "tracknumber=$tracknr" "$file" &amp;&amp; rm "$file"
+done
+</code></pre>
+
+</div>
+
+<p>
+Put the script somewhere and name it to <code>cue2flac</code>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org043e943" class="outline-2">
+<h3 id="org043e943">Start conversion</h3>
+<div class="outline-text-2" id="text-org043e943">
+<div class="org-src-container">
+
+<pre><code class="lang-sh"># convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
+find . -name '*.ape'|xargs -I {} ffmpeg -i {} {}.wav
+# split wav and convert it to flac, make sure the *.cue exists in current directory
+cue2flac a.ape.wav
+# do the cleaning (OPTIONAL)
+rm *.ape *.wav
+</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+            </div>
+        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="previous">
@@ -952,7 +974,7 @@ Here is my setup:
             <li class="next">
                 <a href="index-8.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

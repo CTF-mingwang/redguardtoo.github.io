@@ -79,9 +79,9 @@ Salesforce provides <a href="https://developer.salesforce.com/docs/atlas.en-us.d
 Luckily, there is <a href="https://force-cli.heroku.com/">Force.com CLI</a> which can upload single file in a few seconds. Both Sublime Text and Emacs use this tool.
 </p>
 
-<div id="outline-container-org4be7631" class="outline-2">
-<h3 id="org4be7631">Sublime Text</h3>
-<div class="outline-text-2" id="text-org4be7631">
+<div id="outline-container-org18ca247" class="outline-2">
+<h3 id="org18ca247">Sublime Text</h3>
+<div class="outline-text-2" id="text-org18ca247">
 <p>
 You need install sublime text plugin <a href="http://mavensmate.com/Getting_Started/Users">mavensmate</a>. After installation, you need click <code>Login</code> menu at least once. Then when you save the code file, it's automatically deployed to the server.
 </p>
@@ -99,15 +99,15 @@ Mavensmate is actually just GUI wrapper of Force.com CLI,
 <li>When fetching, <code>force fetch</code> is executed</li>
 </ul>
 </div>
-
-<p></p>
 </div>
-<div id="outline-container-org210b81e" class="outline-2">
-<h3 id="org210b81e">Emacs</h3>
-<div class="outline-text-2" id="text-org210b81e">
+
+<div id="outline-container-orgc98ce75" class="outline-2">
+<h3 id="orgc98ce75">Emacs</h3>
+<div class="outline-text-2" id="text-orgc98ce75">
 <p>
 In Sublime Text I have to re-login and fetch from time to time. That get me distracted. I prefer executing only one commmand to upload the file in editing. That command should be always successful.
 </p>
+
 <p>
 My solution is to combine "login/fetch/push" commnands into one liner which is stored in a file local variable <code>compile-command</code>. So when I execute <code>M-x compile</code>, the commands "login/fetch/push" in <code>compile-command</code> will all be executed sequentially. So I don't need care about login and fetch things any more.
 </p>
@@ -115,7 +115,6 @@ My solution is to combine "login/fetch/push" commnands into one liner which is s
 <p>
 Here is my setup,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun my-setup-develop-environment ()
@@ -158,8 +157,6 @@ Here is my setup,
 </code></pre>
 
 </div>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -184,12 +181,12 @@ Here is my setup,
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -197,7 +194,7 @@ Here is my setup,
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

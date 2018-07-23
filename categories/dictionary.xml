@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (dictionary)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/dictionary.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about dictionary)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/dictionary.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 with a dictionary and hippie-expand                              :en:emacs:dictionary:autocomplete:
 &lt;/p&gt;
 
@@ -11,9 +11,9 @@ I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most
 I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgcdd1e2e" class="outline-2"&gt;
-&lt;h3 id="orgcdd1e2e"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgcdd1e2e"&gt;
+&lt;div id="outline-container-orge84c0f0" class="outline-2"&gt;
+&lt;h3 id="orge84c0f0"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge84c0f0"&gt;
 &lt;p&gt;
 This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/p&gt;
@@ -60,17 +60,17 @@ This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org033b6db" class="outline-2"&gt;
-&lt;h3 id="org033b6db"&gt;Technical details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org033b6db"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgab30d52" class="outline-2"&gt;
+&lt;h3 id="orgab30d52"&gt;Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgab30d52"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;lazy load of ispell-mode to speed Emacs startup&lt;/li&gt;
 &lt;li&gt;add a fallback dictionary "english-words.txt" so autocompletion never fails&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;ispell-lookup-words&lt;/code&gt; or &lt;code&gt;lookup-words&lt;/code&gt; simply does grep thing, so english-words.txt is just a plain text file.&lt;/li&gt;
+&lt;li&gt;`ispell-lookup-words` or `lookup-words` simply does grep thing, so english-words.txt is just a plain text file.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>autocomplete</category><category>dictionary</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</guid><pubDate>Mon, 30 Mar 2015 03:53:40 GMT</pubDate></item></channel></rss>

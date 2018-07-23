@@ -72,9 +72,9 @@ I love the REPL (Read–eval–print loop). Watch live update of web page when t
 to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up   :en:repl:javascript:html:frontend:
 </p>
 
-<div id="outline-container-orgf8e4ba3" class="outline-2">
-<h3 id="orgf8e4ba3">Problem</h3>
-<div class="outline-text-2" id="text-orgf8e4ba3">
+<div id="outline-container-org0bad6c2" class="outline-2">
+<h3 id="org0bad6c2">Problem</h3>
+<div class="outline-text-2" id="text-org0bad6c2">
 <p>
 I love the REPL (Read–eval–print loop). Watch live update of web page when typing code is cool.
 </p>
@@ -104,15 +104,15 @@ For me, a practical solution must be:
 <li>no learning curve. I don't want to learn any domain specific language or API. For example, if my web application uses jquery, I want <b>use and only use jquery API</b> to manipulate web page in my text editor. If it use backbone, then I use backbone. No more, no less.</li>
 </ul>
 </div>
-
-<p></p>
 </div>
-<div id="outline-container-orgf3eeba4" class="outline-2">
-<h3 id="orgf3eeba4">Solution</h3>
-<div class="outline-text-2" id="text-orgf3eeba4">
+
+<div id="outline-container-orga273de9" class="outline-2">
+<h3 id="orga273de9">Solution</h3>
+<div class="outline-text-2" id="text-orga273de9">
 <p>
 The best solution is firefox addon <a href="https://github.com/bard/mozrepl/wiki">MozRepl</a>. You can install it <a href="https://addons.mozilla.org">https://addons.mozilla.org</a>. Click firefox menu "Tools =&gt; MozRepl =&gt; Start" to run it.
 <img src="../wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"></p>
+
 <p>
 So what is MozRepl, as its web site says, "MozRepl lets you program Firefox and other Mozilla-based applications <b>from the inside</b>." Basically it convert firefox into a socket server. Your text editor could talk to firefox and let firefox do anything you want. Since it only interact with the firefox, I don't need mess with the web server.
 </p>
@@ -132,12 +132,11 @@ Section 1 is about how to use MozRepl, whatever text editor you use, you should 
 <p>
 Section 2 is on how to set up my text editor Emacs to interact with MozRepl. It's optional.
 </p>
-
 </div>
 
-<div id="outline-container-orge09b5c1" class="outline-3">
-<h4 id="orge09b5c1">Section 1, use MozRepl</h4>
-<div class="outline-text-3" id="text-orge09b5c1">
+<div id="outline-container-orgc6ddbca" class="outline-3">
+<h4 id="orgc6ddbca">Section 1, use MozRepl</h4>
+<div class="outline-text-3" id="text-orgc6ddbca">
 <p>
 Here are key points:
 </p>
@@ -187,13 +186,12 @@ As you can see from above, I can use jQuery API loaded in that web page without 
 <p>
 Please note the code is not part of my web application! It will be run only in MozRepl. You can telnet to the MozRepl socket server (127.0.0.1 with port 4424) and copy paste above code line by line.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgd183dfa" class="outline-3">
-<h4 id="orgd183dfa">Section 2, set up text editor (Emacs)</h4>
-<div class="outline-text-3" id="text-orgd183dfa">
+<div id="outline-container-org8582b45" class="outline-3">
+<h4 id="org8582b45">Section 2, set up text editor (Emacs)</h4>
+<div class="outline-text-3" id="text-org8582b45">
 <p>
 My text editor is Emacs, so I use Emacs as an example.
 </p>
@@ -244,21 +242,21 @@ Step 2, Please insert below code into your ~/.emacs:
 <p>
 From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js file you need MozRepl to run.
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
+<div id="outline-container-orgb3ba992" class="outline-2">
+<h3 id="orgb3ba992">Tips</h3>
+<div class="outline-text-2" id="text-orgb3ba992">
 </div>
-</div>
-</div>
-<div id="outline-container-org8a09a68" class="outline-2">
-<h3 id="org8a09a68">Tips</h3>
-<div class="outline-text-2" id="text-org8a09a68">
-</div>
-<div id="outline-container-org486fbc9" class="outline-3">
-<h4 id="org486fbc9">Tip 1</h4>
-<div class="outline-text-3" id="text-org486fbc9">
+<div id="outline-container-org2540d51" class="outline-3">
+<h4 id="org2540d51">Tip 1</h4>
+<div class="outline-text-3" id="text-org2540d51">
 <p>
 Well, this is a simple tip. Maybe you are already aware of this.
 </p>
+
 <p>
 You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separate logic for different project.
 </p>
@@ -266,7 +264,6 @@ You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separa
 <p>
 Here is javascript code,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-javascript">var url=document.URL;
@@ -282,13 +279,12 @@ if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
 <p>
 Since javascript is good at analyzing URL, you can also tweak the URL parameters. Anyway, the full power of javascript is at your hand.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgbd52e39" class="outline-3">
-<h4 id="orgbd52e39">Tip 2</h4>
-<div class="outline-text-3" id="text-orgbd52e39">
+<div id="outline-container-orgdca350f" class="outline-3">
+<h4 id="orgdca350f">Tip 2</h4>
+<div class="outline-text-3" id="text-orgdca350f">
 <p>
 Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-reload-browser" to refresh the page. If page is not refreshed, restart Firefox. Luckily this does not happen too often.
 </p>
@@ -302,14 +298,13 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 </code></pre>
 
 </div>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org10c2944" class="outline-2">
-<h3 id="org10c2944">Demo</h3>
-<div class="outline-text-2" id="text-org10c2944">
+<div id="outline-container-org75745cd" class="outline-2">
+<h3 id="org75745cd">Demo</h3>
+<div class="outline-text-2" id="text-org75745cd">
 <p>
 Here is a demo how I use it in a real world web application development.
 </p>
@@ -323,7 +318,6 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
 <p><img src="../wp-content/mozrepl-in-action.gif" alt="mozrepl-in-action.gif"></p>
 </div>
 </div>
-
 </div>
 </div>
         </div>
@@ -347,12 +341,12 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -360,7 +354,7 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

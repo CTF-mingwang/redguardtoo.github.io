@@ -95,9 +95,9 @@ Perforce is a proprietary VCS. It's less powerful than <a href="https://git-scm.
 For example, <code>git log -p file-path</code> displays the detailed history of a single file. There is no way you can do this in perforce. Even ClI like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> can't do it. I have to use Emacs Lisp to clean the output of <code>p4</code>.
 </p>
 
-<div id="outline-container-org23103ce" class="outline-2">
-<h3 id="org23103ce">Perforce workflow</h3>
-<div class="outline-text-2" id="text-org23103ce">
+<div id="outline-container-orgabbf76e" class="outline-2">
+<h3 id="orgabbf76e">Perforce workflow</h3>
+<div class="outline-text-2" id="text-orgabbf76e">
 <ul class="org-ul">
 <li>
 <code>p4 set</code> to <a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html">set up</a>
@@ -118,9 +118,9 @@ For example, <code>git log -p file-path</code> displays the detailed history of 
 </div>
 </div>
 
-<div id="outline-container-org8c6f957" class="outline-2">
-<h3 id="org8c6f957">My solution</h3>
-<div class="outline-text-2" id="text-org8c6f957">
+<div id="outline-container-org07eeabe" class="outline-2">
+<h3 id="org07eeabe">My solution</h3>
+<div class="outline-text-2" id="text-org07eeabe">
 <p>
 Perforce Cygwin portable is not recommended.
 </p>
@@ -133,10 +133,9 @@ I suggest using executable from Perforce Windows native version which works on b
 Perforce server assigns unique URL for each physical file. If I only feed <code>p4</code> that URL, the operation is always successful.
 </p>
 </div>
-
-<div id="outline-container-org3ad6184" class="outline-3">
-<h4 id="org3ad6184">Emacs</h4>
-<div class="outline-text-3" id="text-org3ad6184">
+<div id="outline-container-org590f55c" class="outline-3">
+<h4 id="org590f55c">Emacs</h4>
+<div class="outline-text-3" id="text-org590f55c">
 <p>
 I developed <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a> which shows "commit message of current line in Emacs". It supports Perforce out of box (you still need <code>p4 login</code> at first.)
 </p>
@@ -156,7 +155,6 @@ My patched <a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp
 <p>
 I also provided commands like <code>p4edit</code>, <code>p4revert</code>, <code>p4submit</code>, <code>p4diff</code>, and <code>p4history</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; {{ perforce utilities
@@ -279,7 +277,6 @@ If FILE-OPENED, current file is still opened."
 <p>
 As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-project">find-file-in-project</a>, insert below code into <code>prog-mode-hook</code> to view any perforce change inside Emacs,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(setq-local ffip-diff-backends
@@ -298,17 +295,16 @@ As a bonus tip, if you use <a href="https://github.com/technomancy/find-file-in-
 <p>
 You can also check my <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-perforce.el">emacs.d</a> to get latest code.
 </p>
-
-<p></p>
 </div>
 </div>
-<div id="outline-container-orgc01848e" class="outline-3">
-<h4 id="orgc01848e">Bash Shell</h4>
-<div class="outline-text-3" id="text-orgc01848e">
+<div id="outline-container-org602c7d3" class="outline-3">
+<h4 id="org602c7d3">Bash Shell</h4>
+<div class="outline-text-3" id="text-org602c7d3">
 <p>
 Other operations are finished in Bash Shell,
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-bash"># {{ Perforce, I hope I will never use it
 if [ "$OS_NAME" = "CYGWIN" ]; then
     function p4() {
@@ -432,7 +428,6 @@ function p4ml(){
 # }}
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -459,12 +454,12 @@ function p4ml(){
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -472,7 +467,7 @@ function p4ml(){
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

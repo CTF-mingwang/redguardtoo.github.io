@@ -70,9 +70,9 @@ sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shn'>
 to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
 </p>
 
-<div id="outline-container-org39bbd11" class="outline-2">
-<h3 id="org39bbd11">Install CLI tools</h3>
-<div class="outline-text-2" id="text-org39bbd11">
+<div id="outline-container-orgdc64dc1" class="outline-2">
+<h3 id="orgdc64dc1">Install CLI tools</h3>
+<div class="outline-text-2" id="text-orgdc64dc1">
 <div class="org-src-container">
 
 <pre><code class="lang-sh"># mac to support ape
@@ -81,20 +81,19 @@ sudo emerge cuetools
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org523d9e5" class="outline-2">
-<h3 id="org523d9e5">Download script</h3>
-<div class="outline-text-2" id="text-org523d9e5">
+<div id="outline-container-org7c95576" class="outline-2">
+<h3 id="org7c95576">Download script</h3>
+<div class="outline-text-2" id="text-org7c95576">
 <p>
 See <a href="https://bbs.archlinux.org/viewtopic.php?id=58766">https://bbs.archlinux.org/viewtopic.php?id=58766</a> for the source of bash script.
 </p>
+
 <p>
 Here is the full content of the bash script:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-sh">#!/bin/bash
@@ -155,14 +154,14 @@ done
 <p>
 Put the script somewhere and name it to <code>cue2flac</code>
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org1e36f10" class="outline-2">
-<h3 id="org1e36f10">Start conversion</h3>
-<div class="outline-text-2" id="text-org1e36f10">
+<div id="outline-container-org043e943" class="outline-2">
+<h3 id="org043e943">Start conversion</h3>
+<div class="outline-text-2" id="text-org043e943">
 <div class="org-src-container">
+
 <pre><code class="lang-sh"># convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
 find . -name '*.ape'|xargs -I {} ffmpeg -i {} {}.wav
 # split wav and convert it to flac, make sure the *.cue exists in current directory
@@ -171,7 +170,6 @@ cue2flac a.ape.wav
 rm *.ape *.wav
 </code></pre>
 
-<p></p>
 </div>
 </div>
 </div>
@@ -197,12 +195,12 @@ rm *.ape *.wav
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -210,7 +208,7 @@ rm *.ape *.wav
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

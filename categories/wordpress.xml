@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about wordpress)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/wordpress.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Migrate blog from wordpress into nikola</title><link>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 blog from wordpress into nikola                                       :en:wordpress:nikola:blog:migrate:
 &lt;/p&gt;
 
@@ -15,9 +15,9 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 If you are only interested in web page optimization, start from the second section of the article.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org723402b" class="outline-2"&gt;
-&lt;h3 id="org723402b"&gt;Migrate from WordPress to Nikola&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org723402b"&gt;
+&lt;div id="outline-container-org5fa357d" class="outline-2"&gt;
+&lt;h3 id="org5fa357d"&gt;Migrate from WordPress to Nikola&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5fa357d"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# you might need need `sudo apt-get install python-gdbm` on Debian
@@ -64,7 +64,6 @@ nikola build
 &lt;p&gt;
 Use below command to fix embedded code in HTML files:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;find -name '*.wp' -exec grep -l "\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]" {} \; |xargs sed -i 's/\[sourcecode.*\&amp;lt;diff\&amp;gt;.*\]/&amp;lt;pre class="brush: diff;"&amp;gt;/g
@@ -80,7 +79,6 @@ Manually fixed those articles with Chinese title in url_map.csv
 &lt;p&gt;
 Use below script to fixed the xml dumped from wordpress:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-python"&gt;#!/usr/bin/python
@@ -136,15 +134,16 @@ Import the xml into &lt;a href="http://disqus.com"&gt;http://disqus.com&lt;/a&gt
 &lt;p&gt;
 You can use javascript to re-direct the URL, so your old article links are still valid. Ask at &lt;a href="http://stackoverflow.com"&gt;http://stackoverflow.com&lt;/a&gt; or contact your local Javascript developers on how to do it. It's simple task but a little boring.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd115734" class="outline-2"&gt;
-&lt;h3 id="orgd115734"&gt;Optimization&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd115734"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgde5e38f" class="outline-2"&gt;
+&lt;h3 id="orgde5e38f"&gt;Optimization&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgde5e38f"&gt;
 &lt;p&gt;
 I developed &lt;a href="https://github.com/redguardtoo/org2nikola"&gt;org2nikola&lt;/a&gt; to convert Org subtree into Nikola page. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Instead of hacking conf.py, I &lt;b&gt;tweak the theme's javascript/html/css directly&lt;/b&gt;. It's simpler and more flexible.
 &lt;/p&gt;
@@ -172,8 +171,7 @@ In order to see the real example of optimization, please visit &lt;a href="http:
 &lt;p&gt;
 My static blog is hosted at &lt;a href="https://pages.github.com/"&gt;GitHub Pages&lt;/a&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>blog</category><category>en</category><category>migrate</category><category>nikola</category><category>wordpress</category><guid>http://blog.binchen.org/posts/migrate-blog-from-wordpress-into-nikola.html</guid><pubDate>Tue, 22 Apr 2014 09:09:21 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 wordpress php and make cdnjs.com host js                              :en:wordpress:blog:javascript:php:
 &lt;/p&gt;

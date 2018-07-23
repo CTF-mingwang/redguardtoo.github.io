@@ -77,9 +77,9 @@ wxWidgets 3.0.0
 WARNING: before building, please make sure remove everything in build directory, <b>including hidden directory</b>!
 </p>
 
-<div id="outline-container-org2f49c0c" class="outline-2">
-<h3 id="org2f49c0c">Install webkit by using Linux distribution's package manager</h3>
-<div class="outline-text-2" id="text-org2f49c0c">
+<div id="outline-container-org21cd6bd" class="outline-2">
+<h3 id="org21cd6bd">Install webkit by using Linux distribution's package manager</h3>
+<div class="outline-text-2" id="text-org21cd6bd">
 <p>
 I need use wxWebView which dependent on webkit on Linux. The issue here is that webkit on Linux is using GTK.
 </p>
@@ -88,16 +88,16 @@ I need use wxWebView which dependent on webkit on Linux. The issue here is that 
 Make sure the webkit and wxWidgets are using same version of GTK.
 </p>
 </div>
-
-<p></p>
 </div>
-<div id="outline-container-org212f141" class="outline-2">
-<h3 id="org212f141">build the source</h3>
-<div class="outline-text-2" id="text-org212f141">
+
+<div id="outline-container-org929aaed" class="outline-2">
+<h3 id="org929aaed">build the source</h3>
+<div class="outline-text-2" id="text-org929aaed">
 <p>
 Please note I don't use libtiff. I think libpng and libjpeg is enough.
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-sh">mkdir -p ${WXWIN}/build-release;cd ${WXWIN}/build-release;../configure --disable-shared --without-libtiff;make
 mkdir -p ${WXWIN}/build-debug;cd ${WXWIN}/build-debug;../configure --disable-shared --enable-debug --without-libtiff;make
 </code></pre>
@@ -111,8 +111,6 @@ On OSX, I need extra <code>--with-osx_cocoa</code> parameter for configure.
 <p>
 On Linux, build will be fine following above steps. But for building application, I need <code>sudo apt-get install libgtk2.0-dev</code> on Debian/Ubuntu/Mint.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -137,12 +135,12 @@ On Linux, build will be fine following above steps. But for building application
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -150,7 +148,7 @@ On Linux, build will be fine following above steps. But for building application
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

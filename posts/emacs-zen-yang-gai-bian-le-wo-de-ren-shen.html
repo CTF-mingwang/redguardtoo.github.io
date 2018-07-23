@@ -97,37 +97,37 @@ Emacs实际上是被禁止使用的,因为消耗太多内存.所以我只是尝�
 以下是我的翻译兼一些背景资料:
 </p>
 
-<div id="outline-container-orgd8b72e5" class="outline-2">
-<h3 id="orgd8b72e5">1980年,我开始编程.</h3>
+<div id="outline-container-orgbda6029" class="outline-2">
+<h3 id="orgbda6029">1980年,我开始编程.</h3>
 </div>
 
-<div id="outline-container-org280afdb" class="outline-2">
-<h3 id="org280afdb">Basic,400 steps (此句不知如何翻译)</h3>
+<div id="outline-container-orgc5e7d73" class="outline-2">
+<h3 id="orgc5e7d73">Basic,400 steps (此句不知如何翻译)</h3>
 </div>
 
-<div id="outline-container-org36bc433" class="outline-2">
-<h3 id="org36bc433">1988年,我遇到了Emacs,在学校的Sun-3上,和200多个学生共用.</h3>
+<div id="outline-container-org54510fe" class="outline-2">
+<h3 id="org54510fe">1988年,我遇到了Emacs,在学校的Sun-3上,和200多个学生共用.</h3>
 </div>
 
-<div id="outline-container-orgb2acde7" class="outline-2">
-<h3 id="orgb2acde7">Emacs实际上是被禁止使用的,因为消耗太多内存.所以我只是尝试了一下.</h3>
+<div id="outline-container-orgb4db9e2" class="outline-2">
+<h3 id="orgb4db9e2">Emacs实际上是被禁止使用的,因为消耗太多内存.所以我只是尝试了一下.</h3>
 </div>
 
-<div id="outline-container-orgbff0379" class="outline-2">
-<h3 id="orgbff0379">我可以自由下载Emacs并阅读其源代码.</h3>
+<div id="outline-container-orgfc201de" class="outline-2">
+<h3 id="orgfc201de">我可以自由下载Emacs并阅读其源代码.</h3>
 </div>
 
-<div id="outline-container-org901a973" class="outline-2">
-<h3 id="org901a973">Emacs是我的第一个Lisp解释器.</h3>
+<div id="outline-container-orgeb5ff36" class="outline-2">
+<h3 id="orgeb5ff36">Emacs是我的第一个Lisp解释器.</h3>
 </div>
 
-<div id="outline-container-org5186ff2" class="outline-2">
-<h3 id="org5186ff2">从Emacs我学到了很多关于语言实现的知识.</h3>
+<div id="outline-container-org48e119b" class="outline-2">
+<h3 id="org48e119b">从Emacs我学到了很多关于语言实现的知识.</h3>
 </div>
 
-<div id="outline-container-org781ef5c" class="outline-2">
-<h3 id="org781ef5c">例如,emacs的整数实现(Embedding integer in pointers)</h3>
-<div class="outline-text-2" id="text-org781ef5c">
+<div id="outline-container-orgf45a8e5" class="outline-2">
+<h3 id="orgf45a8e5">例如,emacs的整数实现(Embedding integer in pointers)</h3>
+<div class="outline-text-2" id="text-orgf45a8e5">
 <p>
 参考Lisp_Object定义,在Emacs源代码的lisp.h中,Lisp_Object是一个既可以作为指针使用又可以作为整数使用的类型
 具体代码见下,注意Lisp_Int为0,使得非负整数可以直接转换为对应的List_Object类型:
@@ -184,89 +184,110 @@ Lisp_OLisp_Stringbject;
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orge386953" class="outline-2">
-<h3 id="orge386953">又例如Emacs的内存自动回收机制(Mark and sweep garbage collection)</h3>
-<div class="outline-text-2" id="text-orge386953">
+<div id="outline-container-org7bb388f" class="outline-2">
+<h3 id="org7bb388f">又例如Emacs的内存自动回收机制(Mark and sweep garbage collection)</h3>
+<div class="outline-text-2" id="text-org7bb388f">
 <p>
 具体细节参考<a href="http://lists.gnu.org/archive/html/emacs-devel/2011-10/msg01289.html">这里</a>的讨论.
 </p>
 </div>
 </div>
-<div id="outline-container-org08419f3" class="outline-2">
-<h3 id="org08419f3">C和Lisp的Calling conventions(不好翻,基本上就是函数如何调用,函数参数的内存模型之类…)</h3>
+
+<div id="outline-container-orgd161c18" class="outline-2">
+<h3 id="orgd161c18">C和Lisp的Calling conventions(不好翻,基本上就是函数如何调用,函数参数的内存模型之类…)</h3>
 </div>
-<div id="outline-container-org341f653" class="outline-2">
-<h3 id="org341f653">我完全理解Lisp怎么工作的</h3>
+
+<div id="outline-container-org63ef338" class="outline-2">
+<h3 id="org63ef338">我完全理解Lisp怎么工作的</h3>
 </div>
-<div id="outline-container-org8fc1c40" class="outline-2">
-<h3 id="org8fc1c40">我被Lisp Objects迷住了</h3>
+
+<div id="outline-container-org02d0db0" class="outline-2">
+<h3 id="org02d0db0">我被Lisp Objects迷住了</h3>
 </div>
-<div id="outline-container-org8ebf8f8" class="outline-2">
-<h3 id="org8ebf8f8">当我得到Sparc工作站时我开始使用Emacs</h3>
+
+<div id="outline-container-orgce40fc4" class="outline-2">
+<h3 id="orgce40fc4">当我得到Sparc工作站时我开始使用Emacs</h3>
 </div>
-<div id="outline-container-orgd667563" class="outline-2">
-<h3 id="orgd667563">我完全被迷住了,Emacs成为我的一部分</h3>
+
+<div id="outline-container-org00db57f" class="outline-2">
+<h3 id="org00db57f">我完全被迷住了,Emacs成为我的一部分</h3>
 </div>
-<div id="outline-container-org2147494" class="outline-2">
-<h3 id="org2147494">而且Emacs任何我不喜欢的部分我都可以改,Emacs完全可配置.</h3>
+
+<div id="outline-container-org3d93081" class="outline-2">
+<h3 id="org3d93081">而且Emacs任何我不喜欢的部分我都可以改,Emacs完全可配置.</h3>
 </div>
-<div id="outline-container-orgd721c3e" class="outline-2">
-<h3 id="orgd721c3e">Emacs使我明白了任何东西都可以被程序员改变</h3>
+
+<div id="outline-container-orgbd4cb2f" class="outline-2">
+<h3 id="orgbd4cb2f">Emacs使我明白了任何东西都可以被程序员改变</h3>
 </div>
-<div id="outline-container-org9df5872" class="outline-2">
-<h3 id="org9df5872">完全的自由</h3>
+
+<div id="outline-container-orgbb60bb8" class="outline-2">
+<h3 id="orgbb60bb8">完全的自由</h3>
 </div>
-<div id="outline-container-org67d52e7" class="outline-2">
-<h3 id="org67d52e7">编辑时可以无视键位设置</h3>
+
+<div id="outline-container-org5eb8336" class="outline-2">
+<h3 id="org5eb8336">编辑时可以无视键位设置</h3>
 </div>
-<div id="outline-container-orgc9c232d" class="outline-2">
-<h3 id="orgc9c232d">我想用Emacs做所有的事,编程,文档,邮件…</h3>
+
+<div id="outline-container-org7a0afc8" class="outline-2">
+<h3 id="org7a0afc8">我想用Emacs做所有的事,编程,文档,邮件…</h3>
 </div>
-<div id="outline-container-orgd2175d0" class="outline-2">
-<h3 id="orgd2175d0">所以我写了"cmail",我的第一个严肃的Lisp程序,我每天用它</h3>
+
+<div id="outline-container-orgea54eb7" class="outline-2">
+<h3 id="orgea54eb7">所以我写了"cmail",我的第一个严肃的Lisp程序,我每天用它</h3>
 </div>
-<div id="outline-container-org4f121b1" class="outline-2">
-<h3 id="org4f121b1">1993年,我开始搞我的Ruby</h3>
+
+<div id="outline-container-org8abd37f" class="outline-2">
+<h3 id="org8abd37f">1993年,我开始搞我的Ruby</h3>
 </div>
-<div id="outline-container-orgd44a1fa" class="outline-2">
-<h3 id="orgd44a1fa">Ruby的设计受到Emacs实现的影响,例如整数和tagged pointer合用,相似的GC,和Lisp类似的Object Model</h3>
-<div class="outline-text-2" id="text-orgd44a1fa">
+
+<div id="outline-container-org29aa726" class="outline-2">
+<h3 id="org29aa726">Ruby的设计受到Emacs实现的影响,例如整数和tagged pointer合用,相似的GC,和Lisp类似的Object Model</h3>
+<div class="outline-text-2" id="text-org29aa726">
 <p>
 tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数据类型,低地址的29bit用作指针或者整数(取决于数据类型)
 </p>
 </div>
 </div>
-<div id="outline-container-orgbcf4ad7" class="outline-2">
-<h3 id="orgbcf4ad7">接下来我把Smalltalk的OO系统加上去</h3>
+
+<div id="outline-container-orgcaa9fa3" class="outline-2">
+<h3 id="orgcaa9fa3">接下来我把Smalltalk的OO系统加上去</h3>
 </div>
-<div id="outline-container-orga949c17" class="outline-2">
-<h3 id="orga949c17">语法我用Algol/Ada/Eiffel</h3>
+
+<div id="outline-container-orgf218d0e" class="outline-2">
+<h3 id="orgf218d0e">语法我用Algol/Ada/Eiffel</h3>
 </div>
-<div id="outline-container-org3dd8603" class="outline-2">
-<h3 id="org3dd8603">但是我是Emacs狂,所以在Emacs中支持auto-indent是必须的</h3>
+
+<div id="outline-container-org2dce1ff" class="outline-2">
+<h3 id="org2dce1ff">但是我是Emacs狂,所以在Emacs中支持auto-indent是必须的</h3>
 </div>
-<div id="outline-container-org368e4a6" class="outline-2">
-<h3 id="org368e4a6">在1993年,类似的语法要支持auto-indent很难</h3>
+
+<div id="outline-container-orga879946" class="outline-2">
+<h3 id="orga879946">在1993年,类似的语法要支持auto-indent很难</h3>
 </div>
-<div id="outline-container-org1a52767" class="outline-2">
-<h3 id="org1a52767">所以我就写了自己的ruby-mode.el,试图用elisp和正则表达式(regex)解决这个问题.</h3>
+
+<div id="outline-container-orge68d378" class="outline-2">
+<h3 id="orge68d378">所以我就写了自己的ruby-mode.el,试图用elisp和正则表达式(regex)解决这个问题.</h3>
 </div>
-<div id="outline-container-org8276b1b" class="outline-2">
-<h3 id="org8276b1b">一个礼拜后,我在给Ruby加上end关键字后终于成功了</h3>
+
+<div id="outline-container-org40df835" class="outline-2">
+<h3 id="org40df835">一个礼拜后,我在给Ruby加上end关键字后终于成功了</h3>
 </div>
-<div id="outline-container-orgf162e85" class="outline-2">
-<h3 id="orgf162e85">如果我不能让我的emacs下的ruby-mode成功,那么Ruby的语法会更像C</h3>
+
+<div id="outline-container-orgc16b617" class="outline-2">
+<h3 id="orgc16b617">如果我不能让我的emacs下的ruby-mode成功,那么Ruby的语法会更像C</h3>
 </div>
-<div id="outline-container-org69dd14e" class="outline-2">
-<h3 id="org69dd14e">这样就和其他脚本语言差不多,Ruby也不会那么受欢迎</h3>
+
+<div id="outline-container-orgbc2a531" class="outline-2">
+<h3 id="orgbc2a531">这样就和其他脚本语言差不多,Ruby也不会那么受欢迎</h3>
 </div>
-<div id="outline-container-org017432c" class="outline-2">
-<h3 id="org017432c">小结</h3>
-<div class="outline-text-2" id="text-org017432c">
+
+<div id="outline-container-org92ff338" class="outline-2">
+<h3 id="org92ff338">小结</h3>
+<div class="outline-text-2" id="text-org92ff338">
 <ul class="org-ul">
 <li>Emacs教我什么是软件自由(freedom for software)</li>
 <li>Emacs教我如何读代码</li>
@@ -303,12 +324,12 @@ tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -316,7 +337,7 @@ tagged pointer的细节请参考上文的C代码,高地址的3bit用作判别数
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:12:59 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:29 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>purify quora.com with vanilla javascript</title><link>http://blog.binchen.org/posts/purify-quora-com-with-vanilla-javascript.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 quora.com with vanilla javascript                                      :en:javascript:quora:
 &lt;/p&gt;
 
@@ -332,9 +332,9 @@ code navigation for web development                                 :en:javascri
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgc5b92a7" class="outline-2"&gt;
-&lt;h3 id="orgc5b92a7"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc5b92a7"&gt;
+&lt;div id="outline-container-orgbd2a2d7" class="outline-2"&gt;
+&lt;h3 id="orgbd2a2d7"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbd2a2d7"&gt;
 &lt;p&gt;
 In Angular application, a function is defined in a javascript file and called in a html file.
 &lt;/p&gt;
@@ -354,7 +354,6 @@ javascript file:
 &lt;p&gt;
 html file:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;angular.module['myapp'].controller('MyController', function ($scope, $http) {
@@ -372,12 +371,12 @@ html file:
 &lt;p&gt;
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2f8000c" class="outline-2"&gt;
-&lt;h3 id="org2f8000c"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2f8000c"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org0a67a4d" class="outline-2"&gt;
+&lt;h3 id="org0a67a4d"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0a67a4d"&gt;
 &lt;p&gt;
 CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
@@ -392,9 +391,9 @@ I use CTags instead of IDEs because:
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgee29836" class="outline-3"&gt;
-&lt;h4 id="orgee29836"&gt;CTags setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgee29836"&gt;
+&lt;div id="outline-container-orga99af1d" class="outline-3"&gt;
+&lt;h4 id="orga99af1d"&gt;CTags setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga99af1d"&gt;
 &lt;p&gt;
 Create a file named ".ctags":
 &lt;/p&gt;
@@ -450,7 +449,6 @@ The key point of this setup is the regular expression for HTML should be &lt;b&g
 &lt;p&gt;
 On Mac, location of ".ctags":
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/Users/yourname/.ctags
@@ -461,7 +459,6 @@ On Mac, location of ".ctags":
 &lt;p&gt;
 On Linux, location of ".ctags":
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/home/yourname/.ctags
@@ -472,25 +469,27 @@ On Linux, location of ".ctags":
 &lt;p&gt;
 On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org00850f1" class="outline-2"&gt;
-&lt;h3 id="org00850f1"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org00850f1"&gt;
+&lt;div id="outline-container-orge1d98a6" class="outline-2"&gt;
+&lt;h3 id="orge1d98a6"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge1d98a6"&gt;
 &lt;p&gt;
 Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5dd3ba7" class="outline-2"&gt;
-&lt;h3 id="org5dd3ba7"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org5dd3ba7"&gt;
+
+&lt;div id="outline-container-org1450693" class="outline-2"&gt;
+&lt;h3 id="org1450693"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1450693"&gt;
 &lt;p&gt;
 Run CTags at least once:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;ctags -e -R -f /app/path/TAGS
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -499,7 +498,6 @@ Run CTags at least once:
 &lt;p&gt;
 Then insert below code into your ~/.emacs:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list '("/app/path/TAGS"))
@@ -518,8 +516,7 @@ If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; 
 &lt;p&gt;
 Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 on using Ctags with Emacs                                                :en:emacs:ctags:javascript:
 &lt;/p&gt;
@@ -622,9 +619,9 @@ Please note:
 &lt;li&gt;My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div id="outline-container-orga976c00" class="outline-2"&gt;
-&lt;h3 id="orga976c00"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orga976c00"&gt;
+&lt;div id="outline-container-org4987f9d" class="outline-2"&gt;
+&lt;h3 id="org4987f9d"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org4987f9d"&gt;
 &lt;p&gt;
 As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 &lt;/p&gt;
@@ -637,21 +634,20 @@ The only way to debug such application is to insert as many as possible logging 
 So my problem is how to insert logging code as quickly as possible.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-org976852c" class="outline-2"&gt;
-&lt;h3 id="org976852c"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org976852c"&gt;
+&lt;div id="outline-container-org6dceb8d" class="outline-2"&gt;
+&lt;h3 id="org6dceb8d"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6dceb8d"&gt;
 &lt;p&gt;
 My solution is &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt;. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7347c1f" class="outline-2"&gt;
-&lt;h3 id="org7347c1f"&gt;Logging simple JS variable&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7347c1f"&gt;
+&lt;div id="outline-container-org7ee3610" class="outline-2"&gt;
+&lt;h3 id="org7ee3610"&gt;Logging simple JS variable&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7ee3610"&gt;
 &lt;p&gt;
 Given a variable name like "var1", I need insert javascript code as below:
 &lt;/p&gt;
@@ -670,12 +666,12 @@ Snippet:
 &lt;p&gt;
 This snippet need you input variable name once.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga440537" class="outline-2"&gt;
-&lt;h3 id="orga440537"&gt;Logging complex JS variable&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orga440537"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org7a8f93a" class="outline-2"&gt;
+&lt;h3 id="org7a8f93a"&gt;Logging complex JS variable&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7a8f93a"&gt;
 &lt;p&gt;
 In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 &lt;/p&gt;
@@ -689,12 +685,11 @@ Snippet:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/log-recent-kill-ring.yasnippet&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge76b657" class="outline-2"&gt;
-&lt;h3 id="orge76b657"&gt;Logging JS function name when it's called&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge76b657"&gt;
+&lt;div id="outline-container-org59a6db0" class="outline-2"&gt;
+&lt;h3 id="org59a6db0"&gt;Logging JS function name when it's called&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org59a6db0"&gt;
 &lt;p&gt;
 In below example, I need insert  "console.log('hello is called');" in function "hello":
 &lt;/p&gt;
@@ -724,12 +719,12 @@ Please check &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp
 &lt;p&gt;
 The regular expressions could be used in &lt;b&gt;both&lt;/b&gt; js-mode and js2-mode.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org54d0f01" class="outline-2"&gt;
-&lt;h3 id="org54d0f01"&gt;Logging JS function name with its parameters&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org54d0f01"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org624aabc" class="outline-2"&gt;
+&lt;h3 id="org624aabc"&gt;Logging JS function name with its parameters&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org624aabc"&gt;
 &lt;p&gt;
 JS example:
 &lt;/p&gt;
@@ -755,12 +750,12 @@ Snippet:
 &lt;p&gt;
 BTW, since I use &lt;a href="http://www.emacswiki.org/Evil"&gt;Evil&lt;/a&gt;, copy the parameter into kill-ring is as simple as pressing "yi(".
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org151d6c3" class="outline-2"&gt;
-&lt;h3 id="org151d6c3"&gt;Insert JS debugger statement&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org151d6c3"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org441e531" class="outline-2"&gt;
+&lt;h3 id="org441e531"&gt;Insert JS debugger statement&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org441e531"&gt;
 &lt;p&gt;
 @cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
 &lt;/p&gt;
@@ -774,12 +769,11 @@ Snippets:
 &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet"&gt;https://github.com/redguardtoo/emacs.d/blob/master/snippets/js-mode/debugger-cond-breakpoint-from-kill-ring.yasnippet&lt;/a&gt;
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-org07fa9a3" class="outline-2"&gt;
-&lt;h3 id="org07fa9a3"&gt;Bonus&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org07fa9a3"&gt;
+&lt;div id="outline-container-org1cf39d2" class="outline-2"&gt;
+&lt;h3 id="org1cf39d2"&gt;Bonus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1cf39d2"&gt;
 &lt;p&gt;
 Similar snippets for Emacs Lisp are defined &lt;a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode"&gt;HERE&lt;/a&gt;.
 &lt;/p&gt;
@@ -798,9 +792,9 @@ Screenshot:
 &lt;img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-org88f3735" class="outline-2"&gt;
-&lt;h3 id="org88f3735"&gt;Environment&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org88f3735"&gt;
+&lt;div id="outline-container-orge632669" class="outline-2"&gt;
+&lt;h3 id="orge632669"&gt;Environment&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge632669"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;Bootstrap 2.3.2&lt;/li&gt;
 &lt;li&gt;font-awesome 3.2.1&lt;/li&gt;
@@ -811,12 +805,11 @@ Screenshot:
 I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1139ed8" class="outline-2"&gt;
-&lt;h3 id="org1139ed8"&gt;Notes&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1139ed8"&gt;
+&lt;div id="outline-container-orga24296b" class="outline-2"&gt;
+&lt;h3 id="orga24296b"&gt;Notes&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orga24296b"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".&lt;/li&gt;
 &lt;li&gt;IE7 does not support inline-block properly, I need below css code hack:&lt;/li&gt;
@@ -832,12 +825,10 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;bootstrap's row-fluid has issues in IE7. I use row-fluid in this case, but have to hard code the row width sometimes.&lt;/li&gt;
 &lt;li&gt;add below code into javascript so that I can hack IE7-only css code:&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;if($.browser.msie &amp;amp;&amp;amp; parseFloat($.browser.version) &amp;lt; 8){
@@ -847,8 +838,7 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>css</category><category>en</category><category>ie</category><category>javascript</category><guid>http://blog.binchen.org/posts/use-bootstrapfont-awesomejquery-for-ie7-web-application.html</guid><pubDate>Sun, 23 Nov 2014 07:37:10 GMT</pubDate></item><item><title>Why Emacs is a better editor, part two</title><link>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Emacs is a better editor, part two                                        :en:emacs:javascript:
 &lt;/p&gt;
@@ -861,9 +851,9 @@ If you are impatient, jump to the "Quick Start" and paste my setup into your ~/.
 No extra setup needed! Then keep using your js2-mode happily, as if nothing happened. ;) 
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgf3615fb" class="outline-2"&gt;
-&lt;h3 id="orgf3615fb"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf3615fb"&gt;
+&lt;div id="outline-container-org0b59e6e" class="outline-2"&gt;
+&lt;h3 id="org0b59e6e"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0b59e6e"&gt;
 &lt;p&gt;
 In my previous article &lt;a href="http://blog.binchen.org/posts/why-emacs-is-better-editor.html"&gt;Why Emacs is better editor - a case study for javascript developer&lt;/a&gt;, I proved that Emacs is better than &lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;.
 &lt;/p&gt;
@@ -895,15 +885,16 @@ In modern MVC javascript frameworks (&lt;a href="https://angularjs.org/"&gt;Angu
 &lt;p&gt;
 As you can see, using regular expression to extract the string "MyController" is more versatile and simpler.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgcf15d61" class="outline-2"&gt;
-&lt;h3 id="orgcf15d61"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgcf15d61"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgfdbfa2f" class="outline-2"&gt;
+&lt;h3 id="orgfdbfa2f"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgfdbfa2f"&gt;
 &lt;p&gt;
 My latest &lt;a href="https://github.com/mooz/js2-mode/pull/169"&gt;contribution to js2-mode&lt;/a&gt; solves this problem perfectly. It &lt;b&gt;combines the powers of AST and regular expression&lt;/b&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 The js2-mode will integrate this feature soon. I will notify you when next version is ready.
 &lt;/p&gt;
@@ -915,7 +906,6 @@ Let's cut off the boring technical details and see the demo,
 &lt;p&gt;
 For a simple &lt;a href="https://gist.github.com/redguardtoo/558ea0133daa72010b73#file-hello-js"&gt;hello.js&lt;/a&gt; with below content,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;function helloworld() {
@@ -981,15 +971,16 @@ Another valuable feedback is that native Sublime provides better experience &lt;
 &lt;p&gt;
 Sublime users also argue that Sublime3 uses &lt;a href="https://www.python.org/"&gt;Python&lt;/a&gt;. Python is a &lt;b&gt;better programming language&lt;/b&gt;. I'm qualified to answer this question because I wrote some large commercial Python application when I worked in Kodak R&amp;amp;D. First version I used was v2.2. So I've got about &lt;b&gt;10 years experience&lt;/b&gt; in Python. And I write lots of &lt;a href="https://github.com/redguardtoo/"&gt;Emacs Lisp code&lt;/a&gt; these days. My opinion is that both languages are good enough as DSL for text editors. In Python, you can use OO. In Emacs Lisp, you can treat function as object and there are &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Defining-Macros.html"&gt;Macros&lt;/a&gt; and &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html"&gt;Advising&lt;/a&gt;. Both languages have enough widgets to shoot yourself in the foot. Python is surely newbie-friendly. But &lt;b&gt;number of newbies&lt;/b&gt; doesn't matter in high-end rival.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6bd9b38" class="outline-2"&gt;
-&lt;h3 id="org6bd9b38"&gt;Quick Start&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org6bd9b38"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org291eb25" class="outline-2"&gt;
+&lt;h3 id="org291eb25"&gt;Quick Start&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org291eb25"&gt;
 &lt;p&gt;
 I'm still discussing with the js2-mode maintainer Dmitry Gutov about the best way to merge my patch.
 &lt;/p&gt;
+
 &lt;p&gt;
 Dmitry Gutov updated the algorithm to parse the imenu items by walking the AST instead. It's better than my REGEX hacking because AST could show the context of the function.
 &lt;/p&gt;
@@ -1001,7 +992,6 @@ But my patch is still useful for extract strings from modern JS framework, as I'
 &lt;p&gt;
 In the meantime, you can paste below code into your ~/.emacs before the patch is officially merged.
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; below regex list could be used in both js-mode and js2-mode
@@ -1155,8 +1145,7 @@ Merge RLT and EXTRA-RLT, items in RLT has *higher* priority."
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/why-emacs-is-better-editor-part-two.html</guid><pubDate>Sat, 01 Nov 2014 11:06:17 GMT</pubDate></item><item><title>Hack wordpress php and make cdnjs.com host js</title><link>http://blog.binchen.org/posts/hack-wordpress-php-and-make-cdnjs-com-host-js.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 wordpress php and make cdnjs.com host js                              :en:wordpress:blog:javascript:php:
 &lt;/p&gt;
@@ -1253,9 +1242,9 @@ index db8c668..e41ec12 100644
 to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up   :en:repl:javascript:html:frontend:
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgf8e4ba3" class="outline-2"&gt;
-&lt;h3 id="orgf8e4ba3"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf8e4ba3"&gt;
+&lt;div id="outline-container-org0bad6c2" class="outline-2"&gt;
+&lt;h3 id="org0bad6c2"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0bad6c2"&gt;
 &lt;p&gt;
 I love the REPL (Read–eval–print loop). Watch live update of web page when typing code is cool.
 &lt;/p&gt;
@@ -1285,15 +1274,16 @@ For me, a practical solution must be:
 &lt;li&gt;no learning curve. I don't want to learn any domain specific language or API. For example, if my web application uses jquery, I want &lt;b&gt;use and only use jquery API&lt;/b&gt; to manipulate web page in my text editor. If it use backbone, then I use backbone. No more, no less.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-orgf3eeba4" class="outline-2"&gt;
-&lt;h3 id="orgf3eeba4"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf3eeba4"&gt;
+&lt;div id="outline-container-orga273de9" class="outline-2"&gt;
+&lt;h3 id="orga273de9"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orga273de9"&gt;
 &lt;p&gt;
 The best solution is firefox addon &lt;a href="https://github.com/bard/mozrepl/wiki"&gt;MozRepl&lt;/a&gt;. You can install it &lt;a href="https://addons.mozilla.org"&gt;https://addons.mozilla.org&lt;/a&gt;. Click firefox menu "Tools =&amp;gt; MozRepl =&amp;gt; Start" to run it.
 &lt;img src="http://blog.binchen.org/wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"&gt;
 &lt;/p&gt;
+
 &lt;p&gt;
 So what is MozRepl, as its web site says, "MozRepl lets you program Firefox and other Mozilla-based applications &lt;b&gt;from the inside&lt;/b&gt;." Basically it convert firefox into a socket server. Your text editor could talk to firefox and let firefox do anything you want. Since it only interact with the firefox, I don't need mess with the web server.
 &lt;/p&gt;
@@ -1313,12 +1303,11 @@ Section 1 is about how to use MozRepl, whatever text editor you use, you should 
 &lt;p&gt;
 Section 2 is on how to set up my text editor Emacs to interact with MozRepl. It's optional.
 &lt;/p&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge09b5c1" class="outline-3"&gt;
-&lt;h4 id="orge09b5c1"&gt;Section 1, use MozRepl&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orge09b5c1"&gt;
+&lt;div id="outline-container-orgc6ddbca" class="outline-3"&gt;
+&lt;h4 id="orgc6ddbca"&gt;Section 1, use MozRepl&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgc6ddbca"&gt;
 &lt;p&gt;
 Here are key points:
 &lt;/p&gt;
@@ -1369,12 +1358,12 @@ As you can see from above, I can use jQuery API loaded in that web page without 
 &lt;p&gt;
 Please note the code is not part of my web application! It will be run only in MozRepl. You can telnet to the MozRepl socket server (127.0.0.1 with port 4424) and copy paste above code line by line.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd183dfa" class="outline-3"&gt;
-&lt;h4 id="orgd183dfa"&gt;Section 2, set up text editor (Emacs)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd183dfa"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org8582b45" class="outline-3"&gt;
+&lt;h4 id="org8582b45"&gt;Section 2, set up text editor (Emacs)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org8582b45"&gt;
 &lt;p&gt;
 My text editor is Emacs, so I use Emacs as an example.
 &lt;/p&gt;
@@ -1425,20 +1414,21 @@ Step 2, Please insert below code into your ~/.emacs:
 &lt;p&gt;
 From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js file you need MozRepl to run.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;div id="outline-container-orgb3ba992" class="outline-2"&gt;
+&lt;h3 id="orgb3ba992"&gt;Tips&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb3ba992"&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org8a09a68" class="outline-2"&gt;
-&lt;h3 id="org8a09a68"&gt;Tips&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org8a09a68"&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org486fbc9" class="outline-3"&gt;
-&lt;h4 id="org486fbc9"&gt;Tip 1&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org486fbc9"&gt;
+&lt;div id="outline-container-org2540d51" class="outline-3"&gt;
+&lt;h4 id="org2540d51"&gt;Tip 1&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2540d51"&gt;
 &lt;p&gt;
 Well, this is a simple tip. Maybe you are already aware of this.
 &lt;/p&gt;
+
 &lt;p&gt;
 You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separate logic for different project.
 &lt;/p&gt;
@@ -1446,7 +1436,6 @@ You can write a all-in-one.js. In all-in-one.js, you can parse the URL to separa
 &lt;p&gt;
 Here is javascript code,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;var url=document.URL;
@@ -1462,12 +1451,12 @@ if(/^.*mycompany\.com\.au.*my-account\/registration/.test(url)){
 &lt;p&gt;
 Since javascript is good at analyzing URL, you can also tweak the URL parameters. Anyway, the full power of javascript is at your hand.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgbd52e39" class="outline-3"&gt;
-&lt;h4 id="orgbd52e39"&gt;Tip 2&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgbd52e39"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgdca350f" class="outline-3"&gt;
+&lt;h4 id="orgdca350f"&gt;Tip 2&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgdca350f"&gt;
 &lt;p&gt;
 Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-reload-browser" to refresh the page. If page is not refreshed, restart Firefox. Luckily this does not happen too often.
 &lt;/p&gt;
@@ -1481,13 +1470,13 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org10c2944" class="outline-2"&gt;
-&lt;h3 id="org10c2944"&gt;Demo&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org10c2944"&gt;
+&lt;div id="outline-container-org75745cd" class="outline-2"&gt;
+&lt;h3 id="org75745cd"&gt;Demo&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org75745cd"&gt;
 &lt;p&gt;
 Here is a demo how I use it in a real world web application development.
 &lt;/p&gt;
@@ -1502,5 +1491,4 @@ The script to drive the firefox is written in simple javascript/jquery code, whi
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;&lt;/div&gt;</description><category>en</category><category>frontend</category><category>html</category><category>javascript</category><category>repl</category><guid>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</guid><pubDate>Mon, 10 Feb 2014 21:56:00 GMT</pubDate></item></channel></rss>

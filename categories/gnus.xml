@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (gnus)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gnus.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:01 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gnus)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gnus.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
 &lt;/p&gt;
 
@@ -174,30 +174,62 @@ All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags 
 &lt;p&gt;
 UPDATE:
 This is only a case study. My complete guide on Gnus is at &lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html"&gt;http://blog.binchen.org/posts/notes-on-using-gnus.html&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;div id="outline-container-1" class="outline-3"&gt; &lt;h4 id="sec-1"&gt;Send the latest commit&lt;/h4&gt; &lt;div class="outline-text-3" id="text-1"&gt;     
-&lt;pre class="prettyprint "&gt;
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgdeb477d" class="outline-2"&gt;
+&lt;h3 id="orgdeb477d"&gt;Use Gnus to apply patch sent by `git send-email`   &lt;span class="tag"&gt;&lt;span class="git"&gt;git&lt;/span&gt; &lt;span class="email"&gt;email&lt;/span&gt; &lt;span class="patch"&gt;patch&lt;/span&gt; &lt;span class="gnus"&gt;gnus&lt;/span&gt; &lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdeb477d"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgdf9ad06" class="outline-3"&gt;
+&lt;h4 id="orgdf9ad06"&gt;Send the latest commit&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgdf9ad06"&gt;
+&lt;div class="org-src-container"&gt;
 
-# send one commit
-
+&lt;pre&gt;&lt;code class="lang-bash"&gt;# send one commit
 git send-email -1 --annotate
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-2" class="outline-3"&gt; &lt;h4 id="sec-2"&gt;Apply patch&lt;/h4&gt; &lt;div class="outline-text-3" id="text-2"&gt;   &lt;p&gt; Select that email, run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer. &lt;/p&gt; &lt;p&gt; Emacs will prompt you where to save that email. Say I save it in ~/News/patch/hello.patch. &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-git am ~/News/patch/hello.patch
-&lt;/pre&gt;
+&lt;div id="outline-container-org2c94076" class="outline-3"&gt;
+&lt;h4 id="org2c94076"&gt;Apply patch&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2c94076"&gt;
+&lt;p&gt;
+Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
+&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;  &lt;/div&gt;  &lt;div id="outline-container-3" class="outline-3"&gt; &lt;h4 id="sec-3"&gt;Syntax highlight of patch email&lt;/h4&gt; &lt;div class="outline-text-3" id="text-3"&gt;  &lt;p&gt;See &lt;a href="https://github.com/fgeller/emacs.d/blob/master/site-lisp/gnus-article-treat-patch.el"&gt;fgeller's plugin&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; Add following code to configure his plugin: &lt;/p&gt;   
-&lt;pre class="prettyprint "&gt;
+&lt;p&gt;
+Emacs will ask for directory to sve that email. Say I save it as &lt;code&gt;~/News/patch/hello.patch&lt;/code&gt;.
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
 
-(require 'gnus-article-treat-patch)
+&lt;pre&gt;&lt;code class="lang-bash"&gt;git am ~/News/patch/hello.patch
+&lt;/code&gt;&lt;/pre&gt;
 
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org1e7cb68" class="outline-3"&gt;
+&lt;h4 id="org1e7cb68"&gt;Syntax highlight of patch email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org1e7cb68"&gt;
+&lt;p&gt;
+Use &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch.el"&gt;gnus-article-treat-patch.el&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Add below code to setup: 
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'gnus-article-treat-patch)
 (setq gnus-article-patch-conditions
       '( "^@@ -[0-9]+,[0-9]+ \\+[0-9]+,[0-9]+ @@" ))
-&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Fri, 06 Sep 2013 22:00:00 GMT</pubDate></item><item><title>How to get email from exchange server without Outlook</title><link>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item><item><title>How to get email from exchange server without Outlook</title><link>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to get email from exchange server without Outlook                         :en:email:outlook:imap:linux:emacs:gnus:
 &lt;/p&gt;
 
@@ -217,16 +249,16 @@ Second part uses &lt;a href="https://www.mozilla.org/en-US/thunderbird/"&gt;thun
 Third part uses Emacs and Gnus to replace thunderbird. It's optional.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd32ebd8" class="outline-2"&gt;
-&lt;h3 id="orgd32ebd8"&gt;DavMail as mail gateway&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd32ebd8"&gt;
+&lt;div id="outline-container-orgc42e55d" class="outline-2"&gt;
+&lt;h3 id="orgc42e55d"&gt;DavMail as mail gateway&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc42e55d"&gt;
 &lt;pre class="example"&gt;
 Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LDAP exchange gateway allowing users to use any mail/calendar client (e.g. Thunderbird with Lightning or Apple iCal) with an Exchange server.
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1ed7b80" class="outline-3"&gt;
-&lt;h4 id="org1ed7b80"&gt;Install&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org1ed7b80"&gt;
+&lt;div id="outline-container-org928f980" class="outline-3"&gt;
+&lt;h4 id="org928f980"&gt;Install&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org928f980"&gt;
 &lt;p&gt;
 &lt;a href="http://davmail.sourceforge.net/download.html"&gt;Download the installer&lt;/a&gt; at Debian/Ubuntu/Mint:
 &lt;/p&gt;
@@ -242,15 +274,15 @@ sudo dpkg -i davmail_4.5.1-2303-1_all.deb
 &lt;p&gt;
 Installation is easy. DavMail by itself is a portable java application. Since its GUI is dependent on SWT. So I give the instruction on how to install SWT in ubuntu. If you don't use ubuntu, then you are already technically good enough to know how to install SWT.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd2eae14" class="outline-3"&gt;
-&lt;h4 id="orgd2eae14"&gt;Configuration&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd2eae14"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orga6742c7" class="outline-3"&gt;
+&lt;h4 id="orga6742c7"&gt;Configuration&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga6742c7"&gt;
 &lt;p&gt;
 Now start DavMail. 
 &lt;/p&gt;
+
 &lt;p&gt;
 Please input the web Outlook url like "&lt;a href="https://webmail.mycompany.com.au/owa/"&gt;https://webmail.mycompany.com.au/owa/&lt;/a&gt;" in its GUI.
 &lt;/p&gt;
@@ -278,16 +310,17 @@ For example, my EWS URL is &lt;code&gt;https://my-company.local/EWS/Exchange.asm
 &lt;p&gt;
 BTW, &lt;a href="https://outlook.office365.com/"&gt;https://outlook.office365.com/&lt;/a&gt; EWS URL is &lt;code&gt;https://outlook.office365.com/EWS/Exchange.asmx&lt;/code&gt;.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org3c34520" class="outline-2"&gt;
-&lt;h3 id="org3c34520"&gt;Thunderbird&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3c34520"&gt;
+&lt;div id="outline-container-org5ecd382" class="outline-2"&gt;
+&lt;h3 id="org5ecd382"&gt;Thunderbird&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5ecd382"&gt;
 &lt;p&gt;
 Create a new account, and &lt;b&gt;manually&lt;/b&gt; configure the server. The server name is "127.0.0.1", the port number is already on your paper. The minimum setup needs IMAP port to  receive mail and SMTP port to send email.
 &lt;/p&gt;
+
 &lt;p&gt;
 You don't need care about ssl stuff, let thunderbird handle it. But if you get the error message like "BAD command authentication required" in davmail's log, modify setup in "Account Settings -&amp;gt; Server Settings -&amp;gt; Security Settings -&amp;gt; Connection Settings". Select "None".
 &lt;/p&gt;
@@ -295,15 +328,16 @@ You don't need care about ssl stuff, let thunderbird handle it. But if you get t
 &lt;p&gt;
 The only issue is the "Username". You can log in Outlook Web UI, click "Options -&amp;gt; Change Password". The user name is displayed above the first input box. Please note the full user name may include the work domain.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org98b8ec7" class="outline-2"&gt;
-&lt;h3 id="org98b8ec7"&gt;Emacs Gnus&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org98b8ec7"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgf2c3366" class="outline-2"&gt;
+&lt;h3 id="orgf2c3366"&gt;Emacs Gnus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf2c3366"&gt;
 &lt;p&gt;
 Gnus cannot access IMAP service of DavMail. There is &lt;a href="http://permalink.gmane.org/gmane.emacs.gnus.general/83301"&gt;some bug&lt;/a&gt;.
 &lt;/p&gt;
+
 &lt;p&gt;
 So we have to turn to POP3. Check &lt;a href="http://www.emacswiki.org/emacs/GnusTutorial"&gt;documentation&lt;/a&gt; at EmacsWiki.
 &lt;/p&gt;
@@ -315,7 +349,6 @@ If you use POP3, don NOT delete mails on server. You &lt;b&gt;must&lt;/b&gt; set
 &lt;p&gt;
 Insert below code into your ~/.emacs:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; gnus+davmail bug, so I have to use pop3 for DavMail
@@ -341,8 +374,7 @@ Since I've got many mails in INBOX folder, POP3 could take some time to get them
 &lt;p&gt;
 Another tip is when opening a folder in Gnus, press &lt;code&gt;C-u ENTER&lt;/code&gt; instead of &lt;code&gt;ENTER&lt;/code&gt; key. &lt;code&gt;C-u&lt;/code&gt; here means display all the read &lt;b&gt;and unread mails&lt;/b&gt;. It's awkward when product manager ask you open an important mail but that mail is invisible because it's marked READ. Check my article &lt;a href="https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/gnus-guide-en.org"&gt;Practical guide to use Gnus with Gmail&lt;/a&gt; for more tips.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><category>imap</category><category>linux</category><category>outlook</category><guid>http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html</guid><pubDate>Tue, 06 Aug 2013 20:26:00 GMT</pubDate></item><item><title>Practical guide to use Gnus with Gmail</title><link>http://blog.binchen.org/posts/notes-on-using-gnus.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 guide to use Gnus with Gmail                                        :emacs:email:gmail:gnus:
 &lt;/p&gt;

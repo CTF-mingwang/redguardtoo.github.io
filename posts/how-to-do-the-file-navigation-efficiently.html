@@ -87,9 +87,9 @@ The solutin is based on the ideas of top geeks. I only did the implementation.
 Mendel Cooper provided the original design in <a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting Guide</a>. Masafumi Oyamada (AKA mooz) added the missing piece by creating <a href="https://github.com/mooz/percol">percol</a>.
 </p>
 
-<div id="outline-container-org6ddc251" class="outline-2">
-<h3 id="org6ddc251">Problem</h3>
-<div class="outline-text-2" id="text-org6ddc251">
+<div id="outline-container-org52a4c13" class="outline-2">
+<h3 id="org52a4c13">Problem</h3>
+<div class="outline-text-2" id="text-org52a4c13">
 <p>
 How to find full path of a file by fuzz search?
 </p>
@@ -98,25 +98,24 @@ How to find full path of a file by fuzz search?
 The path should be shared easily to other application like Emacs.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-orge91661e" class="outline-2">
-<h3 id="orge91661e">Installation</h3>
-<div class="outline-text-2" id="text-orge91661e">
+<div id="outline-container-orgc62df3b" class="outline-2">
+<h3 id="orgc62df3b">Installation</h3>
+<div class="outline-text-2" id="text-orgc62df3b">
 </div>
-<div id="outline-container-org0f9657f" class="outline-3">
-<h4 id="org0f9657f">Step 1, Install percol</h4>
-<div class="outline-text-3" id="text-org0f9657f">
+<div id="outline-container-org9c8c110" class="outline-3">
+<h4 id="org9c8c110">Step 1, Install percol</h4>
+<div class="outline-text-3" id="text-org9c8c110">
 <p>
 <a href="https://github.com/mooz/percol/archive/master.zip">Download the package</a> and extract it. Place the sub-directory named "percol/" into the directory "~/bin". Rename the program "percol" in sub-directory "bin" into "percol.py". Put the percol.py also into "~/bin".
 </p>
 </div>
 </div>
 
-<div id="outline-container-org5972aab" class="outline-3">
-<h4 id="org5972aab">Step 2, Insert below code into ~/.bashrc:</h4>
-<div class="outline-text-3" id="text-org5972aab">
+<div id="outline-container-orgae4f432" class="outline-3">
+<h4 id="orgae4f432">Step 2, Insert below code into ~/.bashrc:</h4>
+<div class="outline-text-3" id="text-orgae4f432">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">[ $(uname -s | grep -c CYGWIN) -eq 1 ] &amp;&amp; OS_NAME="CYGWIN" || OS_NAME=`uname -s`
@@ -174,17 +173,17 @@ function cf()
 <p>
 `cf` is similar to `ff`. It will output Windows path under cygwin.
 </p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org068fbf0" class="outline-2">
-<h3 id="org068fbf0">Usage</h3>
-<div class="outline-text-2" id="text-org068fbf0">
+<div id="outline-container-orgac9d152" class="outline-2">
+<h3 id="orgac9d152">Usage</h3>
+<div class="outline-text-2" id="text-orgac9d152">
 <p>
 Type "ff partials-of-file-path" in shell. A filter window popups. You can filter and scroll down/up to select one file. The full path will be copied into system clipboard automatically (under Linux, either xsel or xclip are required for clipboard access).
 </p>
+
 <p>
 The paritials-of-file-path could contain wildcard character.
 </p>
@@ -192,7 +191,6 @@ The paritials-of-file-path could contain wildcard character.
 <p>
 For example, <b>for "/home/cb/projs/web-portal/app/styles/bootstrap/main.css", you can type either of below command</b>:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash">ff .../grunt-docs/*bootstrap*css
@@ -217,20 +215,20 @@ I can scroll up/down (press Ctrl-P or Ctrl-N) to select the exact file.
 <p>
 In Emacs community, people try to embed a file explorer into Emacs (Sr speedbar, for example). This solution may make embedded file explorer unnecessary.
 </p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org97b2982" class="outline-2">
-<h3 id="org97b2982">Advanced usage</h3>
-<div class="outline-text-2" id="text-org97b2982">
+<div id="outline-container-org7ea214e" class="outline-2">
+<h3 id="org7ea214e">Advanced usage</h3>
+<div class="outline-text-2" id="text-org7ea214e">
 <p>
 More examples follow.
 </p>
 </div>
-<div id="outline-container-orga404ca8" class="outline-3">
-<h4 id="orga404ca8">Search the bash history.</h4>
-<div class="outline-text-3" id="text-orga404ca8">
+
+<div id="outline-container-orgc351b79" class="outline-3">
+<h4 id="orgc351b79">Search the bash history.</h4>
+<div class="outline-text-3" id="text-orgc351b79">
 <p>
 Code to insert ~/.bashrc:
 </p>
@@ -255,13 +253,12 @@ Though grep is quick enough for me, it can be replaced by <a href="https://githu
 <p>
 Screenshot:
 <img src="../wp-content/use-h-in-shell.png" alt="use-h-in-shell.png"></p>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgdfa6a49" class="outline-3">
-<h4 id="orgdfa6a49">Select a file in git commit</h4>
-<div class="outline-text-3" id="text-orgdfa6a49">
+<div id="outline-container-org4b7d10d" class="outline-3">
+<h4 id="org4b7d10d">Select a file in git commit</h4>
+<div class="outline-text-3" id="text-org4b7d10d">
 <p>
 Code to insert ~/.bashrc:
 </p>
@@ -281,14 +278,13 @@ Code to insert ~/.bashrc:
 <p>
 Screenshot:
 <img src="../wp-content/use-glsf-in-shell.png" alt="use-glsf-in-shell.png"></p>
+</div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-</div>
-<div id="outline-container-org7bfb27d" class="outline-2">
-<h3 id="org7bfb27d">Summary</h3>
-<div class="outline-text-2" id="text-org7bfb27d">
+<div id="outline-container-org8a5e24c" class="outline-2">
+<h3 id="org8a5e24c">Summary</h3>
+<div class="outline-text-2" id="text-org8a5e24c">
 <p>
 The key idea is that I have full freedom to get job done in any way. Emacs is nothing more than a tool to help me achieve more power and more freedom. For example, I find mooz's percol because I like his Emacs plugin <a href="https://github.com/mooz/js2-mode">js2-mode</a> and I want to check his other works. 
 </p>
@@ -316,12 +312,12 @@ The key idea is that I have full freedom to get job done in any way. Emacs is no
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -329,7 +325,7 @@ The key idea is that I have full freedom to get job done in any way. Emacs is no
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

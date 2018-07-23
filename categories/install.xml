@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (install)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/install.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Notes to install Gentoo Linux</title><link>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about install)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/install.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Notes to install Gentoo Linux</title><link>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to install Gentoo Linux                                                 :gentoo:linux:install:en:
 &lt;/p&gt;
 
-&lt;div id="outline-container-org8235fbb" class="outline-2"&gt;
-&lt;h3 id="org8235fbb"&gt;Intel integrated video card&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org8235fbb"&gt;
+&lt;div id="outline-container-org0546db1" class="outline-2"&gt;
+&lt;h3 id="org0546db1"&gt;Intel integrated video card&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0546db1"&gt;
 &lt;p&gt;
 Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&amp;gt; Intel) is critical:
 &lt;/p&gt;
@@ -15,30 +15,33 @@ Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&a
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org981be05" class="outline-2"&gt;
-&lt;h3 id="org981be05"&gt;Grub2&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org981be05"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org8368ea3" class="outline-2"&gt;
+&lt;h3 id="org8368ea3"&gt;Grub2&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org8368ea3"&gt;
 &lt;p&gt;
 Let grub2 create the cfg for me automatically,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-sh"&gt;grub2-mkconfig -o /boot/grub/grub.cfg
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6a43bcd" class="outline-2"&gt;
-&lt;h3 id="org6a43bcd"&gt;Network&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org6a43bcd"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org4a69ae7" class="outline-3"&gt;
-&lt;h4 id="org4a69ae7"&gt;Ethernet&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org4a69ae7"&gt;
+
+&lt;div id="outline-container-org6e925b3" class="outline-2"&gt;
+&lt;h3 id="org6e925b3"&gt;Network&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6e925b3"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org5decd7a" class="outline-3"&gt;
+&lt;h4 id="org5decd7a"&gt;Ethernet&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org5decd7a"&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
 # @see https://wiki.gentoo.org/wiki/Netifrc
 ln -s /etc/init.d/net.lo /etc/init.d/net.eth0
@@ -47,12 +50,13 @@ echo 'config_eth0="dhcp"' &amp;gt;&amp;gt; /etc/conf.d/net
 rc-update add net.eth0 default
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org98daa9c" class="outline-3"&gt;
-&lt;h4 id="org98daa9c"&gt;Wireless (wifi)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org98daa9c"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge3978f0" class="outline-3"&gt;
+&lt;h4 id="orge3978f0"&gt;Wireless (wifi)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orge3978f0"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -69,7 +73,6 @@ rc-update add net.ra0 default
 &lt;p&gt;
 Content of /etc/wpa_supplicant/wpa_supplicant.conf:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-conf"&gt;#let wpa_supplicant take care of scanning and AP selection
@@ -93,7 +96,6 @@ For kernel 3.17.*+, by default wpa_supplicant use &lt;code&gt;nl80211&lt;/code&g
 &lt;p&gt;
 We need for it use &lt;code&gt;wext&lt;/code&gt; instead. To double check &lt;code&gt;wext&lt;/code&gt; does work,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;sudo wpa_supplicant -dd -B -i ra0 -Dwext -c /etc/wpa_supplicant/wpa_supplicant.conf
@@ -104,7 +106,6 @@ We need for it use &lt;code&gt;wext&lt;/code&gt; instead. To double check &lt;co
 &lt;p&gt;
 But OpenRC script does not have &lt;code&gt;-Dwext&lt;/code&gt;,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# as root
@@ -118,28 +119,28 @@ cd /lib;grep -rsn --exclude-dir=/home "Starting wpa_supplicant on" *
 &lt;p&gt;
 Modify /lib/netifrc/net/wpa_supplicant.sh to for it use wext,
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;opts="-Dwext ${opts} -c ${cfgfile}"
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org2da0d69" class="outline-2"&gt;
-&lt;h3 id="org2da0d69"&gt;Clock Synchronization&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2da0d69"&gt;
+&lt;div id="outline-container-org1936903" class="outline-2"&gt;
+&lt;h3 id="org1936903"&gt;Clock Synchronization&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1936903"&gt;
 &lt;p&gt;
 &lt;a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate"&gt;htpdate&lt;/a&gt; is great because it only use HTTP protocol, don't forget add server in its config file.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2194092" class="outline-2"&gt;
-&lt;h3 id="org2194092"&gt;Sound&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2194092"&gt;
+
+&lt;div id="outline-container-org1181f3a" class="outline-2"&gt;
+&lt;h3 id="org1181f3a"&gt;Sound&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1181f3a"&gt;
 &lt;p&gt;
 Nothing to tell. There may be some issue, but I forgot.&lt;/p&gt;
 &lt;/div&gt;

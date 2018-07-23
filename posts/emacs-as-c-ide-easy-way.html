@@ -105,9 +105,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 </p>
 
-<div id="outline-container-org3df5b43" class="outline-2">
-<h3 id="org3df5b43">Step 1, create sample projects for experiment</h3>
-<div class="outline-text-2" id="text-org3df5b43">
+<div id="outline-container-org6b16639" class="outline-2">
+<h3 id="org6b16639">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-org6b16639">
 <p>
 I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
@@ -133,7 +133,6 @@ Let's create directories,
 <p>
 The content of <code>~/proj2/lib.cpp</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-c">void proj2_hello(int a2, char* b2) {
@@ -145,7 +144,6 @@ The content of <code>~/proj2/lib.cpp</code>,
 <p>
 The content of <code>~/proj1/main.cpp</code>,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-c">void proj1_hello(int a1, char* b1) {
@@ -157,17 +155,17 @@ int main(int argc, char *argv[]) {
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgc72a34f" class="outline-2">
-<h3 id="orgc72a34f">Step 2, scan C++ code and setup Emacs</h3>
-<div class="outline-text-2" id="text-orgc72a34f">
+<div id="outline-container-org07f02e6" class="outline-2">
+<h3 id="org07f02e6">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-org07f02e6">
 <p>
 Run below command in shell to scan code,
 </p>
 <div class="org-src-container">
+
 <pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
 cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
 cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
@@ -183,7 +181,6 @@ cd ~/proj2 &amp;&amp; gtags
 <p>
 If you are <b>using old Global</b> (v5.7.1, for example), the command to create tags file in read only directory may fail. This is Global's bug. But there is workaround:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
@@ -200,7 +197,6 @@ Global introduced <code>MAKEOBJDIRPREFIX</code> on 2008-03-23.
 <p>
 After installing Emacs plugins and setup (minimum setup from their website is enough), insert below code into ~/.emacs,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; Please note `file-truename' must be used!
@@ -216,16 +212,16 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orgd5a09bb" class="outline-2">
-<h3 id="orgd5a09bb">Usage</h3>
-<div class="outline-text-2" id="text-orgd5a09bb">
+<div id="outline-container-org5ca4d01" class="outline-2">
+<h3 id="org5ca4d01">Usage</h3>
+<div class="outline-text-2" id="text-org5ca4d01">
 <p>
 Use the Emacs plugins as usual.
 </p>
+
 <p>
 But you need install latest company built on 25th August because I <a href="https://github.com/company-mode/company-mode/issues/570">fixed a company issue</a> yesterday.
 </p>
@@ -234,16 +230,16 @@ But you need install latest company built on 25th August because I <a href="http
 Screenshot,
 </p>
 
+
 <div class="figure">
 <p><img src="../wp-content/cpp-gtags-demo-nq8.png" alt="cpp-gtags-demo-nq8.png"></p>
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-orga1d8765" class="outline-2">
-<h3 id="orga1d8765">Technical Details (Optional)</h3>
-<div class="outline-text-2" id="text-orga1d8765">
+<div id="outline-container-org427e01d" class="outline-2">
+<h3 id="org427e01d">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-org427e01d">
 <p>
 Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.
 </p>
@@ -271,12 +267,12 @@ Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Globa
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -284,7 +280,7 @@ Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Globa
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

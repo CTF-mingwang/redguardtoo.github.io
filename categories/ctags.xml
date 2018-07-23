@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:04 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 code navigation for web development                                 :en:javascript:emacs:ctags:
 &lt;/p&gt;
 
@@ -7,9 +7,9 @@ code navigation for web development                                 :en:javascri
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgc5b92a7" class="outline-2"&gt;
-&lt;h3 id="orgc5b92a7"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc5b92a7"&gt;
+&lt;div id="outline-container-orgbd2a2d7" class="outline-2"&gt;
+&lt;h3 id="orgbd2a2d7"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbd2a2d7"&gt;
 &lt;p&gt;
 In Angular application, a function is defined in a javascript file and called in a html file.
 &lt;/p&gt;
@@ -29,7 +29,6 @@ javascript file:
 &lt;p&gt;
 html file:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-javascript"&gt;angular.module['myapp'].controller('MyController', function ($scope, $http) {
@@ -47,12 +46,12 @@ html file:
 &lt;p&gt;
 As you can see, the keyword we are interested is just a string, like "MyController". The only way to extract it is &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2f8000c" class="outline-2"&gt;
-&lt;h3 id="org2f8000c"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2f8000c"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org0a67a4d" class="outline-2"&gt;
+&lt;h3 id="org0a67a4d"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0a67a4d"&gt;
 &lt;p&gt;
 CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
@@ -67,9 +66,9 @@ I use CTags instead of IDEs because:
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgee29836" class="outline-3"&gt;
-&lt;h4 id="orgee29836"&gt;CTags setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgee29836"&gt;
+&lt;div id="outline-container-orga99af1d" class="outline-3"&gt;
+&lt;h4 id="orga99af1d"&gt;CTags setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga99af1d"&gt;
 &lt;p&gt;
 Create a file named ".ctags":
 &lt;/p&gt;
@@ -125,7 +124,6 @@ The key point of this setup is the regular expression for HTML should be &lt;b&g
 &lt;p&gt;
 On Mac, location of ".ctags":
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/Users/yourname/.ctags
@@ -136,7 +134,6 @@ On Mac, location of ".ctags":
 &lt;p&gt;
 On Linux, location of ".ctags":
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;/home/yourname/.ctags
@@ -147,25 +144,27 @@ On Linux, location of ".ctags":
 &lt;p&gt;
 On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.com/en-us/kb/310519"&gt;create an environment variable&lt;/a&gt; named "HOME" whose value is the parent directory of ".ctags".
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org00850f1" class="outline-2"&gt;
-&lt;h3 id="org00850f1"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org00850f1"&gt;
+&lt;div id="outline-container-orge1d98a6" class="outline-2"&gt;
+&lt;h3 id="orge1d98a6"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge1d98a6"&gt;
 &lt;p&gt;
 Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org5dd3ba7" class="outline-2"&gt;
-&lt;h3 id="org5dd3ba7"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org5dd3ba7"&gt;
+
+&lt;div id="outline-container-org1450693" class="outline-2"&gt;
+&lt;h3 id="org1450693"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1450693"&gt;
 &lt;p&gt;
 Run CTags at least once:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-bash"&gt;ctags -e -R -f /app/path/TAGS
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -174,7 +173,6 @@ Run CTags at least once:
 &lt;p&gt;
 Then insert below code into your ~/.emacs:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq tags-table-list '("/app/path/TAGS"))
@@ -193,8 +191,7 @@ If you prefer &lt;a href="https://github.com/emacs-helm/helm"&gt;Helm&lt;/a&gt; 
 &lt;p&gt;
 Please install the latest helm because I &lt;a href="https://github.com/emacs-helm/helm/pull/965"&gt;enhanced helm-etags-select&lt;/a&gt; for this problem.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><category>javascript</category><guid>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</guid><pubDate>Thu, 02 Apr 2015 12:51:21 GMT</pubDate></item><item><title>Tips on using Ctags with Emacs</title><link>http://blog.binchen.org/posts/tips-on-using-ctags-with-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 on using Ctags with Emacs                                                :en:emacs:ctags:javascript:
 &lt;/p&gt;
@@ -407,18 +404,18 @@ The purpose to load tags files is to look up API easily. For example, I use C++ 
 The reason to do the unload thing is to avoid function name conflict from some tags files. EmacsWiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org7b3e60a" class="outline-2"&gt;
-&lt;h3 id="org7b3e60a"&gt;Produce tags files for all the environments&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7b3e60a"&gt;
+&lt;div id="outline-container-orgc3102f8" class="outline-2"&gt;
+&lt;h3 id="orgc3102f8"&gt;Produce tags files for all the environments&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc3102f8"&gt;
 &lt;p&gt;
 For example, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at &lt;code&gt;/home/cb/tags/Library_A/linux&lt;/code&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4c531df" class="outline-2"&gt;
-&lt;h3 id="org4c531df"&gt;Use git and github to manage the tags files&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4c531df"&gt;
+&lt;div id="outline-container-orgfd9bb69" class="outline-2"&gt;
+&lt;h3 id="orgfd9bb69"&gt;Use git and github to manage the tags files&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgfd9bb69"&gt;
 &lt;p&gt;
 So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library.
 &lt;/p&gt;
@@ -427,15 +424,16 @@ So I can have copies of the tags files at github server and my local computers. 
 EmacsWiki discusses how to update your tags file frequently because your own code are updated frequently. But the tags file from a big library like wxWidgets need not be updated to often because I only use limited old APIs in that library.
 &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;div id="outline-container-org160ffdd" class="outline-2"&gt;
-&lt;h3 id="org160ffdd"&gt;Write emacs lisp code to load/unload these tags files&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org160ffdd"&gt;
+&lt;div id="outline-container-org90f4ae7" class="outline-2"&gt;
+&lt;h3 id="org90f4ae7"&gt;Write emacs lisp code to load/unload these tags files&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org90f4ae7"&gt;
 &lt;p&gt;
 Here is the code. In this example, if I need load tags file for &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use &lt;a href="http://www.emacswiki.org/Smex"&gt;Smex&lt;/a&gt;, calling function doesn't mean pressing many keys.
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
+
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;; Set up tags built from third party libraries ===begin
 ; define tags alias like "wx-tags" here
 (setq wx-tags (expand-file-name "~/tags/wx/osx/TAGS"))
@@ -469,6 +467,5 @@ This solution only uses one standard variable &lt;code&gt;tags-table-list&lt;/co
 &lt;p&gt;
 See &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html"&gt;Emacs manual&lt;/a&gt; for technical details.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>ctags</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/how-to-manage-and-use-tags-file-of-third-party-libraries-in-emacs.html</guid><pubDate>Thu, 22 Nov 2012 15:35:00 GMT</pubDate></item></channel></rss>

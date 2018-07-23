@@ -91,9 +91,9 @@ Here is my summary of that article:
 I also use other packages which is more efficient.
 </p>
 
-<div id="outline-container-orge0c42aa" class="outline-2">
-<h3 id="orge0c42aa">window-numbering.el</h3>
-<div class="outline-text-2" id="text-orge0c42aa">
+<div id="outline-container-org34d2c22" class="outline-2">
+<h3 id="org34d2c22">window-numbering.el</h3>
+<div class="outline-text-2" id="text-org34d2c22">
 <p>
 <a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>great</b>. It uses hot key <code>M-number</code> to switch window (for example, <code>M-3</code> to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like <code>M-0</code> to jump to the minibuffer.
 </p>
@@ -110,22 +110,21 @@ Here is my configuration for <code>window-numbering.el</code>:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org1e49724" class="outline-2">
-<h3 id="org1e49724">Evil</h3>
-<div class="outline-text-2" id="text-org1e49724">
+<div id="outline-container-org0b936df" class="outline-2">
+<h3 id="org0b936df">Evil</h3>
+<div class="outline-text-2" id="text-org0b936df">
 <p>
 <a href="http://emacswiki.org/emacs/Evil">Evil</a> is a vim-emulation. It use vim's keybindings <code>C-w h/j/k/l</code> to move. Please note <code>C-w h</code> is more efficient than <code>C-x o</code>. It's because <code>w</code> key is more close than <code>x</code> key and <code>h/j/k/l</code> is easy to press.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org2fedb33" class="outline-2">
-<h3 id="org2fedb33">buffer-move.el</h3>
-<div class="outline-text-2" id="text-org2fedb33">
+<div id="outline-container-orgaa683d9" class="outline-2">
+<h3 id="orgaa683d9">buffer-move.el</h3>
+<div class="outline-text-2" id="text-orgaa683d9">
 <p>
 <a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
 </p>
@@ -142,16 +141,16 @@ Here is my configuration:
 </code></pre>
 
 </div>
+</div>
+</div>
 
-<p></p>
-</div>
-</div>
-<div id="outline-container-org2ae951f" class="outline-2">
-<h3 id="org2ae951f">Optimization</h3>
-<div class="outline-text-2" id="text-org2ae951f">
+<div id="outline-container-org2d6dcf6" class="outline-2">
+<h3 id="org2d6dcf6">Optimization</h3>
+<div class="outline-text-2" id="text-org2d6dcf6">
 <p>
 I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
 </p>
+
 <p>
 According to the data collected by keyfreq, more than 99 percent of my moving focus between windows is done through <b>window-numbering.el</b>.
 </p>
@@ -167,7 +166,6 @@ Finally I use hotkey <code>,1</code>, <code>,2</code>, and <code>,3</code> to sw
 <p>
 Here is the code:
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(define-key evil-normal-state-map ",1" 'select-window-1)
@@ -181,8 +179,6 @@ Here is the code:
 <p>
 Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup at github</a>.
 </p>
-
-<p></p>
 </div>
 </div>
 </div>
@@ -207,12 +203,12 @@ Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup a
         };
         (function() {
             var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
         })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
+    </script><noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
 </noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="https://disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
         
@@ -220,7 +216,7 @@ Check <a href="https://github.com/redguardtoo/emacs.d/commit/8a51696">my setup a
     </div>
 
         
-       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+       <script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

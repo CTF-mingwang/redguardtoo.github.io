@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 13 Jul 2018 02:13:03 GMT</lastBuildDate><generator>https://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ftp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ftp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:27 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How a programmer publish static HTML blog in Emacs</title><link>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 a programmer publish static HTML blog in Emacs                            :en:emacs:ftp:
 &lt;/p&gt;
 
@@ -19,9 +19,9 @@ Basic Emacs lisp knowledges are required.
 Please note I'm &lt;b&gt;NOT&lt;/b&gt; targeted at specific static site generator like &lt;a href="http://getnikola.com/blog/"&gt;Nikola&lt;/a&gt; or &lt;a href="http://jekyllrb.com/"&gt;Jekyll&lt;/a&gt;.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org0407a56" class="outline-2"&gt;
-&lt;h3 id="org0407a56"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0407a56"&gt;
+&lt;div id="outline-container-org6e5167e" class="outline-2"&gt;
+&lt;h3 id="org6e5167e"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6e5167e"&gt;
 &lt;p&gt;
 Tested on &lt;b&gt;Linux and OSX&lt;/b&gt;.
 &lt;/p&gt;
@@ -73,12 +73,12 @@ Requirements:
 &lt;p&gt;
 You can write blog into org file, export and publicize it with command `M-x org2nikola-export-subtree`.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgda19bdb" class="outline-2"&gt;
-&lt;h3 id="orgda19bdb"&gt;Why&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgda19bdb"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org45ed9ac" class="outline-2"&gt;
+&lt;h3 id="org45ed9ac"&gt;Why&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org45ed9ac"&gt;
 &lt;p&gt;
 I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href="https://github.com/punchagan/org2blog"&gt;Org2blog&lt;/a&gt; for a very long time. Then I turned to static blog generator because:
 &lt;/p&gt;
@@ -92,16 +92,15 @@ I used &lt;a href="https://wordpress.org"&gt;Wordpress&lt;/a&gt; and &lt;a href=
 Yes, only wordpress sucks. For Org2blog, I can only say good things. Actually, this article is inspired purely by &lt;a href="https://github.com/punchagan"&gt;Puneeth Chaganti&lt;/a&gt;'s excellent work on org2blog.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-org67fd296" class="outline-2"&gt;
-&lt;h3 id="org67fd296"&gt;Technical Details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org67fd296"&gt;
+&lt;div id="outline-container-org484917d" class="outline-2"&gt;
+&lt;h3 id="org484917d"&gt;Technical Details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org484917d"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgafea9bf" class="outline-3"&gt;
-&lt;h4 id="orgafea9bf"&gt;Generating HTML&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgafea9bf"&gt;
+&lt;div id="outline-container-org4a8790f" class="outline-3"&gt;
+&lt;h4 id="org4a8790f"&gt;Generating HTML&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org4a8790f"&gt;
 &lt;p&gt;
 As I said, Nikola is my blog generator which converts my org file into HTML.
 &lt;/p&gt;
@@ -186,12 +185,12 @@ The code snippet inside "&amp;lt;pre&amp;gt;" tag could be rendered by 3rd party
 &lt;p&gt;
 BTW, the last straw that push me away the Wordpress is its wrapper of SyntaxHighlighter. SyntaxHighlighter is a beautiful and user-friendly library. But the wrapper forces me to tweak the php code in terrible editor from Wordpress.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org253f392" class="outline-3"&gt;
-&lt;h4 id="org253f392"&gt;Create blog posts&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org253f392"&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org0122084" class="outline-3"&gt;
+&lt;h4 id="org0122084"&gt;Create blog posts&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org0122084"&gt;
 &lt;p&gt;
 Emacs creates HTML files and meta files.  Things created by Emacs will be copied into Nikola's folder.
 &lt;/p&gt;
@@ -228,12 +227,11 @@ Scanning posts....done!
 Only the files in sub-folder "output" need be uploaded.
 &lt;/p&gt;
 &lt;/div&gt;
-
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb805391" class="outline-3"&gt;
-&lt;h4 id="orgb805391"&gt;Preprocess nikola output&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgb805391"&gt;
+&lt;div id="outline-container-orgbb9a030" class="outline-3"&gt;
+&lt;h4 id="orgbb9a030"&gt;Preprocess nikola output&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbb9a030"&gt;
 &lt;p&gt;
 It's all done by Emacs Lisp.
 &lt;/p&gt;
@@ -251,15 +249,15 @@ The final output contain lines like:
 &lt;p&gt;
 As you can see, each line is a ftp upload command we need execute in shell.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2491d0f" class="outline-3"&gt;
-&lt;h4 id="org2491d0f"&gt;FTP upload&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2491d0f"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-org01013ec" class="outline-3"&gt;
+&lt;h4 id="org01013ec"&gt;FTP upload&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org01013ec"&gt;
 &lt;p&gt;
 Ncftp is my choice of FTP client. It's solid and efficient.
 &lt;/p&gt;
+
 &lt;p&gt;
 Its command line tool "ncftpput" has a flag "-b". With the flag ncftpput will start a daemon at background and handles the ftp upload as a batch job submit. It means ftp connection will be reused and the user is not blocked by the upload operation. So the upload operation is &lt;b&gt;extremely fast&lt;/b&gt;.
 &lt;/p&gt;
@@ -271,16 +269,17 @@ I use Emacs Lisp API `file-truename` to convert all relative path to absolute pa
 &lt;p&gt;
 BTW, you can `cat ~/.ncftp/spool/log` to check the FTP upload status.
 &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-orgf0708ea" class="outline-2"&gt;
-&lt;h3 id="orgf0708ea"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf0708ea"&gt;
+&lt;div id="outline-container-org922a62b" class="outline-2"&gt;
+&lt;h3 id="org922a62b"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org922a62b"&gt;
 &lt;p&gt;
 The workflow is simple.
 &lt;/p&gt;
+
 &lt;p&gt;
 Emacs and third party JS libraries are responsible for the look and feel of my website.
 &lt;/p&gt;
@@ -292,6 +291,5 @@ Blog generator like Nikola is just a thin layer to relay the HTML files created 
 &lt;p&gt;
 Ncftp will upload HTML files. It's the best FTP client which could be easily integrated into Emacs.
 &lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ftp</category><guid>http://blog.binchen.org/posts/how-to-publish-static-html-blog-in-emacs-as-a-programmer.html</guid><pubDate>Sat, 15 Nov 2014 04:16:31 GMT</pubDate></item><item><title>How to use FTP in Emacs</title><link>http://blog.binchen.org/posts/how-to-use-ftp-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Emacs's default &lt;a href="http://www.emacswiki.org/AngeFtp"&gt;Ftp client&lt;/a&gt; is a little outdated compared to other modern Ftp clients. &lt;/p&gt; &lt;p&gt; What I want is a two panel file explorer with ftp client integrated (An excellent example is &lt;a href="http://www.ghisler.com"&gt;Total Commander&lt;/a&gt; on windows). &lt;/p&gt; &lt;p&gt; In Emacs, I've got &lt;a href="http://emacswiki.org/emacs/Sunrise_Commander"&gt;Sunrise Commander&lt;/a&gt; which is close to Total Commander, but NO Ftp integration. &lt;/p&gt; &lt;p&gt; I dig around the internet for a while and find that the perfect solution is mount the ftp server into my local file system with &lt;a href="http://curlftpfs.sourceforge.net"&gt;CurlFtpFS&lt;/a&gt;. &lt;/p&gt; &lt;p&gt; The best part of this solution is CurlFtpFS supports both OS X and Linux. &lt;/p&gt; &lt;p&gt; In order to install CurlFtpFS on OS X, you need use the package manager &lt;a href="http://mxcl.github.com/homebrew/"&gt;Homebrew&lt;/a&gt;. The only catch I met on OS X is that I need upgrade Fuse4X driver manually for some wired reason to avoid "incompatible with the kernel version" error. Upgrading is simple. Download dmg plus mouse click stuff only. See &lt;a href="http://fuse4x.github.com/faq.html"&gt;FAQ&lt;/a&gt; for details. &lt;/p&gt; &lt;p&gt; For the usage of CurlFtpFS, see &lt;a href="https://wiki.archlinux.org/index.php/Mount_FTP"&gt;HERE&lt;/a&gt; for documentation. It's for Linux. But totally fine for OS X users. &lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>ftp</category><category>linux</category><category>mac</category><category>mount</category><guid>http://blog.binchen.org/posts/how-to-use-ftp-in-emacs.html</guid><pubDate>Sun, 11 Nov 2012 13:05:00 GMT</pubDate></item></channel></rss>
