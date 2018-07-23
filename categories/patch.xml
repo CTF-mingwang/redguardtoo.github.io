@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about patch)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/patch.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:47:00 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org3bf94a4" class="outline-2"&gt;
-&lt;h3 id="org3bf94a4"&gt;Use Gnus to apply patch sent by `git send-email`   &lt;span class="tag"&gt;&lt;span class="git"&gt;git&lt;/span&gt; &lt;span class="email"&gt;email&lt;/span&gt; &lt;span class="patch"&gt;patch&lt;/span&gt; &lt;span class="gnus"&gt;gnus&lt;/span&gt; &lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org3bf94a4"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about patch)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/patch.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:48:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-org7022dba" class="outline-2"&gt;
+&lt;h3 id="org7022dba"&gt;Use Gnus to apply patch sent by `git send-email`   &lt;span class="tag"&gt;&lt;span class="git"&gt;git&lt;/span&gt; &lt;span class="email"&gt;email&lt;/span&gt; &lt;span class="patch"&gt;patch&lt;/span&gt; &lt;span class="gnus"&gt;gnus&lt;/span&gt; &lt;span class="en"&gt;en&lt;/span&gt; &lt;span class="emacs"&gt;emacs&lt;/span&gt;&lt;/span&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7022dba"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgbb7e1d6" class="outline-3"&gt;
-&lt;h4 id="orgbb7e1d6"&gt;Setup git-send-email&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgbb7e1d6"&gt;
+&lt;div id="outline-container-org267afbe" class="outline-3"&gt;
+&lt;h4 id="org267afbe"&gt;Setup git-send-email&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org267afbe"&gt;
 &lt;p&gt;
 On Debian you need run &lt;code&gt;sudo apt-get install git-email&lt;/code&gt; at first.
 &lt;/p&gt;
@@ -15,7 +15,7 @@ Then you need run &lt;code&gt;cpan Authen::SASL MIME::Base64 Net::SMTP::SSL&lt;/
 &lt;/p&gt;
 
 &lt;p&gt;
-Add below section into your &lt;code&gt;~/.gitconfig&lt;/code&gt; if you use Gmail SMTP:
+Modify &lt;code&gt;~/.gitconfig&lt;/code&gt; if you use Gmail SMTP:
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
@@ -29,9 +29,9 @@ Add below section into your &lt;code&gt;~/.gitconfig&lt;/code&gt; if you use Gma
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd9eae59" class="outline-3"&gt;
-&lt;h4 id="orgd9eae59"&gt;Send the latest commit&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd9eae59"&gt;
+&lt;div id="outline-container-org2871756" class="outline-3"&gt;
+&lt;h4 id="org2871756"&gt;Send the latest commit&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2871756"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# send one commit
@@ -42,9 +42,9 @@ git send-email -1 --annotate
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2703b41" class="outline-3"&gt;
-&lt;h4 id="org2703b41"&gt;Apply patch in Gnus&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2703b41"&gt;
+&lt;div id="outline-container-org0a7b707" class="outline-3"&gt;
+&lt;h4 id="org0a7b707"&gt;Apply patch in Gnus&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org0a7b707"&gt;
 &lt;p&gt;
 Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
 &lt;/p&gt;
@@ -60,9 +60,9 @@ Emacs will ask for directory to sve that email. Say I save it as &lt;code&gt;~/N
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org21733cb" class="outline-3"&gt;
-&lt;h4 id="org21733cb"&gt;Syntax highlight patch embedded in email (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org21733cb"&gt;
+&lt;div id="outline-container-orgd720baa" class="outline-3"&gt;
+&lt;h4 id="orgd720baa"&gt;Syntax highlight patch embedded in email (OPTIONAL)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgd720baa"&gt;
 &lt;p&gt;
 Use &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch/gnus-article-treat-patch.el"&gt;gnus-article-treat-patch.el&lt;/a&gt;.
 &lt;/p&gt;
