@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about etags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/etags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-v1.3.1 is released                                              :en:emacs:etags:
-&lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about etags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/etags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:52:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgdec3447" class="outline-2"&gt;
 
+&lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;Counsel-etags&lt;/a&gt; is a complete solution for code navigation in Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-It basically needs no setup. For example, one command &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; is enough to start code navigation immediately.
+It needs no setup. One command &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; is enough to start code navigation immediately.
 &lt;/p&gt;
 
 &lt;p&gt;
-The package solves all the problems using Ctags/Etags with Emacs.
+The package solves all problems using Ctags/Etags with Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
 &lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from &lt;code&gt;counsel-etags&lt;/code&gt;. The setup is simple:
 &lt;/p&gt;
-
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Don't ask before rereading the TAGS files if they have changed
@@ -60,4 +58,6 @@ There are also other enhancements.
 &lt;/p&gt;
 
 &lt;p&gt;
-Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item></channel></rss>
+Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item></channel></rss>
