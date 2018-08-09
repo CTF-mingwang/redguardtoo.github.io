@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about js2)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/js2.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use js2-mode as minor mode to process JSON</title><link>http://blog.binchen.org/posts/use-js2-mode-as-minor-mode-to-process-json.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 js2-mode as minor mode to process JSON                                    :en:emacs:json:js2:
 &lt;/p&gt;
 
@@ -19,9 +19,9 @@ In essence, a major mode is just a collection of APIs. We could use its APIs wit
 Here are two examples.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgc6d6c95" class="outline-2"&gt;
-&lt;h3 id="orgc6d6c95"&gt;Validate JSON&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc6d6c95"&gt;
+&lt;div id="outline-container-org0beebbf" class="outline-2"&gt;
+&lt;h3 id="org0beebbf"&gt;Validate JSON&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0beebbf"&gt;
 &lt;p&gt;
 &lt;code&gt;M-x my-validate-json-or-js-expression&lt;/code&gt; to validate the buffer.
 &lt;/p&gt;
@@ -67,9 +67,9 @@ If NOT-JSON-P is not nil, validate as Javascript expression instead of JSON."
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0c73b19" class="outline-2"&gt;
-&lt;h3 id="org0c73b19"&gt;Print JSON path&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0c73b19"&gt;
+&lt;div id="outline-container-org1183e27" class="outline-2"&gt;
+&lt;h3 id="org1183e27"&gt;Print JSON path&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1183e27"&gt;
 &lt;p&gt;
 For example, you got JSON string  &lt;code&gt;{"a": {"b": 3}}&lt;/code&gt;. If you place cursor over &lt;code&gt;3&lt;/code&gt; and &lt;code&gt;M-x my-print-json-path&lt;/code&gt;, you got output &lt;code&gt;a.b&lt;/code&gt;.
 &lt;/p&gt;
@@ -102,9 +102,9 @@ If HARDCODED-ARRAY-INDEX provided, array index in JSON path is replaced with it.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge1c221f" class="outline-2"&gt;
-&lt;h3 id="orge1c221f"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge1c221f"&gt;
+&lt;div id="outline-container-org507da32" class="outline-2"&gt;
+&lt;h3 id="org507da32"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org507da32"&gt;
 &lt;p&gt;
 As you can see, I use a few APIs from js2-mode while js2-mode is still disabled:
 &lt;/p&gt;
@@ -256,9 +256,9 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 Let's see an example in real life development.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org2173aa7" class="outline-2"&gt;
-&lt;h3 id="org2173aa7"&gt;Note&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2173aa7"&gt;
+&lt;div id="outline-container-orgb06d380" class="outline-2"&gt;
+&lt;h3 id="orgb06d380"&gt;Note&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb06d380"&gt;
 &lt;p&gt;
 For people who does not get the key points of this article, here are the points:
 &lt;/p&gt;
@@ -270,9 +270,9 @@ For people who does not get the key points of this article, here are the points:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgbeeecf6" class="outline-2"&gt;
-&lt;h3 id="orgbeeecf6"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgbeeecf6"&gt;
+&lt;div id="outline-container-orgb1733af" class="outline-2"&gt;
+&lt;h3 id="orgb1733af"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb1733af"&gt;
 &lt;p&gt;
 I'm maintaining a big javascript file with thousands of lines of legacy code.
 &lt;/p&gt;
@@ -327,9 +327,9 @@ Most editors like Sublime Text 3 cannot display the javascript functions with me
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfceeaf8" class="outline-2"&gt;
-&lt;h3 id="orgfceeaf8"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgfceeaf8"&gt;
+&lt;div id="outline-container-org730fc0d" class="outline-2"&gt;
+&lt;h3 id="org730fc0d"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org730fc0d"&gt;
 &lt;p&gt;
 Emacs has a &lt;a href="http://www.emacswiki.org/emacs/Js2Mode"&gt;js2-mode&lt;/a&gt; which is basically a javascript interpreter written in lisp. It's created by &lt;a href="http://www.emacswiki.org/emacs/SteveYegge"&gt;Steve Yegge&lt;/a&gt; and now maintained by &lt;a href="https://github.com/mooz/js2-mode"&gt;mooz&lt;/a&gt;.
 &lt;/p&gt;
@@ -434,9 +434,9 @@ The screen shot after we applying the above patch:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org654fde6" class="outline-2"&gt;
-&lt;h3 id="org654fde6"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org654fde6"&gt;
+&lt;div id="outline-container-orga51ab00" class="outline-2"&gt;
+&lt;h3 id="orga51ab00"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orga51ab00"&gt;
 &lt;p&gt;
 That's an example of beauty of Emacs.
 &lt;/p&gt;
@@ -447,9 +447,9 @@ It gives you freedom and power. You can base your work on the top geeks like Ste
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8679106" class="outline-2"&gt;
-&lt;h3 id="org8679106"&gt;Update&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org8679106"&gt;
+&lt;div id="outline-container-org5079463" class="outline-2"&gt;
+&lt;h3 id="org5079463"&gt;Update&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5079463"&gt;
 &lt;p&gt;
 My patch is incorporated into &lt;code&gt;js2-mode&lt;/code&gt; since version &lt;code&gt;20140114&lt;/code&gt;.
 &lt;/p&gt;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about word)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/word.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:10 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about word)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/word.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs auto-completion for non-programmers</title><link>http://blog.binchen.org/posts/emacs-auto-completion-for-non-programmers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 auto-completion for non-programmers                                     :en:emacs:completion:word:
 &lt;/p&gt;
 
@@ -79,9 +79,9 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-08-11 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd6690ae" class="outline-2"&gt;
-&lt;h3 id="orgd6690ae"&gt;Tools&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd6690ae"&gt;
+&lt;div id="outline-container-orgfecd39d" class="outline-2"&gt;
+&lt;h3 id="orgfecd39d"&gt;Tools&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgfecd39d"&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
 &lt;colgroup&gt;
@@ -127,13 +127,13 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org73f2ff0" class="outline-2"&gt;
-&lt;h3 id="org73f2ff0"&gt;Work flow&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org73f2ff0"&gt;
+&lt;div id="outline-container-orgcdabb34" class="outline-2"&gt;
+&lt;h3 id="orgcdabb34"&gt;Work flow&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcdabb34"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org8d9a298" class="outline-3"&gt;
-&lt;h4 id="org8d9a298"&gt;Use scrot to screenshot and put its path into clipboard&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org8d9a298"&gt;
+&lt;div id="outline-container-org1642a97" class="outline-3"&gt;
+&lt;h4 id="org1642a97"&gt;Use scrot to screenshot and put its path into clipboard&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org1642a97"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
@@ -143,9 +143,9 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org155c3ae" class="outline-3"&gt;
-&lt;h4 id="org155c3ae"&gt;Create org file and insert path of screen shot&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org155c3ae"&gt;
+&lt;div id="outline-container-org6b3e9ea" class="outline-3"&gt;
+&lt;h4 id="org6b3e9ea"&gt;Create org file and insert path of screen shot&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org6b3e9ea"&gt;
 &lt;p&gt;
 Actually I use below elisp command to do the insertion for me.
 &lt;/p&gt;
@@ -178,9 +178,9 @@ The full path into relative path and insert it as a local file link in org-mode"
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgdbec8f0" class="outline-3"&gt;
-&lt;h4 id="orgdbec8f0"&gt;Convert org file into Microsoft Word format&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgdbec8f0"&gt;
+&lt;div id="outline-container-org9d894a8" class="outline-3"&gt;
+&lt;h4 id="org9d894a8"&gt;Convert org file into Microsoft Word format&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org9d894a8"&gt;
 &lt;p&gt;
 I'm sure this method works even on Windows. But I don't have Windows PC to validate my belief. Libreoffice is required.
 &lt;/p&gt;
@@ -222,9 +222,9 @@ Emacs will find the binary "soffice" from libreoffice to do the conversion.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org19aea08" class="outline-3"&gt;
-&lt;h4 id="org19aea08"&gt;Tips&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org19aea08"&gt;
+&lt;div id="outline-container-org6407723" class="outline-3"&gt;
+&lt;h4 id="org6407723"&gt;Tips&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org6407723"&gt;
 &lt;p&gt;
 If you need page break in exported document, insert below snippet into the org file:
 &lt;/p&gt;

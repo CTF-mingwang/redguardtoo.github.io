@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about clipboard)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/clipboard.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Copy file name or full path of file from Emacs dired buffer into system clipboard</title><link>http://blog.binchen.org/posts/copy-file-name-or-full-path-of-file-in-emacs-dired-buffer-into-system-clipboard.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Simple, insert below code into your ~/.emacs: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 ;; {{ copy the file-name/full-path in dired buffer into clipboard
@@ -87,9 +87,9 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-04 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orge4cd2c8" class="outline-2"&gt;
-&lt;h3 id="orge4cd2c8"&gt;Prepare&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge4cd2c8"&gt;
+&lt;div id="outline-container-org429a7b6" class="outline-2"&gt;
+&lt;h3 id="org429a7b6"&gt;Prepare&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org429a7b6"&gt;
 &lt;p&gt;
 On Linux, &lt;a href="http://www.vergenet.net/~conrad/software/xsel/"&gt;xsel&lt;/a&gt; is required.
 &lt;/p&gt;
@@ -108,9 +108,9 @@ On Windows 10 Linux Subsystem. No external tool is required.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org200e444" class="outline-2"&gt;
-&lt;h3 id="org200e444"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org200e444"&gt;
+&lt;div id="outline-container-orgc844f95" class="outline-2"&gt;
+&lt;h3 id="orgc844f95"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc844f95"&gt;
 &lt;p&gt;
 This solution works reliably on &lt;b&gt;any environment&lt;/b&gt;.
 &lt;/p&gt;
@@ -192,13 +192,13 @@ My actual setup is more robust. See &lt;a href="https://github.com/redguardtoo/e
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc09fd9d" class="outline-2"&gt;
-&lt;h3 id="orgc09fd9d"&gt;Tips&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc09fd9d"&gt;
+&lt;div id="outline-container-orgf454c1a" class="outline-2"&gt;
+&lt;h3 id="orgf454c1a"&gt;Tips&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf454c1a"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org564fa66" class="outline-3"&gt;
-&lt;h4 id="org564fa66"&gt;Clipboard manager&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org564fa66"&gt;
+&lt;div id="outline-container-org2454101" class="outline-3"&gt;
+&lt;h4 id="org2454101"&gt;Clipboard manager&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2454101"&gt;
 &lt;p&gt;
 I suggest &lt;a href="http://parcellite.sourceforge.net/"&gt;Parcellite&lt;/a&gt; on Linux, &lt;a href="http://ditto-cp.sourceforge.net/"&gt;Ditto&lt;/a&gt; on Windows, &lt;a href="https://github.com/TermiT/Flycut"&gt;Flycut&lt;/a&gt; on macOS.
 &lt;/p&gt;
@@ -237,9 +237,9 @@ trim_newline=false
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org9b68e30" class="outline-3"&gt;
-&lt;h4 id="org9b68e30"&gt;Clipboard when ssh&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org9b68e30"&gt;
+&lt;div id="outline-container-org29908ba" class="outline-3"&gt;
+&lt;h4 id="org29908ba"&gt;Clipboard when ssh&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org29908ba"&gt;
 &lt;p&gt;
 Try,
 &lt;/p&gt;

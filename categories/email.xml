@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about email)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/email.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:40 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to use Gnus Group Topics efficiently</title><link>http://blog.binchen.org/posts/how-to-use-gnus-group-topics-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
 &lt;/p&gt;
 
@@ -174,13 +174,13 @@ All you need is "M-x message-copy-select-forwarded-email-tags" to copy the tags 
 &lt;p&gt;
 UPDATE:
 This is only a case study. My complete guide on Gnus is at &lt;a href="http://blog.binchen.org/posts/notes-on-using-gnus.html"&gt;http://blog.binchen.org/posts/notes-on-using-gnus.html&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div id="outline-container-orgfac70d2" class="outline-2"&gt;
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/why-gnus-is-better-than-gmail.html</guid><pubDate>Wed, 30 Apr 2014 12:46:31 GMT</pubDate></item><item><title>Use Gnus to apply patch sent by `git send-email`</title><link>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Gnus to apply patch sent by `git send-email`                              :git:email:patch:&lt;a href="en:emacs"&gt;en:emacs&lt;/a&gt;:
+&lt;/p&gt;
 
-&lt;div class="outline-text-2" id="text-orgfac70d2"&gt;
-&lt;/div&gt;
-&lt;div id="outline-container-org8a70941" class="outline-3"&gt;
-&lt;h4 id="org8a70941"&gt;Setup git-send-email&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org8a70941"&gt;
+&lt;div id="outline-container-org588da2f" class="outline-2"&gt;
+&lt;h3 id="org588da2f"&gt;Setup git-send-email&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org588da2f"&gt;
 &lt;p&gt;
 On Debian run &lt;code&gt;sudo apt-get install git-email&lt;/code&gt; to install git command line tools.
 &lt;/p&gt;
@@ -204,9 +204,10 @@ Modify &lt;code&gt;~/.gitconfig&lt;/code&gt; to use Gmail SMTP:
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org321dec7" class="outline-3"&gt;
-&lt;h4 id="org321dec7"&gt;Send the latest commit&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org321dec7"&gt;
+
+&lt;div id="outline-container-orgb61e87b" class="outline-2"&gt;
+&lt;h3 id="orgb61e87b"&gt;Send the latest commit&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb61e87b"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-bash"&gt;# send one commit
@@ -217,9 +218,9 @@ git send-email -1 --annotate
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orga5db506" class="outline-3"&gt;
-&lt;h4 id="orga5db506"&gt;Apply patch&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orga5db506"&gt;
+&lt;div id="outline-container-org802a7b6" class="outline-2"&gt;
+&lt;h3 id="org802a7b6"&gt;Apply patch&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org802a7b6"&gt;
 &lt;p&gt;
 Select one mail. Run command "M-x gnus-summary-save-article-email" whose short key is "O m" in summary buffer.
 &lt;/p&gt;
@@ -235,9 +236,10 @@ Emacs will ask for directory to save that patch. Say I save it as &lt;code&gt;~/
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org6e57dd4" class="outline-3"&gt;
-&lt;h4 id="org6e57dd4"&gt;Syntax highlight patch embedded in mail (OPTIONAL)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org6e57dd4"&gt;
+
+&lt;div id="outline-container-orgacd0a93" class="outline-2"&gt;
+&lt;h3 id="orgacd0a93"&gt;Syntax highlight patch embedded in mail (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgacd0a93"&gt;
 &lt;p&gt;
 Use &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/site-lisp/gnus-article-treat-patch/gnus-article-treat-patch.el"&gt;gnus-article-treat-patch.el&lt;/a&gt;.
 &lt;/p&gt;
@@ -254,8 +256,7 @@ Add below code to setup:
 
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
 &lt;pre class="prettyprint "&gt;
 &lt;p&gt;sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL&lt;/p&gt;
 &lt;/pre&gt;
@@ -280,16 +281,16 @@ Second part uses &lt;a href="https://www.mozilla.org/en-US/thunderbird/"&gt;thun
 Third part uses Emacs and Gnus to replace thunderbird. It's optional.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgcc40717" class="outline-2"&gt;
-&lt;h3 id="orgcc40717"&gt;DavMail as mail gateway&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgcc40717"&gt;
+&lt;div id="outline-container-org5e00458" class="outline-2"&gt;
+&lt;h3 id="org5e00458"&gt;DavMail as mail gateway&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5e00458"&gt;
 &lt;pre class="example"&gt;
 Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LDAP exchange gateway allowing users to use any mail/calendar client (e.g. Thunderbird with Lightning or Apple iCal) with an Exchange server.
 &lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org8f421b7" class="outline-3"&gt;
-&lt;h4 id="org8f421b7"&gt;Install&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org8f421b7"&gt;
+&lt;div id="outline-container-org46a7a76" class="outline-3"&gt;
+&lt;h4 id="org46a7a76"&gt;Install&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org46a7a76"&gt;
 &lt;p&gt;
 &lt;a href="http://davmail.sourceforge.net/download.html"&gt;Download the installer&lt;/a&gt; at Debian/Ubuntu/Mint:
 &lt;/p&gt;
@@ -307,9 +308,9 @@ Installation is easy. DavMail by itself is a portable java application. Since it
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc79fbde" class="outline-3"&gt;
-&lt;h4 id="orgc79fbde"&gt;Configuration&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc79fbde"&gt;
+&lt;div id="outline-container-orgea09d78" class="outline-3"&gt;
+&lt;h4 id="orgea09d78"&gt;Configuration&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgea09d78"&gt;
 &lt;p&gt;
 Now start DavMail. 
 &lt;/p&gt;
@@ -345,9 +346,9 @@ BTW, &lt;a href="https://outlook.office365.com/"&gt;https://outlook.office365.co
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org03fe3b4" class="outline-2"&gt;
-&lt;h3 id="org03fe3b4"&gt;Thunderbird&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org03fe3b4"&gt;
+&lt;div id="outline-container-org8d77da3" class="outline-2"&gt;
+&lt;h3 id="org8d77da3"&gt;Thunderbird&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org8d77da3"&gt;
 &lt;p&gt;
 Create a new account, and &lt;b&gt;manually&lt;/b&gt; configure the server. The server name is "127.0.0.1", the port number is already on your paper. The minimum setup needs IMAP port to  receive mail and SMTP port to send email.
 &lt;/p&gt;
@@ -362,9 +363,9 @@ The only issue is the "Username". You can log in Outlook Web UI, click "Options 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org42ca4f8" class="outline-2"&gt;
-&lt;h3 id="org42ca4f8"&gt;Emacs Gnus&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org42ca4f8"&gt;
+&lt;div id="outline-container-org3ba7507" class="outline-2"&gt;
+&lt;h3 id="org3ba7507"&gt;Emacs Gnus&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org3ba7507"&gt;
 &lt;p&gt;
 Gnus cannot access IMAP service of DavMail. There is &lt;a href="http://permalink.gmane.org/gmane.emacs.gnus.general/83301"&gt;some bug&lt;/a&gt;.
 &lt;/p&gt;
@@ -418,9 +419,9 @@ CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2015-11-13 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgb59fe24" class="outline-2"&gt;
-&lt;h3 id="orgb59fe24"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgb59fe24"&gt;
+&lt;div id="outline-container-org000ac27" class="outline-2"&gt;
+&lt;h3 id="org000ac27"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org000ac27"&gt;
 &lt;p&gt;
 As a freelancer, I need reply agent's email frequently.
 &lt;/p&gt;
@@ -436,16 +437,16 @@ So I have several issues to resolve:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdb32af6" class="outline-2"&gt;
-&lt;h3 id="orgdb32af6"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgdb32af6"&gt;
+&lt;div id="outline-container-orgb7dc589" class="outline-2"&gt;
+&lt;h3 id="orgb7dc589"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb7dc589"&gt;
 &lt;p&gt;
 &lt;a href="https://github.com/capitaomorte/yasnippet"&gt;Yasnippet&lt;/a&gt; is the best solution for email templates because you can embed Lisp code in the template.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgfe011d2" class="outline-3"&gt;
-&lt;h4 id="orgfe011d2"&gt;Templates&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgfe011d2"&gt;
+&lt;div id="outline-container-org191eac8" class="outline-3"&gt;
+&lt;h4 id="org191eac8"&gt;Templates&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org191eac8"&gt;
 &lt;p&gt;
 I publicize my .emacs.d at &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;github&lt;/a&gt;. But email templates are my private stuff. So I place them in different location.
 &lt;/p&gt;
@@ -504,9 +505,9 @@ It will automatically fetch the first name of agent,
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org47b5f3f" class="outline-3"&gt;
-&lt;h4 id="org47b5f3f"&gt;Emacs setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org47b5f3f"&gt;
+&lt;div id="outline-container-org730a16e" class="outline-3"&gt;
+&lt;h4 id="org730a16e"&gt;Emacs setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org730a16e"&gt;
 &lt;p&gt;
 Add following code into .emacs to make yasnippet load the emacs templates:
 &lt;/p&gt;

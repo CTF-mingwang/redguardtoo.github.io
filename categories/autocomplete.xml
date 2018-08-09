@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about autocomplete)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/autocomplete.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 12:10:09 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about autocomplete)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/autocomplete.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Autocomplete with a dictionary and hippie-expand</title><link>http://blog.binchen.org/posts/autocomplete-with-a-dictionary-with-hippie-expand.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 with a dictionary and hippie-expand                              :en:emacs:dictionary:autocomplete:
 &lt;/p&gt;
 
@@ -11,9 +11,9 @@ I use &lt;a href="http://company-mode.github.io/"&gt;company-mode&lt;/a&gt; most
 I surely can do this in company-mode too. But I prefer hippie-expand because I choose to make company-mode focus on programming stuff and hippie-expand on writing.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org0201696" class="outline-2"&gt;
-&lt;h3 id="org0201696"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0201696"&gt;
+&lt;div id="outline-container-org8948c5a" class="outline-2"&gt;
+&lt;h3 id="org8948c5a"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org8948c5a"&gt;
 &lt;p&gt;
 This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/p&gt;
@@ -63,9 +63,9 @@ This solution works &lt;b&gt;in any environment&lt;/b&gt;.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8012d65" class="outline-2"&gt;
-&lt;h3 id="org8012d65"&gt;Technical details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org8012d65"&gt;
+&lt;div id="outline-container-orgdfea639" class="outline-2"&gt;
+&lt;h3 id="orgdfea639"&gt;Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdfea639"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;based on &lt;a href="https://github.com/syohex/emacs-ac-ispell"&gt;ac-ispell&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;lazy load of ispell-mode to speed Emacs startup&lt;/li&gt;
@@ -81,9 +81,9 @@ to configure yasnippet 0.7.0 and use it with Auto-Complete-Mode           :en:ya
 I will only talk about how to set up yasnippet 0.7.0 or higher version.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgc3d310f" class="outline-2"&gt;
-&lt;h3 id="orgc3d310f"&gt;If you follow `normal install` way, setup is simple&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc3d310f"&gt;
+&lt;div id="outline-container-org7372e84" class="outline-2"&gt;
+&lt;h3 id="org7372e84"&gt;If you follow `normal install` way, setup is simple&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7372e84"&gt;
 &lt;p&gt;
 See its &lt;a href="http://capitaomorte.github.com/yasnippet/"&gt;official documentation&lt;/a&gt;.
 &lt;/p&gt;
@@ -104,9 +104,9 @@ Install the yasnippet into somewhere and add following code into your .emacs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb66bf95" class="outline-2"&gt;
-&lt;h3 id="orgb66bf95"&gt;If you use elpa package system, setup is even simpler&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgb66bf95"&gt;
+&lt;div id="outline-container-orgab16b01" class="outline-2"&gt;
+&lt;h3 id="orgab16b01"&gt;If you use elpa package system, setup is even simpler&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgab16b01"&gt;
 &lt;p&gt;
 After installation, you only need two lines in .emacs.
 &lt;/p&gt;
@@ -128,16 +128,16 @@ So you only put your own snippets in "~/.emacs.d/snippets" and done. No need to 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org66ee2d7" class="outline-2"&gt;
-&lt;h3 id="org66ee2d7"&gt;The real world setup is NOT simple&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org66ee2d7"&gt;
+&lt;div id="outline-container-orgcf8b7dd" class="outline-2"&gt;
+&lt;h3 id="orgcf8b7dd"&gt;The real world setup is NOT simple&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcf8b7dd"&gt;
 &lt;p&gt;
 I will explain the reasons at first and give my complete yasnippet configuration code at the end of the this post.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc7b826d" class="outline-3"&gt;
-&lt;h4 id="orgc7b826d"&gt;Two snippets may share the same key, so I need activate `yas/dropdown-prompt'&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc7b826d"&gt;
+&lt;div id="outline-container-orgbaab8fb" class="outline-3"&gt;
+&lt;h4 id="orgbaab8fb"&gt;Two snippets may share the same key, so I need activate `yas/dropdown-prompt'&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbaab8fb"&gt;
 &lt;p&gt;
 One issue is I need a user-friendly dropdown window popped up when the key I input has several candidates. For example, when I type "inc" in C code. There are two candidates `#include "…"' and `#include &amp;lt;…&amp;gt;' available. A handy dropdown popup will help me to choose one of them as efficient as possible.
 &lt;/p&gt;
@@ -152,18 +152,18 @@ The bad news is for some strange reason yasnippet won't load that dropdown-list 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org92a93e7" class="outline-3"&gt;
-&lt;h4 id="org92a93e7"&gt;`yas/dropdown-prompt' is not perfect&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org92a93e7"&gt;
+&lt;div id="outline-container-orgac155c2" class="outline-3"&gt;
+&lt;h4 id="orgac155c2"&gt;`yas/dropdown-prompt' is not perfect&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgac155c2"&gt;
 &lt;p&gt;
 I cannot scroll down the dropdown window when there are more candidates it can display. That's especially annoying when calling `yas/insert-snippet'. In this case, we need use `yas/completing-prompt' instead. I will show the fix at the end of this article.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3f530d2" class="outline-3"&gt;
-&lt;h4 id="org3f530d2"&gt;Yasnippet conflicts with other plugins&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org3f530d2"&gt;
+&lt;div id="outline-container-orga72d8f9" class="outline-3"&gt;
+&lt;h4 id="orga72d8f9"&gt;Yasnippet conflicts with other plugins&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga72d8f9"&gt;
 &lt;p&gt;
 I use &lt;a href="http://cx4a.org/software/auto-complete/"&gt;Auto Complete Mode&lt;/a&gt; (version 20120327 in elpa).  There are two issues when using it with yasnippet.
 &lt;/p&gt;
@@ -187,9 +187,9 @@ curl -L https://raw.github.com/tkf/auto-complete/337caa2ccc254a79f615bb2417f0d2f
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge7277fa" class="outline-2"&gt;
-&lt;h3 id="orge7277fa"&gt;My final yasnippet setup&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge7277fa"&gt;
+&lt;div id="outline-container-orgcac4a2e" class="outline-2"&gt;
+&lt;h3 id="orgcac4a2e"&gt;My final yasnippet setup&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcac4a2e"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'yasnippet)
