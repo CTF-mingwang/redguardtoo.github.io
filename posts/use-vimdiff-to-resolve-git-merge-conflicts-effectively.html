@@ -74,16 +74,16 @@ vimdiff to resolve git/subversion/mercurial merge conflicts effectively   :en:gi
 </p>
 
 <p>
-You can jump to <a href="use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#orgb58a3cf">No description for this link</a> section at the end of this article.
+You can jump to <a href="use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#org6f1adf3">No description for this link</a> section at the end of this article.
 </p>
 
 <p>
 I use git as an example of version control software. But you can use any other version control software instead.
 </p>
 
-<div id="outline-container-org35cead9" class="outline-2">
-<h3 id="org35cead9">The reasons to use vimdiff to do the merge?</h3>
-<div class="outline-text-2" id="text-org35cead9">
+<div id="outline-container-org1f9dd5e" class="outline-2">
+<h3 id="org1f9dd5e">The reasons to use vimdiff to do the merge?</h3>
+<div class="outline-text-2" id="text-org1f9dd5e">
 <ul class="org-ul">
 <li>It's free (vim)</li>
 <li>It works on any OS</li>
@@ -93,13 +93,13 @@ I use git as an example of version control software. But you can use any other v
 </div>
 </div>
 
-<div id="outline-container-org9619a50" class="outline-2">
-<h3 id="org9619a50">Setup</h3>
-<div class="outline-text-2" id="text-org9619a50">
+<div id="outline-container-org6ddd41d" class="outline-2">
+<h3 id="org6ddd41d">Setup</h3>
+<div class="outline-text-2" id="text-org6ddd41d">
 </div>
-<div id="outline-container-org30fec02" class="outline-3">
-<h4 id="org30fec02">Setup vimdiff (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-org30fec02">
+<div id="outline-container-orga5b001a" class="outline-3">
+<h4 id="orga5b001a">Setup vimdiff (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-orga5b001a">
 <p>
 The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code.
 </p>
@@ -133,9 +133,9 @@ map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt;
 </div>
 </div>
 
-<div id="outline-container-orgab1b09f" class="outline-3">
-<h4 id="orgab1b09f">Setup git</h4>
-<div class="outline-text-3" id="text-orgab1b09f">
+<div id="outline-container-org17403b0" class="outline-3">
+<h4 id="org17403b0">Setup git</h4>
+<div class="outline-text-3" id="text-org17403b0">
 <p>
 Run below commands in shell,
 </p>
@@ -150,13 +150,13 @@ git config --global mergetool.prompt false
 </div>
 </div>
 
-<div id="outline-container-org81f885b" class="outline-2">
-<h3 id="org81f885b">Usage</h3>
-<div class="outline-text-2" id="text-org81f885b">
+<div id="outline-container-org2dd6207" class="outline-2">
+<h3 id="org2dd6207">Usage</h3>
+<div class="outline-text-2" id="text-org2dd6207">
 </div>
-<div id="outline-container-org80a23fa" class="outline-3">
-<h4 id="org80a23fa">Create a "hello world" project</h4>
-<div class="outline-text-3" id="text-org80a23fa">
+<div id="outline-container-orga9b316b" class="outline-3">
+<h4 id="orga9b316b">Create a "hello world" project</h4>
+<div class="outline-text-3" id="text-orga9b316b">
 <p>
 I setup a "hello world" project at <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a> for your practice.
 </p>
@@ -189,9 +189,9 @@ git merge chen # now some conflicts created because Bob has already edited and m
 </div>
 </div>
 
-<div id="outline-container-org6094240" class="outline-3">
-<h4 id="org6094240">Resolve merge conflict</h4>
-<div class="outline-text-3" id="text-org6094240">
+<div id="outline-container-org3a5ecae" class="outline-3">
+<h4 id="org3a5ecae">Resolve merge conflict</h4>
+<div class="outline-text-3" id="text-org3a5ecae">
 <p>
 Now start merge tool,
 </p>
@@ -281,9 +281,9 @@ When you have resolved all the conflicts, follow the hint of git to commit your 
 </div>
 </div>
 
-<div id="outline-container-org76b536d" class="outline-2">
-<h3 id="org76b536d">Tips</h3>
-<div class="outline-text-2" id="text-org76b536d">
+<div id="outline-container-orgeb536f8" class="outline-2">
+<h3 id="orgeb536f8">Tips</h3>
+<div class="outline-text-2" id="text-orgeb536f8">
 <ul class="org-ul">
 <li>fugitive.vim (<a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a>) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code</li>
 <li>You can use Emacs to do the similar job (<a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool">http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool</a>). For me, Emacs start up time is too much for this task. Some people use <code>emacsclient</code> which has other overhead I don't like</li>
@@ -302,9 +302,9 @@ map [[ [n
 </div>
 </div>
 
-<div id="outline-container-orgef6e88b" class="outline-2">
-<h3 id="orgef6e88b"><a id="orgb58a3cf"></a></h3>
-<div class="outline-text-2" id="text-orgef6e88b">
+<div id="outline-container-org78d7db5" class="outline-2">
+<h3 id="org78d7db5"><a id="org6f1adf3"></a></h3>
+<div class="outline-text-2" id="text-org78d7db5">
 <p>
 You can use command line like "git mergetool -t vimdiff" to start vimdiff from git.
 </p>
@@ -334,16 +334,16 @@ Then you can press hot key ",2" ",3" ",4" in vimdiff to pull change from top thr
 </div>
 </div>
 
-<div id="outline-container-org59da920" class="outline-2">
-<h3 id="org59da920">subversion/mercurial</h3>
-<div class="outline-text-2" id="text-org59da920">
+<div id="outline-container-org7488351" class="outline-2">
+<h3 id="org7488351">subversion/mercurial</h3>
+<div class="outline-text-2" id="text-org7488351">
 <p>
 Until now I'm focusing on how to tweak the vimdiff UI because the git has already setup the <a href="https://github.com/git/git/blob/master/mergetools/vimdiff">basic vimdiff layout for us</a>. So we just follow the Git layout in other VCS.
 </p>
 </div>
-<div id="outline-container-orgb5ab61d" class="outline-3">
-<h4 id="orgb5ab61d">subversion</h4>
-<div class="outline-text-3" id="text-orgb5ab61d">
+<div id="outline-container-orgaa017f3" class="outline-3">
+<h4 id="orgaa017f3">subversion</h4>
+<div class="outline-text-3" id="text-orgaa017f3">
 <p>
 Insert below code into ~/.subversion/config:
 </p>
@@ -393,9 +393,9 @@ vimdiff -f -d -c 'wincmd J' "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 </div>
 </div>
 
-<div id="outline-container-org4a8da7a" class="outline-2">
-<h3 id="org4a8da7a">mercurial</h3>
-<div class="outline-text-2" id="text-org4a8da7a">
+<div id="outline-container-org19bf17d" class="outline-2">
+<h3 id="org19bf17d">mercurial</h3>
+<div class="outline-text-2" id="text-org19bf17d">
 <p>
 Insert below code into <code>~/.hgrc</code>:
 </p>

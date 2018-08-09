@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about java)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/java.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about java)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/java.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>C/C++/Java code indentation in Emacs</title><link>http://blog.binchen.org/posts/ccjava-code-indentation-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 code indentation in Emacs                                          :en:emacs:java:c::c:
 &lt;/p&gt;
 
-&lt;div id="outline-container-orge195ea0" class="outline-2"&gt;
-&lt;h3 id="orge195ea0"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge195ea0"&gt;
+&lt;div id="outline-container-org0527f95" class="outline-2"&gt;
+&lt;h3 id="org0527f95"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0527f95"&gt;
 &lt;p&gt;
 There are two styles when insert curly braces in C like languages.
 &lt;/p&gt;
@@ -49,9 +49,9 @@ In "Style 2", when I press ENTER key after ")" at first line, I expect the new l
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2fb8f35" class="outline-2"&gt;
-&lt;h3 id="org2fb8f35"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org2fb8f35"&gt;
+&lt;div id="outline-container-org3cbdda9" class="outline-2"&gt;
+&lt;h3 id="org3cbdda9"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org3cbdda9"&gt;
 &lt;p&gt;
 Insert below code into ~/.emacs:
 &lt;/p&gt;
@@ -81,9 +81,9 @@ That's it.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org51d0f4b" class="outline-2"&gt;
-&lt;h3 id="org51d0f4b"&gt;Explanation&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org51d0f4b"&gt;
+&lt;div id="outline-container-org8406ac5" class="outline-2"&gt;
+&lt;h3 id="org8406ac5"&gt;Explanation&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org8406ac5"&gt;
 &lt;p&gt;
 When you press the ENTER key, the function &lt;b&gt;c-indent-line&lt;/b&gt; will be called.
 &lt;/p&gt;
@@ -118,9 +118,9 @@ And the context &lt;b&gt;func-decl-cont&lt;/b&gt; corresponds to:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf0a7b82" class="outline-2"&gt;
-&lt;h3 id="orgf0a7b82"&gt;Technical details&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf0a7b82"&gt;
+&lt;div id="outline-container-orgd9a1e98" class="outline-2"&gt;
+&lt;h3 id="orgd9a1e98"&gt;Technical details&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd9a1e98"&gt;
 &lt;p&gt;
 When you press ENTER key, the new line will be inserted. Then the function &lt;b&gt;indent-according-to-mode&lt;/b&gt; will always be called
 &lt;/p&gt;

@@ -109,9 +109,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-23 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 Tue&gt;</span></span>
 </p>
 
-<div id="outline-container-orgfecd39d" class="outline-2">
-<h3 id="orgfecd39d">Tools</h3>
-<div class="outline-text-2" id="text-orgfecd39d">
+<div id="outline-container-org181969a" class="outline-2">
+<h3 id="org181969a">Tools</h3>
+<div class="outline-text-2" id="text-org181969a">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-left">
@@ -149,13 +149,13 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 
 </div>
 </div>
 
-<div id="outline-container-orgcdabb34" class="outline-2">
-<h3 id="orgcdabb34">Work flow</h3>
-<div class="outline-text-2" id="text-orgcdabb34">
+<div id="outline-container-org965b8eb" class="outline-2">
+<h3 id="org965b8eb">Work flow</h3>
+<div class="outline-text-2" id="text-org965b8eb">
 </div>
-<div id="outline-container-org1642a97" class="outline-3">
-<h4 id="org1642a97">Use scrot to screenshot and put its path into clipboard</h4>
-<div class="outline-text-3" id="text-org1642a97">
+<div id="outline-container-orgda4960c" class="outline-3">
+<h4 id="orgda4960c">Use scrot to screenshot and put its path into clipboard</h4>
+<div class="outline-text-3" id="text-orgda4960c">
 <div class="org-src-container">
 
 <pre><code class="lang-bash">scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
@@ -165,9 +165,9 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 
 </div>
 </div>
 
-<div id="outline-container-org6b3e9ea" class="outline-3">
-<h4 id="org6b3e9ea">Create org file and insert path of screen shot</h4>
-<div class="outline-text-3" id="text-org6b3e9ea">
+<div id="outline-container-org7ea0c24" class="outline-3">
+<h4 id="org7ea0c24">Create org file and insert path of screen shot</h4>
+<div class="outline-text-3" id="text-org7ea0c24">
 <p>
 Actually I use below elisp command to do the insertion for me.
 </p>
@@ -200,9 +200,9 @@ The full path into relative path and insert it as a local file link in org-mode"
 </div>
 </div>
 </div>
-<div id="outline-container-org9d894a8" class="outline-3">
-<h4 id="org9d894a8">Convert org file into Microsoft Word format</h4>
-<div class="outline-text-3" id="text-org9d894a8">
+<div id="outline-container-org84e4989" class="outline-3">
+<h4 id="org84e4989">Convert org file into Microsoft Word format</h4>
+<div class="outline-text-3" id="text-org84e4989">
 <p>
 I'm sure this method works even on Windows. But I don't have Windows PC to validate my belief. Libreoffice is required.
 </p>
@@ -244,9 +244,9 @@ Emacs will find the binary "soffice" from libreoffice to do the conversion.
 </div>
 </div>
 
-<div id="outline-container-org6407723" class="outline-3">
-<h4 id="org6407723">Tips</h4>
-<div class="outline-text-3" id="text-org6407723">
+<div id="outline-container-org6abde89" class="outline-3">
+<h4 id="org6abde89">Tips</h4>
+<div class="outline-text-3" id="text-org6abde89">
 <p>
 If you need page break in exported document, insert below snippet into the org file:
 </p>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about frontend)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/frontend.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up</title><link>http://blog.binchen.org/posts/how-to-do-htmljavascript-repl-read-eval-print-loop-with-no-server-set-up-2.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 to do HTML/Javascript REPL (Read–eval–print loop) with NO server set up   :en:repl:javascript:html:frontend:
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgcedab3c" class="outline-2"&gt;
-&lt;h3 id="orgcedab3c"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgcedab3c"&gt;
+&lt;div id="outline-container-org34e4c0b" class="outline-2"&gt;
+&lt;h3 id="org34e4c0b"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org34e4c0b"&gt;
 &lt;p&gt;
 I love the REPL (Read–eval–print loop). Watch live update of web page when typing code is cool.
 &lt;/p&gt;
@@ -37,9 +37,9 @@ For me, a practical solution must be:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgef1a5e1" class="outline-2"&gt;
-&lt;h3 id="orgef1a5e1"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgef1a5e1"&gt;
+&lt;div id="outline-container-orge504655" class="outline-2"&gt;
+&lt;h3 id="orge504655"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge504655"&gt;
 &lt;p&gt;
 The best solution is firefox addon &lt;a href="https://github.com/bard/mozrepl/wiki"&gt;MozRepl&lt;/a&gt;. You can install it &lt;a href="https://addons.mozilla.org"&gt;https://addons.mozilla.org&lt;/a&gt;. Click firefox menu "Tools =&amp;gt; MozRepl =&amp;gt; Start" to run it.
 &lt;img src="http://blog.binchen.org/wp-content/moz-repl-start-nq8.png" alt="moz-repl-start-nq8.png"&gt;
@@ -66,9 +66,9 @@ Section 2 is on how to set up my text editor Emacs to interact with MozRepl. It'
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org8375ddd" class="outline-3"&gt;
-&lt;h4 id="org8375ddd"&gt;Section 1, use MozRepl&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org8375ddd"&gt;
+&lt;div id="outline-container-org6cb8e9e" class="outline-3"&gt;
+&lt;h4 id="org6cb8e9e"&gt;Section 1, use MozRepl&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org6cb8e9e"&gt;
 &lt;p&gt;
 Here are key points:
 &lt;/p&gt;
@@ -122,9 +122,9 @@ Please note the code is not part of my web application! It will be run only in M
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org87ed598" class="outline-3"&gt;
-&lt;h4 id="org87ed598"&gt;Section 2, set up text editor (Emacs)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org87ed598"&gt;
+&lt;div id="outline-container-org7524a3c" class="outline-3"&gt;
+&lt;h4 id="org7524a3c"&gt;Section 2, set up text editor (Emacs)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org7524a3c"&gt;
 &lt;p&gt;
 My text editor is Emacs, so I use Emacs as an example.
 &lt;/p&gt;
@@ -179,13 +179,13 @@ From now on, you only need "M-x moz-load-js-file-and-send-it" and select the js 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5253631" class="outline-2"&gt;
-&lt;h3 id="org5253631"&gt;Tips&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org5253631"&gt;
+&lt;div id="outline-container-org242c261" class="outline-2"&gt;
+&lt;h3 id="org242c261"&gt;Tips&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org242c261"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org45a697d" class="outline-3"&gt;
-&lt;h4 id="org45a697d"&gt;Tip 1&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org45a697d"&gt;
+&lt;div id="outline-container-org83a2f8e" class="outline-3"&gt;
+&lt;h4 id="org83a2f8e"&gt;Tip 1&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org83a2f8e"&gt;
 &lt;p&gt;
 Well, this is a simple tip. Maybe you are already aware of this.
 &lt;/p&gt;
@@ -215,9 +215,9 @@ Since javascript is good at analyzing URL, you can also tweak the URL parameters
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgec20cdf" class="outline-3"&gt;
-&lt;h4 id="orgec20cdf"&gt;Tip 2&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgec20cdf"&gt;
+&lt;div id="outline-container-orge299b0f" class="outline-3"&gt;
+&lt;h4 id="orge299b0f"&gt;Tip 2&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orge299b0f"&gt;
 &lt;p&gt;
 Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-reload-browser" to refresh the page. If page is not refreshed, restart Firefox. Luckily this does not happen too often.
 &lt;/p&gt;
@@ -235,9 +235,9 @@ Sometimes mozrepl will be unresponsive. You can test it by running "M-x moz-relo
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfab009a" class="outline-2"&gt;
-&lt;h3 id="orgfab009a"&gt;Demo&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgfab009a"&gt;
+&lt;div id="outline-container-org493755a" class="outline-2"&gt;
+&lt;h3 id="org493755a"&gt;Demo&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org493755a"&gt;
 &lt;p&gt;
 Here is a demo how I use it in a real world web application development.
 &lt;/p&gt;

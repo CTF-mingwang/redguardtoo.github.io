@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about desktop)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/desktop.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 13:57:38 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Install gitso v0.6 on Gentoo Linux</title><link>http://blog.binchen.org/posts/install-gitso-v0-6-on-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Gitso is a frontend to reverse VNC connections. Say you want to access your office pc which is behind firewall. Then you need Gitso. &lt;/p&gt; &lt;p&gt; Here is the commands to install gitso: &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about desktop)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/desktop.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Install gitso v0.6 on Gentoo Linux</title><link>http://blog.binchen.org/posts/install-gitso-v0-6-on-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;Gitso is a frontend to reverse VNC connections. Say you want to access your office pc which is behind firewall. Then you need Gitso. &lt;/p&gt; &lt;p&gt; Here is the commands to install gitso: &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 sudo mkdir /usr/portage/net-misc/gitso
@@ -37,37 +37,37 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 这是为有志于成为高手的中级Linux用户而写的入门指导.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org59f1a3d" class="outline-2"&gt;
-&lt;h3 id="org59f1a3d"&gt;哲学&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org59f1a3d"&gt;
+&lt;div id="outline-container-org00a5e9d" class="outline-2"&gt;
+&lt;h3 id="org00a5e9d"&gt;哲学&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org00a5e9d"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org933efdd" class="outline-3"&gt;
-&lt;h4 id="org933efdd"&gt;长期投资&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org933efdd"&gt;
+&lt;div id="outline-container-org662c8fc" class="outline-3"&gt;
+&lt;h4 id="org662c8fc"&gt;长期投资&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org662c8fc"&gt;
 &lt;p&gt;
 软件对我而言是长期投资.所以我会花很多时间学习软件的快捷键(快捷键长期来说操作比鼠标高效),那种只能用鼠标操作的软件对我来说就是"坏"软件.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc0b5f8e" class="outline-3"&gt;
-&lt;h4 id="orgc0b5f8e"&gt;理性思维&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc0b5f8e"&gt;
+&lt;div id="outline-container-orgf032cc0" class="outline-3"&gt;
+&lt;h4 id="orgf032cc0"&gt;理性思维&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf032cc0"&gt;
 &lt;p&gt;
 以文件管理器来说,在Windows平台下我长期使用并热爱Total Commander,在Linux下平台下也有几款文件管理器在界面和功能上和Total Commander上非常接近,自然从感情上讲我会爱屋及乌.但是我最后还是选择了以Emacs作为主要的文件管理器,以丑陋的Midnight Commander为辅助,因我已确定选择软件的总的原则是尽可能用少的的软件做尽可能多的事.具体说来就是以Emacs做任何事,如果一定要用其他软件辅助Emacs,快捷键也应是Emacs的.Midnight Commander符合该条件
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd301b3d" class="outline-3"&gt;
-&lt;h4 id="orgd301b3d"&gt;科学方法&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd301b3d"&gt;
+&lt;div id="outline-container-org6a7b83e" class="outline-3"&gt;
+&lt;h4 id="org6a7b83e"&gt;科学方法&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org6a7b83e"&gt;
 &lt;p&gt;
 细节见后文,我要强调的是我的工具和方法都是有高手验证过,有官方文档支持.对我而言,科学的含义,就是前人反复验证过的,过去100%成功也许能保证现在将来可能成功(因工具环境不断在变化,所以只是有可能).除此以外都不叫科学.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org53cbac2" class="outline-3"&gt;
-&lt;h4 id="org53cbac2"&gt;以人为本&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org53cbac2"&gt;
+&lt;div id="outline-container-orgfd6074c" class="outline-3"&gt;
+&lt;h4 id="orgfd6074c"&gt;以人为本&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgfd6074c"&gt;
 &lt;p&gt;
 在后文我会列出一些筛选软件的方法.也会推荐一些软件.但你决不要认为只要用了这些软件或者记住了我的方法就能成为高手了.这只是敲门砖而已.
 &lt;/p&gt;
@@ -79,16 +79,16 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org76c0c96" class="outline-2"&gt;
-&lt;h3 id="org76c0c96"&gt;少而精&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org76c0c96"&gt;
+&lt;div id="outline-container-org1eb6a9a" class="outline-2"&gt;
+&lt;h3 id="org1eb6a9a"&gt;少而精&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1eb6a9a"&gt;
 &lt;p&gt;
 软件数量少,品质高,功能强,依赖小,界面通用.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org9331754" class="outline-3"&gt;
-&lt;h4 id="org9331754"&gt;数量少&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org9331754"&gt;
+&lt;div id="outline-container-org46ab5ca" class="outline-3"&gt;
+&lt;h4 id="org46ab5ca"&gt;数量少&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org46ab5ca"&gt;
 &lt;p&gt;
 很重要,只有用的软件少(但是完成工作不少),才能有精力精通.
 &lt;/p&gt;
@@ -98,9 +98,9 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org55727a0" class="outline-3"&gt;
-&lt;h4 id="org55727a0"&gt;品质高&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org55727a0"&gt;
+&lt;div id="outline-container-org08fe2f9" class="outline-3"&gt;
+&lt;h4 id="org08fe2f9"&gt;品质高&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org08fe2f9"&gt;
 &lt;p&gt;
 实质很简单,就是:
 &lt;/p&gt;
@@ -114,9 +114,9 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1062fb7" class="outline-3"&gt;
-&lt;h4 id="org1062fb7"&gt;功能强&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org1062fb7"&gt;
+&lt;div id="outline-container-org681402d" class="outline-3"&gt;
+&lt;h4 id="org681402d"&gt;功能强&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org681402d"&gt;
 &lt;p&gt;
 原谅我又用Emacs举例,它可以看网页,收邮件,写程序,做笔记,写博客.
 &lt;/p&gt;
@@ -126,17 +126,17 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd697cbd" class="outline-3"&gt;
-&lt;h4 id="orgd697cbd"&gt;依赖小&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd697cbd"&gt;
+&lt;div id="outline-container-orge50b9bf" class="outline-3"&gt;
+&lt;h4 id="orge50b9bf"&gt;依赖小&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orge50b9bf"&gt;
 &lt;p&gt;
 例如,命令行软件不依赖于QT,GTK之类图形界面库,安装包小很多,运行时消耗内存也小,启动快.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org41e0603" class="outline-3"&gt;
-&lt;h4 id="org41e0603"&gt;界面通用&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org41e0603"&gt;
+&lt;div id="outline-container-orgde44752" class="outline-3"&gt;
+&lt;h4 id="orgde44752"&gt;界面通用&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgde44752"&gt;
 &lt;p&gt;
 例如,我写程序用emacs,一般操作用bash shell,上网用Firefox,但是通过适当的设置(Firefox需要安装插件keysnail,其他软件只要用最新版即可),他们的快捷键都是Emacs的.
 &lt;/p&gt;
@@ -144,13 +144,13 @@ sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install 
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org819074e" class="outline-2"&gt;
-&lt;h3 id="org819074e"&gt;软件推荐&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org819074e"&gt;
+&lt;div id="outline-container-orga7c30ed" class="outline-2"&gt;
+&lt;h3 id="orga7c30ed"&gt;软件推荐&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orga7c30ed"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org2980487" class="outline-3"&gt;
-&lt;h4 id="org2980487"&gt;编辑器&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org2980487"&gt;
+&lt;div id="outline-container-org253548a" class="outline-3"&gt;
+&lt;h4 id="org253548a"&gt;编辑器&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org253548a"&gt;
 &lt;p&gt;
 我用Emacs,考虑到它可以做任何事,可以认为它是轻量级的.
 &lt;/p&gt;
@@ -160,17 +160,17 @@ Vim也用,万不得已用nano,结束了.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org4a15222" class="outline-3"&gt;
-&lt;h4 id="org4a15222"&gt;浏览器&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org4a15222"&gt;
+&lt;div id="outline-container-org8e22a7e" class="outline-3"&gt;
+&lt;h4 id="org8e22a7e"&gt;浏览器&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org8e22a7e"&gt;
 &lt;p&gt;
 Firefox.它是自由软件,所以有很多顶尖Geek为其写插件.例如&lt;a href="https://github.com/mooz/keysnail/wiki"&gt;keysnail&lt;/a&gt;可以把Firefox的快捷键设置为Emacs的快捷键.所以我可以不用鼠标浏览网页.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgd8ecfa0" class="outline-3"&gt;
-&lt;h4 id="orgd8ecfa0"&gt;Shell&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgd8ecfa0"&gt;
+&lt;div id="outline-container-org5c267ea" class="outline-3"&gt;
+&lt;h4 id="org5c267ea"&gt;Shell&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org5c267ea"&gt;
 &lt;p&gt;
 我用bash,在我的.bashrc中有如下一行,
 &lt;/p&gt;
@@ -189,9 +189,9 @@ Firefox.它是自由软件,所以有很多顶尖Geek为其写插件.例如&lt;a 
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1f27891" class="outline-3"&gt;
-&lt;h4 id="org1f27891"&gt;桌面&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org1f27891"&gt;
+&lt;div id="outline-container-org6dfefb9" class="outline-3"&gt;
+&lt;h4 id="org6dfefb9"&gt;桌面&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org6dfefb9"&gt;
 &lt;p&gt;
 Gnome是不考虑,用轻量级的&lt;a href="http://i3wm.org/"&gt;i3&lt;/a&gt;.
 &lt;/p&gt;
@@ -201,9 +201,9 @@ i3是平铺桌面(例如左窗口写代码,右窗口看PDF文档),学习曲线�
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org29419d4" class="outline-3"&gt;
-&lt;h4 id="org29419d4"&gt;其他&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org29419d4"&gt;
+&lt;div id="outline-container-org95e5fee" class="outline-3"&gt;
+&lt;h4 id="org95e5fee"&gt;其他&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org95e5fee"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;联网自己写脚本,因为GUI工具如wicd之类的依赖多&lt;/li&gt;
 &lt;li&gt;听音乐用命令行工具mpd和mpc&lt;/li&gt;
@@ -214,16 +214,16 @@ i3是平铺桌面(例如左窗口写代码,右窗口看PDF文档),学习曲线�
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7eaf353" class="outline-2"&gt;
-&lt;h3 id="org7eaf353"&gt;软件使用也需维护&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org7eaf353"&gt;
+&lt;div id="outline-container-org9f36328" class="outline-2"&gt;
+&lt;h3 id="org9f36328"&gt;软件使用也需维护&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org9f36328"&gt;
 &lt;p&gt;
 安装软件在包管理系统的帮助下很简单.麻烦的是最新软件有时候不稳定,这通常是因为软件的配置文件更新引起的.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgfe70dc2" class="outline-3"&gt;
-&lt;h4 id="orgfe70dc2"&gt;将/etc目录下的默认配置文件备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgfe70dc2"&gt;
+&lt;div id="outline-container-orgf212ad5" class="outline-3"&gt;
+&lt;h4 id="orgf212ad5"&gt;将/etc目录下的默认配置文件备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgf212ad5"&gt;
 &lt;p&gt;
 Linux的软件默认配置文件在/etc/目录下.
 我使用分布式版本控制软件&lt;a href="http://git-scm.com/"&gt;git&lt;/a&gt;管理/etc目录,分布式版本控制系统好处很多,最大好处就是数据到处有完整备份,非常安全.具体细节请参考&lt;a href="http://en.wikipedia.org/wiki/Distributed_revision_control_system"&gt;wikipedia&lt;/a&gt;.
@@ -253,9 +253,9 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdfbf9ba" class="outline-3"&gt;
-&lt;h4 id="orgdfbf9ba"&gt;将用户目录下的用户定制配置文件备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgdfbf9ba"&gt;
+&lt;div id="outline-container-org10d34f4" class="outline-3"&gt;
+&lt;h4 id="org10d34f4"&gt;将用户目录下的用户定制配置文件备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org10d34f4"&gt;
 &lt;p&gt;
 我也用git将配置文件(在/home/username/下)备份到&lt;a href="http://www.github.com"&gt;github&lt;/a&gt;的服务器上.这里必须用第三方服务器同步配置,因为我使用多台电脑.
 &lt;/p&gt;
@@ -265,9 +265,9 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org519cb12" class="outline-3"&gt;
-&lt;h4 id="org519cb12"&gt;将软件版本降级&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org519cb12"&gt;
+&lt;div id="outline-container-orga4edd2b" class="outline-3"&gt;
+&lt;h4 id="orga4edd2b"&gt;将软件版本降级&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orga4edd2b"&gt;
 &lt;p&gt;
 最新版本的软件可能不稳定,这时降级是必要的.
 &lt;/p&gt;
@@ -291,9 +291,9 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orge6c84af" class="outline-3"&gt;
-&lt;h4 id="orge6c84af"&gt;云备份&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orge6c84af"&gt;
+&lt;div id="outline-container-orgbe242fa" class="outline-3"&gt;
+&lt;h4 id="orgbe242fa"&gt;云备份&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgbe242fa"&gt;
 &lt;p&gt;
 多媒体文件用云备份服务更好,我推荐&lt;a href="https://www.getdropbox.com/referrals/NTg1ODg2Mjk"&gt;Dropbox&lt;/a&gt;.
 &lt;/p&gt;
@@ -303,9 +303,9 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org1ee9df2" class="outline-3"&gt;
-&lt;h4 id="org1ee9df2"&gt;备份操作系统&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org1ee9df2"&gt;
+&lt;div id="outline-container-org26e0812" class="outline-3"&gt;
+&lt;h4 id="org26e0812"&gt;备份操作系统&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org26e0812"&gt;
 &lt;p&gt;
 不用经常作,又有云备份,又有分布式版本控制系统,怕什么.
 &lt;/p&gt;
@@ -332,9 +332,9 @@ sudo git checkout commit_ref(version) /etc/mysql/my.cnf #restoren file
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org735c2b6" class="outline-3"&gt;
-&lt;h4 id="org735c2b6"&gt;阅读官方文档&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org735c2b6"&gt;
+&lt;div id="outline-container-orgcf152d5" class="outline-3"&gt;
+&lt;h4 id="orgcf152d5"&gt;阅读官方文档&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgcf152d5"&gt;
 &lt;p&gt;
 阅读官方和社区文档.
 &lt;/p&gt;
@@ -348,9 +348,9 @@ Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgc32bf75" class="outline-3"&gt;
-&lt;h4 id="orgc32bf75"&gt;虚拟机的用处&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgc32bf75"&gt;
+&lt;div id="outline-container-orgde2e558" class="outline-3"&gt;
+&lt;h4 id="orgde2e558"&gt;虚拟机的用处&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgde2e558"&gt;
 &lt;p&gt;
 我虚拟机软件使用VirtualBox,虚拟机为Windows XP,该操作系统我会定期更新安全补丁.软件只安装了IE和firefox.该操作系统我只用来操作网络银行.每次操作完毕,我会重置虚拟机状态到操作前的snapshot.
 &lt;/p&gt;
@@ -358,9 +358,9 @@ Arch Linux和Gentoo Linux的特点是用户一般水准较高,所以文档技术
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb1004ce" class="outline-2"&gt;
-&lt;h3 id="orgb1004ce"&gt;常用软件的诊断修复&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgb1004ce"&gt;
+&lt;div id="outline-container-orgbc55a5b" class="outline-2"&gt;
+&lt;h3 id="orgbc55a5b"&gt;常用软件的诊断修复&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgbc55a5b"&gt;
 &lt;p&gt;
 即使用了上述做法,一年中也会有一次倒霉.就是某个版本软件出问题了.没人能帮忙,不能降级,改配置也没用,也没有可用的错误信息.
 &lt;/p&gt;
@@ -424,9 +424,9 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org35109c3" class="outline-2"&gt;
-&lt;h3 id="org35109c3"&gt;系统启动失败的修复&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org35109c3"&gt;
+&lt;div id="outline-container-orgf40cbeb" class="outline-2"&gt;
+&lt;h3 id="orgf40cbeb"&gt;系统启动失败的修复&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgf40cbeb"&gt;
 &lt;p&gt;
 解决方法很简单,用常见的Linux启动光盘启动,然后chroot,其作用是以指定目录作为操作系统根目录(root directory),然后以此根目录为基准建立一个新的环境.
 &lt;/p&gt;
@@ -441,9 +441,9 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge4cba73" class="outline-2"&gt;
-&lt;h3 id="orge4cba73"&gt;书籍推荐&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge4cba73"&gt;
+&lt;div id="outline-container-org2ba7ae2" class="outline-2"&gt;
+&lt;h3 id="org2ba7ae2"&gt;书籍推荐&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org2ba7ae2"&gt;
 &lt;table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides"&gt;
 
 &lt;colgroup&gt;
@@ -477,18 +477,18 @@ pkgfile属于软件包pkgtools,所以你必须安装pkgtools,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org70e9c6d" class="outline-2"&gt;
-&lt;h3 id="org70e9c6d"&gt;常见问题&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org70e9c6d"&gt;
+&lt;div id="outline-container-org5a8c07b" class="outline-2"&gt;
+&lt;h3 id="org5a8c07b"&gt;常见问题&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5a8c07b"&gt;
 &lt;p&gt;
 等你的问题了.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf8d732b" class="outline-2"&gt;
-&lt;h3 id="orgf8d732b"&gt;联系我&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf8d732b"&gt;
+&lt;div id="outline-container-org5fdff12" class="outline-2"&gt;
+&lt;h3 id="org5fdff12"&gt;联系我&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5fdff12"&gt;
 &lt;p&gt;
 这是我的&lt;a href="https://twitter.com/#!/chen_bin"&gt;twitter&lt;/a&gt;和&lt;a href="https://plus.google.com/110954683162859211810"&gt;google plus&lt;/a&gt;,也可以通过我的email&amp;lt;chenbin DOT sh AT GMAIL DOT COM&amp;gt;联系我.
 &lt;/p&gt;
