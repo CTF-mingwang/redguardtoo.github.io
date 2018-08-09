@@ -11,15 +11,15 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to be extremely efficient in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-be-extremely-efficient-in-emacs.html">
-<meta property="og:description" content="to be extremely efficient in Emacs                                        :en:emacs:
+<meta property="og:description" content="You only need keyfreq to find most frequently commands.
 
 
 
-All you need to do is using keyfreq to measure how many time you execute commands.
+The most frequently used commands should be assigned efficient key bindings.
 
 
 
-The frequently used comman">
+But you need exclude already optimized commands or commands w">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-02-26T13:51:27Z">
 <meta property="article:tag" content="emacs">
@@ -62,17 +62,15 @@ The frequently used comman">
 
         </div>
         <div class="body">
-            <div>
+            <div id="outline-container-org78211af" class="outline-2">
+
+<div class="outline-text-2" id="text-org78211af">
 <p>
-to be extremely efficient in Emacs                                        :en:emacs:
+You only need <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>find</b> most frequently commands.
 </p>
 
 <p>
-All you need to do is using <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>measure</b> how many time you execute commands.
-</p>
-
-<p>
-The frequently used commands should be assigned efficient key bindings.
+The most frequently used commands should be assigned efficient key bindings.
 </p>
 
 <p>
@@ -86,7 +84,6 @@ For example, commands like <code>next-line/previous-line/forward-char/backward-c
 <p>
 The minimum keyfreq setup,
 </p>
-
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'keyfreq)
@@ -110,7 +107,6 @@ My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyfreq
 <p>
 Below is the eight month keyfreq data of my office computer,
 </p>
-
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-right">
@@ -1309,6 +1305,7 @@ Below is the eight month keyfreq data of my office computer,
 </tr>
 </tbody>
 </table>
+</div>
 </div>
         </div>
         
