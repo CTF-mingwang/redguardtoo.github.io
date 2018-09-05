@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Use Perforce inside Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/use-perforce-inside-emacs.html">
-<meta property="og:description" content="Perforce inside Emacs                                                     :en:emacs:perforce:vcs:bash:p4:
-
-
-
-CREATED: &lt;2016-12-05 Mon&gt;
+<meta property="og:description" content="CREATED: &lt;2016-12-05 Mon&gt;
 
 
 
@@ -23,7 +19,11 @@ UPDATED: &lt;2017-08-14 Mon&gt;
 
 
 
-Perforce is a proprietary VCS. It">
+Perforce is a proprietary VCS. It's less powerful than Git so need extra effort to be use with Emacs.
+
+
+
+For example, git log -p file-path dis">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-12-05T11:51:47Z">
 <meta property="article:tag" content="bash">
@@ -76,10 +76,6 @@ Perforce is a proprietary VCS. It">
         <div class="body">
             <div>
 <p>
-Perforce inside Emacs                                                     :en:emacs:perforce:vcs:bash:p4:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-12-05 Mon&gt;</span></span>
 </p>
 
@@ -95,9 +91,9 @@ Perforce is a proprietary VCS. It's less powerful than <a href="https://git-scm.
 For example, <code>git log -p file-path</code> displays the detailed history of a single file. There is no way you can do this in perforce. Even ClI like <code>p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}</code> can't do it. I have to use Emacs Lisp to clean the output of <code>p4</code>.
 </p>
 
-<div id="outline-container-orga1273fd" class="outline-2">
-<h3 id="orga1273fd">Perforce workflow</h3>
-<div class="outline-text-2" id="text-orga1273fd">
+<div id="outline-container-org95abc8e" class="outline-2">
+<h3 id="org95abc8e">Perforce workflow</h3>
+<div class="outline-text-2" id="text-org95abc8e">
 <ul class="org-ul">
 <li>
 <code>p4 set</code> to <a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html">set up</a>
@@ -118,9 +114,9 @@ For example, <code>git log -p file-path</code> displays the detailed history of 
 </div>
 </div>
 
-<div id="outline-container-org48542ad" class="outline-2">
-<h3 id="org48542ad">My solution</h3>
-<div class="outline-text-2" id="text-org48542ad">
+<div id="outline-container-org9e9dbd2" class="outline-2">
+<h3 id="org9e9dbd2">My solution</h3>
+<div class="outline-text-2" id="text-org9e9dbd2">
 <p>
 Perforce Cygwin portable is not recommended.
 </p>
@@ -133,9 +129,9 @@ I suggest using executable from Perforce Windows native version which works on b
 Perforce server assigns unique URL for each physical file. If I only feed <code>p4</code> that URL, the operation is always successful.
 </p>
 </div>
-<div id="outline-container-org9c3957e" class="outline-3">
-<h4 id="org9c3957e">Emacs</h4>
-<div class="outline-text-3" id="text-org9c3957e">
+<div id="outline-container-orgaa364b9" class="outline-3">
+<h4 id="orgaa364b9">Emacs</h4>
+<div class="outline-text-3" id="text-orgaa364b9">
 <p>
 I developed <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a> which shows "commit message of current line in Emacs". It supports Perforce out of box (you still need <code>p4 login</code> at first.)
 </p>
@@ -297,9 +293,9 @@ You can also check my <a href="https://github.com/redguardtoo/emacs.d/blob/maste
 </p>
 </div>
 </div>
-<div id="outline-container-orgfbf65a8" class="outline-3">
-<h4 id="orgfbf65a8">Bash Shell</h4>
-<div class="outline-text-3" id="text-orgfbf65a8">
+<div id="outline-container-org2508396" class="outline-3">
+<h4 id="org2508396">Bash Shell</h4>
+<div class="outline-text-3" id="text-org2508396">
 <p>
 Other operations are finished in Bash Shell,
 </p>

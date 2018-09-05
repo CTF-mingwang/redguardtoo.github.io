@@ -11,13 +11,9 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Find which package contains a file">
 <meta property="og:url" content="http://blog.binchen.org/posts/find-which-package-contains-a-file.html">
-<meta property="og:description" content="which package contains a file                                            :linux:package:find:en:
-
-
-
-
-dpkg --search /usr/bin/amidi # debian/ubuntu, local search
-apt-file update;apt-file search amidi # ">
+<meta property="og:description" content="dpkg --search /usr/bin/amidi # debian/ubuntu, local search
+apt-file update;apt-file search amidi # debian/ubuntu, remote seach. You need install apt-file at first.
+equery b -e amidi # gentoo, remote/l">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-07-29T14:51:00Z">
 <meta property="article:tag" content="en">
@@ -66,12 +62,7 @@ apt-file update;apt-file search amidi # ">
 
         </div>
         <div class="body">
-            <div>
-<p>
-which package contains a file                                            :linux:package:find:<a href="en">en</a>:
-</p>
-
-<div class="org-src-container">
+            <div class="org-src-container">
 
 <pre><code class="lang-sh">dpkg --search /usr/bin/amidi # debian/ubuntu, local search
 apt-file update;apt-file search amidi # debian/ubuntu, remote seach. You need install apt-file at first.
@@ -80,7 +71,6 @@ pacman -Qo admidi # archlinux, local search
 pkgfile amidi # archlinux, You need install pkgfile
 </code></pre>
 
-</div>
 </div>
         </div>
         

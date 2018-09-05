@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Export org file embedded with code snippets">
 <meta property="og:url" content="http://blog.binchen.org/posts/export-org-file-embedded-with-code-snippets.html">
-<meta property="og:description" content="org file embedded with code snippets                                   :en:emacs:org:export:html:
-
-
-
-CREATED: &lt;2014-11-20 Thu&gt;
+<meta property="og:description" content="CREATED: &lt;2014-11-20 Thu&gt;
 
 
 
@@ -26,7 +22,13 @@ UPDATED: &lt;2015-06-06 Sat&gt;
 problem
 
 
-I use Org-mode to record all my">
+I use Org-mode to record all my notes.
+
+
+
+As a developer, I place code snippets from many programming languages into one org file.
+
+">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-11-20T12:22:17Z">
 <meta property="article:tag" content="emacs">
@@ -77,10 +79,6 @@ I use Org-mode to record all my">
         <div class="body">
             <div>
 <p>
-org file embedded with code snippets                                   :en:emacs:org:export:html:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-11-20 Thu&gt;</span></span>
 </p>
 
@@ -88,9 +86,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-11-20 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-06-06 Sat&gt;</span></span>
 </p>
 
-<div id="outline-container-org823f75f" class="outline-2">
-<h3 id="org823f75f">problem</h3>
-<div class="outline-text-2" id="text-org823f75f">
+<div id="outline-container-orgdeb7872" class="outline-2">
+<h3 id="orgdeb7872">problem</h3>
+<div class="outline-text-2" id="text-orgdeb7872">
 <p>
 I use <a href="http://orgmode.org/">Org-mode</a> to record all my notes.
 </p>
@@ -113,13 +111,13 @@ My hooks are also dependent on third party tools. So if anyone else uses my setu
 </div>
 </div>
 
-<div id="outline-container-orgb3bcea6" class="outline-2">
-<h3 id="orgb3bcea6">Solution</h3>
-<div class="outline-text-2" id="text-orgb3bcea6">
+<div id="outline-container-org6e18ce1" class="outline-2">
+<h3 id="org6e18ce1">Solution</h3>
+<div class="outline-text-2" id="text-org6e18ce1">
 </div>
-<div id="outline-container-org814f356" class="outline-3">
-<h4 id="org814f356">Setup</h4>
-<div class="outline-text-3" id="text-org814f356">
+<div id="outline-container-org295031c" class="outline-3">
+<h4 id="org295031c">Setup</h4>
+<div class="outline-text-3" id="text-org295031c">
 <p>
 In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
 </p>
@@ -162,9 +160,9 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 </div>
 </div>
 </div>
-<div id="outline-container-org2f79a73" class="outline-3">
-<h4 id="org2f79a73">Usage</h4>
-<div class="outline-text-3" id="text-org2f79a73">
+<div id="outline-container-orgf398681" class="outline-3">
+<h4 id="orgf398681">Usage</h4>
+<div class="outline-text-3" id="text-orgf398681">
 <p>
 I use python-mode-hook setup as an example:
 </p>
@@ -186,29 +184,29 @@ I use python-mode-hook setup as an example:
 </div>
 </div>
 
-<div id="outline-container-org3cbabb6" class="outline-2">
-<h3 id="org3cbabb6">Tips</h3>
-<div class="outline-text-2" id="text-org3cbabb6">
+<div id="outline-container-orgf2f9495" class="outline-2">
+<h3 id="orgf2f9495">Tips</h3>
+<div class="outline-text-2" id="text-orgf2f9495">
 </div>
-<div id="outline-container-org41145c4" class="outline-3">
-<h4 id="org41145c4">Export shell code</h4>
-<div class="outline-text-3" id="text-org41145c4">
+<div id="outline-container-orgd2c01b9" class="outline-3">
+<h4 id="orgd2c01b9">Export shell code</h4>
+<div class="outline-text-3" id="text-orgd2c01b9">
 <p>
 Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 </p>
 </div>
 </div>
-<div id="outline-container-org7f2aabf" class="outline-3">
-<h4 id="org7f2aabf">Yasnippet setup</h4>
-<div class="outline-text-3" id="text-org7f2aabf">
+<div id="outline-container-orge4b8d03" class="outline-3">
+<h4 id="orge4b8d03">Yasnippet setup</h4>
+<div class="outline-text-3" id="text-orge4b8d03">
 <p>
 To avoid loading yasnippets when exporting, I have to <a href="https://github.com/capitaomorte/yasnippet#use-yas-minor-mode-on-a-per-buffer-basis">"use yas-minor-mode on a per-buffer basis"</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbae5b93" class="outline-3">
-<h4 id="orgbae5b93">Manually turn off the major-mode hook</h4>
-<div class="outline-text-3" id="text-orgbae5b93">
+<div id="outline-container-org8d8b000" class="outline-3">
+<h4 id="org8d8b000">Manually turn off the major-mode hook</h4>
+<div class="outline-text-3" id="text-org8d8b000">
 <p>
 It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
 </p>
@@ -229,9 +227,9 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
 </div>
 </div>
 </div>
-<div id="outline-container-orgc333ee2" class="outline-3">
-<h4 id="orgc333ee2">after-save-hook</h4>
-<div class="outline-text-3" id="text-orgc333ee2">
+<div id="outline-container-orgc926bd8" class="outline-3">
+<h4 id="orgc926bd8">after-save-hook</h4>
+<div class="outline-text-3" id="text-orgc926bd8">
 <p>
 `after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files
 </p>

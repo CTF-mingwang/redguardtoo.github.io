@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Effective spell check in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">
-<meta property="og:description" content="spell check in Emacs                                                :en:linux:emacs:spell:
-
-
-
-CREATED: &lt;2014-01-21 Tue&gt;
+<meta property="og:description" content="CREATED: &lt;2014-01-21 Tue&gt;
 
 
 
@@ -23,7 +19,11 @@ UPDATED: &lt;2016-12-07 Wed&gt;
 
 
 
-I use Flyspell in web-mode as sample.  Other maj">
+I use Flyspell in web-mode as sample.  Other major modes also works.
+
+
+
+At first, please  turn on flyspell for all programming languages by in">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-01-21T12:00:00Z">
 <meta property="article:tag" content="emacs">
@@ -72,10 +72,6 @@ I use Flyspell in web-mode as sample.  Other maj">
         <div class="body">
             <div>
 <p>
-spell check in Emacs                                                :en:linux:emacs:spell:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-01-21 Tue&gt;</span></span>
 </p>
 
@@ -107,9 +103,9 @@ There is also a <a href="http://blog.binchen.org/posts/what-s-the-best-spell-che
 <li>Difference between hunspell and aspell</li>
 <li>How to setup hunspell</li>
 </ul>
-<div id="outline-container-org18d53df" class="outline-2">
-<h3 id="org18d53df">Spell check in HTML</h3>
-<div class="outline-text-2" id="text-org18d53df">
+<div id="outline-container-orged4c87c" class="outline-2">
+<h3 id="orged4c87c">Spell check in HTML</h3>
+<div class="outline-text-2" id="text-orged4c87c">
 <p>
 I will spell check,
 </p>
@@ -169,9 +165,9 @@ I use <a href="http://web-mode.org/">web-mode</a> for HTML files. The technique 
 </div>
 </div>
 
-<div id="outline-container-org465dbe4" class="outline-2">
-<h3 id="org465dbe4">Don't display doublon (double word) as error</h3>
-<div class="outline-text-2" id="text-org465dbe4">
+<div id="outline-container-org4f52bd0" class="outline-2">
+<h3 id="org4f52bd0">Don't display doublon (double word) as error</h3>
+<div class="outline-text-2" id="text-org4f52bd0">
 <p>
 Modern CSS frameworks like <a href="http://getbootstrap.com/">Bootstrap</a> make doublon unavoidable. For example, CSS class name <code>btn btn-default</code> contains double word <code>btn</code>.
 </p>
@@ -200,9 +196,9 @@ So we need stop displaying doublon as error in HTML,
 </div>
 </div>
 
-<div id="outline-container-orgfd47e75" class="outline-2">
-<h3 id="orgfd47e75">Spell check camel case strings</h3>
-<div class="outline-text-2" id="text-orgfd47e75">
+<div id="outline-container-org4ed0ec1" class="outline-2">
+<h3 id="org4ed0ec1">Spell check camel case strings</h3>
+<div class="outline-text-2" id="text-org4ed0ec1">
 <p>
 We can check camel cased string/variable/function if and only if <a href="http://aspell.net/">aspell</a> is used.
 </p>
@@ -228,9 +224,9 @@ Insert below code into <code>.emacs</code>,
 </div>
 </div>
 
-<div id="outline-container-orgbd43ade" class="outline-2">
-<h3 id="orgbd43ade">Summary</h3>
-<div class="outline-text-2" id="text-orgbd43ade">
+<div id="outline-container-orgd456738" class="outline-2">
+<h3 id="orgd456738">Summary</h3>
+<div class="outline-text-2" id="text-orgd456738">
 <p>
 <a href="http://www.emacswiki.org/emacs/FlySpell">EmacsWiki</a> suggests <code>(flyspell-prog-mode)</code> which only checks typo in comments.
 </p>
@@ -250,9 +246,9 @@ Screen shot (typos are underscored):
 </div>
 </div>
 
-<div id="outline-container-org4c45c19" class="outline-2">
-<h3 id="org4c45c19">Javascript and ReactJS setup (OPTIONAL)</h3>
-<div class="outline-text-2" id="text-org4c45c19">
+<div id="outline-container-org6951cc5" class="outline-2">
+<h3 id="org6951cc5">Javascript and ReactJS setup (OPTIONAL)</h3>
+<div class="outline-text-2" id="text-org6951cc5">
 <p>
 If you fully understand my previous sections, you don't need read this section.
 </p>

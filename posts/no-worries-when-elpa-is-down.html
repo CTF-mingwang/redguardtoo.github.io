@@ -11,16 +11,12 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="No worries when elpa is down">
 <meta property="og:url" content="http://blog.binchen.org/posts/no-worries-when-elpa-is-down.html">
-<meta property="og:description" content="worries when elpa is down                                                  :en:emacs:package:elpa:
-
-
-
-I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
+<meta property="og:description" content="I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
 
 
 
 
-mkdir -p ~/elpaclone">
+mkdir -p ~/elpaclone &amp;&amp; cd ~/elpaclone &amp;&amp; curl -L https://elpa.gnu.org/packages/archive-contents | perl -pe 's/(^\(1|\n)//">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-08-14T12:52:27Z">
 <meta property="article:tag" content="elpa">
@@ -68,10 +64,6 @@ mkdir -p ~/elpaclone">
         </div>
         <div class="body">
             <div>
-<p>
-worries when elpa is down                                                  :en:emacs:package:elpa:
-</p>
-
 <p>
 I use one liner shell command to clone Emacs Lisp Package Archive (ELPA):
 </p>

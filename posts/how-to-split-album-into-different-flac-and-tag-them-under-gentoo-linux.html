@@ -11,16 +11,24 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to split album into different flac and tag them under Gentoo Linux">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html">
-<meta property="og:description" content='to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
-
-
-
-Install CLI tools
+<meta property="og:description" content='Install CLI tools
 
 
 
 # mac to support ape
-sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shn'>
+sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shntool
+sudo emerge cuetools
+
+
+
+
+
+
+
+Download script
+
+
+See https://bbs.archlinux.org/viewtopic.'>
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-05-12T22:32:00Z">
 <meta property="article:tag" content="cue">
@@ -66,13 +74,9 @@ sudo USE="alac flac mac shorten sox wavpack" emerge media-sound/shn'>
         </div>
         <div class="body">
             <div>
-<p>
-to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
-</p>
-
-<div id="outline-container-org14b252a" class="outline-2">
-<h3 id="org14b252a">Install CLI tools</h3>
-<div class="outline-text-2" id="text-org14b252a">
+<div id="outline-container-org39e76f5" class="outline-2">
+<h3 id="org39e76f5">Install CLI tools</h3>
+<div class="outline-text-2" id="text-org39e76f5">
 <div class="org-src-container">
 
 <pre><code class="lang-sh"># mac to support ape
@@ -84,9 +88,9 @@ sudo emerge cuetools
 </div>
 </div>
 
-<div id="outline-container-org426e2c9" class="outline-2">
-<h3 id="org426e2c9">Download script</h3>
-<div class="outline-text-2" id="text-org426e2c9">
+<div id="outline-container-org69981e9" class="outline-2">
+<h3 id="org69981e9">Download script</h3>
+<div class="outline-text-2" id="text-org69981e9">
 <p>
 See <a href="https://bbs.archlinux.org/viewtopic.php?id=58766">https://bbs.archlinux.org/viewtopic.php?id=58766</a> for the source of bash script.
 </p>
@@ -157,9 +161,9 @@ Put the script somewhere and name it to <code>cue2flac</code>
 </div>
 </div>
 
-<div id="outline-container-org2cd3777" class="outline-2">
-<h3 id="org2cd3777">Start conversion</h3>
-<div class="outline-text-2" id="text-org2cd3777">
+<div id="outline-container-orgb8f7245" class="outline-2">
+<h3 id="orgb8f7245">Start conversion</h3>
+<div class="outline-text-2" id="text-orgb8f7245">
 <div class="org-src-container">
 
 <pre><code class="lang-sh"># convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"

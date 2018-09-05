@@ -11,18 +11,19 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Split Emacs window with certain ratio">
 <meta property="og:url" content="http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html">
-<meta property="og:description" content="Emacs window with certain ratio                                        :en:emacs:
-
-
-
-The idea comes from yangdaweihit. Here is the implementation.
+<meta property="og:description" content="The idea comes from yangdaweihit. Here is the implementation.
 
 
 
 
 (defvar my-ratio-dict
   '((1 . 1.61803398875)
-   ">
+    (2 . 2)
+    (3 . 3)
+    (4 . 4)
+    (5 . 0.61803398875))
+  &quot;The ratio dictionary.&quot;)
+">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2017-09-05T13:26:55Z">
 <meta property="article:tag" content="emacs">
@@ -66,10 +67,6 @@ The idea comes from yangdaweihit. Here is the implementation.
         </div>
         <div class="body">
             <div>
-<p>
-Emacs window with certain ratio                                        :en:emacs:
-</p>
-
 <p>
 The idea comes from <a href="https://github.com/redguardtoo/emacs.d/issues/607">yangdaweihit</a>. Here is the implementation.
 </p>

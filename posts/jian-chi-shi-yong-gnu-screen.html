@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="坚持使用gnu screen">
 <meta property="og:url" content="http://blog.binchen.org/posts/jian-chi-shi-yong-gnu-screen.html">
-<meta property="og:description" content="screen                         :software:linux:zh:
-
-
-
-虽然tmux很优秀,但是目前很难支持cygwin(Nicholas Marriott在2010年12月说的),而我的工作需要使用windows.
+<meta property="og:description" content="虽然tmux很优秀,但是目前很难支持cygwin(Nicholas Marriott在2010年12月说的),而我的工作需要使用windows.
 
 
 
@@ -23,7 +19,19 @@
 
 
 
-要安装最新版的screen,在我的Arch Linu">
+要安装最新版的screen,在我的Arch Linux下很简单,
+
+
+
+packer -S screen-git
+
+
+
+
+
+
+
+在windows的cygwin下">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2011-04-23T20:37:00Z">
 <meta property="article:tag" content="linux">
@@ -70,10 +78,6 @@
         <div class="body">
             <div>
 <p>
-screen                         :software:linux:zh:
-</p>
-
-<p>
 虽然tmux很优秀,但是目前很难支持<a href="http://www.cygwin.com">cygwin</a>(<a href="http://comments.gmane.org/gmane.comp.terminal-emulators.tmux.user/1093">Nicholas Marriott在2010年12月说的</a>),而我的工作需要使用windows.
 </p>
 
@@ -81,9 +85,9 @@ screen                         :software:linux:zh:
 最新版的screen的一个重要特性就是已支持垂直分屏,其快捷键为=C-a |=.
 </p>
 
-<div id="outline-container-org885964e" class="outline-2">
-<h3 id="org885964e">要安装最新版的screen,在我的<a href="http://www.archlinux.org">Arch Linux</a>下很简单,</h3>
-<div class="outline-text-2" id="text-org885964e">
+<div id="outline-container-orgc81dbfc" class="outline-2">
+<h3 id="orgc81dbfc">要安装最新版的screen,在我的<a href="http://www.archlinux.org">Arch Linux</a>下很简单,</h3>
+<div class="outline-text-2" id="text-orgc81dbfc">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">packer -S screen-git
@@ -93,9 +97,9 @@ screen                         :software:linux:zh:
 </div>
 </div>
 
-<div id="outline-container-orga83e3b0" class="outline-2">
-<h3 id="orga83e3b0">在windows的cygwin下安装要多几步.</h3>
-<div class="outline-text-2" id="text-orga83e3b0">
+<div id="outline-container-orgd1c409c" class="outline-2">
+<h3 id="orgd1c409c">在windows的cygwin下安装要多几步.</h3>
+<div class="outline-text-2" id="text-orgd1c409c">
 <p>
 首先安装软件包libncurse-devel,然后去<a href="http://ftp.gnu.org/gnu/screen/">官方网站</a>下载最新源代码包(目前版本为4.0.3),解压缩,
 </p>
@@ -118,9 +122,9 @@ screen                         :software:linux:zh:
 </div>
 </div>
 
-<div id="outline-container-orgd9d6ba4" class="outline-2">
-<h3 id="orgd9d6ba4">如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错,</h3>
-<div class="outline-text-2" id="text-orgd9d6ba4">
+<div id="outline-container-org66002ed" class="outline-2">
+<h3 id="org66002ed">如用urxvt作为Terminal Simulator(比如我),直接启动screen会报错,</h3>
+<div class="outline-text-2" id="text-org66002ed">
 <div class="org-src-container">
 
 <pre><code class="lang-sh">$ screen
@@ -145,9 +149,9 @@ term rxvt-256color
 </div>
 </div>
 
-<div id="outline-container-orgd16e0b9" class="outline-2">
-<h3 id="orgd16e0b9">使用screen前我将screen的Ctrl-a改为Ctrl-t</h3>
-<div class="outline-text-2" id="text-orgd16e0b9">
+<div id="outline-container-org85cffbb" class="outline-2">
+<h3 id="org85cffbb">使用screen前我将screen的Ctrl-a改为Ctrl-t</h3>
+<div class="outline-text-2" id="text-org85cffbb">
 <p>
 因为 <code>Ctrl-a</code> 在Bash和Emacs中都是常用快捷键,在 <code>.screenrc</code> 中添加一行,
 </p>

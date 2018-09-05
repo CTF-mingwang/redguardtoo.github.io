@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Easy indentation setup in Emacs for web development">
 <meta property="og:url" content="http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html">
-<meta property="og:description" content="indentation setup in Emacs for web development                           :en:emacs:web:indent:
-
-
-
-CREATED: &lt;2015-04-02 Thu&gt;
+<meta property="og:description" content="CREATED: &lt;2015-04-02 Thu&gt;
 
 
 
@@ -23,7 +19,18 @@ UPDATE: &lt;2016-06-22 Wed&gt;
 
 
 
-This question has been asked so many times, s">
+This question has been asked so many times, so I answered it here once for all.
+
+
+
+Solution
+
+
+Insert below code into ~/.emacs:
+
+
+
+(defun my-set">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2015-04-02T13:57:48Z">
 <meta property="article:tag" content="emacs">
@@ -72,10 +79,6 @@ This question has been asked so many times, s">
         <div class="body">
             <div>
 <p>
-indentation setup in Emacs for web development                           :en:emacs:web:indent:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-04-02 Thu&gt;</span></span>
 </p>
 
@@ -87,9 +90,9 @@ UPDATE: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-06-22 W
 This question has been asked so many times, so I answered it here once for all.
 </p>
 
-<div id="outline-container-org1b8d83d" class="outline-2">
-<h3 id="org1b8d83d">Solution</h3>
-<div class="outline-text-2" id="text-org1b8d83d">
+<div id="outline-container-org1315119" class="outline-2">
+<h3 id="org1315119">Solution</h3>
+<div class="outline-text-2" id="text-org1315119">
 <p>
 Insert below code into ~/.emacs:
 </p>
@@ -161,9 +164,9 @@ For <b>any new programming language</b> not covered in this post, there are two 
 </div>
 </div>
 
-<div id="outline-container-org8a50b95" class="outline-2">
-<h3 id="org8a50b95">Tips (OPTIONAL)</h3>
-<div class="outline-text-2" id="text-org8a50b95">
+<div id="outline-container-orga3e1526" class="outline-2">
+<h3 id="orga3e1526">Tips (OPTIONAL)</h3>
+<div class="outline-text-2" id="text-orga3e1526">
 <ul class="org-ul">
 <li>Please note the first paramter of `string-match-p` is actually <b>regular expression</b>. So you can write regular expression like "\\(/proj1\\|work.org\\)"</li>
 

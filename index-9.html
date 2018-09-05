@@ -126,20 +126,16 @@
             <div class="body">
                 <div>
 <p>
-vimdiff to resolve git/subversion/mercurial merge conflicts effectively   :en:git:mergetool:vim:merge:
-</p>
-
-<p>
-You can jump to <a href="posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#org6f1adf3">No description for this link</a> section at the end of this article.
+You can jump to <a href="posts/use-vimdiff-to-resolve-git-merge-conflicts-effectively.html#org3b48472">No description for this link</a> section at the end of this article.
 </p>
 
 <p>
 I use git as an example of version control software. But you can use any other version control software instead.
 </p>
 
-<div id="outline-container-org1f9dd5e" class="outline-2">
-<h3 id="org1f9dd5e">The reasons to use vimdiff to do the merge?</h3>
-<div class="outline-text-2" id="text-org1f9dd5e">
+<div id="outline-container-org4f936a5" class="outline-2">
+<h3 id="org4f936a5">The reasons to use vimdiff to do the merge?</h3>
+<div class="outline-text-2" id="text-org4f936a5">
 <ul class="org-ul">
 <li>It's free (vim)</li>
 <li>It works on any OS</li>
@@ -149,13 +145,13 @@ I use git as an example of version control software. But you can use any other v
 </div>
 </div>
 
-<div id="outline-container-org6ddd41d" class="outline-2">
-<h3 id="org6ddd41d">Setup</h3>
-<div class="outline-text-2" id="text-org6ddd41d">
+<div id="outline-container-org08ce5d9" class="outline-2">
+<h3 id="org08ce5d9">Setup</h3>
+<div class="outline-text-2" id="text-org08ce5d9">
 </div>
-<div id="outline-container-orga5b001a" class="outline-3">
-<h4 id="orga5b001a">Setup vimdiff (OPTIONAL)</h4>
-<div class="outline-text-3" id="text-orga5b001a">
+<div id="outline-container-orgb5839c8" class="outline-3">
+<h4 id="orgb5839c8">Setup vimdiff (OPTIONAL)</h4>
+<div class="outline-text-3" id="text-orgb5839c8">
 <p>
 The vimdiff as a merge tool will display several buffers to show YOURS/THEIRS/ORIGINAL code.
 </p>
@@ -189,9 +185,9 @@ map &lt;silent&gt; &lt;leader&gt;4 :diffget 4&lt;CR&gt;
 </div>
 </div>
 
-<div id="outline-container-org17403b0" class="outline-3">
-<h4 id="org17403b0">Setup git</h4>
-<div class="outline-text-3" id="text-org17403b0">
+<div id="outline-container-orgcb6b7b6" class="outline-3">
+<h4 id="orgcb6b7b6">Setup git</h4>
+<div class="outline-text-3" id="text-orgcb6b7b6">
 <p>
 Run below commands in shell,
 </p>
@@ -206,13 +202,13 @@ git config --global mergetool.prompt false
 </div>
 </div>
 
-<div id="outline-container-org2dd6207" class="outline-2">
-<h3 id="org2dd6207">Usage</h3>
-<div class="outline-text-2" id="text-org2dd6207">
+<div id="outline-container-orgb94d4be" class="outline-2">
+<h3 id="orgb94d4be">Usage</h3>
+<div class="outline-text-2" id="text-orgb94d4be">
 </div>
-<div id="outline-container-orga9b316b" class="outline-3">
-<h4 id="orga9b316b">Create a "hello world" project</h4>
-<div class="outline-text-3" id="text-orga9b316b">
+<div id="outline-container-org31f0efd" class="outline-3">
+<h4 id="org31f0efd">Create a "hello world" project</h4>
+<div class="outline-text-3" id="text-org31f0efd">
 <p>
 I setup a "hello world" project at <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a> for your practice.
 </p>
@@ -245,9 +241,9 @@ git merge chen # now some conflicts created because Bob has already edited and m
 </div>
 </div>
 
-<div id="outline-container-org3a5ecae" class="outline-3">
-<h4 id="org3a5ecae">Resolve merge conflict</h4>
-<div class="outline-text-3" id="text-org3a5ecae">
+<div id="outline-container-org8e9a891" class="outline-3">
+<h4 id="org8e9a891">Resolve merge conflict</h4>
+<div class="outline-text-3" id="text-org8e9a891">
 <p>
 Now start merge tool,
 </p>
@@ -337,9 +333,9 @@ When you have resolved all the conflicts, follow the hint of git to commit your 
 </div>
 </div>
 
-<div id="outline-container-orgeb536f8" class="outline-2">
-<h3 id="orgeb536f8">Tips</h3>
-<div class="outline-text-2" id="text-orgeb536f8">
+<div id="outline-container-orgade4eb1" class="outline-2">
+<h3 id="orgade4eb1">Tips</h3>
+<div class="outline-text-2" id="text-orgade4eb1">
 <ul class="org-ul">
 <li>fugitive.vim (<a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a>) can do this too. Actually it can do much more git stuff than merge. I cannot write this article without reading its code</li>
 <li>You can use Emacs to do the similar job (<a href="http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool">http://stackoverflow.com/questions/1817370/using-ediff-as-git-mergetool</a>). For me, Emacs start up time is too much for this task. Some people use <code>emacsclient</code> which has other overhead I don't like</li>
@@ -358,9 +354,9 @@ map [[ [n
 </div>
 </div>
 
-<div id="outline-container-org78d7db5" class="outline-2">
-<h3 id="org78d7db5"><a id="org6f1adf3"></a></h3>
-<div class="outline-text-2" id="text-org78d7db5">
+<div id="outline-container-orgf7a0d99" class="outline-2">
+<h3 id="orgf7a0d99"><a id="org3b48472"></a></h3>
+<div class="outline-text-2" id="text-orgf7a0d99">
 <p>
 You can use command line like "git mergetool -t vimdiff" to start vimdiff from git.
 </p>
@@ -390,16 +386,16 @@ Then you can press hot key ",2" ",3" ",4" in vimdiff to pull change from top thr
 </div>
 </div>
 
-<div id="outline-container-org7488351" class="outline-2">
-<h3 id="org7488351">subversion/mercurial</h3>
-<div class="outline-text-2" id="text-org7488351">
+<div id="outline-container-org6de2664" class="outline-2">
+<h3 id="org6de2664">subversion/mercurial</h3>
+<div class="outline-text-2" id="text-org6de2664">
 <p>
 Until now I'm focusing on how to tweak the vimdiff UI because the git has already setup the <a href="https://github.com/git/git/blob/master/mergetools/vimdiff">basic vimdiff layout for us</a>. So we just follow the Git layout in other VCS.
 </p>
 </div>
-<div id="outline-container-orgaa017f3" class="outline-3">
-<h4 id="orgaa017f3">subversion</h4>
-<div class="outline-text-3" id="text-orgaa017f3">
+<div id="outline-container-org7ad40e5" class="outline-3">
+<h4 id="org7ad40e5">subversion</h4>
+<div class="outline-text-3" id="text-org7ad40e5">
 <p>
 Insert below code into ~/.subversion/config:
 </p>
@@ -449,9 +445,9 @@ vimdiff -f -d -c 'wincmd J' "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 </div>
 </div>
 
-<div id="outline-container-org19bf17d" class="outline-2">
-<h3 id="org19bf17d">mercurial</h3>
-<div class="outline-text-2" id="text-org19bf17d">
+<div id="outline-container-orga561b7f" class="outline-2">
+<h3 id="orga561b7f">mercurial</h3>
+<div class="outline-text-2" id="text-orga561b7f">
 <p>
 Insert below code into <code>~/.hgrc</code>:
 </p>
@@ -582,10 +578,6 @@ vimdiff.args = -f -d -c 'wincmd J' "$output" "$local" "$base" "$other" +close +c
             </div>
             <div class="body">
                 <div>
-<p>
-reliable way to access system clipboard from Emacs                        :emacs:en:linux:clipboard:
-</p>
-
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-05-31 Fri&gt;</span></span>
 </p>
@@ -856,13 +848,9 @@ Here is my setup:
             </div>
             <div class="body">
                 <div>
-<p>
-to split album into different flac and tag them under Gentoo Linux        :en:flac:cue:
-</p>
-
-<div id="outline-container-org14b252a" class="outline-2">
-<h3 id="org14b252a">Install CLI tools</h3>
-<div class="outline-text-2" id="text-org14b252a">
+<div id="outline-container-org39e76f5" class="outline-2">
+<h3 id="org39e76f5">Install CLI tools</h3>
+<div class="outline-text-2" id="text-org39e76f5">
 <div class="org-src-container">
 
 <pre><code class="lang-sh"># mac to support ape
@@ -874,9 +862,9 @@ sudo emerge cuetools
 </div>
 </div>
 
-<div id="outline-container-org426e2c9" class="outline-2">
-<h3 id="org426e2c9">Download script</h3>
-<div class="outline-text-2" id="text-org426e2c9">
+<div id="outline-container-org69981e9" class="outline-2">
+<h3 id="org69981e9">Download script</h3>
+<div class="outline-text-2" id="text-org69981e9">
 <p>
 See <a href="https://bbs.archlinux.org/viewtopic.php?id=58766">https://bbs.archlinux.org/viewtopic.php?id=58766</a> for the source of bash script.
 </p>
@@ -947,9 +935,9 @@ Put the script somewhere and name it to <code>cue2flac</code>
 </div>
 </div>
 
-<div id="outline-container-org2cd3777" class="outline-2">
-<h3 id="org2cd3777">Start conversion</h3>
-<div class="outline-text-2" id="text-org2cd3777">
+<div id="outline-container-orgb8f7245" class="outline-2">
+<h3 id="orgb8f7245">Start conversion</h3>
+<div class="outline-text-2" id="text-orgb8f7245">
 <div class="org-src-container">
 
 <pre><code class="lang-sh"># convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"

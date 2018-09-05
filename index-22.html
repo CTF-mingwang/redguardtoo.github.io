@@ -49,10 +49,6 @@
             <div class="body">
                 <div>
 <p>
-to manage Emacs packages effectively                                      :en:emacs:package:
-</p>
-
-<p>
 Here are a few techniques I developed after reading <a href="https://github.com/purcell">Steve Purcell</a>'s setup.
 </p>
 
@@ -64,9 +60,9 @@ The techniques are compatible with <a href="https://github.com/jwiegley/use-pack
 Mid-level Lisp knowledge is required to read this article.
 </p>
 
-<div id="outline-container-orgc58e8b1" class="outline-2">
-<h3 id="orgc58e8b1">Do NOT use package.el for certain packages</h3>
-<div class="outline-text-2" id="text-orgc58e8b1">
+<div id="outline-container-org2fedf96" class="outline-2">
+<h3 id="org2fedf96">Do NOT use package.el for certain packages</h3>
+<div class="outline-text-2" id="text-org2fedf96">
 <p>
 Create the directory <code>~/.emacs.d/site-lisp</code>. Then insert below code into <code>~/.emacs</code>,
 </p>
@@ -91,9 +87,9 @@ You can place a package's source code at sub-directory of <code>~/.emacs.d/site-
 </div>
 </div>
 
-<div id="outline-container-orgb420224" class="outline-2">
-<h3 id="orgb420224">Create your own package repository</h3>
-<div class="outline-text-2" id="text-orgb420224">
+<div id="outline-container-org0b959de" class="outline-2">
+<h3 id="org0b959de">Create your own package repository</h3>
+<div class="outline-text-2" id="text-org0b959de">
 <p>
 Step 1, Place two files "archive-contents" and "hello-1.0.0.el" in any directory. Say <code>~/.emacs.d/localelpa</code>. 
 </p>
@@ -153,10 +149,10 @@ Orphan package issue is also resolved by <code>elpa-mirror</code>. You can delet
 </div>
 </div>
 
-<div id="outline-container-org91bd8ea" class="outline-2">
-<h3 id="org91bd8ea">
+<div id="outline-container-orge753330" class="outline-2">
+<h3 id="orge753330">
 <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Advising-Functions.html">Advice</a> <code>package--add-to-archive-contents</code> to filter packages</h3>
-<div class="outline-text-2" id="text-org91bd8ea">
+<div class="outline-text-2" id="text-orge753330">
 <p>
 Insert below code into ~/.emacs,
 </p>
@@ -220,9 +216,9 @@ This solution is copied from Steve Purcell's setup with a little modification.
 </div>
 </div>
 
-<div id="outline-container-orgb4dc869" class="outline-2">
-<h3 id="orgb4dc869">Summary</h3>
-<div class="outline-text-2" id="text-orgb4dc869">
+<div id="outline-container-org6df3517" class="outline-2">
+<h3 id="org6df3517">Summary</h3>
+<div class="outline-text-2" id="text-org6df3517">
 <p>
 You can combine above techniques to <b>solve any package issue</b>.
 </p>
@@ -277,10 +273,6 @@ It's possibly I started my journey by <a href="https://github.com/redguardtoo/ma
             </div>
             <div class="body">
                 <div>
-<p>
-git-timemachine UI based on ivy-mode                                      :en:emacs:ivy:git:timemachine:
-</p>
-
 <p>
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-09-23 Fri&gt;</span></span>
 </p>
@@ -362,10 +354,6 @@ Screenshot after <code>M-x my-git-timemachine</code>,
             <div class="body">
                 <div>
 <p>
-line with ivy-mode                                                   :en:emacs:ivy:grep:
-</p>
-
-<p>
 Complete current line by <a href="https://git-scm.com/docs/git-grep">git grep</a> and <a href="https://github.com/abo-abo/swiper">ivy-mode</a>.
 </p>
 
@@ -446,19 +434,13 @@ I also tried <code>grep</code> which is too slow for my project.
 
             </div>
             <div class="body">
-                <div>
-<p>
-Messages Buffer modifiable in Emacs 24.4                                 :en:emacs:messages:buffer:
-</p>
-
-<div class="org-src-container">
+                <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defadvice switch-to-buffer (after switch-to-buffer-after-hack activate)
   (if (string= "*Messages*" (buffer-name))
       (read-only-mode -1)))
 </code></pre>
 
-</div>
 </div>
             </div>
         </div>
@@ -488,10 +470,6 @@ Messages Buffer modifiable in Emacs 24.4                                 :en:ema
             </div>
             <div class="body">
                 <div>
-<p>
-to input Non-English character in evil-mode efficiently                   :en:emacs:evil:
-</p>
-
 <p>
 You can <code>M-x toggle-input-method</code> or <code>C-\</code> to input Non-English characters.
 </p>
@@ -595,10 +573,6 @@ Chinese version:
             <div class="body">
                 <div>
 <p>
-tip                                                                :en:emacs:ivy:evil:
-</p>
-
-<p>
 Please install <a href="https://github.com/syl20bnr/evil-escape">evil-escape</a> at first.
 </p>
 
@@ -639,10 +613,6 @@ When <a href="https://github.com/abo-abo/swiper">Swiper/Ivy</a> candidate window
             </div>
             <div class="body">
                 <div>
-<p>
-general.el to provide multiple leader key in evil-mode                    :en:emacs:evil:vim:
-</p>
-
 <p>
 <a href="https://github.com/noctuid/general.el">General.el</a> "provides a more convenient way to bind keys in emacs for both evil and non-evil users".
 </p>
@@ -706,10 +676,6 @@ My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-evil.el
             </div>
             <div class="body">
                 <div>
-<p>
-ivy to open recent directories                                            :en:emacs:ivy:
-</p>
-
 <p>
 The recent directories include parent directories of opened files in Emacs and the directories accessed in Bash shell. 
 </p>
@@ -779,10 +745,6 @@ Screenshot:
             <div class="body">
                 <div>
 <p>
-vs Sublime Text on Salesforce development                               :en:emacs:salesforce:sublime:
-</p>
-
-<p>
 Our client decided to move their legacy system to a cloud platform called salesforce.com. So I got a chance to investigate how to <b>deploy code</b> to the salesforce server inside Emacs and Sublime Text.
 </p>
 
@@ -794,9 +756,9 @@ Salesforce provides <a href="https://developer.salesforce.com/docs/atlas.en-us.d
 Luckily, there is <a href="https://force-cli.heroku.com/">Force.com CLI</a> which can upload single file in a few seconds. Both Sublime Text and Emacs use this tool.
 </p>
 
-<div id="outline-container-org11cf607" class="outline-2">
-<h3 id="org11cf607">Sublime Text</h3>
-<div class="outline-text-2" id="text-org11cf607">
+<div id="outline-container-orga1c4eb7" class="outline-2">
+<h3 id="orga1c4eb7">Sublime Text</h3>
+<div class="outline-text-2" id="text-orga1c4eb7">
 <p>
 You need install sublime text plugin <a href="http://mavensmate.com/Getting_Started/Users">mavensmate</a>. After installation, you need click <code>Login</code> menu at least once. Then when you save the code file, it's automatically deployed to the server.
 </p>
@@ -816,9 +778,9 @@ Mavensmate is actually just GUI wrapper of Force.com CLI,
 </div>
 </div>
 
-<div id="outline-container-org6d3c09b" class="outline-2">
-<h3 id="org6d3c09b">Emacs</h3>
-<div class="outline-text-2" id="text-org6d3c09b">
+<div id="outline-container-org43130d7" class="outline-2">
+<h3 id="org43130d7">Emacs</h3>
+<div class="outline-text-2" id="text-org43130d7">
 <p>
 In Sublime Text I have to re-login and fetch from time to time. That get me distracted. I prefer executing only one commmand to upload the file in editing. That command should be always successful.
 </p>
@@ -901,9 +863,7 @@ Here is my setup,
 
             </div>
             <div class="body">
-                <div id="outline-container-orgbc73121" class="outline-2">
-
-<div class="outline-text-2" id="text-orgbc73121">
+                <div>
 <p>
 You only need <a href="https://github.com/dacap/keyfreq">keyfreq</a> to <b>find</b> frequently used commands.
 </p>
@@ -923,6 +883,7 @@ For example, commands like <code>next-line/previous-line/forward-char/backward-c
 <p>
 The minimum keyfreq setup,
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'keyfreq)
@@ -946,6 +907,7 @@ My <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-keyfreq
 <p>
 Below is the eight month keyfreq data of my office computer,
 </p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-right">
@@ -2144,7 +2106,6 @@ Below is the eight month keyfreq data of my office computer,
 </tr>
 </tbody>
 </table>
-</div>
 </div>
             </div>
         </div>

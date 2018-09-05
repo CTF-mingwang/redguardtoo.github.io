@@ -65,7 +65,7 @@ It uses options <code>--run-together</code> from <a href="http://aspell.net/">GN
 </p>
 
 <p>
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is regards as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing namespace "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing namespace "MS" is regarded as typo.
 </p>
 
 <p>
@@ -420,10 +420,6 @@ Now you can use <a href="https://github.com/redguardtoo/wucuo">wucuo</a> which i
             <div class="body">
                 <div>
 <p>
-Imenu to list comments in current buffer                                  :en:emacs:imenu:
-</p>
-
-<p>
 <a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> v3.2.0 has a new function <code>evilnc-imenu-create-index-function</code>.
 </p>
 
@@ -482,9 +478,7 @@ Screen cast:
 
             </div>
             <div class="body">
-                <div id="outline-container-org01e902c" class="outline-2">
-
-<div class="outline-text-2" id="text-1">
+                <div>
 <p>
 <a href="https://github.com/redguardtoo/counsel-etags">Counsel-etags</a> is a complete solution for code navigation in Emacs.
 </p>
@@ -500,6 +494,7 @@ It solves all problems using Ctags/Etags with Emacs.
 <p>
 <b>Problem 1:</b> Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from <code>counsel-etags</code>. The setup is simple:
 </p>
+
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">;; Don't ask before rereading the TAGS files if they have changed
@@ -543,7 +538,6 @@ There are also other enhancements.
 <p>
 Please check <a href="https://github.com/redguardtoo/counsel-etags">https://github.com/redguardtoo/counsel-etags</a> for more tips.</p>
 </div>
-</div>
             </div>
         </div>
         <div class="post">
@@ -571,10 +565,6 @@ Please check <a href="https://github.com/redguardtoo/counsel-etags">https://gith
             </div>
             <div class="body">
                 <div>
-<p>
-complete everything in Emacs                                             :en:emacs:
-</p>
-
 <p>
 As a web developer using modern front end framework like React/Angular, I spend a lot of time on web components. 
 </p>
@@ -711,10 +701,6 @@ For example, it is a piece of cake to support Lisp by creating comand <code>my-c
             <div class="body">
                 <div>
 <p>
-Emacs window with certain ratio                                        :en:emacs:
-</p>
-
-<p>
 The idea comes from <a href="https://github.com/redguardtoo/emacs.d/issues/607">yangdaweihit</a>. Here is the implementation.
 </p>
 
@@ -803,10 +789,6 @@ Usage is simple. For example, <code>C-x 2</code> is similar to original <code>sp
             </div>
             <div class="body">
                 <div>
-<p>
-diff-mode with Ivy                                                    :en:emacs:diff:ivy:
-</p>
-
 <p>
 My current job requires me to review the freelancer's patches and apply them to our code branch under <a href="https://www.perforce.com/">Perforce</a> control. Due to my client's security policy, the freelancer can only work on isolated sandbox environment and can't access our code base directly.
 </p>
@@ -905,10 +887,6 @@ The solution is added into <a href="https://github.com/technomancy/find-file-in-
             </div>
             <div class="body">
                 <div>
-<p>
-and Emacs                                                             :en:emacs:firefox:ivy:keysnail:
-</p>
-
 <p>
 For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
 </p>
@@ -1062,10 +1040,6 @@ Here is my complete <a href="https://gist.github.com/redguardtoo/003ac86d4c11b70
             <div class="body">
                 <div>
 <p>
-wgrep and evil to replace text efficiently                                :en:emacs:wgrep:
-</p>
-
-<p>
 In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> in order to search/replace text in project root directory.
 </p>
 
@@ -1125,10 +1099,6 @@ I'm too lazy to remember extra commands. So here is the workaround:
             </div>
             <div class="body">
                 <div>
-<p>
-is easy if you read code                                      :en:emacs:ivy:counsel:
-</p>
-
 <p>
 If you regard a package as a collection of APIs and read its code, Emacs is easy to master.
 </p>
@@ -1309,10 +1279,6 @@ Turn off `read-only-mode' of opened files."
             </div>
             <div class="body">
                 <div>
-<p>
-word in Emacs mini-buffer when using Evil                       :en:emacs:evil:vim:
-</p>
-
 <p>
 When using <a href="https://www.emacswiki.org/emacs/Evil">Evil</a> I often input <code>%s/old-keyword/new-keyword/g</code> in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html">Minibuffer</a>.
 </p>

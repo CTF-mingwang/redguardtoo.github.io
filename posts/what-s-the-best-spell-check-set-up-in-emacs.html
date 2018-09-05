@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="What's the best spell check setup in emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html">
-<meta property="og:description" content="the best spell check setup in emacs                                   :en:ispell:aspell:spell:check:emacs:hunspell:
-
-
-
-UPDATED: &lt;2016-05-13 Fri&gt;
+<meta property="og:description" content="UPDATED: &lt;2016-05-13 Fri&gt;
 
 
 
@@ -23,7 +19,11 @@ CREATED: &lt;2014-04-26 Sat&gt;
 
 
 
-I will show you the min">
+I will show you the minimum setup and explain why.
+
+
+
+Topics covered in official manual (flyspell-mode-predicate, for example) are NOT discuss">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2014-04-21T08:25:20Z">
 <meta property="article:tag" content="aspell">
@@ -78,10 +78,6 @@ I will show you the min">
         <div class="body">
             <div>
 <p>
-the best spell check setup in emacs                                   :en:ispell:aspell:spell:check:emacs:hunspell:
-</p>
-
-<p>
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-13 Fri&gt;</span></span>
 </p>
 
@@ -101,9 +97,9 @@ Topics covered in official manual (flyspell-mode-predicate, for example) are NOT
 But you can see my <b>complete</b> setup <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">HERE</a>.
 </p>
 
-<div id="outline-container-org8ef9e57" class="outline-2">
-<h3 id="org8ef9e57">Suggestion for non-programmers</h3>
-<div class="outline-text-2" id="text-org8ef9e57">
+<div id="outline-container-org5013dd0" class="outline-2">
+<h3 id="org5013dd0">Suggestion for non-programmers</h3>
+<div class="outline-text-2" id="text-org5013dd0">
 <p>
 Emacs will find the right dictionary by querying your locale.
 </p>
@@ -159,9 +155,9 @@ Please run command "man aspell" or "man hunspell" in shell if you have more ques
 </div>
 </div>
 
-<div id="outline-container-org55d3c8e" class="outline-2">
-<h3 id="org55d3c8e">Suggestion for programmers</h3>
-<div class="outline-text-2" id="text-org55d3c8e">
+<div id="outline-container-orge444012" class="outline-2">
+<h3 id="orge444012">Suggestion for programmers</h3>
+<div class="outline-text-2" id="text-orge444012">
 <p>
 I strongly recommend aspell instead of hunspell (Though hunspell is fine).
 </p>
@@ -251,13 +247,13 @@ See <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelli
 </div>
 </div>
 
-<div id="outline-container-org6686213" class="outline-2">
-<h3 id="org6686213">Why</h3>
-<div class="outline-text-2" id="text-org6686213">
+<div id="outline-container-org1f67a5f" class="outline-2">
+<h3 id="org1f67a5f">Why</h3>
+<div class="outline-text-2" id="text-org1f67a5f">
 </div>
-<div id="outline-container-orge71fd3a" class="outline-3">
-<h4 id="orge71fd3a">Aspell</h4>
-<div class="outline-text-3" id="text-orge71fd3a">
+<div id="outline-container-orgd892291" class="outline-3">
+<h4 id="orgd892291">Aspell</h4>
+<div class="outline-text-3" id="text-orgd892291">
 <p>
 aspell is recommended because its option "–run-together". That option could check the <b>camel case word</b>. Variable name often uses camel case naming convention these days. Read my <a href="http://blog.binchen.org/?p=950">Effective spell check in Emacs</a> for advanced tips (spell check HTML files).
 </p>
@@ -291,9 +287,9 @@ There is another variable named "ispell-cmd-args". It is actually some <b>extra<
 </p>
 </div>
 </div>
-<div id="outline-container-orga76d63d" class="outline-3">
-<h4 id="orga76d63d">Hunspell</h4>
-<div class="outline-text-3" id="text-orga76d63d">
+<div id="outline-container-org5d758fb" class="outline-3">
+<h4 id="org5d758fb">Hunspell</h4>
+<div class="outline-text-3" id="text-org5d758fb">
 <p>
 I cannot find hunspell option to check camel case words. Please enlighten me if you know the option.
 </p>
@@ -335,13 +331,13 @@ As you can see, you can pass the extra arguments to the hunspell by tweak <code>
 </div>
 </div>
 
-<div id="outline-container-org0c7c5d8" class="outline-2">
-<h3 id="org0c7c5d8">FAQ</h3>
-<div class="outline-text-2" id="text-org0c7c5d8">
+<div id="outline-container-org84608a1" class="outline-2">
+<h3 id="org84608a1">FAQ</h3>
+<div class="outline-text-2" id="text-org84608a1">
 </div>
-<div id="outline-container-orgd2e5cb6" class="outline-3">
-<h4 id="orgd2e5cb6">How to setup Hunspell</h4>
-<div class="outline-text-3" id="text-orgd2e5cb6">
+<div id="outline-container-orgac37741" class="outline-3">
+<h4 id="orgac37741">How to setup Hunspell</h4>
+<div class="outline-text-3" id="text-orgac37741">
 <p>
 The easiest way is to set up environment variable <code>DICPATH</code>,
 </p>

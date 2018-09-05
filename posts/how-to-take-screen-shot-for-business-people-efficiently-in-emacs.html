@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to take screen shot for business people efficiently in Emacs">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-take-screen-shot-for-business-people-efficiently-in-emacs.html">
-<meta property="og:description" content="to take screen shot for business people efficiently in Emacs              :en:emacs:screenshot:org:word:office:linux:
-
-
-
-CREATED: &lt;2013-10-23 Wed&gt;
+<meta property="og:description" content="CREATED: &lt;2013-10-23 Wed&gt;
 
 
 
@@ -36,7 +32,21 @@ Tools
 
 
 
-Nam">
+Name
+Description
+Minimum version
+
+
+
+
+Org-mode
+create org-file which could be converted to odt file
+7.8
+
+
+
+scrot
+command line">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-10-23T17:31:00Z">
 <meta property="article:tag" content="emacs">
@@ -91,10 +101,6 @@ Nam">
         <div class="body">
             <div>
 <p>
-to take screen shot for business people efficiently in Emacs              :en:emacs:screenshot:org:word:office:linux:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-23 Wed&gt;</span></span>
 </p>
 
@@ -102,9 +108,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2013-10-23 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 Tue&gt;</span></span>
 </p>
 
-<div id="outline-container-org181969a" class="outline-2">
-<h3 id="org181969a">Tools</h3>
-<div class="outline-text-2" id="text-org181969a">
+<div id="outline-container-orgd0af29e" class="outline-2">
+<h3 id="orgd0af29e">Tools</h3>
+<div class="outline-text-2" id="text-orgd0af29e">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col class="org-left">
@@ -142,13 +148,13 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 
 </div>
 </div>
 
-<div id="outline-container-org965b8eb" class="outline-2">
-<h3 id="org965b8eb">Work flow</h3>
-<div class="outline-text-2" id="text-org965b8eb">
+<div id="outline-container-org5ffdc76" class="outline-2">
+<h3 id="org5ffdc76">Work flow</h3>
+<div class="outline-text-2" id="text-org5ffdc76">
 </div>
-<div id="outline-container-orgda4960c" class="outline-3">
-<h4 id="orgda4960c">Use scrot to screenshot and put its path into clipboard</h4>
-<div class="outline-text-3" id="text-orgda4960c">
+<div id="outline-container-orgfc35d3f" class="outline-3">
+<h4 id="orgfc35d3f">Use scrot to screenshot and put its path into clipboard</h4>
+<div class="outline-text-3" id="text-orgfc35d3f">
 <div class="org-src-container">
 
 <pre><code class="lang-bash">scrot '%H%M%S-%d_$wx$h.png' -e 'mkdir -p ~/screenshot;mv $f ~/screenshot/;echo ~/screenshot/$f|tr -d \"\\n\"|xsel -ib;'
@@ -158,9 +164,9 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-08-11 
 </div>
 </div>
 
-<div id="outline-container-org7ea0c24" class="outline-3">
-<h4 id="org7ea0c24">Create org file and insert path of screen shot</h4>
-<div class="outline-text-3" id="text-org7ea0c24">
+<div id="outline-container-org17bfb74" class="outline-3">
+<h4 id="org17bfb74">Create org file and insert path of screen shot</h4>
+<div class="outline-text-3" id="text-org17bfb74">
 <p>
 Actually I use below elisp command to do the insertion for me.
 </p>
@@ -193,9 +199,9 @@ The full path into relative path and insert it as a local file link in org-mode"
 </div>
 </div>
 </div>
-<div id="outline-container-org84e4989" class="outline-3">
-<h4 id="org84e4989">Convert org file into Microsoft Word format</h4>
-<div class="outline-text-3" id="text-org84e4989">
+<div id="outline-container-orgcd8dce3" class="outline-3">
+<h4 id="orgcd8dce3">Convert org file into Microsoft Word format</h4>
+<div class="outline-text-3" id="text-orgcd8dce3">
 <p>
 I'm sure this method works even on Windows. But I don't have Windows PC to validate my belief. Libreoffice is required.
 </p>
@@ -237,9 +243,9 @@ Emacs will find the binary "soffice" from libreoffice to do the conversion.
 </div>
 </div>
 
-<div id="outline-container-org6abde89" class="outline-3">
-<h4 id="org6abde89">Tips</h4>
-<div class="outline-text-3" id="text-org6abde89">
+<div id="outline-container-orgbd38ac2" class="outline-3">
+<h4 id="orgbd38ac2">Tips</h4>
+<div class="outline-text-3" id="text-orgbd38ac2">
 <p>
 If you need page break in exported document, insert below snippet into the org file:
 </p>

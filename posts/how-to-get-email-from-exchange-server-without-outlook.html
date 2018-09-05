@@ -11,15 +11,19 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="How to get email from exchange server without Outlook">
 <meta property="og:url" content="http://blog.binchen.org/posts/how-to-get-email-from-exchange-server-without-outlook.html">
-<meta property="og:description" content="to get email from exchange server without Outlook                         :en:email:outlook:imap:linux:emacs:gnus:
+<meta property="og:description" content="This article has three parts. 
 
 
 
-This article has three parts. 
+First part explains setup of mail gateway DavMail for Exchange server.
 
 
 
-First part explains setup of mail gateway DavMai">
+Second part uses thunderbird to fetch mails from Davmail.
+
+
+
+Third part uses Emacs and Gnus ">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-08-06T20:26:00Z">
 <meta property="article:tag" content="emacs">
@@ -74,10 +78,6 @@ First part explains setup of mail gateway DavMai">
         <div class="body">
             <div>
 <p>
-to get email from exchange server without Outlook                         :en:email:outlook:imap:linux:emacs:gnus:
-</p>
-
-<p>
 This article has three parts. 
 </p>
 
@@ -93,16 +93,16 @@ Second part uses <a href="https://www.mozilla.org/en-US/thunderbird/">thunderbir
 Third part uses Emacs and Gnus to replace thunderbird. It's optional.
 </p>
 
-<div id="outline-container-orgc42f81b" class="outline-2">
-<h3 id="orgc42f81b">DavMail as mail gateway</h3>
-<div class="outline-text-2" id="text-orgc42f81b">
+<div id="outline-container-org0b151f9" class="outline-2">
+<h3 id="org0b151f9">DavMail as mail gateway</h3>
+<div class="outline-text-2" id="text-org0b151f9">
 <pre class="example">
 Ever wanted to get rid of Outlook ? DavMail is a POP/IMAP/SMTP/Caldav/Carddav/LDAP exchange gateway allowing users to use any mail/calendar client (e.g. Thunderbird with Lightning or Apple iCal) with an Exchange server.
 </pre>
 </div>
-<div id="outline-container-org66b25ca" class="outline-3">
-<h4 id="org66b25ca">Install</h4>
-<div class="outline-text-3" id="text-org66b25ca">
+<div id="outline-container-org7fb1ba3" class="outline-3">
+<h4 id="org7fb1ba3">Install</h4>
+<div class="outline-text-3" id="text-org7fb1ba3">
 <p>
 <a href="http://davmail.sourceforge.net/download.html">Download the installer</a> at Debian/Ubuntu/Mint:
 </p>
@@ -120,9 +120,9 @@ Installation is easy. DavMail by itself is a portable java application. Since it
 </p>
 </div>
 </div>
-<div id="outline-container-org6f8651a" class="outline-3">
-<h4 id="org6f8651a">Configuration</h4>
-<div class="outline-text-3" id="text-org6f8651a">
+<div id="outline-container-org2039004" class="outline-3">
+<h4 id="org2039004">Configuration</h4>
+<div class="outline-text-3" id="text-org2039004">
 <p>
 Now start DavMail. 
 </p>
@@ -158,9 +158,9 @@ BTW, <a href="https://outlook.office365.com/">https://outlook.office365.com/</a>
 </div>
 </div>
 
-<div id="outline-container-org13d54be" class="outline-2">
-<h3 id="org13d54be">Thunderbird</h3>
-<div class="outline-text-2" id="text-org13d54be">
+<div id="outline-container-org992d0d6" class="outline-2">
+<h3 id="org992d0d6">Thunderbird</h3>
+<div class="outline-text-2" id="text-org992d0d6">
 <p>
 Create a new account, and <b>manually</b> configure the server. The server name is "127.0.0.1", the port number is already on your paper. The minimum setup needs IMAP port to  receive mail and SMTP port to send email.
 </p>
@@ -175,9 +175,9 @@ The only issue is the "Username". You can log in Outlook Web UI, click "Options 
 </div>
 </div>
 
-<div id="outline-container-orgcfbf65d" class="outline-2">
-<h3 id="orgcfbf65d">Emacs Gnus</h3>
-<div class="outline-text-2" id="text-orgcfbf65d">
+<div id="outline-container-org45a9b6d" class="outline-2">
+<h3 id="org45a9b6d">Emacs Gnus</h3>
+<div class="outline-text-2" id="text-org45a9b6d">
 <p>
 Gnus cannot access IMAP service of DavMail. There is <a href="http://permalink.gmane.org/gmane.emacs.gnus.general/83301">some bug</a>.
 </p>

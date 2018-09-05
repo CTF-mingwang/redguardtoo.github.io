@@ -49,10 +49,6 @@
             <div class="body">
                 <div>
 <p>
-regions in Emacs                                                         :emacs:en:diff:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-01-27 Wed&gt;</span></span>
 </p>
 
@@ -202,12 +198,7 @@ So here is my code,
 
             </div>
             <div class="body">
-                <div>
-<p>
-ivy-mode to search bash history                                           :en:emacs:bash:ivy:
-</p>
-
-<div class="org-src-container">
+                <div class="org-src-container">
 
 <pre><code class="lang-lisp">(defun counsel-yank-bash-history ()
   "Yank the bash history"
@@ -227,7 +218,6 @@ ivy-mode to search bash history                                           :en:em
         (message "%s =&gt; kill-ring" val))))
 </code></pre>
 
-</div>
 </div>
             </div>
         </div>
@@ -259,10 +249,6 @@ ivy-mode to search bash history                                           :en:em
             </div>
             <div class="body">
                 <div>
-<p>
-to use Gnus Group Topics efficiently                                      :en:emacs:gmail:email:gnus:
-</p>
-
 <p>
 Group Topics is used to manage Gnus groups.
 </p>
@@ -381,10 +367,6 @@ BTW, "hotmail" and "gmail" are the keys you used when configuring IMAP accounts,
             <div class="body">
                 <div>
 <p>
-gutter tip                                                                :en:emacs:git:git:gutter:
-</p>
-
-<p>
 I use <a href="https://github.com/syohex/emacs-git-gutter">git-gutter.el</a> everyday. It indicats "whether a line has been inserted, modified or deleted". You can jump to the inser/modified/deleted line easily.
 </p>
 
@@ -452,10 +434,6 @@ So I designed `M-x git-gutter-reset-to-head-parent`,
             <div class="body">
                 <div>
 <p>
-gcalcli for google calendar                                               :en:google:calendar:
-</p>
-
-<p>
 I use cli `pip install –user gcalcli parsedatetime` to install <a href="https://github.com/insanum/gcalcli">gcalcli</a> into HOME folder.
 </p>
 
@@ -519,10 +497,6 @@ Edit crontab to remind me about the calendar events,
             </div>
             <div class="body">
                 <div>
-<p>
-Ivy-mode to tweak workgroups2                                             :en:emacs:ivy:workgroups:
-</p>
-
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-22 Tue&gt;</span></span>
 </p>
@@ -632,10 +606,6 @@ Here is code:
             <div class="body">
                 <div>
 <p>
-Ivy-mode, bye Helm                                                      :en:emacs:ivy:helm:
-</p>
-
-<p>
 I love <a href="https://github.com/abo-abo/swiper">Ivy-mode/Swiper</a> because it's fast and easy to extend. So my <a href="https://github.com/emacs-helm/helm">Helm</a> setup is replaced by ivy-mode.
 </p>
 
@@ -647,13 +617,13 @@ I will show you how I use ivy-mode.
 <b>Only one API</b> `ivy-read` from ivy-mode is used.
 </p>
 
-<div id="outline-container-orge1a6c6d" class="outline-2">
-<h3 id="orge1a6c6d">Demo</h3>
-<div class="outline-text-2" id="text-orge1a6c6d">
+<div id="outline-container-org1b3dd69" class="outline-2">
+<h3 id="org1b3dd69">Demo</h3>
+<div class="outline-text-2" id="text-org1b3dd69">
 </div>
-<div id="outline-container-org024949a" class="outline-3">
-<h4 id="org024949a">M-x counsel-git-grep-yank-line</h4>
-<div class="outline-text-3" id="text-org024949a">
+<div id="outline-container-orgf8943d8" class="outline-3">
+<h4 id="orgf8943d8">M-x counsel-git-grep-yank-line</h4>
+<div class="outline-text-3" id="text-orgf8943d8">
 <p>
 Use <a href="https://git-scm.com/docs/git-grep">git-grep</a> to grep lines. Then copy the selected line into kill ring.
 </p>
@@ -663,9 +633,9 @@ Use <a href="https://git-scm.com/docs/git-grep">git-grep</a> to grep lines. Then
 </div>
 </div>
 </div>
-<div id="outline-container-org95efce9" class="outline-3">
-<h4 id="org95efce9">M-x counsel-git-find-my-file</h4>
-<div class="outline-text-3" id="text-org95efce9">
+<div id="outline-container-org68e3e5e" class="outline-3">
+<h4 id="org68e3e5e">M-x counsel-git-find-my-file</h4>
+<div class="outline-text-3" id="text-org68e3e5e">
 <p>
 Find my file under git version control in recent N weeks.
 </p>
@@ -676,9 +646,9 @@ Find my file under git version control in recent N weeks.
 </div>
 </div>
 </div>
-<div id="outline-container-org47d8342" class="outline-3">
-<h4 id="org47d8342">M-x ivy-imenu-goto</h4>
-<div class="outline-text-3" id="text-org47d8342">
+<div id="outline-container-orge70f5ef" class="outline-3">
+<h4 id="orge70f5ef">M-x ivy-imenu-goto</h4>
+<div class="outline-text-3" id="text-orge70f5ef">
 <p>
 Imenu. It's quick.
 </p>
@@ -689,9 +659,9 @@ Imenu. It's quick.
 </div>
 </div>
 </div>
-<div id="outline-container-org3986b7a" class="outline-3">
-<h4 id="org3986b7a">M-x ivy-bookmark-goto</h4>
-<div class="outline-text-3" id="text-org3986b7a">
+<div id="outline-container-org92fa198" class="outline-3">
+<h4 id="org92fa198">M-x ivy-bookmark-goto</h4>
+<div class="outline-text-3" id="text-org92fa198">
 <p>
 Quick and customizable.
 </p>
@@ -704,9 +674,9 @@ Quick and customizable.
 </div>
 </div>
 
-<div id="outline-container-orga7f570c" class="outline-2">
-<h3 id="orga7f570c">Code</h3>
-<div class="outline-text-2" id="text-orga7f570c">
+<div id="outline-container-org10c693d" class="outline-2">
+<h3 id="org10c693d">Code</h3>
+<div class="outline-text-2" id="text-org10c693d">
 <p>
 Swiper 7.0+ required.
 </p>
@@ -895,10 +865,6 @@ Or else, find files since 24 weeks (6 months) ago."
             <div class="body">
                 <div>
 <p>
-auto-completion for non-programmers                                     :en:emacs:completion:word:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-12-01 Tue&gt;</span></span>
 </p>
 
@@ -994,10 +960,6 @@ You can download my <a href="https://github.com/redguardtoo/emacs.d/raw/master/m
             </div>
             <div class="body">
                 <div>
-<p>
-completion for HTML/JS/CSS in Emacs                                      :en:emacs:html:css:javascript:
-</p>
-
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-11-27 Fri&gt;</span></span>
 </p>
@@ -1172,10 +1134,6 @@ All done. Use company-mode as your wish!</p>
             </div>
             <div class="body">
                 <div>
-<p>
-js2-mode to print json path                                               :en:emacs:js2:javascript:
-</p>
-
 <p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-10-29 Thu&gt;</span></span>
 </p>

@@ -11,15 +11,12 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Find files provided by the installed package">
 <meta property="og:url" content="http://blog.binchen.org/posts/find-files-provided-by-the-installed-package.html">
-<meta property="og:description" content="files provided by the installed package                                  :linux:package:manager:en:
-
-
-
-
-dpkg -L emacs # Debian/Ubuntu
+<meta property="og:description" content="dpkg -L emacs # Debian/Ubuntu
 pacman -Ql emacs # ArchLinux
 rpm -qlp emacs # Redhat/Centos
-cygche">
+cygcheck -l emacs # Cygwin
+brew ls --verbose emacs # Homebrew
+equery f emacs # Gentoo Linux, you need install ">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-02-18T17:34:00Z">
 <meta property="article:tag" content="en">
@@ -66,12 +63,7 @@ cygche">
 
         </div>
         <div class="body">
-            <div>
-<p>
-files provided by the installed package                                  :linux:package:manager:en:
-</p>
-
-<div class="org-src-container">
+            <div class="org-src-container">
 
 <pre><code class="lang-sh">dpkg -L emacs # Debian/Ubuntu
 pacman -Ql emacs # ArchLinux
@@ -82,7 +74,6 @@ equery f emacs # Gentoo Linux, you need install gentoolkit
 gem contents zurb-foundation # Ruby gem
 </code></pre>
 
-</div>
 </div>
         </div>
         

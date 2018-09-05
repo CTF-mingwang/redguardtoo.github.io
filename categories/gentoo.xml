@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gentoo)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gentoo.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Memo on upgrading ArchLinux</title><link>http://blog.binchen.org/posts/memo-on-upgrading-archlinux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;pre class="prettyprint "&gt;
 &lt;h2&gt;shit happens&lt;/h2&gt;
 &lt;p&gt;pacman -Syu &lt;/p&gt;
 &lt;h2&gt;archlinux replace grub with grub2&lt;/h2&gt;
@@ -33,13 +33,9 @@ sudo emerge wxpython iproute2 x11vnc tightvnc
 sudo ebuild /usr/portage/net-misc/gitso/gitso-0.6.ebuild unpack compile install qmerge clean
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;/p&gt;&lt;p&gt; There are many howtos on gitso on internet. Google it. &lt;/p&gt;&lt;/div&gt;</description><category>desktop</category><category>en</category><category>gentoo</category><category>linux</category><category>remote</category><category>vnc</category><guid>http://blog.binchen.org/posts/install-gitso-v0-6-on-gentoo-linux.html</guid><pubDate>Thu, 29 Aug 2013 22:43:14 GMT</pubDate></item><item><title>Notes to install Gentoo Linux</title><link>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-to install Gentoo Linux                                                 :gentoo:linux:install:en:
-&lt;/p&gt;
-
-&lt;div id="outline-container-orgd9a864d" class="outline-2"&gt;
-&lt;h3 id="orgd9a864d"&gt;Intel integrated video card&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd9a864d"&gt;
+&lt;p&gt;&lt;/p&gt;&lt;p&gt; There are many howtos on gitso on internet. Google it. &lt;/p&gt;&lt;/div&gt;</description><category>desktop</category><category>en</category><category>gentoo</category><category>linux</category><category>remote</category><category>vnc</category><guid>http://blog.binchen.org/posts/install-gitso-v0-6-on-gentoo-linux.html</guid><pubDate>Thu, 29 Aug 2013 22:43:14 GMT</pubDate></item><item><title>Notes to install Gentoo Linux</title><link>http://blog.binchen.org/posts/notes-to-install-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-org0e27a94" class="outline-2"&gt;
+&lt;h3 id="org0e27a94"&gt;Intel integrated video card&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0e27a94"&gt;
 &lt;p&gt;
 Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&amp;gt; Intel) is critical:
 &lt;/p&gt;
@@ -52,9 +48,9 @@ Enable KMS (Kernel Mode Setting) for Intel (Device Drivers =&amp;gt; Graphic =&a
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org47c82d2" class="outline-2"&gt;
-&lt;h3 id="org47c82d2"&gt;Grub2&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org47c82d2"&gt;
+&lt;div id="outline-container-org24f3c30" class="outline-2"&gt;
+&lt;h3 id="org24f3c30"&gt;Grub2&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org24f3c30"&gt;
 &lt;p&gt;
 Let grub2 create the cfg for me automatically,
 &lt;/p&gt;
@@ -67,13 +63,13 @@ Let grub2 create the cfg for me automatically,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgab593f6" class="outline-2"&gt;
-&lt;h3 id="orgab593f6"&gt;Network&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgab593f6"&gt;
+&lt;div id="outline-container-org905fda7" class="outline-2"&gt;
+&lt;h3 id="org905fda7"&gt;Network&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org905fda7"&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orga49390c" class="outline-3"&gt;
-&lt;h4 id="orga49390c"&gt;Ethernet&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orga49390c"&gt;
+&lt;div id="outline-container-org54f3c5b" class="outline-3"&gt;
+&lt;h4 id="org54f3c5b"&gt;Ethernet&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org54f3c5b"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -88,9 +84,9 @@ rc-update add net.eth0 default
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb515265" class="outline-3"&gt;
-&lt;h4 id="orgb515265"&gt;Wireless (wifi)&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgb515265"&gt;
+&lt;div id="outline-container-org2bf7d0c" class="outline-3"&gt;
+&lt;h4 id="org2bf7d0c"&gt;Wireless (wifi)&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2bf7d0c"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;#net.lo should exist! if NOT, `emerge --ask --oneshot net-misc/netifrc`
@@ -163,18 +159,18 @@ Modify /lib/netifrc/net/wpa_supplicant.sh to for it use wext,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1300c8b" class="outline-2"&gt;
-&lt;h3 id="org1300c8b"&gt;Clock Synchronization&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1300c8b"&gt;
+&lt;div id="outline-container-orgd199933" class="outline-2"&gt;
+&lt;h3 id="orgd199933"&gt;Clock Synchronization&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd199933"&gt;
 &lt;p&gt;
 &lt;a href="http://en.gentoo-wiki.com/wiki/Time_Synchronization#htpdate"&gt;htpdate&lt;/a&gt; is great because it only use HTTP protocol, don't forget add server in its config file.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org73a0b9d" class="outline-2"&gt;
-&lt;h3 id="org73a0b9d"&gt;Sound&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org73a0b9d"&gt;
+&lt;div id="outline-container-org1de10af" class="outline-2"&gt;
+&lt;h3 id="org1de10af"&gt;Sound&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org1de10af"&gt;
 &lt;p&gt;
 Nothing to tell. There may be some issue, but I forgot.&lt;/p&gt;
 &lt;/div&gt;

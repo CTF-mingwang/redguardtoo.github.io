@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Perforce inside Emacs                                                     :en:emacs:perforce:vcs:bash:p4:
-&lt;/p&gt;
-
-&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about bash)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/bash.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Use Perforce inside Emacs</title><link>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-12-05 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -19,9 +15,9 @@ Perforce is a proprietary VCS. It's less powerful than &lt;a href="https://git-s
 For example, &lt;code&gt;git log -p file-path&lt;/code&gt; displays the detailed history of a single file. There is no way you can do this in perforce. Even ClI like &lt;code&gt;p4 changes file-path | awk '{print $2}' | xargs -i p4 describe -du {}&lt;/code&gt; can't do it. I have to use Emacs Lisp to clean the output of &lt;code&gt;p4&lt;/code&gt;.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orga1273fd" class="outline-2"&gt;
-&lt;h3 id="orga1273fd"&gt;Perforce workflow&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orga1273fd"&gt;
+&lt;div id="outline-container-org95abc8e" class="outline-2"&gt;
+&lt;h3 id="org95abc8e"&gt;Perforce workflow&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org95abc8e"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;p4 set&lt;/code&gt; to &lt;a href="https://www.perforce.com/perforce/r14.2/manuals/cmdref/p4_set.html"&gt;set up&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;p4 login&lt;/code&gt; to login&lt;/li&gt;
@@ -35,9 +31,9 @@ For example, &lt;code&gt;git log -p file-path&lt;/code&gt; displays the detailed
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org48542ad" class="outline-2"&gt;
-&lt;h3 id="org48542ad"&gt;My solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org48542ad"&gt;
+&lt;div id="outline-container-org9e9dbd2" class="outline-2"&gt;
+&lt;h3 id="org9e9dbd2"&gt;My solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org9e9dbd2"&gt;
 &lt;p&gt;
 Perforce Cygwin portable is not recommended.
 &lt;/p&gt;
@@ -50,9 +46,9 @@ I suggest using executable from Perforce Windows native version which works on b
 Perforce server assigns unique URL for each physical file. If I only feed &lt;code&gt;p4&lt;/code&gt; that URL, the operation is always successful.
 &lt;/p&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-org9c3957e" class="outline-3"&gt;
-&lt;h4 id="org9c3957e"&gt;Emacs&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org9c3957e"&gt;
+&lt;div id="outline-container-orgaa364b9" class="outline-3"&gt;
+&lt;h4 id="orgaa364b9"&gt;Emacs&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-orgaa364b9"&gt;
 &lt;p&gt;
 I developed &lt;a href="https://github.com/redguardtoo/vc-msg"&gt;vc-msg&lt;/a&gt; which shows "commit message of current line in Emacs". It supports Perforce out of box (you still need &lt;code&gt;p4 login&lt;/code&gt; at first.)
 &lt;/p&gt;
@@ -214,9 +210,9 @@ You can also check my &lt;a href="https://github.com/redguardtoo/emacs.d/blob/ma
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id="outline-container-orgfbf65a8" class="outline-3"&gt;
-&lt;h4 id="orgfbf65a8"&gt;Bash Shell&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-orgfbf65a8"&gt;
+&lt;div id="outline-container-org2508396" class="outline-3"&gt;
+&lt;h4 id="org2508396"&gt;Bash Shell&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2508396"&gt;
 &lt;p&gt;
 Other operations are finished in Bash Shell,
 &lt;/p&gt;
@@ -348,11 +344,7 @@ function p4ml(){
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-ivy-mode to search bash history                                           :en:emacs:bash:ivy:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>p4</category><category>perforce</category><category>vcs</category><guid>http://blog.binchen.org/posts/use-perforce-inside-emacs.html</guid><pubDate>Mon, 05 Dec 2016 11:51:47 GMT</pubDate></item><item><title>Use ivy-mode to search bash history</title><link>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun counsel-yank-bash-history ()
   "Yank the bash history"
@@ -372,11 +364,7 @@ ivy-mode to search bash history                                           :en:em
         (message "%s =&amp;gt; kill-ring" val))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-to manage the file path in big project                                    :en:engineering:software:bash:
-&lt;/p&gt;
-
-&lt;p&gt;
+&lt;/div&gt;</description><category>bash</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/use-ivy-mode-to-search-bash-history.html</guid><pubDate>Mon, 25 Jan 2016 05:40:41 GMT</pubDate></item><item><title>How to manage the file path in big project</title><link>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 It's not good practice to use relative path in big project.
 &lt;/p&gt;
 
@@ -452,10 +440,6 @@ Or you can override the TTAGROOT value when you executing "test.sh":
 &lt;p&gt;
 BTW, don't abuse this technique. Set &lt;b&gt;one environment variable&lt;/b&gt; for the root directory of project is enough.
 &lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>engineering</category><category>software</category><guid>http://blog.binchen.org/posts/how-to-manage-the-file-path-in-big-project.html</guid><pubDate>Thu, 29 May 2014 01:31:35 GMT</pubDate></item><item><title>paste string from clipboard into minibuffer in Emacs</title><link>http://blog.binchen.org/posts/paste-string-from-clipboard-into-minibuffer-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-string from clipboard into minibuffer in Emacs                          :en:emacs:bash:
-&lt;/p&gt;
-
-&lt;p&gt;
 First, I find &lt;code&gt;M-Y&lt;/code&gt; is easier to press when paste string into minibuffer than old "Shift+Insert". "Ctrl-V" is not supported in some terminals.
 &lt;/p&gt;
 
@@ -559,10 +543,6 @@ ff line-from-clipboard
 &lt;/pre&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;p&gt; Here is the screen cast: &lt;img src="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif" alt="https://dl.dropboxusercontent.com/u/858862/screencast/git-find-full-path.gif"&gt; &lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><guid>http://blog.binchen.org/posts/how-to-use-git-effectively.html</guid><pubDate>Fri, 11 Oct 2013 09:38:00 GMT</pubDate></item><item><title>The power of git command line interface</title><link>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-power of git command line interface                                       :en:git:percol:bash:linux:
-&lt;/p&gt;
-
-&lt;p&gt;
 Examples about how to use git CLI.
 &lt;/p&gt;
 
@@ -630,10 +610,6 @@ BTW, I use CLI clipboard tool like xsel. For example, "echo hello|xsel -ib" whic
 &lt;p&gt;
 so I can &lt;code&gt;git show `gcid`|xsel -ib&lt;/code&gt; to copy/paste the code of specific commit between terminal and firefox.
 &lt;/p&gt;&lt;/div&gt;</description><category>bash</category><category>en</category><category>git</category><category>linux</category><category>percol</category><guid>http://blog.binchen.org/posts/the-power-of-git-command-line-interface-4.html</guid><pubDate>Thu, 01 Aug 2013 15:17:00 GMT</pubDate></item><item><title>My git alias in .bashrc</title><link>http://blog.binchen.org/posts/my-git-alias-in-bashrc.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-git alias in .bashrc                                                       :en:git:version:control:bash:
-&lt;/p&gt;
-
-&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2012-12-26 Wed&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 

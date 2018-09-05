@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 09 Aug 2018 14:47:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-speed up 1000%                                                          :en:linux:emacs:
-&lt;/p&gt;
-
-&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
 &lt;/p&gt;
 
@@ -234,10 +230,6 @@ sudo mount 192.168.1.9:/srv/nfs4/z ~/z -o rsize=131072,wsize=131072,noatime,nodi
 &lt;/pre&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt; &lt;/div&gt;</description><category>archlinux</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/notes-on-set-up-nfs-on-archlinux.html</guid><pubDate>Fri, 07 Feb 2014 17:24:09 GMT</pubDate></item><item><title>Effective spell check in Emacs</title><link>http://blog.binchen.org/posts/effective-spell-check-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-spell check in Emacs                                                :en:linux:emacs:spell:
-&lt;/p&gt;
-
-&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2014-01-21 Tue&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -270,9 +262,9 @@ There is also a &lt;a href="http://blog.binchen.org/posts/what-s-the-best-spell-
 &lt;li&gt;How to setup hunspell&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div id="outline-container-org18d53df" class="outline-2"&gt;
-&lt;h3 id="org18d53df"&gt;Spell check in HTML&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org18d53df"&gt;
+&lt;div id="outline-container-orged4c87c" class="outline-2"&gt;
+&lt;h3 id="orged4c87c"&gt;Spell check in HTML&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orged4c87c"&gt;
 &lt;p&gt;
 I will spell check,
 &lt;/p&gt;
@@ -332,9 +324,9 @@ I use &lt;a href="http://web-mode.org/"&gt;web-mode&lt;/a&gt; for HTML files. Th
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org465dbe4" class="outline-2"&gt;
-&lt;h3 id="org465dbe4"&gt;Don't display doublon (double word) as error&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org465dbe4"&gt;
+&lt;div id="outline-container-org4f52bd0" class="outline-2"&gt;
+&lt;h3 id="org4f52bd0"&gt;Don't display doublon (double word) as error&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org4f52bd0"&gt;
 &lt;p&gt;
 Modern CSS frameworks like &lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; make doublon unavoidable. For example, CSS class name &lt;code&gt;btn btn-default&lt;/code&gt; contains double word &lt;code&gt;btn&lt;/code&gt;.
 &lt;/p&gt;
@@ -363,9 +355,9 @@ So we need stop displaying doublon as error in HTML,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfd47e75" class="outline-2"&gt;
-&lt;h3 id="orgfd47e75"&gt;Spell check camel case strings&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgfd47e75"&gt;
+&lt;div id="outline-container-org4ed0ec1" class="outline-2"&gt;
+&lt;h3 id="org4ed0ec1"&gt;Spell check camel case strings&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org4ed0ec1"&gt;
 &lt;p&gt;
 We can check camel cased string/variable/function if and only if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
 &lt;/p&gt;
@@ -391,9 +383,9 @@ Insert below code into &lt;code&gt;.emacs&lt;/code&gt;,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgbd43ade" class="outline-2"&gt;
-&lt;h3 id="orgbd43ade"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgbd43ade"&gt;
+&lt;div id="outline-container-orgd456738" class="outline-2"&gt;
+&lt;h3 id="orgd456738"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd456738"&gt;
 &lt;p&gt;
 &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests &lt;code&gt;(flyspell-prog-mode)&lt;/code&gt; which only checks typo in comments.
 &lt;/p&gt;
@@ -414,9 +406,9 @@ Screen shot (typos are underscored):
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4c45c19" class="outline-2"&gt;
-&lt;h3 id="org4c45c19"&gt;Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4c45c19"&gt;
+&lt;div id="outline-container-org6951cc5" class="outline-2"&gt;
+&lt;h3 id="org6951cc5"&gt;Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6951cc5"&gt;
 &lt;p&gt;
 If you fully understand my previous sections, you don't need read this section.
 &lt;/p&gt;
@@ -451,10 +443,6 @@ sudo ls -1 /etc/{rc,init}.d/|grep local
 &lt;/pre&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;</description><category>en</category><category>init</category><category>linux</category><guid>http://blog.binchen.org/posts/how-to-execute-user-program-for-system-v-init-script.html</guid><pubDate>Sat, 18 Jan 2014 09:37:10 GMT</pubDate></item><item><title>My grub2 configuration</title><link>http://blog.binchen.org/posts/my-grub2-configuration.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-grub2 configuration                                                        :grub:linux:en:
-&lt;/p&gt;
-
-&lt;p&gt;
 Content of &lt;code&gt;/etc/grub.d/11_windows&lt;/code&gt;,
 &lt;/p&gt;
 

@@ -11,14 +11,11 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Perforce Tip: how to apply my default change to the release branch">
 <meta property="og:url" content="http://blog.binchen.org/posts/perforce-tip-how-to-apply-my-default-change-to-the-release-branch.html">
-<meta property="og:description" content="Tip: how to apply my default change to the release branch :en:linux:scm:perforce:
+<meta property="og:description" content="Reasons I need this hack
 
 
-
-Reasons I need this hack
-
-
-Our current project uses mix platforms (WIN64/Linux64), so the file path contains backwa">
+Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash \.
+My p4 CLI program is from Windows installer because Cygwin version has th">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2011-06-24T21:15:00Z">
 <meta property="article:tag" content="en">
@@ -66,13 +63,9 @@ Our current project uses mix platforms (WIN64/Linux64), so the file path contain
         </div>
         <div class="body">
             <div>
-<p>
-Tip: how to apply my default change to the release branch :en:linux:scm:perforce:
-</p>
-
-<div id="outline-container-org8cc586e" class="outline-2">
-<h3 id="org8cc586e">Reasons I need this hack</h3>
-<div class="outline-text-2" id="text-org8cc586e">
+<div id="outline-container-org5a947e4" class="outline-2">
+<h3 id="org5a947e4">Reasons I need this hack</h3>
+<div class="outline-text-2" id="text-org5a947e4">
 <ul class="org-ul">
 <li>Our current project uses mix platforms (WIN64/Linux64), so the file path contains backward slash <code>\</code>.</li>
 <li>My p4 CLI program is from Windows installer because Cygwin version has the slash issue.</li>
@@ -81,9 +74,9 @@ Tip: how to apply my default change to the release branch :en:linux:scm:perforce
 </div>
 </div>
 
-<div id="outline-container-org8e1c9a3" class="outline-2">
-<h3 id="org8e1c9a3">How to?</h3>
-<div class="outline-text-2" id="text-org8e1c9a3">
+<div id="outline-container-orga9023e3" class="outline-2">
+<h3 id="orga9023e3">How to?</h3>
+<div class="outline-text-2" id="text-orga9023e3">
 <p>
 Create the patch,
 </p>

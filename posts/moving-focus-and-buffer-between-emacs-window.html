@@ -11,15 +11,16 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Moving focus and buffer between Emacs window">
 <meta property="og:url" content="http://blog.binchen.org/posts/moving-focus-and-buffer-between-emacs-window.html">
-<meta property="og:description" content="focus and buffer between Emacs window                                  :en:emacs:window:buffer:move:
+<meta property="og:description" content="Please read the excellent article Moving between Emacs windows for basic setup.
 
 
 
-Please read the excellent article Moving between Emacs windows for basic setup.
+Here is my summary of that article:
 
 
 
-Here is my su">
+you can use windmove.el (embedded in Emacs). Its hotkey is Shift+Arrow
+switch-">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2013-02-03T14:19:00Z">
 <meta property="article:tag" content="buffer">
@@ -70,10 +71,6 @@ Here is my su">
         <div class="body">
             <div>
 <p>
-focus and buffer between Emacs window                                  :en:emacs:window:buffer:move:
-</p>
-
-<p>
 Please read the excellent article <a href="http://irreal.org/blog/?p=1562">Moving between Emacs windows</a> for basic setup.
 </p>
 
@@ -91,9 +88,9 @@ Here is my summary of that article:
 I also use other packages which is more efficient.
 </p>
 
-<div id="outline-container-org4760e07" class="outline-2">
-<h3 id="org4760e07">window-numbering.el</h3>
-<div class="outline-text-2" id="text-org4760e07">
+<div id="outline-container-orgf32fe9d" class="outline-2">
+<h3 id="orgf32fe9d">window-numbering.el</h3>
+<div class="outline-text-2" id="text-orgf32fe9d">
 <p>
 <a href="https://github.com/nschum/window-numbering.el">window-numbering.el</a> is <b>great</b>. It uses hot key <code>M-number</code> to switch window (for example, <code>M-3</code> to select window with number 3). So I can press only <b>one</b> key to switch window. Besides, it has some extra features like <code>M-0</code> to jump to the minibuffer.
 </p>
@@ -113,18 +110,18 @@ Here is my configuration for <code>window-numbering.el</code>:
 </div>
 </div>
 
-<div id="outline-container-org9377eb0" class="outline-2">
-<h3 id="org9377eb0">Evil</h3>
-<div class="outline-text-2" id="text-org9377eb0">
+<div id="outline-container-orgfd3d3c6" class="outline-2">
+<h3 id="orgfd3d3c6">Evil</h3>
+<div class="outline-text-2" id="text-orgfd3d3c6">
 <p>
 <a href="http://emacswiki.org/emacs/Evil">Evil</a> is a vim-emulation. It use vim's keybindings <code>C-w h/j/k/l</code> to move. Please note <code>C-w h</code> is more efficient than <code>C-x o</code>. It's because <code>w</code> key is more close than <code>x</code> key and <code>h/j/k/l</code> is easy to press.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8e3c8dc" class="outline-2">
-<h3 id="org8e3c8dc">buffer-move.el</h3>
-<div class="outline-text-2" id="text-org8e3c8dc">
+<div id="outline-container-org137972f" class="outline-2">
+<h3 id="org137972f">buffer-move.el</h3>
+<div class="outline-text-2" id="text-org137972f">
 <p>
 <a href="http://www.emacswiki.org/cgi-bin/wiki/buffer-move.el">buffer-move.el</a> moves the buffer instead of focus between windows. It can be installed through <a href="http://melpa.milkbox.net/">MELPA</a>.
 </p>
@@ -144,9 +141,9 @@ Here is my configuration:
 </div>
 </div>
 
-<div id="outline-container-org93ae6ad" class="outline-2">
-<h3 id="org93ae6ad">Optimization</h3>
-<div class="outline-text-2" id="text-org93ae6ad">
+<div id="outline-container-org2e87da3" class="outline-2">
+<h3 id="org2e87da3">Optimization</h3>
+<div class="outline-text-2" id="text-org2e87da3">
 <p>
 I use <a href="https://github.com/dacap/keyfreq">keyfreq</a> to record all my key pressing for <b>more than six months</b>.
 </p>

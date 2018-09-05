@@ -11,11 +11,7 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="Emacs as C++ IDE, easy way">
 <meta property="og:url" content="http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html">
-<meta property="og:description" content="as C++ IDE, easy way                                                    :en:emacs:c:global:gtags:c:ide:
-
-
-
-CREATED: &lt;2016-08-25 Thu&gt;
+<meta property="og:description" content="CREATED: &lt;2016-08-25 Thu&gt;
 
 
 
@@ -23,7 +19,11 @@ UPDATED: &lt;2017-05-17 Wed&gt;
 
 
 
-This is a newbie friendly solution ">
+This is a newbie friendly solution which works at Linux/OSX/Cygwin (should work at Windows too, but I don't develop at Windows).
+
+
+
+Setup is m">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2016-08-25T14:20:28Z">
 <meta property="article:tag" content="c">
@@ -76,10 +76,6 @@ This is a newbie friendly solution ">
         <div class="body">
             <div>
 <p>
-as C++ IDE, easy way                                                    :en:emacs:c:global:gtags:c:ide:
-</p>
-
-<p>
 CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-25 Thu&gt;</span></span>
 </p>
 
@@ -105,9 +101,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 </p>
 
-<div id="outline-container-org37fea07" class="outline-2">
-<h3 id="org37fea07">Step 1, create sample projects for experiment</h3>
-<div class="outline-text-2" id="text-org37fea07">
+<div id="outline-container-orga8ec3d3" class="outline-2">
+<h3 id="orga8ec3d3">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-orga8ec3d3">
 <p>
 I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
@@ -158,9 +154,9 @@ int main(int argc, char *argv[]) {
 </div>
 </div>
 
-<div id="outline-container-org80ef8a4" class="outline-2">
-<h3 id="org80ef8a4">Step 2, scan C++ code and setup Emacs</h3>
-<div class="outline-text-2" id="text-org80ef8a4">
+<div id="outline-container-org5f3dfd2" class="outline-2">
+<h3 id="org5f3dfd2">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-org5f3dfd2">
 <p>
 Run below command in shell to scan code,
 </p>
@@ -215,9 +211,9 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </div>
 </div>
 
-<div id="outline-container-org2bf6826" class="outline-2">
-<h3 id="org2bf6826">Usage</h3>
-<div class="outline-text-2" id="text-org2bf6826">
+<div id="outline-container-orgfe2296a" class="outline-2">
+<h3 id="orgfe2296a">Usage</h3>
+<div class="outline-text-2" id="text-orgfe2296a">
 <p>
 Use the Emacs plugins as usual.
 </p>
@@ -237,9 +233,9 @@ Screenshot,
 </div>
 </div>
 
-<div id="outline-container-org2e6d120" class="outline-2">
-<h3 id="org2e6d120">Technical Details (Optional)</h3>
-<div class="outline-text-2" id="text-org2e6d120">
+<div id="outline-container-orgb1aeab2" class="outline-2">
+<h3 id="orgb1aeab2">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-orgb1aeab2">
 <p>
 Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.
 </p>

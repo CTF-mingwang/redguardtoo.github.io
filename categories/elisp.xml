@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about elisp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/elisp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 23 Jul 2018 11:37:30 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Debug Emacs Lisp code the hard way</title><link>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I &lt;a href="https://github.com/emacs-helm/helm/issues/448"&gt;met some issue&lt;/a&gt; when using helm several days ago. &lt;/p&gt; &lt;p&gt; With the help from Michael Heerdegen, I can locate the line error message is dumped. &lt;/p&gt; &lt;p&gt; But the problem is I cannot get the backtrace at all. &lt;/p&gt; &lt;p&gt; So I insert some &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html"&gt;backtrace printing code&lt;/a&gt; above that line and "M-x eval-buffer": &lt;/p&gt;   
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about elisp)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/elisp.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Debug Emacs Lisp code the hard way</title><link>http://blog.binchen.org/posts/debug-emacs-lisp-code-the-hard-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt;I &lt;a href="https://github.com/emacs-helm/helm/issues/448"&gt;met some issue&lt;/a&gt; when using helm several days ago. &lt;/p&gt; &lt;p&gt; With the help from Michael Heerdegen, I can locate the line error message is dumped. &lt;/p&gt; &lt;p&gt; But the problem is I cannot get the backtrace at all. &lt;/p&gt; &lt;p&gt; So I insert some &lt;a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Internals-of-Debugger.html"&gt;backtrace printing code&lt;/a&gt; above that line and "M-x eval-buffer": &lt;/p&gt;   
 &lt;pre class="prettyprint "&gt;
 
 (with-output-to-temp-buffer "backtrace-output"
@@ -25,10 +25,6 @@
 &lt;/pre&gt;
 
 &lt;p&gt;&lt;/p&gt;&lt;/div&gt;</description><category>elisp</category><category>emacs</category><category>en</category><category>programming</category><guid>http://blog.binchen.org/posts/add-current-directory-into-load-path-in-emacs.html</guid><pubDate>Mon, 17 Feb 2014 13:24:23 GMT</pubDate></item><item><title>Convert multiple line into one big string in Emacs</title><link>http://blog.binchen.org/posts/convert-multiple-line-into-one-big-string-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-multiple line into one big string in Emacs                            :emacs:en:elisp:
-&lt;/p&gt;
-
-&lt;p&gt;
 This command converts selected region in Emacs into one string and put it into the kill ring.
 &lt;/p&gt;
 
@@ -96,10 +92,6 @@ Current position is preserved."
        (&lt;em&gt;linux&lt;/em&gt; (executable-find &lt;span style="color: #8abeb7;"&gt;"firefox"&lt;/span&gt;))
        ))
 &lt;/p&gt;&lt;/pre&gt;  &lt;/div&gt;</description><category>browser</category><category>elisp</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/open-url-in-emacs-with-external-browser.html</guid><pubDate>Mon, 28 Jan 2013 10:59:00 GMT</pubDate></item><item><title>Toggle http proxy in emacs-w3m</title><link>http://blog.binchen.org/posts/toggle-http-proxy-in-emacs-w3m.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-http proxy in emacs-w3m                                                :&lt;a href="emacs:proxy:http:en"&gt;emacs:proxy:http:en&lt;/a&gt;:
-&lt;/p&gt;
-
-&lt;p&gt;
 &lt;a href="http://www.emacswiki.org/emacs/emacs-w3m"&gt;emacs-w3m&lt;/a&gt; is a browser which handles all my basic web surfing needs.
 &lt;/p&gt;
 
