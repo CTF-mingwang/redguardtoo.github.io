@@ -23,6 +23,64 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">Auto-complete word in Emacs mini-buffer when using Evil</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2017-03-28T12:16:06+00:00">2017-03-28 12:16</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html#disqus_thread" data-disqus-identifier="cache/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/evil.html" rel="tag">evil</a></li>
+           <li><a class="tag p-category" href="categories/vim.html" rel="tag">vim</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+When using <a href="https://www.emacswiki.org/emacs/Evil">Evil</a> I often input <code>%s/old-keyword/new-keyword/g</code> in <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html">Minibuffer</a>.
+</p>
+
+<p>
+The problem is auto completions of <code>new-keyword</code> using <a href="http://www.gnu.org/s/emacs/manual/html_node/autotype/Hippie-Expand.html">hippie-expand</a> always fail.
+</p>
+
+<p>
+It turns out that the character "/" is treated as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Word constituent</a> in minibuffer.
+</p>
+
+<p>
+The solution is to re-define "/" as <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html">Punctuation characters</a>:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(defun minibuffer-inactive-mode-hook-setup ()
+  ;; make `try-expand-dabbrev' from `hippie-expand' work in mini-buffer
+  ;; @see `he-dabbrev-beg', so we need re-define syntax for '/'
+  (set-syntax-table (let* ((table (make-syntax-table)))
+                      (modify-syntax-entry ?/ "." table)
+                      table)))
+(add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
+</code></pre>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/indent-jsx-in-emacs.html">Indent JSX in Emacs</a></h1>
             <div class="meta">
                 <div class="authordate">

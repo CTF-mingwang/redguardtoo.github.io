@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 07 Sep 2018 12:40:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Wucuo, a Emacs spell checker that works with camel case code</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Now it's simple to spell check camel case code in Emacs if you use my new package &lt;a href="https://github.com/redguardtoo/wucuo"&gt;wucuo&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Setup is easy. Add &lt;code&gt;(wucuo-start)&lt;/code&gt; in &lt;code&gt;~/.emacs&lt;/code&gt;, then use flyspell as usual.
+&lt;/p&gt;
+
+&lt;p&gt;
+The flyspell could use either aspell or hunspell. No extra setup for aspell or hunspell is required. 
+&lt;/p&gt;
+
+&lt;p&gt;
+Wucuo start a independent process to do some extra check on camel case words. So your original flyspell setup is still valid.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, you could still use Spanish and English dictionaries to check typo with your original setup.
+&lt;/p&gt;
+
+&lt;p&gt;
+Two flag &lt;code&gt;wucuo-aspell-language-to-use&lt;/code&gt; and &lt;code&gt;wucuo-hunspell-dictionary-base-name&lt;/code&gt; are used and only used to check camel case word though independent process.
+&lt;/p&gt;
+
+&lt;p&gt;
+Wucuo is generic enough to handle any programming language out of box if the language's major mode inherits from &lt;a href="https://www.emacswiki.org/emacs/ProgMode"&gt;prog-mode&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+If the major mode does not inherit from &lt;code&gt;prog-mode&lt;/code&gt;, it's still simple to use wucuo.
+&lt;/p&gt;
+
+&lt;p&gt;
+You only need find font face the camel case word is used by running &lt;code&gt;M-x wucuo-current-font-face&lt;/code&gt;. Say the font face is &lt;code&gt;js2-function-call&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Then we need setup &lt;code&gt;wucuo-personal-font-faces-to-check&lt;/code&gt;,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq wucuo-personal-font-faces-to-check '(js2-function-call))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+That's all.
+&lt;/p&gt;
+
+&lt;p&gt;
+There also some &lt;b&gt;optional&lt;/b&gt; handy tool to help you manage your personal dictionaries:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;code&gt;M-x wucuo-create-aspell-personal-dictionary&lt;/code&gt; creates plain word dictionary &lt;code&gt;~/.aspell.en.pws&lt;/code&gt; for aspell&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;M-x wucuo-create-hunspell-personal-dictionary&lt;/code&gt; creates plain word dictionary &lt;code&gt;~/.hunspell_en_US&lt;/code&gt; for hunspell&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+BTW, please don't start &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; when using wucuo.
+&lt;/p&gt;
+
+&lt;p&gt;
+Any suggestion is welcomed. For example, currently wucuo only check English camel case word. Ping me if you want to use other languages.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</guid><pubDate>Fri, 07 Sep 2018 12:39:54 GMT</pubDate></item><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-17 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -955,31 +1020,4 @@ Turn off `read-only-mode' of opened files."
         (forward-line 1)))))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item><item><title>Auto-complete word in Emacs mini-buffer when using Evil</title><link>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-When using &lt;a href="https://www.emacswiki.org/emacs/Evil"&gt;Evil&lt;/a&gt; I often input &lt;code&gt;%s/old-keyword/new-keyword/g&lt;/code&gt; in &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Minibuffer.html"&gt;Minibuffer&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-The problem is auto completions of &lt;code&gt;new-keyword&lt;/code&gt; using &lt;a href="http://www.gnu.org/s/emacs/manual/html_node/autotype/Hippie-Expand.html"&gt;hippie-expand&lt;/a&gt; always fail.
-&lt;/p&gt;
-
-&lt;p&gt;
-It turns out that the character "/" is treated as &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html"&gt;Word constituent&lt;/a&gt; in minibuffer.
-&lt;/p&gt;
-
-&lt;p&gt;
-The solution is to re-define "/" as &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Syntax-Class-Table.html"&gt;Punctuation characters&lt;/a&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun minibuffer-inactive-mode-hook-setup ()
-  ;; make `try-expand-dabbrev' from `hippie-expand' work in mini-buffer
-  ;; @see `he-dabbrev-beg', so we need re-define syntax for '/'
-  (set-syntax-table (let* ((table (make-syntax-table)))
-                      (modify-syntax-entry ?/ "." table)
-                      table)))
-(add-hook 'minibuffer-inactive-mode-hook 'minibuffer-inactive-mode-hook-setup)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>evil</category><category>vim</category><guid>http://blog.binchen.org/posts/auto-complete-word-in-emacs-mini-buffer-when-using-evil.html</guid><pubDate>Tue, 28 Mar 2017 12:16:06 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>counsel</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html</guid><pubDate>Tue, 09 May 2017 13:38:06 GMT</pubDate></item></channel></rss>
