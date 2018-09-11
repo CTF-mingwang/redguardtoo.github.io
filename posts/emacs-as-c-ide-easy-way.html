@@ -15,11 +15,11 @@
 
 
 
-UPDATED: &lt;2017-05-17 Wed&gt;
+UPDATED: &lt;2018-09-11 Tue&gt;
 
 
 
-This is a newbie friendly solution which works at Linux/OSX/Cygwin (should work at Windows too, but I don't develop at Windows).
+This is a newbie friendly solution. It works at Linux/macOS/Cygwin (should work at Windows too, but I don't develop at Windows).
 
 
 
@@ -80,11 +80,11 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-25 
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2017-05-17 Wed&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-11 Tue&gt;</span></span>
 </p>
 
 <p>
-This is a <b>newbie friendly</b> solution which works at Linux/OSX/Cygwin (should work at Windows too, but I don't develop at Windows).
+This is a <b>newbie friendly</b> solution. It works at Linux/macOS/Cygwin (should work at Windows too, but I don't develop at Windows).
 </p>
 
 <p>
@@ -93,17 +93,17 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 
 <ul class="org-ul">
 <li>
-<a href="https://github.com/company-mode/company-mode">company</a> for code completion</li>
+<code>company-gtags.el</code> from <a href="https://github.com/company-mode/company-mode">company</a> for code completion</li>
 <li>
-<a href="https://github.com/syohex/emacs-helm-gtags">emacs-helm-gtags</a> <b>or</b> <a href="https://github.com/syohex/emacs-counsel-gtags">emacs-counsel-gtags</a> for code navigation. I use emacs-counsel-gtags.</li>
+<a href="https://github.com/syohex/emacs-helm-gtags">emacs-helm-gtags</a> <b>or</b> <a href="https://github.com/syohex/emacs-counsel-gtags">emacs-counsel-gtags</a> (recommended) for code navigation</li>
 </ul>
 <p>
 Here is the step to step guide.
 </p>
 
-<div id="outline-container-orga8ec3d3" class="outline-2">
-<h3 id="orga8ec3d3">Step 1, create sample projects for experiment</h3>
-<div class="outline-text-2" id="text-orga8ec3d3">
+<div id="outline-container-org5773db5" class="outline-2">
+<h3 id="org5773db5">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-org5773db5">
 <p>
 I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
@@ -154,9 +154,9 @@ int main(int argc, char *argv[]) {
 </div>
 </div>
 
-<div id="outline-container-org5f3dfd2" class="outline-2">
-<h3 id="org5f3dfd2">Step 2, scan C++ code and setup Emacs</h3>
-<div class="outline-text-2" id="text-org5f3dfd2">
+<div id="outline-container-org058c305" class="outline-2">
+<h3 id="org058c305">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-org058c305">
 <p>
 Run below command in shell to scan code,
 </p>
@@ -211,9 +211,9 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </div>
 </div>
 
-<div id="outline-container-orgfe2296a" class="outline-2">
-<h3 id="orgfe2296a">Usage</h3>
-<div class="outline-text-2" id="text-orgfe2296a">
+<div id="outline-container-org00d9e04" class="outline-2">
+<h3 id="org00d9e04">Usage</h3>
+<div class="outline-text-2" id="text-org00d9e04">
 <p>
 Use the Emacs plugins as usual.
 </p>
@@ -233,9 +233,26 @@ Screenshot,
 </div>
 </div>
 
-<div id="outline-container-orgb1aeab2" class="outline-2">
-<h3 id="orgb1aeab2">Technical Details (Optional)</h3>
-<div class="outline-text-2" id="text-orgb1aeab2">
+<div id="outline-container-org5fbc881" class="outline-2">
+<h3 id="org5fbc881">Tip</h3>
+<div class="outline-text-2" id="text-org5fbc881">
+<p>
+GNU Global could use ctags (Either <a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> or <a href="https://ctags.io/">Universal Ctags</a>) as backend to create tags file.
+</p>
+
+<p>
+I suggest NOT doing so. Or else I'm not sure the company-mode or emacs-counsel-gtags will work.
+</p>
+
+<p>
+If you prefer ctags, you could use it directly. Then you can use  <code>company-etags.el</code> from company (code auto completion) and <a href="https://github.com/redguardtoo/counsel-etags">counsel-etags</a> (code navigation) instead.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb55856a" class="outline-2">
+<h3 id="orgb55856a">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-orgb55856a">
 <p>
 Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.
 </p>
