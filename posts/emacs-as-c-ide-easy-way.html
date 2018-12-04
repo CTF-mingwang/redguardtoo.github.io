@@ -15,7 +15,7 @@
 
 
 
-UPDATED: &lt;2018-09-11 Tue&gt;
+UPDATED: &lt;2018-12-04 Tue&gt;
 
 
 
@@ -80,7 +80,7 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-08-25 
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-11 Tue&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-12-04 Tue&gt;</span></span>
 </p>
 
 <p>
@@ -101,9 +101,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 </p>
 
-<div id="outline-container-org5773db5" class="outline-2">
-<h3 id="org5773db5">Step 1, create sample projects for experiment</h3>
-<div class="outline-text-2" id="text-org5773db5">
+<div id="outline-container-org887a39a" class="outline-2">
+<h3 id="org887a39a">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-org887a39a">
 <p>
 I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
@@ -154,17 +154,20 @@ int main(int argc, char *argv[]) {
 </div>
 </div>
 
-<div id="outline-container-org058c305" class="outline-2">
-<h3 id="org058c305">Step 2, scan C++ code and setup Emacs</h3>
-<div class="outline-text-2" id="text-org058c305">
+<div id="outline-container-orgf60334b" class="outline-2">
+<h3 id="orgf60334b">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-orgf60334b">
 <p>
 Run below command in shell to scan code,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
-cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
-cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags 
+<pre><code class="lang-bash"># dump index files to directory ~/obj if 3rd party library directory is read only
+cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags --objdir
+cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags --objdir
+# # above two commands are same as below commands
+# mkdir -p ~/obj/usr/include &amp;&amp; cd /usr/include &amp;&amp; gtags --objdir=~/obj/usr/include
+# mkdir -p ~/obj/usr/linux/include &amp;&amp; cd /usr/linux/include &amp;&amp; gtags --objdir=~/obj/usr/linux/include
 ... 
 # index files are placed inside the projects
 cd ~/proj1 &amp;&amp; gtags 
@@ -175,19 +178,7 @@ cd ~/proj2 &amp;&amp; gtags
 </div>
 
 <p>
-If you are <b>using old Global</b> (v5.7.1, for example), the command to create tags file in read only directory may fail. This is Global's bug. But there is workaround:
-</p>
-<div class="org-src-container">
-
-<pre><code class="lang-bash"># dump index files to ~/obj if the project/library directories are read only
-mkdir -p ~/obj/usr/include &amp;&amp; cd /usr/include &amp;&amp; gtags ~/obj/usr/include
-mkdir -p ~/obj/usr/linux/include &amp;&amp; cd /usr/linux/include &amp;&amp; gtags ~/obj/usr/linux/include
-</code></pre>
-
-</div>
-
-<p>
-Global introduced <code>MAKEOBJDIRPREFIX</code> on 2008-03-23.
+Global introduced <code>MAKEOBJDIRPREFIX</code> on 2008-03-23. I tested with <code>GNU Global v6.6.2</code> on Debian.
 </p>
 
 <p>
@@ -211,9 +202,9 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </div>
 </div>
 
-<div id="outline-container-org00d9e04" class="outline-2">
-<h3 id="org00d9e04">Usage</h3>
-<div class="outline-text-2" id="text-org00d9e04">
+<div id="outline-container-orgdc1c59c" class="outline-2">
+<h3 id="orgdc1c59c">Usage</h3>
+<div class="outline-text-2" id="text-orgdc1c59c">
 <p>
 Use the Emacs plugins as usual.
 </p>
@@ -233,26 +224,26 @@ Screenshot,
 </div>
 </div>
 
-<div id="outline-container-org5fbc881" class="outline-2">
-<h3 id="org5fbc881">Tip</h3>
-<div class="outline-text-2" id="text-org5fbc881">
+<div id="outline-container-org772441d" class="outline-2">
+<h3 id="org772441d">Tip</h3>
+<div class="outline-text-2" id="text-org772441d">
 <p>
 GNU Global could use ctags (Either <a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> or <a href="https://ctags.io/">Universal Ctags</a>) as backend to create tags file.
 </p>
 
 <p>
-I suggest NOT doing so. Or else I'm not sure the company-mode or emacs-counsel-gtags will work.
+I suggest NOT doing so. Or else I'm not sure the <code>company-mode</code> or <code>emacs-counsel-gtags</code> will work.
 </p>
 
 <p>
-If you prefer ctags, you could use it directly. Then you can use  <code>company-etags.el</code> from company (code auto completion) and <a href="https://github.com/redguardtoo/counsel-etags">counsel-etags</a> (code navigation) instead.
+If you prefer ctags, you could use it directly. Then you can use  <code>company-etags.el</code> from <code>company-mode</code> for auto-completion and <a href="https://github.com/redguardtoo/counsel-etags">counsel-etags</a> for navigation instead.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb55856a" class="outline-2">
-<h3 id="orgb55856a">Technical Details (Optional)</h3>
-<div class="outline-text-2" id="text-orgb55856a">
+<div id="outline-container-org0c9efd1" class="outline-2">
+<h3 id="org0c9efd1">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-org0c9efd1">
 <p>
 Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.
 </p>
