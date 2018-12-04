@@ -101,9 +101,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 </p>
 
-<div id="outline-container-orgcd4ef4f" class="outline-2">
-<h3 id="orgcd4ef4f">Step 1, create sample projects for experiment</h3>
-<div class="outline-text-2" id="text-orgcd4ef4f">
+<div id="outline-container-orgf3d830f" class="outline-2">
+<h3 id="orgf3d830f">Step 1, create sample projects for experiment</h3>
+<div class="outline-text-2" id="text-orgf3d830f">
 <p>
 I have two projects <code>~/proj1</code> and <code>~/proj2</code>.
 </p>
@@ -154,9 +154,9 @@ int main(int argc, char *argv[]) {
 </div>
 </div>
 
-<div id="outline-container-org0daee71" class="outline-2">
-<h3 id="org0daee71">Step 2, scan C++ code and setup Emacs</h3>
-<div class="outline-text-2" id="text-org0daee71">
+<div id="outline-container-orgd1a86d0" class="outline-2">
+<h3 id="orgd1a86d0">Step 2, scan C++ code and setup Emacs</h3>
+<div class="outline-text-2" id="text-orgd1a86d0">
 <p>
 Run below command in shell to scan code,
 </p>
@@ -165,7 +165,7 @@ Run below command in shell to scan code,
 <pre><code class="lang-bash"># dump index files to directory ~/obj if 3rd party library directory is read only
 cd /usr/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags --objdir
 cd /usr/linux/include &amp;&amp; MAKEOBJDIRPREFIX=~/obj gtags --objdir
-# # above two commands are same as below commands
+# # above two command lines are same as below two command lines
 # mkdir -p ~/obj/usr/include &amp;&amp; cd /usr/include &amp;&amp; gtags --objdir=~/obj/usr/include
 # mkdir -p ~/obj/usr/linux/include &amp;&amp; cd /usr/linux/include &amp;&amp; gtags --objdir=~/obj/usr/linux/include
 ... 
@@ -186,7 +186,7 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">;; Please note `file-truename' must be used!
+<pre><code class="lang-lisp">;; `file-truename' MUST be used!
 (setenv "GTAGSLIBPATH" (concat "/usr/include"
                                ":"
                                "/usr/src/linux/include"
@@ -202,9 +202,9 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 </div>
 </div>
 
-<div id="outline-container-org7fa7eb4" class="outline-2">
-<h3 id="org7fa7eb4">Usage</h3>
-<div class="outline-text-2" id="text-org7fa7eb4">
+<div id="outline-container-orgfa1eb81" class="outline-2">
+<h3 id="orgfa1eb81">Usage</h3>
+<div class="outline-text-2" id="text-orgfa1eb81">
 <p>
 Use the Emacs plugins as usual.
 </p>
@@ -224,9 +224,9 @@ Screenshot,
 </div>
 </div>
 
-<div id="outline-container-org35f3b14" class="outline-2">
-<h3 id="org35f3b14">Tip</h3>
-<div class="outline-text-2" id="text-org35f3b14">
+<div id="outline-container-orga7a8293" class="outline-2">
+<h3 id="orga7a8293">Tip</h3>
+<div class="outline-text-2" id="text-orga7a8293">
 <p>
 GNU Global could use ctags (Either <a href="http://ctags.sourceforge.net/">Exuberant Ctags</a> or <a href="https://ctags.io/">Universal Ctags</a>) as backend to create tags file.
 </p>
@@ -241,9 +241,9 @@ If you prefer ctags, you could use it directly. Then you can use  <code>company-
 </div>
 </div>
 
-<div id="outline-container-orgd384a88" class="outline-2">
-<h3 id="orgd384a88">Technical Details (Optional)</h3>
-<div class="outline-text-2" id="text-orgd384a88">
+<div id="outline-container-org046cedc" class="outline-2">
+<h3 id="org046cedc">Technical Details (Optional)</h3>
+<div class="outline-text-2" id="text-org046cedc">
 <p>
 Check <a href="https://www.gnu.org/software/global/manual/global.html">GNU Global manual</a> to understand environment variables <code>GTAGSLIBPATH</code> and <code>MAKEOBJDIRPREFIX</code>.
 </p>
