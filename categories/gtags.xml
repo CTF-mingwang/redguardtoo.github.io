@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gtags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gtags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Dec 2018 10:48:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about gtags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/gtags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Dec 2018 10:50:26 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs as C++ IDE, easy way</title><link>http://blog.binchen.org/posts/emacs-as-c-ide-easy-way.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-08-25 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
@@ -8,7 +8,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-This is a &lt;b&gt;newbie friendly&lt;/b&gt; solution. It works at Linux/macOS/Cygwin (should work at Windows too, but I don't develop at Windows).
+This solution works on Linux/macOS/Cygwin (should work at Windows too, but I don't develop at Windows).
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -24,9 +24,9 @@ Setup is minimum. Only GNU Global and two Emacs plugins are required:
 Here is the step to step guide.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org887a39a" class="outline-2"&gt;
-&lt;h3 id="org887a39a"&gt;Step 1, create sample projects for experiment&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org887a39a"&gt;
+&lt;div id="outline-container-orgcd4ef4f" class="outline-2"&gt;
+&lt;h3 id="orgcd4ef4f"&gt;Step 1, create sample projects for experiment&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcd4ef4f"&gt;
 &lt;p&gt;
 I have two projects &lt;code&gt;~/proj1&lt;/code&gt; and &lt;code&gt;~/proj2&lt;/code&gt;.
 &lt;/p&gt;
@@ -77,9 +77,9 @@ int main(int argc, char *argv[]) {
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf60334b" class="outline-2"&gt;
-&lt;h3 id="orgf60334b"&gt;Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgf60334b"&gt;
+&lt;div id="outline-container-org0daee71" class="outline-2"&gt;
+&lt;h3 id="org0daee71"&gt;Step 2, scan C++ code and setup Emacs&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0daee71"&gt;
 &lt;p&gt;
 Run below command in shell to scan code,
 &lt;/p&gt;
@@ -125,9 +125,9 @@ After installing Emacs plugins and setup (minimum setup from their website is en
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdc1c59c" class="outline-2"&gt;
-&lt;h3 id="orgdc1c59c"&gt;Usage&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgdc1c59c"&gt;
+&lt;div id="outline-container-org7fa7eb4" class="outline-2"&gt;
+&lt;h3 id="org7fa7eb4"&gt;Usage&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7fa7eb4"&gt;
 &lt;p&gt;
 Use the Emacs plugins as usual.
 &lt;/p&gt;
@@ -148,9 +148,9 @@ Screenshot,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org772441d" class="outline-2"&gt;
-&lt;h3 id="org772441d"&gt;Tip&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org772441d"&gt;
+&lt;div id="outline-container-org35f3b14" class="outline-2"&gt;
+&lt;h3 id="org35f3b14"&gt;Tip&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org35f3b14"&gt;
 &lt;p&gt;
 GNU Global could use ctags (Either &lt;a href="http://ctags.sourceforge.net/"&gt;Exuberant Ctags&lt;/a&gt; or &lt;a href="https://ctags.io/"&gt;Universal Ctags&lt;/a&gt;) as backend to create tags file.
 &lt;/p&gt;
@@ -165,9 +165,9 @@ If you prefer ctags, you could use it directly. Then you can use  &lt;code&gt;co
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0c9efd1" class="outline-2"&gt;
-&lt;h3 id="org0c9efd1"&gt;Technical Details (Optional)&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0c9efd1"&gt;
+&lt;div id="outline-container-orgd384a88" class="outline-2"&gt;
+&lt;h3 id="orgd384a88"&gt;Technical Details (Optional)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgd384a88"&gt;
 &lt;p&gt;
 Check &lt;a href="https://www.gnu.org/software/global/manual/global.html"&gt;GNU Global manual&lt;/a&gt; to understand environment variables &lt;code&gt;GTAGSLIBPATH&lt;/code&gt; and &lt;code&gt;MAKEOBJDIRPREFIX&lt;/code&gt;.
 &lt;/p&gt;
