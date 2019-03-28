@@ -23,7 +23,7 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
-            <h1 class="title"><a href="posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html">Wucuo, a Emacs spell checker that works with camel case code</a></h1>
+            <h1 class="title"><a href="posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html">Steps to install Emacs 27 for testing</a></h1>
             <div class="meta">
                 <div class="authordate">
                     <time class="timeago" datetime="2018-09-07T12:39:54+00:00">2018-09-07 12:39</time>
@@ -41,7 +41,6 @@
         Tags : 
            <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/flyspell.html" rel="tag">flyspell</a></li>
         </ul>
 </div>
 
@@ -49,72 +48,18 @@
             <div class="body">
                 <div>
 <p>
-Now it's possible to spell check camel case code in Emacs using <a href="https://github.com/redguardtoo/wucuo">wucuo</a>.
-</p>
-
-<p>
-Setup is easy. Add <code>(wucuo-start)</code> into <code>~/.emacs</code>, then <b>use flyspell as usual</b>.
-</p>
-
-<p>
-Flyspell could use either aspell or hunspell. No extra setup for aspell or hunspell is required. 
-</p>
-
-<p>
-Wucuo starts an independent process to check camel case words. So your original flyspell setup is still valid.
-</p>
-
-<p>
-For example, you could still use Spanish and English dictionaries in your existing flyspell setup.
-</p>
-
-<p>
-Two flag <code>wucuo-aspell-language-to-use</code> and <code>wucuo-hunspell-dictionary-base-name</code> are used and only used to check camel case word through independent process.
-</p>
-
-<p>
-Wucuo is generic enough to handle any programming language if its major mode inherits from <a href="https://www.emacswiki.org/emacs/ProgMode">prog-mode</a>.
-</p>
-
-<p>
-Even if the major mode does not inherit from <code>prog-mode</code>, it's still simple to use wucuo.
-</p>
-
-<p>
-You only need find font face the camel case word is used by running <code>M-x wucuo-current-font-face</code>. Say the font face is <code>js2-function-call</code>.
-</p>
-
-<p>
-Then we need setup <code>wucuo-personal-font-faces-to-check</code>,
+The Emacs is not for daily usage. Only for testing.
 </p>
 
 <div class="org-src-container">
 
-<pre><code class="lang-lisp">(setq wucuo-personal-font-faces-to-check '(js2-function-call))
+<pre><code class="lang-bash">sudo apt install built-essential automake autoconf texinfo # optional if they are already installed
+git clone https://git.savannah.gnu.org/git/emacs.git
+cd emacs &amp;&amp; ./configure CFLAGS=-no-pie --without-x --without-dbus --without-sound --with-gnutls=no &amp;&amp; make
+src/emacs # start emacs
 </code></pre>
 
 </div>
-
-<p>
-That's all.
-</p>
-
-<p>
-Some <b>optional</b> tools to help you manage personal dictionaries:
-</p>
-
-<ul class="org-ul">
-<li>
-<code>M-x wucuo-create-aspell-personal-dictionary</code> creates plain word dictionary <code>~/.aspell.en.pws</code> for aspell</li>
-<li>
-<code>M-x wucuo-create-hunspell-personal-dictionary</code> creates plain word dictionary <code>~/.hunspell_en_US</code> for hunspell</li>
-</ul>
-<p>
-BTW, please don't start <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> when using wucuo.
-</p>
-
-<p>
-Any suggestion is welcomed. For example, currently wucuo only check English camel case word. Ping me if you want to use other languages.</p>
 </div>
             </div>
         </div>
@@ -1353,7 +1298,7 @@ Turn off `read-only-mode' of opened files."
 <li class="next">
                 <a href="index-24.html" rel="next">Older posts</a>
             </li>
-        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2018         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2019         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             
         </footer>
 </div>

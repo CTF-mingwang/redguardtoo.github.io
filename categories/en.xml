@@ -1,70 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Dec 2018 10:54:11 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Wucuo, a Emacs spell checker that works with camel case code</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-Now it's possible to spell check camel case code in Emacs using &lt;a href="https://github.com/redguardtoo/wucuo"&gt;wucuo&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Setup is easy. Add &lt;code&gt;(wucuo-start)&lt;/code&gt; into &lt;code&gt;~/.emacs&lt;/code&gt;, then &lt;b&gt;use flyspell as usual&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Flyspell could use either aspell or hunspell. No extra setup for aspell or hunspell is required. 
-&lt;/p&gt;
-
-&lt;p&gt;
-Wucuo starts an independent process to check camel case words. So your original flyspell setup is still valid.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, you could still use Spanish and English dictionaries in your existing flyspell setup.
-&lt;/p&gt;
-
-&lt;p&gt;
-Two flag &lt;code&gt;wucuo-aspell-language-to-use&lt;/code&gt; and &lt;code&gt;wucuo-hunspell-dictionary-base-name&lt;/code&gt; are used and only used to check camel case word through independent process.
-&lt;/p&gt;
-
-&lt;p&gt;
-Wucuo is generic enough to handle any programming language if its major mode inherits from &lt;a href="https://www.emacswiki.org/emacs/ProgMode"&gt;prog-mode&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Even if the major mode does not inherit from &lt;code&gt;prog-mode&lt;/code&gt;, it's still simple to use wucuo.
-&lt;/p&gt;
-
-&lt;p&gt;
-You only need find font face the camel case word is used by running &lt;code&gt;M-x wucuo-current-font-face&lt;/code&gt;. Say the font face is &lt;code&gt;js2-function-call&lt;/code&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Then we need setup &lt;code&gt;wucuo-personal-font-faces-to-check&lt;/code&gt;,
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 28 Mar 2019 10:27:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Steps to install Emacs 27 for testing</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+The Emacs is not for daily usage. Only for testing.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq wucuo-personal-font-faces-to-check '(js2-function-call))
+&lt;pre&gt;&lt;code class="lang-bash"&gt;sudo apt install built-essential automake autoconf texinfo # optional if they are already installed
+git clone https://git.savannah.gnu.org/git/emacs.git
+cd emacs &amp;amp;&amp;amp; ./configure CFLAGS=-no-pie --without-x --without-dbus --without-sound --with-gnutls=no &amp;amp;&amp;amp; make
+src/emacs # start emacs
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;
-
-&lt;p&gt;
-That's all.
-&lt;/p&gt;
-
-&lt;p&gt;
-Some &lt;b&gt;optional&lt;/b&gt; tools to help you manage personal dictionaries:
-&lt;/p&gt;
-
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;&lt;code&gt;M-x wucuo-create-aspell-personal-dictionary&lt;/code&gt; creates plain word dictionary &lt;code&gt;~/.aspell.en.pws&lt;/code&gt; for aspell&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;M-x wucuo-create-hunspell-personal-dictionary&lt;/code&gt; creates plain word dictionary &lt;code&gt;~/.hunspell_en_US&lt;/code&gt; for hunspell&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;
-BTW, please don't start &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; when using wucuo.
-&lt;/p&gt;
-
-&lt;p&gt;
-Any suggestion is welcomed. For example, currently wucuo only check English camel case word. Ping me if you want to use other languages.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</guid><pubDate>Fri, 07 Sep 2018 12:39:54 GMT</pubDate></item><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</guid><pubDate>Fri, 07 Sep 2018 12:39:54 GMT</pubDate></item><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-17 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 

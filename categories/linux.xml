@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:53 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about linux)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/linux.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 28 Mar 2019 10:27:49 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs speed up 1000%</title><link>http://blog.binchen.org/posts/emacs-speed-up-1000.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I'm still &lt;b&gt;NOT&lt;/b&gt; satisfied with my Emacs performance after applying below tricks:
 &lt;/p&gt;
 
@@ -109,9 +109,17 @@ BTW, I've also moved &lt;b&gt;all my projects into memory&lt;/b&gt;, using simil
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATE:
+UPDATE 1:
 I also publicize my project-managing script at &lt;a href="https://gist.github.com/redguardtoo/596b1a9fd3eac1cedd13#file-proj2ram"&gt;gist&lt;/a&gt;. It's almost same as emacs2ram. 
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;/p&gt;
+
+&lt;p&gt;
+UPDATE 2:
+Now I use &lt;a href="https://hoytech.com/vmtouch/"&gt;vmtouch&lt;/a&gt; which is easier to use and more light weight. Run &lt;code&gt;vmtouch -vt ~/.emacs.d&lt;/code&gt; to place the directory into memory.
+&lt;/p&gt;
+
+&lt;p&gt;
+Unfortunately, &lt;code&gt;vmtouch&lt;/code&gt; doesn't support windows. You can convert my bash script to DOS batch script. Basically the script copies the directory into ram disk and create a link to the directory in memory. You can use &lt;a href="https://sourceforge.net/projects/imdisk-toolkit/"&gt;ImDisk Toolkit&lt;/a&gt; to create ram disk.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>linux</category><guid>http://blog.binchen.org/posts/emacs-speed-up-1000.html</guid><pubDate>Fri, 08 May 2015 11:58:13 GMT</pubDate></item><item><title>Why people say "Emacs is the best operating system"</title><link>http://blog.binchen.org/posts/why-people-say-emacs-is-the-best-operating-system.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
  people say "Emacs is the best operating system"                           :en:emacs:font:linux:terminal:terminator:
 It's becasue Emacs has great documentation and enough APIs.
 &lt;/p&gt;
@@ -262,9 +270,9 @@ There is also a &lt;a href="http://blog.binchen.org/posts/what-s-the-best-spell-
 &lt;li&gt;How to setup hunspell&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div id="outline-container-orged4c87c" class="outline-2"&gt;
-&lt;h3 id="orged4c87c"&gt;Spell check in HTML&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orged4c87c"&gt;
+&lt;div id="outline-container-orgc34f5d9" class="outline-2"&gt;
+&lt;h3 id="orgc34f5d9"&gt;Spell check in HTML&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc34f5d9"&gt;
 &lt;p&gt;
 I will spell check,
 &lt;/p&gt;
@@ -324,9 +332,9 @@ I use &lt;a href="http://web-mode.org/"&gt;web-mode&lt;/a&gt; for HTML files. Th
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4f52bd0" class="outline-2"&gt;
-&lt;h3 id="org4f52bd0"&gt;Don't display doublon (double word) as error&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4f52bd0"&gt;
+&lt;div id="outline-container-orgdca9af1" class="outline-2"&gt;
+&lt;h3 id="orgdca9af1"&gt;Don't display doublon (double word) as error&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgdca9af1"&gt;
 &lt;p&gt;
 Modern CSS frameworks like &lt;a href="http://getbootstrap.com/"&gt;Bootstrap&lt;/a&gt; make doublon unavoidable. For example, CSS class name &lt;code&gt;btn btn-default&lt;/code&gt; contains double word &lt;code&gt;btn&lt;/code&gt;.
 &lt;/p&gt;
@@ -355,9 +363,9 @@ So we need stop displaying doublon as error in HTML,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4ed0ec1" class="outline-2"&gt;
-&lt;h3 id="org4ed0ec1"&gt;Spell check camel case strings&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org4ed0ec1"&gt;
+&lt;div id="outline-container-org0672368" class="outline-2"&gt;
+&lt;h3 id="org0672368"&gt;Spell check camel case strings&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org0672368"&gt;
 &lt;p&gt;
 We can check camel cased string/variable/function if and only if &lt;a href="http://aspell.net/"&gt;aspell&lt;/a&gt; is used.
 &lt;/p&gt;
@@ -383,9 +391,9 @@ Insert below code into &lt;code&gt;.emacs&lt;/code&gt;,
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd456738" class="outline-2"&gt;
-&lt;h3 id="orgd456738"&gt;Summary&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd456738"&gt;
+&lt;div id="outline-container-orge75016c" class="outline-2"&gt;
+&lt;h3 id="orge75016c"&gt;Summary&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge75016c"&gt;
 &lt;p&gt;
 &lt;a href="http://www.emacswiki.org/emacs/FlySpell"&gt;EmacsWiki&lt;/a&gt; suggests &lt;code&gt;(flyspell-prog-mode)&lt;/code&gt; which only checks typo in comments.
 &lt;/p&gt;
@@ -406,9 +414,9 @@ Screen shot (typos are underscored):
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6951cc5" class="outline-2"&gt;
-&lt;h3 id="org6951cc5"&gt;Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org6951cc5"&gt;
+&lt;div id="outline-container-org802f02c" class="outline-2"&gt;
+&lt;h3 id="org802f02c"&gt;Javascript and ReactJS setup (OPTIONAL)&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org802f02c"&gt;
 &lt;p&gt;
 If you fully understand my previous sections, you don't need read this section.
 &lt;/p&gt;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 05 Sep 2018 14:46:50 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about ctags)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/ctags.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 28 Mar 2019 10:27:48 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective code navigation for web development</title><link>http://blog.binchen.org/posts/effective-code-navigation-for-web-development.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I use &lt;a href="https://angularjs.org/"&gt;AngularJS&lt;/a&gt; as an example. The technique applies to other web frameworks.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgb09055a" class="outline-2"&gt;
-&lt;h3 id="orgb09055a"&gt;Problem&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgb09055a"&gt;
+&lt;div id="outline-container-orgc6a5196" class="outline-2"&gt;
+&lt;h3 id="orgc6a5196"&gt;Problem&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgc6a5196"&gt;
 &lt;p&gt;
 In Angular application, a function is defined in a javascript file and called in a html file.
 &lt;/p&gt;
@@ -45,9 +45,9 @@ As you can see, the keyword we are interested is just a string, like "MyControll
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1b8659e" class="outline-2"&gt;
-&lt;h3 id="org1b8659e"&gt;Solution&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org1b8659e"&gt;
+&lt;div id="outline-container-orge9bcdaa" class="outline-2"&gt;
+&lt;h3 id="orge9bcdaa"&gt;Solution&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge9bcdaa"&gt;
 &lt;p&gt;
 CTags is good at parsing files with &lt;b&gt;regular expression&lt;/b&gt;.
 &lt;/p&gt;
@@ -62,9 +62,9 @@ I use CTags instead of IDEs because:
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org118ac3d" class="outline-3"&gt;
-&lt;h4 id="org118ac3d"&gt;CTags setup&lt;/h4&gt;
-&lt;div class="outline-text-3" id="text-org118ac3d"&gt;
+&lt;div id="outline-container-org2fc1d13" class="outline-3"&gt;
+&lt;h4 id="org2fc1d13"&gt;CTags setup&lt;/h4&gt;
+&lt;div class="outline-text-3" id="text-org2fc1d13"&gt;
 &lt;p&gt;
 Create a file named ".ctags":
 &lt;/p&gt;
@@ -144,18 +144,18 @@ On Windows, place ".ctags" anywhere. Then &lt;a href="http://support.microsoft.c
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org252b198" class="outline-2"&gt;
-&lt;h3 id="org252b198"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org252b198"&gt;
+&lt;div id="outline-container-org5c3d90c" class="outline-2"&gt;
+&lt;h3 id="org5c3d90c"&gt;&lt;a href="http://www.sublimetext.com/"&gt;Sublime Text&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5c3d90c"&gt;
 &lt;p&gt;
 Install &lt;a href="https://github.com/SublimeText/CTags"&gt;CTags plugin&lt;/a&gt; and follow its instruction.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge7ad7f6" class="outline-2"&gt;
-&lt;h3 id="orge7ad7f6"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orge7ad7f6"&gt;
+&lt;div id="outline-container-orgb6cbdf9" class="outline-2"&gt;
+&lt;h3 id="orgb6cbdf9"&gt;&lt;a href="https://www.gnu.org/software/emacs/"&gt;Emacs&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb6cbdf9"&gt;
 &lt;p&gt;
 Run CTags at least once:
 &lt;/p&gt;
@@ -392,18 +392,18 @@ The purpose to load tags files is to look up API easily. For example, I use C++ 
 The reason to do the unload thing is to avoid function name conflict from some tags files. EmacsWiki has a section "Choosing Among Multiple Tags for the Same Name" to solve this problem. But unloading is more convenient. In theory, it would be annoying if I need repeat load and unload the same tags files. In reality, it seldom happens because if I need work on Javascript (so I unload C++ related TAGS), I will usually keep working on Javascript until the end of the day.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org48de6ab" class="outline-2"&gt;
-&lt;h3 id="org48de6ab"&gt;Produce tags files for all the environments&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org48de6ab"&gt;
+&lt;div id="outline-container-org59e9cc4" class="outline-2"&gt;
+&lt;h3 id="org59e9cc4"&gt;Produce tags files for all the environments&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org59e9cc4"&gt;
 &lt;p&gt;
 For example, I produce tags files of Library A for Mac and Linux. I put tags file from Mac at directory "/home/cb/tags/Library_A/mac" and file from Linux at &lt;code&gt;/home/cb/tags/Library_A/linux&lt;/code&gt;.
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd019eab" class="outline-2"&gt;
-&lt;h3 id="orgd019eab"&gt;Use git and github to manage the tags files&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgd019eab"&gt;
+&lt;div id="outline-container-org4c9791e" class="outline-2"&gt;
+&lt;h3 id="org4c9791e"&gt;Use git and github to manage the tags files&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org4c9791e"&gt;
 &lt;p&gt;
 So I can have copies of the tags files at github server and my local computers. That's also a part of my strategy to setup the development environment. My projects on different computers usually use same external library.
 &lt;/p&gt;
@@ -414,9 +414,9 @@ EmacsWiki discusses how to update your tags file frequently because your own cod
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0b54862" class="outline-2"&gt;
-&lt;h3 id="org0b54862"&gt;Write emacs lisp code to load/unload these tags files&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org0b54862"&gt;
+&lt;div id="outline-container-orgb29c26d" class="outline-2"&gt;
+&lt;h3 id="orgb29c26d"&gt;Write emacs lisp code to load/unload these tags files&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgb29c26d"&gt;
 &lt;p&gt;
 Here is the code. In this example, if I need load tags file for &lt;a href="http://www.wxwidgets.org"&gt;wxWidgets&lt;/a&gt;, I call the function "add-wx-tags". If I need unload the tags file, I press "Ctrl-u" and call the same function "add-wx-tags". Since I use &lt;a href="http://www.emacswiki.org/Smex"&gt;Smex&lt;/a&gt;, calling function doesn't mean pressing many keys.
 &lt;/p&gt;
