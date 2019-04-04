@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 04 Apr 2019 11:54:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flyspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flyspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 04 Apr 2019 12:00:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to spell check function/variable in Emacs</title><link>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 CREATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-06-17 Sun&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2018-09-06 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
+UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2019-04-04 Thu&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how to spell check camel cased name of functions and variables in Emacs.
+&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how to spell check camel cased names of functions and variables in Emacs. It uses options &lt;code&gt;--run-together&lt;/code&gt; from &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-It uses options &lt;code&gt;--run-together&lt;/code&gt; from &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -30,7 +26,7 @@ In this article,
 &lt;/ul&gt;
 
 &lt;p&gt;
-In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; does spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up typos to display. For example, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; only displays typos in comments and strings are visible.
+In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up typos to display. For example, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; only displays typos in comments and strings are visible.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -70,27 +66,27 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
   // it's typo because number of interior words is greater than "--run-together-limit"
   if (pos + 1 &amp;gt;= sp-&amp;gt;run_together_limit_) return 0;
 
-  // `i` is the `end` of interior word, the poition AFTER last character of interior word
+  // `i` is the `end` of sub-word, the poition AFTER last character of interior word
   for (char * i = word + sp-&amp;gt;run_together_min_; 
-       // already checked the whole word; besides, any interior word whose size is less 
+       // already checked the whole word; besides, any sub-word whose size is less 
        // than "--run-together-min" is regarded as invalid
        i &amp;lt;= word_end - sp-&amp;gt;run_together_min_;
        ++i)
   {
     char t = *i;
 
-    // read the interior word by set the character at `end` position to '\0'
+    // read the sub-word by set the character at `end` position to '\0'
     *i = '\0';
     res = check_word_s(word, ci);
     // restore original character at `end` position
     *i = t;
 
-    // Current interior word is invalid, we need append the character at current
-    //  `end` position to creata new interior word.
-    //  Inncrement `i` because `i` always points to the `end` of interior word
+    // Current sub-word is invalid, we need append the character at current
+    //  `end` position to creata new sub-word.
+    //  Inncrement `i` because `i` always points to the `end` of sub-word
     if (!res) continue;
 
-    // Current interior word is valid, strip it from the whole word to create a totally
+    // Current sub-word is valid, strip it from the whole word to create a totally
     // new word for `check_word`, `check_word` is a recursive function
     res = check_word(i, word_end, ci + 1, pos + 1);
     if (res) return res;
@@ -108,16 +104,16 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;word&lt;/code&gt; points to string "hisHelle" (in C/C++, string is character array. The last character of array is character &lt;code&gt;'\0'&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;sp-&amp;gt;run_together_min_&lt;/code&gt; is 3, so &lt;code&gt;i&lt;/code&gt; initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;check_word_s&lt;/code&gt; return &lt;code&gt;true&lt;/code&gt; for interior word "his"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sp-&amp;gt;run_together_min_&lt;/code&gt; is 3, so &lt;code&gt;i&lt;/code&gt; initially points to the character "H", at the end of sub-word "his"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;check_word_s&lt;/code&gt; return &lt;code&gt;true&lt;/code&gt; for sub-word "his"&lt;/li&gt;
 &lt;li&gt;So we strip "his" from "hisHelle" and recursively call &lt;code&gt;check_word&lt;/code&gt; to check new word "Helle"&lt;/li&gt;
 &lt;li&gt;In the new context of &lt;code&gt;check_word&lt;/code&gt;, we extract "Hel" from "Helle" initially&lt;/li&gt;
-&lt;li&gt;"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply &lt;code&gt;check_word&lt;/code&gt; on "e"&lt;/li&gt;
-&lt;li&gt;"e" is not valid and at the end of recursion. So "hisHelle" is a typo&lt;/li&gt;
+&lt;li&gt;"Hel" is invalid. So "Hell" is extracted from "Helle". The remaining charcter "e" is a treated as as new word with &lt;code&gt;check_word&lt;/code&gt; recursively applying on it&lt;/li&gt;
+&lt;li&gt;"e" is not valid It's the last word could be extracted. So recursion is over. It's concluded that "hisHelle" is a typo&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-Here are the key points:
+Key points:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
@@ -132,11 +128,7 @@ If &lt;code&gt;--run-together-min&lt;/code&gt; is 3, the word "onChange" is rega
 &lt;/p&gt;
 
 &lt;p&gt;
-The solution is stripping out two character interior word from original word and spell check new word again in Emacs Lisp.
-&lt;/p&gt;
-
-&lt;p&gt;
-We will use Emacs Lisp to solve this problem completely, support &lt;b&gt;both aspell and hunspell&lt;/b&gt;.
+I use Emacs Lisp to solve this problem, support &lt;b&gt;both aspell and hunspell&lt;/b&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -164,7 +156,7 @@ Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I set
 &lt;/p&gt;
 
 &lt;p&gt;
-Please note function &lt;code&gt;split-camel-case&lt;/code&gt; splits a camel case word into a list of sub-words. It's assumed any sub-word with less one or two characters is not typo.
+Please note function &lt;code&gt;split-camel-case&lt;/code&gt; splits a camel case word into a list of sub-words. Sub-word with less one or two characters is not typo.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;

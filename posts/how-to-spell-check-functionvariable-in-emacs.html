@@ -15,15 +15,11 @@
 
 
 
-UPDATED: &lt;2018-09-06 Thu&gt;
+UPDATED: &lt;2019-04-04 Thu&gt;
 
 
 
-This article explains how to spell check camel cased name of functions and variables in Emacs.
-
-
-
-It uses options --run-together from GNU Aspe">
+This article explains how to spell check camel cased names of functions and variables in Emacs. It uses options --run-together from GNU Aspell">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2018-06-17T03:16:41Z">
 <meta property="article:tag" content="emacs">
@@ -74,19 +70,15 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-06-17 
 </p>
 
 <p>
-UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-06 Thu&gt;</span></span>
+UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-04-04 Thu&gt;</span></span>
 </p>
 
 <p>
-<a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how to spell check camel cased name of functions and variables in Emacs.
+<a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how to spell check camel cased names of functions and variables in Emacs. It uses options <code>--run-together</code> from <a href="http://aspell.net/">GNU Aspell</a>.
 </p>
 
 <p>
-It uses options <code>--run-together</code> from <a href="http://aspell.net/">GNU Aspell</a>.
-</p>
-
-<p>
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 </p>
 
 <p>
@@ -101,7 +93,7 @@ In this article,
 </li>
 </ul>
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> does spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up typos to display. For example, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> only displays typos in comments and strings are visible.
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up typos to display. For example, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> only displays typos in comments and strings are visible.
 </p>
 
 <p>
@@ -142,27 +134,27 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
   // it's typo because number of interior words is greater than "--run-together-limit"
   if (pos + 1 &gt;= sp-&gt;run_together_limit_) return 0;
 
-  // `i` is the `end` of interior word, the poition AFTER last character of interior word
+  // `i` is the `end` of sub-word, the poition AFTER last character of interior word
   for (char * i = word + sp-&gt;run_together_min_; 
-       // already checked the whole word; besides, any interior word whose size is less 
+       // already checked the whole word; besides, any sub-word whose size is less 
        // than "--run-together-min" is regarded as invalid
        i &lt;= word_end - sp-&gt;run_together_min_;
        ++i)
   {
     char t = *i;
 
-    // read the interior word by set the character at `end` position to '\0'
+    // read the sub-word by set the character at `end` position to '\0'
     *i = '\0';
     res = check_word_s(word, ci);
     // restore original character at `end` position
     *i = t;
 
-    // Current interior word is invalid, we need append the character at current
-    //  `end` position to creata new interior word.
-    //  Inncrement `i` because `i` always points to the `end` of interior word
+    // Current sub-word is invalid, we need append the character at current
+    //  `end` position to creata new sub-word.
+    //  Inncrement `i` because `i` always points to the `end` of sub-word
     if (!res) continue;
 
-    // Current interior word is valid, strip it from the whole word to create a totally
+    // Current sub-word is valid, strip it from the whole word to create a totally
     // new word for `check_word`, `check_word` is a recursive function
     res = check_word(i, word_end, ci + 1, pos + 1);
     if (res) return res;
@@ -182,16 +174,16 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 <li>
 <code>word</code> points to string "hisHelle" (in C/C++, string is character array. The last character of array is character <code>'\0'</code>)</li>
 <li>
-<code>sp-&gt;run_together_min_</code> is 3, so <code>i</code> initially points to the character "H", at the end of interior word "his"</li>
+<code>sp-&gt;run_together_min_</code> is 3, so <code>i</code> initially points to the character "H", at the end of sub-word "his"</li>
 <li>
-<code>check_word_s</code> return <code>true</code> for interior word "his"</li>
+<code>check_word_s</code> return <code>true</code> for sub-word "his"</li>
 <li>So we strip "his" from "hisHelle" and recursively call <code>check_word</code> to check new word "Helle"</li>
 <li>In the new context of <code>check_word</code>, we extract "Hel" from "Helle" initially</li>
-<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply <code>check_word</code> on "e"</li>
-<li>"e" is not valid and at the end of recursion. So "hisHelle" is a typo</li>
+<li>"Hel" is invalid. So "Hell" is extracted from "Helle". The remaining charcter "e" is a treated as as new word with <code>check_word</code> recursively applying on it</li>
+<li>"e" is not valid It's the last word could be extracted. So recursion is over. It's concluded that "hisHelle" is a typo</li>
 </ul>
 <p>
-Here are the key points:
+Key points:
 </p>
 
 <ul class="org-ul">
@@ -208,11 +200,7 @@ If <code>--run-together-min</code> is 3, the word "onChange" is regarded as typo
 </p>
 
 <p>
-The solution is stripping out two character interior word from original word and spell check new word again in Emacs Lisp.
-</p>
-
-<p>
-We will use Emacs Lisp to solve this problem completely, support <b>both aspell and hunspell</b>.
+I use Emacs Lisp to solve this problem, support <b>both aspell and hunspell</b>.
 </p>
 
 <p>
@@ -240,7 +228,7 @@ Here is complete setup you can paste into <code>.emacs</code> (I setup for <code
 </p>
 
 <p>
-Please note function <code>split-camel-case</code> splits a camel case word into a list of sub-words. It's assumed any sub-word with less one or two characters is not typo.
+Please note function <code>split-camel-case</code> splits a camel case word into a list of sub-words. Sub-word with less one or two characters is not typo.
 </p>
 
 <div class="org-src-container">
