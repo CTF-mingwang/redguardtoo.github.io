@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 04 Apr 2019 12:00:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Steps to install Emacs 27 for testing</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 04 Apr 2019 12:11:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Steps to install Emacs 27 for testing</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 The Emacs is not for daily usage. Only for testing.
 &lt;/p&gt;
 
@@ -24,7 +24,7 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the sub-word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -33,12 +33,12 @@ In this article,
 
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;I will explain &lt;b&gt;how Emacs spell checker works&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt; (Hunspell can NOT check camel case word at all)&lt;/li&gt;
-&lt;li&gt;Finally, I will show you &lt;b&gt;a complete solution&lt;/b&gt; which works with &lt;b&gt;either aspell or hunspell&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt;&lt;/li&gt;
+&lt;li&gt;Finally, &lt;b&gt;a complete solution&lt;/b&gt; which works with &lt;b&gt;both aspell and hunspell&lt;/b&gt; is provided&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up typos to display. For example, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; only displays typos in comments and strings are visible.
+Emacs built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up typos to display. For example, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; only displays typos in comments and strings.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -46,16 +46,16 @@ Aspell doesn't understand syntax of any programming language. It simply reports 
 &lt;/p&gt;
 
 &lt;p&gt;
-There are two extra "run-together" word options in aspell:
+Aspell has two options:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; is "Maximum number of words can be strung together"&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; is "Minimal length of interior words"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; is "Minimal length of sub-words"&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-Let's study the code of aspell to understand these two options. We can start from &lt;code&gt;Working::check_word&lt;/code&gt; in &lt;code&gt;modules/speller/default/suggest.cpp&lt;/code&gt;.
+Aspell C++ code has to be studied in order to understand above two options. Let's start from &lt;code&gt;Working::check_word&lt;/code&gt; in &lt;code&gt;modules/speller/default/suggest.cpp&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -75,10 +75,10 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
   unsigned res = check_word_s(word, ci);
   // if `res` is true, it's a valid word, don't bother run-together
   if (res) return pos + 1;
-  // it's typo because number of interior words is greater than "--run-together-limit"
+  // it's typo because number of sub-words is greater than "--run-together-limit"
   if (pos + 1 &amp;gt;= sp-&amp;gt;run_together_limit_) return 0;
 
-  // `i` is the `end` of sub-word, the poition AFTER last character of interior word
+  // `i` is the `end` of sub-word, the poition AFTER last character of sub-word
   for (char * i = word + sp-&amp;gt;run_together_min_; 
        // already checked the whole word; besides, any sub-word whose size is less 
        // than "--run-together-min" is regarded as invalid
@@ -130,21 +130,25 @@ Key points:
 
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could be bigger with enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")&lt;/li&gt;
-&lt;li&gt;So &lt;code&gt;--run-together-min&lt;/code&gt; should always be 3&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character sub-words ("hehe", "isme", …)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be greater than 3, or else, too many "correct" three character sub-words are regarded as invalid ("his", "her", "one", "two")&lt;/li&gt;
+&lt;li&gt;So &lt;code&gt;--run-together-min&lt;/code&gt; &lt;b&gt;should always be 3&lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-If &lt;code&gt;--run-together-min&lt;/code&gt; is 3, the word "onChange" is regarded as typo because the first two characters "on" is identified as typo. This problem need be fixed in Emacs Lisp.
+If &lt;code&gt;--run-together-min&lt;/code&gt; is 3, the word "onChange" is typo because the first two characters "on" is typo by aspell. This is obviously wrong.
 &lt;/p&gt;
 
 &lt;p&gt;
-I use Emacs Lisp to solve this problem, support &lt;b&gt;both aspell and hunspell&lt;/b&gt;.
+The solution is a Emacs Lisp predicate which supports &lt;b&gt;both aspell and hunspell&lt;/b&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-We can attach a predicate into specific major-mode. The predicate return &lt;code&gt;t&lt;/code&gt; if current word at cursor is typo,
+A predicate could be attached to specific major-mode. The predicate file all the typos reported by CLI program. If predicate returns  &lt;code&gt;t&lt;/code&gt;, the feed in typo is finally approved to be typo,
+&lt;/p&gt;
+
+&lt;p&gt;
+A example of predicate for &lt;code&gt;js2-mode&lt;/code&gt;,
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -160,7 +164,7 @@ We can attach a predicate into specific major-mode. The predicate return &lt;cod
 &lt;/div&gt;
 
 &lt;p&gt;
-It's &lt;code&gt;js-flyspell-verify&lt;/code&gt; who filter the typo reported by CLI program. So it's the last chance to fix wrongly identified typos.
+Typo candidates are filtered by &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So predicate is where to fix typos wrongly reported by CLI program.
 &lt;/p&gt;
 
 &lt;p&gt;

@@ -102,7 +102,7 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2019-04-04 
 </p>
 
 <p>
-But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character sub-word as typo. For example, "onChange" is identified as typo because the sub-word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 </p>
 
 <p>
@@ -112,12 +112,12 @@ In this article,
 <ul class="org-ul">
 <li>I will explain <b>how Emacs spell checker works</b>
 </li>
-<li>Then we study the <b>algorithm of aspell</b> (Hunspell can NOT check camel case word at all)</li>
-<li>Finally, I will show you <b>a complete solution</b> which works with <b>either aspell or hunspell</b>
+<li>Then we study the <b>algorithm of aspell</b>
 </li>
+<li>Finally, <b>a complete solution</b> which works with <b>both aspell and hunspell</b> is provided</li>
 </ul>
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up typos to display. For example, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> only displays typos in comments and strings are visible.
+Emacs built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> does spell checking. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up typos to display. For example, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> only displays typos in comments and strings.
 </p>
 
 <p>
@@ -125,17 +125,17 @@ Aspell doesn't understand syntax of any programming language. It simply reports 
 </p>
 
 <p>
-There are two extra "run-together" word options in aspell:
+Aspell has two options:
 </p>
 
 <ul class="org-ul">
 <li>
 <code>--run-together-limit</code> is "Maximum number of words can be strung together"</li>
 <li>
-<code>--run-together-min</code> is "Minimal length of interior words"</li>
+<code>--run-together-min</code> is "Minimal length of sub-words"</li>
 </ul>
 <p>
-Let's study the code of aspell to understand these two options. We can start from <code>Working::check_word</code> in <code>modules/speller/default/suggest.cpp</code>.
+Aspell C++ code has to be studied in order to understand above two options. Let's start from <code>Working::check_word</code> in <code>modules/speller/default/suggest.cpp</code>.
 </p>
 
 <p>
@@ -155,10 +155,10 @@ unsigned Working::check_word(char * word, char * word_end,  CheckInfo * ci,
   unsigned res = check_word_s(word, ci);
   // if `res` is true, it's a valid word, don't bother run-together
   if (res) return pos + 1;
-  // it's typo because number of interior words is greater than "--run-together-limit"
+  // it's typo because number of sub-words is greater than "--run-together-limit"
   if (pos + 1 &gt;= sp-&gt;run_together_limit_) return 0;
 
-  // `i` is the `end` of sub-word, the poition AFTER last character of interior word
+  // `i` is the `end` of sub-word, the poition AFTER last character of sub-word
   for (char * i = word + sp-&gt;run_together_min_; 
        // already checked the whole word; besides, any sub-word whose size is less 
        // than "--run-together-min" is regarded as invalid
@@ -214,21 +214,26 @@ Key points:
 <li>
 <code>--run-together-limit</code> could be bigger with enough memory. It's default value is 8. I prefer 16.</li>
 <li>
-<code>--run-together-min</code> can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)</li>
+<code>--run-together-min</code> can't be 2 because too many typos are combination of "correct" two character sub-words ("hehe", "isme", …)</li>
 <li>
-<code>--run-together-min</code> can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")</li>
-<li>So <code>--run-together-min</code> should always be 3</li>
+<code>--run-together-min</code> can't be greater than 3, or else, too many "correct" three character sub-words are regarded as invalid ("his", "her", "one", "two")</li>
+<li>So <code>--run-together-min</code> <b>should always be 3</b>
+</li>
 </ul>
 <p>
-If <code>--run-together-min</code> is 3, the word "onChange" is regarded as typo because the first two characters "on" is identified as typo. This problem need be fixed in Emacs Lisp.
+If <code>--run-together-min</code> is 3, the word "onChange" is typo because the first two characters "on" is typo by aspell. This is obviously wrong.
 </p>
 
 <p>
-I use Emacs Lisp to solve this problem, support <b>both aspell and hunspell</b>.
+The solution is a Emacs Lisp predicate which supports <b>both aspell and hunspell</b>.
 </p>
 
 <p>
-We can attach a predicate into specific major-mode. The predicate return <code>t</code> if current word at cursor is typo,
+A predicate could be attached to specific major-mode. The predicate file all the typos reported by CLI program. If predicate returns  <code>t</code>, the feed in typo is finally approved to be typo,
+</p>
+
+<p>
+A example of predicate for <code>js2-mode</code>,
 </p>
 
 <div class="org-src-container">
@@ -244,7 +249,7 @@ We can attach a predicate into specific major-mode. The predicate return <code>t
 </div>
 
 <p>
-It's <code>js-flyspell-verify</code> who filter the typo reported by CLI program. So it's the last chance to fix wrongly identified typos.
+Typo candidates are filtered by <code>js-flyspell-verify</code>. So predicate is where to fix typos wrongly reported by CLI program.
 </p>
 
 <p>
