@@ -98,15 +98,15 @@ UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2018-09-06 
 </p>
 
 <p>
-<a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how to spell check name of function and variable while programming in Emacs.
+<a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html">This article</a> explains how to spell check camel cased name of functions and variables in Emacs.
 </p>
 
 <p>
-It uses options <code>--run-together</code> from <a href="http://aspell.net/">GNU Aspell</a> to check camel cased word.
+It uses options <code>--run-together</code> from <a href="http://aspell.net/">GNU Aspell</a>.
 </p>
 
 <p>
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing namespace "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 </p>
 
 <p>
@@ -116,20 +116,20 @@ In this article,
 <ul class="org-ul">
 <li>I will explain <b>how Emacs spell checker works</b>
 </li>
-<li>Then we study the <b>algorithm of aspell</b> (We can learn nothing from hunspell because <b>hunspell can NOT check camel case word at all</b>)</li>
+<li>Then we study the <b>algorithm of aspell</b> (Hunspell can NOT check camel case word at all)</li>
 <li>Finally, I will show you <b>a complete solution</b> which works with <b>either aspell or hunspell</b>
 </li>
 </ul>
 <p>
-In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> is in charge of spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos of text into <code>Fly Spell</code>. <code>Fly Spell</code> then select certain typos to display. For example, when <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> is on, only typos in comments and strings are visible.
+In Emacs, a built in plugin <a href="https://www.emacswiki.org/emacs/FlySpell">Fly Spell</a> does spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into <code>Fly Spell</code>. <code>Fly Spell</code> then picks up typos to display. For example, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html">flyspell-prog-mode</a> only displays typos in comments and strings are visible.
 </p>
 
 <p>
-So aspell doesn't understand syntax of any programming language. It scans plain text and report all typos to Fly Spell.
+Aspell doesn't understand syntax of any programming language. It simply reports typos in plain text.
 </p>
 
 <p>
-In aspell, there are two extra "run-together" word options:
+There are two extra "run-together" word options in aspell:
 </p>
 
 <ul class="org-ul">
@@ -139,11 +139,11 @@ In aspell, there are two extra "run-together" word options:
 <code>--run-together-min</code> is "Minimal length of interior words"</li>
 </ul>
 <p>
-Let's study the code of aspell to understand these two options. The "run-together" algorithm in implemented in function <code>Working::check_word</code> of file "modules/speller/default/suggest.cpp".
+Let's study the code of aspell to understand these two options. We can start from <code>Working::check_word</code> in <code>modules/speller/default/suggest.cpp</code>.
 </p>
 
 <p>
-In order to help you understand this function, I documented the code line by line,
+Here is code,
 </p>
 
 <div class="org-src-container">
@@ -199,42 +199,40 @@ Let's use "hisHelle" as demo how <code>check_word</code> runs:
 </p>
 
 <ul class="org-ul">
-<li>"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')</li>
-<li>"sp-&gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"</li>
-<li>"check_word_s" return "true" for interior word "his"</li>
-<li>So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"</li>
-<li>In the new context of "check_word", we extract "Hel" from "Helle" initially</li>
-<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e"</li>
+<li>
+<code>word</code> points to string "hisHelle" (in C/C++, string is character array. The last character of array is character <code>'\0'</code>)</li>
+<li>
+<code>sp-&gt;run_together_min_</code> is 3, so <code>i</code> initially points to the character "H", at the end of interior word "his"</li>
+<li>
+<code>check_word_s</code> return <code>true</code> for interior word "his"</li>
+<li>So we strip "his" from "hisHelle" and recursively call <code>check_word</code> to check new word "Helle"</li>
+<li>In the new context of <code>check_word</code>, we extract "Hel" from "Helle" initially</li>
+<li>"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply <code>check_word</code> on "e"</li>
 <li>"e" is not valid and at the end of recursion. So "hisHelle" is a typo</li>
 </ul>
 <p>
-Here is our conclusion after studying the code:
+Here are the key points:
 </p>
 
 <ul class="org-ul">
 <li>
-<code>--run-together-limit</code> could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.</li>
+<code>--run-together-limit</code> could be bigger with enough memory. It's default value is 8. I prefer 16.</li>
 <li>
 <code>--run-together-min</code> can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)</li>
 <li>
 <code>--run-together-min</code> can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")</li>
-<li>
-<code>--run-together-min</code> should always be 3 which is its default value. Actually, it should never be tweak-able by user at the beginning</li>
+<li>So <code>--run-together-min</code> should always be 3</li>
 </ul>
 <p>
-Since <code>--run-together-min</code> is 3. the word "onChange" is always regarded as typo because of two character interior word "on". Since there is nothing we can do at aspell side, we have to turn to Emacs to fix this problem.
+If <code>--run-together-min</code> is 3, the word "onChange" is regarded as typo because the first two characters "on" is identified as typo. This problem need be fixed in Emacs Lisp.
 </p>
 
 <p>
-When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from original word and spell check new word again.
+The solution is stripping out two character interior word from original word and spell check new word again in Emacs Lisp.
 </p>
 
 <p>
-Please note <code>hunspell</code> can't check camel case word at all while aspell can check camel case word but with a little noise. So there is nothing we can study in hunspell.
-</p>
-
-<p>
-We will use Emacs Lisp to solve this problem completely, using <b>either aspell or hunspell</b>.
+We will use Emacs Lisp to solve this problem completely, support <b>both aspell and hunspell</b>.
 </p>
 
 <p>
@@ -254,7 +252,7 @@ We can attach a predicate into specific major-mode. The predicate return <code>t
 </div>
 
 <p>
-As you can see from above code, we have full control on what typos should be displayed in <code>js-flyspell-verify</code>. So <code>predicate</code> is actually the last chance to fix wrongly identified typos.
+It's <code>js-flyspell-verify</code> who filter the typo reported by CLI program. So it's the last chance to fix wrongly identified typos.
 </p>
 
 <p>
@@ -262,7 +260,7 @@ Here is complete setup you can paste into <code>.emacs</code> (I setup for <code
 </p>
 
 <p>
-Please note function <code>split-camel-case</code> split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
+Please note function <code>split-camel-case</code> splits a camel case word into a list of sub-words. It's assumed any sub-word with less one or two characters is not typo.
 </p>
 
 <div class="org-src-container">
@@ -425,12 +423,8 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 </div>
 
 <p>
-Optionally, you could see <a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el">https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el</a> for my real world setup.
-</p>
-
-<p>
-UPDATE:
-Now you can use <a href="https://github.com/redguardtoo/wucuo">wucuo</a> which is complete and out of box solution to spell check code.</p>
+<b>UPDATE:</b>
+Now you can use <a href="https://github.com/redguardtoo/wucuo">wucuo</a>. It's an out of box solution supporting both aspell and hunspell.</p>
 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 28 Mar 2019 10:33:45 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Steps to install Emacs 27 for testing</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 04 Apr 2019 11:54:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Steps to install Emacs 27 for testing</title><link>http://blog.binchen.org/posts/wucuo-a-emacs-spell-checker-that-works-with-camel-case-code.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 The Emacs is not for daily usage. Only for testing.
 &lt;/p&gt;
 
@@ -20,15 +20,15 @@ UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&am
 &lt;/p&gt;
 
 &lt;p&gt;
-&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how to spell check name of function and variable while programming in Emacs.
+&lt;a href="http://blog.binchen.org/posts/effective-spell-check-in-emacs.html"&gt;This article&lt;/a&gt; explains how to spell check camel cased name of functions and variables in Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-It uses options &lt;code&gt;--run-together&lt;/code&gt; from &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt; to check camel cased word.
+It uses options &lt;code&gt;--run-together&lt;/code&gt; from &lt;a href="http://aspell.net/"&gt;GNU Aspell&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on". Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing namespace "MS" is regarded as typo.
+But this solution is not perfect. It wrongly identifies two character interior word as typo. For example, "onChange" is identified as typo because the interior word "on" is identified as typo. Another issue is namespace of function name. For example, "MS" from "MSToggleButton" is alias of "Microsoft". If "MS" is identified as typo, every word containing "MS" is regarded as typo.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -37,20 +37,20 @@ In this article,
 
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;I will explain &lt;b&gt;how Emacs spell checker works&lt;/b&gt;&lt;/li&gt;
-&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt; (We can learn nothing from hunspell because &lt;b&gt;hunspell can NOT check camel case word at all&lt;/b&gt;)&lt;/li&gt;
+&lt;li&gt;Then we study the &lt;b&gt;algorithm of aspell&lt;/b&gt; (Hunspell can NOT check camel case word at all)&lt;/li&gt;
 &lt;li&gt;Finally, I will show you &lt;b&gt;a complete solution&lt;/b&gt; which works with &lt;b&gt;either aspell or hunspell&lt;/b&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; is in charge of spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos of text into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then select certain typos to display. For example, when &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; is on, only typos in comments and strings are visible.
+In Emacs, a built in plugin &lt;a href="https://www.emacswiki.org/emacs/FlySpell"&gt;Fly Spell&lt;/a&gt; does spell check. It passes the options and plain text to command line tool aspell. Aspell sends back the typos into &lt;code&gt;Fly Spell&lt;/code&gt;. &lt;code&gt;Fly Spell&lt;/code&gt; then picks up typos to display. For example, &lt;a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html"&gt;flyspell-prog-mode&lt;/a&gt; only displays typos in comments and strings are visible.
 &lt;/p&gt;
 
 &lt;p&gt;
-So aspell doesn't understand syntax of any programming language. It scans plain text and report all typos to Fly Spell.
+Aspell doesn't understand syntax of any programming language. It simply reports typos in plain text.
 &lt;/p&gt;
 
 &lt;p&gt;
-In aspell, there are two extra "run-together" word options:
+There are two extra "run-together" word options in aspell:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
@@ -59,11 +59,11 @@ In aspell, there are two extra "run-together" word options:
 &lt;/ul&gt;
 
 &lt;p&gt;
-Let's study the code of aspell to understand these two options. The "run-together" algorithm in implemented in function &lt;code&gt;Working::check_word&lt;/code&gt; of file "modules/speller/default/suggest.cpp".
+Let's study the code of aspell to understand these two options. We can start from &lt;code&gt;Working::check_word&lt;/code&gt; in &lt;code&gt;modules/speller/default/suggest.cpp&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
-In order to help you understand this function, I documented the code line by line,
+Here is code,
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -119,40 +119,36 @@ Let's use "hisHelle" as demo how &lt;code&gt;check_word&lt;/code&gt; runs:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;"word" points to string "hisHelle" (in C/C++, string is character array. The last character of array is character '\0')&lt;/li&gt;
-&lt;li&gt;"sp-&amp;gt;run_together_min_" is 3, so "i" initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
-&lt;li&gt;"check_word_s" return "true" for interior word "his"&lt;/li&gt;
-&lt;li&gt;So we strip "his" from "hisHelle" and recursively call "check_word" to check new word "Helle"&lt;/li&gt;
-&lt;li&gt;In the new context of "check_word", we extract "Hel" from "Helle" initially&lt;/li&gt;
-&lt;li&gt;"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply "check_word" on "e"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;word&lt;/code&gt; points to string "hisHelle" (in C/C++, string is character array. The last character of array is character &lt;code&gt;'\0'&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sp-&amp;gt;run_together_min_&lt;/code&gt; is 3, so &lt;code&gt;i&lt;/code&gt; initially points to the character "H", at the end of interior word "his"&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;check_word_s&lt;/code&gt; return &lt;code&gt;true&lt;/code&gt; for interior word "his"&lt;/li&gt;
+&lt;li&gt;So we strip "his" from "hisHelle" and recursively call &lt;code&gt;check_word&lt;/code&gt; to check new word "Helle"&lt;/li&gt;
+&lt;li&gt;In the new context of &lt;code&gt;check_word&lt;/code&gt;, we extract "Hel" from "Helle" initially&lt;/li&gt;
+&lt;li&gt;"Hel" is invalid. So we extract "Hell" from "Helle" and get new word "e" and recursively apply &lt;code&gt;check_word&lt;/code&gt; on "e"&lt;/li&gt;
 &lt;li&gt;"e" is not valid and at the end of recursion. So "hisHelle" is a typo&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-Here is our conclusion after studying the code:
+Here are the key points:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
-&lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could not be bigger if your computer got enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--run-together-limit&lt;/code&gt; could be bigger with enough memory. It's default value is 8. I prefer 16.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be 2 because too many typos are combination of "correct" two character interior words ("hehe", "isme", …)&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; can't be greater than 3, or else, too many "correct" three character interior words are regarded as invalid ("his", "her", "one", "two")&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;--run-together-min&lt;/code&gt; should always be 3 which is its default value. Actually, it should never be tweak-able by user at the beginning&lt;/li&gt;
+&lt;li&gt;So &lt;code&gt;--run-together-min&lt;/code&gt; should always be 3&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;
-Since &lt;code&gt;--run-together-min&lt;/code&gt; is 3. the word "onChange" is always regarded as typo because of two character interior word "on". Since there is nothing we can do at aspell side, we have to turn to Emacs to fix this problem.
+If &lt;code&gt;--run-together-min&lt;/code&gt; is 3, the word "onChange" is regarded as typo because the first two characters "on" is identified as typo. This problem need be fixed in Emacs Lisp.
 &lt;/p&gt;
 
 &lt;p&gt;
-When Emacs got potential typo on Emacs side, we can strip out all the two character interior word from original word and spell check new word again.
+The solution is stripping out two character interior word from original word and spell check new word again in Emacs Lisp.
 &lt;/p&gt;
 
 &lt;p&gt;
-Please note &lt;code&gt;hunspell&lt;/code&gt; can't check camel case word at all while aspell can check camel case word but with a little noise. So there is nothing we can study in hunspell.
-&lt;/p&gt;
-
-&lt;p&gt;
-We will use Emacs Lisp to solve this problem completely, using &lt;b&gt;either aspell or hunspell&lt;/b&gt;.
+We will use Emacs Lisp to solve this problem completely, support &lt;b&gt;both aspell and hunspell&lt;/b&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -172,7 +168,7 @@ We can attach a predicate into specific major-mode. The predicate return &lt;cod
 &lt;/div&gt;
 
 &lt;p&gt;
-As you can see from above code, we have full control on what typos should be displayed in &lt;code&gt;js-flyspell-verify&lt;/code&gt;. So &lt;code&gt;predicate&lt;/code&gt; is actually the last chance to fix wrongly identified typos.
+It's &lt;code&gt;js-flyspell-verify&lt;/code&gt; who filter the typo reported by CLI program. So it's the last chance to fix wrongly identified typos.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -180,7 +176,7 @@ Here is complete setup you can paste into &lt;code&gt;.emacs&lt;/code&gt; (I set
 &lt;/p&gt;
 
 &lt;p&gt;
-Please note function &lt;code&gt;split-camel-case&lt;/code&gt; split a camel case word into a list of sub-words. I just assume any sub-word whose length is less than three is not a typo.
+Please note function &lt;code&gt;split-camel-case&lt;/code&gt; splits a camel case word into a list of sub-words. It's assumed any sub-word with less one or two characters is not typo.
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
@@ -343,12 +339,8 @@ Please note RUN-TOGETHER will make aspell less capable. So it should only be use
 &lt;/div&gt;
 
 &lt;p&gt;
-Optionally, you could see &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el"&gt;https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-spelling.el&lt;/a&gt; for my real world setup.
-&lt;/p&gt;
-
-&lt;p&gt;
-UPDATE:
-Now you can use &lt;a href="https://github.com/redguardtoo/wucuo"&gt;wucuo&lt;/a&gt; which is complete and out of box solution to spell check code.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;b&gt;UPDATE:&lt;/b&gt;
+Now you can use &lt;a href="https://github.com/redguardtoo/wucuo"&gt;wucuo&lt;/a&gt;. It's an out of box solution supporting both aspell and hunspell.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>flyspell</category><guid>http://blog.binchen.org/posts/how-to-spell-check-functionvariable-in-emacs.html</guid><pubDate>Sun, 17 Jun 2018 03:16:41 GMT</pubDate></item><item><title>Use Imenu to list comments in current buffer</title><link>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/evil-nerd-commenter"&gt;evil-nerd-commenter&lt;/a&gt; v3.2.0 has a new function &lt;code&gt;evilnc-imenu-create-index-function&lt;/code&gt;.
 &lt;/p&gt;
 
