@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 08 Apr 2019 13:02:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance Emacs Evil global markers</title><link>http://blog.binchen.org/posts/enhance-emacs-evil-global-markers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 08 Apr 2019 13:04:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance Emacs Evil global markers</title><link>http://blog.binchen.org/posts/enhance-emacs-evil-global-markers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Global evil marker is saved in &lt;code&gt;evil-global-markers-history&lt;/code&gt; by &lt;a href="https://github.com/jwiegley/session"&gt;session.el&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -9,7 +9,7 @@ Insert below code int &lt;code&gt;~/.emacs&lt;/code&gt;,
 
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defvar evil-global-markers-history nil)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar evil-global-markers-history nil)
 (defun my-forward-line (lnum)
   "Forward LNUM lines."
   (setq lnum (string-to-number lnum))
