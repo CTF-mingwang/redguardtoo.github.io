@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 08 Apr 2019 13:04:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Enhance Emacs Evil global markers</title><link>http://blog.binchen.org/posts/enhance-emacs-evil-global-markers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about emacs)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/emacs.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 13 May 2019 14:38:57 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>My favorite Richard Stallman interviews</title><link>http://blog.binchen.org/posts/my-favourite-richard-stallman-interviews.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I've watched and listened many Richard Stallman interviews. Many hosts are really bad. They know nothing about technology and are too aggressive.
+&lt;/p&gt;
+
+&lt;p&gt;
+But good interviewers still exist. Here are top 3 interviews I recommend:
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;&lt;a href="http://hackerpublicradio.org/eps.php?id=1116"&gt;Interview with Richard Stallman&lt;/a&gt; from Hacker Public Radio. The interviewer is technical by himself so he can ask right questions and understand Richard Stallman's point correctly.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=NB8mCcLRxlg"&gt;Richard Stallman on Free Software: Freedom is Worth the Inconvenience&lt;/a&gt; from Singularity Weblog. Nikola Danaylov focus more on ethic perspective of free software.&lt;/li&gt;
+
+&lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=JQbrQTc3jxM"&gt;Dr Diane Hamilton Interviews Richard Stallman&lt;/a&gt;. Diane Hamilton is good listener and just let Richard Stallman talk. Stallman quoted text from Chinese ancient novel San Guo (Three Kingdom) in the interview.&lt;/li&gt;
+&lt;/ul&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>gnu</category><guid>http://blog.binchen.org/posts/my-favourite-richard-stallman-interviews.html</guid><pubDate>Mon, 13 May 2019 14:33:32 GMT</pubDate></item><item><title>Enhance Emacs Evil global markers</title><link>http://blog.binchen.org/posts/enhance-emacs-evil-global-markers.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Global evil marker is saved in &lt;code&gt;evil-global-markers-history&lt;/code&gt; by &lt;a href="https://github.com/jwiegley/session"&gt;session.el&lt;/a&gt;.
 &lt;/p&gt;
 
@@ -858,33 +872,4 @@ key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
 
 &lt;p&gt;
 Here is my complete &lt;a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a"&gt;.keysnail.js&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>ivy</category><category>keysnail</category><guid>http://blog.binchen.org/posts/firefox-and-emacs.html</guid><pubDate>Tue, 23 May 2017 12:24:25 GMT</pubDate></item><item><title>Use wgrep and evil to replace text efficiently</title><link>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-In my previous article &lt;a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html"&gt;Emacs is easy if you read code&lt;/a&gt;, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define &lt;code&gt;my-grep&lt;/code&gt; and &lt;code&gt;my-grep-occur&lt;/code&gt; in &lt;a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el"&gt;init-ivy.el&lt;/a&gt; in order to search/replace text in project root directory.
-&lt;/p&gt;
-
-&lt;p&gt;
-My wgrep-mode enabled buffer is in evil-mode. I prefer pressing vi key binding &lt;code&gt;dd&lt;/code&gt; to remove lines in that buffer to tell wgrep skip them.
-&lt;/p&gt;
-
-&lt;p&gt;
-It turns out we need &lt;code&gt;M-x C-c C-p&lt;/code&gt; or &lt;code&gt;M-x wgrep-toggle-readonly-area&lt;/code&gt; before removing lines.
-&lt;/p&gt;
-
-&lt;p&gt;
-I'm too lazy to remember extra commands. So here is the workaround:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Press `dd' to delete lines in `wgrep-mode' in evil directly
-(defadvice evil-delete (around evil-delete-hack activate)
-  ;; make buffer writable
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area))
-  ad-do-it
-  ;; make buffer read-only
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area)))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>wgrep</category><guid>http://blog.binchen.org/posts/use-wgrep-and-evil-to-replace-text-efficiently.html</guid><pubDate>Mon, 22 May 2017 13:14:35 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>ivy</category><category>keysnail</category><guid>http://blog.binchen.org/posts/firefox-and-emacs.html</guid><pubDate>Tue, 23 May 2017 12:24:25 GMT</pubDate></item></channel></rss>

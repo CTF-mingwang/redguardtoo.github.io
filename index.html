@@ -23,6 +23,53 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/my-favourite-richard-stallman-interviews.html">My favorite Richard Stallman interviews</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2019-05-13T14:33:32+00:00">2019-05-13 14:33</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/my-favourite-richard-stallman-interviews.html#disqus_thread" data-disqus-identifier="cache/posts/my-favourite-richard-stallman-interviews.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gnu.html" rel="tag">gnu</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+I've watched and listened many Richard Stallman interviews. Many hosts are really bad. They know nothing about technology and are too aggressive.
+</p>
+
+<p>
+But good interviewers still exist. Here are top 3 interviews I recommend:
+</p>
+
+<ul class="org-ul">
+<li>
+<a href="http://hackerpublicradio.org/eps.php?id=1116">Interview with Richard Stallman</a> from Hacker Public Radio. The interviewer is technical by himself so he can ask right questions and understand Richard Stallman's point correctly.</li>
+
+<li>
+<a href="https://www.youtube.com/watch?v=NB8mCcLRxlg">Richard Stallman on Free Software: Freedom is Worth the Inconvenience</a> from Singularity Weblog. Nikola Danaylov focus more on ethic perspective of free software.</li>
+
+<li>
+<a href="https://www.youtube.com/watch?v=JQbrQTc3jxM">Dr Diane Hamilton Interviews Richard Stallman</a>. Diane Hamilton is good listener and just let Richard Stallman talk. Stallman quoted text from Chinese ancient novel San Guo (Three Kingdom) in the interview.</li>
+</ul>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/enhance-emacs-evil-global-markers.html">Enhance Emacs Evil global markers</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1154,65 +1201,6 @@ key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
 <p>
 Here is my complete <a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a">.keysnail.js</a>.
 </p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Use wgrep and evil to replace text efficiently</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-05-22T13:14:35+00:00">2017-05-22 13:14</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html#disqus_thread" data-disqus-identifier="cache/posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/wgrep.html" rel="tag">wgrep</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> in order to search/replace text in project root directory.
-</p>
-
-<p>
-My wgrep-mode enabled buffer is in evil-mode. I prefer pressing vi key binding <code>dd</code> to remove lines in that buffer to tell wgrep skip them.
-</p>
-
-<p>
-It turns out we need <code>M-x C-c C-p</code> or <code>M-x wgrep-toggle-readonly-area</code> before removing lines.
-</p>
-
-<p>
-I'm too lazy to remember extra commands. So here is the workaround:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">;; Press `dd' to delete lines in `wgrep-mode' in evil directly
-(defadvice evil-delete (around evil-delete-hack activate)
-  ;; make buffer writable
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area))
-  ad-do-it
-  ;; make buffer read-only
-  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
-      (wgrep-toggle-readonly-area)))
-</code></pre>
-
-</div>
 </div>
             </div>
         </div>

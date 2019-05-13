@@ -23,6 +23,65 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Use wgrep and evil to replace text efficiently</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2017-05-22T13:14:35+00:00">2017-05-22 13:14</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-wgrep-and-evil-to-replace-text-efficiently.html#disqus_thread" data-disqus-identifier="cache/posts/use-wgrep-and-evil-to-replace-text-efficiently.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/wgrep.html" rel="tag">wgrep</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+In my previous article <a href="http://blog.binchen.org/posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a>, I proved ivy and wgrep is easy if you read code. You can even create your own plugin based on their APIs. For example, I define <code>my-grep</code> and <code>my-grep-occur</code> in <a href="https://github.com/redguardtoo/emacs.d/blob/deb521f15e530527598572ef50fd66ea2936fc3c/lisp/init-ivy.el">init-ivy.el</a> in order to search/replace text in project root directory.
+</p>
+
+<p>
+My wgrep-mode enabled buffer is in evil-mode. I prefer pressing vi key binding <code>dd</code> to remove lines in that buffer to tell wgrep skip them.
+</p>
+
+<p>
+It turns out we need <code>M-x C-c C-p</code> or <code>M-x wgrep-toggle-readonly-area</code> before removing lines.
+</p>
+
+<p>
+I'm too lazy to remember extra commands. So here is the workaround:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">;; Press `dd' to delete lines in `wgrep-mode' in evil directly
+(defadvice evil-delete (around evil-delete-hack activate)
+  ;; make buffer writable
+  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
+      (wgrep-toggle-readonly-area))
+  ad-do-it
+  ;; make buffer read-only
+  (if (and (boundp 'wgrep-prepared) wgrep-prepared)
+      (wgrep-toggle-readonly-area)))
+</code></pre>
+
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/emacs-is-easy-if-you-read-code.html">Emacs is easy if you read code</a></h1>
             <div class="meta">
                 <div class="authordate">
