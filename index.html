@@ -23,6 +23,78 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/dianyou-0-0-3-is-out.html">dianyou 0.0.3 is out</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2019-06-04T12:54:48+00:00">2019-06-04 12:54</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/dianyou-0-0-3-is-out.html#disqus_thread" data-disqus-identifier="cache/posts/dianyou-0-0-3-is-out.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/email.html" rel="tag">email</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/gnus.html" rel="tag">gnus</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+Gnus still has enough room to improve. So I released <a href="https://github.com/redguardtoo/dianyou">dianyou</a> to solve my Gnus problem.
+</p>
+
+<div id="outline-container-org34c0377" class="outline-2">
+
+<div class="outline-text-2" id="text-1">
+<p>
+Most Gnus users use <code>gnus-group-make-nnir-group</code> to search mails. But it's not usable in "Summary Buffer". Its <a href="https://tools.ietf.org/html/rfc3501#section-6.4.4">IMAP SEARCH Command</a> is hard to use.
+</p>
+
+<p>
+It could be replaced by <code>dianyou-group-make-nnir-group</code> which supports shortcuts. For example, you can input "f John s 1y2w2d" and select "imap" when Gnus asks the question "Imap Search in". It means search mails from John since 1 year, 2 weeks and 2 days ago.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org98564bd" class="outline-2">
+
+<div class="outline-text-2" id="text-2">
+<p>
+I'm too lazy to set up my contacts. It would be much better Gnus could <b>automatically</b> collect email addresses from all received mails. So I created the command <code>dianyou-insert-email-address-from-received-mails</code>. The inserted email address is also inserted into the global variable <code>dianyou-email-address-history</code> which could be persisted by <a href="https://github.com/jwiegley/session">session</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orga08702e" class="outline-2">
+
+<div class="outline-text-2" id="text-3">
+<p>
+One annoying thing in Gnus is pressing "q" will close opened folder. I often pressed "q" when I only intended to switch to another Gnus buffer. Now I can use <code>dianyou-switch-gnus-buffer</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org89d6e6b" class="outline-2">
+
+<div class="outline-text-2" id="text-4">
+<p>
+Use <code>dianyou-paste-image-from-clipboard</code>. CLI program <a href="https://github.com/astrand/xclip">xclip</a> should be installed at first.</p>
+</div>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/my-favourite-richard-stallman-interviews.html">My favorite Richard Stallman interviews</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1047,160 +1119,6 @@ BTW, I can edit the patch on the spot when applying hunks. Similar to the work f
 
 <p>
 The solution is added into <a href="https://github.com/technomancy/find-file-in-project">https://github.com/technomancy/find-file-in-project</a>.</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/firefox-and-emacs.html">Firefox and Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-05-23T12:24:25+00:00">2017-05-23 12:24</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/firefox-and-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/firefox-and-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/firefox.html" rel="tag">firefox</a></li>
-           <li><a class="tag p-category" href="categories/ivy.html" rel="tag">ivy</a></li>
-           <li><a class="tag p-category" href="categories/keysnail.html" rel="tag">keysnail</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
-</p>
-
-<p>
-Three years ago, I wrote <a href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html">Use firefox in Emacs way</a> to demo how to convert Firefox into Emacs by <a href="https://github.com/mooz/keysnail/wiki">Keynsail.</a>
-</p>
-
-<p>
-A year ago I published <a href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html">Hello Ivy-mode, bye Helm</a> to prove how powerful <a href="https://github.com/abo-abo/swiper">Ivy-mode</a> is by using its API <code>ivy-read</code>.
-</p>
-
-<p>
-Keysnail has similar javascript API <code>prompt.selector</code> and it's as powerful as <code>ivy-read</code> if not more powerful.
-</p>
-
-<p>
-For example, you can insert below snippet into <code>~/.keysnail.js</code> and press ",hh" or "C-c C-h" to query browse history:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">function searchHistory(evt, arg) {
-  function timeSince(now, date) {
-
-    var seconds = Math.floor((now - date) / 1000);
-
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval &gt; 1) {
-      return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval &gt; 1) {
-      return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval &gt; 1) {
-      return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval &gt; 1) {
-      return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval &gt; 1) {
-      return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
-
-  function searchWithKeyword(q) {
-    var collection = (function() {
-      //search option
-      var options = PlacesUtils.history.getNewQueryOptions();
-      options.maxResults = 4096;
-      options.queryType = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
-      //options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_FRECENCY_DESCENDING;
-      options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_DATE_DESCENDING;
-      options.includeHidden = true;
-
-      //search query
-      var query = PlacesUtils.history.getNewQuery();
-      // read keyworld
-      if(q &amp;&amp; q !== '') {
-        query.searchTerms  = q;
-      }
-
-      var result = PlacesUtils.history.executeQuery(query, options);
-      var root = result.root;
-
-      var collection = [];
-      var now = new Date().getTime();
-      var siteNode;
-      root.containerOpen = true;
-      for (var i = 0; i &lt; root.childCount; i++) {
-        // siteNode =&gt; nsINavHistoryResultNode
-        siteNode = root.getChild(i);
-        collection.push([siteNode.icon,siteNode.title,siteNode.uri, siteNode.time/1000]);
-      }
-      collection.sort(function(a, b) {
-        return b[3]-a[3];
-      });
-      // reformat the time
-      for (i = 0; i &lt; collection.length; i++) {
-        collection[i][3] = timeSince(now, collection[i][3]) + ' ago';
-      }
-      root.containerOpen = false;
-      return collection;
-    })();
-
-    prompt.selector({
-      message    : "Search history"+ (q &amp;&amp; q !== ''? (' @'+q +':') : ':' ),
-      collection : collection,
-      flags      : [ICON | IGNORE, 0, 0, 0],
-      header     : ["Title", "Url", "Last visited"],
-      width      : [30, 60, 10],
-      callback: function (i) {
-        if (i &gt;= 0) {
-          openUILinkIn(collection[i][2], "tab");
-        }
-      },
-      onFinish: function() {
-        gBrowser.focus();
-        _content.focus();
-      }
-    });
-  }
-
-  prompt.finish(true);
-  prompt.read('Keyword to search history?', searchWithKeyword, null, null, null, 0, "history_search");
-  // searchWithKeyword('test');
-
-}
-key.setViewKey([',', 'h', 'h'], searchHistory, "Search history");
-key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
-</code></pre>
-
-</div>
-
-<p>
-Here is my complete <a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a">.keysnail.js</a>.
-</p>
 </div>
             </div>
         </div>

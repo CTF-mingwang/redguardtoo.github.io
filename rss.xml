@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 13 May 2019 14:43:35 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>My favorite Richard Stallman interviews</title><link>http://blog.binchen.org/posts/my-favourite-richard-stallman-interviews.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Jun 2019 12:57:05 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>dianyou 0.0.3 is out</title><link>http://blog.binchen.org/posts/dianyou-0-0-3-is-out.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+Gnus still has enough room to improve. So I released &lt;a href="https://github.com/redguardtoo/dianyou"&gt;dianyou&lt;/a&gt; to solve my Gnus problem.
+&lt;/p&gt;
+
+&lt;div id="outline-container-org34c0377" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Most Gnus users use &lt;code&gt;gnus-group-make-nnir-group&lt;/code&gt; to search mails. But it's not usable in "Summary Buffer". Its &lt;a href="https://tools.ietf.org/html/rfc3501#section-6.4.4"&gt;IMAP SEARCH Command&lt;/a&gt; is hard to use.
+&lt;/p&gt;
+
+&lt;p&gt;
+It could be replaced by &lt;code&gt;dianyou-group-make-nnir-group&lt;/code&gt; which supports shortcuts. For example, you can input "f John s 1y2w2d" and select "imap" when Gnus asks the question "Imap Search in". It means search mails from John since 1 year, 2 weeks and 2 days ago.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org98564bd" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+I'm too lazy to set up my contacts. It would be much better Gnus could &lt;b&gt;automatically&lt;/b&gt; collect email addresses from all received mails. So I created the command &lt;code&gt;dianyou-insert-email-address-from-received-mails&lt;/code&gt;. The inserted email address is also inserted into the global variable &lt;code&gt;dianyou-email-address-history&lt;/code&gt; which could be persisted by &lt;a href="https://github.com/jwiegley/session"&gt;session&lt;/a&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orga08702e" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-3"&gt;
+&lt;p&gt;
+One annoying thing in Gnus is pressing "q" will close opened folder. I often pressed "q" when I only intended to switch to another Gnus buffer. Now I can use &lt;code&gt;dianyou-switch-gnus-buffer&lt;/code&gt;.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org89d6e6b" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-4"&gt;
+&lt;p&gt;
+Use &lt;code&gt;dianyou-paste-image-from-clipboard&lt;/code&gt;. CLI program &lt;a href="https://github.com/astrand/xclip"&gt;xclip&lt;/a&gt; should be installed at first.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>gnus</category><guid>http://blog.binchen.org/posts/dianyou-0-0-3-is-out.html</guid><pubDate>Tue, 04 Jun 2019 12:54:48 GMT</pubDate></item><item><title>My favorite Richard Stallman interviews</title><link>http://blog.binchen.org/posts/my-favourite-richard-stallman-interviews.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I've watched/listened many Richard Stallman interviews. Some hosts are really bad. They know nothing about technology and are too aggressive.
 &lt;/p&gt;
 
@@ -750,126 +791,4 @@ BTW, I can edit the patch on the spot when applying hunks. Similar to the work f
 &lt;/p&gt;
 
 &lt;p&gt;
-The solution is added into &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;https://github.com/technomancy/find-file-in-project&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</guid><pubDate>Tue, 30 May 2017 12:29:12 GMT</pubDate></item><item><title>Firefox and Emacs</title><link>http://blog.binchen.org/posts/firefox-and-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-For me, there is NO difference between Firefox and Emacs. They provide useful APIs, nothing more.
-&lt;/p&gt;
-
-&lt;p&gt;
-Three years ago, I wrote &lt;a href="http://blog.binchen.org/posts/use-firefox-in-emacs-way-3.html"&gt;Use firefox in Emacs way&lt;/a&gt; to demo how to convert Firefox into Emacs by &lt;a href="https://github.com/mooz/keysnail/wiki"&gt;Keynsail.&lt;/a&gt;
-&lt;/p&gt;
-
-&lt;p&gt;
-A year ago I published &lt;a href="http://blog.binchen.org/posts/hello-ivy-mode-bye-helm.html"&gt;Hello Ivy-mode, bye Helm&lt;/a&gt; to prove how powerful &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; is by using its API &lt;code&gt;ivy-read&lt;/code&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-Keysnail has similar javascript API &lt;code&gt;prompt.selector&lt;/code&gt; and it's as powerful as &lt;code&gt;ivy-read&lt;/code&gt; if not more powerful.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, you can insert below snippet into &lt;code&gt;~/.keysnail.js&lt;/code&gt; and press ",hh" or "C-c C-h" to query browse history:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;function searchHistory(evt, arg) {
-  function timeSince(now, date) {
-
-    var seconds = Math.floor((now - date) / 1000);
-
-    var interval = Math.floor(seconds / 31536000);
-
-    if (interval &amp;gt; 1) {
-      return interval + " years";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval &amp;gt; 1) {
-      return interval + " months";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval &amp;gt; 1) {
-      return interval + " days";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval &amp;gt; 1) {
-      return interval + " hours";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval &amp;gt; 1) {
-      return interval + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
-  }
-
-  function searchWithKeyword(q) {
-    var collection = (function() {
-      //search option
-      var options = PlacesUtils.history.getNewQueryOptions();
-      options.maxResults = 4096;
-      options.queryType = Ci.nsINavHistoryQueryOptions.QUERY_TYPE_HISTORY;
-      //options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_FRECENCY_DESCENDING;
-      options.sortingMode = Ci.nsINavHistoryQueryOptions.SORT_BY_DATE_DESCENDING;
-      options.includeHidden = true;
-
-      //search query
-      var query = PlacesUtils.history.getNewQuery();
-      // read keyworld
-      if(q &amp;amp;&amp;amp; q !== '') {
-        query.searchTerms  = q;
-      }
-
-      var result = PlacesUtils.history.executeQuery(query, options);
-      var root = result.root;
-
-      var collection = [];
-      var now = new Date().getTime();
-      var siteNode;
-      root.containerOpen = true;
-      for (var i = 0; i &amp;lt; root.childCount; i++) {
-        // siteNode =&amp;gt; nsINavHistoryResultNode
-        siteNode = root.getChild(i);
-        collection.push([siteNode.icon,siteNode.title,siteNode.uri, siteNode.time/1000]);
-      }
-      collection.sort(function(a, b) {
-        return b[3]-a[3];
-      });
-      // reformat the time
-      for (i = 0; i &amp;lt; collection.length; i++) {
-        collection[i][3] = timeSince(now, collection[i][3]) + ' ago';
-      }
-      root.containerOpen = false;
-      return collection;
-    })();
-
-    prompt.selector({
-      message    : "Search history"+ (q &amp;amp;&amp;amp; q !== ''? (' @'+q +':') : ':' ),
-      collection : collection,
-      flags      : [ICON | IGNORE, 0, 0, 0],
-      header     : ["Title", "Url", "Last visited"],
-      width      : [30, 60, 10],
-      callback: function (i) {
-        if (i &amp;gt;= 0) {
-          openUILinkIn(collection[i][2], "tab");
-        }
-      },
-      onFinish: function() {
-        gBrowser.focus();
-        _content.focus();
-      }
-    });
-  }
-
-  prompt.finish(true);
-  prompt.read('Keyword to search history?', searchWithKeyword, null, null, null, 0, "history_search");
-  // searchWithKeyword('test');
-
-}
-key.setViewKey([',', 'h', 'h'], searchHistory, "Search history");
-key.setGlobalKey(['C-c', 'C-h'], searchHistory, "Search history");
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Here is my complete &lt;a href="https://gist.github.com/redguardtoo/003ac86d4c11b70b870a"&gt;.keysnail.js&lt;/a&gt;.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>firefox</category><category>ivy</category><category>keysnail</category><guid>http://blog.binchen.org/posts/firefox-and-emacs.html</guid><pubDate>Tue, 23 May 2017 12:24:25 GMT</pubDate></item></channel></rss>
+The solution is added into &lt;a href="https://github.com/technomancy/find-file-in-project"&gt;https://github.com/technomancy/find-file-in-project&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>diff</category><category>emacs</category><category>en</category><category>ivy</category><guid>http://blog.binchen.org/posts/enhance-diff-mode-with-ivy.html</guid><pubDate>Tue, 30 May 2017 12:29:12 GMT</pubDate></item></channel></rss>
