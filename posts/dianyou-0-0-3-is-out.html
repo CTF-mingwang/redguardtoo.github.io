@@ -11,14 +11,14 @@
 <meta property="og:site_name" content="Chen's blog">
 <meta property="og:title" content="dianyou 0.0.3 is out">
 <meta property="og:url" content="http://blog.binchen.org/posts/dianyou-0-0-3-is-out.html">
-<meta property="og:description" content="I created dianyou to solve my Gnus issues.
+<meta property="og:description" content="I created dianyou (电邮) to solve improve my Gnus work flow.
 
 
 
 Search mails
 
 
-Most Gnus users use gnus-group-make-nnir-group to search mails. But it's not usable in &quot;Summary Buffer&quot;. Its IMAP SEARCH Command is hard to">
+Most Gnus users use gnus-group-make-nnir-group to search mails. But it's not usable in &quot;Summary Buffer&quot;. Its IMAP SEARCH Co">
 <meta property="og:type" content="article">
 <meta property="article:published_time" content="2019-06-04T12:54:48Z">
 <meta property="article:tag" content="emacs">
@@ -67,12 +67,12 @@ Most Gnus users use gnus-group-make-nnir-group to search mails. But it's not usa
         <div class="body">
             <div>
 <p>
-I created <a href="https://github.com/redguardtoo/dianyou">dianyou</a> to solve my Gnus issues.
+I created <a href="https://github.com/redguardtoo/dianyou">dianyou</a> (电邮) to solve improve my Gnus work flow.
 </p>
 
-<div id="outline-container-org99d737f" class="outline-2">
-<h3 id="org99d737f">Search mails</h3>
-<div class="outline-text-2" id="text-org99d737f">
+<div id="outline-container-orged80b75" class="outline-2">
+<h3 id="orged80b75">Search mails</h3>
+<div class="outline-text-2" id="text-orged80b75">
 <p>
 Most Gnus users use <code>gnus-group-make-nnir-group</code> to search mails. But it's not usable in "Summary Buffer". Its <a href="https://tools.ietf.org/html/rfc3501#section-6.4.4">IMAP SEARCH Command</a> is hard to use.
 </p>
@@ -83,27 +83,27 @@ It could be replaced by <code>dianyou-group-make-nnir-group</code> which support
 </div>
 </div>
 
-<div id="outline-container-org502d8fd" class="outline-2">
-<h3 id="org502d8fd">Auto complete email address</h3>
-<div class="outline-text-2" id="text-org502d8fd">
+<div id="outline-container-orgdb36ad2" class="outline-2">
+<h3 id="orgdb36ad2">Auto complete email address</h3>
+<div class="outline-text-2" id="text-orgdb36ad2">
 <p>
 I'm too lazy to set up my contacts. It would be better that Gnus could <b>automatically</b> collect email addresses from all received mails. So I created the command <code>dianyou-insert-email-address-from-received-mails</code>. The inserted email address is also inserted into the global variable <code>dianyou-email-address-history</code> which could be persisted by <a href="https://github.com/jwiegley/session">session</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org08a33d6" class="outline-2">
-<h3 id="org08a33d6">Switch Gnus buffer</h3>
-<div class="outline-text-2" id="text-org08a33d6">
+<div id="outline-container-orga91f867" class="outline-2">
+<h3 id="orga91f867">Switch Gnus buffer</h3>
+<div class="outline-text-2" id="text-orga91f867">
 <p>
 One annoying thing in Gnus is pressing "q" will close opened folder. I often pressed "q" when I only intended to switch to another Gnus buffer. Now I can use <code>dianyou-switch-gnus-buffer</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org81c5907" class="outline-2">
-<h3 id="org81c5907">Paste image from clipboard</h3>
-<div class="outline-text-2" id="text-org81c5907">
+<div id="outline-container-orgdff2081" class="outline-2">
+<h3 id="orgdff2081">Paste image from clipboard</h3>
+<div class="outline-text-2" id="text-orgdff2081">
 <p>
 Use <code>dianyou-paste-image-from-clipboard</code>. CLI program <a href="https://github.com/astrand/xclip">xclip</a> should be installed at first.</p>
 </div>
