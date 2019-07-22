@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 22 Jul 2019 12:13:03 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Javascript code navigation in counsel-etags</title><link>http://blog.binchen.org/posts/javascript-code-navigation-in-counsel-etags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about javascript)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/javascript.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 22 Jul 2019 12:14:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Javascript code navigation in counsel-etags</title><link>http://blog.binchen.org/posts/javascript-code-navigation-in-counsel-etags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Javascript code navigation is supported by &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;counsel-etags&lt;/a&gt; out of box.
 &lt;/p&gt;
 
@@ -68,9 +68,9 @@ My current project uses a technology called &lt;a href="https://www.styled-compo
 It could dynamically change web application's appearance and is a critical technology for our application to support multiple customer. Application's theme is basically a file containing a huge json object. So it's important that developers can jump to the corresponding json object's field by json path.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org83883d9" class="outline-2"&gt;
-&lt;h3 id="org83883d9"&gt;Screencast&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org83883d9"&gt;
+&lt;div id="outline-container-orge42eaed" class="outline-2"&gt;
+&lt;h3 id="orge42eaed"&gt;Screencast&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orge42eaed"&gt;
 
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/counsel-etags-plus-json-path.gif" alt="counsel-etags-plus-json-path.gif"&gt;
@@ -79,9 +79,9 @@ It could dynamically change web application's appearance and is a critical techn
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgaee0ce4" class="outline-2"&gt;
-&lt;h3 id="orgaee0ce4"&gt;Code&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgaee0ce4"&gt;
+&lt;div id="outline-container-org6ac393a" class="outline-2"&gt;
+&lt;h3 id="org6ac393a"&gt;Code&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org6ac393a"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'counsel-etags)
@@ -118,8 +118,8 @@ It could dynamically change web application's appearance and is a critical techn
         (write-region (point-min) (point-max) tags-file nil :silent)))))
 
 (defun counsel-etags-after-update-tags-hook-setup (tags-file)
-    (my-manual-update-tag-file "theming/themes/darkTheme.js" tags-file)
-    (my-manual-update-tag-file "theming/themes/lightTheme.js" tags-file))
+    (my-manual-update-tag-file "frontend/theming/themes/darkTheme.js" tags-file)
+    (my-manual-update-tag-file "frontend/theming/themes/lightTheme.js" tags-file))
 (add-hook 'counsel-etags-after-update-tags-hook 'counsel-etags-after-update-tags-hook-setup)
 &lt;/code&gt;&lt;/pre&gt;
 

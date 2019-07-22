@@ -135,9 +135,9 @@ My current project uses a technology called <a href="https://www.styled-componen
 It could dynamically change web application's appearance and is a critical technology for our application to support multiple customer. Application's theme is basically a file containing a huge json object. So it's important that developers can jump to the corresponding json object's field by json path.
 </p>
 
-<div id="outline-container-org83883d9" class="outline-2">
-<h3 id="org83883d9">Screencast</h3>
-<div class="outline-text-2" id="text-org83883d9">
+<div id="outline-container-orge42eaed" class="outline-2">
+<h3 id="orge42eaed">Screencast</h3>
+<div class="outline-text-2" id="text-orge42eaed">
 
 <div class="figure">
 <p><img src="../wp-content/counsel-etags-plus-json-path.gif" alt="counsel-etags-plus-json-path.gif"></p>
@@ -145,9 +145,9 @@ It could dynamically change web application's appearance and is a critical techn
 </div>
 </div>
 
-<div id="outline-container-orgaee0ce4" class="outline-2">
-<h3 id="orgaee0ce4">Code</h3>
-<div class="outline-text-2" id="text-orgaee0ce4">
+<div id="outline-container-org6ac393a" class="outline-2">
+<h3 id="org6ac393a">Code</h3>
+<div class="outline-text-2" id="text-org6ac393a">
 <div class="org-src-container">
 
 <pre><code class="lang-lisp">(require 'counsel-etags)
@@ -184,8 +184,8 @@ It could dynamically change web application's appearance and is a critical techn
         (write-region (point-min) (point-max) tags-file nil :silent)))))
 
 (defun counsel-etags-after-update-tags-hook-setup (tags-file)
-    (my-manual-update-tag-file "theming/themes/darkTheme.js" tags-file)
-    (my-manual-update-tag-file "theming/themes/lightTheme.js" tags-file))
+    (my-manual-update-tag-file "frontend/theming/themes/darkTheme.js" tags-file)
+    (my-manual-update-tag-file "frontend/theming/themes/lightTheme.js" tags-file))
 (add-hook 'counsel-etags-after-update-tags-hook 'counsel-etags-after-update-tags-hook-setup)
 </code></pre>
 
