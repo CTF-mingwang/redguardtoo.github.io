@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about aspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/aspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Jun 2019 13:03:42 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about aspell)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/aspell.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Sep 2019 13:15:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Aspell 0.60.8 will have direct support for camelCase words</title><link>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/redguardtoo/emacs.d/issues/796"&gt;Kevin Atkinso&lt;/a&gt; told me this good news.
+&lt;/p&gt;
+
+&lt;p&gt;
+Currently I'm using &lt;a href="https://github.com/redguardtoo/wucuo"&gt;Emacs Lisp&lt;/a&gt; to check camel case words.
+&lt;/p&gt;
+
+&lt;p&gt;
+The new option &lt;code&gt;--camel-case&lt;/code&gt; from aspell will definitely speed up the whole process.
+&lt;/p&gt;
+
+&lt;p&gt;
+Minimum Emacs setup,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq ispell-program-name "aspell")
+(setq-default ispell-extra-args '("--sug-mode=ultra"
+                                  "--lang=en_US"))
+;; Make sure new aspell is installed
+(when (string-match-p "--camel-case"
+                      (shell-command-to-string (concat ispell-program-name " --help")))
+  (push "--camel-case" ispell-extra-args))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Optionally, you could read &lt;a href="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html"&gt;What's the best spell check setup in emacs&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>aspell</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</guid><pubDate>Sun, 01 Sep 2019 13:13:35 GMT</pubDate></item><item><title>What's the best spell check setup in emacs</title><link>http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 UPDATED: &lt;span class="timestamp-wrapper"&gt;&lt;span class="timestamp"&gt;&amp;lt;2016-05-13 Fri&amp;gt;&lt;/span&gt;&lt;/span&gt;
 &lt;/p&gt;
 

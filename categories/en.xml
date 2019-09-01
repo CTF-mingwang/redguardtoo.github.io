@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Mon, 22 Jul 2019 12:14:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Javascript code navigation in counsel-etags</title><link>http://blog.binchen.org/posts/javascript-code-navigation-in-counsel-etags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about en)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/en.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 01 Sep 2019 13:15:41 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Aspell 0.60.8 will have direct support for camelCase words</title><link>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/redguardtoo/emacs.d/issues/796"&gt;Kevin Atkinso&lt;/a&gt; told me this good news.
+&lt;/p&gt;
+
+&lt;p&gt;
+Currently I'm using &lt;a href="https://github.com/redguardtoo/wucuo"&gt;Emacs Lisp&lt;/a&gt; to check camel case words.
+&lt;/p&gt;
+
+&lt;p&gt;
+The new option &lt;code&gt;--camel-case&lt;/code&gt; from aspell will definitely speed up the whole process.
+&lt;/p&gt;
+
+&lt;p&gt;
+Minimum Emacs setup,
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq ispell-program-name "aspell")
+(setq-default ispell-extra-args '("--sug-mode=ultra"
+                                  "--lang=en_US"))
+;; Make sure new aspell is installed
+(when (string-match-p "--camel-case"
+                      (shell-command-to-string (concat ispell-program-name " --help")))
+  (push "--camel-case" ispell-extra-args))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Optionally, you could read &lt;a href="http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html"&gt;What's the best spell check setup in emacs&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description><category>aspell</category><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</guid><pubDate>Sun, 01 Sep 2019 13:13:35 GMT</pubDate></item><item><title>Javascript code navigation in counsel-etags</title><link>http://blog.binchen.org/posts/javascript-code-navigation-in-counsel-etags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 Javascript code navigation is supported by &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;counsel-etags&lt;/a&gt; out of box.
 &lt;/p&gt;
 
@@ -793,62 +823,4 @@ For example, it is a piece of cake to support Lisp by creating comand &lt;code&g
   (eacl-complete-multi-lines-internal "[^)]*)"))
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item><item><title>Split Emacs window with certain ratio</title><link>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-The idea comes from &lt;a href="https://github.com/redguardtoo/emacs.d/issues/607"&gt;yangdaweihit&lt;/a&gt;. Here is the implementation.
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defvar my-ratio-dict
-  '((1 . 1.61803398875)
-    (2 . 2)
-    (3 . 3)
-    (4 . 4)
-    (5 . 0.61803398875))
-  "The ratio dictionary.")
-
-(defun my-split-window-horizontally (&amp;amp;optional ratio)
-  "Split window horizontally and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-horizontally (floor (/ (window-body-width)
-                                           (1+ ratio-val)))))
-     (t
-      (split-window-horizontally)))
-    (set-window-buffer (next-window) (other-buffer))
-    (if (or (not ratio-val)
-            (&amp;gt;= ratio-val 1))
-        (windmove-right))))
-
-(defun my-split-window-vertically (&amp;amp;optional ratio)
-  "Split window vertically and resize the new window.
-Always focus bigger window."
-  (interactive "P")
-  (let* (ratio-val)
-    (cond
-     (ratio
-      (setq ratio-val (cdr (assoc ratio my-ratio-dict)))
-      (split-window-vertically (floor (/ (window-body-height)
-                                         (1+ ratio-val)))))
-     (t
-      (split-window-vertically)))
-    ;; open another window with other-buffer
-    (set-window-buffer (next-window) (other-buffer))
-    ;; move focus if new window bigger than current one
-    (if (or (not ratio-val)
-            (&amp;gt;= ratio-val 1))
-        (windmove-down))))
-
-(global-set-key (kbd "C-x 2") 'my-split-window-vertically)
-(global-set-key (kbd "C-x 3") 'my-split-window-horizontally)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Usage is simple. For example, &lt;code&gt;C-x 2&lt;/code&gt; is similar to original &lt;code&gt;split-winddow-vertically&lt;/code&gt; while &lt;code&gt;C-u 1 C-x 2&lt;/code&gt; split the window in golden ratio.
-&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/split-emacs-window-with-certain-ratio.html</guid><pubDate>Tue, 05 Sep 2017 13:26:55 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item></channel></rss>
