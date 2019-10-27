@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 27 Oct 2019 12:38:23 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Aspell 0.60.8 will have direct support for camelCase words</title><link>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 27 Oct 2019 12:39:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags 1.9.0 is out</title><link>http://blog.binchen.org/posts/counsel-etags-1-9-0-is-out.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+&lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;Counsel-etags&lt;/a&gt; is fast, energy-saving, and powerful code navigation solution.
+&lt;/p&gt;
+
+&lt;p&gt;
+This version can list tags in current buffer.
+&lt;/p&gt;
+
+&lt;p&gt;
+You can simply run &lt;code&gt;M-x counsel-etags-list-tag-in-current-file&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Or set up imenu before &lt;code&gt;M-x imenu&lt;/code&gt; or &lt;code&gt;M-x helm-imenu&lt;/code&gt; or &lt;code&gt;M-x counsel-imenu&lt;/code&gt;, 
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(setq imenu-create-index-function 'counsel-etags-imenu-default-create-index-function)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+screenshot:
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/counsel-etags-imenu.png" alt="counsel-etags-imenu.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>http://blog.binchen.org/posts/counsel-etags-1-9-0-is-out.html</guid><pubDate>Sun, 27 Oct 2019 12:38:05 GMT</pubDate></item><item><title>Aspell 0.60.8 will have direct support for camelCase words</title><link>http://blog.binchen.org/posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/emacs.d/issues/796"&gt;Kevin Atkinso&lt;/a&gt; told me this good news.
 &lt;/p&gt;
 
@@ -716,111 +746,4 @@ There are also other enhancements.
 &lt;/p&gt;
 
 &lt;p&gt;
-Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item><item><title>Auto complete everything in Emacs</title><link>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-As a web developer using modern front end framework like React/Angular, I spend a lot of time on web components. 
-&lt;/p&gt;
-
-&lt;p&gt;
-A component instance is like:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;&amp;lt;GenericTable
-  onSelectRow={ row =&amp;gt; console.log(row) }
-  numberOfPinnedColumns={2}
-  withToolBar
-  onClickCell={ cell =&amp;gt; console.log(cell) }
-&amp;gt;
-  &amp;lt;PaginationButtons /&amp;gt;
-  &amp;lt;TotalSum /&amp;gt;
-  &amp;lt;ReportButtons /&amp;gt;
-&amp;lt;/GenericTable&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-Basically a component instance is a big chunk of html tags.
-&lt;/p&gt;
-
-&lt;p&gt;
-I created a new package &lt;a href="https://github.com/redguardtoo/eacl"&gt;EACL&lt;/a&gt; (Emacs auto complete lines) which could help me &lt;b&gt;input components in unbelievable speed&lt;/b&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-The idea is simple. If I've already used one component elsewhere in the project. It's unnecessary to re-type the similar code again.
-&lt;/p&gt;
-
-&lt;p&gt;
-All I need to do is to input the first characters of the component and run &lt;code&gt;M-x eacl-complete-tag&lt;/code&gt; which will grep the project and input the remaining part of component.
-&lt;/p&gt;
-
-&lt;p&gt;
-Here is a demo to input component &lt;code&gt;ButtonToolbar&lt;/code&gt;:
-&lt;/p&gt;
-
-&lt;div class="figure"&gt;
-&lt;p&gt;&lt;img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"&gt;
-&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;p&gt;
-Please note &lt;code&gt;EACL&lt;/code&gt; is generic and can be use in any programming language. 
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;code&gt;M-x eacl-complete-statement&lt;/code&gt; to &lt;b&gt;complete below Javascript code&lt;/b&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-javascript"&gt;import {
-  Button,
-  Row,
-  Column
-} from 'react-bootstrap';
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-&lt;code&gt;M-x eacl-complete-snippet&lt;/code&gt; to &lt;b&gt;complete below C code&lt;/b&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-c"&gt;static int v9fs_drop_inode(struct inode *inode)
-{
-    struct v9fs_session_info *v9ses;
-    v9ses = v9fs_inode2v9ses(inode);
-    if (v9ses-&amp;gt;cache == CACHE_LOOSE || v9ses-&amp;gt;cache == CACHE_FSCACHE)
-        return generic_drop_inode(inode);
-    /*
-     * in case of non cached mode always drop the
-     * the inode because we want the inode attribute
-     * to always match that on the server.
-     */
-    return 1;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-You can also create your own commands based on API &lt;code&gt;eacl-complete-multi-lines-internal&lt;/code&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;
-For example, it is a piece of cake to support Lisp by creating comand &lt;code&gt;my-complete-lisp&lt;/code&gt;:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;(require 'eacl)
-(defun my-complete-lisp ()
-  (interactive)
-  (eacl-complete-multi-lines-internal "[^)]*)"))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><guid>http://blog.binchen.org/posts/auto-complete-everything-in-emacs.html</guid><pubDate>Mon, 30 Oct 2017 11:13:30 GMT</pubDate></item></channel></rss>
+Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item></channel></rss>

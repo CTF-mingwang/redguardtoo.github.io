@@ -23,6 +23,57 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/counsel-etags-1-9-0-is-out.html">counsel-etags 1.9.0 is out</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2019-10-27T12:38:05+00:00">2019-10-27 12:38</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/counsel-etags-1-9-0-is-out.html#disqus_thread" data-disqus-identifier="cache/posts/counsel-etags-1-9-0-is-out.html">Comments</a>
+
+
+                </div>
+            
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+<a href="https://github.com/redguardtoo/counsel-etags">Counsel-etags</a> is fast, energy-saving, and powerful code navigation solution.
+</p>
+
+<p>
+This version can list tags in current buffer.
+</p>
+
+<p>
+You can simply run <code>M-x counsel-etags-list-tag-in-current-file</code>.
+</p>
+
+<p>
+Or set up imenu before <code>M-x imenu</code> or <code>M-x helm-imenu</code> or <code>M-x counsel-imenu</code>, 
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq imenu-create-index-function 'counsel-etags-imenu-default-create-index-function)
+</code></pre>
+
+</div>
+
+<p>
+screenshot:
+</p>
+
+<div class="figure">
+<p><img src="wp-content/counsel-etags-imenu.png" alt="counsel-etags-imenu.png"></p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/aspell-0-60-8-will-have-direct-support-for-camelcase-words.html">Aspell 0.60.8 will have direct support for camelCase words</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1015,141 +1066,6 @@ There are also other enhancements.
 
 <p>
 Please check <a href="https://github.com/redguardtoo/counsel-etags">https://github.com/redguardtoo/counsel-etags</a> for more tips.</p>
-</div>
-            </div>
-        </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/auto-complete-everything-in-emacs.html">Auto complete everything in Emacs</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2017-10-30T11:13:30+00:00">2017-10-30 11:13</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/auto-complete-everything-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/auto-complete-everything-in-emacs.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-As a web developer using modern front end framework like React/Angular, I spend a lot of time on web components. 
-</p>
-
-<p>
-A component instance is like:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">&lt;GenericTable
-  onSelectRow={ row =&gt; console.log(row) }
-  numberOfPinnedColumns={2}
-  withToolBar
-  onClickCell={ cell =&gt; console.log(cell) }
-&gt;
-  &lt;PaginationButtons /&gt;
-  &lt;TotalSum /&gt;
-  &lt;ReportButtons /&gt;
-&lt;/GenericTable&gt;
-</code></pre>
-
-</div>
-
-<p>
-Basically a component instance is a big chunk of html tags.
-</p>
-
-<p>
-I created a new package <a href="https://github.com/redguardtoo/eacl">EACL</a> (Emacs auto complete lines) which could help me <b>input components in unbelievable speed</b>.
-</p>
-
-<p>
-The idea is simple. If I've already used one component elsewhere in the project. It's unnecessary to re-type the similar code again.
-</p>
-
-<p>
-All I need to do is to input the first characters of the component and run <code>M-x eacl-complete-tag</code> which will grep the project and input the remaining part of component.
-</p>
-
-<p>
-Here is a demo to input component <code>ButtonToolbar</code>:
-</p>
-
-<div class="figure">
-<p><img src="https://raw.githubusercontent.com/redguardtoo/eacl/master/eacl-demo.gif" alt="eacl-demo.gif"></p>
-</div>
-
-<p>
-Please note <code>EACL</code> is generic and can be use in any programming language. 
-</p>
-
-<p>
-<code>M-x eacl-complete-statement</code> to <b>complete below Javascript code</b>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-javascript">import {
-  Button,
-  Row,
-  Column
-} from 'react-bootstrap';
-</code></pre>
-
-</div>
-
-<p>
-<code>M-x eacl-complete-snippet</code> to <b>complete below C code</b>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-c">static int v9fs_drop_inode(struct inode *inode)
-{
-    struct v9fs_session_info *v9ses;
-    v9ses = v9fs_inode2v9ses(inode);
-    if (v9ses-&gt;cache == CACHE_LOOSE || v9ses-&gt;cache == CACHE_FSCACHE)
-        return generic_drop_inode(inode);
-    /*
-     * in case of non cached mode always drop the
-     * the inode because we want the inode attribute
-     * to always match that on the server.
-     */
-    return 1;
-}
-</code></pre>
-
-</div>
-
-<p>
-You can also create your own commands based on API <code>eacl-complete-multi-lines-internal</code>.
-</p>
-
-<p>
-For example, it is a piece of cake to support Lisp by creating comand <code>my-complete-lisp</code>:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(require 'eacl)
-(defun my-complete-lisp ()
-  (interactive)
-  (eacl-complete-multi-lines-internal "[^)]*)"))
-</code></pre>
-
-</div>
 </div>
             </div>
         </div>
