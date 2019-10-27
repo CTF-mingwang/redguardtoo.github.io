@@ -652,9 +652,9 @@ Please note:
 <li>I'm good at most debuggers. The point of this article is to deal with <b>more difficult issues</b> the debugger can not handle.</li>
 <li>My code quality is fine. It handles all the corner cases I've met. For example, single quote and double quotes will be escaped properly.</li>
 </ul>
-<div id="outline-container-org85fefe6" class="outline-2">
-<h3 id="org85fefe6">Problem</h3>
-<div class="outline-text-2" id="text-org85fefe6">
+<div id="outline-container-orgbca181d" class="outline-2">
+<h3 id="orgbca181d">Problem</h3>
+<div class="outline-text-2" id="text-orgbca181d">
 <p>
 As a freelancer I am often required to debug legacy javascript code from some huge "enterprise"" applications.
 </p>
@@ -669,18 +669,18 @@ So my problem is how to insert logging code as quickly as possible.
 </div>
 </div>
 
-<div id="outline-container-org9300e2d" class="outline-2">
-<h3 id="org9300e2d">Solution</h3>
-<div class="outline-text-2" id="text-org9300e2d">
+<div id="outline-container-org6395ebf" class="outline-2">
+<h3 id="org6395ebf">Solution</h3>
+<div class="outline-text-2" id="text-org6395ebf">
 <p>
 My solution is <a href="https://github.com/capitaomorte/yasnippet">Yasnippet</a>. Yasnippet allow me to insert executable Emacs Lisp code in its snippet. I will Sotake full advantage of that feature. 
 </p>
 </div>
 </div>
 
-<div id="outline-container-org85e1f31" class="outline-2">
-<h3 id="org85e1f31">Logging simple JS variable</h3>
-<div class="outline-text-2" id="text-org85e1f31">
+<div id="outline-container-orgd128ba5" class="outline-2">
+<h3 id="orgd128ba5">Logging simple JS variable</h3>
+<div class="outline-text-2" id="text-orgd128ba5">
 <p>
 Given a variable name like "var1", I need insert javascript code as below:
 </p>
@@ -702,9 +702,9 @@ This snippet need you input variable name once.
 </div>
 </div>
 
-<div id="outline-container-org098ad95" class="outline-2">
-<h3 id="org098ad95">Logging complex JS variable</h3>
-<div class="outline-text-2" id="text-org098ad95">
+<div id="outline-container-orgf15bbad" class="outline-2">
+<h3 id="orgf15bbad">Logging complex JS variable</h3>
+<div class="outline-text-2" id="text-orgf15bbad">
 <p>
 In real world, the JS variable is often a string like "MyController.servicea.find('.class').attr1" which I hate to type.
 </p>
@@ -720,9 +720,9 @@ Snippet:
 </div>
 </div>
 
-<div id="outline-container-org250c36e" class="outline-2">
-<h3 id="org250c36e">Logging JS function name when it's called</h3>
-<div class="outline-text-2" id="text-org250c36e">
+<div id="outline-container-orgb7f4e99" class="outline-2">
+<h3 id="orgb7f4e99">Logging JS function name when it's called</h3>
+<div class="outline-text-2" id="text-orgb7f4e99">
 <p>
 In below example, I need insert  "console.log('hello is called');" in function "hello":
 </p>
@@ -755,9 +755,9 @@ The regular expressions could be used in <b>both</b> js-mode and js2-mode.
 </div>
 </div>
 
-<div id="outline-container-org3502c0c" class="outline-2">
-<h3 id="org3502c0c">Logging JS function name with its parameters</h3>
-<div class="outline-text-2" id="text-org3502c0c">
+<div id="outline-container-orgcffd065" class="outline-2">
+<h3 id="orgcffd065">Logging JS function name with its parameters</h3>
+<div class="outline-text-2" id="text-orgcffd065">
 <p>
 JS example:
 </p>
@@ -786,9 +786,9 @@ BTW, since I use <a href="http://www.emacswiki.org/Evil">Evil</a>, copy the para
 </div>
 </div>
 
-<div id="outline-container-orgabde8b5" class="outline-2">
-<h3 id="orgabde8b5">Insert JS debugger statement</h3>
-<div class="outline-text-2" id="text-orgabde8b5">
+<div id="outline-container-orge04829a" class="outline-2">
+<h3 id="orge04829a">Insert JS debugger statement</h3>
+<div class="outline-text-2" id="text-orge04829a">
 <p>
 @cjk provided this tip. The debugger like Firebug will pause at the debugger statement. It saves me the time to locate JS file, to go to the specific line and set breakpoint after re-deploying the application.
 </p>
@@ -804,9 +804,9 @@ Snippets:
 </div>
 </div>
 
-<div id="outline-container-orgae4988f" class="outline-2">
-<h3 id="orgae4988f">Bonus</h3>
-<div class="outline-text-2" id="text-orgae4988f">
+<div id="outline-container-org854cc7a" class="outline-2">
+<h3 id="org854cc7a">Bonus</h3>
+<div class="outline-text-2" id="text-org854cc7a">
 <p>
 Similar snippets for Emacs Lisp are defined <a href="https://github.com/redguardtoo/emacs.d/tree/master/snippets/emacs-lisp-mode">HERE</a>.
 </p>
@@ -851,9 +851,9 @@ Live demo:
 Screenshot:
 <img src="https://cloud.githubusercontent.com/assets/184553/5156904/e86f11a6-733c-11e4-8312-a6c8ad2b17be.png" alt="e86f11a6-733c-11e4-8312-a6c8ad2b17be.png"></p>
 
-<div id="outline-container-org8e5b78e" class="outline-2">
-<h3 id="org8e5b78e">Environment</h3>
-<div class="outline-text-2" id="text-org8e5b78e">
+<div id="outline-container-org0201dae" class="outline-2">
+<h3 id="org0201dae">Environment</h3>
+<div class="outline-text-2" id="text-org0201dae">
 <ul class="org-ul">
 <li>Bootstrap 2.3.2</li>
 <li>font-awesome 3.2.1</li>
@@ -865,9 +865,9 @@ I only use the grid layout from bootstrap and minimum API from jQuery.
 </div>
 </div>
 
-<div id="outline-container-org2683e8c" class="outline-2">
-<h3 id="org2683e8c">Notes</h3>
-<div class="outline-text-2" id="text-org2683e8c">
+<div id="outline-container-orgffd4910" class="outline-2">
+<h3 id="orgffd4910">Notes</h3>
+<div class="outline-text-2" id="text-orgffd4910">
 <ul class="org-ul">
 <li>IE7 does not support media query. So I abandon "mobile first" strategy, new strategy is "IE7 first".</li>
 <li>IE7 does not support inline-block properly, I need below css code hack:</li>
@@ -985,9 +985,9 @@ CREATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2014-11-20 
 UPDATED: <span class="timestamp-wrapper"><span class="timestamp">&lt;2015-06-06 Sat&gt;</span></span>
 </p>
 
-<div id="outline-container-org5fd763c" class="outline-2">
-<h3 id="org5fd763c">problem</h3>
-<div class="outline-text-2" id="text-org5fd763c">
+<div id="outline-container-org2fd0d26" class="outline-2">
+<h3 id="org2fd0d26">problem</h3>
+<div class="outline-text-2" id="text-org2fd0d26">
 <p>
 I use <a href="http://orgmode.org/">Org-mode</a> to record all my notes.
 </p>
@@ -1010,13 +1010,13 @@ My hooks are also dependent on third party tools. So if anyone else uses my setu
 </div>
 </div>
 
-<div id="outline-container-org7bf90b2" class="outline-2">
-<h3 id="org7bf90b2">Solution</h3>
-<div class="outline-text-2" id="text-org7bf90b2">
+<div id="outline-container-org0c08cbf" class="outline-2">
+<h3 id="org0c08cbf">Solution</h3>
+<div class="outline-text-2" id="text-org0c08cbf">
 </div>
-<div id="outline-container-org2067443" class="outline-3">
-<h4 id="org2067443">Setup</h4>
-<div class="outline-text-3" id="text-org2067443">
+<div id="outline-container-org3f95b29" class="outline-3">
+<h4 id="org3f95b29">Setup</h4>
+<div class="outline-text-3" id="text-org3f95b29">
 <p>
 In order to solve the issue, I write a small function which will be called at the beginning of each major mode hook.
 </p>
@@ -1059,9 +1059,9 @@ The function basically check whether the `(buffer-file-name)` is the temporary f
 </div>
 </div>
 </div>
-<div id="outline-container-org570e343" class="outline-3">
-<h4 id="org570e343">Usage</h4>
-<div class="outline-text-3" id="text-org570e343">
+<div id="outline-container-org3c20d7b" class="outline-3">
+<h4 id="org3c20d7b">Usage</h4>
+<div class="outline-text-3" id="text-org3c20d7b">
 <p>
 I use python-mode-hook setup as an example:
 </p>
@@ -1083,29 +1083,29 @@ I use python-mode-hook setup as an example:
 </div>
 </div>
 
-<div id="outline-container-org76189bd" class="outline-2">
-<h3 id="org76189bd">Tips</h3>
-<div class="outline-text-2" id="text-org76189bd">
+<div id="outline-container-org81a7e2f" class="outline-2">
+<h3 id="org81a7e2f">Tips</h3>
+<div class="outline-text-2" id="text-org81a7e2f">
 </div>
-<div id="outline-container-org153b99b" class="outline-3">
-<h4 id="org153b99b">Export shell code</h4>
-<div class="outline-text-3" id="text-org153b99b">
+<div id="outline-container-org0a96870" class="outline-3">
+<h4 id="org0a96870">Export shell code</h4>
+<div class="outline-text-3" id="text-org0a96870">
 <p>
 Exporting shell code will fail if `sh-mode` is loaded. So I use "bash" instead. Since there is no "bash-mode", exporting will be fine.
 </p>
 </div>
 </div>
-<div id="outline-container-org25f48d6" class="outline-3">
-<h4 id="org25f48d6">Yasnippet setup</h4>
-<div class="outline-text-3" id="text-org25f48d6">
+<div id="outline-container-org646995b" class="outline-3">
+<h4 id="org646995b">Yasnippet setup</h4>
+<div class="outline-text-3" id="text-org646995b">
 <p>
 To avoid loading yasnippets when exporting, I have to <a href="https://github.com/capitaomorte/yasnippet#use-yas-minor-mode-on-a-per-buffer-basis">"use yas-minor-mode on a per-buffer basis"</a>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgcabc30f" class="outline-3">
-<h4 id="orgcabc30f">Manually turn off the major-mode hook</h4>
-<div class="outline-text-3" id="text-orgcabc30f">
+<div id="outline-container-orgf0825de" class="outline-3">
+<h4 id="orgf0825de">Manually turn off the major-mode hook</h4>
+<div class="outline-text-3" id="text-orgf0825de">
 <p>
 It's controlled by global flag `load-user-customized-major-mode-hook`, as you can see from the "Setup" section.
 </p>
@@ -1126,9 +1126,9 @@ Say I want to turn off the major mode hooks when `M-x org-publish`, here is the 
 </div>
 </div>
 </div>
-<div id="outline-container-org7ccfd14" class="outline-3">
-<h4 id="org7ccfd14">after-save-hook</h4>
-<div class="outline-text-3" id="text-org7ccfd14">
+<div id="outline-container-org724d38d" class="outline-3">
+<h4 id="org724d38d">after-save-hook</h4>
+<div class="outline-text-3" id="text-org724d38d">
 <p>
 `after-save-hook` is the "Normal hook that is run after a buffer is saved to its file". You may also need tweak it up because it will be called when exporting org files
 </p>

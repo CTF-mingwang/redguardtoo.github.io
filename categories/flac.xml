@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flac)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flac.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 04 Jun 2019 13:03:43 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-orgc44207d" class="outline-2"&gt;
-&lt;h3 id="orgc44207d"&gt;Install CLI tools&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-orgc44207d"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about flac)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/flac.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 27 Oct 2019 12:38:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to split album into different flac and tag them under Gentoo Linux</title><link>http://blog.binchen.org/posts/how-to-split-album-into-different-flac-and-tag-them-under-gentoo-linux.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;div id="outline-container-org5e9c280" class="outline-2"&gt;
+&lt;h3 id="org5e9c280"&gt;Install CLI tools&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org5e9c280"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# mac to support ape
@@ -13,9 +13,9 @@ sudo emerge cuetools
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org34a1cd1" class="outline-2"&gt;
-&lt;h3 id="org34a1cd1"&gt;Download script&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org34a1cd1"&gt;
+&lt;div id="outline-container-orgcfaad41" class="outline-2"&gt;
+&lt;h3 id="orgcfaad41"&gt;Download script&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-orgcfaad41"&gt;
 &lt;p&gt;
 See &lt;a href="https://bbs.archlinux.org/viewtopic.php?id=58766"&gt;https://bbs.archlinux.org/viewtopic.php?id=58766&lt;/a&gt; for the source of bash script.
 &lt;/p&gt;
@@ -86,9 +86,9 @@ Put the script somewhere and name it to &lt;code&gt;cue2flac&lt;/code&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org625005e" class="outline-2"&gt;
-&lt;h3 id="org625005e"&gt;Start conversion&lt;/h3&gt;
-&lt;div class="outline-text-2" id="text-org625005e"&gt;
+&lt;div id="outline-container-org7569bf9" class="outline-2"&gt;
+&lt;h3 id="org7569bf9"&gt;Start conversion&lt;/h3&gt;
+&lt;div class="outline-text-2" id="text-org7569bf9"&gt;
 &lt;div class="org-src-container"&gt;
 
 &lt;pre&gt;&lt;code class="lang-sh"&gt;# convert the ape to corresponding wav file, for example, "a.ape" is converted to "a.ape.wav"
