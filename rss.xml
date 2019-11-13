@@ -1,5 +1,227 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Sun, 27 Oct 2019 12:39:31 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>counsel-etags 1.9.0 is out</title><link>http://blog.binchen.org/posts/counsel-etags-1-9-0-is-out.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 13:32:59 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I used to regard vimdiff as the best merge tool for Git because it's simply fast.
+&lt;/p&gt;
+
+&lt;p&gt;
+See the demo how I use vimdiff to resolve conflicts from &lt;a href="https://github.com/redguardtoo/test-git-mergetool"&gt;https://github.com/redguardtoo/test-git-mergetool&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/vimdiff-as-git-merge-tool.gif" alt="vimdiff-as-git-merge-tool.gif"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+The only issue is Vim is not as powerful as Emacs.
+&lt;/p&gt;
+
+&lt;p&gt;
+Resolving conflicts is NOT only pick up a difference (hunk) from either remote branch or local branch. My usual workflow is placing my difference into sub-window containing merged buffer first, then I go to sub-window of remote branch and copy code snippet into merged buffer . So there are lots of sub-windows operations.
+&lt;/p&gt;
+
+&lt;p&gt;
+In Emacs, I use &lt;a href="https://github.com/abo-abo/ace-window"&gt;ace-window&lt;/a&gt; and &lt;a href="https://github.com/deb0ch/emacs-winum"&gt;winum&lt;/a&gt; to move focus between sub-windows.  I can also use API  &lt;code&gt;window-configuration-to-register&lt;/code&gt; and &lt;code&gt;jump-to-register&lt;/code&gt; to save/load windows layout. Besides, &lt;a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html"&gt;Ediff&lt;/a&gt; is a beast to handle diff and patch.
+&lt;/p&gt;
+
+&lt;p&gt;
+So I give one example to prove why Emacs should be a better merge tool &lt;b&gt;in theory&lt;/b&gt;. If you are good at both Vim and Emacs, you know it's the truth.
+&lt;/p&gt;
+
+&lt;p&gt;
+I don't want to waste time on theory. Let's come back to the real world problem. And I will show you a perfect solution to this problem soon.
+&lt;/p&gt;
+
+&lt;p&gt;
+The problem is, I never use Emacs as the merge tool until now.
+&lt;/p&gt;
+
+&lt;p&gt;
+There are two reasons.
+&lt;/p&gt;
+
+&lt;p&gt;
+First reason,  &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;My Emacs configuration&lt;/a&gt; uses too many packages. It starts up too slow after I have used up all the optimization tricks on it. As you can see from vimdiff demo video. Running &lt;code&gt;git mergetool&lt;/code&gt; need restart text editors frequently. So text editors should start up as fast as possible
+&lt;/p&gt;
+
+&lt;p&gt;
+Second reason, the UI of &lt;code&gt;ediff&lt;/code&gt; is not right. The best UI should be similar to vimdiff. All operations should be completed freely in any sub-window instead of ediff control panel only.
+&lt;/p&gt;
+
+&lt;p&gt;
+Luckily, Emacs gives me the full freedom to solve the problem. And the result is beyond my expectation.
+&lt;/p&gt;
+
+&lt;p&gt;
+Here is the solution.
+&lt;/p&gt;
+
+&lt;div id="outline-container-org53fce60" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+Insert below code into &lt;code&gt;~/.gitconfig&lt;/code&gt;,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-conf"&gt;[mergetool.ediff]
+# use git mergetool ediff to resolve conflicts
+cmd = emacs -nw -Q --eval \"(setq startup-now t)\" -l \"~/.emacs.d/init.el\" --eval \"(progn (setq ediff-quit-hook 'kill-emacs) (if (file-readable-p \\\"$BASE\\\") (ediff-merge-files-with-ancestor \\\"$LOCAL\\\" \\\"$REMOTE\\\" \\\"$BASE\\\" nil \\\"$MERGED\\\") (ediff-merge-files \\\"$LOCAL\\\" \\\"$REMOTE\\\" nil \\\"$MERGED\\\")))\"
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+In above code, option &lt;code&gt;-Q&lt;/code&gt; equals &lt;code&gt;-q --no-site-file --no-splash&lt;/code&gt;. Actually, only &lt;code&gt;-q&lt;/code&gt; is critical. &lt;code&gt;-q&lt;/code&gt; means "Do not load an init file". A global emacs lisp flag &lt;code&gt;startup-now&lt;/code&gt; is defined before loading &lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;p&gt;
+Then in &lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;, I need only add one line,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;(when (not (boundp 'startup-now))
+  ;; heavy weight configuration happens here
+  )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+When &lt;code&gt;startup-now&lt;/code&gt; is defined, all the heavy weight configuration should not turned off. Considering in this scenario, we are using Emacs only as merge tool, 99% configuration could be turned off. For example, set up for any programming language is not required. flyspell and flycheck could be turned off. Yasnippet is also useless. 
+&lt;/p&gt;
+
+&lt;p&gt;
+I only need focus on essential operations related to text/file/window.
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;a href="https://github.com/emacs-evil/evil"&gt;Evil&lt;/a&gt; should be used. At the beginning of this article, I said "I love vimdiff because it's fast". It's impossible to be more efficient without Evil.
+&lt;/p&gt;
+
+&lt;p&gt;
+Any patch/diff utilities should be included too. &lt;a href="https://github.com/abo-abo/swiper"&gt;counsel/swiper/ivy&lt;/a&gt; is also must have because I can use &lt;code&gt;counsel-git&lt;/code&gt; to find file and &lt;code&gt;counsel-git-grep&lt;/code&gt; to grep text.
+&lt;/p&gt;
+
+&lt;p&gt;
+Native Emacs API is enough to save/load windows layout.
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org03f4c93" class="outline-2"&gt;
+
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;p&gt;
+We need focus on merged buffer window when Emacs starts because that's where we do the most text editing things. 
+&lt;/p&gt;
+
+&lt;p&gt;
+This set up happens in &lt;code&gt;ediff-startup-hook&lt;/code&gt;, 
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defun ediff-startup-hook-setup ()
+  ;; hide control panel if it's current buffer
+  (when (string-match-p (setq my-ediff-panel-name (buffer-name))
+                        "\*Ediff Control Panel.*\*")
+    ;; move to the first difference
+    (ediff-next-difference)
+    ;; move to the merged buffer window
+    (winum-select-window-by-number 3)
+    ;; save the windows layout
+    (window-configuration-to-register ?a)))
+
+(add-hook 'ediff-startup-hook 'ediff-startup-hook-setup)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+&lt;p&gt;
+Please note I use &lt;code&gt;winum-select-window-by-number&lt;/code&gt; from &lt;code&gt;winum&lt;/code&gt; to set default window focus. You can use any other third packages or native API &lt;code&gt;select-window&lt;/code&gt; instead.
+&lt;/p&gt;
+
+&lt;p&gt;
+Saving initial windows layout into register &lt;code&gt;a&lt;/code&gt; is achieved by &lt;code&gt;(window-configuration-to-register ?a)&lt;/code&gt; in &lt;code&gt;ediff-startup-hook&lt;/code&gt;. &lt;code&gt;(jump-to-register ?a)&lt;/code&gt; restores the saved layout.
+&lt;/p&gt;
+
+&lt;p&gt;
+Then we need make sure ediff commands can be used everywhere. The trick is "move focus to ediff panel temporarily to execute its commands, then move focus back to original window".
+&lt;/p&gt;
+
+&lt;p&gt;
+So I designed a macro &lt;code&gt;my-ediff-command&lt;/code&gt; to do this,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defmacro my-ediff-command (cmd &amp;amp;optional no-arg)
+  `(lambda (&amp;amp;optional arg)
+     (interactive "P")
+     (let* ((w (get-buffer-window)))
+       ;; go to panel window
+       (select-window (get-buffer-window my-ediff-panel-name))
+       ;; execute ediff command, ignore any error
+       (condition-case e
+           (if ,no-arg (funcall ,cmd) (funcall ,cmd arg))
+         (error
+          (message "%s" (error-message-string e))))
+       ;; back to original window
+       (select-window w))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Usage is simple,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;(global-set-key (kbd "C-c C-y") (my-ediff-command 'ediff-next-difference))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Here is the list of essential ediff commands,
+&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;ediff-next-difference&lt;/li&gt;
+&lt;li&gt;ediff-previous-difference&lt;/li&gt;
+&lt;li&gt;ediff-restore-diff-in-merge-buffer&lt;/li&gt;
+&lt;li&gt;ediff-revert-buffers-then-recompute-diffs&lt;/li&gt;
+&lt;li&gt;ediff-copy-A-to-C&lt;/li&gt;
+&lt;li&gt;ediff-copy-A-to-C&lt;/li&gt;
+&lt;li&gt;ediff-copy-both-to-C&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;
+You can use &lt;a href="https://github.com/abo-abo/hydra"&gt;Hyra&lt;/a&gt; or &lt;a href="https://github.com/noctuid/general.el"&gt;General.el&lt;/a&gt; to assign key bindings.
+&lt;/p&gt;
+
+&lt;p&gt;
+The definition of &lt;code&gt;ediff-copy-both-to-C&lt;/code&gt;,
+&lt;/p&gt;
+&lt;div class="org-src-container"&gt;
+
+&lt;pre&gt;&lt;code class="lang-emacs"&gt;;; @see https://stackoverflow.com/a/29757750/245363
+(defun ediff-copy-both-to-C (&amp;amp;optional arg)
+  "Copy code from both A and B to C."
+  (interactive)
+  (ediff-copy-diff ediff-current-difference nil 'C nil
+                   (concat
+                    (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+                    (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;
+Here is &lt;a href="https://gist.github.com/redguardtoo/d4ecd51f785bd117a6a0"&gt;my ~/.gitconfig=&lt;/a&gt; and &lt;a href="https://github.com/redguardtoo/emacs.d/blob/master/lisp/init-ediff.el"&gt;my ediff set up&lt;/a&gt; in real world.
+&lt;/p&gt;
+
+&lt;p&gt;
+Please note the techniques introduced here can be used with other VCS (subversion, perforce …).&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/div&gt;</description><guid>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</guid><pubDate>Wed, 13 Nov 2019 13:29:46 GMT</pubDate></item><item><title>counsel-etags 1.9.0 is out</title><link>http://blog.binchen.org/posts/counsel-etags-1-9-0-is-out.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;Counsel-etags&lt;/a&gt; is fast, energy-saving, and powerful code navigation solution.
 &lt;/p&gt;
 
@@ -689,61 +911,4 @@ Screen cast:
 
 &lt;div class="figure"&gt;
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/counsel-imenu-comments.gif" alt="counsel-imenu-comments.gif"&gt;
-&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>imenu</category><guid>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</guid><pubDate>Sun, 08 Apr 2018 02:12:04 GMT</pubDate></item><item><title>counsel-etags v1.3.1 is released</title><link>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
-&lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;Counsel-etags&lt;/a&gt; is a complete solution for code navigation in Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-It needs no setup. One command &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; is enough to start code navigation immediately.
-&lt;/p&gt;
-
-&lt;p&gt;
-It solves all problems using Ctags/Etags with Emacs.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Problem 1:&lt;/b&gt; Ctags takes a few seconds to update the tags file (the index file to lookup tags). The updating process blocks the user's further interaction. This problem is solved by the virtual updating function from &lt;code&gt;counsel-etags&lt;/code&gt;. The setup is simple:
-&lt;/p&gt;
-
-&lt;div class="org-src-container"&gt;
-
-&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; Don't ask before rereading the TAGS files if they have changed
-(setq tags-revert-without-query t)
-;; Don't warn when TAGS files are large
-(setq large-file-warning-threshold nil)
-;; Setup auto update now
-(add-hook 'prog-mode-hook
-  (lambda ()
-    (add-hook 'after-save-hook
-              'counsel-etags-virtual-update-tags 'append 'local)))
-(add-hook 'after-save-hook 'counsel-etags-virtual-update-tags)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;/div&gt;
-
-&lt;p&gt;
-&lt;b&gt;Problem 2:&lt;/b&gt; Tag lookup may fail if the latest code is not scanned yet. This problem is solved by running &lt;code&gt;counsel-etags-grep&lt;/code&gt; &lt;b&gt;automatically&lt;/b&gt; if &lt;code&gt;counsel-etags-find-tag-at-point&lt;/code&gt; fails. So users always get results.
-&lt;/p&gt;
-
-&lt;p&gt;
-There are also other enhancements.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Enhancement 1:&lt;/b&gt; Levenshtein Distance algorithm is used to place the better matching candidates at the the top. For example, a function named &lt;code&gt;renderTable&lt;/code&gt; could be defined all around in a ReactJS project. But it's very possible the user prefers the definition in same component or same folder where she triggers code navigation.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Enhancement 2:&lt;/b&gt; It's inefficient to search the same tag again and again. &lt;code&gt;counsel-etags-recent-tag&lt;/code&gt; is used to jump to previous definitions.
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Enhancement 3:&lt;/b&gt; &lt;a href="https://github.com/abo-abo/swiper"&gt;Ivy-mode&lt;/a&gt; provides filter UI for &lt;code&gt;counsel-etags&lt;/code&gt;. Its means all the functionalities from Ivy is also available. For example, users can input "!keyword1" to &lt;b&gt;exclude&lt;/b&gt; candidates matching "keyword1".
-&lt;/p&gt;
-
-&lt;p&gt;
-&lt;b&gt;Enhancement 4:&lt;/b&gt; &lt;code&gt;counsel-etags-grep&lt;/code&gt; uses the fastest grep program &lt;a href="https://github.com/BurntSushi/ripgrep"&gt;ripgrep&lt;/a&gt; if it's installed. Or else it falls back to standard grep.
-&lt;/p&gt;
-
-&lt;p&gt;
-Please check &lt;a href="https://github.com/redguardtoo/counsel-etags"&gt;https://github.com/redguardtoo/counsel-etags&lt;/a&gt; for more tips.&lt;/p&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>etags</category><guid>http://blog.binchen.org/posts/counsel-etags-v1-3-1-is-released-enemacsctags.html</guid><pubDate>Sun, 12 Nov 2017 09:40:15 GMT</pubDate></item></channel></rss>
+&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>en</category><category>imenu</category><guid>http://blog.binchen.org/posts/use-imenu-to-list-comments-in-current-buffer.html</guid><pubDate>Sun, 08 Apr 2018 02:12:04 GMT</pubDate></item></channel></rss>
