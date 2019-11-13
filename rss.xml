@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 13:58:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 14:09:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
 &lt;p&gt;
-See the demo how I use vimdiff to resolve conflicts from &lt;a href="https://github.com/redguardtoo/test-git-mergetool"&gt;https://github.com/redguardtoo/test-git-mergetool&lt;/a&gt;.
+Here is the demo how I use vimdiff to resolve conflicts from &lt;a href="https://github.com/redguardtoo/test-git-mergetool"&gt;https://github.com/redguardtoo/test-git-mergetool&lt;/a&gt;.
 &lt;/p&gt;
 
 &lt;div class="figure"&gt;
@@ -17,11 +17,11 @@ The only issue is Vim is not as powerful as Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-Resolving conflicts is NOT only pick up a difference (hunk) from either remote branch or local branch. My usual workflow is placing my difference into sub-window containing merged buffer first, then I go to sub-window of remote branch and copy code snippet into merged buffer. So there are lots of sub-windows operations.
+Resolving conflicts is NOT only picking up a diff hunk from either remote buffer or local buffer. I often need place my hunk into merged buffer first, then I go to remote buffer and copy snippet into merged buffer. So there are lots of sub-windows operations.
 &lt;/p&gt;
 
 &lt;p&gt;
-In Emacs, I use &lt;a href="https://github.com/abo-abo/ace-window"&gt;ace-window&lt;/a&gt; and &lt;a href="https://github.com/deb0ch/emacs-winum"&gt;winum&lt;/a&gt; to move focus between sub-windows.  I can also use API &lt;code&gt;window-configuration-to-register&lt;/code&gt; and &lt;code&gt;jump-to-register&lt;/code&gt; to save/load windows layout. Besides, &lt;a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html"&gt;Ediff&lt;/a&gt; is a beast to handle diff and patch.
+In Emacs, I use &lt;a href="https://github.com/abo-abo/ace-window"&gt;Ace-window&lt;/a&gt; and &lt;a href="https://github.com/deb0ch/emacs-winum"&gt;Winum&lt;/a&gt; to move focus between sub-windows.  I also use API &lt;code&gt;window-configuration-to-register&lt;/code&gt; and &lt;code&gt;jump-to-register&lt;/code&gt; to save/load windows layout. Besides, &lt;a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html"&gt;Ediff&lt;/a&gt; is a beast to handle diff and patch.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -41,22 +41,22 @@ There are two reasons.
 &lt;/p&gt;
 
 &lt;p&gt;
-First reason, &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;My Emacs configuration&lt;/a&gt; uses too many packages. It starts up too slow after I have used up all the optimization tricks on it. As you can see from vimdiff demo video, &lt;code&gt;git mergetool&lt;/code&gt; restarts the editor frequently. So the editor should be as lightweight as possible.
+First reason, &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;My Emacs configuration&lt;/a&gt; uses too many packages. It starts up slowly. As you can see from vimdiff demo, &lt;code&gt;git mergetool&lt;/code&gt; restarts the editor many times. So the editor should be lightweight.
 &lt;/p&gt;
 
 &lt;p&gt;
-Second reason, the UI of &lt;code&gt;ediff&lt;/code&gt; is not right. The best UI should be similar to vimdiff. All operations should be completed freely in any sub-window instead of ediff control panel only.
+Second reason, the UI of &lt;code&gt;ediff&lt;/code&gt; is not right. UI of Vimdiff is much better. All operations should be completed freely in any sub-window instead of ediff control panel only.
 &lt;/p&gt;
 
 &lt;p&gt;
-Luckily, Emacs gives me the full freedom to solve the problem. And the result is beyond my expectation.
+Luckily, Emacs gives me the full freedom to solve the problem. The final result is beyond my expectation.
 &lt;/p&gt;
 
 &lt;p&gt;
-Here is the solution.
+Here is the complete solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org5f32c5e" class="outline-2"&gt;
+&lt;div id="outline-container-org938fa22" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -109,7 +109,7 @@ Native Emacs API is enough to save/load windows layout.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org758c3d3" class="outline-2"&gt;
+&lt;div id="outline-container-org96c9e5d" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
@@ -219,7 +219,7 @@ Here is &lt;a href="https://gist.github.com/redguardtoo/d4ecd51f785bd117a6a0"&gt
 &lt;/p&gt;
 
 &lt;p&gt;
-Please note the techniques introduced here can be used with other VCS (subversion, perforce …).
+Please note the techniques introduced here &lt;b&gt;can be used with other VCS (subversion, perforce …)&lt;/b&gt;.
 &lt;/p&gt;
 
 &lt;p&gt;

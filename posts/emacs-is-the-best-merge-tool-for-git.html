@@ -15,11 +15,7 @@
 
 
 
-See the demo how I use vimdiff to resolve conflicts from https://github.com/redguardtoo/test-git-mergetool.
-
-
-
-
+Here is the demo how I use vimdiff to resolve conflicts from https://github.com/redguardtoo/test-git-mergetool.
 
 
 
@@ -63,7 +59,7 @@ I used to regard vimdiff as the best merge tool for Git because it's simply fast
 </p>
 
 <p>
-See the demo how I use vimdiff to resolve conflicts from <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a>.
+Here is the demo how I use vimdiff to resolve conflicts from <a href="https://github.com/redguardtoo/test-git-mergetool">https://github.com/redguardtoo/test-git-mergetool</a>.
 </p>
 
 <div class="figure">
@@ -75,11 +71,11 @@ The only issue is Vim is not as powerful as Emacs.
 </p>
 
 <p>
-Resolving conflicts is NOT only pick up a difference (hunk) from either remote branch or local branch. My usual workflow is placing my difference into sub-window containing merged buffer first, then I go to sub-window of remote branch and copy code snippet into merged buffer. So there are lots of sub-windows operations.
+Resolving conflicts is NOT only picking up a diff hunk from either remote buffer or local buffer. I often need place my hunk into merged buffer first, then I go to remote buffer and copy snippet into merged buffer. So there are lots of sub-windows operations.
 </p>
 
 <p>
-In Emacs, I use <a href="https://github.com/abo-abo/ace-window">ace-window</a> and <a href="https://github.com/deb0ch/emacs-winum">winum</a> to move focus between sub-windows.  I can also use API <code>window-configuration-to-register</code> and <code>jump-to-register</code> to save/load windows layout. Besides, <a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html">Ediff</a> is a beast to handle diff and patch.
+In Emacs, I use <a href="https://github.com/abo-abo/ace-window">Ace-window</a> and <a href="https://github.com/deb0ch/emacs-winum">Winum</a> to move focus between sub-windows.  I also use API <code>window-configuration-to-register</code> and <code>jump-to-register</code> to save/load windows layout. Besides, <a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html">Ediff</a> is a beast to handle diff and patch.
 </p>
 
 <p>
@@ -99,22 +95,22 @@ There are two reasons.
 </p>
 
 <p>
-First reason, <a href="https://github.com/redguardtoo/emacs.d">My Emacs configuration</a> uses too many packages. It starts up too slow after I have used up all the optimization tricks on it. As you can see from vimdiff demo video, <code>git mergetool</code> restarts the editor frequently. So the editor should be as lightweight as possible.
+First reason, <a href="https://github.com/redguardtoo/emacs.d">My Emacs configuration</a> uses too many packages. It starts up slowly. As you can see from vimdiff demo, <code>git mergetool</code> restarts the editor many times. So the editor should be lightweight.
 </p>
 
 <p>
-Second reason, the UI of <code>ediff</code> is not right. The best UI should be similar to vimdiff. All operations should be completed freely in any sub-window instead of ediff control panel only.
+Second reason, the UI of <code>ediff</code> is not right. UI of Vimdiff is much better. All operations should be completed freely in any sub-window instead of ediff control panel only.
 </p>
 
 <p>
-Luckily, Emacs gives me the full freedom to solve the problem. And the result is beyond my expectation.
+Luckily, Emacs gives me the full freedom to solve the problem. The final result is beyond my expectation.
 </p>
 
 <p>
-Here is the solution.
+Here is the complete solution.
 </p>
 
-<div id="outline-container-org5f32c5e" class="outline-2">
+<div id="outline-container-org938fa22" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -167,7 +163,7 @@ Native Emacs API is enough to save/load windows layout.
 </div>
 </div>
 
-<div id="outline-container-org758c3d3" class="outline-2">
+<div id="outline-container-org96c9e5d" class="outline-2">
 
 <div class="outline-text-2" id="text-2">
 <p>
@@ -276,7 +272,7 @@ Here is <a href="https://gist.github.com/redguardtoo/d4ecd51f785bd117a6a0">my ~/
 </p>
 
 <p>
-Please note the techniques introduced here can be used with other VCS (subversion, perforce …).
+Please note the techniques introduced here <b>can be used with other VCS (subversion, perforce …)</b>.
 </p>
 
 <p>
