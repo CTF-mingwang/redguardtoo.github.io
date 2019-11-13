@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 13:57:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 13:58:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
@@ -56,7 +56,7 @@ Luckily, Emacs gives me the full freedom to solve the problem. And the result is
 Here is the solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgd5410e0" class="outline-2"&gt;
+&lt;div id="outline-container-org5f32c5e" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -80,7 +80,7 @@ Then in &lt;code&gt;~/.emacs.d/init.el&lt;/code&gt;, I need only add one line,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;(when (not (boundp 'startup-now))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(when (not (boundp 'startup-now))
   ;; heavy weight configuration happens here
   )
 &lt;/code&gt;&lt;/pre&gt;
@@ -109,7 +109,7 @@ Native Emacs API is enough to save/load windows layout.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1671ea3" class="outline-2"&gt;
+&lt;div id="outline-container-org758c3d3" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
@@ -121,7 +121,7 @@ This set up happens in &lt;code&gt;ediff-startup-hook&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defun ediff-startup-hook-setup ()
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defun ediff-startup-hook-setup ()
   ;; hide control panel if it's current buffer
   (when (string-match-p (setq my-ediff-panel-name (buffer-name))
                         "\*Ediff Control Panel.*\*")
@@ -153,7 +153,7 @@ So I designed a macro &lt;code&gt;my-ediff-command&lt;/code&gt; to do this,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;(defmacro my-ediff-command (cmd &amp;amp;optional no-arg)
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(defmacro my-ediff-command (cmd &amp;amp;optional no-arg)
   `(lambda (&amp;amp;optional arg)
      (interactive "P")
      (let* ((w (get-buffer-window)))
@@ -175,7 +175,7 @@ Usage is simple,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;(global-set-key (kbd "C-c C-y") (my-ediff-command 'ediff-next-difference))
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;(global-set-key (kbd "C-c C-y") (my-ediff-command 'ediff-next-difference))
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;/div&gt;
@@ -202,7 +202,7 @@ The definition of &lt;code&gt;ediff-copy-both-to-C&lt;/code&gt;,
 &lt;/p&gt;
 &lt;div class="org-src-container"&gt;
 
-&lt;pre&gt;&lt;code class="lang-emacs"&gt;;; @see https://stackoverflow.com/a/29757750/245363
+&lt;pre&gt;&lt;code class="lang-lisp"&gt;;; @see https://stackoverflow.com/a/29757750/245363
 (defun ediff-copy-both-to-C (&amp;amp;optional arg)
   "Copy code from both A and B to C."
   (interactive)

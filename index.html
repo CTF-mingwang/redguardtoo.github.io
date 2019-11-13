@@ -96,7 +96,7 @@ Luckily, Emacs gives me the full freedom to solve the problem. And the result is
 Here is the solution.
 </p>
 
-<div id="outline-container-orgd5410e0" class="outline-2">
+<div id="outline-container-org5f32c5e" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -120,7 +120,7 @@ Then in <code>~/.emacs.d/init.el</code>, I need only add one line,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-emacs">(when (not (boundp 'startup-now))
+<pre><code class="lang-lisp">(when (not (boundp 'startup-now))
   ;; heavy weight configuration happens here
   )
 </code></pre>
@@ -149,7 +149,7 @@ Native Emacs API is enough to save/load windows layout.
 </div>
 </div>
 
-<div id="outline-container-org1671ea3" class="outline-2">
+<div id="outline-container-org758c3d3" class="outline-2">
 
 <div class="outline-text-2" id="text-2">
 <p>
@@ -161,7 +161,7 @@ This set up happens in <code>ediff-startup-hook</code>,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-emacs">(defun ediff-startup-hook-setup ()
+<pre><code class="lang-lisp">(defun ediff-startup-hook-setup ()
   ;; hide control panel if it's current buffer
   (when (string-match-p (setq my-ediff-panel-name (buffer-name))
                         "\*Ediff Control Panel.*\*")
@@ -193,7 +193,7 @@ So I designed a macro <code>my-ediff-command</code> to do this,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-emacs">(defmacro my-ediff-command (cmd &amp;optional no-arg)
+<pre><code class="lang-lisp">(defmacro my-ediff-command (cmd &amp;optional no-arg)
   `(lambda (&amp;optional arg)
      (interactive "P")
      (let* ((w (get-buffer-window)))
@@ -215,7 +215,7 @@ Usage is simple,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-emacs">(global-set-key (kbd "C-c C-y") (my-ediff-command 'ediff-next-difference))
+<pre><code class="lang-lisp">(global-set-key (kbd "C-c C-y") (my-ediff-command 'ediff-next-difference))
 </code></pre>
 
 </div>
@@ -241,7 +241,7 @@ The definition of <code>ediff-copy-both-to-C</code>,
 </p>
 <div class="org-src-container">
 
-<pre><code class="lang-emacs">;; @see https://stackoverflow.com/a/29757750/245363
+<pre><code class="lang-lisp">;; @see https://stackoverflow.com/a/29757750/245363
 (defun ediff-copy-both-to-C (&amp;optional arg)
   "Copy code from both A and B to C."
   (interactive)
