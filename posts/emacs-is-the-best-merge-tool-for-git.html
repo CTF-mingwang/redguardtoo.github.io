@@ -75,11 +75,11 @@ The only issue is Vim is not as powerful as Emacs.
 </p>
 
 <p>
-Resolving conflicts is NOT only pick up a difference (hunk) from either remote branch or local branch. My usual workflow is placing my difference into sub-window containing merged buffer first, then I go to sub-window of remote branch and copy code snippet into merged buffer . So there are lots of sub-windows operations.
+Resolving conflicts is NOT only pick up a difference (hunk) from either remote branch or local branch. My usual workflow is placing my difference into sub-window containing merged buffer first, then I go to sub-window of remote branch and copy code snippet into merged buffer. So there are lots of sub-windows operations.
 </p>
 
 <p>
-In Emacs, I use <a href="https://github.com/abo-abo/ace-window">ace-window</a> and <a href="https://github.com/deb0ch/emacs-winum">winum</a> to move focus between sub-windows.  I can also use API  <code>window-configuration-to-register</code> and <code>jump-to-register</code> to save/load windows layout. Besides, <a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html">Ediff</a> is a beast to handle diff and patch.
+In Emacs, I use <a href="https://github.com/abo-abo/ace-window">ace-window</a> and <a href="https://github.com/deb0ch/emacs-winum">winum</a> to move focus between sub-windows.  I can also use API <code>window-configuration-to-register</code> and <code>jump-to-register</code> to save/load windows layout. Besides, <a href="https://www.gnu.org/software/emacs/manual/html_mono/ediff.html">Ediff</a> is a beast to handle diff and patch.
 </p>
 
 <p>
@@ -91,7 +91,7 @@ I don't want to waste time on theory. Let's come back to the real world problem.
 </p>
 
 <p>
-The problem is, I never use Emacs as the merge tool until now.
+The problem is, I never use Emacs to resolve merge conflicts until now.
 </p>
 
 <p>
@@ -99,7 +99,7 @@ There are two reasons.
 </p>
 
 <p>
-First reason,  <a href="https://github.com/redguardtoo/emacs.d">My Emacs configuration</a> uses too many packages. It starts up too slow after I have used up all the optimization tricks on it. As you can see from vimdiff demo video. Running <code>git mergetool</code> need restart text editors frequently. So text editors should start up as fast as possible
+First reason, <a href="https://github.com/redguardtoo/emacs.d">My Emacs configuration</a> uses too many packages. It starts up too slow after I have used up all the optimization tricks on it. As you can see from vimdiff demo video, <code>git mergetool</code> restarts the editor frequently. So the editor should be as lightweight as possible.
 </p>
 
 <p>
@@ -114,7 +114,7 @@ Luckily, Emacs gives me the full freedom to solve the problem. And the result is
 Here is the solution.
 </p>
 
-<div id="outline-container-orge79e5fc" class="outline-2">
+<div id="outline-container-orgd5410e0" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
 <p>
@@ -146,7 +146,7 @@ Then in <code>~/.emacs.d/init.el</code>, I need only add one line,
 </div>
 
 <p>
-When <code>startup-now</code> is defined, all the heavy weight configuration should not turned off. Considering in this scenario, we are using Emacs only as merge tool, 99% configuration could be turned off. For example, set up for any programming language is not required. flyspell and flycheck could be turned off. Yasnippet is also useless. 
+When <code>startup-now</code> is defined, all the heavyweight configuration should be off. Considering in this scenario, we are using Emacs only as merge tool, 99% configuration could be turned off. For example, set up for any programming language is not required. Flyspell and flycheck should be off. Yasnippet is also useless. 
 </p>
 
 <p>
@@ -167,7 +167,7 @@ Native Emacs API is enough to save/load windows layout.
 </div>
 </div>
 
-<div id="outline-container-org771640f" class="outline-2">
+<div id="outline-container-org1671ea3" class="outline-2">
 
 <div class="outline-text-2" id="text-2">
 <p>
