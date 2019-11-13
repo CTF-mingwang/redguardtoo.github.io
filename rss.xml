@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 14:09:20 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 14:11:22 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
@@ -29,24 +29,17 @@ So I give one example to prove why Emacs should be a better merge tool &lt;b&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-I don't want to waste time on theory. Let's come back to the real world problem. And I will show you a perfect solution to this problem soon.
+Now let's talk the real world problem. And I will show you a perfect solution to this problem soon.
 &lt;/p&gt;
 
 &lt;p&gt;
-The problem is, I never use Emacs to resolve merge conflicts until now.
+The problem is, I never use Emacs to resolve merge conflicts for two reaons:
 &lt;/p&gt;
 
-&lt;p&gt;
-There are two reasons.
-&lt;/p&gt;
-
-&lt;p&gt;
-First reason, &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;My Emacs configuration&lt;/a&gt; uses too many packages. It starts up slowly. As you can see from vimdiff demo, &lt;code&gt;git mergetool&lt;/code&gt; restarts the editor many times. So the editor should be lightweight.
-&lt;/p&gt;
-
-&lt;p&gt;
-Second reason, the UI of &lt;code&gt;ediff&lt;/code&gt; is not right. UI of Vimdiff is much better. All operations should be completed freely in any sub-window instead of ediff control panel only.
-&lt;/p&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;First, &lt;a href="https://github.com/redguardtoo/emacs.d"&gt;My Emacs configuration&lt;/a&gt; uses too many packages. It starts up slowly. As you can see from vimdiff demo, &lt;code&gt;git mergetool&lt;/code&gt; restarts the editor many times. So the editor should be lightweight.&lt;/li&gt;
+&lt;li&gt;Second, the UI of &lt;code&gt;ediff&lt;/code&gt; is not right. UI of Vimdiff is much better. All operations should be completed freely in any sub-window instead of ediff control panel only.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;
 Luckily, Emacs gives me the full freedom to solve the problem. The final result is beyond my expectation.
@@ -56,7 +49,7 @@ Luckily, Emacs gives me the full freedom to solve the problem. The final result 
 Here is the complete solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org938fa22" class="outline-2"&gt;
+&lt;div id="outline-container-org91453a4" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -109,7 +102,7 @@ Native Emacs API is enough to save/load windows layout.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org96c9e5d" class="outline-2"&gt;
+&lt;div id="outline-container-orgfe7b30d" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
