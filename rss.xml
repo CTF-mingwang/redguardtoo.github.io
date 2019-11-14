@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 14 Nov 2019 13:04:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 14 Nov 2019 13:06:47 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
@@ -13,7 +13,7 @@ Here is the demo how I use vimdiff to resolve conflicts from &lt;a href="https:/
 &lt;/div&gt;
 
 &lt;p&gt;
-Please note in the screencast I use Git built in command &lt;a href="https://git-scm.com/docs/git-mergetool"&gt;mergetool&lt;/a&gt;. It will &lt;b&gt;automatically&lt;/b&gt; open conflicted file one by one with vim. In other software, the developer need &lt;b&gt;manually&lt;/b&gt; select and open the conflicted file. 
+Please note in the screencast I use Git built in command &lt;a href="https://git-scm.com/docs/git-mergetool"&gt;mergetool&lt;/a&gt;. It will &lt;b&gt;automatically&lt;/b&gt; open conflicted file one by one using vim. In other software, the developer need &lt;b&gt;manually&lt;/b&gt; select and open the conflicted file. 
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -21,7 +21,7 @@ The only issue is Vim is not as powerful as Emacs.
 &lt;/p&gt;
 
 &lt;p&gt;
-Resolving conflicts is NOT only picking up a diff hunk from either remote buffer or local buffer. I often need place my hunk into merged buffer first, then I go to remote buffer and copy snippet into merged buffer. So there are lots of sub-windows operations.
+Resolving conflicts is NOT only picking up a diff hunk from either remote buffer or local buffer. I often need place my hunk into merged buffer first, then I go to remote buffer and copy some snippet into merged buffer. So there are lots of sub-window operations.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -53,7 +53,7 @@ Luckily, Emacs gives me the full freedom to solve the problem. The final result 
 Here is the complete solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgb8a91c5" class="outline-2"&gt;
+&lt;div id="outline-container-org3656241" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
@@ -110,7 +110,7 @@ Native Emacs API is enough to save/load windows layout.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5cc8d58" class="outline-2"&gt;
+&lt;div id="outline-container-org47e5326" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
