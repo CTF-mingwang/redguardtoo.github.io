@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 13 Nov 2019 16:09:46 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog</title><link>http://blog.binchen.org/</link><description>Linux, Programming, Emacs</description><atom:link href="http://blog.binchen.org/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Thu, 14 Nov 2019 13:04:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
@@ -11,6 +11,10 @@ Here is the demo how I use vimdiff to resolve conflicts from &lt;a href="https:/
 &lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/vimdiff-as-git-merge-tool.gif" alt="vimdiff-as-git-merge-tool.gif"&gt;
 &lt;/p&gt;
 &lt;/div&gt;
+
+&lt;p&gt;
+Please note in the screencast I use Git built in command &lt;a href="https://git-scm.com/docs/git-mergetool"&gt;mergetool&lt;/a&gt;. It will &lt;b&gt;automatically&lt;/b&gt; open conflicted file one by one with vim. In other software, the developer need &lt;b&gt;manually&lt;/b&gt; select and open the conflicted file. 
+&lt;/p&gt;
 
 &lt;p&gt;
 The only issue is Vim is not as powerful as Emacs.
@@ -29,11 +33,11 @@ So I give one example to prove why Emacs should be a better merge tool &lt;b&gt;
 &lt;/p&gt;
 
 &lt;p&gt;
-Now let's talk the real world problem. And I will show you a perfect solution to this problem soon.
+Now let's talk the real world problem. And I will show you a perfect solution soon.
 &lt;/p&gt;
 
 &lt;p&gt;
-The problem is, I never use Emacs to resolve merge conflicts for two reaons:
+The problem is, I never use Emacs to resolve merge conflicts for two reasons:
 &lt;/p&gt;
 
 &lt;ul class="org-ul"&gt;
@@ -49,9 +53,13 @@ Luckily, Emacs gives me the full freedom to solve the problem. The final result 
 Here is the complete solution.
 &lt;/p&gt;
 
-&lt;div id="outline-container-org177b98b" class="outline-2"&gt;
+&lt;div id="outline-container-orgb8a91c5" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+This technique is only useful for &lt;code&gt;git mergetool&lt;/code&gt; because git will open and close the text editor Emacs many times.
+&lt;/p&gt;
+
 &lt;p&gt;
 Insert below code into &lt;code&gt;~/.gitconfig&lt;/code&gt;,
 &lt;/p&gt;
@@ -102,11 +110,19 @@ Native Emacs API is enough to save/load windows layout.
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org55a5a39" class="outline-2"&gt;
+&lt;div id="outline-container-org5cc8d58" class="outline-2"&gt;
 
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
-We need focus on merged buffer window when Emacs starts because that's where we do the most text editing things. 
+Packages dependent on ediff (&lt;a href="https://magit.vc/"&gt;Magit&lt;/a&gt;?) could also benefit from optimization of ediff.
+&lt;/p&gt;
+
+&lt;p&gt;
+The optimization is simple. Do everything in merged buffer.
+&lt;/p&gt;
+
+&lt;p&gt;
+First I move focus into merged buffer when Emacs starts up,
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -130,7 +146,7 @@ This set up happens in &lt;code&gt;ediff-startup-hook&lt;/code&gt;,
 
 &lt;/div&gt;
 &lt;p&gt;
-Please note I use &lt;code&gt;winum-select-window-by-number&lt;/code&gt; from &lt;code&gt;winum&lt;/code&gt; to set default window focus. You can use any other third packages or native API &lt;code&gt;select-window&lt;/code&gt; instead.
+Please note I use &lt;code&gt;winum-select-window-by-number&lt;/code&gt; from &lt;code&gt;winum&lt;/code&gt; move focus to merged buffer. You can use any other third party package or native API &lt;code&gt;select-window&lt;/code&gt; instead.
 &lt;/p&gt;
 
 &lt;p&gt;
@@ -138,7 +154,11 @@ Saving initial windows layout into register &lt;code&gt;a&lt;/code&gt; is achiev
 &lt;/p&gt;
 
 &lt;p&gt;
-Then we need make sure ediff commands can be used everywhere. The trick is "move focus to ediff panel temporarily to execute its commands, then move focus back to original window".
+Then we need make sure ediff commands can be used out of ediff's panel. Currently ediff command can only be triggered inside of its panel.
+&lt;/p&gt;
+
+&lt;p&gt;
+The trick is "move focus into ediff panel temporarily to execute its commands, then move focus back to original window".
 &lt;/p&gt;
 
 &lt;p&gt;

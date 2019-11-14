@@ -67,6 +67,10 @@ Here is the demo how I use vimdiff to resolve conflicts from <a href="https://gi
 </div>
 
 <p>
+Please note in the screencast I use Git built in command <a href="https://git-scm.com/docs/git-mergetool">mergetool</a>. It will <b>automatically</b> open conflicted file one by one with vim. In other software, the developer need <b>manually</b> select and open the conflicted file. 
+</p>
+
+<p>
 The only issue is Vim is not as powerful as Emacs.
 </p>
 
@@ -83,11 +87,11 @@ So I give one example to prove why Emacs should be a better merge tool <b>in the
 </p>
 
 <p>
-Now let's talk the real world problem. And I will show you a perfect solution to this problem soon.
+Now let's talk the real world problem. And I will show you a perfect solution soon.
 </p>
 
 <p>
-The problem is, I never use Emacs to resolve merge conflicts for two reaons:
+The problem is, I never use Emacs to resolve merge conflicts for two reasons:
 </p>
 
 <ul class="org-ul">
@@ -102,9 +106,13 @@ Luckily, Emacs gives me the full freedom to solve the problem. The final result 
 Here is the complete solution.
 </p>
 
-<div id="outline-container-org177b98b" class="outline-2">
+<div id="outline-container-orgb8a91c5" class="outline-2">
 
 <div class="outline-text-2" id="text-1">
+<p>
+This technique is only useful for <code>git mergetool</code> because git will open and close the text editor Emacs many times.
+</p>
+
 <p>
 Insert below code into <code>~/.gitconfig</code>,
 </p>
@@ -155,11 +163,19 @@ Native Emacs API is enough to save/load windows layout.
 </div>
 </div>
 
-<div id="outline-container-org55a5a39" class="outline-2">
+<div id="outline-container-org5cc8d58" class="outline-2">
 
 <div class="outline-text-2" id="text-2">
 <p>
-We need focus on merged buffer window when Emacs starts because that's where we do the most text editing things. 
+Packages dependent on ediff (<a href="https://magit.vc/">Magit</a>?) could also benefit from optimization of ediff.
+</p>
+
+<p>
+The optimization is simple. Do everything in merged buffer.
+</p>
+
+<p>
+First I move focus into merged buffer when Emacs starts up,
 </p>
 
 <p>
@@ -183,7 +199,7 @@ This set up happens in <code>ediff-startup-hook</code>,
 
 </div>
 <p>
-Please note I use <code>winum-select-window-by-number</code> from <code>winum</code> to set default window focus. You can use any other third packages or native API <code>select-window</code> instead.
+Please note I use <code>winum-select-window-by-number</code> from <code>winum</code> move focus to merged buffer. You can use any other third party package or native API <code>select-window</code> instead.
 </p>
 
 <p>
@@ -191,7 +207,11 @@ Saving initial windows layout into register <code>a</code> is achieved by <code>
 </p>
 
 <p>
-Then we need make sure ediff commands can be used everywhere. The trick is "move focus to ediff panel temporarily to execute its commands, then move focus back to original window".
+Then we need make sure ediff commands can be used out of ediff's panel. Currently ediff command can only be triggered inside of its panel.
+</p>
+
+<p>
+The trick is "move focus into ediff panel temporarily to execute its commands, then move focus back to original window".
 </p>
 
 <p>
