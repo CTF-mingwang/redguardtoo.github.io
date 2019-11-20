@@ -23,6 +23,58 @@
         </ul></section><section class="page-content"><div class="content" rel="main">
             
         <div class="post">
+            <h1 class="title"><a href="posts/effective-git-blame-in-emacs.html">Effective "git blame" in Emacs</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2019-11-20T13:42:54+00:00">2019-11-20 13:42</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/effective-git-blame-in-emacs.html#disqus_thread" data-disqus-identifier="cache/posts/effective-git-blame-in-emacs.html">Comments</a>
+
+
+                </div>
+            
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+I published Emacs package <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a>. It uses <code>git-blame</code> to show commit information of current line.
+</p>
+
+<p>
+In the new version, it can display the correct commit which submits selected text of current line.
+</p>
+
+<p>
+For example, the line 6 at <a href="https://github.com/redguardtoo/test-git-blame/blob/master/hello.js">https://github.com/redguardtoo/test-git-blame/blob/master/hello.js</a> is changed by three commits.
+</p>
+
+<p>
+Select the partial of line 6 and run <code>vc-msg-show</code>, the correct commit is displayed.
+</p>
+
+<p>
+Screenshots,
+</p>
+
+<div class="figure">
+<p><img src="wp-content/vc-msg-neutral.png" alt="vc-msg-neutral.png"></p>
+</div>
+
+<div class="figure">
+<p><img src="wp-content/vc-msg-good.png" alt="vc-msg-good.png"></p>
+</div>
+
+<div class="figure">
+<p><img src="wp-content/vc-msg-bad.png" alt="vc-msg-bad.png"></p>
+</div>
+</div>
+            </div>
+        </div>
+        <div class="post">
             <h1 class="title"><a href="posts/emacs-is-the-best-merge-tool-for-git.html">Emacs is the best merge tool for Git</a></h1>
             <div class="meta">
                 <div class="authordate">
@@ -1186,70 +1238,10 @@ Now you can use <a href="https://github.com/redguardtoo/wucuo">wucuo</a>. It's a
 </div>
             </div>
         </div>
-        <div class="post">
-            <h1 class="title"><a href="posts/use-imenu-to-list-comments-in-current-buffer.html">Use Imenu to list comments in current buffer</a></h1>
-            <div class="meta">
-                <div class="authordate">
-                    <time class="timeago" datetime="2018-04-08T02:12:04+00:00">2018-04-08 02:12</time>
-</div>
-                <div class="stats">
-                    
-        
-    <a href="posts/use-imenu-to-list-comments-in-current-buffer.html#disqus_thread" data-disqus-identifier="cache/posts/use-imenu-to-list-comments-in-current-buffer.html">Comments</a>
-
-
-                </div>
-            
-        <div itemprop="keywords" class="tags">
-        <ul>
-        Tags : 
-           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
-           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="categories/imenu.html" rel="tag">imenu</a></li>
-        </ul>
-</div>
-
-            </div>
-            <div class="body">
-                <div>
-<p>
-<a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> v3.2.0 has a new function <code>evilnc-imenu-create-index-function</code>.
-</p>
-
-<p>
-<a href="http://www.gnu.org/s/emacs/manual/html_node/emacs/Imenu.html">Imenu</a> could use this function to list all comments in current file.
-</p>
-
-<p>
-Usage:
-</p>
-
-<div class="org-src-container">
-
-<pre><code class="lang-lisp">(require 'counsel)
-(defun counsel-imenu-comments ()
-  "Imenu display comments."
-  (interactive)
-  (let* ((imenu-create-index-function 'evilnc-imenu-create-index-function))
-    (counsel-imenu)))
-</code></pre>
-
-</div>
-
-<p>
-Screen cast:
-</p>
-
-<div class="figure">
-<p><img src="wp-content/counsel-imenu-comments.gif" alt="counsel-imenu-comments.gif"></p>
-</div>
-</div>
-            </div>
-        </div>
     
         <nav class="postindexpager"><ul class="pager">
 <li class="next">
-                <a href="index-24.html" rel="next">Older posts</a>
+                <a href="index-25.html" rel="next">Older posts</a>
             </li>
         </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2019         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
             

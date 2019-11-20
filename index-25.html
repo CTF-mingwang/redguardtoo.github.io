@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Linux, Programming, Emacs">
+<meta name="viewport" content="width=device-width">
+<title>Chen's blog (old posts, page 25) | Chen's blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.binchen.org/index-25.html">
+<!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]-->
+</head>
+<body>
+    <section class="social"><ul>
+<li><a href="index.html" title="Home"><i class="icon-home"></i></a></li>
+            <li><a href="archive.html" title="Archives"><i class="icon-folder-open-alt"></i></a></li>
+            <li><a href="categories/index.html" title="Tags"><i class="icon-tags"></i></a></li>
+            <li><a href="rss.xml" title="RSS"><i class="icon-rss"></i></a></li>
+            <li><a href="stories/about.html" title="About me"><i class="icon-user"></i></a></li>
+            <li><a href="https://twitter.com/chen_bin" title="My Twitter"><i class="icon-twitter"></i></a></li>
+            <li><a href="https://github.com/redguardtoo" title="My Github"><i class="icon-github"></i></a></li>
+
+        </ul></section><section class="page-content"><div class="content" rel="main">
+            
+        <div class="post">
+            <h1 class="title"><a href="posts/use-imenu-to-list-comments-in-current-buffer.html">Use Imenu to list comments in current buffer</a></h1>
+            <div class="meta">
+                <div class="authordate">
+                    <time class="timeago" datetime="2018-04-08T02:12:04+00:00">2018-04-08 02:12</time>
+</div>
+                <div class="stats">
+                    
+        
+    <a href="posts/use-imenu-to-list-comments-in-current-buffer.html#disqus_thread" data-disqus-identifier="cache/posts/use-imenu-to-list-comments-in-current-buffer.html">Comments</a>
+
+
+                </div>
+            
+        <div itemprop="keywords" class="tags">
+        <ul>
+        Tags : 
+           <li><a class="tag p-category" href="categories/emacs.html" rel="tag">emacs</a></li>
+           <li><a class="tag p-category" href="categories/en.html" rel="tag">en</a></li>
+           <li><a class="tag p-category" href="categories/imenu.html" rel="tag">imenu</a></li>
+        </ul>
+</div>
+
+            </div>
+            <div class="body">
+                <div>
+<p>
+<a href="https://github.com/redguardtoo/evil-nerd-commenter">evil-nerd-commenter</a> v3.2.0 has a new function <code>evilnc-imenu-create-index-function</code>.
+</p>
+
+<p>
+<a href="http://www.gnu.org/s/emacs/manual/html_node/emacs/Imenu.html">Imenu</a> could use this function to list all comments in current file.
+</p>
+
+<p>
+Usage:
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(require 'counsel)
+(defun counsel-imenu-comments ()
+  "Imenu display comments."
+  (interactive)
+  (let* ((imenu-create-index-function 'evilnc-imenu-create-index-function))
+    (counsel-imenu)))
+</code></pre>
+
+</div>
+
+<p>
+Screen cast:
+</p>
+
+<div class="figure">
+<p><img src="wp-content/counsel-imenu-comments.gif" alt="counsel-imenu-comments.gif"></p>
+</div>
+</div>
+            </div>
+        </div>
+    
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
+                <a href="index.html" rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-24.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav><script>var disqus_shortname="chenbin0";(function(){var a=document.createElement("script");a.async=true;a.src="https://"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script><footer id="footer"><p>Contents © 2019         <a href="mailto:chenbin.sh@gmail.com">Chen Bin</a> - Powered by         <a href="http://getnikola.com" rel="nofollow">Nikola</a>         </p>
+            
+        </footer>
+</div>
+    </section><script src="assets/js/all-nocdn.js" type="text/javascript"></script><script type="text/javascript">
+         document.addEventListener('DOMContentLoaded', function() {
+           var items = document.getElementsByClassName('timeago'), e, pd;
+           for (var i = 0; i < items.length; i++) {
+             e = items[i];
+             pd = moment(new Date(e.getAttribute('datetime')));
+             e.innerHTML = pd.fromNow();
+             e.setAttribute('title', pd.format('LLLL'));
+           }
+         });
+        </script>
+</body>
+</html>
