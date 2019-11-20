@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 20 Nov 2019 13:46:33 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>Chen's blog (Posts about git)</title><link>http://blog.binchen.org/</link><description></description><atom:link href="http://blog.binchen.org/categories/git.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Wed, 20 Nov 2019 13:47:51 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Effective "git blame" in Emacs</title><link>http://blog.binchen.org/posts/effective-git-blame-in-emacs.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
+I published Emacs package &lt;a href="https://github.com/redguardtoo/vc-msg"&gt;vc-msg&lt;/a&gt;. It uses &lt;code&gt;git-blame&lt;/code&gt; to show commit information of current line.
+&lt;/p&gt;
+
+&lt;p&gt;
+In the new version, it can display the correct commit which submits selected text of current line.
+&lt;/p&gt;
+
+&lt;p&gt;
+For example, the line 6 at &lt;a href="https://github.com/redguardtoo/test-git-blame/blob/master/hello.js"&gt;https://github.com/redguardtoo/test-git-blame/blob/master/hello.js&lt;/a&gt; is changed by three commits.
+&lt;/p&gt;
+
+&lt;p&gt;
+Select the partial of line 6 and run &lt;code&gt;vc-msg-show&lt;/code&gt;, the correct commit is displayed.
+&lt;/p&gt;
+
+&lt;p&gt;
+Screenshots,
+&lt;/p&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/vc-msg-neutral.png" alt="vc-msg-neutral.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/vc-msg-good.png" alt="vc-msg-good.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class="figure"&gt;
+&lt;p&gt;&lt;img src="http://blog.binchen.org/wp-content/vc-msg-bad.png" alt="vc-msg-bad.png"&gt;
+&lt;/p&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>blame</category><category>emacs</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/effective-git-blame-in-emacs.html</guid><pubDate>Wed, 20 Nov 2019 13:42:54 GMT</pubDate></item><item><title>Emacs is the best merge tool for Git</title><link>http://blog.binchen.org/posts/emacs-is-the-best-merge-tool-for-git.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;
 I used to regard vimdiff as the best merge tool for Git because it's simply fast.
 &lt;/p&gt;
 
@@ -676,9 +709,4 @@ Add below code to setup:
 
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item><item><title>Use `git send-email' at ubuntu</title><link>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</link><dc:creator>Chen Bin</dc:creator><description>&lt;div&gt;&lt;p&gt;&lt;/p&gt;&lt;p&gt; When I try to use `git send-email' at ubuntu 13.04, I get error message some perl modules are missing. &lt;/p&gt;  &lt;p&gt; So here is one line command to install all missing perl modules: &lt;/p&gt; &lt;div class="org-src-container"&gt;&lt;br&gt;
-&lt;pre class="prettyprint "&gt;
-&lt;p&gt;sudo cpan Error Net:SMTP:SSL MIME::Base64 Authen::SASL&lt;/p&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;&lt;/p&gt;&lt;/div&gt; &lt;/div&gt;</description><category>email</category><category>en</category><category>git</category><guid>http://blog.binchen.org/posts/use-git-send-email-at-ubuntu.html</guid><pubDate>Thu, 15 Aug 2013 08:24:21 GMT</pubDate></item></channel></rss>
+&lt;/div&gt;&lt;/div&gt;</description><category>emacs</category><category>email</category><category>en</category><category>git</category><category>gnus</category><category>patch</category><guid>http://blog.binchen.org/posts/use-gnus-to-apply-patch-sent-by-git-send-email.html</guid><pubDate>Sat, 07 Sep 2013 00:00:00 GMT</pubDate></item></channel></rss>
