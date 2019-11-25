@@ -3,29 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Effective "git blame" in Emacs | Chen's blog</title>
+<title>Yin and Yang in Emacs | Chen's blog</title>
 <link href="../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
-<link rel="canonical" href="http://blog.binchen.org/posts/effective-git-blame-in-emacs.html">
+<link rel="canonical" href="http://blog.binchen.org/posts/yin-and-yang-in-emacs.html">
 <!--[if lt IE 9]><script src="/assets/js/html5.js"></script><![endif]--><meta name="author" content="Chen Bin">
 <meta property="og:site_name" content="Chen's blog">
-<meta property="og:title" content='Effective "git blame" in Emacs'>
-<meta property="og:url" content="http://blog.binchen.org/posts/effective-git-blame-in-emacs.html">
-<meta property="og:description" content="I published Emacs package vc-msg. It uses git-blame to show commit information of current line.
+<meta property="og:title" content="Yin and Yang in Emacs">
+<meta property="og:url" content="http://blog.binchen.org/posts/yin-and-yang-in-emacs.html">
+<meta property="og:description" content="As a Chinese, I studied Tao Te Ching since childhood. So I believe Tao (the way) exist in Emacs. Tao is basically Yin and Yang who lives in harmony in Emacs.
 
 
 
-In the new version, it can display the correct commit information of current line.
-
-
-
-For example, th">
+I can't say Yin is good and Yang is evi">
 <meta property="og:type" content="article">
-<meta property="article:published_time" content="2019-11-20T13:42:54Z">
-<meta property="article:tag" content="blame">
+<meta property="article:published_time" content="2019-11-25T08:09:33Z">
 <meta property="article:tag" content="emacs">
 <meta property="article:tag" content="en">
-<meta property="article:tag" content="git">
 </head>
 <body>
     <section class="social"><ul>
@@ -41,26 +35,24 @@ For example, th">
             
     <div class="post">
     
-    <h1 class="p-name entry-title" itemprop="headline name">Effective "git blame" in Emacs</h1>
+    <h1 class="p-name entry-title" itemprop="headline name">Yin and Yang in Emacs</h1>
 
         <div class="meta">
             <div class="authordate">
-                <time class="timeago" datetime="2019-11-20T13:42:54+00:00">2019-11-20 13:42</time>
+                <time class="timeago" datetime="2019-11-25T08:09:33+00:00">2019-11-25 08:09</time>
             
 
             
           |  
-        <a href="effective-git-blame-in-emacs.wp" id="sourcelink">Source</a>
+        <a href="yin-and-yang-in-emacs.wp" id="sourcelink">Source</a>
 
             </div>
             
         <div itemprop="keywords" class="tags">
         <ul>
         Tags : 
-           <li><a class="tag p-category" href="../categories/blame.html" rel="tag">blame</a></li>
            <li><a class="tag p-category" href="../categories/emacs.html" rel="tag">emacs</a></li>
            <li><a class="tag p-category" href="../categories/en.html" rel="tag">en</a></li>
-           <li><a class="tag p-category" href="../categories/git.html" rel="tag">git</a></li>
         </ul>
 </div>
 
@@ -68,28 +60,20 @@ For example, th">
         <div class="body">
             <div>
 <p>
-I published Emacs package <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a>. It uses <code>git-blame</code> to show commit information of current line.
+As a Chinese, I studied <a href="https://en.wikipedia.org/wiki/Tao_Te_Ching">Tao Te Ching</a> since childhood. So I believe Tao (the way) exist in Emacs. Tao is basically Yin and Yang who lives in harmony in Emacs.
 </p>
 
 <p>
-In the new version, it can display the correct commit information of current line.
+I can't say Yin is good and Yang is evil, or vice versa. All I can do is to find the way to make Yin and Yang co-exist. 
 </p>
 
 <p>
-For example, the line 6 at <a href="https://github.com/redguardtoo/test-git-blame/blob/master/hello.js">https://github.com/redguardtoo/test-git-blame/blob/master/hello.js</a> is changed by three commits.
+For example, a few days ago I published <a href="https://www.reddit.com/r/emacs/comments/dz2a80/effective_git_blame_in_emacs/">Effective "git blame" in Emacs</a> which introduced my package <a href="https://github.com/redguardtoo/vc-msg">vc-msg</a>.
 </p>
 
 <p>
-Select the partial of line 6 and run <code>vc-msg-show</code>, the correct commit is displayed.
+It became one of my most popular reddit post because its unique feature <b>partial line blame</b>,
 </p>
-
-<p>
-Screenshots,
-</p>
-
-<div class="figure">
-<p><img src="../wp-content/vc-msg-neutral.png" alt="vc-msg-neutral.png"></p>
-</div>
 
 <div class="figure">
 <p><img src="../wp-content/vc-msg-good.png" alt="vc-msg-good.png"></p>
@@ -98,23 +82,50 @@ Screenshots,
 <div class="figure">
 <p><img src="../wp-content/vc-msg-bad.png" alt="vc-msg-bad.png"></p>
 </div>
+
+<p>
+I noticed some comments compared my package with <a href="https://magit.vc/">Magit</a>. Those comments were very educational and I did learned a few useful tricks.
+</p>
+
+<p>
+My point is, <code>vc-msg</code> and <code>Magit</code> could collaborate without any problem, like Yin and Yang lives harmony. If you find any conflict between <code>vc-msg</code> and <code>Magit</code>, just let me know. I will fix it.
+</p>
+
+<p>
+I totally understand there are many Magit lovers in Emacs community. So I make <code>vs-msg v1.0.2</code> to support Magit. You can use <code>partial line blame</code> in <code>vc-msg</code> but calling Magit command to open the commit.  
+</p>
+
+<p>
+It's only one line setup,
+</p>
+
+<div class="org-src-container">
+
+<pre><code class="lang-lisp">(setq vc-msg-git-show-commit-function 'magit-show-commit)
+</code></pre>
+
+</div>
+
+<p>
+I tested in <code>magit-blame-mode</code> and found no issue.
+</p>
+
+<p>
+I'm sure <code>vc-msg</code> should always work find in other major modes or minor modes. There are also two callback functions <code>vc-msg-get-current-file-function</code> <code>vc-msg-get-line-num-function</code> which users can customize.</p>
 </div>
         </div>
         
         <ul class="pager hidden-print">
 <li class="previous">
-                <a href="emacs-is-the-best-merge-tool-for-git.html" rel="prev" title="Emacs is the best merge tool for Git">Previous post</a>
-            </li>
-            <li class="next">
-                <a href="yin-and-yang-in-emacs.html" rel="next" title="Yin and Yang in Emacs">Next post</a>
+                <a href="effective-git-blame-in-emacs.html" rel="prev" title='Effective "git blame" in Emacs'>Previous post</a>
             </li>
         </ul>
 <div id="disqus_thread"></div>
         <script>
         var disqus_shortname ="chenbin0",
-            disqus_url="http://blog.binchen.org/posts/effective-git-blame-in-emacs.html",
-        disqus_title="Effective \"git blame\" in Emacs",
-        disqus_identifier="cache/posts/effective-git-blame-in-emacs.html",
+            disqus_url="http://blog.binchen.org/posts/yin-and-yang-in-emacs.html",
+        disqus_title="Yin and Yang in Emacs",
+        disqus_identifier="cache/posts/yin-and-yang-in-emacs.html",
         disqus_config = function () {
             this.language = "en";
         };
